@@ -1,6 +1,6 @@
 name: Feature Issue Template
 description: An Issue Template for Features
-title: "[FEATURE] <title>"
+title: "[FEATURE] "
 labels: []
 assignees: []
 body:
