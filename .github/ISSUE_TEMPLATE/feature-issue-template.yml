@@ -1,5 +1,5 @@
 name: Feature Issue Template
-about: An Issue Template for Features
+description: An Issue Template for Features
 title: "[FEATURE] <title>"
 labels: []
 assignees: []
@@ -20,13 +20,11 @@ body:
         - [ ] Todo 2
         - [ ] Todo 3
     validations:
-        required: false
-
+      required: false
   - type: textarea
     attributes:
       label: ETC
       description: ETC
       placeholder: ETC
     validations:
-        required: false
-
+      required: false
