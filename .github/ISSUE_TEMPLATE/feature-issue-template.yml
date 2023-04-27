@@ -1,8 +1,8 @@
 name: Feature Issue Template
 about: An Issue Template for Features
-title: '[FEATURE] '
-labels: ''
-assignees: ''
+title: "[FEATURE] <title>"
+labels: []
+assignees: []
 body:
   - type: textarea
     attributes:
