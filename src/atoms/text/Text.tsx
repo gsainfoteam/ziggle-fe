@@ -4,10 +4,10 @@ import styled, { css } from "styled-components";
 import Font from "../../styles/font";
 
 interface TextProps {
-  color: React.CSSProperties["color"];
-  font: Font;
-  size: React.CSSProperties["fontSize"];
-  textAlign: React.CSSProperties["textAlign"];
+  color?: React.CSSProperties["color"];
+  font?: Font;
+  size?: React.CSSProperties["fontSize"];
+  textAlign?: React.CSSProperties["textAlign"];
 }
 
 // 폰트별 letter-spacing 도 추가해야할 수도
@@ -55,6 +55,7 @@ const Text = styled.p<TextProps>`
   }}
   size: ${({ size }) => size ?? undefined};
   text-align: ${({ textAlign }) => textAlign ?? "inherit"};
+  color: ${({ color }) => color ?? "inherit"};
 `;
 
 export default Text;

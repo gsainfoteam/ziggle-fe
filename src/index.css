@@ -11,6 +11,12 @@
 }
 
 @font-face {
+    font-family: 'NotoSansKR-Black', sans-serif;
+    src: url("./assets/fonts/NotoSansKR-Black.otf");
+    font-weight: 900;
+}
+
+@font-face {
     font-family: 'Aharoni-Bold', sans-serif;
     src: url("./assets/fonts/Aharoni-Bold.ttf");
     font-weight: 700;
