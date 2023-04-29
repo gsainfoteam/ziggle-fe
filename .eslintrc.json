@@ -15,7 +15,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:storybook/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -23,14 +24,21 @@
     "JSX": "readonly"
   },
   "parserOptions": {
-    "project": ["./tsconfig.eslint.json"],
+    "project": [
+      "./tsconfig.eslint.json"
+    ],
     "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "simple-import-sort", "prettier"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "simple-import-sort",
+    "prettier"
+  ],
   "rules": {
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
