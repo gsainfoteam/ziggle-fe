@@ -2,17 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 import addImgBlack from "./assets/addImgBlack.svg";
-import arrowCircleLeftDeselected from "./assets/arrowCircleLeftDeselected.svg";
-import arrowCircleLeftPrimary from "./assets/arrowCircleLeftPrimary.svg";
+import arrowCircleLeftDeselected from "./assets/arrowCircleRightDeselected.svg";
+import arrowCircleLeftPrimary from "./assets/arrowCircleRightPrimary.svg";
 import arrowLeftWhite from "./assets/arrowLeftWhite.svg";
 import bellPrimary from "./assets/bellPrimary.svg";
 import documentBlack from "./assets/documentBlack.svg";
 import githubWhite from "./assets/githubWhite.svg";
 import instagramWhite from "./assets/instagramWhite.svg";
 import linesBlack from "./assets/linesBlack.svg";
+import searchPrimary from "./assets/searchPrimary.svg";
 import searchWhite from "./assets/searchWhite.svg";
 import tagBlack from "./assets/tagBlack.svg";
 import userWhite from "./assets/userWhite.svg";
+import xPrimary from "./assets/xPrimary.svg";
 
 interface EachIconProps {
   width?: React.CSSProperties["width"];
@@ -49,7 +51,7 @@ const AddImgBlack = ({ width, height }: EachIconProps) => {
   );
 };
 
-const ArrowCircleLeftDeselected = ({ width, height }: EachIconProps) => {
+const ArrowCircleRightDeselected = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
       src={arrowCircleLeftDeselected}
@@ -60,7 +62,7 @@ const ArrowCircleLeftDeselected = ({ width, height }: EachIconProps) => {
   );
 };
 
-const ArrowCircleRightDeselected = ({ width, height }: EachIconProps) => {
+const ArrowCircleLeftDeselected = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
       src={arrowCircleLeftDeselected}
@@ -72,7 +74,7 @@ const ArrowCircleRightDeselected = ({ width, height }: EachIconProps) => {
   );
 };
 
-const ArrowCircleLeftPrimary = ({ width, height }: EachIconProps) => {
+const ArrowCircleRightPrimary = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
       src={arrowCircleLeftPrimary}
@@ -83,7 +85,7 @@ const ArrowCircleLeftPrimary = ({ width, height }: EachIconProps) => {
   );
 };
 
-const ArrowCircleRightPrimary = ({ width, height }: EachIconProps) => {
+const ArrowCircleLeftPrimary = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
       src={arrowCircleLeftPrimary}
@@ -208,6 +210,17 @@ const SearchWhite = ({ width, height }: EachIconProps) => {
   );
 };
 
+const SearchPrimary = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={searchPrimary}
+      alt={"search primary icon"}
+      cssWidth={width}
+      cssHeight={height}
+    />
+  );
+};
+
 const TagBlack = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
@@ -230,6 +243,17 @@ const UserWhite = ({ width, height }: EachIconProps) => {
   );
 };
 
+const XPrimary = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={xPrimary}
+      alt={"x primary icon"}
+      cssWidth={width}
+      cssHeight={height}
+    />
+  );
+};
+
 Icon.AddImgBlack = AddImgBlack;
 Icon.ArrowCircleLeftDeselected = ArrowCircleLeftDeselected;
 Icon.ArrowCircleRightDeselected = ArrowCircleRightDeselected;
@@ -245,7 +269,9 @@ Icon.GithubWhite = GithubWhite;
 Icon.InstagramWhite = InstagramWhite;
 Icon.LinesBlack = LinesBlack;
 Icon.SearchWhite = SearchWhite;
+Icon.SearchPrimary = SearchPrimary;
 Icon.TagBlack = TagBlack;
 Icon.UserWhite = UserWhite;
+Icon.XPrimary = XPrimary;
 
 export default Icon;
