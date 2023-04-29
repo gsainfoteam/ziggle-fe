@@ -19,6 +19,8 @@ body:
         - [ ] Todo 1
         - [ ] Todo 2
         - [ ] Todo 3
+      value: |
+        - [ ]
     validations:
       required: false
   - type: textarea
