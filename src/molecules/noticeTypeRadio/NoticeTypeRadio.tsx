@@ -1,5 +1,3 @@
-import React from "react";
-
 import Button from "../../atoms/button/Button";
 import Flex from "../../atoms/containers/flex/Flex";
 import { NoticeType } from "../../types/types";
