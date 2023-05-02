@@ -1,14 +1,13 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import Search from "./Search";
 
 export default {
   title: "molecules/search/Search",
   component: Search,
-} as ComponentMeta<typeof Search>;
+} as Meta<typeof Search>;
 
-const Template: ComponentStory<typeof Search> = (args) => <Search {...args} />;
+const Template: StoryFn<typeof Search> = (args) => <Search {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

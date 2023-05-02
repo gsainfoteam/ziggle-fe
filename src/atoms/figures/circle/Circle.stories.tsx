@@ -1,5 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import colorSet from "../../../styles/colorSet";
 import Circle from "./Circle";
@@ -7,9 +6,9 @@ import Circle from "./Circle";
 export default {
   title: "atoms/figures/circle/Circle",
   component: Circle,
-} as ComponentMeta<typeof Circle>;
+} as Meta<typeof Circle>;
 
-const Template: ComponentStory<typeof Circle> = (args) => <Circle {...args} />;
+const Template: StoryFn<typeof Circle> = (args) => <Circle {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

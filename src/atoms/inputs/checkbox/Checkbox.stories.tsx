@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import React from "react";
 
 import Checkbox from "./Checkbox";
@@ -6,9 +6,9 @@ import Checkbox from "./Checkbox";
 export default {
   title: "atoms/inputs/checkbox/Checkbox",
   component: Checkbox,
-} as ComponentMeta<typeof Checkbox>;
+} as Meta<typeof Checkbox>;
 
-const Template: ComponentStory<typeof Checkbox> = (args) => {
+const Template: StoryFn<typeof Checkbox> = (args) => {
   const [checked, setChecked] = React.useState(false);
 
   return (

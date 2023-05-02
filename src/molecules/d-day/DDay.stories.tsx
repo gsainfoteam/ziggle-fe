@@ -1,14 +1,13 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import DDay from "./DDay";
 
 export default {
   title: "molecules/d-day/DDay",
   component: DDay,
-} as ComponentMeta<typeof DDay>;
+} as Meta<typeof DDay>;
 
-const Template: ComponentStory<typeof DDay> = (args) => <DDay {...args} />;
+const Template: StoryFn<typeof DDay> = (args) => <DDay {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

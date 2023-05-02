@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useId } from "react";
+import { InputHTMLAttributes, useId } from "react";
 
 import colorSet from "../../../styles/colorSet";
 import Font from "../../../styles/font";
