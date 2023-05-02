@@ -1,14 +1,13 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import Text from "./Text";
 
 export default {
   title: "atoms/text/Text",
   component: Text,
-} as ComponentMeta<typeof Text>;
+} as Meta<typeof Text>;
 
-const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
+const Template: StoryFn<typeof Text> = (args) => <Text {...args} />;
 
 export const Default = Template.bind({
   children: "Default",

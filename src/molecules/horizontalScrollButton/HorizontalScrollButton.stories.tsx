@@ -1,14 +1,13 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import HorizontalScrollButton from "./HorizontalScrollButton";
 
 export default {
   title: "molecules/horizontalScrollButton/HorizontalScrollButton",
   component: HorizontalScrollButton,
-} as ComponentMeta<typeof HorizontalScrollButton>;
+} as Meta<typeof HorizontalScrollButton>;
 
-const Template: ComponentStory<typeof HorizontalScrollButton> = (args) => (
+const Template: StoryFn<typeof HorizontalScrollButton> = (args) => (
   <HorizontalScrollButton {...args}>
     <HorizontalScrollButton.Left disabled />
     <HorizontalScrollButton.Right />

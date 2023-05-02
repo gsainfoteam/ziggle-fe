@@ -1,14 +1,13 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import { Meta, StoryFn } from "@storybook/react";
 
 import Chip, { ChipVariant } from "./Chip";
 
 export default {
   title: "molecules/chip/Chip",
   component: Chip,
-} as ComponentMeta<typeof Chip>;
+} as Meta<typeof Chip>;
 
-const Template: ComponentStory<typeof Chip> = (args) => <Chip {...args} />;
+const Template: StoryFn<typeof Chip> = (args) => <Chip {...args} />;
 
 export const Outlined = Template.bind({});
 Outlined.args = {
