@@ -53,7 +53,7 @@ const Text = styled.p<TextProps>`
         `;
     }
   }}
-  size: ${({ size }) => size ?? undefined};
+  font-size: ${({ size }) => size ?? undefined};
   text-align: ${({ textAlign }) => textAlign ?? "inherit"};
   color: ${({ color }) => color ?? "inherit"};
 `;
