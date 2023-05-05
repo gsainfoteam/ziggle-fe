@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import Input from "../../atoms/inputs/input/Input";
 import Tag from "../../molecules/tag/Tag";
 import colorSet from "../../styles/colorSet";
 
@@ -16,14 +18,24 @@ const TagSelectWrapper = styled.div`
 interface TagSelectProps {
   tags: string[];
   onDelete?: (tag: string) => void;
+  onAdd?: (tag: string) => void;
 }
 
-const TagSelect = ({ tags, onDelete }: TagSelectProps) => {
+const TagSelect = ({ tags, onDelete, onAdd }: TagSelectProps) => {
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    if (!input.includes(" ")) return;
+    onAdd?.(input.split(" ")[0]);
+    setInput("");
+  }, [input, onAdd]);
+
   return (
     <TagSelectWrapper>
       {tags.map((tag) => (
         <Tag key={tag} label={tag} onDeleteClick={() => onDelete?.(tag)} />
       ))}
+      <Input value={input} onChange={(e) => setInput(e.target.value)} />
     </TagSelectWrapper>
   );
 };
