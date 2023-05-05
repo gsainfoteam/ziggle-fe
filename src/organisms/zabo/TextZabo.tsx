@@ -25,6 +25,7 @@ interface ContentZaboProps {
   viewCount: number;
   author: string;
   content: string;
+  organization: string;
 }
 
 const TextZabo = ({
@@ -33,6 +34,7 @@ const TextZabo = ({
   viewCount,
   author,
   content,
+  organization,
 }: ContentZaboProps) => {
   return (
     <ZaboWrapper>
@@ -53,7 +55,9 @@ const TextZabo = ({
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.NoticeWriter}>{author}</Text>
+      <Text font={Font.NoticeWriter}>
+        {author} • {organization}
+      </Text>
     </ZaboWrapper>
   );
 };
