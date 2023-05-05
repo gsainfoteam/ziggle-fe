@@ -13,6 +13,10 @@ const TagSelectWrapper = styled.div`
   align-items: center;
   gap: 5px;
   padding: 0 16px;
+  overflow: scroll;
+  > * {
+    flex: 0 0 auto;
+  }
 `;
 
 interface TagSelectProps {
