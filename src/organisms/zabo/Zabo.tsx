@@ -26,7 +26,7 @@ const Title = styled(Text)`
   overflow: hidden;
 `;
 Title.defaultProps = {
-  font: Font.NoticeWriter,
+  font: Font.Bold,
   size: "1.25rem",
 };
 
@@ -52,17 +52,17 @@ const TextZabo = ({
       <img src={thumbnailUrl} />
       <Title>{title}</Title>
       <Flex gap="0.25em">
-        <Text font={Font.NoticeDes_Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText}>
           {date}
         </Text>
-        <Text font={Font.NoticeDes_Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText}>
           •
         </Text>
-        <Text font={Font.NoticeDes_Bold} color={colorSet.secondaryText}>
+        <Text font={Font.Bold} color={colorSet.secondaryText}>
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.NoticeWriter}>
+      <Text font={Font.Bold}>
         {author} • {organization}
       </Text>
     </ZaboWrapper>

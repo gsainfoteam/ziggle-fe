@@ -12,3 +12,7 @@ const Template: StoryFn<typeof Text> = (args) => <Text {...args} />;
 export const Default = Template.bind({
   children: "Default",
 });
+
+Default.args = {
+  children: "Default",
+};

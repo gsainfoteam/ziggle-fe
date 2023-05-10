@@ -15,41 +15,25 @@ interface TextProps {
 const Text = styled.p<TextProps>`
   ${({ font }) => {
     switch (font) {
-      case Font.Title:
+      case Font.Bold:
         return css`
-          font-family: "NotoSansKR-Bold", sans-serif;
+          font-family: "Noto Sans KR", sans-serif;
           font-weight: 700;
-          font-size: 4.375rem;
         `;
-      case Font.NoticeTitle:
+      case Font.Medium:
         return css`
-          font-family: "NotoSansKR-Bold", sans-serif;
-          font-weight: 700;
-          font-size: 1.25rem;
-        `;
-      case Font.NoticeDes_Medium:
-        return css`
-          font-family: "NotoSansKR-Medium", sans-serif;
+          font-family: "Noto Sans KR", sans-serif;
           font-weight: 500;
-          font-size: 0.875rem;
         `;
-      case Font.NoticeDes_Bold:
+      case Font.Regular:
         return css`
-          font-family: "NotoSansKR-Bold", sans-serif;
-          font-weight: 700;
-          font-size: 0.875rem;
+          font-family: "Noto Sans KR", sans-serif;
+          font-weight: 400;
         `;
-      case Font.NoticeWriter:
-        return css`
-          font-family: "NotoSansKR-Bold", sans-serif;
-          font-weight: 700;
-          font-size: 1rem;
-        `;
-      case Font.AharoniTitle:
+      case Font.Aharoni:
         return css`
           font-family: "Aharoni-Bold", sans-serif;
           font-weight: 700;
-          font-size: 4.375rem;
         `;
     }
   }}

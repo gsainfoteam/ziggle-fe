@@ -38,24 +38,24 @@ const TextZabo = ({
 }: ContentZaboProps) => {
   return (
     <ZaboWrapper>
-      <Text font={Font.NoticeWriter} size="1.875rem">
+      <Text font={Font.Bold} size="1.875rem">
         {title}
       </Text>
-      <Text font={Font.NoticeDes_Medium} size="1.125rem">
+      <Text font={Font.Medium} size="1.125rem">
         {content}
       </Text>
       <Flex gap="0.25em">
-        <Text font={Font.NoticeDes_Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText}>
           {date}
         </Text>
-        <Text font={Font.NoticeDes_Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText}>
           •
         </Text>
-        <Text font={Font.NoticeDes_Bold} color={colorSet.secondaryText}>
+        <Text font={Font.Bold} color={colorSet.secondaryText}>
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.NoticeWriter}>
+      <Text font={Font.Bold}>
         {author} • {organization}
       </Text>
     </ZaboWrapper>
