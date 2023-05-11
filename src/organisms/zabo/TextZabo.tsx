@@ -1,4 +1,5 @@
 import Flex from "src/atoms/containers/flex/Flex";
+import { ZaboProps } from "src/types/types";
 import styled from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -19,15 +20,6 @@ const ZaboWrapper = styled.div`
   }
 `;
 
-interface ContentZaboProps {
-  title: string;
-  date: string;
-  viewCount: number;
-  author: string;
-  content: string;
-  organization: string;
-}
-
 const TextZabo = ({
   title,
   date,
@@ -35,7 +27,7 @@ const TextZabo = ({
   author,
   content,
   organization,
-}: ContentZaboProps) => {
+}: ZaboProps) => {
   return (
     <ZaboWrapper>
       <Text font={Font.Bold} size="1.875rem">

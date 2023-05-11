@@ -1,4 +1,5 @@
 import Flex from "src/atoms/containers/flex/Flex";
+import { ZaboProps } from "src/types/types";
 import styled from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -30,16 +31,7 @@ Title.defaultProps = {
   size: "1.25rem",
 };
 
-interface ZaboProps {
-  title: string;
-  date: string;
-  viewCount: number;
-  author: string;
-  thumbnailUrl: string;
-  organization: string;
-}
-
-const TextZabo = ({
+const Zabo = ({
   title,
   date,
   viewCount,
@@ -69,4 +61,4 @@ const TextZabo = ({
   );
 };
 
-export default TextZabo;
+export default Zabo;
