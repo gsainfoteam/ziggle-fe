@@ -17,4 +17,6 @@ Default.args = {
   viewCount: 110,
   author: "이정우",
   organization: "INFOTEAM",
+  origin: "height",
+  size: 300,
 };
