@@ -13,6 +13,7 @@ interface TextProps {
 // 폰트별 letter-spacing 도 추가해야할 수도
 
 const Text = styled.p<TextProps>`
+  margin: 0;
   ${({ font }) => {
     switch (font) {
       case Font.Bold:
