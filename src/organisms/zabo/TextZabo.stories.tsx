@@ -17,4 +17,6 @@ Default.args = {
   date: "2023.02.13",
   viewCount: 119,
   author: "박시원",
+  origin: "height",
+  size: 400,
 };

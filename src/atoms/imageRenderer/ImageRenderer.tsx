@@ -2,10 +2,15 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import colorSet from "src/styles/colorSet";
 import { ImageRendererProps } from "src/types/types";
 import styled, { css } from "styled-components";
 
-const OriginIMG = styled.img<{ isHover: boolean; isLoading: boolean }>`
+const OriginIMG = styled.img<{
+  isHover: boolean;
+  isLoading: boolean;
+  shadowColor: string;
+}>`
   border-radius: 5px;
   object-fit: cover;
   transition: 0.1s;
@@ -17,11 +22,13 @@ const OriginIMG = styled.img<{ isHover: boolean; isLoading: boolean }>`
       `;
     }
   }}
-  ${({ isHover }) => {
+  ${({ isHover, shadowColor }) => {
     if (isHover) {
       return css`
-        transform: translateY(-5px);
-        box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+        transform: translateY(-10px);
+        box-shadow: ${shadowColor}40 0px 5px, ${shadowColor}30 0px 10px,
+          ${shadowColor}20 0px 15px, ${shadowColor}10 0px 20px,
+          ${shadowColor}05 0px 25px;
       `;
     }
   }}
@@ -72,6 +79,7 @@ const ImageRenderer = ({
             src={imageUrl}
             size={size}
             isHover={isHover}
+            shadowColor={colorSet.primary}
             isLoading={isLoading}
             onLoad={handleImageLoad}
           />
@@ -85,6 +93,7 @@ const ImageRenderer = ({
             src={imageUrl}
             size={size}
             isHover={isHover}
+            shadowColor={colorSet.primary}
             isLoading={isLoading}
             onLoad={handleImageLoad}
           />
