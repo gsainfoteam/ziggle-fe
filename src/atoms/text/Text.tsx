@@ -1,9 +1,10 @@
 import React from "react";
+import colorSet from "src/styles/colorSet";
 import styled, { css } from "styled-components";
 
 import Font from "../../styles/font";
 
-interface TextProps {
+export interface TextProps {
   color?: React.CSSProperties["color"];
   font?: Font;
   size?: React.CSSProperties["fontSize"];
@@ -40,7 +41,7 @@ const Text = styled.p<TextProps>`
   }}
   font-size: ${({ size }) => size ?? undefined};
   text-align: ${({ textAlign }) => textAlign ?? "inherit"};
-  color: ${({ color }) => color ?? "inherit"};
+  color: ${({ color }) => color ?? colorSet.text};
 `;
 
 export default Text;

@@ -13,4 +13,13 @@ const Template: StoryFn<typeof SearchResult> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  deadline: "2023.02.28",
+  title: "인포팀 신규 부원 모집",
+  author: "이정우",
+  tags: ["모집", "WING", "많관부"],
+  date: "2023.02.13",
+  viewCount: 123,
+  thumbnailUrl: "https://picsum.photos/2000/3000",
+  searchQuery: "이",
+};
