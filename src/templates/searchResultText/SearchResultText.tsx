@@ -1,55 +1,55 @@
 import Flex from "src/atoms/containers/flex/Flex";
-import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
-import Text from "src/atoms/text/Text";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
-import colorSet from "src/styles/colorSet";
 import defaults from "src/styles/defaults";
-import Font from "src/styles/font";
 import { SearchResultProps } from "src/types/types";
 import getDayOfWeek from "src/utils/getDay";
 import GetHighlightedText from "src/utils/GetHighlightedText";
 import styled from "styled-components";
 
-const SearchResultWrap = styled(Flex)<{ padding: string }>`
-  padding-left: ${({ padding }) => padding};
-  padding-right: ${({ padding }) => padding};
+import Text from "../../atoms/text/Text";
+import colorSet from "../../styles/colorSet";
+import Font from "../../styles/font";
+
+const ZaboWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  margin-top: 1rem;
+  width: 100%;
   box-sizing: border-box;
-  align-items: stretch;
+  overflow: hidden;
+
+  border-radius: 5px;
+  border: 1px solid ${colorSet.secondaryText};
   cursor: pointer;
+
+  p {
+    margin: 0;
+  }
 `;
 
-const SearchResult = ({
+const SearchResultText = ({
   deadline,
   title,
   author,
   tags,
   date,
   viewCount,
-  thumbnailUrl,
   searchQuery,
   organization,
+  content,
 }: SearchResultProps) => {
   return (
-    <SearchResultWrap
-      width="100vw"
-      alignItems="center"
-      padding={defaults.pageSideGap}
-      gap="1.2rem"
+    <div
+      style={{
+        padding: `0 ${defaults.pageSideGap}`,
+        boxSizing: "border-box",
+        width: "100vw",
+      }}
     >
-      <ImageRenderer
-        origin="width"
-        size={230}
-        imageUrl={thumbnailUrl}
-        isHover={false}
-      />
-      <Flex
-        flexDirection="column"
-        justifyContent="space-between"
-        style={{
-          boxSizing: "border-box",
-          padding: "1rem 0",
-        }}
-      >
+      <ZaboWrapper>
         <Flex flexDirection="column">
           <Text font={Font.Medium} size="1.2rem">
             {deadline && `마감일 ${deadline} (${getDayOfWeek(deadline)})`}
@@ -82,6 +82,7 @@ const SearchResult = ({
               </>
             )}
           </Flex>
+
           <Flex gap="0.5rem" style={{ margin: "0.5rem 0" }}>
             {tags.map((tag, index) => (
               <Chip
@@ -94,19 +95,37 @@ const SearchResult = ({
               />
             ))}
           </Flex>
-        </Flex>
-        <Flex gap="0.5rem" alignItems="center">
-          <Text font={Font.Regular} size="1rem" color={colorSet.secondaryText}>
-            {date}
+          <Text
+            font={Font.Medium}
+            size="1.125rem"
+            style={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 3, // 이렇게밖에 안됨
+              WebkitBoxOrient: "vertical",
+            }}
+          >
+            {content}
           </Text>
-          <Text color={colorSet.secondaryText}>•</Text>
-          <Text font={Font.Bold} size="1rem" color={colorSet.secondaryText}>
-            조회수 {viewCount}
-          </Text>
         </Flex>
-      </Flex>
-    </SearchResultWrap>
+
+        <Flex flexDirection="column">
+          <Flex gap="0.25em">
+            <Text font={Font.Medium} color={colorSet.secondaryText}>
+              {date}
+            </Text>
+            <Text font={Font.Medium} color={colorSet.secondaryText}>
+              •
+            </Text>
+            <Text font={Font.Bold} color={colorSet.secondaryText}>
+              조회수 {viewCount}
+            </Text>
+          </Flex>
+        </Flex>
+      </ZaboWrapper>
+    </div>
   );
 };
 
-export default SearchResult;
+export default SearchResultText;

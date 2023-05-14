@@ -104,7 +104,7 @@ const TextZabo = ({
           </Text>
         </Flex>
         <Text font={Font.Bold}>
-          {author} • {organization}
+          {author} {organization && `• ${organization}`}
         </Text>
       </Flex>
     </ZaboWrapper>

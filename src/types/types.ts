@@ -10,7 +10,7 @@ export interface ZaboProps {
   date: string;
   viewCount: number;
   author: string;
-  organization: string;
+  organization?: string;
 
   /** 이미지가 있는 경우 Zabo, 없는 경우 TextZabo */
   thumbnailUrl?: string;
@@ -30,4 +30,17 @@ export interface ImageRendererProps {
   origin: Origin;
   size: number; // pixel 단위만 허용 (이미지 크기 계산을 위함)
   isHover: boolean;
+}
+
+export interface SearchResultProps {
+  deadline?: string;
+  content?: string;
+  title: string;
+  author: string;
+  organization?: string;
+  tags: string[];
+  date: string;
+  viewCount: number;
+  thumbnailUrl: string;
+  searchQuery: string;
 }

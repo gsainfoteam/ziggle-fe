@@ -48,7 +48,7 @@ const Zabo = ({
   organization,
   origin,
   size,
-}: Omit<Required<ZaboProps>, "content">) => {
+}: Omit<ZaboProps, "content"> & { thumbnailUrl: string }) => {
   const { hovered, ref } = useHover();
   return (
     <ZaboWrapper ref={ref}>
@@ -71,7 +71,7 @@ const Zabo = ({
         </Text>
       </Flex>
       <Text font={Font.Bold}>
-        {author} • {organization}
+        {author} {organization && `• ${organization}`}
       </Text>
     </ZaboWrapper>
   );
