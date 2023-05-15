@@ -1,23 +1,5 @@
 @font-face {
-    font-family: 'NotoSansKR-Medium', sans-serif;
-    src: url("./assets/fonts/NotoSansKR-Medium.otf");
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: 'NotoSansKR-Bold', sans-serif;
-    src: url("./assets/fonts/NotoSansKR-Bold.otf");
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: 'NotoSansKR-Black', sans-serif;
-    src: url("./assets/fonts/NotoSansKR-Black.otf");
-    font-weight: 900;
-}
-
-@font-face {
     font-family: 'Aharoni-Bold', sans-serif;
-    src: url("./assets/fonts/Aharoni-Bold.ttf");
+    src: url("./assets/fonts/Aharoni-Bold.ttf") format(".ttf");
     font-weight: 700;
 }

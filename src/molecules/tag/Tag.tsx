@@ -29,7 +29,7 @@ interface TagProps {
 const Tag = ({ label, onDeleteClick }: TagProps) => {
   return (
     <TagWrapper>
-      <Text font={Font.NoticeDes_Medium} color={"white"}>
+      <Text font={Font.Medium} color={colorSet.colorless}>
         #{label}
       </Text>
       <Button onClick={onDeleteClick}>

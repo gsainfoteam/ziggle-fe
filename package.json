@@ -12,12 +12,14 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@mantine/hooks": "^6.0.10",
     "i18next": "^22.4.8",
     "i18next-browser-languagedetector": "^7.0.1",
     "prettier": "^2.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.1",
+    "react-loading-skeleton": "^3.3.1",
     "react-router-dom": "^6.11.0",
     "styled-components": "^5.3.6"
   },

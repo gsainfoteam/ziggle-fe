@@ -24,6 +24,7 @@ const Button = styled.button<ButtonProps>`
   padding: 0;
   border: none;
   background-color: transparent;
+  transition: 0.1s;
 
   ${({ variant }) => {
     switch (variant) {
@@ -32,12 +33,22 @@ const Button = styled.button<ButtonProps>`
           border: 1px solid ${colorSet.primary};
           border-radius: 5px;
           padding: 10px 20px;
+          color: ${colorSet.primary};
+
+          :hover {
+            background-color: ${colorSet.secondary};
+          }
         `;
       case ButtonVariant.contained:
         return css`
           background-color: ${colorSet.primary};
           border-radius: 5px;
           padding: 10px 20px;
+          color: ${colorSet.colorless};
+
+          :hover {
+            box-shadow: inset rgba(0, 0, 0, 0.15) 0px 0px 0px 40px;
+          }
         `;
     }
   }}

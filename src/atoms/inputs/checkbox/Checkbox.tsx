@@ -46,7 +46,7 @@ const Checkbox = ({
         )}
 
         <Text
-          font={Font.NoticeDes_Medium}
+          font={Font.Medium}
           size={"1.5rem"}
           color={checked ? colorSet.text : colorSet.secondaryText}
         >

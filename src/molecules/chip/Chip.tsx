@@ -39,13 +39,18 @@ const ChipWrapper = styled.div<ChipWrapperProps>`
 
 interface ChipProps extends ChipWrapperProps {
   label: string;
+  font?: Font;
 }
 
-const Chip = ({ variant = ChipVariant.outlined, label }: ChipProps) => {
+const Chip = ({
+  variant = ChipVariant.outlined,
+  label,
+  font = Font.Medium,
+}: ChipProps) => {
   return (
     <ChipWrapper variant={variant}>
       <Text
-        font={Font.NoticeDes_Medium}
+        font={font}
         size={"1.25rem"}
         color={variant === ChipVariant.outlined ? colorSet.primary : "#ffffff"}
       >
