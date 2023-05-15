@@ -10,9 +10,8 @@ import getDayOfWeek from "src/utils/getDay";
 import GetHighlightedText from "src/utils/GetHighlightedText";
 import styled from "styled-components";
 
-const SearchResultWrap = styled(Flex)<{ padding: string }>`
-  padding-left: ${({ padding }) => padding};
-  padding-right: ${({ padding }) => padding};
+const SearchResultWrap = styled(Flex)`
+  padding: 0 ${defaults.pageSideGap};
   box-sizing: border-box;
   align-items: stretch;
   cursor: pointer;
@@ -30,12 +29,7 @@ const SearchResult = ({
   organization,
 }: SearchResultProps) => {
   return (
-    <SearchResultWrap
-      width="100vw"
-      alignItems="center"
-      padding={defaults.pageSideGap}
-      gap="1.2rem"
-    >
+    <SearchResultWrap width="100vw" alignItems="center" gap="1.2rem">
       <ImageRenderer
         origin="width"
         size={230}

@@ -106,6 +106,7 @@ const SearchResultText = ({
               WebkitBoxOrient: "vertical",
             }}
           >
+            {!content && "<내용없음>"}
             {content}
           </Text>
         </Flex>
