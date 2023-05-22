@@ -9,16 +9,25 @@ import Text from "src/atoms/text/Text";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import {ReactComponent as SearchPrimary} from "../../../src/atoms/icon/assets/SearchPrimary.svg";
+import {ReactComponent as XPrimary} from "../../../src/atoms/icon/assets/xPrimary.svg";
 const SearchPage = () => {
     const handleSubmit = () =>{
 
     };
     return (
     <>
-    <Navbar background-color={colorSet.primary}></Navbar>
+    
     <Area>
+    <Navbar background-color={colorSet.primary}></Navbar>
     <Content>
-    <p style = {{height:"150px", margin : '0 auto'}}></p>
+    
+    <div style = {{height:"150px", margin : '0 auto',display : 'flex', justifyContent: 'flex-end'}}>
+
+    <Button>
+    <XPrimary style={{height:"100px"}}/>
+    </Button>
+    
+    </div>
     <p style = {{ paddingLeft : defaults.pageSideGap, paddingRight : defaults.pageSideGap}}>
             <p style={{ width: '850px', margin: '0 auto' }}>   
                 <SearchVar onSubmit={handleSubmit} placeholder={"검색어를 입력하세요"}/>
@@ -55,8 +64,9 @@ const SearchPage = () => {
     </p>
     <p style = {{height:"300px", margin : '0 auto'}}></p>
     </Content>
-    </Area>
     <Footer></Footer>
+    </Area>
+    
 </>
     );
 };
