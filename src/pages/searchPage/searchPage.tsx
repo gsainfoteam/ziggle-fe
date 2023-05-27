@@ -13,7 +13,8 @@ import Content from "src/atoms/containers/content/Content";
 import {useState} from 'react';
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
-import NoticeTypeRadio from "src/molecules/noticeTypeRadio/NoticeTypeRadio";
+//import NoticeTypeRadio from "src/molecules/noticeTypeRadio/NoticeTypeRadio";
+import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import { NoticeType } from "src/types/types";
 import {ReactComponent as SearchNoResult} from "../../../src/atoms/icon/assets/searchNoResult.svg";
 import Font from "src/styles/font";
@@ -24,9 +25,13 @@ const SearchPage = () => {
     const handleSubmit = () =>{
         
     };
+    const handleTagChange = (selected: NoticeType[]) => {
+        setSelectedTags(selected);
+      };
     const [showResults, setShowResults] = useState(false);
     const [noResults, setNoResults] = useState(false);
     const [defaultResults, setDefaultResults] = useState(true);
+    const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
     const result = () =>{
         setShowResults(true);
         setDefaultResults(false);
@@ -60,7 +65,7 @@ const SearchPage = () => {
                 <SearchVar onSubmit={handleSubmit} placeholder={"공지 제목이나 태그로 검색"}/>
                 <p style = {{height : "30px", margin : '0 auto'}}></p>    
                 <p style={{ height: "40px", margin:'0 auto'}}>
-                <NoticeTypeRadio selected={NoticeType.RECRUIT} onChange={handleSubmit} />
+                <SearchTagSelect selected={selectedTags} onChange={handleTagChange}/>
                 </p>
                 <p style = {{ height: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin:'50px' }}>
 
