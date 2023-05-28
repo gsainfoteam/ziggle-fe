@@ -20,7 +20,7 @@ import {ReactComponent as SearchNoResult} from "../../../src/atoms/icon/assets/s
 import Font from "src/styles/font";
 import {Search,XXPrimary} from "src/assets/Icons";
 
-
+const n=3;
 const SearchPage = () => {
     const handleSubmit = () =>{
         
@@ -65,15 +65,15 @@ const SearchPage = () => {
                 <SearchVar onSubmit={handleSubmit} placeholder={"공지 제목이나 태그로 검색"}/>
                 <p style = {{height : "30px", margin : '0 auto'}}></p>    
                 <p style={{ height: "40px", margin:'0 auto'}}>
-                <SearchTagSelect selected={selectedTags} onChange={handleTagChange}/>
+                    <SearchTagSelect selected={selectedTags} onChange={handleTagChange}/>
                 </p>
-                <p style = {{ height: '700px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin:'50px' }}>
+    <p style = {{ flexGrow:1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin:'50px' }}>
 
         {defaultResults && (
                 
             
             <p>
-                <Search size="250px" color={colorSet.secondaryText}  ></Search>
+            <Search size="250px" color={colorSet.secondaryText}  ></Search>
             <p style = {{height : "10px", margin : '0 auto'}}></p> 
             <Text size="25px" color={colorSet.secondaryText} font={Font.Medium} style={{paddingTop:'20px'}}>
                             검색어를 입력해주세요
@@ -85,19 +85,35 @@ const SearchPage = () => {
         {showResults && (
 
             <p>
+            <p style = {{paddingTop:'0px', paddingBottom:'0px', paddingLeft:defaults.pageSideGap,paddingRight:defaults.pageSideGap, height:"100px", margin : '0 auto',display : 'flex', justifyContent: 'flex-start'}}>
+                <Text size="50px" color={colorSet.text} font={Font.Bold} style={{padding:0}}>
+                ♨ 지글 공지
+            </Text>
+            </p>
             
-            <SearchResult
-              deadline="2023.02.28"
-              title="인포팀 신규 부원 모집"
-              author="이정우"
-              tags = {["인포팀", "신규부원", "모집"]}
-              date = "2023.02.13"
-              viewCount ={ 123}
-              thumbnailUrl = "https://picsum.photos/2000/3000"
-              searchQuery = "이"
-            
-            ></SearchResult>
+    {Array.from({ length: n }).map((_, index) =>(
+    <div style={{ margin: '20px' }}>
+      <SearchResult
+        key={index} // 고유한 key prop을 지정해야 함
+        deadline="2023.02.28"
+        title="인포팀 신규 부원 모집"
+        author="이정우"
+        tags={["인포팀", "신규부원", "모집"]}
+        date="2023.02.13"
+        viewCount={123}
+        thumbnailUrl="https://picsum.photos/2000/3000"
+        searchQuery="이"
+      />
+    </div>
+    ))}
 
+            <p style = {{paddingTop:'10px', paddingBottom:'0px', paddingLeft:defaults.pageSideGap,paddingRight:defaults.pageSideGap, height:"100px", margin : '0 auto',display : 'flex', justifyContent: 'flex-start'}}>
+                <Text size="50px" color={colorSet.text} font={Font.Bold} style={{padding:'0px'}}>
+                📰 학사 공지
+            </Text>
+            </p>
+        {Array.from({ length: n }).map((_) =>(
+            <div style={{ margin: '20px' }}>
             <SearchResultText
             deadline="2023.02.28"
             title="인포팀 신규 부원 모집"
@@ -109,7 +125,9 @@ const SearchPage = () => {
             searchQuery="이"
             thumbnailUrl=""
             />
-</p>
+            </div>
+            ))}
+        </p>
           )}
 
 
@@ -118,8 +136,8 @@ const SearchPage = () => {
             <p>
             <p style = {{height : "10px", margin : '0 auto'}}></p> 
             <SearchNoResult></SearchNoResult>
-            <Text size="25px" color={colorSet.secondaryText} style={{paddingTop:'20px'}}>
-                검색 결과가 없습니다.
+            <Text size="25px" color={colorSet.secondaryText} font={Font.Bold} style={{paddingTop:'20px'}}>
+                검색 결과가 존재하지 않습니다.
             </Text>
             </p>
 
