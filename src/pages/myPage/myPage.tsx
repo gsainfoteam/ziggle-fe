@@ -57,29 +57,42 @@ const myPage = () => {
                 
 
                 <div>
-                    <table style={{ borderCollapse: 'collapse', width: '500px', margin:'10px', borderRadius:'10px' }}>
+                <table style={{ borderCollapse: 'collapse', width: '500px', margin:'10px', borderRadius:'10px' }}>
                   <tbody>
-                  <tr style={{ height: '50px', backgroundColor: colorSet.primary, borderRadius: '10px 0 0 10px'}}>
-                  <td style={{ borderBottom: '1px solid #ccc', width:'75%' }}>
+                  <tr style={{ height: '50px', backgroundColor: colorSet.primary, borderRadius: '10px 10px 0 0'}}>
+                  <td style={{ borderBottom: '1px solid #ccc', width:'75%', borderRadius: '10px 0 0 0' }}>
                         내가 게시한 공지 목록</td>
-                        <td style={{borderBottom: '1px solid #ccc', width: '25%' }}>
+                        <td style={{borderBottom: '1px solid #ccc', width: '25%', borderRadius: '0 10px 0 0 ' }}>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style={{ height: '50px'}}>
                       <td style={{ borderBottom: '1px solid #ccc', width:'75%' }}>
-                        20210000</td>
+                        23학번 과잠 구매 희망자 조사</td>
                         <td style={{borderBottom: '1px solid #ccc', width: '25%' }}>
-                        날짜
+                        2023.02.14.
                         </td>
                     </tr>
                     
-                    <tr>
+                    <tr style={{ height: '50px'}}>
                       <td style={{ borderBottom: '1px solid #ccc' }}>
-                        010-1234-1234</td>
+                        공연동아리 지대로 연극 ART </td>
+                    <td style={{borderBottom: '1px solid #ccc', width: '25%' }}>
+                    2023.02.13.
+                    </td>
                     </tr>
-                    <tr>
+                    <tr style={{ height: '50px'}}>
                       <td style={{ borderBottom: '1px solid #ccc' }}>
-                        infoteam@gm.gist.ac.kr</td>
+                        2023년도 WING 신규 부원 모집!</td>
+                    <td style={{borderBottom: '1px solid #ccc', width: '25%' }}>
+                    2023.02.13.
+                    </td>
+                    </tr>
+                    <tr style={{ height: '50px', borderRadius: '10px 10px 0 0'}} >
+                      <td style={{ borderLeft: '1px solid #ccc',  borderRadius: '10px 10px 0 0', borderBottom: '1px solid #ccc' }}>
+                        23년도 인포팀 신규 부원 모집</td>
+                    <td style={{borderRight: '1px solid #ccc',  borderRadius: '10px 10px 0 0', borderBottom: '1px solid #ccc', width: '25%' }}>
+                    2023.02.13.
+                    </td>
                     </tr>
                   </tbody>
                 </table>
