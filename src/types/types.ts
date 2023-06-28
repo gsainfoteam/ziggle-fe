@@ -44,3 +44,7 @@ export interface SearchResultProps {
   thumbnailUrl: string;
   searchQuery: string;
 }
+
+export interface Notice {
+  uuid: string;
+}
