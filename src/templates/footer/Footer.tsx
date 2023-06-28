@@ -61,7 +61,7 @@ const LinkSum2 = {
 const Footer = () => {
   return (
     <Bar
-      width={"100vw"}
+      width={"100%"}
       padding={defaults.pageSideGap}
       bgColor={colorSet.primary}
       gap="7rem"
