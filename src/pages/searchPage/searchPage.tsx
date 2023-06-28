@@ -1,4 +1,3 @@
-//import defaults from "src/styles/defaults";
 import colorSet from "../../styles/colorSet";
 import Navbar from "src/templates/navbar/Navbar";
 import defaults from "src/styles/defaults";
@@ -8,12 +7,9 @@ import Button from "src/atoms/button/Button";
 import Text from "src/atoms/text/Text";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
-//import {ReactComponent as SearchPrimary} from "../../../src/atoms/icon/assets/SearchPrimary.svg";
-//import {ReactComponent as XPrimary} from "../../../src/atoms/icon/assets/xPrimary.svg";
 import {useState} from 'react';
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
-//import NoticeTypeRadio from "src/molecules/noticeTypeRadio/NoticeTypeRadio";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import { NoticeType } from "src/types/types";
 import {ReactComponent as SearchNoResult} from "../../../src/atoms/icon/assets/searchNoResult.svg";
@@ -70,8 +66,6 @@ const SearchPage = () => {
     <p style = {{ flexGrow:1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', margin:'50px' }}>
 
         {defaultResults && (
-                
-            
             <p>
             <Search size="250px" color={colorSet.secondaryText}  ></Search>
             <p style = {{height : "10px", margin : '0 auto'}}></p> 

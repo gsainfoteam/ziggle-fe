@@ -6,6 +6,8 @@ import Content from "src/atoms/containers/content/Content";
 import MypageTable from "src/templates/mypageTable/MypageTable";
 import MypageProfile from "src/templates/mypageProfile/MypageProfile";
 import MypageSeperate from "src/templates/mypageSeperate/MypageSeperate";
+
+
 const myPage = () => {
 
     return (
@@ -17,7 +19,7 @@ const myPage = () => {
 
                         <div style={{ display: 'flex',height:'1000px', alignItems:'center'}}>
                             <div style={{ flex: 2, display: 'flex', flexDirection: 'column',position: 'relative', margin:'10px'}}>
-                                
+
                                     <MypageProfile name="이정우" id="20220000" phone="010-1234-1234" email="infoteam@gm.gist.ac.kr"/>
 
                                     <MypageSeperate/>
@@ -34,7 +36,6 @@ const myPage = () => {
                                 </div>
                             </div>
                         </div>
-
 
                 </Content>
             <Footer/>

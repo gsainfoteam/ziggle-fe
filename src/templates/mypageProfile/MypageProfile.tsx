@@ -9,6 +9,8 @@ interface MypageProfileProps {
     phone?:string;
     email?:string;
 }
+
+
 const MypageProfile: React.FC<MypageProfileProps> = ({ 
     name,
     id,
