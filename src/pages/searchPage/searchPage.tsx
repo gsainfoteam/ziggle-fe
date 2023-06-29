@@ -1,8 +1,6 @@
 import colorSet from "../../styles/colorSet";
-import Navbar from "src/templates/navbar/Navbar";
 import defaults from "src/styles/defaults";
 import SearchVar from "../../molecules/search/Search";
-import Footer from "src/templates/footer/Footer";
 import Button from "src/atoms/button/Button";
 import Text from "src/atoms/text/Text";
 import Area from "src/atoms/containers/area/Area";
@@ -45,7 +43,6 @@ const SearchPage = () => {
     <>
     
     <Area>
-        <Navbar background-color={colorSet.primary}/>
             <Content>
                 <Button style = {{background:colorSet.placeholder}} onClick= {result}>result</Button> 
                 <Button onClick= {noResult} style = {{margin:"10px"}}>noResult</Button>
@@ -74,6 +71,7 @@ const SearchPage = () => {
                                         검색어를 입력해주세요
                         </Text>
                         </p>
+            
                     )} 
 
 
@@ -148,7 +146,7 @@ const SearchPage = () => {
             </p>
             <p style = {{height:"300px", margin : '0 auto'}}/>
             </Content>
-        <Footer/>
+
     </Area>
     
 </>

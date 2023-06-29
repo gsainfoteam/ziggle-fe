@@ -1,7 +1,4 @@
-import Navbar from "src/templates/navbar/Navbar";
-import colorSet from "src/styles/colorSet";
 import Area from "src/atoms/containers/area/Area";
-import Footer from "src/templates/footer/Footer";
 import Content from "src/atoms/containers/content/Content";
 import MypageTable from "src/templates/mypageTable/MypageTable";
 import MypageProfile from "src/templates/mypageProfile/MypageProfile";
@@ -13,7 +10,6 @@ const myPage = () => {
     return (
     <>
             <Area>
-                <Navbar background-color={colorSet.primary}/>
                 
                     <Content style={{width:'1000px',height:'1000px', display:'flex',flexDirection:'column', alignItems:'center'}}>
 
@@ -38,7 +34,6 @@ const myPage = () => {
                         </div>
 
                 </Content>
-            <Footer/>
     </Area>
     </>
     );
