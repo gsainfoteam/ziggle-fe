@@ -40,6 +40,7 @@ Title.defaultProps = {
 };
 
 const Zabo = ({
+  
   title,
   date,
   viewCount,

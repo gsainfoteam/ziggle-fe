@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import colorSet from "../../styles/colorSet";
 
-enum ButtonVariant {
+export enum ButtonVariant {
   outlined = "outlined",
   contained = "contained",
 }

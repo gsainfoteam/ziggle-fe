@@ -2,6 +2,7 @@ export enum NoticeType {
   RECRUIT = "RECRUIT",
   EVENT = "EVENT",
   NORMAL = "GENERAL", // 일반을 normal로 할지 general로 할지 고민 -> General로 합시다.
+  ACADEMIC = "ACADEMIC",
 }
 
 export interface ZaboProps {
