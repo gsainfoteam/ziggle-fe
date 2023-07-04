@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@mantine/hooks": "^6.0.10",
+    "@tanstack/react-query": "^4.29.7",
+    "axios": "^1.4.0",
     "i18next": "^22.4.8",
     "i18next-browser-languagedetector": "^7.0.1",
     "prettier": "^2.8.1",

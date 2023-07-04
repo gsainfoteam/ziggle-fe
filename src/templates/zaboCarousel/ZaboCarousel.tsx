@@ -4,10 +4,11 @@ import HorizontalScrollButton from "src/molecules/horizontalScrollButton/Horizon
 import TextZabo from "src/organisms/zabo/TextZabo";
 import Zabo from "src/organisms/zabo/Zabo";
 import colorSet from "src/styles/colorSet";
-import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
 import { ZaboProps } from "src/types/types";
 import styled from "styled-components";
+
+import Content from "../../atoms/containers/content/Content";
 
 interface ZaboCarouselProps {
   manyZabos: Omit<ZaboProps, "origin" | "size">[];
@@ -16,17 +17,18 @@ interface ZaboCarouselProps {
 }
 
 const EntireWrap = styled.div`
-  width: 100vw;
-  margin-top: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const UpperWrap = styled.div<{ padding: string }>`
-  width: 100%;
+const UpperWrap = styled(Content)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.725rem ${({ padding }) => padding};
   box-sizing: border-box;
+  padding: 20px 0;
 `;
 
 const ScrollBtnWrap = styled.div`
@@ -35,17 +37,20 @@ const ScrollBtnWrap = styled.div`
   gap: 0 10px;
 `;
 
-const LowerWrap = styled.div<{ padding: string; bgColor?: string }>`
+const LowerWrap = styled.div<{ bgColor?: string }>`
   width: 100%;
   background-color: ${({ bgColor }) => bgColor ?? undefined};
-  padding-left: ${({ padding }) => padding};
-  padding-right: ${({ padding }) => padding};
-  padding-top: 0;
-  padding-bottom: 1.2rem;
+
+  padding: 5px 0 15px 0;
+
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const ZabosContainer = styled.div`
+const ZabosContainer = styled(Content)`
   display: flex;
   gap: 20px;
   overflow-x: scroll;
@@ -53,6 +58,7 @@ const ZabosContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
   -ms-overflow-style: none;
   scrollbar-width: none;
 `;
@@ -91,9 +97,9 @@ const ZaboCarousel = ({
 
   return (
     <EntireWrap>
-      <UpperWrap padding={defaults.pageSideGap}>
+      <UpperWrap>
         <Text
-          size="3rem"
+          size="2rem"
           color={colorSet.text}
           font={Font.Bold}
           style={{ margin: 0 }}
@@ -111,7 +117,7 @@ const ZaboCarousel = ({
           ></HorizontalScrollButton.Right>
         </ScrollBtnWrap>
       </UpperWrap>
-      <LowerWrap padding={defaults.pageSideGap} bgColor={carouselBGColor}>
+      <LowerWrap bgColor={carouselBGColor}>
         <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
           {manyZabos.map((zabo) => {
             if (zabo.thumbnailUrl === undefined) {
