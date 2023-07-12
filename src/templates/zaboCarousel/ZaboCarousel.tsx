@@ -99,7 +99,7 @@ const ZaboCarousel = ({
     <EntireWrap>
       <UpperWrap>
         <Text
-          size="2rem"
+          size="2.8rem"
           color={colorSet.text}
           font={Font.Bold}
           style={{ margin: 0 }}
@@ -133,7 +133,7 @@ const ZaboCarousel = ({
                   content={zabo.content}
                   organization={zabo.organization}
                   origin="height"
-                  size={300}
+                  size={280}
                 />
               );
             } else {
@@ -149,7 +149,7 @@ const ZaboCarousel = ({
                   organization={zabo.organization}
                   thumbnailUrl={zabo.thumbnailUrl}
                   origin="height"
-                  size={300}
+                  size={280}
                 />
               );
             }

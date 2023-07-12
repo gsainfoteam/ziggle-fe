@@ -36,11 +36,10 @@ const Title = styled(Text)<{ hovered: boolean }>`
 `;
 Title.defaultProps = {
   font: Font.Bold,
-  size: "1.25rem",
+  size: "1.2rem",
 };
 
 const Zabo = ({
-  
   title,
   date,
   viewCount,
@@ -61,13 +60,13 @@ const Zabo = ({
       />
       <Title hovered={hovered}>{title}</Title>
       <Flex gap="0.25em">
-        <Text font={Font.Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
           {date}
         </Text>
-        <Text font={Font.Medium} color={colorSet.secondaryText}>
+        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
           •
         </Text>
-        <Text font={Font.Bold} color={colorSet.secondaryText}>
+        <Text font={Font.Bold} color={colorSet.secondaryText} size={"0.9rem"}>
           조회수 {viewCount}
         </Text>
       </Flex>
