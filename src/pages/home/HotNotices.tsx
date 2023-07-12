@@ -1,5 +1,6 @@
+import dummyZabos from "src/mock/dummy-zabos";
+
 import ZaboCarousel from "../../templates/zaboCarousel/ZaboCarousel";
-import { dummyZabos } from "../../templates/zaboCarousel/ZaboCarousel.stories";
 
 const HotNotices = () => {
   // const { data } = useQuery(

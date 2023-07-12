@@ -1,4 +1,5 @@
 import Flex from "src/atoms/containers/flex/Flex";
+import Spacer from "src/atoms/spacer/Spacer";
 import { ZaboProps } from "src/types/types";
 import styled, { css } from "styled-components";
 
@@ -76,6 +77,9 @@ const TextZabo = ({
         >
           {title}
         </Text>
+
+        <Spacer height={"10px"} />
+
         <Text
           font={Font.Medium}
           size="1.125rem"

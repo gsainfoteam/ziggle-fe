@@ -1,10 +1,10 @@
-import Button, { ButtonVariant } from "../../atoms/button/Button";
 import Flex from "../../atoms/containers/flex/Flex";
-import Icon from "../../atoms/icon/Icon";
-import Spacer from "../../atoms/spacer/Spacer";
-import Text from "../../atoms/text/Text";
-import Font from "../../styles/font";
-import bannerImg from "./assets/banner.webp";
+// import Button, { ButtonVariant } from "../../atoms/button/Button";
+// import Icon from "../../atoms/icon/Icon";
+// import Spacer from "../../atoms/spacer/Spacer";
+// import Text from "../../atoms/text/Text";
+// import Font from "../../styles/font";
+import bannerImg from "./assets/defaultBanner.png";
 
 interface BannerProps {}
 
@@ -15,11 +15,12 @@ const Banner = ({}: BannerProps) => {
       height={"fit-content"}
       style={{
         position: "relative",
+        cursor: "pointer",
       }}
     >
       <img src={bannerImg} alt={"banner img"} width={"100%"} />
 
-      <Flex
+      {/* <Flex
         width={"100%"}
         height={"100%"}
         flexDirection={"column"}
@@ -30,11 +31,11 @@ const Banner = ({}: BannerProps) => {
           backgroundColor: "rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Text font={Font.Aharoni} size={"3rem"} color={"white"}>
+        <Text font={Font.Aharoni} size={"2.8rem"} color={"white"}>
           NOTICE.
         </Text>
 
-        <Text font={Font.Aharoni} size={"4rem"} color={"white"}>
+        <Text font={Font.Aharoni} size={"3.8rem"} color={"white"}>
           INTEGRATED.
         </Text>
 
@@ -61,7 +62,7 @@ const Banner = ({}: BannerProps) => {
             <Icon.ArrowLeftWhite width={"16.6px"} />
           </Flex>
         </Button>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };

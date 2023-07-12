@@ -1,5 +1,5 @@
 const colorSet = {
-  primary: "#FF6565",
+  primary: "#EB6263",
   secondary: "#FFEAEA", // primary보다 연함
 
   // 흑백 계열 Colors

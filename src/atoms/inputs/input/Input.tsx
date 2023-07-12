@@ -8,6 +8,7 @@ interface InputProps {
   width?: React.CSSProperties["width"];
   padding?: React.CSSProperties["padding"];
   fontSize?: React.CSSProperties["fontSize"];
+  color?: React.CSSProperties["color"];
 }
 
 const Input = styled.input<InputProps>`
@@ -16,6 +17,7 @@ const Input = styled.input<InputProps>`
   padding: ${({ padding }) => (padding ? padding : "0.5rem")};
   font-family: NotoSansKR-Medium, sans-serif;
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "0.875rem")};
+  color: ${({ color }) => (color ? color : colorSet.text)};
   border: none;
   border-radius: 0;
   outline-style: none;

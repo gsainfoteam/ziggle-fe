@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "../../atoms/button/Button";
@@ -11,7 +12,7 @@ const SearchWrapper = styled.form`
   align-items: center;
   border: 2px solid ${colorSet.primary};
   border-radius: 5px;
-  padding: 20px 30px;
+  padding: 10px 20px;
 `;
 
 interface SearchProps {
@@ -25,6 +26,8 @@ interface SearchProps {
 const Search = ({ onSubmit, placeholder }: SearchProps) => {
   const [keyword, setKeyword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const navigator = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,7 +51,8 @@ const Search = ({ onSubmit, placeholder }: SearchProps) => {
         placeholder={placeholder}
         value={keyword}
         onChange={handleKeywordChange}
-        fontSize={"1.875rem"}
+        fontSize={"1.5rem"}
+        color={colorSet.primary}
         style={{
           flexGrow: 1,
         }}
@@ -58,7 +62,12 @@ const Search = ({ onSubmit, placeholder }: SearchProps) => {
           <Icon.XPrimary />
         </Button>
       ) : (
-        <Button type={"submit"}>
+        <Button
+          type={"submit"}
+          onClick={() => {
+            navigator(-1);
+          }}
+        >
           <Icon.SearchPrimary width={"32px"} height={"32px"} />
         </Button>
       )}

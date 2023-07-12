@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
+import { dummyAcademicNotices } from "src/mock/dummy-academic-notices";
 
 // import colorSet from "src/styles/colorSet";
 import AcademicTable, { AcademicTableType } from "./AcademicTable";
@@ -13,73 +14,9 @@ const Template: StoryFn<typeof AcademicTable> = (args) => (
 );
 
 export const DefaultRow = Template.bind({});
-DefaultRow.args = {
-  type: AcademicTableType.Default,
-  title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-  tags: ["납입금", "장학"],
-  deadline: "2023.03.31",
-  date: "2023.03.13",
-};
+DefaultRow.args = dummyAcademicNotices[0];
 
 export const TitleRow = Template.bind({});
 TitleRow.args = {
   type: AcademicTableType.Title,
 };
-
-export const dummyAcademicNotices: {
-  title: string;
-  tags: string[];
-  deadline: string;
-  date: string;
-  link?: string;
-}[] = [
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-  {
-    title: "[학사]2023년 1학기 국가근로장학생(교내근로) 희망근로지 신청 안내 ",
-    tags: ["납입금", "장학"],
-    deadline: "2023.03.31",
-    date: "2023.03.13",
-    link: "https://www.gist.ac.kr/kr/html/sub05/050209.html?mode=V&no=209793&GotoPage=1",
-  },
-];
