@@ -93,7 +93,7 @@ export const Instagram = ({ size, color }: IconProps) => {
   );
 };
 
-export const XXPrimary = ({ size, color }: IconProps) => {
+export const Close = ({ size, color }: IconProps) => {
   return (
     <svg
       width={size ?? "24px"}

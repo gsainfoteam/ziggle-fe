@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Account, Search } from "src/assets/Icons";
 import { ZiggleLogo } from "src/assets/ZiggleLogo";
 import Button from "src/atoms/button/Button";
@@ -35,20 +35,11 @@ const AccountSum = styled(Button)`
 `;
 
 const Navbar = ({ username }: NavbarProps) => {
-  const navigator = useNavigate();
-
   return (
     <Bar bgColor={colorSet.primary}>
-      <div
-        style={{
-          cursor: "pointer",
-        }}
-        onClick={() => {
-          navigator("/");
-        }}
-      >
+      <Link to={"/"}>
         <ZiggleLogo />
-      </div>
+      </Link>
       <ButtonSum>
         <Button>
           <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
@@ -63,16 +54,11 @@ const Navbar = ({ username }: NavbarProps) => {
           }}
         >
           <Search size="1.6rem" />
-          <Text
-            color={colorSet.colorless}
-            size="1.1rem"
-            font={Font.Bold}
-            onClick={() => {
-              navigator("/search");
-            }}
-          >
-            공지 검색
-          </Text>
+          <Link to={"/search"} style={{ textDecoration: "none" }}>
+            <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
+              공지 검색
+            </Text>
+          </Link>
         </Button>
       </ButtonSum>
       <AccountSum>
