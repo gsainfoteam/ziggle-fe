@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Button from "../../atoms/button/Button";
@@ -26,8 +25,6 @@ interface SearchProps {
 const Search = ({ onSubmit, placeholder }: SearchProps) => {
   const [keyword, setKeyword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const navigator = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,12 +59,7 @@ const Search = ({ onSubmit, placeholder }: SearchProps) => {
           <Icon.XPrimary />
         </Button>
       ) : (
-        <Button
-          type={"submit"}
-          onClick={() => {
-            navigator(-1);
-          }}
-        >
+        <Button type={"submit"}>
           <Icon.SearchPrimary width={"32px"} height={"32px"} />
         </Button>
       )}

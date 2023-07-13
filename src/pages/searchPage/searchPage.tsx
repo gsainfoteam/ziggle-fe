@@ -4,6 +4,7 @@ import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Text from "src/atoms/text/Text";
+import dummySearchResult from "src/mock/dummy-searchresult";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
@@ -132,13 +133,13 @@ const SearchPage = () => {
                     {Array.from({ length: n }).map((_, index) => (
                       <div style={{ margin: "20px" }} key={index}>
                         <SearchResult
-                          deadline="2023.02.28"
-                          title="인포팀 신규 부원 모집"
-                          author="이정우"
-                          tags={["인포팀", "신규부원", "모집"]}
-                          date="2023.02.13"
-                          viewCount={123}
-                          thumbnailUrl="https://picsum.photos/2000/3000"
+                          deadline={dummySearchResult.deadline}
+                          title={dummySearchResult.title}
+                          author={dummySearchResult.author}
+                          tags={dummySearchResult.tags}
+                          date={dummySearchResult.date}
+                          viewCount={dummySearchResult.viewCount}
+                          thumbnailUrl={dummySearchResult.thumbnailUrl}
                           searchQuery="이"
                         />
                       </div>
@@ -168,13 +169,13 @@ const SearchPage = () => {
                     {Array.from({ length: n }).map((_, index) => (
                       <div style={{ margin: "20px" }} key={index}>
                         <SearchResultText
-                          deadline="2023.02.28"
-                          title="인포팀 신규 부원 모집"
-                          author="이정우"
-                          tags={["모집", "WING", "많관부"]}
-                          date="2023.02.13"
-                          viewCount={123}
-                          content="안녕하세요, 하우스연합회입니다. 2023년 3월 1일, 하우스연합회에서 중고장터를 진행합니다❗퇴사자, 잔류자, 신입생 상관없이 판매 물품/무료나눔하고자하는 물품이 있으시다면 자유롭게 등록해주시기 바랍니다! 자세한 일정은 다음..."
+                          deadline={dummySearchResult.deadline}
+                          title={dummySearchResult.title}
+                          author={dummySearchResult.author}
+                          tags={dummySearchResult.tags}
+                          date={dummySearchResult.date}
+                          viewCount={dummySearchResult.viewCount}
+                          content={dummySearchResult.content}
                           searchQuery="이"
                           thumbnailUrl=""
                         />
