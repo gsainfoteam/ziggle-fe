@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Search, XXPrimary } from "src/assets/Icons";
+import { useNavigate } from "react-router-dom";
+import { Close } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
+import Flex from "src/atoms/containers/flex/Flex";
+import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import dummySearchResult from "src/mock/dummy-searchresult";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
@@ -13,12 +16,19 @@ import SearchResultText from "src/templates/searchResultText/SearchResultText";
 import { NoticeType } from "src/types/types";
 
 import { ReactComponent as SearchNoResult } from "../../../src/atoms/icon/assets/searchNoResult.svg";
-import SearchVar from "../../molecules/search/Search";
+import SearchBar from "../../molecules/searchBar/SearchBar";
 import colorSet from "../../styles/colorSet";
+import CloseBtnAnimation from "./CloseBtnAnimation";
+import SearchBarAnimation from "./SearchBarAnimation";
+import SearchGif from "./SearchGif";
 
 const n = 3;
 const SearchPage = () => {
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    // TODO : submit 동작
+    console.log("submit");
+  };
+
   const handleTagChange = (selected: NoticeType[]) => {
     setSelectedTags(selected);
   };
@@ -36,6 +46,11 @@ const SearchPage = () => {
     setNoResults(true);
     setDefaultResults(false);
     setShowResults(false);
+  };
+
+  const navigator = useNavigate();
+  const goBack = () => {
+    navigator(-1);
   };
 
   return (
@@ -57,28 +72,25 @@ const SearchPage = () => {
               justifyContent: "flex-end",
             }}
           >
-            <Button>
-              <XXPrimary size="25px" color={colorSet.secondaryText} />
-            </Button>
+            <CloseBtnAnimation.AnimationWrapper>
+              <Button onClick={goBack}>
+                <Close size="25px" color={colorSet.secondaryText} />
+              </Button>
+            </CloseBtnAnimation.AnimationWrapper>
           </div>
-          <p
-            style={{
-              paddingLeft: defaults.pageSideGap,
-              paddingRight: defaults.pageSideGap,
-            }}
-          >
+          <Flex>
             <p style={{ width: "700px", margin: "0 auto" }}>
-              <SearchVar
-                onSubmit={handleSubmit}
-                placeholder={"공지 제목이나 태그로 검색"}
-              />
-              <p style={{ height: "30px", margin: "0 auto" }} />
-              <p style={{ height: "40px", margin: "0 auto" }}>
+              <SearchBarAnimation.AnimationWrapper>
+                <SearchBar
+                  onSubmit={handleSubmit}
+                  placeholder={"공지 제목이나 태그로 검색"}
+                />
+                <Spacer height={"12px"} />
                 <SearchTagSelect
                   selected={selectedTags}
                   onChange={handleTagChange}
                 />
-              </p>
+              </SearchBarAnimation.AnimationWrapper>
               <p
                 style={{
                   flexGrow: 1,
@@ -90,21 +102,18 @@ const SearchPage = () => {
                 }}
               >
                 {defaultResults && (
-                  <p>
-                    <Search
-                      size="250px"
-                      color={colorSet.secondaryText}
-                    ></Search>
-                    <p style={{ height: "10px", margin: "0 auto" }}></p>
+                  <Flex justifyContent="center">
+                    <SearchGif width={"230px"} />
+                    <Spacer height={"10px"} />
                     <Text
-                      size="1.7rem"
+                      size="1.5rem"
                       color={colorSet.secondaryText}
                       font={Font.Medium}
-                      style={{ paddingTop: "20px" }}
+                      style={{ paddingTop: "20px", marginTop: "-30px" }}
                     >
                       검색어를 입력해주세요
                     </Text>
-                  </p>
+                  </Flex>
                 )}
 
                 {showResults && (
@@ -200,7 +209,7 @@ const SearchPage = () => {
                 )}
               </p>
             </p>
-          </p>
+          </Flex>
           <p style={{ height: "300px", margin: "0 auto" }} />
         </Content>
       </Area>

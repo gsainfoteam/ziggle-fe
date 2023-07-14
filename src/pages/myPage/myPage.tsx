@@ -5,7 +5,7 @@ import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
 
-const myPage = () => {
+const MyPage = () => {
   return (
     <>
       <Area>
@@ -64,4 +64,4 @@ const myPage = () => {
   );
 };
 
-export default myPage;
+export default MyPage;
