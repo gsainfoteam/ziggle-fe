@@ -9,6 +9,29 @@ interface MypageProfileProps {
   email?: string;
 }
 
+interface InfoFieldProps {
+  children?: React.ReactNode;
+}
+const InfoField = ({ children }: InfoFieldProps) => {
+  return (
+    <Text
+      size="1.4rem"
+      color={colorSet.secondaryText}
+      font={Font.Regular}
+      style={{
+        borderBottom: "1px solid #ccc",
+        lineHeight: "50px",
+        marginLeft: "50px",
+        marginRight: "50px",
+        // paddingTop: "20px",
+        padding: "20px 20px 5px 20px",
+      }}
+    >
+      {children}
+    </Text>
+  );
+};
+
 const MypageProfile: React.FC<MypageProfileProps> = ({
   name,
   id,
@@ -73,58 +96,9 @@ const MypageProfile: React.FC<MypageProfileProps> = ({
       <div
         style={{ display: "flex", flexDirection: "column", padding: "20px" }}
       >
-        <Text
-          size="1.4rem"
-          color={colorSet.secondaryText}
-          font={Font.Regular}
-          style={{
-            paddingTop: "20px",
-            justifyContent: "left",
-            alignItems: "left",
-            borderBottom: "1px solid #ccc",
-            lineHeight: "50px",
-            marginLeft: "50px",
-            marginRight: "50px",
-            paddingLeft: "20px",
-          }}
-        >
-          {id}
-        </Text>
-        <Text
-          size="1.4rem"
-          color={colorSet.secondaryText}
-          font={Font.Regular}
-          style={{
-            paddingTop: "20px",
-            justifyContent: "left",
-            alignItems: "left",
-            borderBottom: "1px solid #ccc",
-            lineHeight: "50px",
-            marginLeft: "50px",
-            marginRight: "50px",
-            paddingLeft: "20px",
-          }}
-        >
-          {phone}
-        </Text>
-        <Text
-          size="1.2rem"
-          color={colorSet.secondaryText}
-          font={Font.Regular}
-          style={{
-            paddingTop: "20px",
-            justifyContent: "left",
-            alignItems: "left",
-            borderBottom: "1px solid #ccc",
-            textAlign: "left",
-            lineHeight: "50px",
-            marginLeft: "50px",
-            marginRight: "50px",
-            paddingLeft: "20px",
-          }}
-        >
-          {email}
-        </Text>
+        <InfoField>{id}</InfoField>
+        <InfoField>{phone}</InfoField>
+        <InfoField>{email}</InfoField>
       </div>
     </div>
   );

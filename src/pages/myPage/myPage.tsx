@@ -1,5 +1,6 @@
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
+import dummyMypageArticles from "src/mock/dummy-mypage-articles";
 import MyPageInfo from "src/mock/dummy-mypage-info";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
@@ -50,11 +51,17 @@ const MyPage = () => {
               }}
             >
               <div style={{ padding: "50px" }}>
-                <MypageTable title="내가 게시한 공지 목록" />
+                <MypageTable
+                  title="내가 게시한 공지 목록"
+                  articles={dummyMypageArticles.articles2}
+                />
               </div>
 
               <div>
-                <MypageTable title="내 관심 게시물 목록" />
+                <MypageTable
+                  title="리마인드 설정한 게시물 목록"
+                  articles={dummyMypageArticles.articles3}
+                />
               </div>
             </div>
           </div>

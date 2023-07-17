@@ -5,11 +5,11 @@ import colorSet from "./colorSet";
 const GlobalStyle = createGlobalStyle`
     * {
     ::-moz-selection { /* Code for Firefox */
-        background: ${colorSet.secondary};
+        background: ${colorSet.primary}20;
       }
       
       ::selection {
-        background: ${colorSet.secondary};
+        background: ${colorSet.primary}20;
       }
 }
 `;
