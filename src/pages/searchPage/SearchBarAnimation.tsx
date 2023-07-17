@@ -13,7 +13,7 @@ const fadeInWithGoUp = keyframes`
 
 const animationBezier = css`
   animation-timing-function: cubic-bezier(0, 0.51, 0.38, 1);
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 `;
 
 const AnimationWrapper = styled.div`

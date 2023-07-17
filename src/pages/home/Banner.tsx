@@ -1,69 +1,109 @@
+import { useState } from "react";
+import Circle from "src/atoms/figures/circle/Circle";
+import FilledArrowBtn, {
+  HorizontalDirection,
+} from "src/atoms/filledArrow/FilledArrowBtn";
+import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
+import Spacer from "src/atoms/spacer/Spacer";
+import dummyBanners from "src/mock/dummy-banners";
+import colorSet from "src/styles/colorSet";
+
 import Flex from "../../atoms/containers/flex/Flex";
-// import Button, { ButtonVariant } from "../../atoms/button/Button";
-// import Icon from "../../atoms/icon/Icon";
-// import Spacer from "../../atoms/spacer/Spacer";
-// import Text from "../../atoms/text/Text";
-// import Font from "../../styles/font";
-import bannerImg from "./assets/defaultBanner.png";
 
-interface BannerProps {}
+// interface BannerProps {}
 
-const Banner = ({}: BannerProps) => {
+interface IndexCircleProps {
+  isSelected: boolean;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}
+
+const IndexCircle = ({ isSelected, onClick }: IndexCircleProps) => {
   return (
-    <Flex
-      width={"100%"}
-      height={"fit-content"}
-      style={{
-        position: "relative",
-        cursor: "pointer",
-      }}
-    >
-      <img src={bannerImg} alt={"banner img"} width={"100%"} />
+    <Circle
+      style={{ cursor: "pointer" }}
+      onClick={onClick}
+      diameter={"20px"}
+      background={isSelected ? colorSet.primary : colorSet.colorless}
+      border={["2px", colorSet.primary]}
+    />
+  );
+};
 
-      {/* <Flex
+const Banner = () => {
+  const [curIndex, setCurIndex] = useState(0);
+  const maxIndex = dummyBanners.length;
+
+  const ManipulateIndex = (amount: number) => {
+    if (curIndex + amount < 0 || curIndex + amount >= maxIndex) return;
+    setCurIndex((curIndex) => curIndex + amount);
+
+    console.log(dummyBanners[curIndex].imageUrl);
+  };
+
+  return (
+    <>
+      <Flex
         width={"100%"}
-        height={"100%"}
-        flexDirection={"column"}
-        justifyContent={"center"}
-        alignItems={"center"}
+        height={"fit-content"}
         style={{
-          position: "absolute",
-          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          position: "relative",
         }}
       >
-        <Text font={Font.Aharoni} size={"2.8rem"} color={"white"}>
-          NOTICE.
-        </Text>
+        <Flex
+          justifyContent="center"
+          width={"100%"}
+          style={{ backgroundColor: colorSet.primary }}
+        >
+          <ImageRenderer
+            imageUrl={dummyBanners[curIndex].imageUrl}
+            origin="height"
+            size={500}
+            isHover={false}
+            tGP={5}
+            borderRadius={0}
+            objectPosition={dummyBanners[curIndex].objectPosition}
+          />
+        </Flex>
 
-        <Text font={Font.Aharoni} size={"3.8rem"} color={"white"}>
-          INTEGRATED.
-        </Text>
-
-        <Spacer height={"16px"} />
-
-        <Button variant={ButtonVariant.contained}>
-          <Flex
-            justifyContent={"center"}
-            alignItems={"center"}
-            gap={"14px"}
-            style={{
-              padding: "6px 15px",
-            }}
-          >
-            <Text
-              font={Font.Bold}
-              size={"1.25rem"}
-              style={{
-                paddingBottom: "2px",
+        <div
+          style={{
+            width: "100%",
+            height: "10px",
+            backgroundColor: colorSet.primary,
+          }}
+        ></div>
+        <Spacer height={"20px"} />
+      </Flex>
+      <Flex justifyContent="center" gap="15px" alignItems="center">
+        {/* left side banner button */}
+        <FilledArrowBtn
+          direction={HorizontalDirection.LEFT}
+          isPrimary={!!curIndex}
+          onClick={() => ManipulateIndex(-1)}
+          height={"30px"}
+          width={"30px"}
+        />
+        <Flex justifyContent="center" gap="12px" alignItems="center">
+          {Array.from({ length: maxIndex }, (_, i) => (
+            <IndexCircle
+              isSelected={i === curIndex}
+              key={i}
+              onClick={() => {
+                setCurIndex(i);
               }}
-            >
-              공지 작성하기
-            </Text>
-            <Icon.ArrowLeftWhite width={"16.6px"} />
-          </Flex>
-        </Button>
-      </Flex> */}
-    </Flex>
+            />
+          ))}
+        </Flex>
+        {/* right side banner button */}
+        <FilledArrowBtn
+          direction={HorizontalDirection.RIGHT}
+          isPrimary={curIndex < maxIndex - 1}
+          onClick={() => ManipulateIndex(1)}
+          height={"30px"}
+          width={"30px"}
+        />
+      </Flex>
+    </>
   );
 };
 

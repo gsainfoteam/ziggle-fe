@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface CircleProps {
   diameter: React.CSSProperties["width"];
   background?: React.CSSProperties["background"];
+  border?: [React.CSSProperties["width"], React.CSSProperties["color"]];
 }
 
 const Circle = styled.div<CircleProps>`
@@ -15,6 +16,9 @@ const Circle = styled.div<CircleProps>`
   min-height: ${({ diameter }) => (diameter ? diameter : "auto")};
   border-radius: 50%;
   background: ${({ background }) => (background ? background : undefined)};
+
+  box-shadow: ${({ border }) =>
+    border ? `0 0 0 ${border[0]} ${border[1]} inset` : undefined};
 
   display: flex;
   justify-content: center;

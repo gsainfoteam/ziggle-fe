@@ -1,5 +1,3 @@
-import colorSet from "src/styles/colorSet";
-
 import Area from "../../atoms/containers/area/Area";
 import Spacer from "../../atoms/spacer/Spacer";
 import AcademicNotices from "./AcademicNotices";
@@ -15,13 +13,6 @@ const HomePage = () => {
     <>
       <Area>
         <Banner />
-        <div
-          style={{
-            width: "100%",
-            height: "10px",
-            backgroundColor: colorSet.primary,
-          }}
-        ></div>
       </Area>
 
       <Spacer height={"60px"} />

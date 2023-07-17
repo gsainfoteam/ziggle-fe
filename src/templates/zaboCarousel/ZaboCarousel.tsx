@@ -88,11 +88,11 @@ const ZaboCarousel = ({
       const { scrollWidth, scrollLeft, clientWidth } = carouselRef.current;
       const isEnd = scrollWidth - scrollLeft === clientWidth;
       const isStart = scrollLeft === 0;
-      //   console.log(isStart, isEnd);
       setScrollBtnDisabled([isStart, isEnd]);
     }
   };
 
+  /** 한 번에 얼마나 Scroll 할건지 강도 결정 */
   const scrollAmount = 800;
 
   return (

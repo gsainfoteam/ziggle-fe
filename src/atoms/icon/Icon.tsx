@@ -3,7 +3,9 @@ import styled from "styled-components";
 
 import addImgBlack from "./assets/addImgBlack.svg";
 import arrowCircleLeftDeselected from "./assets/arrowCircleRightDeselected.svg";
+import arrowCircleRightDeselectedFilled from "./assets/arrowCircleRightDeselectedFilled.svg";
 import arrowCircleLeftPrimary from "./assets/arrowCircleRightPrimary.svg";
+import arrowCircleRightPrimaryFilled from "./assets/arrowCircleRightPrimaryFilled.svg";
 import arrowLeftWhite from "./assets/arrowLeftWhite.svg";
 import bellPrimary from "./assets/bellPrimary.svg";
 import documentBlack from "./assets/documentBlack.svg";
@@ -89,6 +91,52 @@ const ArrowCircleLeftPrimary = ({ width, height }: EachIconProps) => {
   return (
     <IconImg
       src={arrowCircleLeftPrimary}
+      alt={"arrow circle right primary icon"}
+      cssWidth={width}
+      cssHeight={height}
+      style={{ transform: "rotate(180deg)" }}
+    />
+  );
+};
+
+const ArrowCircleRightDeselectedFilled = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={arrowCircleRightDeselectedFilled}
+      alt={"arrow circle left deselected icon"}
+      cssWidth={width}
+      cssHeight={height}
+    />
+  );
+};
+
+const ArrowCircleLeftDeselectedFilled = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={arrowCircleRightDeselectedFilled}
+      alt={"arrow circle right deselected icon"}
+      cssWidth={width}
+      cssHeight={height}
+      style={{ transform: "rotate(180deg)" }}
+    />
+  );
+};
+
+const ArrowCircleRightPrimaryFilled = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={arrowCircleRightPrimaryFilled}
+      alt={"arrow circle left primary icon"}
+      cssWidth={width}
+      cssHeight={height}
+    />
+  );
+};
+
+const ArrowCircleLeftPrimaryFilled = ({ width, height }: EachIconProps) => {
+  return (
+    <IconImg
+      src={arrowCircleRightPrimaryFilled}
       alt={"arrow circle right primary icon"}
       cssWidth={width}
       cssHeight={height}
@@ -259,6 +307,10 @@ Icon.ArrowCircleLeftDeselected = ArrowCircleLeftDeselected;
 Icon.ArrowCircleRightDeselected = ArrowCircleRightDeselected;
 Icon.ArrowCircleLeftPrimary = ArrowCircleLeftPrimary;
 Icon.ArrowCircleRightPrimary = ArrowCircleRightPrimary;
+Icon.ArrowCircleLeftDeselectedFilled = ArrowCircleLeftDeselectedFilled;
+Icon.ArrowCircleRightDeselectedFilled = ArrowCircleRightDeselectedFilled;
+Icon.ArrowCircleLeftPrimaryFilled = ArrowCircleLeftPrimaryFilled;
+Icon.ArrowCircleRightPrimaryFilled = ArrowCircleRightPrimaryFilled;
 Icon.ArrowLeftWhite = ArrowLeftWhite;
 Icon.ArrowRightWhite = ArrowRightWhite;
 Icon.ArrowUpWhite = ArrowUpWhite;
