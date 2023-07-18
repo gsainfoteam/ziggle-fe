@@ -11,6 +11,7 @@ interface HorizontalScrollButtonProps {
 
 const AnimatedBtn = styled(Button)`
   transition: transform 0.1s ease-in-out;
+
   :active {
     transform: scale(0.9);
   }
@@ -29,9 +30,9 @@ const Left = ({ disabled = false, onClick }: ButtonProps) => {
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleLeftDeselected width={"40px"} height={"40px"} />
+        <Icon.ArrowCircleLeftDeselected width={"36px"} height={"40px"} />
       ) : (
-        <Icon.ArrowCircleLeftPrimary width={"40px"} height={"40px"} />
+        <Icon.ArrowCircleLeftPrimary width={"36px"} height={"40px"} />
       )}
     </AnimatedBtn>
   );
@@ -41,9 +42,9 @@ const Right = ({ disabled = false, onClick }: ButtonProps) => {
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleRightDeselected width={"40px"} height={"40px"} />
+        <Icon.ArrowCircleRightDeselected width={"36px"} height={"40px"} />
       ) : (
-        <Icon.ArrowCircleRightPrimary width={"40px"} height={"40px"} />
+        <Icon.ArrowCircleRightPrimary width={"36px"} height={"40px"} />
       )}
     </AnimatedBtn>
   );
