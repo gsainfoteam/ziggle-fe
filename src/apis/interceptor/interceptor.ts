@@ -42,3 +42,10 @@ export const apiPoster = async <T>(
 ): Promise<AxiosResponse<T>> => {
   return await interceptor.post(import.meta.env.VITE_DOMAIN + path, data);
 };
+
+export const apiPatcher = async <T>(
+  path: string,
+  data: any,
+): Promise<AxiosResponse<T>> => {
+  return await interceptor.patch(import.meta.env.VITE_DOMAIN + path, data);
+};
