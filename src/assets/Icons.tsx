@@ -93,16 +93,16 @@ export const Instagram = ({ size, color }: IconProps) => {
   );
 };
 
-export const XXPrimary = ({ size, color }: IconProps) => {
+export const Close = ({ size, color }: IconProps) => {
   return (
-    <svg 
-    width={size ?? "24px"}
-    height={size ?? "24px"}
-    fill={color ?? colorSet.colorless}
-    viewBox="0 0 27 27" 
-    xmlns="http://www.w3.org/2000/svg"
+    <svg
+      width={size ?? "24px"}
+      height={size ?? "24px"}
+      fill={color ?? colorSet.colorless}
+      viewBox="0 0 27 27"
+      xmlns="http://www.w3.org/2000/svg"
     >
-<path d="M26.626 3.01977L23.9822 0.376022L13.501 10.8573L3.01973 0.376022L0.375977 3.01977L10.8572 13.501L0.375977 23.9823L3.01973 26.626L13.501 16.1448L23.9822 26.626L26.626 23.9823L16.1447 13.501L26.626 3.01977Z"/>
-</svg>
+      <path d="M26.626 3.01977L23.9822 0.376022L13.501 10.8573L3.01973 0.376022L0.375977 3.01977L10.8572 13.501L0.375977 23.9823L3.01973 26.626L13.501 16.1448L23.9822 26.626L26.626 23.9823L16.1447 13.501L26.626 3.01977Z" />
+    </svg>
   );
 };

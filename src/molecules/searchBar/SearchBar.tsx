@@ -11,7 +11,7 @@ const SearchWrapper = styled.form`
   align-items: center;
   border: 2px solid ${colorSet.primary};
   border-radius: 5px;
-  padding: 20px 30px;
+  padding: 10px 20px;
 `;
 
 interface SearchProps {
@@ -22,7 +22,7 @@ interface SearchProps {
 // 검색 아이콘과 X 아이콘을 컴포넌트 내부에서 변경하도록 구현했습니다
 // Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
 
-const Search = ({ onSubmit, placeholder }: SearchProps) => {
+const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   const [keyword, setKeyword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -48,7 +48,8 @@ const Search = ({ onSubmit, placeholder }: SearchProps) => {
         placeholder={placeholder}
         value={keyword}
         onChange={handleKeywordChange}
-        fontSize={"1.875rem"}
+        fontSize={"1.5rem"}
+        color={colorSet.primary}
         style={{
           flexGrow: 1,
         }}
@@ -66,4 +67,4 @@ const Search = ({ onSubmit, placeholder }: SearchProps) => {
   );
 };
 
-export default Search;
+export default SearchBar;

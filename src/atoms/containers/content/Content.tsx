@@ -1,6 +1,7 @@
+import defaults from "src/styles/defaults";
 import styled from "styled-components";
 
-const CONTENT_AREA_DESKTOP = "75%";
+const CONTENT_AREA_DESKTOP = `calc(100% - 2 * ${defaults.pageSideGap})`;
 const CONTENT_AREA_MOBILE = "calc(100% - 40px)";
 
 export interface ContentAreaProps {

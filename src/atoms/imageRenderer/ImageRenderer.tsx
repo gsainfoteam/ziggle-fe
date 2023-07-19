@@ -1,6 +1,6 @@
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import colorSet from "src/styles/colorSet";
 import { ImageRendererProps } from "src/types/types";
@@ -10,8 +10,9 @@ const OriginIMG = styled.img<{
   isHover: boolean;
   isLoading: boolean;
   shadowColor: string;
+  borderRadius: number;
 }>`
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => `${borderRadius}px`};
   object-fit: cover;
   transition: 0.1s;
   z-index: 1;
@@ -34,17 +35,22 @@ const OriginIMG = styled.img<{
   }}
 `;
 
-const HeightOriginIMG = styled(OriginIMG)<{ size: number }>`
+const HeightOriginIMG = styled(OriginIMG)<{
+  size: number;
+  tGP: number;
+  tMS: number;
+  objectPosition: React.CSSProperties["objectPosition"];
+}>`
   height: ${({ size }) => `${size}px`};
-  min-width: ${({ size }) => `calc(${size}px / 1.5)`};
-  max-width: ${({ size }) => `calc(2 * ${size}px)`};
-  object-position: center;
+  min-width: ${({ size, tMS }) => `calc(${size}px / ${tMS})`};
+  max-width: ${({ size, tGP }) => `calc(${tGP} * ${size}px)`};
+  object-position: ${({ objectPosition }) => objectPosition};
 `;
 
-const WidthOriginIMG = styled(OriginIMG)<{ size: number }>`
+const WidthOriginIMG = styled(OriginIMG)<{ size: number; tGP: number }>`
   width: ${({ size }) => `${size}px`};
   min-height: ${({ size }) => `${size}px`};
-  max-height: ${({ size }) => `calc(2 * ${size}px)`};
+  max-height: ${({ size, tGP }) => `calc(${tGP} * ${size}px)`};
 `;
 
 const SkeletonRenderer = ({ size }: Pick<ImageRendererProps, "size">) => {
@@ -64,6 +70,10 @@ const ImageRenderer = ({
   origin,
   size,
   isHover,
+  objectPosition = "center",
+  borderRadius = 5,
+  tGP = 2,
+  tMS = 1.5,
 }: ImageRendererProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const handleImageLoad = () => {
@@ -82,6 +92,10 @@ const ImageRenderer = ({
             shadowColor={colorSet.primary}
             isLoading={isLoading}
             onLoad={handleImageLoad}
+            objectPosition={objectPosition}
+            borderRadius={borderRadius}
+            tGP={tGP}
+            tMS={tMS}
           />
         </>
       );
@@ -95,7 +109,9 @@ const ImageRenderer = ({
             isHover={isHover}
             shadowColor={colorSet.primary}
             isLoading={isLoading}
+            borderRadius={borderRadius}
             onLoad={handleImageLoad}
+            tGP={tGP}
           />
         </>
       );
