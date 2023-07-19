@@ -30,9 +30,9 @@ const Left = ({ disabled = false, onClick }: ButtonProps) => {
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleLeftDeselected width={"36px"} height={"40px"} />
+        <Icon.ArrowCircleLeftDeselected width={"36px"} height={"36px"} />
       ) : (
-        <Icon.ArrowCircleLeftPrimary width={"36px"} height={"40px"} />
+        <Icon.ArrowCircleLeftPrimary width={"36px"} height={"36px"} />
       )}
     </AnimatedBtn>
   );
@@ -42,9 +42,9 @@ const Right = ({ disabled = false, onClick }: ButtonProps) => {
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleRightDeselected width={"36px"} height={"40px"} />
+        <Icon.ArrowCircleRightDeselected width={"36px"} height={"36px"} />
       ) : (
-        <Icon.ArrowCircleRightPrimary width={"36px"} height={"40px"} />
+        <Icon.ArrowCircleRightPrimary width={"36px"} height={"36px"} />
       )}
     </AnimatedBtn>
   );

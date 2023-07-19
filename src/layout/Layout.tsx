@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "src/templates/navbar/Navbar";
+import Spacer from "src/atoms/spacer/Spacer";
 import Footer from "src/templates/footer/Footer";
-
+import Navbar from "src/templates/navbar/Navbar";
 
 const Layout = () => {
   return (
     <div>
-    <Navbar />
-    <Outlet />
+      <Navbar />
+      <Outlet />
 
-    <Footer/>
+      <Spacer height={"300px"} />
+      <Footer />
     </div>
   );
 };

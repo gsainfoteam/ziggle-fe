@@ -88,18 +88,18 @@ const ZaboCarousel = ({
       const { scrollWidth, scrollLeft, clientWidth } = carouselRef.current;
       const isEnd = scrollWidth - scrollLeft === clientWidth;
       const isStart = scrollLeft === 0;
-      //   console.log(isStart, isEnd);
       setScrollBtnDisabled([isStart, isEnd]);
     }
   };
 
+  /** 한 번에 얼마나 Scroll 할건지 강도 결정 */
   const scrollAmount = 800;
 
   return (
     <EntireWrap>
       <UpperWrap>
         <Text
-          size="2rem"
+          size="2.8rem"
           color={colorSet.text}
           font={Font.Bold}
           style={{ margin: 0 }}
@@ -133,7 +133,7 @@ const ZaboCarousel = ({
                   content={zabo.content}
                   organization={zabo.organization}
                   origin="height"
-                  size={300}
+                  size={280}
                 />
               );
             } else {
@@ -149,7 +149,7 @@ const ZaboCarousel = ({
                   organization={zabo.organization}
                   thumbnailUrl={zabo.thumbnailUrl}
                   origin="height"
-                  size={300}
+                  size={280}
                 />
               );
             }

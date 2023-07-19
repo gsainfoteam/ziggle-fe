@@ -17,11 +17,11 @@ const ChipWrapper = styled.div<ChipWrapperProps>`
   display: flex;
   align-items: center;
 
-  height: 30px;
+  height: 34px;
   width: max-content;
-  border: 1.5px solid ${colorSet.primary};
+  border: 1.75px solid ${colorSet.primary};
   border-radius: 10px;
-  padding: 2px 10px;
+  padding: 0 12px;
 
   ${({ variant }) => {
     switch (variant) {
@@ -51,7 +51,7 @@ const Chip = ({
     <ChipWrapper variant={variant}>
       <Text
         font={font}
-        size={"1rem"}
+        size={"1.125rem"}
         color={variant === ChipVariant.outlined ? colorSet.primary : "#ffffff"}
       >
         {label}

@@ -42,8 +42,6 @@ const HomePage = () => {
 
         <AcademicNotices />
       </Area>
-
-      <Spacer height={"60px"} />
     </>
   );
 };
