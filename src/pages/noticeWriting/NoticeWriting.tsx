@@ -1,8 +1,7 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import styled from "styled-components";
 
-import Button, { ButtonVariant } from "../../atoms/button/Button";
 import Area from "../../atoms/containers/area/Area";
 import Content from "../../atoms/containers/content/Content";
 import Flex from "../../atoms/containers/flex/Flex";
@@ -12,12 +11,13 @@ import Input from "../../atoms/inputs/input/Input";
 import Spacer from "../../atoms/spacer/Spacer";
 import Text from "../../atoms/text/Text";
 import NoticeTypeRadio from "../../molecules/noticeTypeRadio/NoticeTypeRadio";
-import Tag from "../../molecules/tag/Tag";
 import colorSet from "../../styles/colorSet";
 import Font from "../../styles/font";
 import { NoticeType } from "../../types/types";
 import dateFormat from "../../utils/dateFormat";
+import NoticeWritingActions from "./NoticeWritingActions";
 import NoticeWritingImageInput from "./NoticeWritingImageInput";
+import TagSelector from "./TagSelector";
 
 const DateInput = styled.input`
   border: none;
@@ -33,20 +33,32 @@ const DateInput = styled.input`
 `;
 
 const NoticeWriting = () => {
+  const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
   const [deadline, setDeadline] = useState<string>(dateFormat(new Date(), "-"));
 
   const [tags, setTags] = useState<string[]>([]);
 
-  const [files, setFiles] = useState<string[]>([]);
+  const [images, setImages] = useState<string[]>([]);
+
+  const editorRef = useRef<any>(null);
+
+  const handleSubmit = () => {};
 
   return (
     <Area>
       <Content>
         <Spacer height={"100px"} />
 
-        <Input placeholder={"제목을 입력하세요"} fontSize={"3rem"} />
+        <Input
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+          placeholder={"제목을 입력하세요"}
+          fontSize={"3rem"}
+        />
 
         <Spacer height={"15px"} />
 
@@ -88,48 +100,7 @@ const NoticeWriting = () => {
 
         <Spacer height={"35px"} />
 
-        <Flex flexDirection={"column"} gap={"15px"}>
-          <Flex gap={"12px"}>
-            <Icon.TagBlack width={"24px"} />
-            <Text font={Font.Medium} size={"1.25rem"}>
-              태그 설정
-            </Text>
-          </Flex>
-
-          <Flex
-            gap={"5px"}
-            style={{
-              border: `1.5px solid ${colorSet.primary}`,
-              borderRadius: "8px",
-              padding: "12px",
-            }}
-          >
-            {tags.map((tag) => (
-              <Tag
-                key={tag}
-                label={tag}
-                onDeleteClick={() => {
-                  setTags(tags.filter((t) => t !== tag));
-                }}
-              />
-            ))}
-            <Input
-              placeholder={
-                tags.length === 0 ? "태그를 입력하세요 (띄어쓰기로 구분)" : ""
-              }
-              onChange={(event) => {
-                const tag = event.target.value;
-                if (tag.includes(" ")) {
-                  setTags([...tags, ...tag.split(" ").filter((t) => t !== "")]);
-                  event.target.value = "";
-                }
-              }}
-              style={{
-                flexGrow: 1,
-              }}
-            />
-          </Flex>
-        </Flex>
+        <TagSelector tags={tags} setTags={setTags} />
 
         <Spacer height={"25px"} />
 
@@ -141,35 +112,22 @@ const NoticeWriting = () => {
             </Text>
           </Flex>
 
-          <Editor />
+          <Editor
+            tinymceScriptSrc={"../../../tinymce/tinymce.min.js"}
+            onInit={(_, editor) => (editorRef.current = editor)}
+            init={{
+              promotion: false,
+            }}
+          />
         </Flex>
 
         <Spacer height={"60px"} />
 
-        <NoticeWritingImageInput files={files} setFiles={setFiles} />
+        <NoticeWritingImageInput files={images} setFiles={setImages} />
 
         <Spacer height={"100px"} />
 
-        <Flex flexDirection={"column"} gap={"15px"} alignItems={"center"}>
-          <Button variant={ButtonVariant.contained}>
-            <Text
-              size={"1.125rem"}
-              font={Font.Bold}
-              style={{
-                padding: "5px 30px",
-              }}
-            >
-              공지 제출하기
-            </Text>
-          </Button>
-          <Text
-            font={Font.Regular}
-            color={colorSet.secondaryText}
-            size={"0.875rem"}
-          >
-            공지 제출 시 수정이 불가능합니다.
-          </Text>
-        </Flex>
+        <NoticeWritingActions handleSubmit={handleSubmit} />
       </Content>
 
       <Spacer height={"100px"} />
