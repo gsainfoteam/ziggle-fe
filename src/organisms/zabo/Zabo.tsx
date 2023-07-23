@@ -1,6 +1,6 @@
 import { useHover } from "@mantine/hooks";
 import Flex from "src/atoms/containers/flex/Flex";
-import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
+import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import { ZaboProps } from "src/types/types";
 import styled from "styled-components";
 
@@ -52,8 +52,8 @@ const Zabo = ({
   const { hovered, ref } = useHover();
   return (
     <ZaboWrapper ref={ref}>
-      <ImageRenderer
-        imageUrl={thumbnailUrl}
+      <ZaboImage
+        src={thumbnailUrl}
         origin={origin}
         size={size}
         isHover={hovered}

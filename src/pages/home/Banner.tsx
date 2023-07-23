@@ -3,9 +3,9 @@ import Circle from "src/atoms/figures/circle/Circle";
 import FilledArrowBtn, {
   HorizontalDirection,
 } from "src/atoms/filledArrow/FilledArrowBtn";
-import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
 import Spacer from "src/atoms/spacer/Spacer";
 import dummyBanners from "src/mock/dummy-banners";
+import BannerImage from "src/molecules/bannerImage/BannerImage";
 import colorSet from "src/styles/colorSet";
 
 import Flex from "../../atoms/containers/flex/Flex";
@@ -54,13 +54,8 @@ const Banner = () => {
           width={"100%"}
           style={{ backgroundColor: colorSet.primary }}
         >
-          <ImageRenderer
-            imageUrl={dummyBanners[curIndex].imageUrl}
-            origin="height"
-            size={500}
-            isHover={false}
-            tGP={5}
-            borderRadius={0}
+          <BannerImage
+            src={dummyBanners[curIndex].imageUrl}
             objectPosition={dummyBanners[curIndex].objectPosition}
           />
         </Flex>

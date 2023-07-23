@@ -11,6 +11,7 @@ const dummyBanners: BannerProps[] = [
   },
   {
     imageUrl: banner2,
+    objectPosition: "center",
   },
   {
     imageUrl: banner3,

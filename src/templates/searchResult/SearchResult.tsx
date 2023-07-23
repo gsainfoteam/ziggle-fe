@@ -1,7 +1,7 @@
 import Flex from "src/atoms/containers/flex/Flex";
-import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
 import Text from "src/atoms/text/Text";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
+import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import colorSet from "src/styles/colorSet";
 import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
@@ -30,12 +30,7 @@ const SearchResult = ({
 }: SearchResultProps) => {
   return (
     <SearchResultWrap width="100vw" alignItems="center" gap="1.2rem">
-      <ImageRenderer
-        origin="width"
-        size={230}
-        imageUrl={thumbnailUrl}
-        isHover={false}
-      />
+      <ZaboImage origin="width" size={230} src={thumbnailUrl} isHover={false} />
       <Flex
         flexDirection="column"
         justifyContent="space-between"
