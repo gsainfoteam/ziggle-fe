@@ -1,4 +1,4 @@
-import { XXPrimary } from "src/assets/Icons";
+import { Close } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import colorSet from "src/styles/colorSet";
@@ -41,7 +41,7 @@ const ImagePreviewItem = ({ src, onDelete }: ImagePreviewItemProps) => {
         }}
       >
         <Flex>
-          <XXPrimary size={"16px"} color={colorSet.colorless} />
+          <Close size={"16px"} color={colorSet.colorless} />
         </Flex>
       </Button>
     </Flex>
