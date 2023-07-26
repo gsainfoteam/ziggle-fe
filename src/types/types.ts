@@ -46,6 +46,22 @@ export interface SearchResultProps {
   searchQuery: string;
 }
 
-export interface Notice {
-  uuid: string;
+export interface NoticeBase {
+  id: number;
+  title: string;
+  views: number;
+  body: string;
+  deadline: string;
+  createdAt: string;
+  author: string;
+  tags: string[];
+}
+
+export interface Notice extends NoticeBase {
+  imageUrl: string;
+}
+
+export interface NoticeDetail extends NoticeBase {
+  imagesUrl: string[];
+  reminder: boolean;
 }

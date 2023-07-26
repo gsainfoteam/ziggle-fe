@@ -39,6 +39,8 @@ export const createNotice = async (
     tags,
     images,
   });
+
+  return data;
 };
 
 export const updateNotice = async (props: {

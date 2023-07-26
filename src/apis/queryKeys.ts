@@ -7,3 +7,5 @@ enum queryKeys {
   getAllNotices = "getAllNotices",
   getNotice = "getNotice",
 }
+
+export default queryKeys;
