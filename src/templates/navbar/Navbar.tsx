@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Account, Search } from "src/assets/Icons";
 import { ZiggleLogo } from "src/assets/ZiggleLogo";
 import Button from "src/atoms/button/Button";
@@ -18,7 +19,7 @@ const Bar = styled.div<{ bgColor: string }>`
   background-color: ${({ bgColor }) => bgColor};
 
   box-sizing: border-box;
-  padding: 0.725rem 1rem;
+  padding: 0.1rem 1rem;
 `;
 
 const ButtonSum = styled.div`
@@ -36,10 +37,12 @@ const AccountSum = styled(Button)`
 const Navbar = ({ username }: NavbarProps) => {
   return (
     <Bar bgColor={colorSet.primary}>
-      <ZiggleLogo />
+      <Link to={"/"}>
+        <ZiggleLogo />
+      </Link>
       <ButtonSum>
         <Button>
-          <Text color={colorSet.colorless} size="1.2rem" font={Font.Bold}>
+          <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
             공지 작성
           </Text>
         </Button>
@@ -51,13 +54,15 @@ const Navbar = ({ username }: NavbarProps) => {
           }}
         >
           <Search size="1.6rem" />
-          <Text color={colorSet.colorless} size="1.2rem" font={Font.Bold}>
-            공지 검색
-          </Text>
+          <Link to={"/search"} style={{ textDecoration: "none" }}>
+            <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
+              공지 검색
+            </Text>
+          </Link>
         </Button>
       </ButtonSum>
       <AccountSum>
-        <Text color={colorSet.colorless} size="1rem" font={Font.Medium}>
+        <Text color={colorSet.colorless} size="0.9rem" font={Font.Medium}>
           {username ?? "로그인"}
         </Text>
         <Account size="1.6rem" />

@@ -31,6 +31,10 @@ export interface ImageRendererProps {
   origin: Origin;
   size: number; // pixel 단위만 허용 (이미지 크기 계산을 위함)
   isHover: boolean;
+  objectPosition?: React.CSSProperties["objectPosition"];
+  borderRadius?: number;
+  tGP?: number; // the greatest product
+  tMS?: number; // the minimum share
 }
 
 export interface SearchResultProps {
@@ -64,4 +68,10 @@ export interface Notice extends NoticeBase {
 export interface NoticeDetail extends NoticeBase {
   imagesUrl: string[];
   reminder: boolean;
+}
+
+export interface BannerProps {
+  imageUrl: string;
+  link?: string;
+  objectPosition?: React.CSSProperties["objectPosition"];
 }

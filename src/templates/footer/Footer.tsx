@@ -13,7 +13,7 @@ const Bar = styled(Flex)<{ padding: string; bgColor: string }>`
   padding: 4rem ${({ padding }) => padding};
   box-sizing: border-box;
   color: ${colorSet.colorless};
-  min-height: 25rem;
+  min-height: 380px;
 `;
 
 interface Link {
@@ -28,12 +28,12 @@ interface LinkSumProps {
 
 const LinkSum = ({ title, links }: LinkSumProps) => {
   return (
-    <Flex flexDirection="column" gap="2rem" width="8rem">
-      <Text font={Font.Bold} size="1rem">
+    <Flex flexDirection="column" gap="1.8rem" width="8rem">
+      <Text font={Font.Bold} size="0.9rem">
         {title}
       </Text>
       {links.map((link) => (
-        <Text key={link.name} font={Font.Regular} size="1rem">
+        <Text key={link.name} font={Font.Regular} size="0.9rem">
           {link.name}
         </Text>
       ))}
@@ -64,7 +64,7 @@ const Footer = () => {
       width={"100%"}
       padding={defaults.pageSideGap}
       bgColor={colorSet.primary}
-      gap="7rem"
+      gap="6rem"
     >
       <Flex flexDirection="column" justifyContent="space-between">
         <Flex flexDirection="column">
@@ -73,8 +73,8 @@ const Footer = () => {
             지스트대학 총학생회 산하 정보국
           </Text>
           <Flex gap="15px" style={{ marginTop: "1rem" }}>
-            <Instagram size="3rem" />
-            <Github size="3rem" />
+            <Instagram size="2.6rem" />
+            <Github size="2.6rem" />
           </Flex>
         </Flex>
         <Text font={Font.Regular} size="1rem">

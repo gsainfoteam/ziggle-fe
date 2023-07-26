@@ -40,14 +40,18 @@ const Checkbox = ({
 
       <Flex gap={"10px"}>
         {checked ? (
-          <img src={checkboxChecked} alt={"checked checkbox"} />
+          <img src={checkboxChecked} alt={"checked checkbox"} width={"20px"} />
         ) : (
-          <img src={checkboxUnchecked} alt={"unchecked checkbox"} />
+          <img
+            src={checkboxUnchecked}
+            alt={"unchecked checkbox"}
+            width={"20px"}
+          />
         )}
 
         <Text
           font={Font.Medium}
-          size={"1.5rem"}
+          size={"1.25rem"}
           color={checked ? colorSet.text : colorSet.secondaryText}
         >
           {label}
