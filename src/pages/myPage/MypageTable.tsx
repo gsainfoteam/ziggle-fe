@@ -3,6 +3,7 @@ import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
+import LazyCat from "./assets/LazyCat";
 interface MypageTableProps {
   title: string;
   articles: MypageArticle[];
@@ -115,6 +116,30 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                 </tr>
               );
             })}
+          {articles.length === 0 && (
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "20px",
+                }}
+              >
+                <LazyCat width={"50%"} height={"50%"} />
+                <Text
+                  size={"1.3rem"}
+                  color={colorSet.secondaryText}
+                  font={Font.Medium}
+                  style={{ padding: "20px" }}
+                >
+                  아직 저장된 글이 없습니다. =ㅅ=
+                </Text>
+              </div>
+            </div>
+          )}
         </tbody>
       </table>
     </div>
