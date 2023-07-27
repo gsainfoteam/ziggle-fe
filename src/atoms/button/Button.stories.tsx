@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import Button from "./Button";
+import Button, { ButtonVariant } from "./Button";
 
 export default {
   title: "atoms/button/Button",
@@ -18,11 +18,11 @@ Default.args = {
 export const Outlined = Template.bind({});
 Outlined.args = {
   children: "Button",
-  variant: "outlined",
+  variant: ButtonVariant.outlined,
 };
 
 export const Contained = Template.bind({});
 Contained.args = {
   children: "Button",
-  variant: "contained",
+  variant: ButtonVariant.contained,
 };

@@ -4,7 +4,7 @@ const dummyDetailedNotice1 = {
   title: "2023년도 WING 신규 부원 모집!",
   isReminded: false,
   images: [notice1],
-  deadline: "2023.02.28",
+  deadline: "2023.07.28",
   isRemind: false,
   author: "정재홍",
   dateCreated: "2022.02.13",

@@ -1,4 +1,10 @@
-import { differenceInDays, parse } from "date-fns";
+import {
+  differenceInDays,
+  parse,
+  setHours,
+  setMinutes,
+  setSeconds,
+} from "date-fns";
 
 const calculateDDay = (deadline: string): number | never => {
   // Validate date format
@@ -9,7 +15,14 @@ const calculateDDay = (deadline: string): number | never => {
   }
 
   const now = new Date();
-  const daysDiff = differenceInDays(parsedDeadline, now);
+
+  // Set deadline time to 23:59:59
+  const deadlineWithTime = setHours(
+    setMinutes(setSeconds(parsedDeadline, 59), 59),
+    23,
+  );
+
+  const daysDiff = differenceInDays(deadlineWithTime, now);
 
   return daysDiff;
 };
@@ -20,9 +33,9 @@ const dDayFormated = (deadline: string): string => {
   if (daysDiff < 0) {
     return "기한 지남";
   } else if (daysDiff === 0) {
-    return "D-Day";
+    return "D - Day";
   } else {
-    return `D-${daysDiff}`;
+    return `D - ${daysDiff}`;
   }
 };
 
