@@ -1,3 +1,4 @@
+import DOMPurify from "dompurify";
 import Text from "src/atoms/text/Text";
 import Font from "src/styles/font";
 import styled from "styled-components";
@@ -26,7 +27,10 @@ const ContentShower = styled(Text)`
 
 const NoticeContent = ({ content }: NoticeContentProps) => {
   const parser = new DOMParser();
-  const Doc = parser.parseFromString(content, "text/html");
+
+  // DOMPurify를 이용한 XSS 방지
+  const cleanedContent = DOMPurify.sanitize(content);
+  const Doc = parser.parseFromString(cleanedContent, "text/html");
 
   return (
     <ContentShower

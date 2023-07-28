@@ -3932,6 +3932,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dompurify@npm:^3":
+  version: 3.0.2
+  resolution: "@types/dompurify@npm:3.0.2"
+  dependencies:
+    "@types/trusted-types": "*"
+  checksum: dc017e16a46bcc77086af7d4dc5d2bf4102f16bf1a11b2937e90380da50e77716a2a608ff52990b1293250fefc2ad7593a1378fe07e3a7e21f200d702f0a7878
+  languageName: node
+  linkType: hard
+
 "@types/ejs@npm:^3.1.1":
   version: 3.1.2
   resolution: "@types/ejs@npm:3.1.2"
@@ -4278,6 +4287,13 @@ __metadata:
   version: 4.2.0
   resolution: "@types/stylis@npm:4.2.0"
   checksum: 02a47584acd2fcb664f7d8270a69686c83752bdfb855f804015d33116a2b09c0b2ac535213a4a7b6d3a78b2915b22b4024cce067ae979beee0e4f8f5fdbc26a9
+  languageName: node
+  linkType: hard
+
+"@types/trusted-types@npm:*":
+  version: 2.0.3
+  resolution: "@types/trusted-types@npm:2.0.3"
+  checksum: 4794804bc4a4a173d589841b6d26cf455ff5dc4f3e704e847de7d65d215f2e7043d8757e4741ce3a823af3f08260a8d04a1a6e9c5ec9b20b7b04586956a6b005
   languageName: node
   linkType: hard
 
@@ -5814,6 +5830,13 @@ __metadata:
   version: 0.5.16
   resolution: "dom-accessibility-api@npm:0.5.16"
   checksum: 005eb283caef57fc1adec4d5df4dd49189b628f2f575af45decb210e04d634459e3f1ee64f18b41e2dcf200c844bc1d9279d80807e686a30d69a4756151ad248
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "dompurify@npm:3.0.5"
+  checksum: 2d9421570c833ce26ce7022955241749b646d41e8bf453f42ede9f22d0e98af482cedb7dfbf8129419eb48b351c1d677a08fc9f1cd91836ce7f6c1807a0676b2
   languageName: node
   linkType: hard
 
@@ -10192,6 +10215,7 @@ __metadata:
     "@storybook/react-vite": ^7.0.7
     "@storybook/testing-library": ^0.0.14-next.2
     "@tanstack/react-query": ^4.29.7
+    "@types/dompurify": ^3
     "@types/eslint": ^8
     "@types/node": ^18.11.18
     "@types/prettier": ^2
@@ -10205,6 +10229,7 @@ __metadata:
     axios: ^1.4.0
     color.js: ^1.2.0
     date-fns: ^2.30.0
+    dompurify: ^3.0.5
     eslint: ~8.22.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1

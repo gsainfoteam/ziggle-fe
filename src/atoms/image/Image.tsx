@@ -12,6 +12,8 @@ export interface ImageProps {
   objectPosition?: React.CSSProperties["objectPosition"];
   isLoading?: boolean;
   borderRadius?: React.CSSProperties["borderRadius"];
+
+  style?: React.CSSProperties;
 }
 
 const Image = styled.img<ImageProps>`
