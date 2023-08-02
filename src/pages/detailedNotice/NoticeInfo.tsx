@@ -57,6 +57,7 @@ const NoticeInfo = ({
               <Spacer width={"10px"} />
               {
                 // 마감일이 지나지 않았을 때만 표시
+                // TODO: 로그인 안 되어 있으면 리마인드 버튼 클릭 시 로그인 페이지로 이동
                 !isPast && (
                   <div style={{ transform: "translateY(2px)" }}>
                     <CustomCheckbox

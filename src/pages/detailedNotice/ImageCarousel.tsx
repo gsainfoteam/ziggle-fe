@@ -66,6 +66,7 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
       setScrollBtnDisabled([isStart, isEnd]);
     }
   };
+
   return (
     <>
       <UpperWrap>
