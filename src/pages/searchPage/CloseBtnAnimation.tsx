@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const fadeInWithGoRight = keyframes`
     0% {
@@ -11,19 +11,12 @@ const fadeInWithGoRight = keyframes`
     }
 `;
 
-const animationBezier = css`
-  animation-timing-function: cubic-bezier(0, 0.51, 0.38, 1);
-  animation-duration: 0.5s;
-`;
-
 const AnimationWrapper = styled.div`
-  animation-name: ${fadeInWithGoRight};
-  ${animationBezier}
+  animation-name: ${fadeInWithGoRight} 0.5 cubic-bezier(0, 0.51, 0.38, 1);
 `;
 
 const CloseBtnAnimation = {
   fadeInWithGoRight,
-  animationBezier,
   AnimationWrapper,
 };
 
