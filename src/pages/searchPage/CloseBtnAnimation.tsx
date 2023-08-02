@@ -12,7 +12,7 @@ const fadeInWithGoRight = keyframes`
 `;
 
 const AnimationWrapper = styled.div`
-  animation-name: ${fadeInWithGoRight} 0.5 cubic-bezier(0, 0.51, 0.38, 1);
+  animation: ${fadeInWithGoRight} 0.5s cubic-bezier(0, 0.51, 0.38, 1);
 `;
 
 const CloseBtnAnimation = {

@@ -12,7 +12,7 @@ const fadeInWithGoUp = keyframes`
 `;
 
 const AnimationWrapper = styled.div`
-  animation-name: ${fadeInWithGoUp} 0.5 cubic-bezier(0, 0.51, 0.38, 1);
+  animation: ${fadeInWithGoUp} 0.5s cubic-bezier(0, 0.51, 0.38, 1);
 `;
 
 const SearchBarAnimation = {
