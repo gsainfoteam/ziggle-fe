@@ -4,7 +4,7 @@ import styled from "styled-components";
 interface CircleProps {
   diameter: React.CSSProperties["width"];
   background?: React.CSSProperties["background"];
-  border?: [React.CSSProperties["width"], React.CSSProperties["color"]];
+  border?: React.CSSProperties["border"];
 }
 
 const Circle = styled.div<CircleProps>`
@@ -17,8 +17,8 @@ const Circle = styled.div<CircleProps>`
   border-radius: 50%;
   background: ${({ background }) => (background ? background : undefined)};
 
-  box-shadow: ${({ border }) =>
-    border ? `0 0 0 ${border[0]} ${border[1]} inset` : undefined};
+  box-sizing: border-box;
+  border: ${({ border }) => (border ? border : undefined)};
 
   display: flex;
   justify-content: center;

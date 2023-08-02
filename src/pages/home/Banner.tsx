@@ -24,7 +24,7 @@ const IndexCircle = ({ isSelected, onClick }: IndexCircleProps) => {
       onClick={onClick}
       diameter={"20px"}
       background={isSelected ? colorSet.primary : colorSet.colorless}
-      border={["2px", colorSet.primary]}
+      border={`2px solid ${colorSet.primary}}`}
     />
   );
 };
