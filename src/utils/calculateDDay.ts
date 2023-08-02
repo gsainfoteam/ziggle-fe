@@ -20,9 +20,9 @@ const dDayFormated = (deadline: string): string => {
   if (daysDiff < 0) {
     return "기한 지남";
   } else if (daysDiff === 0) {
-    return "D-Day";
+    return "D - Day";
   } else {
-    return `D-${daysDiff}`;
+    return `D - ${daysDiff}`;
   }
 };
 

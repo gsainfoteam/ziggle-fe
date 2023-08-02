@@ -1,11 +1,18 @@
-import notice1 from "../pages/detailedNotice/assets/notice1/noticeImg1.png";
+import notice1_00 from "../pages/detailedNotice/assets/notice1/notice1_00.png";
+import notice2_00 from "../pages/detailedNotice/assets/notice2/notice2_00.png";
+import notice2_01 from "../pages/detailedNotice/assets/notice2/notice2_01.png";
+import notice2_02 from "../pages/detailedNotice/assets/notice2/notice2_02.png";
+import notice2_03 from "../pages/detailedNotice/assets/notice2/notice2_03.png";
+import notice2_04 from "../pages/detailedNotice/assets/notice2/notice2_04.png";
+import notice2_05 from "../pages/detailedNotice/assets/notice2/notice2_05.png";
+import notice2_06 from "../pages/detailedNotice/assets/notice2/notice2_06.png";
+import notice2_07 from "../pages/detailedNotice/assets/notice2/notice2_07.png";
 
 const dummyDetailedNotice1 = {
   title: "2023년도 WING 신규 부원 모집!",
   isReminded: false,
-  images: [notice1],
-  deadline: "2023.02.28",
-  isRemind: false,
+  images: [notice1_00],
+  deadline: "2023.08.31",
   author: "정재홍",
   dateCreated: "2022.02.13",
   viewCount: 200,
@@ -21,4 +28,38 @@ const dummyDetailedNotice1 = {
   <p><span style="white-space: pre-wrap;">관련 문의가 많은 경우에는 평가 요소 및 구체적인 선발 과정 등을 이야기하는 별도의 Q&amp;A 세션을 진행하고자 합니다. <br>더 궁금한 사항은 제 카톡이나 010-5513-2743 문자로 자유롭게 연락주시면 됩니다.</span></p>`,
 };
 
-export default { dummyDetailedNotice1 };
+const dummyDetailedNotice2 = {
+  title: "영단기, 공단기 커넥츠🤝광주과학기술원 총학생회 제휴 안내",
+  isReminded: true,
+  images: [
+    notice2_00,
+    notice2_01,
+    notice2_02,
+    notice2_03,
+    notice2_04,
+    notice2_05,
+    notice2_06,
+    notice2_07,
+  ],
+  author: "김민정",
+  dateCreated: "2022.07.20",
+  viewCount: 73,
+  tags: ["혜택", "영단기", "커넥츠"],
+  content: `<h3>🚩수강신청하러가기:&nbsp;</h3>
+  <p>https://naver.me/FU94FiLw</p>
+  <h3>✨여름방학 수강자를 위한 추가혜택✨</h3>
+  <p>&middot;선착순 20명 토익응시료 100%지원<br>(최초 1회한함, 선착순 마감 후 50%지원)<br>&middot;여름방학 한정 지텔프 추가 선택 가능&nbsp;</p>
+  <h3>📚토익점수 UP</h3>
+  <p><br>&middot;교재3권지원&nbsp;<br>&middot;영단기 토익 LC+RC 1년 수강권 (+ 300일 추가증정)<br>&middot;학습게시판을 통한 자료제공과 질문 피드백</p>
+  <h3><br>📚어학실력 UP</h3>
+  <p>&middot;영단기 토익스피킹 강좌제공 + 교재 1권<br>&middot;오픽, 영어회화, 중국어, 일본어 강좌 제공&nbsp;</p>
+  <h3>📚자격증으로 스펙 UP</h3>
+  <p>&middot;컴퓨터활용능력 등 IT 자격증, OA, 프로그래밍, 그래픽, 창업까지 한번에(인컴멀티스쿨 전과목 패키지 1년 수강권)</p>
+  <h3>🚩수강자 추가 선택사항</h3>
+  <p>&middot;공기업단기빠꼼이NCS, 한국사능력검정시험, 지텔프 할인혜택</p>
+  <h3>🚩수강자 특별혜택</h3>
+  <p>&middot;공단기 15만원 할인권 증정<br>&middot;전공별 자격증 강의지원</p>
+  <p>☎ 010.7685.0509</p>`,
+};
+
+export default { dummyDetailedNotice1, dummyDetailedNotice2 };
