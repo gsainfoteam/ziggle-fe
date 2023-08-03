@@ -4,9 +4,9 @@ import Layout from "./layout/Layout";
 import HomePage from "./pages/home/HomePage";
 import MyPage from "./pages/myPage/myPage";
 import NoticeWriting from "./pages/noticeWriting/NoticeWriting";
-import PlaygroundPage from "./pages/playground/PlaygroundPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
+import Paths from "./types/paths";
 
 const App = () => {
   return (
@@ -15,12 +15,11 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="*" element={<Navigate to={"/"} replace />} />
-            <Route path="/playground" element={<PlaygroundPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/myPage" element={<MyPage />} />
-            <Route path="/notice/writing" element={<NoticeWriting />} />
+            <Route path={Paths.home} element={<HomePage />} />
+            <Route path="*" element={<Navigate to={Paths.home} replace />} />
+            <Route path={Paths.search} element={<SearchPage />} />
+            <Route path={Paths.myPage} element={<MyPage />} />
+            <Route path={Paths.noticeWriting} element={<NoticeWriting />} />
           </Route>
         </Routes>
       </BrowserRouter>

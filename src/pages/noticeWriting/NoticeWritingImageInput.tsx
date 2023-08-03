@@ -1,7 +1,7 @@
 import { useRef } from "react";
+import Grid from "src/atoms/containers/grid/Grid";
 import styled from "styled-components";
 
-import Grid from "src/atoms/containers/grid/Grid";
 import Button, { ButtonVariant } from "../../atoms/button/Button";
 import Flex from "../../atoms/containers/flex/Flex";
 import Icon from "../../atoms/icon/Icon";
