@@ -34,7 +34,7 @@ const CoverContent = styled(Content)`
 
 const DetailedNoticePage = () => {
   const dummyData: dummyDetailedNotice =
-    dummyDetailedNotice.dummyDetailedNotice2;
+    dummyDetailedNotice.dummyDetailedNotice1;
 
   const [showImageViewer, setShowImageViewer] = useState<boolean>(false);
 

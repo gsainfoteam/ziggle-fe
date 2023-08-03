@@ -91,19 +91,19 @@ const CheckboxWrapper = styled.div`
   }
 `;
 
-interface CustomCheckboxProps {
+interface CheckboxWithLabelProps {
   id: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
   children?: React.ReactNode;
 }
 
-const CustomCheckbox = ({
+const CheckboxWithLabel = ({
   id,
   checked,
   onChange,
   children,
-}: CustomCheckboxProps) => (
+}: CheckboxWithLabelProps) => (
   <CheckboxWrapper>
     <input
       className="inp-cbx"
@@ -128,4 +128,4 @@ const CustomCheckbox = ({
   </CheckboxWrapper>
 );
 
-export default CustomCheckbox;
+export default CheckboxWithLabel;
