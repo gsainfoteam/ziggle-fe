@@ -26,16 +26,13 @@ const ContentShower = styled(Text)`
 `;
 
 const NoticeContent = ({ content }: NoticeContentProps) => {
-  const parser = new DOMParser();
-
   // DOMPurify를 이용한 XSS 방지
   const cleanedContent = DOMPurify.sanitize(content);
-  const Doc = parser.parseFromString(cleanedContent, "text/html");
 
   return (
     <ContentShower
       font={Font.Regular}
-      dangerouslySetInnerHTML={{ __html: Doc.body.innerHTML }}
+      dangerouslySetInnerHTML={{ __html: cleanedContent }}
     ></ContentShower>
   );
 };
