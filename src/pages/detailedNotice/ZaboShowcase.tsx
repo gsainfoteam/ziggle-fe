@@ -76,9 +76,7 @@ const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
             width={showcaseWidth}
             left={showcaseLeft}
             isHover={hovered}
-            onClick={() => {
-              onShow?.();
-            }}
+            onClick={onShow}
           />
         </div>
         <ImageCTAButton
@@ -86,9 +84,7 @@ const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
           height={"40px"}
           left={ctaButtonLeft}
           ref={ctaButtonRef}
-          onClick={() => {
-            onShow?.();
-          }}
+          onClick={onShow}
         >
           <Flex gap={"16px"}>
             <Text size={"0.875rem"} font={Font.Medium}>
