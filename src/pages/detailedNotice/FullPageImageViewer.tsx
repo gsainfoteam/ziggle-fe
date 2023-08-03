@@ -55,8 +55,6 @@ const FullPageImageViewer = ({
   const ManipulateIndex = (amount: number) => {
     if (imageIndex + amount < 0 || imageIndex + amount > maxIndex) return;
     setImageIndex((imageIndex) => imageIndex + amount);
-
-    console.log(imageIndex);
   };
 
   // 키보드 화살표로 인덱싱 지원

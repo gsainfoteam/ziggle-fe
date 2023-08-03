@@ -19,18 +19,14 @@ const HoverImage = styled(Image)<{ isHover: boolean; shadowColor: string }>`
   }}
 `;
 
-const HeightOriginIMG = styled(HoverImage)<{
-  size: number;
-}>`
+const HeightOriginIMG = styled(HoverImage)<{ size: number }>`
   height: ${({ size }) => `${size}px`};
   min-width: ${({ size }) => `calc(${size}px / 1.5`};
   max-width: ${({ size }) => `calc(2 * ${size}px)`};
   object-position: "center";
 `;
 
-const WidthOriginIMG = styled(HoverImage)<{
-  size: number;
-}>`
+const WidthOriginIMG = styled(HoverImage)<{ size: number }>`
   width: ${({ size }) => `${size}px`};
   min-height: ${({ size }) => `${size}px`};
   max-height: ${({ size }) => `calc(2 * ${size}px)`};
