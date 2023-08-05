@@ -1,18 +1,19 @@
-import { differenceInDays } from "date-fns";
+import dayjs from "dayjs";
 
 const calculateDDay = (deadline: string): number | never => {
-  console.log(deadline);
-
   // Validate date format
-  const parsedDeadline = new Date();
-  console.log(parsedDeadline);
-
-  if (isNaN(parsedDeadline.getTime())) {
+  const parsedDeadline = dayjs(deadline);
+  if (!parsedDeadline.isValid()) {
     throw new Error("The deadline date format is incorrect.");
   }
 
-  const now = new Date();
-  const daysDiff = differenceInDays(parsedDeadline, now);
+  // Set time to 23:59:59
+  const finalDeadline = parsedDeadline.hour(23).minute(59).second(59);
+
+  const now = dayjs();
+
+  // Calculate the difference in days
+  const daysDiff = finalDeadline.diff(now, "day");
 
   return daysDiff;
 };
