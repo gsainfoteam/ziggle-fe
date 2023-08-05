@@ -12,9 +12,9 @@ const dummyDetailedNotice1 = {
   title: "2023년도 WING 신규 부원 모집!",
   isReminded: false,
   images: [notice1_00],
-  deadline: "2023.08.31",
+  deadline: "2023-08-03T11:57:18.740Z",
   author: "정재홍",
-  dateCreated: "2022.02.13",
+  dateCreated: "2023-03-03T11:57:18.740Z",
   viewCount: 200,
   tags: ["모집", "WING", "많관부"],
   content: `<p><span style="white-space: pre-wrap;">안녕하세요!! GIST 유일 전산동아리 WING에서 신입부원을 모집합니다 😎😎<br>올해는 신입생을 포함하여, 전학년을 대상으로 선발하게 되어, 이렇게 인사드립니다. <br>소개 링크: https://jaehong21.notion.site/JOIN-WING-e371a3ea53e44502b7f819a696f13189 </span></p>
@@ -42,7 +42,7 @@ const dummyDetailedNotice2 = {
     notice2_07,
   ],
   author: "김민정",
-  dateCreated: "2022.07.20",
+  dateCreated: "2023-08-03T11:57:18.740Z",
   viewCount: 73,
   tags: ["혜택", "영단기", "커넥츠"],
   content: `<h3>🚩수강신청하러가기:&nbsp;</h3>

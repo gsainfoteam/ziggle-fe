@@ -1,8 +1,11 @@
-import { differenceInDays, parse } from "date-fns";
+import { differenceInDays } from "date-fns";
 
 const calculateDDay = (deadline: string): number | never => {
+  console.log(deadline);
+
   // Validate date format
-  const parsedDeadline = parse(deadline, "yyyy.MM.dd", new Date());
+  const parsedDeadline = new Date();
+  console.log(parsedDeadline);
 
   if (isNaN(parsedDeadline.getTime())) {
     throw new Error("The deadline date format is incorrect.");
