@@ -16,7 +16,6 @@
     "@tanstack/react-query": "^4.29.7",
     "axios": "^1.4.0",
     "color.js": "^1.2.0",
-    "date-fns": "^2.30.0",
     "dayjs": "^1.11.9",
     "dompurify": "^3.0.5",
     "i18next": "^22.4.8",

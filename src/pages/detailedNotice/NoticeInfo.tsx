@@ -7,7 +7,8 @@ import Chip, { ChipVariant } from "src/molecules/chip/Chip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import dDayFormated from "src/utils/calculateDDay";
-import getDayOfWeek from "src/utils/getDay";
+import formatISODate from "src/utils/formatISODate";
+import getDayOfWeek from "src/utils/getDayOfWeek";
 
 export interface NoticeInfoProps {
   deadline?: string;
@@ -45,7 +46,7 @@ const NoticeInfo = ({
                 마감일&nbsp;
               </Text>
               <Text font={Font.Bold} size={"1.5rem"}>
-                {deadline} ({getDayOfWeek(deadline)})
+                {formatISODate(deadline)} ({getDayOfWeek(deadline)})
               </Text>
               <Spacer width={"10px"} />
               <Chip
@@ -137,7 +138,7 @@ const NoticeInfo = ({
           size={"1.25rem"}
           color={colorSet.secondaryText}
         >
-          {dateCreated}&nbsp;·&nbsp;
+          {formatISODate(dateCreated)}&nbsp;·&nbsp;
         </Text>
         <Text
           font={Font.Medium}

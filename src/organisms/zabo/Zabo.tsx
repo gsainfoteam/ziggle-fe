@@ -2,6 +2,7 @@ import { useHover } from "@mantine/hooks";
 import Flex from "src/atoms/containers/flex/Flex";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import { ZaboProps } from "src/types/types";
+import formatISODate from "src/utils/formatISODate";
 import styled from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -61,7 +62,7 @@ const Zabo = ({
       <Title hovered={hovered}>{title}</Title>
       <Flex gap="0.25em">
         <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
-          {date}
+          {formatISODate(date)}
         </Text>
         <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
           •

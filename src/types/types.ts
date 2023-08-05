@@ -26,6 +26,9 @@ export interface ZaboProps {
 
 type Origin = "width" | "height";
 
+/**
+ * @deprecated The method should not be used
+ */
 export interface ImageRendererProps {
   imageUrl: string;
   origin: Origin;
