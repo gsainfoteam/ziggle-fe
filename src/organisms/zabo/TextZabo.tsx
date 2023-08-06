@@ -24,6 +24,7 @@ const ZaboWrapper = styled.div<{
   box-sizing: border-box;
   overflow: hidden;
 
+  background-color: ${colorSet.colorless};
   border-radius: 5px;
   border: 1px solid ${colorSet.secondaryText};
   cursor: pointer;
@@ -87,8 +88,10 @@ const TextZabo = ({
             textOverflow: "ellipsis",
             overflow: "hidden",
             display: "-webkit-box",
-            WebkitLineClamp: 5, // 이렇게밖에 안됨
+            WebkitLineClamp: origin === "height" ? 5 : 8, // 이렇게밖에 안됨
             WebkitBoxOrient: "vertical",
+            lineHeight: "1.5rem",
+            wordBreak: "break-word",
           }}
         >
           {content}
