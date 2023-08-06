@@ -26,6 +26,9 @@ export interface ZaboProps {
 
 type Origin = "width" | "height";
 
+/**
+ * @deprecated The method should not be used
+ */
 export interface ImageRendererProps {
   imageUrl: string;
   origin: Origin;
@@ -33,8 +36,8 @@ export interface ImageRendererProps {
   isHover: boolean;
   objectPosition?: React.CSSProperties["objectPosition"];
   borderRadius?: number;
-  tGP?: number; // the greatest product
-  tMS?: number; // the minimum share
+  size_theGreatestProduct?: number;
+  size_theMinimumShare?: number;
 }
 
 export interface SearchResultProps {

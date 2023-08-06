@@ -3763,6 +3763,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dompurify@npm:^3":
+  version: 3.0.2
+  resolution: "@types/dompurify@npm:3.0.2"
+  dependencies:
+    "@types/trusted-types": "*"
+  checksum: dc017e16a46bcc77086af7d4dc5d2bf4102f16bf1a11b2937e90380da50e77716a2a608ff52990b1293250fefc2ad7593a1378fe07e3a7e21f200d702f0a7878
+  languageName: node
+  linkType: hard
+
 "@types/ejs@npm:^3.1.1":
   version: 3.1.2
   resolution: "@types/ejs@npm:3.1.2"
@@ -4038,6 +4047,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-responsive-masonry@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "@types/react-responsive-masonry@npm:2.1.0"
+  dependencies:
+    "@types/react": "*"
+  checksum: 319aeecf3bc6d7a3e15ae2c9dc1a345d04e37dbbdf27f32c5e8fd985dbf5e045023a881367b336752b445abda9800a5f370fa6d7e7eabfc9ffda493bbdcd4e74
+  languageName: node
+  linkType: hard
+
 "@types/react-responsive@npm:^8.0.5":
   version: 8.0.5
   resolution: "@types/react-responsive@npm:8.0.5"
@@ -4101,6 +4119,13 @@ __metadata:
     "@types/react": "*"
     csstype: ^3.0.2
   checksum: 84f53b3101739b20d1731554fb7735bc2f3f5d050a8b392e9845403c8c8bbd729737d033978649f9195a97b557875b010d46e35a4538564a2d0dbcce661dbf76
+  languageName: node
+  linkType: hard
+
+"@types/trusted-types@npm:*":
+  version: 2.0.3
+  resolution: "@types/trusted-types@npm:2.0.3"
+  checksum: 4794804bc4a4a173d589841b6d26cf455ff5dc4f3e704e847de7d65d215f2e7043d8757e4741ce3a823af3f08260a8d04a1a6e9c5ec9b20b7b04586956a6b005
   languageName: node
   linkType: hard
 
@@ -5208,6 +5233,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"color.js@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "color.js@npm:1.2.0"
+  checksum: 47de6e7acef77f52bdfe2deaeba9c9e3a4df601834ae7d78263c586b2b6a51179727edcf4700bb5967d0987b0962ceed9787c42c2997cd48d80c3dda09248089
+  languageName: node
+  linkType: hard
+
 "colorette@npm:^2.0.19":
   version: 2.0.20
   resolution: "colorette@npm:2.0.20"
@@ -5422,6 +5454,13 @@ __metadata:
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: e1a52e6c25c1314d6beef5168da704ab29c5186b877c07d822bd0806717d9a265e8493a2e35ca7e68d0f5d472d43fac1cdce70fd79fd0853dff81f3028d857b5
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.9":
+  version: 1.11.9
+  resolution: "dayjs@npm:1.11.9"
+  checksum: a4844d83dc87f921348bb9b1b93af851c51e6f71fa259604809cfe1b49d1230e6b0212dab44d1cb01994c096ad3a77ea1cf18fa55154da6efcc9d3610526ac38
   languageName: node
   linkType: hard
 
@@ -5640,6 +5679,13 @@ __metadata:
   version: 0.5.16
   resolution: "dom-accessibility-api@npm:0.5.16"
   checksum: 005eb283caef57fc1adec4d5df4dd49189b628f2f575af45decb210e04d634459e3f1ee64f18b41e2dcf200c844bc1d9279d80807e686a30d69a4756151ad248
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "dompurify@npm:3.0.5"
+  checksum: 2d9421570c833ce26ce7022955241749b646d41e8bf453f42ede9f22d0e98af482cedb7dfbf8129419eb48b351c1d677a08fc9f1cd91836ce7f6c1807a0676b2
   languageName: node
   linkType: hard
 
@@ -6098,7 +6144,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-storybook@npm:^0.6.11":
+"eslint-plugin-storybook@npm:^0.6.13":
   version: 0.6.13
   resolution: "eslint-plugin-storybook@npm:0.6.13"
   dependencies:
@@ -9493,6 +9539,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-responsive-masonry@npm:^2.1.7":
+  version: 2.1.7
+  resolution: "react-responsive-masonry@npm:2.1.7"
+  checksum: d8fd1838f73554809ecf2fbb29605abdd40eecaeb09caf549ea674e7e319e02fa7ff7aae978914b16f3a5f802d03a16402765a093e0bbb1d782665fd41632d97
+  languageName: node
+  linkType: hard
+
 "react-responsive@npm:^9.0.2":
   version: 9.0.2
   resolution: "react-responsive@npm:9.0.2"
@@ -9964,6 +10017,7 @@ __metadata:
     "@storybook/testing-library": ^0.0.14-next.2
     "@tanstack/react-query": ^4.29.7
     "@tinymce/tinymce-react": ^4.3.0
+    "@types/dompurify": ^3
     "@types/eslint": ^8
     "@types/node": ^18.11.18
     "@types/prettier": ^2
@@ -9971,18 +10025,22 @@ __metadata:
     "@types/react": ^18.0.26
     "@types/react-dom": ^18.0.9
     "@types/react-responsive": ^8.0.5
+    "@types/react-responsive-masonry": ^2.1.0
     "@types/styled-components": ^5
     "@typescript-eslint/eslint-plugin": ^5.47.1
     "@typescript-eslint/parser": ^5.47.1
     "@vitejs/plugin-react": ^3.0.0
     axios: ^1.4.0
+    color.js: ^1.2.0
+    dayjs: ^1.11.9
+    dompurify: ^3.0.5
     eslint: ~8.22.0
     eslint-config-prettier: ^8.5.0
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-react: ^7.31.11
     eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-simple-import-sort: ^8.0.0
-    eslint-plugin-storybook: ^0.6.11
+    eslint-plugin-storybook: ^0.6.13
     i18next: ^22.4.8
     i18next-browser-languagedetector: ^7.0.1
     prettier: ^2.8.1
@@ -9992,6 +10050,7 @@ __metadata:
     react-i18next: ^12.1.1
     react-loading-skeleton: ^3.3.1
     react-responsive: ^9.0.2
+    react-responsive-masonry: ^2.1.7
     react-router-dom: ^6.11.2
     storybook: ^7.0.7
     styled-components: ^5.3.6

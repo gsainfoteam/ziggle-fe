@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Layout from "./layout/Layout";
+import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
 import HomePage from "./pages/home/HomePage";
 import MyPage from "./pages/myPage/MyPage";
 import NoticeWriting from "./pages/noticeWriting/NoticeWriting";
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="*" element={<Navigate to={"/"} replace />} />
             <Route path="/playground" element={<PlaygroundPage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/notice/:id" element={<DetailedNoticePage />} />
             <Route path="/myPage" element={<MyPage />} />
             <Route path="/notice/writing" element={<NoticeWriting />} />
           </Route>

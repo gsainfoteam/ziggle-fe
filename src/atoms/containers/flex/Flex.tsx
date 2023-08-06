@@ -18,7 +18,7 @@ const Flex = styled.div<Flex>`
   display: flex;
   flex-direction: ${({ flexDirection }) =>
     flexDirection ? flexDirection : "row"};
-  flex-wrap: wrap;
+  flex-wrap: wrap; // default
   justify-content: ${({ justifyContent }) =>
     justifyContent ? justifyContent : "flex-start"};
   align-items: ${({ alignItems }) => (alignItems ? alignItems : "normal")};

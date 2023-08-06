@@ -1,12 +1,13 @@
 import Flex from "src/atoms/containers/flex/Flex";
-import ImageRenderer from "src/atoms/imageRenderer/ImageRenderer";
 import Text from "src/atoms/text/Text";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
+import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import colorSet from "src/styles/colorSet";
 import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
 import { SearchResultProps } from "src/types/types";
-import getDayOfWeek from "src/utils/getDay";
+import formatISODate from "src/utils/formatISODate";
+import getDayOfWeek from "src/utils/getDayOfWeek";
 import GetHighlightedText from "src/utils/GetHighlightedText";
 import styled from "styled-components";
 
@@ -30,12 +31,7 @@ const SearchResult = ({
 }: SearchResultProps) => {
   return (
     <SearchResultWrap width="100vw" alignItems="center" gap="1.2rem">
-      <ImageRenderer
-        origin="width"
-        size={230}
-        imageUrl={thumbnailUrl}
-        isHover={false}
-      />
+      <ZaboImage origin="width" size={230} src={thumbnailUrl} isHover={false} />
       <Flex
         flexDirection="column"
         justifyContent="space-between"
@@ -46,7 +42,8 @@ const SearchResult = ({
       >
         <Flex flexDirection="column">
           <Text font={Font.Medium} size="1.2rem">
-            {deadline && `마감일 ${deadline} (${getDayOfWeek(deadline)})`}
+            {deadline &&
+              `마감일 ${formatISODate(deadline)} (${getDayOfWeek(deadline)})`}
           </Text>
           <GetHighlightedText
             text={title}
@@ -91,7 +88,7 @@ const SearchResult = ({
         </Flex>
         <Flex gap="0.5rem" alignItems="center">
           <Text font={Font.Regular} size="1rem" color={colorSet.secondaryText}>
-            {date}
+            {formatISODate(date)}
           </Text>
           <Text color={colorSet.secondaryText}>•</Text>
           <Text font={Font.Bold} size="1rem" color={colorSet.secondaryText}>

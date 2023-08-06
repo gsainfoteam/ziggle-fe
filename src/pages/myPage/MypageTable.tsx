@@ -3,6 +3,7 @@ import Button from "src/atoms/button/Button";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import formatISODate from "src/utils/formatISODate";
 
 import LazyCat from "./assets/LazyCat";
 interface MypageTableProps {
@@ -126,7 +127,7 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                       font={Font.Regular}
                       style={{ padding: "10px", textAlign: "center" }}
                     >
-                      {articleObj.date}
+                      {formatISODate(articleObj.date)}
                     </Text>
                   </div>
                 </div>

@@ -23,6 +23,16 @@ const AnimatedBtn = styled(Button)`
   }
 `;
 
+const icons = {
+  [HorizontalDirection.LEFT]: {
+    primary: Icon.ArrowCircleLeftPrimaryFilled,
+    deselected: Icon.ArrowCircleLeftDeselectedFilled,
+  },
+  [HorizontalDirection.RIGHT]: {
+    primary: Icon.ArrowCircleRightPrimaryFilled,
+    deselected: Icon.ArrowCircleRightDeselectedFilled,
+  },
+};
 const FilledArrowBtn = ({
   isPrimary,
   direction,
@@ -30,41 +40,14 @@ const FilledArrowBtn = ({
   height,
   onClick,
 }: FilledArrowBtnProps) => {
-  switch (direction) {
-    case HorizontalDirection.LEFT:
-      if (isPrimary) {
-        // Left Primary
-        return (
-          <AnimatedBtn onClick={onClick}>
-            <Icon.ArrowCircleLeftPrimaryFilled width={width} height={height} />
-          </AnimatedBtn>
-        );
-      }
-      // Left Deselected
-      return (
-        <AnimatedBtn onClick={onClick}>
-          <Icon.ArrowCircleLeftDeselectedFilled width={width} height={height} />
-        </AnimatedBtn>
-      );
-    case HorizontalDirection.RIGHT:
-      if (isPrimary) {
-        // Right Primary
-        return (
-          <AnimatedBtn onClick={onClick}>
-            <Icon.ArrowCircleRightPrimaryFilled width={width} height={height} />
-          </AnimatedBtn>
-        );
-      }
-      // Right Deselected
-      return (
-        <AnimatedBtn onClick={onClick}>
-          <Icon.ArrowCircleRightDeselectedFilled
-            width={width}
-            height={height}
-          />
-        </AnimatedBtn>
-      );
-  }
+  const Icon = isPrimary
+    ? icons[direction].primary
+    : icons[direction].deselected;
+  return (
+    <AnimatedBtn onClick={onClick}>
+      <Icon width={width} height={height} />
+    </AnimatedBtn>
+  );
 };
 
 export default FilledArrowBtn;
