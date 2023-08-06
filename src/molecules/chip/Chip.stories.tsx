@@ -20,3 +20,9 @@ Contained.args = {
   label: "🎯 모집",
   variant: ChipVariant.contained,
 };
+
+export const Deselected = Template.bind({});
+Deselected.args = {
+  label: "기한 지남",
+  variant: ChipVariant.deselected,
+};

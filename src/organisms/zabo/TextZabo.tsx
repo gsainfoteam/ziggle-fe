@@ -1,6 +1,7 @@
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import { ZaboProps } from "src/types/types";
+import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -24,6 +25,7 @@ const ZaboWrapper = styled.div<{
   box-sizing: border-box;
   overflow: hidden;
 
+  background-color: ${colorSet.colorless};
   border-radius: 5px;
   border: 1px solid ${colorSet.secondaryText};
   cursor: pointer;
@@ -87,8 +89,10 @@ const TextZabo = ({
             textOverflow: "ellipsis",
             overflow: "hidden",
             display: "-webkit-box",
-            WebkitLineClamp: 5, // 이렇게밖에 안됨
+            WebkitLineClamp: origin === "height" ? 5 : 8, // 이렇게밖에 안됨
             WebkitBoxOrient: "vertical",
+            lineHeight: "1.5rem",
+            wordBreak: "break-word",
           }}
         >
           {content}
@@ -98,7 +102,7 @@ const TextZabo = ({
       <Flex flexDirection="column">
         <Flex gap="0.25em">
           <Text font={Font.Medium} color={colorSet.secondaryText}>
-            {date}
+            {formatISODate(date)}
           </Text>
           <Text font={Font.Medium} color={colorSet.secondaryText}>
             •

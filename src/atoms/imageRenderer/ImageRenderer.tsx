@@ -37,20 +37,26 @@ const OriginIMG = styled.img<{
 
 const HeightOriginIMG = styled(OriginIMG)<{
   size: number;
-  tGP: number;
-  tMS: number;
+  size_theGreatestProduct: number;
+  size_theMinimumShare: number;
   objectPosition: React.CSSProperties["objectPosition"];
 }>`
   height: ${({ size }) => `${size}px`};
-  min-width: ${({ size, tMS }) => `calc(${size}px / ${tMS})`};
-  max-width: ${({ size, tGP }) => `calc(${tGP} * ${size}px)`};
+  min-width: ${({ size, size_theMinimumShare }) =>
+    `calc(${size}px / ${size_theMinimumShare})`};
+  max-width: ${({ size, size_theGreatestProduct }) =>
+    `calc(${size_theGreatestProduct} * ${size}px)`};
   object-position: ${({ objectPosition }) => objectPosition};
 `;
 
-const WidthOriginIMG = styled(OriginIMG)<{ size: number; tGP: number }>`
+const WidthOriginIMG = styled(OriginIMG)<{
+  size: number;
+  size_theGreatestProduct: number;
+}>`
   width: ${({ size }) => `${size}px`};
   min-height: ${({ size }) => `${size}px`};
-  max-height: ${({ size, tGP }) => `calc(${tGP} * ${size}px)`};
+  max-height: ${({ size, size_theGreatestProduct }) =>
+    `calc(${size_theGreatestProduct} * ${size}px)`};
 `;
 
 const SkeletonRenderer = ({ size }: Pick<ImageRendererProps, "size">) => {
@@ -65,6 +71,9 @@ const SkeletonRenderer = ({ size }: Pick<ImageRendererProps, "size">) => {
   );
 };
 
+/**
+ * @deprecated Use "Image" Atom instead
+ */
 const ImageRenderer = ({
   imageUrl,
   origin,
@@ -72,8 +81,8 @@ const ImageRenderer = ({
   isHover,
   objectPosition = "center",
   borderRadius = 5,
-  tGP = 2,
-  tMS = 1.5,
+  size_theGreatestProduct = 2,
+  size_theMinimumShare = 1.5,
 }: ImageRendererProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const handleImageLoad = () => {
@@ -94,8 +103,8 @@ const ImageRenderer = ({
             onLoad={handleImageLoad}
             objectPosition={objectPosition}
             borderRadius={borderRadius}
-            tGP={tGP}
-            tMS={tMS}
+            size_theGreatestProduct={size_theGreatestProduct}
+            size_theMinimumShare={size_theMinimumShare}
           />
         </>
       );
@@ -111,7 +120,7 @@ const ImageRenderer = ({
             isLoading={isLoading}
             borderRadius={borderRadius}
             onLoad={handleImageLoad}
-            tGP={tGP}
+            size_theGreatestProduct={size_theGreatestProduct}
           />
         </>
       );
