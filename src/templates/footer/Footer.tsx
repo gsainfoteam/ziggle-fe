@@ -51,7 +51,7 @@ const LinkSum = ({ title, links }: LinkSumProps) => {
       <Text font={Font.Bold} size="0.9rem">
         {title}
       </Text>
-      <Flex gap="1rem">
+      <Flex gap="1rem" flexDirection="column">
         {links.map(({ link, name }) => (
           <ExternalLink href={link} key={name}>
             {name}
@@ -79,6 +79,14 @@ const linkSections = [
         link: "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
       },
       { name: "문의", link: "mailto:ziggle@gistory.me" },
+    ],
+  },
+  {
+    title: "바로가기",
+    links: [
+      { name: "GIST 홈페이지", link: "https://gist.ac.kr" },
+      { name: "지간표", link: "https://giganpyo.com" },
+      { name: "지졸", link: "https://gijol.im" },
     ],
   },
 ];
