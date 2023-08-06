@@ -14,6 +14,7 @@
   "dependencies": {
     "@mantine/hooks": "^6.0.10",
     "@tanstack/react-query": "^4.29.7",
+    "@tinymce/tinymce-react": "^4.3.0",
     "@types/react-responsive": "^8.0.5",
     "axios": "^1.4.0",
     "i18next": "^22.4.8",
@@ -25,7 +26,8 @@
     "react-loading-skeleton": "^3.3.1",
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.11.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "tinymce": "^6.5.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.7",
