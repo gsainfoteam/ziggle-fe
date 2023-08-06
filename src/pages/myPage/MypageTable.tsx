@@ -1,3 +1,4 @@
+import PropTypes, { Validator } from "prop-types";
 import Button from "src/atoms/button/Button";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
@@ -19,23 +20,27 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
     <div
       style={{ borderRadius: "10px", boxShadow: "0 0 4px rgba(0, 0, 0, 0.3)" }}
     >
-      <table
+      <div
         style={{
           width: "700px",
+          border: "1px solid #ccc",
           borderCollapse: "separate",
           borderSpacing: "0",
           borderRadius: "10px",
         }}
       >
-        <tbody>
-          <tr
+        <div>
+          <div
             style={{
               height: "70px",
               backgroundColor: colorSet.primary,
               borderRadius: "10px 10px 0 0",
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
             }}
           >
-            <td style={{ width: "75%", borderTopLeftRadius: "10px" }}>
+            <div style={{ width: "75%", borderTopLeftRadius: "10px" }}>
               <Text
                 size={"1.3rem"}
                 color={colorSet.colorless}
@@ -44,8 +49,8 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
               >
                 {title}
               </Text>
-            </td>
-            <td
+            </div>
+            <div
               style={{
                 width: "25%",
                 borderTopRightRadius: "10px",
@@ -70,21 +75,31 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                   전체보기
                 </Text>
               </Button>
-            </td>
-          </tr>
+            </div>
+          </div>
 
           {articles.length > 0 &&
             articles.map((articleObj, index) => {
               const isLastRow = index === articles.length - 1;
               const borderBottomRadius = isLastRow ? "10px" : "0px";
               return (
-                <tr key={index}>
-                  <td
+                <div
+                  key={index}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    backgroundColor: colorSet.colorless,
+                    justifyContent: "space-between",
+                    borderBottomLeftRadius: borderBottomRadius,
+                    borderBottomRightRadius: borderBottomRadius,
+                    border: "0.1px solid #e6e6e6",
+                  }}
+                >
+                  <div
                     style={{
                       padding: "20px 0",
                       borderBottomLeftRadius: borderBottomRadius,
-                      borderLeft: "1px solid #ccc",
-                      borderBottom: "1px solid #ccc",
                       lineHeight: "1.5",
                     }}
                   >
@@ -94,13 +109,14 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                       font={Font.Regular}
                       style={{ paddingLeft: "20px" }}
                     >
-                      {articleObj.article}
+                      {articleObj.article.length > 35
+                        ? articleObj.article.substring(0, 35) + "..."
+                        : articleObj.article}
                     </Text>
-                  </td>
-                  <td
+                  </div>
+                  <div
                     style={{
                       borderBottomRightRadius: borderBottomRadius,
-                      borderBottom: "1px solid #ccc",
                       padding: "0 10px",
                     }}
                   >
@@ -112,8 +128,8 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                     >
                       {articleObj.date}
                     </Text>
-                  </td>
-                </tr>
+                  </div>
+                </div>
               );
             })}
           {articles.length === 0 && (
@@ -125,10 +141,12 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                   height: "100%",
                   justifyContent: "center",
                   alignItems: "center",
-                  padding: "20px",
+                  padding: "30px",
+                  backgroundColor: colorSet.colorless,
+                  borderRadius: "0 0 10px 10px",
                 }}
               >
-                <LazyCat width={"50%"} height={"50%"} />
+                <LazyCat width={"35%"} height={"35%"} />
                 <Text
                   size={"1.3rem"}
                   color={colorSet.secondaryText}
@@ -140,10 +158,22 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
               </div>
             </div>
           )}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
+};
+
+const MypageArticleShape = PropTypes.shape({
+  article: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+});
+
+MypageTable.propTypes = {
+  title: PropTypes.string.isRequired,
+  articles: PropTypes.arrayOf(MypageArticleShape).isRequired as Validator<
+    MypageArticle[]
+  >,
 };
 
 export default MypageTable;

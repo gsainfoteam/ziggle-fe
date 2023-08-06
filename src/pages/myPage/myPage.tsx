@@ -7,16 +7,17 @@ import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
 
 const MyPage = () => {
-  const isMobile = useMediaQuery({ maxWidth: 1000 });
+  const isSmall = useMediaQuery({ maxWidth: 1200 });
+  const Height = isSmall ? "1500px" : "1000px";
   return (
     <>
       <Area>
         <div
           style={{
             display: "flex",
-            height: "1000px",
+            height: Height,
             alignItems: "center",
-            flexDirection: isMobile ? "column" : "row",
+            flexDirection: isSmall ? "column" : "row",
           }}
         >
           <div
@@ -35,7 +36,7 @@ const MyPage = () => {
               email={MyPageInfo.email}
             />
 
-            {!isMobile && <MypageSeperate />}
+            {!isSmall && <MypageSeperate />}
           </div>
 
           <div
@@ -50,7 +51,7 @@ const MyPage = () => {
             <div style={{ padding: "50px" }}>
               <MypageTable
                 title="내가 게시한 공지 목록"
-                articles={dummyMypageArticles.articles2}
+                articles={dummyMypageArticles.articles1}
               />
             </div>
 

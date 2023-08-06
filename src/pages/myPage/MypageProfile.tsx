@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -68,12 +69,11 @@ const MypageProfile: React.FC<MypageProfileProps> = ({
           }}
         >
           <img
-            src="https://picsum.photos/2000/3000"
-            alt="이미지 설명"
             style={{
               width: "200px",
               height: "200px",
               borderRadius: "50%",
+              backgroundColor: colorSet.primary,
               marginTop: "20px",
               boxShadow: "0 0 5px rgba(0, 0, 0, 0.4)",
             }}
@@ -104,4 +104,10 @@ const MypageProfile: React.FC<MypageProfileProps> = ({
   );
 };
 
+MypageProfile.propTypes = {
+  name: PropTypes.string,
+  id: PropTypes.string,
+  phone: PropTypes.string,
+  email: PropTypes.string,
+};
 export default MypageProfile;
