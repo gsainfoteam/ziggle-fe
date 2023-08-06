@@ -58,7 +58,11 @@ const Chip = ({
 }: ChipProps) => {
   return (
     <ChipWrapper variant={variant}>
-      <Text font={font} size={"1.1rem"}>
+      <Text
+        font={font}
+        size={"1.125rem"}
+        color={variant === ChipVariant.outlined ? colorSet.primary : "#ffffff"}
+      >
         {label}
       </Text>
     </ChipWrapper>

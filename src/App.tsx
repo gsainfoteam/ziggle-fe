@@ -3,7 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layout/Layout";
 import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
 import HomePage from "./pages/home/HomePage";
-import MyPage from "./pages/myPage/MyPage";
+import MyPage from "./pages/myPage/myPage";
+import NoticeWriting from "./pages/noticeWriting/NoticeWriting";
 import PlaygroundPage from "./pages/playground/PlaygroundPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/search" element={<SearchPage />} />
             <Route path="/notice/:id" element={<DetailedNoticePage />} />
             <Route path="/myPage" element={<MyPage />} />
+            <Route path="/notice/writing" element={<NoticeWriting />} />
           </Route>
         </Routes>
       </BrowserRouter>
