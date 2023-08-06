@@ -1,4 +1,5 @@
-import { Github, Instagram } from "src/assets/Icons";
+import React from "react";
+import { AppStore, Github, PlayStore } from "src/assets/Icons";
 import { InfoteamLogo } from "src/assets/ZiggleLogo";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
@@ -16,14 +17,32 @@ const Bar = styled(Flex)<{ padding: string; bgColor: string }>`
   min-height: 380px;
 `;
 
-interface Link {
-  name: string;
-  link: string;
-}
+const Link = styled(Text)`
+  text-decoration: none;
+`;
+
+const ExternalLink = ({
+  href,
+  children,
+}: React.PropsWithChildren<{ href: string }>) => (
+  <Link
+    as="a"
+    href={href}
+    target="_blank"
+    rel="noreferrer"
+    font={Font.Regular}
+    size="0.9rem"
+  >
+    {children}
+  </Link>
+);
 
 interface LinkSumProps {
   title: string;
-  links: Link[];
+  links: {
+    name: string;
+    link: string;
+  }[];
 }
 
 const LinkSum = ({ title, links }: LinkSumProps) => {
@@ -32,31 +51,37 @@ const LinkSum = ({ title, links }: LinkSumProps) => {
       <Text font={Font.Bold} size="0.9rem">
         {title}
       </Text>
-      {links.map((link) => (
-        <Text key={link.name} font={Font.Regular} size="0.9rem">
-          {link.name}
-        </Text>
-      ))}
+      <Flex gap="1rem">
+        {links.map(({ link, name }) => (
+          <ExternalLink href={link} key={name}>
+            {name}
+          </ExternalLink>
+        ))}
+      </Flex>
     </Flex>
   );
 };
 
-const LinkSum1 = {
-  title: "소개",
-  links: [{ name: "인포팀 소개", link: "" }],
-};
-
-const LinkSum2 = {
-  title: "약관",
-  links: [
-    { name: "서비스이용약관", link: "" },
-    {
-      name: "개인정보처리방침",
-      link: "",
-    },
-    { name: "문의", link: "" },
-  ],
-};
+const linkSections = [
+  {
+    title: "소개",
+    links: [{ name: "인포팀 소개", link: "https://introduce.gistory.me" }],
+  },
+  {
+    title: "약관",
+    links: [
+      {
+        name: "서비스이용약관",
+        link: "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+      },
+      {
+        name: "개인정보처리방침",
+        link: "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+      },
+      { name: "문의", link: "mailto:ziggle@gistory.me" },
+    ],
+  },
+];
 
 const Footer = () => {
   return (
@@ -73,16 +98,24 @@ const Footer = () => {
             지스트대학 총학생회 산하 정보국
           </Text>
           <Flex gap="15px" style={{ marginTop: "1rem" }}>
-            <Instagram size="2.6rem" />
-            <Github size="2.6rem" />
+            <ExternalLink href="https://github.com/gsainfoteam">
+              <Github size="2.6rem" />
+            </ExternalLink>
+            <ExternalLink href="https://play.google.com/store/apps/details?id=me.gistory.ziggle">
+              <PlayStore size="2.6rem" />
+            </ExternalLink>
+            <ExternalLink href="https://apps.apple.com/kr/app/ziggle/id6451740697">
+              <AppStore size="2.6rem" />
+            </ExternalLink>
           </Flex>
         </Flex>
         <Text font={Font.Regular} size="1rem">
           ⓒ 2023. INFOTEAM all rights reserved.
         </Text>
       </Flex>
-      <LinkSum title={LinkSum1.title} links={LinkSum1.links} />
-      <LinkSum title={LinkSum2.title} links={LinkSum2.links} />
+      {linkSections.map(({ title, links }) => (
+        <LinkSum key={title} title={title} links={links} />
+      ))}
     </Bar>
   );
 };
