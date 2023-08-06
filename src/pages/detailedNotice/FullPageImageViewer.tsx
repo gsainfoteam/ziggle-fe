@@ -65,6 +65,20 @@ const FullPageImageViewer = ({
     onClose?.();
   };
 
+  // 이미지 다운로드
+  const downloadImage = (imagePath: string): void => {
+    const link = document.createElement("a");
+    link.href = imagePath;
+    link.download = imagePath.split("/").pop() || ""; // 파일 이름 설정
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleDownload = () => {
+    srcs.forEach((path) => downloadImage(path));
+  };
+
   return (
     <FullPageWrapper
       alignItems="center"
@@ -72,7 +86,7 @@ const FullPageImageViewer = ({
       flexDirection="column"
     >
       <MenuSum gap="30px">
-        <Menu alignItems="center" gap="10px">
+        <Menu alignItems="center" gap="10px" onClick={handleDownload}>
           <Text font={Font.Medium} color={colorSet.colorless}>
             전체 다운로드하기
           </Text>
