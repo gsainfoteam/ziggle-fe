@@ -43,9 +43,9 @@ const AcademicNotices = () => {
       <Spacer height={"24px"} />
 
       <AcademicTable type={AcademicTableType.Title} />
-      {dummyAcademicNotices.map((notice) => (
+      {dummyAcademicNotices.map((notice, index) => (
         <AcademicTable
-          key={notice.title}
+          key={index}
           type={AcademicTableType.Default}
           title={notice.title}
           tags={notice.tags}

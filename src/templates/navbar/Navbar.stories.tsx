@@ -8,7 +8,7 @@ export default {
   component: Navbar,
 } as Meta<typeof Navbar>;
 
-const Template: StoryFn<typeof Navbar> = (args) => <Navbar {...args} />;
+const Template: StoryFn<typeof Navbar> = () => <Navbar />;
 
 export const Default = Template.bind({});
 Default.args = {

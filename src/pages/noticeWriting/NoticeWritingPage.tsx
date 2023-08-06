@@ -32,7 +32,7 @@ const DateInput = styled.input`
   }
 `;
 
-const NoticeWriting = () => {
+const NoticeWritingPage = () => {
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
@@ -135,4 +135,4 @@ const NoticeWriting = () => {
   );
 };
 
-export default NoticeWriting;
+export default NoticeWritingPage;

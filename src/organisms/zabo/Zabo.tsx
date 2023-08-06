@@ -1,6 +1,9 @@
 import { useHover } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
+import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
+import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
 import styled from "styled-components";
 
@@ -48,31 +51,49 @@ const Zabo = ({
   organization,
   origin,
   size,
+  id,
 }: Omit<ZaboProps, "content"> & { thumbnailUrl: string }) => {
-  const { hovered, ref } = useHover();
+  const { hovered, ref } = useHover(); // useHover가 HTMLDivElement만 받아서 부득이하게 ZaboWrapper와 Button 분리
+
+  const navigate = useNavigate();
+
+  const handleZaboClick = () => {
+    navigate(Paths.noticeDetail + id);
+  };
+
   return (
     <ZaboWrapper ref={ref}>
-      <ZaboImage
-        src={thumbnailUrl}
-        origin={origin}
-        size={size}
-        isHover={hovered}
-      />
-      <Title hovered={hovered}>{title}</Title>
-      <Flex gap="0.25em">
-        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
-          {date}
+      <Button onClick={handleZaboClick}>
+        <ZaboImage
+          src={thumbnailUrl}
+          origin={origin}
+          size={size}
+          isHover={hovered}
+        />
+        <Title hovered={hovered}>{title}</Title>
+        <Flex gap="0.25em">
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={"0.9rem"}
+          >
+            {date}
+          </Text>
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={"0.9rem"}
+          >
+            •
+          </Text>
+          <Text font={Font.Bold} color={colorSet.secondaryText} size={"0.9rem"}>
+            조회수 {viewCount}
+          </Text>
+        </Flex>
+        <Text font={Font.Bold}>
+          {author} {organization && `• ${organization}`}
         </Text>
-        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
-          •
-        </Text>
-        <Text font={Font.Bold} color={colorSet.secondaryText} size={"0.9rem"}>
-          조회수 {viewCount}
-        </Text>
-      </Flex>
-      <Text font={Font.Bold}>
-        {author} {organization && `• ${organization}`}
-      </Text>
+      </Button>
     </ZaboWrapper>
   );
 };

@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
 import styled, { css } from "styled-components";
 
@@ -7,7 +10,7 @@ import Text from "../../atoms/text/Text";
 import colorSet from "../../styles/colorSet";
 import Font from "../../styles/font";
 
-const ZaboWrapper = styled.div<{
+const ZaboWrapper = styled(Button)<{
   height: number;
   width: number;
   shadowColor: string;
@@ -55,16 +58,25 @@ const TextZabo = ({
   organization,
   origin,
   size,
+  id,
 }: ZaboProps) => {
   const [zaboHeight, zaboWidth] = [
     origin === "height" ? size : size * 1.5,
     origin === "height" ? size * 1.5 : size,
   ];
+
+  const navigate = useNavigate();
+
+  const handleZaboClick = () => {
+    navigate(Paths.noticeDetail + id);
+  };
+
   return (
     <ZaboWrapper
       height={zaboHeight}
       width={zaboWidth}
       shadowColor={colorSet.primary}
+      onClick={handleZaboClick}
     >
       <Flex>
         <Text

@@ -78,7 +78,7 @@ const SearchResult = ({
                 label={"#" + tag}
                 font={Font.Regular}
                 variant={
-                  tag === searchQuery ? ChipVariant.contained : undefined
+                  tag.name === searchQuery ? ChipVariant.contained : undefined
                 }
               />
             ))}

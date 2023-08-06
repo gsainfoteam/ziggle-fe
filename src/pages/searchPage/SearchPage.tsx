@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllNotices } from "src/apis/notice/notice-api";
+import queryKeys from "src/apis/queryKeys";
 import { Close } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
@@ -7,13 +10,13 @@ import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
-import dummySearchResult from "src/mock/dummy-searchresult";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 import { NoticeType } from "src/types/types";
+import { isEmpty } from "src/utils/utils";
 
 import { ReactComponent as SearchNoResult } from "../../../src/atoms/icon/assets/searchNoResult.svg";
 import SearchBar from "../../molecules/searchBar/SearchBar";
@@ -22,30 +25,33 @@ import CloseBtnAnimation from "./CloseBtnAnimation";
 import SearchBarAnimation from "./SearchBarAnimation";
 import SearchGif from "./SearchGif";
 
-const n = 3;
 const SearchPage = () => {
-  const handleSubmit = () => {
+  const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+
+  const { data } = useQuery(
+    [
+      queryKeys.getAllNotices,
+      {
+        search: searchKeyword,
+        tags: selectedTags,
+      },
+    ],
+    getAllNotices,
+    {
+      enabled: searchKeyword !== "",
+    },
+  );
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // TODO : submit 동작
-    console.log("submit");
+
+    // @ts-ignore
+    setSearchKeyword(e.target[0].value); // SearchBar 수정할 때 주의
   };
 
   const handleTagChange = (selected: NoticeType[]) => {
     setSelectedTags(selected);
-  };
-  const [showResults, setShowResults] = useState(false);
-  const [noResults, setNoResults] = useState(false);
-  const [defaultResults, setDefaultResults] = useState(true);
-  const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
-  const result = () => {
-    setShowResults(true);
-    setDefaultResults(false);
-    setNoResults(false);
-  };
-
-  const noResult = () => {
-    setNoResults(true);
-    setDefaultResults(false);
-    setShowResults(false);
   };
 
   const navigator = useNavigate();
@@ -57,13 +63,6 @@ const SearchPage = () => {
     <>
       <Area>
         <Content>
-          <Button style={{ background: colorSet.placeholder }} onClick={result}>
-            result
-          </Button>
-          <Button onClick={noResult} style={{ margin: "10px" }}>
-            noResult
-          </Button>
-
           <div
             style={{
               height: "150px",
@@ -101,7 +100,7 @@ const SearchPage = () => {
                   margin: "50px",
                 }}
               >
-                {defaultResults && (
+                {!data && (
                   <Flex justifyContent="center">
                     <SearchGif width={"230px"} />
                     <Spacer height={"10px"} />
@@ -116,7 +115,7 @@ const SearchPage = () => {
                   </Flex>
                 )}
 
-                {showResults && (
+                {data && !isEmpty(data.list) && (
                   <p>
                     <p
                       style={{
@@ -139,21 +138,35 @@ const SearchPage = () => {
                         ♨ 지글 공지
                       </Text>
                     </p>
-                    {Array.from({ length: n }).map((_, index) => (
-                      <div style={{ margin: "20px" }} key={index}>
+                    {data.list.map((notice) =>
+                      notice.imageUrl ? (
                         <SearchResult
-                          deadline={dummySearchResult.deadline}
-                          title={dummySearchResult.title}
-                          author={dummySearchResult.author}
-                          tags={dummySearchResult.tags}
-                          date={dummySearchResult.date}
-                          viewCount={dummySearchResult.viewCount}
-                          thumbnailUrl={dummySearchResult.thumbnailUrl}
-                          searchQuery="이"
+                          deadline={notice.deadline}
+                          title={notice.title}
+                          author={notice.author}
+                          tags={notice.tags}
+                          date={notice.createdAt}
+                          viewCount={notice.views}
+                          thumbnailUrl={notice.imageUrl}
+                          searchQuery={searchKeyword}
+                          key={notice.id}
                         />
-                      </div>
-                    ))}
-
+                      ) : (
+                        <SearchResultText
+                          deadline={notice.deadline}
+                          title={notice.title}
+                          author={notice.author}
+                          tags={notice.tags}
+                          date={notice.createdAt}
+                          viewCount={notice.views}
+                          content={notice.body}
+                          searchQuery={searchKeyword}
+                          thumbnailUrl=""
+                          key={notice.id}
+                        />
+                      ),
+                    )}
+                    {/* 
                     <p
                       style={{
                         paddingTop: "10px",
@@ -189,11 +202,11 @@ const SearchPage = () => {
                           thumbnailUrl=""
                         />
                       </div>
-                    ))}
+                    ))} */}
                   </p>
                 )}
 
-                {noResults && (
+                {data && isEmpty(data.list) && (
                   <p>
                     <p style={{ height: "10px", margin: "0 auto" }}></p>
                     <SearchNoResult></SearchNoResult>

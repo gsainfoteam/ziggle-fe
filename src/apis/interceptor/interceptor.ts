@@ -32,20 +32,23 @@ interceptor.interceptors.response.use(
   },
 );
 
-export const apiGetter = async <T>(path: string): Promise<AxiosResponse<T>> => {
-  return await interceptor.get(import.meta.env.VITE_DOMAIN + path);
+export const apiGetter = async <T>(
+  path: string,
+  params?: any,
+): Promise<AxiosResponse<T>> => {
+  return await interceptor.get(import.meta.env.VITE_DOMAIN + path, { params });
 };
 
 export const apiPoster = async <T>(
   path: string,
-  data: any,
+  data?: any,
 ): Promise<AxiosResponse<T>> => {
   return await interceptor.post(import.meta.env.VITE_DOMAIN + path, data);
 };
 
 export const apiPatcher = async <T>(
   path: string,
-  data: any,
+  data?: any,
 ): Promise<AxiosResponse<T>> => {
   return await interceptor.patch(import.meta.env.VITE_DOMAIN + path, data);
 };

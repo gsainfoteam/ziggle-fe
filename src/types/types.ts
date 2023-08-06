@@ -1,8 +1,8 @@
 export enum NoticeType {
-  RECRUIT = "RECRUIT",
-  EVENT = "EVENT",
-  NORMAL = "GENERAL", // 일반을 normal로 할지 general로 할지 고민 -> General로 합시다.
-  ACADEMIC = "ACADEMIC",
+  RECRUIT = "recruit",
+  EVENT = "event",
+  NORMAL = "general", // 일반을 normal로 할지 general로 할지 고민 -> General로 합시다.
+  ACADEMIC = "academic",
 }
 
 export interface ZaboProps {
@@ -24,7 +24,7 @@ export interface ZaboProps {
   size: number;
 }
 
-type Origin = "width" | "height";
+export type Origin = "width" | "height";
 
 export interface ImageRendererProps {
   imageUrl: string;
@@ -43,13 +43,16 @@ export interface SearchResultProps {
   title: string;
   author: string;
   organization?: string;
-  tags: string[];
+  tags: Tag[];
   date: string;
   viewCount: number;
   thumbnailUrl: string;
   searchQuery: string;
 }
 
+/**
+ * 임시로 Zabo 사용, 이후 Notice를 사용하도록 변경
+ */
 export interface NoticeBase {
   id: number;
   title: string;
@@ -58,13 +61,19 @@ export interface NoticeBase {
   deadline: string;
   createdAt: string;
   author: string;
-  tags: string[];
+  tags: Tag[];
 }
 
+/**
+ * 임시로 Zabo 사용, 이후 Notice를 사용하도록 변경
+ */
 export interface Notice extends NoticeBase {
-  imageUrl: string;
+  imageUrl: string | null;
 }
 
+/**
+ * 임시로 Zabo 사용, 이후 Notice를 사용하도록 변경
+ */
 export interface NoticeDetail extends NoticeBase {
   imagesUrl: string[];
   reminder: boolean;
@@ -74,4 +83,17 @@ export interface BannerProps {
   imageUrl: string;
   link?: string;
   objectPosition?: React.CSSProperties["objectPosition"];
+}
+
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface User {
+  user_uuid: string;
+  user_email_id: string;
+  user_name: string;
+  user_phone_number: string;
+  student_id: string;
 }

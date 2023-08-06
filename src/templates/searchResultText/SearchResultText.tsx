@@ -87,10 +87,10 @@ const SearchResultText = ({
             {tags.map((tag, index) => (
               <Chip
                 key={index}
-                label={"#" + tag}
+                label={"#" + tag.name}
                 font={Font.Regular}
                 variant={
-                  tag === searchQuery ? ChipVariant.contained : undefined
+                  tag.name === searchQuery ? ChipVariant.contained : undefined
                 }
               />
             ))}

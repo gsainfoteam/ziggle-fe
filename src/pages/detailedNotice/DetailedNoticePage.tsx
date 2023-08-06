@@ -1,11 +1,16 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { getNotice } from "src/apis/notice/notice-api";
+import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Spacer from "src/atoms/spacer/Spacer";
-import dummyDetailedNotice from "src/mock/dummy-detailed-notice";
 import colorSet from "src/styles/colorSet";
+import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
 
+import Banner from "../home/assets/banner2.png";
 import BackToMainBtn from "./BackToMainBtn";
 import FullPageImageViewer from "./FullPageImageViewer";
 import HowboutThese from "./HowboutThese";
@@ -33,19 +38,34 @@ const CoverContent = styled(Content)`
 `;
 
 const DetailedNoticePage = () => {
-  const dummyData: dummyDetailedNotice =
-    dummyDetailedNotice.dummyDetailedNotice2;
-
   const [showImageViewer, setShowImageViewer] = useState<boolean>(false);
+
+  const { id } = useParams();
+
+  const { data, isLoading } = useQuery(
+    [queryKeys.getNotice, Number(id)],
+    getNotice,
+    {
+      enabled: !isNaN(Number(id)),
+    },
+  );
+
+  if (isLoading || !data) {
+    return <div>loading...</div>; // TODO: 스켈레톤 추가
+  }
 
   return (
     <>
       <Area>
         <ZaboShowcase
-          src={dummyData.images[0]}
-          onShow={() => {
-            setShowImageViewer(true);
-          }}
+          src={data?.imagesUrl[0] ?? Banner} // TODO: 이미지가 없을 때 대체 이미지
+          onShow={
+            isEmpty(data.imagesUrl)
+              ? undefined
+              : () => {
+                  setShowImageViewer(true);
+                }
+          }
         />
 
         <CoverContent>
@@ -56,22 +76,25 @@ const DetailedNoticePage = () => {
           <Spacer height={"20px"} />
 
           <NoticeInfo
-            deadline={dummyData.deadline ?? undefined}
-            title={dummyData.title}
-            isReminded={dummyDetailedNotice.dummyDetailedNotice1.isReminded}
-            author={dummyData.author}
-            dateCreated={dummyData.dateCreated}
-            viewCount={dummyData.viewCount}
-            tags={dummyData.tags}
+            id={data.id}
+            deadline={data.deadline ?? undefined}
+            title={data.title}
+            isReminded={data.reminder}
+            author={data.author}
+            dateCreated={data.createdAt}
+            viewCount={data.views}
+            tags={data.tags}
           />
 
           <Spacer height={"20px"} />
 
-          <NoticeContent content={dummyData.content} />
+          <NoticeContent content={data.body} />
 
           <Spacer height={"80px"} />
 
-          <ImageCarousel imageSrcs={dummyData.images} />
+          {!isEmpty(data.imagesUrl) && (
+            <ImageCarousel imageSrcs={data.imagesUrl} />
+          )}
 
           <Spacer height={"80px"} />
 
@@ -81,7 +104,7 @@ const DetailedNoticePage = () => {
 
       {showImageViewer && (
         <FullPageImageViewer
-          srcs={dummyData.images}
+          srcs={data.imagesUrl}
           startIndex={0}
           onClose={() => {
             setShowImageViewer(false);

@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
+import dummyTags from "src/mock/dummy-tags";
 
 // import colorSet from "src/styles/colorSet";
 import SearchResultText from "./SearchResultText";
@@ -17,7 +18,7 @@ Default.args = {
   deadline: "2023.02.28",
   title: "인포팀 신규 부원 모집",
   author: "이정우",
-  tags: ["모집", "WING", "많관부"],
+  tags: dummyTags,
   date: "2023.02.13",
   viewCount: 123,
   content:

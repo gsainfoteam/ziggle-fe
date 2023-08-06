@@ -84,22 +84,24 @@ const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
             }}
           />
         </div>
-        <ImageCTAButton
-          variant={ButtonVariant.contained}
-          height={"40px"}
-          left={ctaButtonLeft}
-          ref={ctaButtonRef}
-          onClick={() => {
-            onShow?.();
-          }}
-        >
-          <Flex gap={"16px"}>
-            <Text size={"0.875rem"} font={Font.Medium}>
-              포스터 클릭하여 자세히 보기
-            </Text>
-            <Icon.ArrowDownWhite width={"16px"} />
-          </Flex>
-        </ImageCTAButton>
+        {onShow && (
+          <ImageCTAButton
+            variant={ButtonVariant.contained}
+            height={"40px"}
+            left={ctaButtonLeft}
+            ref={ctaButtonRef}
+            onClick={() => {
+              onShow?.();
+            }}
+          >
+            <Flex gap={"16px"}>
+              <Text size={"0.875rem"} font={Font.Medium}>
+                포스터 클릭하여 자세히 보기
+              </Text>
+              <Icon.ArrowDownWhite width={"16px"} />
+            </Flex>
+          </ImageCTAButton>
+        )}
       </div>
     </>
   );

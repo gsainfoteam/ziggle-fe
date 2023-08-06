@@ -1,12 +1,15 @@
 import { useViewportSize } from "@mantine/hooks";
+import { useQuery } from "@tanstack/react-query";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { getAllNotices } from "src/apis/notice/notice-api";
+import queryKeys from "src/apis/queryKeys";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
-import dummyMasonry from "src/mock/dummy-masonry";
 import TextZabo from "src/organisms/zabo/TextZabo";
 import Zabo from "src/organisms/zabo/Zabo";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import { noticeToZabo } from "src/utils/noticeToZabo";
 import styled, { css } from "styled-components";
 
 const MasonryResizer = styled.div<{ observerWidth: number }>`
@@ -36,6 +39,8 @@ const HowboutThese = () => {
   const observer = useViewportSize();
   const observerWidth = observer.width;
 
+  const { data } = useQuery([queryKeys.getAllNotices, {}], getAllNotices);
+
   return (
     <>
       <Text
@@ -57,7 +62,9 @@ const HowboutThese = () => {
           columnsCountBreakPoints={{ 350: 1, 700: 2, 1200: 3, 1600: 4 }}
         >
           <Masonry gutter="15px">
-            {dummyMasonry.map((zabo) => {
+            {data?.list.map((notice) => {
+              const zabo = noticeToZabo(notice, "width", 300);
+
               if (zabo.thumbnailUrl === undefined) {
                 // thumbnailUrl이 없으면 TextZabo로 렌더링
                 return (

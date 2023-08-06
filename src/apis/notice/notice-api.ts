@@ -1,14 +1,28 @@
-import { Notice } from "../../types/types";
-import { apiGetter, apiPatcher, apiPoster } from "../interceptor/interceptor";
+import { Notice, NoticeDetail } from "../../types/types";
+import { apiGetter, apiPoster } from "../interceptor/interceptor";
+
+interface NoticesResponse {
+  list: Notice[];
+  total: number;
+}
+
+interface FetchOptions {
+  offset?: number;
+  limit?: number;
+  search?: string;
+  tags?: string[]; // tag name ex) recruit, event, general, academic ...
+  orderBy?: "deadline" | "hot" | "recent";
+  my?: "own" | "reminders";
+}
 
 export const getAllNotices = async ({
   queryKey,
 }: {
-  queryKey: [string];
-}): Promise<Notice[]> => {
-  const [,] = queryKey;
+  queryKey: [string, FetchOptions];
+}): Promise<NoticesResponse> => {
+  const [, params] = queryKey;
 
-  const { data } = await apiGetter<Notice[]>("/notice/all");
+  const { data } = await apiGetter<NoticesResponse>("/notice/all", params);
 
   return data;
 };
@@ -17,10 +31,10 @@ export const getNotice = async ({
   queryKey,
 }: {
   queryKey: [string, number];
-}): Promise<Notice> => {
+}): Promise<NoticeDetail> => {
   const [, id] = queryKey;
 
-  const { data } = await apiGetter<Notice>(`/notice/${id}`);
+  const { data } = await apiGetter<NoticeDetail>(`/notice/${id}`);
 
   return data;
 };
@@ -45,53 +59,10 @@ export const createNotice = async (props: {
   return data;
 };
 
-// export const updateNotice = async (props: {
-//   id: number;
-//   title: string;
-//   body: string;
-//   deadline: Date;
-// }) => {
-//   const { id, title, body, deadline } = props;
-
-//   const { data } = await apiPatcher(`/notice/${id}`, {
-//     title,
-//     body,
-//     deadline: deadline.toISOString(),
-//   });
-
-//   return data;
-// };
-
-// export const updateNoticeTags = async (props: {
-//   id: number;
-//   tags: string[];
-// }) => {
-//   const { id, tags } = props;
-
-//   const { data } = await apiPatcher(`/notice/${id}/tags`, {
-//     tags,
-//   });
-
-//   return data;
-// };
-
-// export const updateNoticeImages = async (props: {
-//   id: number;
-//   images: string[];
-// }) => {
-//   const { id, images } = props;
-
-//   const { data } = await apiPatcher(`/notice/${id}/images`, {
-//     images,
-//   });
-
-//   return data;
-// };
-
 export const addToReminderList = async (props: { id: number }) => {
   const { id } = props;
 
-  const { data } = await apiPatcher(`/notice/${id}/reminder`, {});
+  const { data } = await apiPoster(`/notice/${id}/reminder`);
 
   return data;
 };

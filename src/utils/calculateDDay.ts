@@ -1,8 +1,9 @@
-import { differenceInDays, parse } from "date-fns";
+import { differenceInDays } from "date-fns";
 
 const calculateDDay = (deadline: string): number | never => {
   // Validate date format
-  const parsedDeadline = parse(deadline, "yyyy.MM.dd", new Date());
+  // const parsedDeadline = parse(deadline, "yyyy.MM.dd", new Date());
+  const parsedDeadline = new Date(deadline); // 위 방식대로 하면 에러가 나서 이렇게 했습니다. firefox 작동 확인 완료.
 
   if (isNaN(parsedDeadline.getTime())) {
     throw new Error("The deadline date format is incorrect.");
