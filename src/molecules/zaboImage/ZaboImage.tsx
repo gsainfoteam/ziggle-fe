@@ -1,3 +1,5 @@
+import "react-loading-skeleton/dist/skeleton.css";
+
 import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import Image from "src/atoms/image/Image";
@@ -11,7 +13,7 @@ const HoverImage = styled(Image)<{ isHover: boolean; shadowColor: string }>`
     if (isHover) {
       return css`
         transform: translateY(-10px);
-        box-shadow: ${colorSet.primary}40 0px 5px, ${shadowColor}30 0px 10px,
+        box-shadow: ${shadowColor}40 0px 5px, ${shadowColor}30 0px 10px,
           ${shadowColor}20 0px 15px, ${shadowColor}10 0px 20px,
           ${shadowColor}05 0px 25px;
       `;
@@ -33,17 +35,19 @@ const WidthOriginIMG = styled(HoverImage)<{ size: number }>`
 `;
 
 interface SkeletonRendererProps {
-  width: number;
-  height: number;
+  size: number;
 }
 
-const SkeletonRenderer = ({ width, height }: SkeletonRendererProps) => {
+const SkeletonRenderer = ({ size }: SkeletonRendererProps) => {
   return (
     <Skeleton
       style={{
         borderRadius: "5px",
-        width: width ? `${width}px` : undefined,
-        height: height ? `${height}px` : undefined,
+        width: `${size}px`,
+        height: `${size}px`,
+
+        boxSizing: "border-box",
+        border: `${colorSet.colorless} solid 3px`,
       }}
     />
   );
@@ -68,14 +72,15 @@ const ZaboImage = ({ src, origin, size, isHover }: ZaboImageProps) => {
     case "height":
       return (
         <>
-          {isLoading && <SkeletonRenderer width={size} height={size} />}
+          {isLoading && <SkeletonRenderer size={size} />}
+
           <HeightOriginIMG
             src={src}
             size={size}
             isHover={isHover}
             shadowColor={colorSet.primary}
-            isLoading={isLoading}
             onLoad={handleImageLoad}
+            isLoading={isLoading}
             borderRadius="5px"
           />
         </>
@@ -83,15 +88,16 @@ const ZaboImage = ({ src, origin, size, isHover }: ZaboImageProps) => {
     case "width":
       return (
         <>
-          {isLoading && <SkeletonRenderer width={size} height={size} />}
+          {isLoading && <SkeletonRenderer size={size} />}
+
           <WidthOriginIMG
             src={src}
             size={size}
             isHover={isHover}
             shadowColor={colorSet.primary}
+            onLoad={handleImageLoad}
             isLoading={isLoading}
             borderRadius="5px"
-            onLoad={handleImageLoad}
           />
         </>
       );

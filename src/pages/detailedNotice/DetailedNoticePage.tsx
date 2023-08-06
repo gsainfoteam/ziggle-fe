@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 import BackToMainBtn from "./BackToMainBtn";
 import FullPageImageViewer from "./FullPageImageViewer";
-import HowboutThese from "./HowboutThese";
+import HowAboutThese from "./HowAboutThese";
 import ImageCarousel from "./ImageCarousel";
 import NoticeContent from "./NoticeContent";
 import NoticeInfo from "./NoticeInfo";
@@ -26,7 +26,7 @@ export interface dummyDetailedNotice {
   content: string;
 }
 
-// 자보가 숨겨진 것처럼 보이기 위해 제작
+// 큰 포스터 이미지 (ZaboShowcase)의 밑부분을 덮기 위해 생성
 const CoverContent = styled(Content)`
   z-index: 1;
   background-color: ${colorSet.colorless};
@@ -34,7 +34,7 @@ const CoverContent = styled(Content)`
 
 const DetailedNoticePage = () => {
   const dummyData: dummyDetailedNotice =
-    dummyDetailedNotice.dummyDetailedNotice1;
+    dummyDetailedNotice.dummyDetailedNotice2;
 
   const [showImageViewer, setShowImageViewer] = useState<boolean>(false);
 
@@ -75,7 +75,7 @@ const DetailedNoticePage = () => {
 
           <Spacer height={"80px"} />
 
-          <HowboutThese />
+          <HowAboutThese />
         </CoverContent>
       </Area>
 

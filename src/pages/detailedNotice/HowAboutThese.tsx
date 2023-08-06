@@ -31,7 +31,7 @@ const MasonryResizer = styled.div<{ observerWidth: number }>`
   }};
 `;
 
-const HowboutThese = () => {
+const HowAboutThese = () => {
   // masonry width 조정을 위해 HowboutThese 컴포넌트의 width를 가져옴
   const observer = useViewportSize();
   const observerWidth = observer.width;
@@ -99,4 +99,4 @@ const HowboutThese = () => {
   );
 };
 
-export default HowboutThese;
+export default HowAboutThese;

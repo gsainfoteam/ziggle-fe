@@ -31,13 +31,12 @@ const IndexCircle = ({ isSelected, onClick }: IndexCircleProps) => {
 
 const Banner = () => {
   const [curIndex, setCurIndex] = useState(0);
-  const maxIndex = dummyBanners.length;
+  const maxIndex = dummyBanners.length - 1;
 
   const ManipulateIndex = (amount: number) => {
-    if (curIndex + amount < 0 || curIndex + amount >= maxIndex) return;
-    setCurIndex((curIndex) => curIndex + amount);
-
-    console.log(dummyBanners[curIndex].imageUrl);
+    setCurIndex((curIndex) =>
+      Math.max(0, Math.min(curIndex + amount, maxIndex)),
+    );
   };
 
   return (
@@ -79,7 +78,7 @@ const Banner = () => {
           width={"30px"}
         />
         <Flex justifyContent="center" gap="12px" alignItems="center">
-          {Array.from({ length: maxIndex }, (_, i) => (
+          {Array.from({ length: maxIndex + 1 }, (_, i) => (
             <IndexCircle
               isSelected={i === curIndex}
               key={i}

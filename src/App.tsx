@@ -19,7 +19,7 @@ const App = () => {
             <Route path="*" element={<Navigate to={"/"} replace />} />
             <Route path="/playground" element={<PlaygroundPage />} />
             <Route path="/search" element={<SearchPage />} />
-            <Route path="/detailedNotice" element={<DetailedNoticePage />} />
+            <Route path="/notice/:id" element={<DetailedNoticePage />} />
             <Route path="/myPage" element={<MyPage />} />
           </Route>
         </Routes>

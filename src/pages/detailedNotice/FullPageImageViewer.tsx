@@ -18,13 +18,9 @@ interface FullPageImageViewerProps {
 }
 
 const FullPageWrapper = styled(Flex)`
-  width: 100vw;
-  height: 100vh;
-
   z-index: 100;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
 
   background-color: rgba(0, 0, 0, 0.6);
 `;
@@ -53,8 +49,9 @@ const FullPageImageViewer = ({
   const maxIndex = srcs.length - 1;
 
   const ManipulateIndex = (amount: number) => {
-    if (imageIndex + amount < 0 || imageIndex + amount > maxIndex) return;
-    setImageIndex((imageIndex) => imageIndex + amount);
+    setImageIndex((imageIndex) =>
+      Math.max(0, Math.min(imageIndex + amount, maxIndex)),
+    );
   };
 
   // 키보드 화살표로 인덱싱 지원

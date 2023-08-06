@@ -46,13 +46,11 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
   ]);
 
   const carouselRef = useRef<HTMLDivElement>(null);
-  const Scroll = (amount: number) => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollTo({
-        left: carouselRef.current.scrollLeft + amount,
-        behavior: "smooth",
-      });
-    }
+  const scroll = (amount: number) => {
+    carouselRef.current?.scrollTo({
+      left: carouselRef.current.scrollLeft + amount,
+      behavior: "smooth",
+    });
   };
 
   /** 한 번에 얼마나 Scroll 할건지 강도 결정 */
@@ -75,11 +73,11 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
         </Text>
         <ScrollBtnWrap>
           <HorizontalScrollButton.Left
-            onClick={() => Scroll(-scrollAmount)}
+            onClick={() => scroll(-scrollAmount)}
             disabled={scrollBtnDisabled[0]}
           ></HorizontalScrollButton.Left>
           <HorizontalScrollButton.Right
-            onClick={() => Scroll(scrollAmount)}
+            onClick={() => scroll(scrollAmount)}
             disabled={scrollBtnDisabled[1]}
           ></HorizontalScrollButton.Right>
         </ScrollBtnWrap>
