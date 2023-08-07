@@ -1,3 +1,4 @@
+import { Account } from "src/assets/Icons";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -61,16 +62,7 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
             alignItems: "center",
           }}
         >
-          <img
-            style={{
-              width: "200px",
-              height: "200px",
-              borderRadius: "50%",
-              backgroundColor: colorSet.primary,
-              marginTop: "20px",
-              boxShadow: "0 0 5px rgba(0, 0, 0, 0.4)",
-            }}
-          />
+          <Account color={colorSet.secondaryText} size="200px"></Account>
         </div>
         <div style={{ height: "50px" }}></div>
         <Text
