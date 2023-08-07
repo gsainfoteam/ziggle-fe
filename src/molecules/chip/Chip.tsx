@@ -7,6 +7,7 @@ import Font from "../../styles/font";
 export enum ChipVariant {
   outlined = "outlined",
   contained = "contained",
+  deselected = "deselected",
 }
 
 interface ChipWrapperProps {
@@ -27,11 +28,19 @@ const ChipWrapper = styled.div<ChipWrapperProps>`
     switch (variant) {
       case ChipVariant.outlined:
         return css`
+          color: ${colorSet.primary};
           background-color: transparent;
         `;
       case ChipVariant.contained:
         return css`
+          color: ${colorSet.colorless};
           background-color: ${colorSet.primary};
+        `;
+      case ChipVariant.deselected:
+        return css`
+          background-color: ${colorSet.deselected};
+          color: ${colorSet.secondaryText};
+          border: none;
         `;
     }
   }}
@@ -51,7 +60,7 @@ const Chip = ({
     <ChipWrapper variant={variant}>
       <Text
         font={font}
-        size={"1.1rem"}
+        size={"1.125rem"}
         color={variant === ChipVariant.outlined ? colorSet.primary : "#ffffff"}
       >
         {label}

@@ -1,8 +1,8 @@
-import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import formatISODate from "src/utils/formatISODate";
 
 import LazyCat from "./assets/LazyCat";
 interface MypageTableProps {
@@ -56,7 +56,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                 borderTopRightRadius: "10px",
               }}
             >
-              <Button
+              {/*               <Button
                 style={{
                   width: "100%",
                   paddingRight: "20px",
@@ -74,7 +74,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                 >
                   전체보기
                 </Text>
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -100,18 +100,21 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                       padding: "20px 0",
                       borderBottomLeftRadius: borderBottomRadius,
                       lineHeight: "1.5",
-                      width: "75%",
+                      width: "70%",
                     }}
                   >
                     <Text
                       size={"1.1rem"}
                       color={colorSet.text}
                       font={Font.Regular}
-                      style={{ paddingLeft: "20px", textOverflow: "ellipsis" }}
+                      style={{
+                        paddingLeft: "20px",
+                        textOverflow: "ellipsis",
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                      }}
                     >
-                      {articleObj.article.length > 35
-                        ? articleObj.article.substring(0, 35) + "..."
-                        : articleObj.article}
+                      {articleObj.article}
                     </Text>
                   </div>
                   <div
@@ -126,7 +129,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                       font={Font.Regular}
                       style={{ padding: "10px", textAlign: "center" }}
                     >
-                      {articleObj.date}
+                      {formatISODate(articleObj.date)}
                     </Text>
                   </div>
                 </Flex>

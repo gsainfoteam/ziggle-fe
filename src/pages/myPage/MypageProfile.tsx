@@ -23,7 +23,6 @@ const InfoField = ({ children }: InfoFieldProps) => {
         lineHeight: "50px",
         marginLeft: "50px",
         marginRight: "50px",
-        // paddingTop: "20px",
         padding: "20px 20px 5px 20px",
       }}
     >

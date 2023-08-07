@@ -26,6 +26,9 @@ export interface ZaboProps {
 
 type Origin = "width" | "height";
 
+/**
+ * @deprecated The method should not be used
+ */
 export interface ImageRendererProps {
   imageUrl: string;
   origin: Origin;
@@ -33,8 +36,8 @@ export interface ImageRendererProps {
   isHover: boolean;
   objectPosition?: React.CSSProperties["objectPosition"];
   borderRadius?: number;
-  tGP?: number; // the greatest product
-  tMS?: number; // the minimum share
+  size_theGreatestProduct?: number;
+  size_theMinimumShare?: number;
 }
 
 export interface SearchResultProps {
@@ -50,12 +53,28 @@ export interface SearchResultProps {
   searchQuery: string;
 }
 
+export interface NoticeBase {
+  id: number;
+  title: string;
+  views: number;
+  body: string;
+  deadline: string;
+  createdAt: string;
+  author: string;
+  tags: string[];
+}
+
+export interface Notice extends NoticeBase {
+  imageUrl: string;
+}
+
+export interface NoticeDetail extends NoticeBase {
+  imagesUrl: string[];
+  reminder: boolean;
+}
+
 export interface BannerProps {
   imageUrl: string;
   link?: string;
   objectPosition?: React.CSSProperties["objectPosition"];
-}
-
-export interface Notice {
-  uuid: string;
 }

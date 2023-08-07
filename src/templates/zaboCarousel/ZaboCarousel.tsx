@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import HorizontalScrollButton from "src/molecules/horizontalScrollButton/HorizontalScrollButton";
 import TextZabo from "src/organisms/zabo/TextZabo";
@@ -37,17 +38,14 @@ const ScrollBtnWrap = styled.div`
   gap: 0 10px;
 `;
 
-const LowerWrap = styled.div<{ bgColor?: string }>`
+const LowerWrap = styled(Flex)<{ bgColor?: string }>`
   width: 100%;
   background-color: ${({ bgColor }) => bgColor ?? undefined};
 
   padding: 5px 0 15px 0;
 
   box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: nowrap;
 `;
 
 const ZabosContainer = styled(Content)`
@@ -117,7 +115,11 @@ const ZaboCarousel = ({
           ></HorizontalScrollButton.Right>
         </ScrollBtnWrap>
       </UpperWrap>
-      <LowerWrap bgColor={carouselBGColor}>
+      <LowerWrap
+        bgColor={carouselBGColor}
+        alignItems="center"
+        justifyContent="center"
+      >
         <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
           {manyZabos.map((zabo) => {
             if (zabo.thumbnailUrl === undefined) {

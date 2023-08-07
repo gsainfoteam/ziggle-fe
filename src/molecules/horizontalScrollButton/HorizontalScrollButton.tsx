@@ -11,6 +11,7 @@ interface HorizontalScrollButtonProps {
 
 const AnimatedBtn = styled(Button)`
   transition: transform 0.1s ease-in-out;
+
   :active {
     transform: scale(0.9);
   }

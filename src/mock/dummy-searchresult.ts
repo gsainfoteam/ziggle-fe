@@ -1,9 +1,9 @@
 const dummySearchResult = {
-  deadline: "2023.02.28",
+  deadline: "2023-08-30T11:57:18.740Z",
   title: "인포팀 신규 부원 모집",
   author: "이정우",
   tags: ["인포팀", "신규부원", "모집"],
-  date: "2023.02.13",
+  date: "2023-08-03T11:57:18.740Z",
   viewCount: 123,
   thumbnailUrl: "https://picsum.photos/2000/3000",
   searchQuery: "이",
