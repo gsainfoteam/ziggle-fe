@@ -79,7 +79,7 @@ const SearchPage = () => {
             </CloseBtnAnimation.AnimationWrapper>
           </div>
           <Flex>
-            <p style={{ width: "700px", margin: "0 auto" }}>
+            <div style={{ width: "700px", margin: "0 auto" }}>
               <SearchBarAnimation.AnimationWrapper>
                 <SearchBar
                   onSubmit={handleSubmit}
@@ -91,7 +91,7 @@ const SearchPage = () => {
                   onChange={handleTagChange}
                 />
               </SearchBarAnimation.AnimationWrapper>
-              <p
+              <div
                 style={{
                   flexGrow: 1,
                   display: "flex",
@@ -117,8 +117,8 @@ const SearchPage = () => {
                 )}
 
                 {showResults && (
-                  <p>
-                    <p
+                  <div>
+                    <div
                       style={{
                         paddingTop: "0px",
                         paddingBottom: "0px",
@@ -138,7 +138,7 @@ const SearchPage = () => {
                       >
                         ♨ 지글 공지
                       </Text>
-                    </p>
+                    </div>
                     {Array.from({ length: n }).map((_, index) => (
                       <div style={{ margin: "20px" }} key={index}>
                         <SearchResult
@@ -154,7 +154,7 @@ const SearchPage = () => {
                       </div>
                     ))}
 
-                    <p
+                    <div
                       style={{
                         paddingTop: "10px",
                         paddingBottom: "0px",
@@ -174,7 +174,7 @@ const SearchPage = () => {
                       >
                         📰 학사 공지
                       </Text>
-                    </p>
+                    </div>
                     {Array.from({ length: n }).map((_, index) => (
                       <div style={{ margin: "20px" }} key={index}>
                         <SearchResultText
@@ -190,12 +190,12 @@ const SearchPage = () => {
                         />
                       </div>
                     ))}
-                  </p>
+                  </div>
                 )}
 
                 {noResults && (
-                  <p>
-                    <p style={{ height: "10px", margin: "0 auto" }}></p>
+                  <div>
+                    <div style={{ height: "10px", margin: "0 auto" }}></div>
                     <SearchNoResult></SearchNoResult>
                     <Text
                       size="1.5rem"
@@ -205,12 +205,12 @@ const SearchPage = () => {
                     >
                       검색 결과가 존재하지 않습니다.
                     </Text>
-                  </p>
+                  </div>
                 )}
-              </p>
-            </p>
+              </div>
+            </div>
           </Flex>
-          <p style={{ height: "300px", margin: "0 auto" }} />
+          <div style={{ height: "300px", margin: "0 auto" }} />
         </Content>
       </Area>
     </>
