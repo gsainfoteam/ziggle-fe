@@ -2,9 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Layout from "./layout/Layout";
 import HomePage from "./pages/home/HomePage";
-import MyPage from "./pages/myPage/myPage";
+import MyPage from "./pages/myPage/MyPage";
 import PlaygroundPage from "./pages/playground/PlaygroundPage";
-import SearchPage from "./pages/searchPage/searchPage";
+import SearchPage from "./pages/searchpage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
 
 const App = () => {

@@ -1,5 +1,5 @@
-import PropTypes, { Validator } from "prop-types";
 import Button from "src/atoms/button/Button";
+import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -15,7 +15,7 @@ export interface MypageArticle {
   date: string;
 }
 
-const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
+const MypageTable = ({ title, articles }: MypageTableProps) => {
   return (
     <div
       style={{ borderRadius: "10px", boxShadow: "0 0 4px rgba(0, 0, 0, 0.3)" }}
@@ -83,14 +83,13 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
               const isLastRow = index === articles.length - 1;
               const borderBottomRadius = isLastRow ? "10px" : "0px";
               return (
-                <div
+                <Flex
                   key={index}
+                  alignItems="center"
+                  flexDirection="row"
+                  justifyContent="space-between"
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    flexDirection: "row",
                     backgroundColor: colorSet.colorless,
-                    justifyContent: "space-between",
                     borderBottomLeftRadius: borderBottomRadius,
                     borderBottomRightRadius: borderBottomRadius,
                     border: "0.1px solid #e6e6e6",
@@ -101,13 +100,14 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                       padding: "20px 0",
                       borderBottomLeftRadius: borderBottomRadius,
                       lineHeight: "1.5",
+                      width: "75%",
                     }}
                   >
                     <Text
                       size={"1.1rem"}
                       color={colorSet.text}
                       font={Font.Regular}
-                      style={{ paddingLeft: "20px" }}
+                      style={{ paddingLeft: "20px", textOverflow: "ellipsis" }}
                     >
                       {articleObj.article.length > 35
                         ? articleObj.article.substring(0, 35) + "..."
@@ -129,7 +129,7 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
                       {articleObj.date}
                     </Text>
                   </div>
-                </div>
+                </Flex>
               );
             })}
           {articles.length === 0 && (
@@ -162,18 +162,6 @@ const MypageTable: React.FC<MypageTableProps> = ({ title, articles }) => {
       </div>
     </div>
   );
-};
-
-const MypageArticleShape = PropTypes.shape({
-  article: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-});
-
-MypageTable.propTypes = {
-  title: PropTypes.string.isRequired,
-  articles: PropTypes.arrayOf(MypageArticleShape).isRequired as Validator<
-    MypageArticle[]
-  >,
 };
 
 export default MypageTable;

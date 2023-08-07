@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -33,12 +32,7 @@ const InfoField = ({ children }: InfoFieldProps) => {
   );
 };
 
-const MypageProfile: React.FC<MypageProfileProps> = ({
-  name,
-  id,
-  phone,
-  email,
-}) => {
+const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
   return (
     <div>
       <div
@@ -104,10 +98,4 @@ const MypageProfile: React.FC<MypageProfileProps> = ({
   );
 };
 
-MypageProfile.propTypes = {
-  name: PropTypes.string,
-  id: PropTypes.string,
-  phone: PropTypes.string,
-  email: PropTypes.string,
-};
 export default MypageProfile;
