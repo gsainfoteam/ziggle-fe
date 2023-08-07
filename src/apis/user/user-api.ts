@@ -4,11 +4,11 @@ import { User } from "src/types/types";
 import { apiGetter } from "../interceptor/interceptor";
 
 export const goToIdp = () => {
+  console.log(import.meta.env.NODE_ENV);
   window.location.href = `${
     import.meta.env.VITE_IDP_URL
   }/authorize?client_id=ziggle2023&redirect_uri=${
-    (import.meta.env.NODE_ENV === "development" ? "http://" : "https://") +
-    window.location.host
+    (import.meta.env.DEV ? "http://" : "https://") + window.location.host
   }&scope=openid%20profile%20email%20student_id&response_type=code`;
 };
 
@@ -17,11 +17,9 @@ export const loginWithIdp = async ({
 }: {
   queryKey: [string, string];
 }) => {
-  const [, auth_code] = queryKey;
+  const [, code] = queryKey;
 
-  const { data } = await apiGetter<LoginResponse>(
-    "/user/login?auth_code=" + auth_code,
-  );
+  const { data } = await apiGetter<LoginResponse>("/user/login?code=" + code);
 
   return data;
 };

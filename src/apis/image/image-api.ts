@@ -8,10 +8,10 @@ export const uploadImages = async (props: {
   const formData = new FormData();
 
   images.forEach((image) => {
-    formData.append("images", image);
+    formData.append("files", image);
   });
 
-  const { data } = await apiPoster<string[]>("/image", formData);
+  const { data } = await apiPoster<string[]>("/image/upload", formData);
 
   return data;
 };

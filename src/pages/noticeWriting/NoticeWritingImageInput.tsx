@@ -16,8 +16,8 @@ const HiddenInput = styled.input`
 `;
 
 interface NoticeWritingImageInputProps {
-  files: string[];
-  setFiles: (files: string[]) => void;
+  files: File[];
+  setFiles: (files: File[]) => void;
 }
 
 const NoticeWritingImageInput = ({
@@ -30,10 +30,7 @@ const NoticeWritingImageInput = ({
     event.preventDefault();
     const droppedfiles = Array.from(event.dataTransfer.files);
 
-    setFiles([
-      ...files,
-      ...droppedfiles.map((file) => URL.createObjectURL(file)),
-    ]);
+    setFiles([...files, ...droppedfiles]);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -44,10 +41,7 @@ const NoticeWritingImageInput = ({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedFiles = Array.from(event.target.files || []);
-    setFiles([
-      ...files,
-      ...selectedFiles.map((file) => URL.createObjectURL(file)),
-    ]);
+    setFiles([...files, ...selectedFiles]);
     event.target.value = "";
   };
 
@@ -97,7 +91,7 @@ const NoticeWritingImageInput = ({
             {files.map((file, index) => (
               <ImagePreviewItem
                 key={index}
-                src={file}
+                src={URL.createObjectURL(file)}
                 onDelete={() => {
                   setFiles(files.filter((f) => f !== file));
                 }}

@@ -42,7 +42,7 @@ export const getNotice = async ({
 export const createNotice = async (props: {
   title: string;
   body: string;
-  tags: string[];
+  tags: number[];
   images: string[];
   deadline?: Date;
 }) => {

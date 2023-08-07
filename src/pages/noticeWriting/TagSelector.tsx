@@ -1,17 +1,59 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import queryKeys from "src/apis/queryKeys";
+import { createTag, searchTags } from "src/apis/tag/tag-api";
 import Flex from "src/atoms/containers/flex/Flex";
 import Icon from "src/atoms/icon/Icon";
 import Input from "src/atoms/inputs/input/Input";
 import Text from "src/atoms/text/Text";
-import Tag from "src/molecules/tag/Tag";
+import TagChip from "src/molecules/tag/TagChip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import { Tag } from "src/types/types";
 
 interface TagSelectorProps {
-  tags: string[];
-  setTags: (tags: string[]) => void;
+  tags: Tag[];
+  setTags: (tags: Tag[]) => void;
 }
 
 const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
+  const [keyword, setKeyword] = useState<string>("");
+  const { data } = useQuery([queryKeys.searchTags, keyword], searchTags);
+
+  const handleTag = useMutation(createTag, {});
+
+  const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.includes(" ")) {
+      const newTag = event.target.value.trim();
+      if (tags.find((tag) => tag.name === newTag)) {
+        setKeyword("");
+        return;
+      }
+
+      const existingTag = data?.find((tag) => tag.name === newTag);
+      if (existingTag) {
+        setTags([...tags, existingTag]);
+        setKeyword("");
+        return;
+      }
+
+      handleTag.mutate(
+        {
+          name: newTag,
+        },
+        {
+          onSuccess: (data) => {
+            setTags([...tags, data]);
+            setKeyword("");
+          },
+        },
+      );
+      return;
+    }
+
+    setKeyword(event.target.value);
+  };
+
   return (
     <Flex flexDirection={"column"} gap={"15px"}>
       <Flex gap={"12px"}>
@@ -30,11 +72,11 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
         }}
       >
         {tags.map((tag) => (
-          <Tag
-            key={tag}
-            label={tag}
+          <TagChip
+            key={tag.name}
+            label={tag.name}
             onDeleteClick={() => {
-              setTags(tags.filter((t) => t !== tag));
+              setTags(tags.filter((t) => t.id !== tag.id));
             }}
           />
         ))}
@@ -42,13 +84,7 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
           placeholder={
             tags.length === 0 ? "태그를 입력하세요 (띄어쓰기로 구분)" : ""
           }
-          onChange={(event) => {
-            const tag = event.target.value;
-            if (tag.includes(" ")) {
-              setTags([...tags, ...tag.split(" ").filter((t) => t !== "")]);
-              event.target.value = "";
-            }
-          }}
+          onChange={handleKeywordChange}
           style={{
             flexGrow: 1,
           }}

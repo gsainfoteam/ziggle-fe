@@ -1,5 +1,8 @@
+import { useMutation } from "@tanstack/react-query";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
+import { uploadImages } from "src/apis/image/image-api";
+import { createNotice } from "src/apis/notice/notice-api";
 import styled from "styled-components";
 
 import Area from "../../atoms/containers/area/Area";
@@ -13,7 +16,7 @@ import Text from "../../atoms/text/Text";
 import NoticeTypeRadio from "../../molecules/noticeTypeRadio/NoticeTypeRadio";
 import colorSet from "../../styles/colorSet";
 import Font from "../../styles/font";
-import { NoticeType } from "../../types/types";
+import { NoticeType, Tag } from "../../types/types";
 import dateFormat from "../../utils/dateFormat";
 import NoticeWritingActions from "./NoticeWritingActions";
 import NoticeWritingImageInput from "./NoticeWritingImageInput";
@@ -38,13 +41,32 @@ const NoticeWritingPage = () => {
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
   const [deadline, setDeadline] = useState<string>(dateFormat(new Date(), "-"));
 
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
 
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
 
   const editorRef = useRef<any>(null);
 
-  const handleSubmit = () => {};
+  const handleNotice = useMutation(createNotice, {});
+  const handleImage = useMutation(uploadImages, {
+    onSuccess: (data) => {
+      const content = editorRef.current.getContent();
+
+      handleNotice.mutate({
+        title,
+        body: content,
+        deadline: hasDeadline ? new Date(deadline) : undefined,
+        tags: tags.map((tag) => tag.id),
+        images: data,
+      });
+    },
+  });
+
+  const handleSubmit = () => {
+    handleImage.mutate({
+      images,
+    });
+  };
 
   return (
     <Area>

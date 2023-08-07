@@ -9473,6 +9473,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-jwt@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "react-jwt@npm:1.2.0"
+  dependencies:
+    fsevents: ^2.3.2
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  checksum: 3bceff77c3e056c036251ab9f692978b65bef04c9c18287afd067b68b6cb614234f2bfcaf12b4c28a18b976a0bc666db6c9547d9a0e2909e024fe42e96f1df4d
+  languageName: node
+  linkType: hard
+
 "react-loading-skeleton@npm:^3.3.1":
   version: 3.3.1
   resolution: "react-loading-skeleton@npm:3.3.1"
@@ -10019,6 +10033,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-i18next: ^12.1.1
+    react-jwt: ^1.2.0
     react-loading-skeleton: ^3.3.1
     react-responsive-masonry: ^2.1.7
     react-router-dom: ^6.11.2
