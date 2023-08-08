@@ -8,7 +8,6 @@ import Image from "src/atoms/image/Image";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
-import rgbToHex from "src/utils/rgbToHex";
 import styled from "styled-components";
 
 interface ZaboShowcaseProps {
@@ -42,10 +41,8 @@ const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
   const [bannerColor, setBannerColor] = useState<string>(colorSet.primary);
 
   useEffect(() => {
-    prominent(src, { amount: 1 }).then((color) => {
-      const hex = rgbToHex([color[0], color[1], color[2]]);
-      console.log(hex);
-      setBannerColor(hex);
+    prominent(src, { amount: 1, format: "hex" }).then((color) => {
+      setBannerColor(color as string);
     });
   });
 
@@ -79,9 +76,7 @@ const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
             width={showcaseWidth}
             left={showcaseLeft}
             isHover={hovered}
-            onClick={() => {
-              onShow?.();
-            }}
+            onClick={onShow}
           />
         </div>
         {onShow && (

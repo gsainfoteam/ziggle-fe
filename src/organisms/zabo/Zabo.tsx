@@ -5,6 +5,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
+import formatISODate from "src/utils/formatISODate";
 import styled from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -77,7 +78,7 @@ const Zabo = ({
             color={colorSet.secondaryText}
             size={"0.9rem"}
           >
-            {date}
+            {formatISODate(date)}
           </Text>
           <Text
             font={Font.Medium}

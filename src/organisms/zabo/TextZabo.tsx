@@ -4,6 +4,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
+import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -113,7 +114,7 @@ const TextZabo = ({
       <Flex flexDirection="column">
         <Flex gap="0.25em">
           <Text font={Font.Medium} color={colorSet.secondaryText}>
-            {date}
+            {formatISODate(date)}
           </Text>
           <Text font={Font.Medium} color={colorSet.secondaryText}>
             •

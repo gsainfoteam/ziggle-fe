@@ -6,7 +6,8 @@ import colorSet from "src/styles/colorSet";
 import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
 import { SearchResultProps } from "src/types/types";
-import getDayOfWeek from "src/utils/getDay";
+import formatISODate from "src/utils/formatISODate";
+import getDayOfWeek from "src/utils/getDayOfWeek";
 import GetHighlightedText from "src/utils/GetHighlightedText";
 import styled from "styled-components";
 
@@ -41,7 +42,8 @@ const SearchResult = ({
       >
         <Flex flexDirection="column">
           <Text font={Font.Medium} size="1.2rem">
-            {deadline && `마감일 ${deadline} (${getDayOfWeek(deadline)})`}
+            {deadline &&
+              `마감일 ${formatISODate(deadline)} (${getDayOfWeek(deadline)})`}
           </Text>
           <GetHighlightedText
             text={title}
@@ -86,7 +88,7 @@ const SearchResult = ({
         </Flex>
         <Flex gap="0.5rem" alignItems="center">
           <Text font={Font.Regular} size="1rem" color={colorSet.secondaryText}>
-            {date}
+            {formatISODate(date)}
           </Text>
           <Text color={colorSet.secondaryText}>•</Text>
           <Text font={Font.Bold} size="1rem" color={colorSet.secondaryText}>

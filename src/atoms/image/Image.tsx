@@ -10,8 +10,9 @@ export interface ImageProps {
   /** blur용으로 사용될 예정 */
   filter?: React.CSSProperties["filter"];
   objectPosition?: React.CSSProperties["objectPosition"];
-  isLoading?: boolean;
   borderRadius?: React.CSSProperties["borderRadius"];
+
+  isLoading?: boolean;
 }
 
 const Image = styled.img<ImageProps>`
@@ -26,8 +27,8 @@ const Image = styled.img<ImageProps>`
   border-radius: ${({ borderRadius }) =>
     borderRadius ? borderRadius : undefined};
   object-fit: cover;
+
   ${({ isLoading }) => {
-    // isLoading을 할당하지 않을 시 무조건 표시됨
     if (isLoading) {
       return css`
         display: none;

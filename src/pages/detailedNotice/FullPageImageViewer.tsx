@@ -18,13 +18,9 @@ interface FullPageImageViewerProps {
 }
 
 const FullPageWrapper = styled(Flex)`
-  width: 100vw;
-  height: 100vh;
-
   z-index: 100;
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
 
   background-color: rgba(0, 0, 0, 0.6);
 `;
@@ -53,10 +49,9 @@ const FullPageImageViewer = ({
   const maxIndex = srcs.length - 1;
 
   const ManipulateIndex = (amount: number) => {
-    if (imageIndex + amount < 0 || imageIndex + amount > maxIndex) return;
-    setImageIndex((imageIndex) => imageIndex + amount);
-
-    console.log(imageIndex);
+    setImageIndex((imageIndex) =>
+      Math.max(0, Math.min(imageIndex + amount, maxIndex)),
+    );
   };
 
   // 키보드 화살표로 인덱싱 지원
@@ -70,6 +65,20 @@ const FullPageImageViewer = ({
     onClose?.();
   };
 
+  // 이미지 다운로드
+  const downloadImage = (imagePath: string): void => {
+    const link = document.createElement("a");
+    link.href = imagePath;
+    link.download = imagePath.split("/").pop() || ""; // 파일 이름 설정
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleDownload = () => {
+    srcs.forEach((path) => downloadImage(path));
+  };
+
   return (
     <FullPageWrapper
       alignItems="center"
@@ -77,7 +86,7 @@ const FullPageImageViewer = ({
       flexDirection="column"
     >
       <MenuSum gap="30px">
-        <Menu alignItems="center" gap="10px">
+        <Menu alignItems="center" gap="10px" onClick={handleDownload}>
           <Text font={Font.Medium} color={colorSet.colorless}>
             전체 다운로드하기
           </Text>
