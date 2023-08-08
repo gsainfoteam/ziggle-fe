@@ -207,8 +207,8 @@ const SearchPage = () => {
                 )}
 
                 {data && isEmpty(data.list) && (
-                  <p>
-                    <p style={{ height: "10px", margin: "0 auto" }}></p>
+                  <div>
+                    <div style={{ height: "10px", margin: "0 auto" }}></div>
                     <SearchNoResult></SearchNoResult>
                     <Text
                       size="1.5rem"
