@@ -1,7 +1,7 @@
 name: Feature Issue Template
 description: An Issue Template for Features
 title: "[FEATURE] "
-labels: []
+labels: ["feature"]
 assignees: []
 body:
   - type: textarea

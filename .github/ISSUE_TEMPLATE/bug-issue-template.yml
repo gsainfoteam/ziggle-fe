@@ -1,7 +1,7 @@
 name: Bug Issue Template
 description: An Issue Template for Bugs
 title: "[BUG] "
-labels: []
+labels: ["bug"]
 assignees: []
 body:
   - type: textarea
@@ -13,11 +13,12 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: How to reproduce
+      label: How to reproduce (재현 불가능 한 경우 '재현 불가능'이라고 적어주세요)
       description: List of todos
       placeholder: |
-        1. Step 1: 
+        1. Step 1:
         2. Step 2:
+        3. Step 3:
       value: |
         1.
     validations:
