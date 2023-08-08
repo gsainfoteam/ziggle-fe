@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import Tag from "./Tag";
+import Tag from "./TagChip";
 
 export default {
   title: "molecules/tag/Tag",

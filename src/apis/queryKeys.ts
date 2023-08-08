@@ -6,6 +6,7 @@ enum queryKeys {
   searchTags = "searchTags",
   getAllNotices = "getAllNotices",
   getNotice = "getNotice",
+  loginWithIdp = "loginWithIdp",
 }
 
 export default queryKeys;

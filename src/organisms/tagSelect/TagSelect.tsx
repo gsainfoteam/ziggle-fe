@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Input from "../../atoms/inputs/input/Input";
-import Tag from "../../molecules/tag/Tag";
+import Tag from "../../molecules/tag/TagChip";
 import colorSet from "../../styles/colorSet";
 
 const TagSelectWrapper = styled.div`

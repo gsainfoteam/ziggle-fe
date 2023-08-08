@@ -1,4 +1,6 @@
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { addToReminderList } from "src/apis/notice/notice-api";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
@@ -6,21 +8,24 @@ import CustomCheckbox from "src/molecules/checkboxWithLabel/CheckboxWithLabel";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import { Tag } from "src/types/types";
 import dDayFormated from "src/utils/calculateDDay";
 import formatISODate from "src/utils/formatISODate";
 import getDayOfWeek from "src/utils/getDayOfWeek";
 
 export interface NoticeInfoProps {
+  id: number;
   deadline?: string;
   title: string;
   isReminded: boolean;
   author: string;
   dateCreated: string;
   viewCount: number;
-  tags: string[];
+  tags: Tag[];
 }
 
 const NoticeInfo = ({
+  id,
   deadline,
   title,
   isReminded,
@@ -33,6 +38,23 @@ const NoticeInfo = ({
   const isPast = deadline ? dDayString === "기한 지남" : false;
 
   const [isRemindChecked, setIsRemindChecked] = useState(isReminded);
+
+  const remind = useMutation(addToReminderList);
+
+  const handleRemindChange = () => {
+    if (isRemindChecked) return;
+
+    remind.mutate(
+      {
+        id,
+      },
+      {
+        onSuccess: () => {
+          setIsRemindChecked(true);
+        },
+      },
+    );
+  };
 
   return (
     <>
@@ -64,7 +86,7 @@ const NoticeInfo = ({
                     <CustomCheckbox
                       id="remind"
                       checked={isRemindChecked}
-                      onChange={setIsRemindChecked}
+                      onChange={handleRemindChange}
                     >
                       <Text
                         font={Font.Medium}
@@ -161,7 +183,7 @@ const NoticeInfo = ({
       {/* 태그 */}
       <Flex alignItems="center" gap={"10px"}>
         {tags.map((tag, index) => (
-          <Chip key={index} label={"#" + tag} font={Font.Regular} />
+          <Chip key={index} label={"#" + tag.name} font={Font.Regular} />
         ))}
       </Flex>
     </>
