@@ -18,8 +18,9 @@ export const goToIdp = () => {
 export const loginWithIdp = async ({ code }: { code: string }) => {
   const response = await apiGetter<LoginResponse>("/user/login?code=" + code);
 
-  if (response.status !== 200) {
-    localStorage.setItem("access_token", response.data.jwt_token);
+  if (response.status === 200) {
+    console.log(response.data);
+    localStorage.setItem("access_token", response.data.access_token);
     return true;
   }
 
