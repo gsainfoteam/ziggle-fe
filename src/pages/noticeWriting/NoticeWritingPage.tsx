@@ -1,8 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { uploadImages } from "src/apis/image/image-api";
 import { createNotice } from "src/apis/notice/notice-api";
+import useAuth from "src/hooks/useAuth";
+import Paths from "src/types/paths";
+import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
 
 import Area from "../../atoms/containers/area/Area";
@@ -47,24 +51,42 @@ const NoticeWritingPage = () => {
 
   const editorRef = useRef<any>(null);
 
-  const handleNotice = useMutation(createNotice, {});
+  const navigate = useNavigate();
+
+  useAuth();
+
+  const handleNotice = useMutation(createNotice, {
+    onSuccess: () => {
+      console.log("공지사항 작성 성공"); // TODO: toast or modal 추가해야해요
+
+      navigate(Paths.home);
+    },
+  });
   const handleImage = useMutation(uploadImages, {
     onSuccess: (data) => {
-      const content = editorRef.current.getContent();
-
-      handleNotice.mutate({
-        title,
-        body: content,
-        deadline: hasDeadline ? new Date(deadline) : undefined,
-        tags: tags.map((tag) => tag.id),
-        images: data,
-      });
+      writeNotice(data);
     },
   });
 
   const handleSubmit = () => {
+    if (isEmpty(images)) {
+      writeNotice(null);
+      return;
+    }
     handleImage.mutate({
       images,
+    });
+  };
+
+  const writeNotice = (imageKeys: string[] | null) => {
+    const content = editorRef.current.getContent();
+
+    handleNotice.mutate({
+      title,
+      body: content,
+      deadline: hasDeadline ? new Date(deadline) : undefined,
+      tags: tags.map((tag) => tag.id),
+      images: imageKeys,
     });
   };
 

@@ -43,7 +43,7 @@ export const createNotice = async (props: {
   title: string;
   body: string;
   tags: number[];
-  images: string[];
+  images: string[] | null;
   deadline?: Date;
 }) => {
   const { title, body, deadline, tags, images } = props;
