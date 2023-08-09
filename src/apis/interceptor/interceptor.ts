@@ -52,3 +52,10 @@ export const apiPatcher = async <T>(
 ): Promise<AxiosResponse<T>> => {
   return await interceptor.patch(import.meta.env.VITE_DOMAIN + path, data);
 };
+
+export const apiDeleter = async <T>(
+  path: string,
+  data?: any,
+): Promise<AxiosResponse<T>> => {
+  return await interceptor.delete(import.meta.env.VITE_DOMAIN + path, data);
+};

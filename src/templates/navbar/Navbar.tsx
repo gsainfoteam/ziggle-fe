@@ -55,19 +55,15 @@ const Navbar = () => {
 
   return (
     <Bar bgColor={colorSet.primary}>
-      <Link to={"/"}>
+      <Link to={Paths.home}>
         <ZiggleLogo />
       </Link>
       <ButtonSum>
-        <Button
-          onClick={() => {
-            navigate(Paths.noticeWriting);
-          }}
-        >
+        <Link to={Paths.noticeWriting} style={{ textDecoration: "none" }}>
           <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
             공지 작성
           </Text>
-        </Button>
+        </Link>
         <Button
           style={{
             display: "flex",
@@ -76,7 +72,7 @@ const Navbar = () => {
           }}
         >
           <Search size="1.6rem" />
-          <Link to={"/search"} style={{ textDecoration: "none" }}>
+          <Link to={Paths.search} style={{ textDecoration: "none" }}>
             <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
               공지 검색
             </Text>

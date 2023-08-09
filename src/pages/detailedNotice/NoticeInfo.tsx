@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { addToReminderList } from "src/apis/notice/notice-api";
+import { toggleReminder } from "src/apis/notice/notice-api";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
@@ -39,18 +39,17 @@ const NoticeInfo = ({
 
   const [isRemindChecked, setIsRemindChecked] = useState(isReminded);
 
-  const remind = useMutation(addToReminderList);
+  const remind = useMutation(toggleReminder);
 
   const handleRemindChange = () => {
-    if (isRemindChecked) return;
-
     remind.mutate(
       {
         id,
+        doRemind: isRemindChecked,
       },
       {
         onSuccess: () => {
-          setIsRemindChecked(true);
+          setIsRemindChecked(!isRemindChecked);
         },
       },
     );

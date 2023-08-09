@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import Tag from "./TagChip";
+import TagChip from "./TagChip";
 
 export default {
   title: "molecules/tag/Tag",
-  component: Tag,
-} as Meta<typeof Tag>;
+  component: TagChip,
+} as Meta<typeof TagChip>;
 
-const Template: StoryFn<typeof Tag> = (args) => <Tag {...args} />;
+const Template: StoryFn<typeof TagChip> = (args) => <TagChip {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

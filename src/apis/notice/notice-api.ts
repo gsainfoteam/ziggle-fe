@@ -1,5 +1,5 @@
 import { Notice, NoticeDetail } from "../../types/types";
-import { apiGetter, apiPoster } from "../interceptor/interceptor";
+import { apiDeleter, apiGetter, apiPoster } from "../interceptor/interceptor";
 
 interface NoticesResponse {
   list: Notice[];
@@ -59,10 +59,17 @@ export const createNotice = async (props: {
   return data;
 };
 
-export const addToReminderList = async (props: { id: number }) => {
-  const { id } = props;
+export const toggleReminder = async (props: {
+  id: number;
+  doRemind: boolean;
+}) => {
+  const { id, doRemind } = props;
 
-  const { data } = await apiPoster(`/notice/${id}/reminder`);
-
-  return data;
+  if (doRemind) {
+    const { data } = await apiPoster(`/notice/${id}/reminder`);
+    return data;
+  } else {
+    const { data } = await apiDeleter(`/notice/${id}/reminder`);
+    return data;
+  }
 };
