@@ -8,6 +8,7 @@ import useAuth from "src/hooks/useAuth";
 import Paths from "src/types/paths";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 import Area from "../../atoms/containers/area/Area";
 import Content from "../../atoms/containers/content/Content";
@@ -84,6 +85,24 @@ const NoticeWritingPage = () => {
   });
 
   const handleSubmit = () => {
+    if (!title) {
+      Swal.fire({
+        text: "제목을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
+    if (!editorRef.current) {
+      Swal.fire({
+        text: "내용을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
     if (isEmpty(images)) {
       writeNotice(null);
       return;
@@ -101,7 +120,7 @@ const NoticeWritingPage = () => {
       body: content,
       deadline: hasDeadline ? new Date(deadline) : undefined,
       tags: [...tags.map((tag) => tag.id), noticeTypeToTagId(noticeType)],
-      images: imageKeys,
+      images: imageKeys ?? [],
     });
   };
 

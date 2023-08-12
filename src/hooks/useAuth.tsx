@@ -8,6 +8,9 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
   const { data: userInfo, isError } = useQuery(
     [queryKeys.getUserInfo],
     getUserInfo,
+    {
+      retry: false,
+    },
   );
 
   const navigate = useNavigate();

@@ -10030,6 +10030,7 @@ __metadata:
     react-router-dom: ^6.11.2
     storybook: ^7.0.7
     styled-components: ^5.3.6
+    sweetalert2: ^11.7.22
     tinymce: ^6.5.1
     typescript: ^4.9.3
     vite: ^4.0.0
@@ -10565,6 +10566,13 @@ __metadata:
   version: 2.0.4
   resolution: "svg-parser@npm:2.0.4"
   checksum: b3de6653048212f2ae7afe4a423e04a76ec6d2d06e1bf7eacc618a7c5f7df7faa5105561c57b94579ec831fbbdbf5f190ba56a9205ff39ed13eabdf8ab086ddf
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.7.22":
+  version: 11.7.22
+  resolution: "sweetalert2@npm:11.7.22"
+  checksum: a4644ce9a801c4c82bc1806c20e218e4a53bf51e8566e19b4f9e5eee911ee905e5201563e7359828263073bcbf0d4a325b3216d90bd5157f48d7f30e3205e195
   languageName: node
   linkType: hard
 
