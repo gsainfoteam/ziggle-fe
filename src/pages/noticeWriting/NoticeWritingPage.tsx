@@ -39,6 +39,19 @@ const DateInput = styled.input`
   }
 `;
 
+const noticeTypeToTagId = (noticeType: NoticeType): number => {
+  switch (noticeType) {
+    case NoticeType.RECRUIT:
+      return 1;
+    case NoticeType.EVENT:
+      return 2;
+    case NoticeType.NORMAL:
+      return 3;
+    case NoticeType.ACADEMIC:
+      return 4;
+  }
+};
+
 const NoticeWritingPage = () => {
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
@@ -53,7 +66,9 @@ const NoticeWritingPage = () => {
 
   const navigate = useNavigate();
 
-  useAuth();
+  useAuth({
+    redirectUrl: Paths.home,
+  });
 
   const handleNotice = useMutation(createNotice, {
     onSuccess: () => {
@@ -85,7 +100,7 @@ const NoticeWritingPage = () => {
       title,
       body: content,
       deadline: hasDeadline ? new Date(deadline) : undefined,
-      tags: tags.map((tag) => tag.id),
+      tags: [...tags.map((tag) => tag.id), noticeTypeToTagId(noticeType)],
       images: imageKeys,
     });
   };
