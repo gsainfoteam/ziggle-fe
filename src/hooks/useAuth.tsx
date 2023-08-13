@@ -2,25 +2,45 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import queryKeys from "src/apis/queryKeys";
-import { getUserInfo } from "src/apis/user/user-api";
+import { getUserInfo, loginWithIdp } from "src/apis/user/user-api";
 
 const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
+  const [query, setQuery] = useSearchParams();
+
   const { data: userInfo, isError } = useQuery(
     [queryKeys.getUserInfo],
     getUserInfo,
     {
       retry: false,
+      enabled: !query.has("code"),
     },
   );
 
   const navigate = useNavigate();
-  const [query] = useSearchParams();
 
   useEffect(() => {
-    if (isError && redirectUrl) {
-      navigate(redirectUrl);
-    }
-  }, [isError, navigate, query, redirectUrl]);
+    const handleLogin = async () => {
+      const code = query.get("code");
+
+      if (code) {
+        const isLoggedIn = await loginWithIdp({
+          code,
+        });
+        if (isLoggedIn) {
+          console.log("로그인 성공");
+          setQuery();
+        }
+
+        return;
+      }
+
+      if (isError && redirectUrl) {
+        navigate(redirectUrl);
+      }
+    };
+
+    handleLogin();
+  }, [isError, navigate, query, redirectUrl, setQuery]);
 
   return { userInfo };
 };

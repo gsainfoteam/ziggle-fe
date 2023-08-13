@@ -5,8 +5,13 @@ import MyPageInfo from "src/mock/dummy-mypage-info";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
+import { User } from "src/types/types";
 
-const MyPage = () => {
+interface MyPageProps {
+  userInfo: User;
+}
+
+const MyPage = ({ userInfo }: MyPageProps) => {
   const isSmall = useMediaQuery({ maxWidth: 1200 });
   const Height = isSmall ? "1500px" : "1000px";
   return (

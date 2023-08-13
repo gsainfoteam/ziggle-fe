@@ -1,5 +1,3 @@
-import useLogin from "src/hooks/useLogin";
-
 import Area from "../../atoms/containers/area/Area";
 import Spacer from "../../atoms/spacer/Spacer";
 import AcademicNotices from "./AcademicNotices";
@@ -11,8 +9,6 @@ import RecruitNotices from "./RecruitNotices";
 import UrgentNotices from "./UrgentNotices";
 
 const HomePage = () => {
-  useLogin();
-
   return (
     <>
       <Area>

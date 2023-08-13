@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadImages } from "src/apis/image/image-api";
 import { createNotice } from "src/apis/notice/notice-api";
-import useAuth from "src/hooks/useAuth";
 import Paths from "src/types/paths";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
@@ -66,10 +65,6 @@ const NoticeWritingPage = () => {
   const editorRef = useRef<any>(null);
 
   const navigate = useNavigate();
-
-  useAuth({
-    redirectUrl: Paths.home,
-  });
 
   const handleNotice = useMutation(createNotice, {
     onSuccess: () => {
