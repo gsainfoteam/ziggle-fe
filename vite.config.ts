@@ -17,6 +17,9 @@ export default defineConfig({
       "/local": {
         target: "https://api.stg.ziggle.gistory.me", //실제 api 도메인을 넣어줍니다.
         changeOrigin: true,
+        headers: {
+          origin: "https://api.stg.ziggle.gistory.me",
+        },
         rewrite: (path) => path.replace(/^\/local/, ""), //target url을 교체합니다.
       },
     },

@@ -43,7 +43,7 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   };
 
   return (
-    <SearchWrapper onSubmit={handleSubmit}>
+    <SearchWrapper onSubmit={handleSubmit} name={"searchQuery"}>
       <Input
         placeholder={placeholder}
         value={keyword}

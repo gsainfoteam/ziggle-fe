@@ -1,9 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { uploadImages } from "src/apis/image/image-api";
 import { createNotice } from "src/apis/notice/notice-api";
+import Paths from "src/types/paths";
+import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 import Area from "../../atoms/containers/area/Area";
 import Content from "../../atoms/containers/content/Content";
@@ -35,6 +39,19 @@ const DateInput = styled.input`
   }
 `;
 
+const noticeTypeToTagId = (noticeType: NoticeType): number => {
+  switch (noticeType) {
+    case NoticeType.RECRUIT:
+      return 1;
+    case NoticeType.EVENT:
+      return 2;
+    case NoticeType.NORMAL:
+      return 3;
+    case NoticeType.ACADEMIC:
+      return 4;
+  }
+};
+
 const NoticeWritingPage = () => {
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
@@ -47,24 +64,58 @@ const NoticeWritingPage = () => {
 
   const editorRef = useRef<any>(null);
 
-  const handleNotice = useMutation(createNotice, {});
+  const navigate = useNavigate();
+
+  const handleNotice = useMutation(createNotice, {
+    onSuccess: () => {
+      console.log("공지사항 작성 성공"); // TODO: toast or modal 추가해야해요
+
+      navigate(Paths.home);
+    },
+  });
   const handleImage = useMutation(uploadImages, {
     onSuccess: (data) => {
-      const content = editorRef.current.getContent();
-
-      handleNotice.mutate({
-        title,
-        body: content,
-        deadline: hasDeadline ? new Date(deadline) : undefined,
-        tags: tags.map((tag) => tag.id),
-        images: data,
-      });
+      writeNotice(data);
     },
   });
 
   const handleSubmit = () => {
+    if (!title) {
+      Swal.fire({
+        text: "제목을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
+    if (!editorRef.current) {
+      Swal.fire({
+        text: "내용을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
+    if (isEmpty(images)) {
+      writeNotice(null);
+      return;
+    }
     handleImage.mutate({
       images,
+    });
+  };
+
+  const writeNotice = (imageKeys: string[] | null) => {
+    const content = editorRef.current.getContent();
+
+    handleNotice.mutate({
+      title,
+      body: content,
+      deadline: hasDeadline ? new Date(deadline) : undefined,
+      tags: [...tags.map((tag) => tag.id), noticeTypeToTagId(noticeType)],
+      images: imageKeys ?? [],
     });
   };
 

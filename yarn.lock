@@ -7853,21 +7853,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.2.3":
-  version: 2.3.1
-  resolution: "jotai@npm:2.3.1"
-  peerDependencies:
-    "@types/react": ">=17.0.0"
-    react: ">=17.0.0"
-  peerDependenciesMeta:
-    "@types/react":
-      optional: true
-    react:
-      optional: true
-  checksum: c2e3dcb3206749cd7f63ab9cfec5d0bacd19ac8c1710e688716fcbdaa031c6bb78f10ed24ea8da65cd98b4dc3c04170c05eedb4d3284b9ad80858f834c69a914
-  languageName: node
-  linkType: hard
-
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -9479,20 +9464,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-jwt@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "react-jwt@npm:1.2.0"
-  dependencies:
-    fsevents: ^2.3.2
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18.0.0
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  checksum: 3bceff77c3e056c036251ab9f692978b65bef04c9c18287afd067b68b6cb614234f2bfcaf12b4c28a18b976a0bc666db6c9547d9a0e2909e024fe42e96f1df4d
-  languageName: node
-  linkType: hard
-
 "react-loading-skeleton@npm:^3.3.1":
   version: 3.3.1
   resolution: "react-loading-skeleton@npm:3.3.1"
@@ -10048,19 +10019,18 @@ __metadata:
     eslint-plugin-storybook: ^0.6.13
     i18next: ^22.4.8
     i18next-browser-languagedetector: ^7.0.1
-    jotai: ^2.2.3
     prettier: ^2.8.1
     prop-types: ^15.8.1
     react: ^18.2.0
     react-dom: ^18.2.0
     react-i18next: ^12.1.1
-    react-jwt: ^1.2.0
     react-loading-skeleton: ^3.3.1
     react-responsive: ^9.0.2
     react-responsive-masonry: ^2.1.7
     react-router-dom: ^6.11.2
     storybook: ^7.0.7
     styled-components: ^5.3.6
+    sweetalert2: ^11.7.22
     tinymce: ^6.5.1
     typescript: ^4.9.3
     vite: ^4.0.0
@@ -10596,6 +10566,13 @@ __metadata:
   version: 2.0.4
   resolution: "svg-parser@npm:2.0.4"
   checksum: b3de6653048212f2ae7afe4a423e04a76ec6d2d06e1bf7eacc618a7c5f7df7faa5105561c57b94579ec831fbbdbf5f190ba56a9205ff39ed13eabdf8ab086ddf
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.7.22":
+  version: 11.7.22
+  resolution: "sweetalert2@npm:11.7.22"
+  checksum: a4644ce9a801c4c82bc1806c20e218e4a53bf51e8566e19b4f9e5eee911ee905e5201563e7359828263073bcbf0d4a325b3216d90bd5157f48d7f30e3205e195
   languageName: node
   linkType: hard
 

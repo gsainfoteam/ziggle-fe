@@ -1,7 +1,7 @@
 enum Font {
-  Bold,
-  Medium,
   Regular,
+  Medium,
+  Bold,
   Aharoni,
 }
 

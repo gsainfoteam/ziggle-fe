@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Grid from "src/atoms/containers/grid/Grid";
 import styled from "styled-components";
 
@@ -25,6 +25,12 @@ const NoticeWritingImageInput = ({
   setFiles,
 }: NoticeWritingImageInputProps) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      files.forEach((file) => URL.revokeObjectURL(URL.createObjectURL(file)));
+    };
+  }, [files]);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -94,6 +100,7 @@ const NoticeWritingImageInput = ({
                 src={URL.createObjectURL(file)}
                 onDelete={() => {
                   setFiles(files.filter((f) => f !== file));
+                  URL.revokeObjectURL(URL.createObjectURL(file));
                 }}
               />
             ))}

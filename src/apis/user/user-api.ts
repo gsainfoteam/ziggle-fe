@@ -15,16 +15,16 @@ export const goToIdp = () => {
   window.location.href = idp_url;
 };
 
-export const loginWithIdp = async ({
-  queryKey,
-}: {
-  queryKey: [string, string];
-}) => {
-  const [, code] = queryKey;
+export const loginWithIdp = async ({ code }: { code: string }) => {
+  const response = await apiGetter<LoginResponse>("/user/login?code=" + code);
 
-  const { data } = await apiGetter<LoginResponse>("/user/login?code=" + code);
+  if (response.status === 200) {
+    console.log(response.data);
+    localStorage.setItem("access_token", response.data.access_token);
+    return true;
+  }
 
-  return data;
+  return false;
 };
 
 export const getUserInfo = async ({ queryKey }: { queryKey: [string] }) => {

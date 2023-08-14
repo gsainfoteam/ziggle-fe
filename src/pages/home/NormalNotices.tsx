@@ -10,7 +10,7 @@ const NormalNotices = () => {
     [
       queryKeys.getNotice,
       {
-        tags: ["event"],
+        tags: ["general"],
       },
     ],
     getAllNotices,

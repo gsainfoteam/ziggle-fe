@@ -1,5 +1,5 @@
 interface LoginResponse {
-  jwt_token: string;
+  access_token: string;
 }
 
 export default LoginResponse;

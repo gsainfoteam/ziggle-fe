@@ -47,7 +47,7 @@ const SearchPage = () => {
     // TODO : submit 동작
 
     // @ts-ignore
-    setSearchKeyword(e.target[0].value); // SearchBar 수정할 때 주의
+    setSearchKeyword(e.currentTarget.searchQuery as HTMLInputElement); // SearchBar 수정할 때 주의
   };
 
   const handleTagChange = (selected: NoticeType[]) => {

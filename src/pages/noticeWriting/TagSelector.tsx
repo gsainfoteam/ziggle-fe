@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import queryKeys from "src/apis/queryKeys";
 import { createTag, searchTags } from "src/apis/tag/tag-api";
+import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Icon from "src/atoms/icon/Icon";
 import Input from "src/atoms/inputs/input/Input";
@@ -10,6 +11,14 @@ import TagChip from "src/molecules/tag/TagChip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import { Tag } from "src/types/types";
+import styled from "styled-components";
+
+const TagOption = styled(Button)`
+  padding: 10px;
+  &:hover {
+    background-color: ${colorSet.secondary};
+  }
+`;
 
 interface TagSelectorProps {
   tags: Tag[];
@@ -18,7 +27,9 @@ interface TagSelectorProps {
 
 const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
   const [keyword, setKeyword] = useState<string>("");
-  const { data } = useQuery([queryKeys.searchTags, keyword], searchTags);
+  const { data } = useQuery([queryKeys.searchTags, keyword], searchTags, {
+    enabled: keyword !== "",
+  });
 
   const handleTag = useMutation(createTag, {});
 
@@ -54,6 +65,11 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
     setKeyword(event.target.value);
   };
 
+  const handleTagOptionClick = (tag: Tag) => {
+    setTags([...tags, tag]);
+    setKeyword("");
+  };
+
   return (
     <Flex flexDirection={"column"} gap={"15px"}>
       <Flex gap={"12px"}>
@@ -63,32 +79,61 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
         </Text>
       </Flex>
 
-      <Flex
-        gap={"5px"}
-        style={{
-          border: `1.5px solid ${colorSet.primary}`,
-          borderRadius: "8px",
-          padding: "12px",
-        }}
-      >
-        {tags.map((tag) => (
-          <TagChip
-            key={tag.name}
-            label={tag.name}
-            onDeleteClick={() => {
-              setTags(tags.filter((t) => t.id !== tag.id));
+      <Flex flexDirection={"column"}>
+        <Flex
+          gap={"5px"}
+          style={{
+            border: `1.5px solid ${colorSet.primary}`,
+            borderRadius: "8px",
+            padding: "12px",
+          }}
+        >
+          {tags.map((tag) => (
+            <TagChip
+              key={tag.name}
+              label={tag.name}
+              onDeleteClick={() => {
+                setTags(tags.filter((t) => t.id !== tag.id));
+              }}
+            />
+          ))}
+          <Input
+            value={keyword}
+            placeholder={
+              tags.length === 0 ? "태그를 입력하세요 (띄어쓰기로 구분)" : ""
+            }
+            onChange={handleKeywordChange}
+            style={{
+              flexGrow: 1,
             }}
           />
-        ))}
-        <Input
-          placeholder={
-            tags.length === 0 ? "태그를 입력하세요 (띄어쓰기로 구분)" : ""
-          }
-          onChange={handleKeywordChange}
+        </Flex>
+        <Flex
           style={{
-            flexGrow: 1,
+            position: "relative",
           }}
-        />
+        >
+          <Flex
+            width={"calc(100% - 20px)"}
+            flexDirection={"column"}
+            style={{
+              position: "absolute",
+              top: "-4px",
+              left: "10px",
+              zIndex: 10,
+              backgroundColor: "white",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            {data?.slice(0, 5).map((tag) => (
+              <TagOption key={tag.id} onClick={() => handleTagOptionClick(tag)}>
+                <Text font={Font.Regular} size={"0.875rem"} textAlign={"left"}>
+                  {tag.name}
+                </Text>
+              </TagOption>
+            ))}
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );
