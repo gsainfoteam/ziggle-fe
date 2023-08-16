@@ -186,7 +186,7 @@ const NoticeWritingPage = () => {
           </Flex>
 
           <Editor
-            tinymceScriptSrc={"../../../tinymce/tinymce.min.js"}
+            tinymceScriptSrc={"/tinymce/tinymce.min.js"}
             onInit={(_, editor) => (editorRef.current = editor)}
             init={{
               promotion: false,
