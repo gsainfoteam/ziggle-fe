@@ -1,7 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
+import { getAllNotices } from "src/apis/notice/notice-api";
+import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
-import dummyMypageArticles from "src/mock/dummy-mypage-articles";
-import MyPageInfo from "src/mock/dummy-mypage-info";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
@@ -13,6 +14,15 @@ interface MyPageProps {
 
 const MyPage = ({ userInfo }: MyPageProps) => {
   const isSmall = useMediaQuery({ maxWidth: 1200 });
+  const { data: myNotices } = useQuery(
+    [queryKeys.getAllNotices, { my: "own" }],
+    getAllNotices,
+  );
+  const { data: reminders } = useQuery(
+    [queryKeys.getAllNotices, { my: "reminders" }],
+    getAllNotices,
+  );
+
   const Height = isSmall ? "1500px" : "1000px";
   return (
     <>
@@ -35,10 +45,10 @@ const MyPage = ({ userInfo }: MyPageProps) => {
             }}
           >
             <MypageProfile
-              name={MyPageInfo.name}
-              id={MyPageInfo.id}
-              phone={MyPageInfo.phone}
-              email={MyPageInfo.email}
+              name={userInfo.user_name}
+              id={userInfo.student_id}
+              phone={userInfo.user_phone_number}
+              email={userInfo.user_email_id}
             />
 
             {!isSmall && <MypageSeperate />}
@@ -56,14 +66,14 @@ const MyPage = ({ userInfo }: MyPageProps) => {
             <div style={{ padding: "50px" }}>
               <MypageTable
                 title="내가 게시한 공지 목록"
-                articles={dummyMypageArticles.articles1}
+                articles={myNotices?.list ?? []}
               />
             </div>
 
             <div>
               <MypageTable
                 title="리마인드 설정한 게시물 목록"
-                articles={dummyMypageArticles.articles3}
+                articles={reminders?.list ?? []}
               />
             </div>
           </div>
