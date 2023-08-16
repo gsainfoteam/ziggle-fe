@@ -81,9 +81,9 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
       <div
         style={{ display: "flex", flexDirection: "column", padding: "20px" }}
       >
-        <InfoField>{id}</InfoField>
-        <InfoField>{phone}</InfoField>
-        <InfoField>{email}</InfoField>
+        {id && <InfoField>{id}</InfoField>}
+        {phone && <InfoField>{phone}</InfoField>}
+        {email && <InfoField>{email}</InfoField>}
       </div>
     </div>
   );
