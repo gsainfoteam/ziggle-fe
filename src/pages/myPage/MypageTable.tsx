@@ -2,17 +2,13 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import { Notice } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 
 import LazyCat from "./assets/LazyCat";
 interface MypageTableProps {
   title: string;
-  articles: MypageArticle[];
-}
-
-export interface MypageArticle {
-  article: string;
-  date: string;
+  articles: Notice[];
 }
 
 const MypageTable = ({ title, articles }: MypageTableProps) => {
@@ -114,7 +110,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      {articleObj.article}
+                      {articleObj.title}
                     </Text>
                   </div>
                   <div
@@ -129,7 +125,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                       font={Font.Regular}
                       style={{ padding: "10px", textAlign: "center" }}
                     >
-                      {formatISODate(articleObj.date)}
+                      {formatISODate(articleObj.createdAt)}
                     </Text>
                   </div>
                 </Flex>
