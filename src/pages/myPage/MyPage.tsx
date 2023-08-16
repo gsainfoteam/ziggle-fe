@@ -1,7 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import Area from "src/atoms/containers/area/Area";
 import dummyMypageArticles from "src/mock/dummy-mypage-articles";
-import MyPageInfo from "src/mock/dummy-mypage-info";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
@@ -35,10 +34,10 @@ const MyPage = ({ userInfo }: MyPageProps) => {
             }}
           >
             <MypageProfile
-              name={MyPageInfo.name}
-              id={MyPageInfo.id}
-              phone={MyPageInfo.phone}
-              email={MyPageInfo.email}
+              name={userInfo.user_name}
+              id={userInfo.student_id}
+              phone={userInfo.user_phone_number}
+              email={userInfo.user_email_id}
             />
 
             {!isSmall && <MypageSeperate />}
