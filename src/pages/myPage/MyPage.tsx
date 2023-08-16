@@ -1,4 +1,7 @@
+import { useQuery } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
+import { getAllNotices } from "src/apis/notice/notice-api";
+import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
 import dummyMypageArticles from "src/mock/dummy-mypage-articles";
 import MypageProfile from "src/pages/myPage/MypageProfile";
@@ -12,6 +15,11 @@ interface MyPageProps {
 
 const MyPage = ({ userInfo }: MyPageProps) => {
   const isSmall = useMediaQuery({ maxWidth: 1200 });
+  const { data: myNotices } = useQuery(
+    [queryKeys.getAllNotices, { my: "own" }],
+    getAllNotices,
+  );
+
   const Height = isSmall ? "1500px" : "1000px";
   return (
     <>
@@ -55,7 +63,7 @@ const MyPage = ({ userInfo }: MyPageProps) => {
             <div style={{ padding: "50px" }}>
               <MypageTable
                 title="내가 게시한 공지 목록"
-                articles={dummyMypageArticles.articles1}
+                articles={myNotices?.list ?? []}
               />
             </div>
 
