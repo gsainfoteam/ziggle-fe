@@ -25,6 +25,7 @@ const Button = styled.button<ButtonProps>`
   border: none;
   background-color: transparent;
   transition: 0.1s;
+  line-height: 0;
 
   ${({ variant }) => {
     switch (variant) {
@@ -54,6 +55,9 @@ const Button = styled.button<ButtonProps>`
   }}
   ${({ border }) => css`
     border: ${border};
+  `}
+  ${({ borderRadius }) => css`
+    border-radius: ${borderRadius};
   `}
   :hover {
     cursor: pointer;

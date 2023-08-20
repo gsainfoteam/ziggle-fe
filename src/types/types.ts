@@ -41,6 +41,7 @@ export interface ImageRendererProps {
 }
 
 export interface SearchResultProps {
+  id: number;
   deadline?: string;
   content?: string;
   title: string;

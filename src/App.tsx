@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import useAuth from "./hooks/useAuth";
 import Layout from "./layout/Layout";
+import AllNoticesPage from "./pages/allNotices/AllNoticesPage";
 import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
 import HomePage from "./pages/home/HomePage";
 import MyPage from "./pages/myPage/MyPage";
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="*" element={<Navigate to={Paths.home} replace />} />
 
           <Route path={Paths.home} element={<HomePage />} />
+          <Route path={Paths.all} element={<AllNoticesPage />} />
           <Route path={Paths.search} element={<SearchPage />} />
           <Route
             path={Paths.noticeDetail + ":id"}

@@ -52,8 +52,13 @@ const Navbar = () => {
         <ZiggleLogo />
       </Link>
       <ButtonSum>
+        <Link to={Paths.all} style={{ textDecoration: "none" }}>
+          <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
+            전체 공지
+          </Text>
+        </Link>
         <Link to={Paths.noticeWriting} style={{ textDecoration: "none" }}>
-          <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
+          <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
             공지 작성
           </Text>
         </Link>
@@ -66,14 +71,14 @@ const Navbar = () => {
         >
           <Search size="1.6rem" />
           <Link to={Paths.search} style={{ textDecoration: "none" }}>
-            <Text color={colorSet.colorless} size="1.1rem" font={Font.Bold}>
+            <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
               공지 검색
             </Text>
           </Link>
         </Button>
       </ButtonSum>
       <AccountSum onClick={handleAccountClick}>
-        <Text color={colorSet.colorless} size="0.9rem" font={Font.Medium}>
+        <Text color={colorSet.colorless} size="0.875rem" font={Font.Medium}>
           {userInfo?.user_name ?? "로그인"}
         </Text>
         <Account size="1.6rem" />

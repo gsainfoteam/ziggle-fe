@@ -11,7 +11,6 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
-import defaults from "src/styles/defaults";
 import Font from "src/styles/font";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
@@ -46,8 +45,9 @@ const SearchPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // TODO : submit 동작
 
-    // @ts-ignore
-    setSearchKeyword(e.currentTarget.searchQuery as HTMLInputElement); // SearchBar 수정할 때 주의
+    console.log(e.currentTarget.searchQuery);
+    const searchQuery = e.currentTarget.searchQuery as HTMLInputElement;
+    setSearchKeyword(searchQuery.value); // SearchBar 수정할 때 주의
   };
 
   const handleTagChange = (selected: NoticeType[]) => {
@@ -63,9 +63,10 @@ const SearchPage = () => {
     <>
       <Area>
         <Content>
+          <Spacer height={"50px"} />
           <div
             style={{
-              height: "150px",
+              height: "100px",
               margin: "0 auto",
               display: "flex",
               justifyContent: "flex-end",
@@ -78,7 +79,13 @@ const SearchPage = () => {
             </CloseBtnAnimation.AnimationWrapper>
           </div>
           <Flex>
-            <div style={{ width: "700px", margin: "0 auto" }}>
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "700px",
+                margin: "0 auto",
+              }}
+            >
               <SearchBarAnimation.AnimationWrapper>
                 <SearchBar
                   onSubmit={handleSubmit}
@@ -90,83 +97,73 @@ const SearchPage = () => {
                   onChange={handleTagChange}
                 />
               </SearchBarAnimation.AnimationWrapper>
-              <div
-                style={{
-                  flexGrow: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: "50px",
-                }}
-              >
-                {!data && (
-                  <Flex justifyContent="center">
-                    <SearchGif width={"230px"} />
-                    <Spacer height={"10px"} />
-                    <Text
-                      size="1.5rem"
-                      color={colorSet.secondaryText}
-                      font={Font.Medium}
-                      style={{ paddingTop: "20px", marginTop: "-30px" }}
-                    >
-                      검색어를 입력해주세요
-                    </Text>
-                  </Flex>
-                )}
+            </div>
+          </Flex>
 
-                {data && !isEmpty(data.list) && (
-                  <div>
-                    <div
-                      style={{
-                        paddingTop: "0px",
-                        paddingBottom: "0px",
-                        paddingLeft: defaults.pageSideGap,
-                        paddingRight: defaults.pageSideGap,
-                        height: "100px",
-                        margin: "0 auto",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                      }}
-                    >
-                      <Text
-                        size="3.5rem"
-                        color={colorSet.text}
-                        font={Font.Bold}
-                        style={{ padding: 0 }}
-                      >
-                        ♨ 지글 공지
-                      </Text>
-                    </div>
-                    {data.list.map((notice) =>
-                      notice.imageUrl ? (
-                        <SearchResult
-                          deadline={notice.deadline}
-                          title={notice.title}
-                          author={notice.author}
-                          tags={notice.tags}
-                          date={notice.createdAt}
-                          viewCount={notice.views}
-                          thumbnailUrl={notice.imageUrl}
-                          searchQuery={searchKeyword}
-                          key={notice.id}
-                        />
-                      ) : (
-                        <SearchResultText
-                          deadline={notice.deadline}
-                          title={notice.title}
-                          author={notice.author}
-                          tags={notice.tags}
-                          date={notice.createdAt}
-                          viewCount={notice.views}
-                          content={notice.body}
-                          searchQuery={searchKeyword}
-                          thumbnailUrl=""
-                          key={notice.id}
-                        />
-                      ),
-                    )}
-                    {/* 
+          {!data && (
+            <Flex justifyContent={"center"} width={"100%"}>
+              <Flex justifyContent="center" flexDirection={"column"}>
+                <Spacer height={"100px"} />
+                <SearchGif width={"230px"} />
+                <Spacer height={"10px"} />
+                <Text
+                  size="1.5rem"
+                  color={colorSet.secondaryText}
+                  font={Font.Medium}
+                  style={{ paddingTop: "20px", marginTop: "-30px" }}
+                >
+                  검색어를 입력해주세요
+                </Text>
+              </Flex>
+            </Flex>
+          )}
+
+          {data && !isEmpty(data.list) && (
+            <div>
+              <Spacer height={"30px"} />
+
+              <Text
+                size="2.5rem"
+                color={colorSet.text}
+                font={Font.Bold}
+                style={{ padding: 0 }}
+              >
+                ♨ 지글 공지
+              </Text>
+
+              <Spacer height={"30px"} />
+
+              {data.list.map((notice) =>
+                notice.imageUrl ? (
+                  <SearchResult
+                    id={notice.id}
+                    deadline={notice.deadline}
+                    title={notice.title}
+                    author={notice.author}
+                    tags={notice.tags}
+                    date={notice.createdAt}
+                    viewCount={notice.views}
+                    thumbnailUrl={notice.imageUrl}
+                    searchQuery={searchKeyword}
+                    key={notice.id}
+                  />
+                ) : (
+                  <SearchResultText
+                    id={notice.id}
+                    deadline={notice.deadline}
+                    title={notice.title}
+                    author={notice.author}
+                    tags={notice.tags}
+                    date={notice.createdAt}
+                    viewCount={notice.views}
+                    content={notice.body}
+                    searchQuery={searchKeyword}
+                    thumbnailUrl=""
+                    key={notice.id}
+                  />
+                ),
+              )}
+              {/* 
                     <p
                       style={{
                         paddingTop: "10px",
@@ -203,26 +200,26 @@ const SearchPage = () => {
                         />
                       </div>
                     ))} */}
-                  </div>
-                )}
-
-                {data && isEmpty(data.list) && (
-                  <div>
-                    <div style={{ height: "10px", margin: "0 auto" }}></div>
-                    <SearchNoResult></SearchNoResult>
-                    <Text
-                      size="1.5rem"
-                      color={colorSet.secondaryText}
-                      font={Font.Bold}
-                      style={{ paddingTop: "20px" }}
-                    >
-                      검색 결과가 존재하지 않습니다.
-                    </Text>
-                  </div>
-                )}
-              </div>
             </div>
-          </Flex>
+          )}
+
+          {data && isEmpty(data.list) && (
+            <Flex justifyContent={"center"} width={"100%"}>
+              <Flex justifyContent={"center"} flexDirection={"column"}>
+                <Spacer height={"80px"} />
+                <div style={{ height: "10px", margin: "0 auto" }}></div>
+                <SearchNoResult></SearchNoResult>
+                <Text
+                  size="1.5rem"
+                  color={colorSet.secondaryText}
+                  font={Font.Bold}
+                  style={{ paddingTop: "20px" }}
+                >
+                  검색 결과가 존재하지 않습니다.
+                </Text>
+              </Flex>
+            </Flex>
+          )}
           <div style={{ height: "300px", margin: "0 auto" }} />
         </Content>
       </Area>

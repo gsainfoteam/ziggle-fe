@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
-import defaults from "src/styles/defaults";
+import Paths from "src/types/paths";
 import { SearchResultProps } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 import getDayOfWeek from "src/utils/getDayOfWeek";
@@ -32,6 +34,7 @@ const ZaboWrapper = styled.div`
 `;
 
 const SearchResultText = ({
+  id,
   deadline,
   title,
   author,
@@ -42,16 +45,16 @@ const SearchResultText = ({
   organization,
   content,
 }: SearchResultProps) => {
+  const navigate = useNavigate();
+
+  const handleZaboClick = () => {
+    navigate(Paths.noticeDetail + id);
+  };
+
   return (
-    <div
-      style={{
-        padding: `0 ${defaults.pageSideGap}`,
-        boxSizing: "border-box",
-        width: "100vw",
-      }}
-    >
+    <Button width={"100%"} onClick={handleZaboClick}>
       <ZaboWrapper>
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" alignItems={"start"}>
           <Text font={Font.Medium} size="1.2rem">
             {deadline &&
               `마감일 ${formatISODate(deadline)} (${getDayOfWeek(deadline)})`}
@@ -60,7 +63,8 @@ const SearchResultText = ({
             text={title}
             query={searchQuery}
             font={Font.Bold}
-            size="2rem"
+            size="1.875rem"
+            textAlign={"start"}
             highlightColor={colorSet.primary}
           />
           <Flex gap="0.5rem" alignItems="center">
@@ -68,7 +72,7 @@ const SearchResultText = ({
               text={author}
               query={searchQuery}
               font={Font.Bold}
-              size="1.2rem"
+              size="1.125rem"
               highlightColor={colorSet.primary}
             />
             {organization && (
@@ -78,7 +82,7 @@ const SearchResultText = ({
                   text={organization}
                   query={searchQuery}
                   font={Font.Bold}
-                  size="1.2rem"
+                  size="1.125rem"
                   highlightColor={colorSet.primary}
                 />
               </>
@@ -100,8 +104,10 @@ const SearchResultText = ({
           <Text
             font={Font.Medium}
             size="1.125rem"
+            textAlign={"start"}
             style={{
               textOverflow: "ellipsis",
+
               overflow: "hidden",
               display: "-webkit-box",
               WebkitLineClamp: 3, // 이렇게밖에 안됨
@@ -110,6 +116,7 @@ const SearchResultText = ({
           >
             {!content && "<내용없음>"}
             {content}
+            {/* 여기 HTML 처리 해야할 거 같음 */}
           </Text>
         </Flex>
 
@@ -127,7 +134,7 @@ const SearchResultText = ({
           </Flex>
         </Flex>
       </ZaboWrapper>
-    </div>
+    </Button>
   );
 };
 
