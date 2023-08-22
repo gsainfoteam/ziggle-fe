@@ -59,36 +59,44 @@ const AllNoticesPage = () => {
 
         <Spacer height={"30px"} />
 
-        {data?.list.map((notice) =>
-          notice.imageUrl ? (
-            <SearchResult
-              id={notice.id}
-              deadline={notice.deadline}
-              title={notice.title}
-              author={notice.author}
-              tags={notice.tags}
-              date={notice.createdAt}
-              viewCount={notice.views}
-              thumbnailUrl={notice.imageUrl}
-              searchQuery={""}
-              key={notice.id}
-            />
-          ) : (
-            <SearchResultText
-              id={notice.id}
-              deadline={notice.deadline}
-              title={notice.title}
-              author={notice.author}
-              tags={notice.tags}
-              date={notice.createdAt}
-              viewCount={notice.views}
-              content={notice.body}
-              searchQuery={""}
-              thumbnailUrl=""
-              key={notice.id}
-            />
-          ),
-        )}
+       <Flex
+          gap="10px"
+          flexDirection="column"
+          style={{
+            flexWrap: "nowrap",
+          }}
+        >
+          {data?.list.map((notice) =>
+            notice.imageUrl ? (
+              <SearchResult
+                id={notice.id}
+                deadline={notice.deadline}
+                title={notice.title}
+                author={notice.author}
+                tags={notice.tags}
+                date={notice.createdAt}
+                viewCount={notice.views}
+                thumbnailUrl={notice.imageUrl}
+                searchQuery={""}
+                key={notice.id}
+              />
+            ) : (
+              <SearchResultText
+                id={notice.id}
+                deadline={notice.deadline}
+                title={notice.title}
+                author={notice.author}
+                tags={notice.tags}
+                date={notice.createdAt}
+                viewCount={notice.views}
+                content={notice.body}
+                searchQuery={""}
+                thumbnailUrl=""
+                key={notice.id}
+              />
+            ),
+          )}
+        </Flex>
 
         <Spacer height={"100px"} />
 
