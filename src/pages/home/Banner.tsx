@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Circle from "src/atoms/figures/circle/Circle";
 import FilledArrowBtn, {
   HorizontalDirection,
@@ -53,10 +54,12 @@ const Banner = () => {
           width={"100%"}
           style={{ backgroundColor: colorSet.primary }}
         >
-          <BannerImage
-            src={dummyBanners[curIndex].imageUrl}
-            objectPosition={dummyBanners[curIndex].objectPosition}
-          />
+          <Link to="/notice-writing">
+            <BannerImage
+              src={dummyBanners[curIndex].imageUrl}
+              objectPosition={dummyBanners[curIndex].objectPosition}
+            />
+          </Link>
         </Flex>
 
         <div
@@ -68,8 +71,8 @@ const Banner = () => {
         ></div>
         <Spacer height={"20px"} />
       </Flex>
-      <Flex justifyContent="center" gap="15px" alignItems="center">
-        {/* left side banner button */}
+      {/* Banner Navigation을 일시적으로 비활성화 (배너 시스템이 구체화되면 재추가) */}
+      {/* <Flex justifyContent="center" gap="15px" alignItems="center">
         <FilledArrowBtn
           direction={HorizontalDirection.LEFT}
           isPrimary={!!curIndex}
@@ -88,7 +91,6 @@ const Banner = () => {
             />
           ))}
         </Flex>
-        {/* right side banner button */}
         <FilledArrowBtn
           direction={HorizontalDirection.RIGHT}
           isPrimary={curIndex < maxIndex - 1}
@@ -96,7 +98,7 @@ const Banner = () => {
           height={"30px"}
           width={"30px"}
         />
-      </Flex>
+      </Flex> */}
     </>
   );
 };

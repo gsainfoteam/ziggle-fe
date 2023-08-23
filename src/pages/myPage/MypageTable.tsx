@@ -5,7 +5,7 @@ import Font from "src/styles/font";
 import { Notice } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 
-import LazyCat from "./assets/LazyCat";
+import LazyCat from "../../assets/LazyCat";
 interface MypageTableProps {
   title: string;
   articles: Notice[];
