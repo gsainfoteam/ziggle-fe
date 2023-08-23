@@ -141,6 +141,7 @@ const TextZabo = ({
             조회수 {viewCount}
           </Text>
         </Flex>
+        <Spacer height={"3px"} />
         <Text font={Font.Medium} textAlign="left">
           {author} {organization && `• ${organization}`}
         </Text>
