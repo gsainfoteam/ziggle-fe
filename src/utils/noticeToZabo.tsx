@@ -13,6 +13,7 @@ export const noticeToZabo = (
     author: notice.author,
     organization: "", // TODO : 백엔드 처리 시 넣어주기
     thumbnailUrl: notice.imageUrl ?? undefined, // 백엔에선 null로 주고 프엔은 optional임...
+    content: notice.body ?? undefined,
     origin: origin,
     size: size,
   };

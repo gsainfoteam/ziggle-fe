@@ -89,6 +89,15 @@ const NoticeWritingPage = () => {
       return;
     }
 
+    if (title.length > 50) {
+      Swal.fire({
+        text: "제목을 50자 이하로 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
     if (!editorRef.current) {
       Swal.fire({
         text: "내용을 입력해주세요",
@@ -131,6 +140,7 @@ const NoticeWritingPage = () => {
           }}
           placeholder={"제목을 입력하세요"}
           fontSize={"3rem"}
+          padding="0"
         />
 
         <Spacer height={"15px"} />

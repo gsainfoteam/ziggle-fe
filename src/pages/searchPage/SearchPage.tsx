@@ -8,6 +8,7 @@ import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
+import Image from "src/atoms/image/Image";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
@@ -18,6 +19,7 @@ import { NoticeType } from "src/types/types";
 import { isEmpty } from "src/utils/utils";
 
 import { ReactComponent as SearchNoResult } from "../../../src/atoms/icon/assets/searchNoResult.svg";
+import Catbounce from "../../assets/catbounce.gif";
 import SearchBar from "../../molecules/searchBar/SearchBar";
 import colorSet from "../../styles/colorSet";
 import CloseBtnAnimation from "./CloseBtnAnimation";
@@ -100,7 +102,8 @@ const SearchPage = () => {
             </div>
           </Flex>
 
-          {!data && (
+          {/* 검색어를 입력하지 않았을 때만 */}
+          {!data && !searchKeyword && (
             <Flex justifyContent={"center"} width={"100%"}>
               <Flex justifyContent="center" flexDirection={"column"}>
                 <Spacer height={"100px"} />
@@ -118,8 +121,31 @@ const SearchPage = () => {
             </Flex>
           )}
 
+          {/* 검색어를 입력했을 때 로딩 */}
+          {!data && searchKeyword && (
+            <Flex flexDirection="column" alignItems="center">
+              <Spacer height={"50px"} />
+              <Image src={Catbounce} width="324px" height="432px" />
+              <Spacer height={"15px"} />
+              <Text
+                size="1.5rem"
+                color={colorSet.secondaryText}
+                font={Font.Medium}
+                style={{ paddingTop: "20px", marginTop: "-30px" }}
+              >
+                검색 중이에요! -ㅅ-
+              </Text>
+            </Flex>
+          )}
+
           {data && !isEmpty(data.list) && (
-            <div>
+            <Flex
+              gap="10px"
+              flexDirection="column"
+              style={{
+                flexWrap: "nowrap",
+              }}
+            >
               <Spacer height={"30px"} />
 
               <Text
@@ -200,7 +226,7 @@ const SearchPage = () => {
                         />
                       </div>
                     ))} */}
-            </div>
+            </Flex>
           )}
 
           {data && isEmpty(data.list) && (
