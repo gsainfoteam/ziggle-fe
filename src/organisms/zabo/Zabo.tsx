@@ -27,7 +27,7 @@ const ZaboWrapper = styled(Button)`
 const Title = styled(Text)<{ hovered: boolean }>`
   -webkit-line-clamp: 2;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  /* -webkit-box-orient: vertical; */
   overflow: hidden;
   transition: 0.1s;
   ${({ hovered }) => {
@@ -82,7 +82,7 @@ const Zabo = ({
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.Bold}>
+      <Text font={Font.Bold} textAlign="left">
         {author} {organization && `• ${organization}`}
       </Text>
     </ZaboWrapper>

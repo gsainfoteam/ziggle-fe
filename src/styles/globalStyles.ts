@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
       ::selection {
         background: ${colorSet.primary}20;
       }
+
+      -moz-box-orient: none;
 }
 `;
 

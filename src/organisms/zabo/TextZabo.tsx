@@ -123,7 +123,7 @@ const TextZabo = ({
             조회수 {viewCount}
           </Text>
         </Flex>
-        <Text font={Font.Bold}>
+        <Text font={Font.Bold} textAlign="left">
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>
