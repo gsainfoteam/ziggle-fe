@@ -47,6 +47,7 @@ const LowerWrap = styled(Flex)<{ bgColor?: string }>`
 
   box-sizing: border-box;
   flex-wrap: nowrap;
+  overflow-y: hidden;
 `;
 
 const ZabosContainer = styled(Content)`

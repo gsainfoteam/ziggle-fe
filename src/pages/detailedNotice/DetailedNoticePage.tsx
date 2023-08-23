@@ -54,19 +54,25 @@ const DetailedNoticePage = () => {
     return <div>loading...</div>; // TODO: 스켈레톤 추가
   }
 
+  const isImageExist = !isEmpty(data.imagesUrl);
+
   return (
     <>
       <Area>
-        <ZaboShowcase
-          src={data?.imagesUrl[0] ?? Banner} // TODO: 이미지가 없을 때 대체 이미지
-          onShow={
-            isEmpty(data.imagesUrl)
-              ? undefined
-              : () => {
-                  setShowImageViewer(true);
-                }
-          }
-        />
+        {isImageExist ? (
+          <ZaboShowcase
+            src={data?.imagesUrl[0] ?? Banner} // TODO: 이미지가 없을 때 대체 이미지
+            onShow={
+              isEmpty(data.imagesUrl)
+                ? undefined
+                : () => {
+                    setShowImageViewer(true);
+                  }
+            }
+          />
+        ) : (
+          <></>
+        )}
 
         <CoverContent>
           <Spacer height={"50px"} />

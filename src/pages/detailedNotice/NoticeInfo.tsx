@@ -45,7 +45,7 @@ const NoticeInfo = ({
     remind.mutate(
       {
         id,
-        doRemind: isRemindChecked,
+        doRemind: !isRemindChecked,
       },
       {
         onSuccess: () => {

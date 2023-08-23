@@ -23,7 +23,7 @@ const ZaboWrapper = styled(Button)<{
   padding: 20px;
   margin-top: 1rem;
 
-  max-height: ${(props) => props.height}px;
+  height: ${(props) => props.height}px;
   min-width: ${(props) => props.width}px;
   box-sizing: border-box;
   overflow: hidden;
@@ -72,6 +72,8 @@ const TextZabo = ({
     navigate(Paths.noticeDetail + id);
   };
 
+  console.log(content);
+
   return (
     <ZaboWrapper
       height={zaboHeight}
@@ -79,14 +81,15 @@ const TextZabo = ({
       shadowColor={colorSet.primary}
       onClick={handleZaboClick}
     >
-      <Flex>
+      <Flex flexDirection="column">
         <Text
           font={Font.Bold}
           size="1.875rem"
           style={{
-            whiteSpace: "nowrap",
+            // whiteSpace: "nowrap",
             textOverflow: "ellipsis",
-            overflow: "hidden",
+            textAlign: "left",
+            WebkitLineClamp: origin === "height" ? 5 : 8, // 이렇게밖에 안됨
           }}
         >
           {title}
@@ -105,6 +108,7 @@ const TextZabo = ({
             WebkitBoxOrient: "vertical",
             lineHeight: "1.5rem",
             wordBreak: "break-word",
+            textAlign: "left",
           }}
         >
           {content}
@@ -123,7 +127,7 @@ const TextZabo = ({
             조회수 {viewCount}
           </Text>
         </Flex>
-        <Text font={Font.Bold} textAlign="left">
+        <Text font={Font.Medium} textAlign="left">
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>

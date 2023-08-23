@@ -2,6 +2,7 @@ import { useHover } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
+import Spacer from "src/atoms/spacer/Spacer";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
@@ -70,6 +71,9 @@ const Zabo = ({
         size={size}
         isHover={hovered}
       />
+
+      <Spacer height="3px" />
+
       <Title hovered={hovered}>{title}</Title>
       <Flex gap="0.25em">
         <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
@@ -82,7 +86,7 @@ const Zabo = ({
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.Bold} textAlign="left">
+      <Text font={Font.Medium} textAlign="left">
         {author} {organization && `• ${organization}`}
       </Text>
     </ZaboWrapper>
