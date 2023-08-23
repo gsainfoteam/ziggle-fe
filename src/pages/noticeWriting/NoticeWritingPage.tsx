@@ -68,8 +68,6 @@ const NoticeWritingPage = () => {
 
   const handleNotice = useMutation(createNotice, {
     onSuccess: () => {
-      console.log("공지사항 작성 성공"); // TODO: toast or modal 추가해야해요
-
       navigate(Paths.home);
     },
   });

@@ -23,7 +23,6 @@ export const noticeToZabo = (
 export const noticesToManyZabos = (
   notices: Notice[],
 ): Omit<ZaboProps, "origin" | "size">[] => {
-  console.log(notices);
   const zabos: Omit<ZaboProps, "origin" | "size">[] = notices.map((notice) => {
     return {
       id: notice.id,

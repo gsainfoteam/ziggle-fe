@@ -27,7 +27,6 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
           code,
         });
         if (isLoggedIn) {
-          console.log("로그인 성공");
           setQuery();
         }
 
