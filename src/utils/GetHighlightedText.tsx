@@ -1,4 +1,5 @@
 import Flex from "src/atoms/containers/flex/Flex";
+import Highlight from "src/atoms/highlight/Highlight";
 import Text, { TextProps } from "src/atoms/text/Text";
 import styled from "styled-components";
 
@@ -15,20 +16,14 @@ const HighlightTextWrap = styled(Flex)`
 `;
 
 const GetHighlightedText = ({
-  color,
-  font,
-  size,
   text,
   query,
   highlightColor,
+  ...textProps
 }: GetHighlightedTextProps) => {
   if (!query || !text.toLowerCase().includes(query.toLowerCase())) {
     // 검색어가 없거나 텍스트에 일치하는 부분이 없는 경우 그대로 반환
-    return (
-      <Text color={color} font={font} size={size}>
-        {text}
-      </Text>
-    );
+    return <Text {...textProps}>{text}</Text>;
   }
 
   const regex = new RegExp(query, "gi");
@@ -42,12 +37,10 @@ const GetHighlightedText = ({
     <HighlightTextWrap>
       {result.map((str, index) => {
         return (
-          <Text key={index} color={color} font={font} size={size}>
+          <Text key={index} {...textProps}>
             {str}
             {index !== result.length - 1 && (
-              <Text color={highlightColor ?? color} font={font} size={size}>
-                {match[index]}
-              </Text>
+              <Highlight color={highlightColor}>{match[index]}</Highlight>
             )}
           </Text>
         );

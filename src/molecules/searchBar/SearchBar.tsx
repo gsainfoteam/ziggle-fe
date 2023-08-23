@@ -43,8 +43,9 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   };
 
   return (
-    <SearchWrapper onSubmit={handleSubmit} name={"searchQuery"}>
+    <SearchWrapper onSubmit={handleSubmit}>
       <Input
+        name={"searchQuery"}
         placeholder={placeholder}
         value={keyword}
         onChange={handleKeywordChange}
@@ -52,6 +53,7 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
         color={colorSet.primary}
         style={{
           flexGrow: 1,
+          lineHeight: "1.5rem",
         }}
       />
       {isSubmitted ? (

@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 import Font from "../../styles/font";
 
-export interface TextProps {
+export interface HightlightProps {
   color?: React.CSSProperties["color"];
   font?: Font;
   size?: React.CSSProperties["fontSize"];
@@ -12,7 +12,7 @@ export interface TextProps {
 
 // 폰트별 letter-spacing 도 추가해야할 수도
 
-const Text = styled.p<TextProps>`
+const Highlight = styled.p<HightlightProps>`
   margin: 0;
   ${({ font }) => {
     switch (font) {
@@ -31,12 +31,16 @@ const Text = styled.p<TextProps>`
           font-family: "Noto Sans KR", sans-serif;
           font-weight: 400;
         `;
+      default:
+        return css`
+          font-family: inherit;
+          font-weight: inherit;
+        `;
     }
   }}
-  font-size: ${({ size }) => size ?? undefined};
-  line-height: 1.2;
+  font-size: ${({ size }) => size ?? "inherit"};
   text-align: ${({ textAlign }) => textAlign ?? "inherit"};
   color: ${({ color }) => color ?? "inherit"};
 `;
 
-export default Text;
+export default Highlight;
