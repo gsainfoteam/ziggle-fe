@@ -57,11 +57,13 @@ const Navbar = () => {
             전체 공지
           </Text>
         </Link>
-        <Link to={Paths.noticeWriting} style={{ textDecoration: "none" }}>
-          <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
-            공지 작성
-          </Text>
-        </Link>
+        {userInfo && (
+          <Link to={Paths.noticeWriting} style={{ textDecoration: "none" }}>
+            <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
+              공지 작성
+            </Text>
+          </Link>
+        )}
         <Button
           style={{
             display: "flex",

@@ -12,9 +12,7 @@ import GlobalStyle from "./styles/globalStyles";
 import Paths from "./types/paths";
 
 const App = () => {
-  const { userInfo } = useAuth({
-    redirectUrl: Paths.home,
-  });
+  const { userInfo } = useAuth();
 
   return (
     <>

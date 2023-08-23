@@ -31,11 +31,6 @@ const Highlight = styled.p<HightlightProps>`
           font-family: "Noto Sans KR", sans-serif;
           font-weight: 400;
         `;
-      case Font.Aharoni:
-        return css`
-          font-family: "Aharoni-Bold", sans-serif;
-          font-weight: 700;
-        `;
       default:
         return css`
           font-family: inherit;

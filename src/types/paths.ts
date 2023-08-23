@@ -3,7 +3,7 @@ enum Paths {
   all = "/all",
   search = "/search",
   myPage = "/my-page",
-  noticeWriting = "/notice/writing",
+  noticeWriting = "/notice-writing",
   noticeDetail = "/notice/", // + id
 }
 

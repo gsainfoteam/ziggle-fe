@@ -8,7 +8,7 @@ export const uploadImages = async (props: {
   const formData = new FormData();
 
   images.forEach((image) => {
-    formData.append("files", image);
+    formData.append("images", image);
   });
 
   const { data } = await apiPoster<string[]>("/image/upload", formData);

@@ -68,7 +68,7 @@ const Pagination = ({
         isPrimary={page < totalItems / itemsPerPage - 1}
         direction={HorizontalDirection.RIGHT}
         onClick={() => {
-          setPage(Math.min(page + 1, totalItems / itemsPerPage - 1));
+          setPage(Math.min(page + 1, Math.ceil(totalItems / itemsPerPage) - 1));
         }}
         height={"30px"}
         width={"30px"}
