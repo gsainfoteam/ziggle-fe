@@ -13,6 +13,7 @@ import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import Font from "src/styles/font";
+import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 import { NoticeType } from "src/types/types";
@@ -30,7 +31,7 @@ const SearchPage = () => {
   const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [
       queryKeys.getAllNotices,
       {
@@ -122,20 +123,8 @@ const SearchPage = () => {
           )}
 
           {/* 검색어를 입력했을 때 로딩 */}
-          {!data && searchKeyword && (
-            <Flex flexDirection="column" alignItems="center">
-              <Spacer height={"50px"} />
-              <Image src={Catbounce} width="324px" height="432px" />
-              <Spacer height={"15px"} />
-              <Text
-                size="1.5rem"
-                color={colorSet.secondaryText}
-                font={Font.Medium}
-                style={{ paddingTop: "20px", marginTop: "-30px" }}
-              >
-                검색 중이에요! -ㅅ-
-              </Text>
-            </Flex>
+          {isLoading && searchKeyword && (
+            <LoadingCatAnimation text="검색 중입니다! -ㅅ-" />
           )}
 
           {data && !isEmpty(data.list) && (
@@ -189,43 +178,6 @@ const SearchPage = () => {
                   />
                 ),
               )}
-              {/* 
-                    <p
-                      style={{
-                        paddingTop: "10px",
-                        paddingBottom: "0px",
-                        paddingLeft: defaults.pageSideGap,
-                        paddingRight: defaults.pageSideGap,
-                        height: "100px",
-                        margin: "0 auto",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                      }}
-                    >
-                      <Text
-                        size="3.5rem"
-                        color={colorSet.text}
-                        font={Font.Bold}
-                        style={{ padding: "0px" }}
-                      >
-                        📰 학사 공지
-                      </Text>
-                    </div>
-                    {Array.from({ length: n }).map((_, index) => (
-                      <div style={{ margin: "20px" }} key={index}>
-                        <SearchResultText
-                          deadline={dummySearchResult.deadline}
-                          title={dummySearchResult.title}
-                          author={dummySearchResult.author}
-                          tags={dummySearchResult.tags}
-                          date={dummySearchResult.date}
-                          viewCount={dummySearchResult.viewCount}
-                          content={dummySearchResult.content}
-                          searchQuery="이"
-                          thumbnailUrl=""
-                        />
-                      </div>
-                    ))} */}
             </Flex>
           )}
 

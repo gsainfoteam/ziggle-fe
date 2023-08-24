@@ -10,6 +10,7 @@ import Text from "src/atoms/text/Text";
 import Pagination from "src/molecules/pagination/Pagination";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 
@@ -18,7 +19,7 @@ const NOTICE_PER_PAGE = 30;
 const AllNoticesPage = () => {
   const [page, setPage] = useState<number>(0);
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [
       queryKeys.getAllNotices,
       {
@@ -73,6 +74,8 @@ const AllNoticesPage = () => {
               flexWrap: "nowrap",
             }}
           >
+            {isLoading && <LoadingCatAnimation />}
+
             {data?.list.map((notice) =>
               notice.imageUrl ? (
                 <SearchResult
