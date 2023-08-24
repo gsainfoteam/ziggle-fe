@@ -19,3 +19,10 @@ Default.args = {
   manyZabos: dummyZabos,
   //   carouselBGColor: colorSet.secondary,
 };
+
+export const NoZabos = Template.bind({});
+NoZabos.args = {
+  carouselTitle: "🌟 마감임박",
+  manyZabos: [],
+  //   carouselBGColor: colorSet.secondary,
+};

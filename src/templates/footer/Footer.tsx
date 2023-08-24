@@ -84,8 +84,7 @@ const linkSections = [
   {
     title: "바로가기",
     links: [
-      { name: "GIST 홈페이지", link: "https://gist.ac.kr" },
-      { name: "지간표", link: "https://giganpyo.com" },
+      { name: "GIST 홈페이지", link: "https://www.gist.ac.kr/kr/main.html" },
       { name: "지졸", link: "https://gijol.im" },
     ],
   },
