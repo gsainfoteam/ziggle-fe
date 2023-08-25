@@ -1,7 +1,12 @@
 import LogEvents from "./log-event";
 
+declare global {
+  interface Window {
+    smartlook: any;
+  }
+}
+
 const sendLog = (event: LogEvents, data?: object) => {
-  // @ts-ignore
   window.smartlook("track", event, data);
 
   console.log(`[Smartlook] ${event}`, data);
