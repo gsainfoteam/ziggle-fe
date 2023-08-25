@@ -4,8 +4,6 @@ import { User } from "src/types/types";
 import { apiGetter } from "../interceptor/interceptor";
 
 export const goToIdp = () => {
-  console.log(import.meta.env.NODE_ENV);
-
   const idp_url = `${
     import.meta.env.VITE_IDP_URL
   }/authorize?client_id=ziggle2023&redirect_uri=${
@@ -19,7 +17,6 @@ export const loginWithIdp = async ({ code }: { code: string }) => {
   const response = await apiGetter<LoginResponse>("/user/login?code=" + code);
 
   if (response.status === 200) {
-    console.log(response.data);
     localStorage.setItem("access_token", response.data.access_token);
     return true;
   }

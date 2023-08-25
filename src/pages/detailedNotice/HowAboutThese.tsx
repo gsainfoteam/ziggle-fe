@@ -72,7 +72,6 @@ const HowAboutThese = () => {
       const first = entries[0];
       if (first.isIntersecting) {
         fetchNextPage();
-        console.log("fetchNextPage");
         observer.disconnect();
       }
     });
@@ -114,7 +113,6 @@ const HowAboutThese = () => {
               page.list.map((notice, lIndex) => {
                 const zabo = noticeToZabo(notice, "width", 300);
 
-                console.log("page", pIndex, "list", lIndex, zabo);
                 const zaboComponent =
                   zabo.thumbnailUrl === undefined ? (
                     <TextZabo
