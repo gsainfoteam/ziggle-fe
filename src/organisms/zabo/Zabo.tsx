@@ -1,5 +1,7 @@
 import { useHover } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
@@ -53,6 +55,7 @@ const Zabo = ({
   origin,
   size,
   id,
+  logName,
 }: Omit<ZaboProps, "content"> & { thumbnailUrl: string }) => {
   const { hovered, ref } = useHover<HTMLButtonElement>(); // useHover가 HTMLDivElement만 받아서 부득이하게 ZaboWrapper와 Button 분리
 
@@ -60,6 +63,10 @@ const Zabo = ({
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
+    sendLog(LogEvents.NoticeClick, {
+      location: logName ?? "unknown",
+      isText: false,
+    });
   };
 
   return (

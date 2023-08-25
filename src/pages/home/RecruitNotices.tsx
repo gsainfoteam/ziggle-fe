@@ -22,6 +22,7 @@ const RecruitNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🎯 모집"}
+      logName={"RecruitNotices"}
     />
   );
 };

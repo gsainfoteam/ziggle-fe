@@ -3,6 +3,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadImages } from "src/apis/image/image-api";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import { createNotice } from "src/apis/notice/notice-api";
 import Paths from "src/types/paths";
 import { isEmpty } from "src/utils/utils";
@@ -78,6 +80,8 @@ const NoticeWritingPage = () => {
   });
 
   const handleSubmit = () => {
+    sendLog(LogEvents.NoticeWritingPageClickSubmit);
+
     if (!title) {
       Swal.fire({
         text: "제목을 입력해주세요",
@@ -129,6 +133,11 @@ const NoticeWritingPage = () => {
           }}
           placeholder={"제목을 입력하세요"}
           fontSize={"3rem"}
+          onBlur={(event) =>
+            sendLog(LogEvents.NoticeWritingPageTypeTitle, {
+              title: event.target.value,
+            })
+          }
         />
 
         <Spacer height={"15px"} />
@@ -139,6 +148,9 @@ const NoticeWritingPage = () => {
             checked={hasDeadline}
             onChange={(event) => {
               setHasDeadline(event.target.checked);
+              sendLog(LogEvents.NoticeWritingPageCheckDeadline, {
+                checked: event.target.checked,
+              });
             }}
           />
 
@@ -148,6 +160,9 @@ const NoticeWritingPage = () => {
               value={deadline}
               onChange={(event) => {
                 setDeadline(event.target.value);
+                sendLog(LogEvents.NoticeWritingPageSetDeadline, {
+                  deadline: event.target.value,
+                });
               }}
             />
           )}
@@ -165,7 +180,12 @@ const NoticeWritingPage = () => {
 
           <NoticeTypeRadio
             selected={noticeType}
-            onChange={(noticeType: NoticeType) => setNoticeType(noticeType)}
+            onChange={(noticeType: NoticeType) => {
+              setNoticeType(noticeType);
+              sendLog(LogEvents.NoticeWritingPageSetType, {
+                type: noticeType,
+              });
+            }}
           />
         </Flex>
 
@@ -189,6 +209,11 @@ const NoticeWritingPage = () => {
             init={{
               promotion: false,
             }}
+            onBlur={(event) =>
+              sendLog(LogEvents.NoticeWritingPageTypeContent, {
+                content: event.target.getContent(),
+              })
+            }
           />
         </Flex>
 

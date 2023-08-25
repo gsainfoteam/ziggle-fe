@@ -79,6 +79,7 @@ const HowAboutThese = () => {
                     organization={zabo.organization}
                     origin="width"
                     size={300}
+                    logName="howAboutThese"
                   />
                 );
               } else {
@@ -95,6 +96,7 @@ const HowAboutThese = () => {
                     thumbnailUrl={zabo.thumbnailUrl}
                     origin="width"
                     size={300}
+                    logName="howAboutThese"
                   />
                 );
               }

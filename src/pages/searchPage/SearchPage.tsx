@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import { getAllNotices } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
 import { Close } from "src/assets/Icons";
@@ -42,20 +44,34 @@ const SearchPage = () => {
     },
   );
 
+  useEffect(() => {
+    sendLog(LogEvents.Search, {
+      query: searchKeyword,
+      types: selectedTags,
+    });
+  }, [searchKeyword, selectedTags]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // TODO : submit 동작
 
     console.log(e.currentTarget.searchQuery);
     const searchQuery = e.currentTarget.searchQuery as HTMLInputElement;
     setSearchKeyword(searchQuery.value); // SearchBar 수정할 때 주의
+    sendLog(LogEvents.SearchPageSubmit, {
+      query: searchQuery.value,
+    });
   };
 
   const handleTagChange = (selected: NoticeType[]) => {
     setSelectedTags(selected);
+    sendLog(LogEvents.SearchPageTypeChange, {
+      types: selected,
+    });
   };
 
   const navigator = useNavigate();
   const goBack = () => {
+    sendLog(LogEvents.SearchPageClickCancel);
     navigator(-1);
   };
 

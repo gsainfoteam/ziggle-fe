@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
@@ -44,11 +46,16 @@ const SearchResultText = ({
   searchQuery,
   organization,
   content,
+  logName,
 }: SearchResultProps) => {
   const navigate = useNavigate();
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
+    sendLog(LogEvents.SearchResultClick, {
+      location: logName ?? "unknown",
+      isText: true,
+    });
   };
 
   return (

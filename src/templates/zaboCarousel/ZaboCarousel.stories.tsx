@@ -17,5 +17,6 @@ export const Default = Template.bind({});
 Default.args = {
   carouselTitle: "🌟 마감임박",
   manyZabos: dummyZabos,
+  logName: "Storybook",
   //   carouselBGColor: colorSet.secondary,
 };
