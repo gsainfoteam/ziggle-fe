@@ -21,6 +21,7 @@ const HotNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🔥 오늘 끓는 공지"}
+      logName={"HotNotices"}
     />
   );
 };

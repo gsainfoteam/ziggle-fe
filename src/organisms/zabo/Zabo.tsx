@@ -1,7 +1,10 @@
 import { useHover } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
+import Spacer from "src/atoms/spacer/Spacer";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
@@ -27,7 +30,7 @@ const ZaboWrapper = styled(Button)`
 const Title = styled(Text)<{ hovered: boolean }>`
   -webkit-line-clamp: 2;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
+  /* -webkit-box-orient: vertical; */
   overflow: hidden;
   transition: 0.1s;
   ${({ hovered }) => {
@@ -53,6 +56,7 @@ const Zabo = ({
   origin,
   size,
   id,
+  logName,
 }: Omit<ZaboProps, "content"> & { thumbnailUrl: string }) => {
   const { hovered, ref } = useHover<HTMLButtonElement>(); // useHover가 HTMLDivElement만 받아서 부득이하게 ZaboWrapper와 Button 분리
 
@@ -60,6 +64,10 @@ const Zabo = ({
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
+    sendLog(LogEvents.NoticeClick, {
+      location: logName ?? "unknown",
+      isText: false,
+    });
   };
 
   return (
@@ -70,6 +78,9 @@ const Zabo = ({
         size={size}
         isHover={hovered}
       />
+
+      <Spacer height="3px" />
+
       <Title hovered={hovered}>{title}</Title>
       <Flex gap="0.25em">
         <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
@@ -82,7 +93,7 @@ const Zabo = ({
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.Bold}>
+      <Text font={Font.Medium} textAlign="left">
         {author} {organization && `• ${organization}`}
       </Text>
     </ZaboWrapper>

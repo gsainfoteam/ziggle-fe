@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import LazyCat from "src/assets/LazyCat";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
 import HorizontalScrollButton from "src/molecules/horizontalScrollButton/HorizontalScrollButton";
@@ -15,6 +16,7 @@ interface ZaboCarouselProps {
   manyZabos: Omit<ZaboProps, "origin" | "size">[];
   carouselTitle: string;
   carouselBGColor?: string;
+  logName?: string;
 }
 
 const EntireWrap = styled.div`
@@ -46,6 +48,7 @@ const LowerWrap = styled(Flex)<{ bgColor?: string }>`
 
   box-sizing: border-box;
   flex-wrap: nowrap;
+  overflow-y: hidden;
 `;
 
 const ZabosContainer = styled(Content)`
@@ -65,6 +68,7 @@ const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
+  logName,
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left
@@ -115,49 +119,72 @@ const ZaboCarousel = ({
           ></HorizontalScrollButton.Right>
         </ScrollBtnWrap>
       </UpperWrap>
-      <LowerWrap
-        bgColor={carouselBGColor}
-        alignItems="center"
-        justifyContent="center"
-      >
-        <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
-          {manyZabos.map((zabo) => {
-            if (zabo.thumbnailUrl === undefined) {
-              // thumbnailUrl이 없으면 TextZabo로 렌더링
-              return (
-                <TextZabo
-                  key={zabo.id}
-                  id={zabo.id}
-                  title={zabo.title}
-                  date={zabo.date}
-                  viewCount={zabo.viewCount}
-                  author={zabo.author}
-                  content={zabo.content}
-                  organization={zabo.organization}
-                  origin="height"
-                  size={280}
-                />
-              );
-            } else {
-              // thumbnailUrl이 있으면 Zabo로 렌더링
-              return (
-                <Zabo
-                  key={zabo.id}
-                  id={zabo.id}
-                  title={zabo.title}
-                  date={zabo.date}
-                  viewCount={zabo.viewCount}
-                  author={zabo.author}
-                  organization={zabo.organization}
-                  thumbnailUrl={zabo.thumbnailUrl}
-                  origin="height"
-                  size={280}
-                />
-              );
-            }
-          })}
-        </ZabosContainer>
-      </LowerWrap>
+      {manyZabos.length > 0 ? (
+        <LowerWrap
+          bgColor={carouselBGColor}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
+            {manyZabos.map((zabo) => {
+              if (zabo.thumbnailUrl === undefined) {
+                // thumbnailUrl이 없으면 TextZabo로 렌더링
+                return (
+                  <TextZabo
+                    key={zabo.id}
+                    id={zabo.id}
+                    title={zabo.title}
+                    date={zabo.date}
+                    viewCount={zabo.viewCount}
+                    author={zabo.author}
+                    content={zabo.content}
+                    organization={zabo.organization}
+                    origin="height"
+                    size={280}
+                    logName={logName}
+                  />
+                );
+              } else {
+                // thumbnailUrl이 있으면 Zabo로 렌더링
+                return (
+                  <Zabo
+                    key={zabo.id}
+                    id={zabo.id}
+                    title={zabo.title}
+                    date={zabo.date}
+                    viewCount={zabo.viewCount}
+                    author={zabo.author}
+                    organization={zabo.organization}
+                    thumbnailUrl={zabo.thumbnailUrl}
+                    origin="height"
+                    size={280}
+                    logName={logName}
+                  />
+                );
+              }
+            })}
+          </ZabosContainer>
+        </LowerWrap>
+      ) : (
+        <>
+          <Flex
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            height="280px"
+          >
+            <LazyCat />
+            <Text
+              size={"1.25rem"}
+              color={colorSet.secondaryText}
+              font={Font.Medium}
+              style={{ padding: "20px" }}
+            >
+              글이 없습니다. =ㅅ=
+            </Text>
+          </Flex>
+        </>
+      )}
     </EntireWrap>
   );
 };

@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
@@ -29,11 +31,16 @@ const SearchResult = ({
   thumbnailUrl,
   searchQuery,
   organization,
+  logName,
 }: SearchResultProps) => {
   const navigate = useNavigate();
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
+    sendLog(LogEvents.SearchResultClick, {
+      location: logName ?? "unknown",
+      isText: false,
+    });
   };
 
   return (

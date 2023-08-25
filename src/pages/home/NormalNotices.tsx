@@ -22,6 +22,7 @@ const NormalNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🔔 일반"}
+      logName={"GeneralNotices"}
     />
   );
 };

@@ -10,6 +10,7 @@ import Text from "src/atoms/text/Text";
 import Pagination from "src/molecules/pagination/Pagination";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 
@@ -18,7 +19,7 @@ const NOTICE_PER_PAGE = 30;
 const AllNoticesPage = () => {
   const [page, setPage] = useState<number>(0);
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [
       queryKeys.getAllNotices,
       {
@@ -59,43 +60,53 @@ const AllNoticesPage = () => {
 
         <Spacer height={"30px"} />
 
-       <Flex
+        <Flex
           gap="10px"
           flexDirection="column"
           style={{
             flexWrap: "nowrap",
           }}
         >
-          {data?.list.map((notice) =>
-            notice.imageUrl ? (
-              <SearchResult
-                id={notice.id}
-                deadline={notice.deadline}
-                title={notice.title}
-                author={notice.author}
-                tags={notice.tags}
-                date={notice.createdAt}
-                viewCount={notice.views}
-                thumbnailUrl={notice.imageUrl}
-                searchQuery={""}
-                key={notice.id}
-              />
-            ) : (
-              <SearchResultText
-                id={notice.id}
-                deadline={notice.deadline}
-                title={notice.title}
-                author={notice.author}
-                tags={notice.tags}
-                date={notice.createdAt}
-                viewCount={notice.views}
-                content={notice.body}
-                searchQuery={""}
-                thumbnailUrl=""
-                key={notice.id}
-              />
-            ),
-          )}
+          <Flex
+            gap="10px"
+            flexDirection="column"
+            style={{
+              flexWrap: "nowrap",
+            }}
+          >
+            {isLoading && <LoadingCatAnimation />}
+
+            {data?.list.map((notice) =>
+              notice.imageUrl ? (
+                <SearchResult
+                  id={notice.id}
+                  deadline={notice.deadline}
+                  title={notice.title}
+                  author={notice.author}
+                  tags={notice.tags}
+                  date={notice.createdAt}
+                  viewCount={notice.views}
+                  thumbnailUrl={notice.imageUrl}
+                  searchQuery={""}
+                  key={notice.id}
+                />
+              ) : (
+                <SearchResultText
+                  id={notice.id}
+                  deadline={notice.deadline}
+                  title={notice.title}
+                  author={notice.author}
+                  tags={notice.tags}
+                  date={notice.createdAt}
+                  viewCount={notice.views}
+                  content={notice.body}
+                  searchQuery={""}
+                  thumbnailUrl=""
+                  key={notice.id}
+                />
+              ),
+            )}
+          </Flex>
         </Flex>
 
         <Spacer height={"100px"} />

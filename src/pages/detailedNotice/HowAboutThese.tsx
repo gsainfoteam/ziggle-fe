@@ -126,6 +126,7 @@ const HowAboutThese = () => {
                       organization={zabo.organization}
                       origin="width"
                       size={300}
+                      logName={"howAboutThese"}
                     />
                   ) : (
                     <Zabo
@@ -139,6 +140,7 @@ const HowAboutThese = () => {
                       thumbnailUrl={zabo.thumbnailUrl}
                       origin="width"
                       size={300}
+                      logName={"howAboutThese"}
                     />
                   );
                 return pIndex + 1 === data.pages.length &&

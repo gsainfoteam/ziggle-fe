@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { dummyAcademicNotices } from "src/mock/dummy-academic-notices";
 
 import Button, { ButtonVariant } from "../../atoms/button/Button";
@@ -13,6 +14,14 @@ import AcademicTable, {
 } from "../../templates/academicTable/AcademicTable";
 
 const AcademicNotices = () => {
+  const gistAcademicNoticeUrl =
+    "https://www.gist.ac.kr/kr/html/sub05/050209.html";
+
+  const openInNewTab = (url: string) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
     <Content>
       <Flex
@@ -30,7 +39,13 @@ const AcademicNotices = () => {
         >
           📰 학사공지
         </Text>
-        <Button variant={ButtonVariant.contained} height={"40px"}>
+        <Button
+          variant={ButtonVariant.contained}
+          height={"40px"}
+          onClick={() => {
+            openInNewTab(gistAcademicNoticeUrl);
+          }}
+        >
           <Flex gap={"16px"}>
             <Text size={"0.875rem"} font={Font.Medium}>
               학사공지 게시판 바로가기
