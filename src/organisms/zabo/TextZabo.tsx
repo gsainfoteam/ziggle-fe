@@ -25,7 +25,7 @@ const ZaboWrapper = styled(Button)<{
   padding: 20px;
   margin-top: 1rem;
 
-  max-height: ${(props) => props.height}px;
+  height: ${(props) => props.height}px;
   min-width: ${(props) => props.width}px;
   box-sizing: border-box;
   overflow: hidden;
@@ -79,6 +79,23 @@ const TextZabo = ({
     });
   };
 
+  // Line-clamp를 제목의 길이에 따라 처리
+  const calculateLineClamp = (
+    titleLength: number,
+    origin: "width" | "height",
+  ): number => {
+    if (origin === "height") {
+      return titleLength > 40 ? 2 : titleLength > 20 ? 3 : 5;
+    } else if (origin === "width") {
+      return titleLength > 40 ? 6 : titleLength > 20 ? 8 : 10;
+    } else {
+      throw new Error(`Invalid origin: ${origin}`);
+    }
+  };
+
+  const titleLength = title.length;
+  const lineClamp = calculateLineClamp(titleLength, origin);
+
   return (
     <ZaboWrapper
       height={zaboHeight}
@@ -86,17 +103,17 @@ const TextZabo = ({
       shadowColor={colorSet.primary}
       onClick={handleZaboClick}
     >
-      <Flex>
+      <Flex flexDirection="column">
         <Text
           font={Font.Bold}
-          size="1.875rem"
+          size="1.625rem"
           style={{
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
+            textAlign: "left",
+            WebkitLineClamp: lineClamp,
           }}
         >
-          {title}
+          {/* title이 50이 넘을 일은 없지만 혹시 모르니 이렇게 처리 */}
+          {titleLength > 50 ? title.slice(0, 50) + "..." : title}
         </Text>
 
         <Spacer height={"10px"} />
@@ -108,10 +125,11 @@ const TextZabo = ({
             textOverflow: "ellipsis",
             overflow: "hidden",
             display: "-webkit-box",
-            WebkitLineClamp: origin === "height" ? 5 : 8, // 이렇게밖에 안됨
+            WebkitLineClamp: lineClamp,
             WebkitBoxOrient: "vertical",
             lineHeight: "1.5rem",
             wordBreak: "break-word",
+            textAlign: "left",
           }}
         >
           {content}
@@ -130,7 +148,8 @@ const TextZabo = ({
             조회수 {viewCount}
           </Text>
         </Flex>
-        <Text font={Font.Bold}>
+        <Spacer height={"3px"} />
+        <Text font={Font.Medium} textAlign="left">
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>

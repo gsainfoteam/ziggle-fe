@@ -15,9 +15,12 @@ const Input = styled.input<InputProps>`
   height: ${({ height }) => (height ? height : undefined)};
   width: ${({ width }) => (width ? width : undefined)};
   padding: ${({ padding }) => (padding ? padding : "0.5rem")};
-  font-family: NotoSansKR-Medium, sans-serif;
+
+  font-family: Noto Sans KR, sans-serif;
+  font-weight: 700;
   font-size: ${({ fontSize }) => (fontSize ? fontSize : "0.875rem")};
   color: ${({ color }) => (color ? color : colorSet.text)};
+
   border: none;
   border-radius: 0;
   outline-style: none;
@@ -28,7 +31,8 @@ const Input = styled.input<InputProps>`
 
   ::placeholder {
     color: ${colorSet.placeholder};
-    font-family: NotoSansKR-Medium, sans-serif;
+    font-family: Noto Sans KR, sans-serif;
+    font-weight: 700;
   }
 `;
 

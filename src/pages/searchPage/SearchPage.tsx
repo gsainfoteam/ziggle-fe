@@ -10,16 +10,19 @@ import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
+import Image from "src/atoms/image/Image";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import Font from "src/styles/font";
+import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 import { NoticeType } from "src/types/types";
 import { isEmpty } from "src/utils/utils";
 
 import { ReactComponent as SearchNoResult } from "../../../src/atoms/icon/assets/searchNoResult.svg";
+import Catbounce from "../../assets/catbounce.gif";
 import SearchBar from "../../molecules/searchBar/SearchBar";
 import colorSet from "../../styles/colorSet";
 import CloseBtnAnimation from "./CloseBtnAnimation";
@@ -30,7 +33,7 @@ const SearchPage = () => {
   const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     [
       queryKeys.getAllNotices,
       {
@@ -116,7 +119,8 @@ const SearchPage = () => {
             </div>
           </Flex>
 
-          {!data && (
+          {/* 검색어를 입력하지 않았을 때만 */}
+          {!data && !searchKeyword && (
             <Flex justifyContent={"center"} width={"100%"}>
               <Flex justifyContent="center" flexDirection={"column"}>
                 <Spacer height={"100px"} />
@@ -134,8 +138,19 @@ const SearchPage = () => {
             </Flex>
           )}
 
+          {/* 검색어를 입력했을 때 로딩 */}
+          {isLoading && searchKeyword && (
+            <LoadingCatAnimation text="검색 중입니다! -ㅅ-" />
+          )}
+
           {data && !isEmpty(data.list) && (
-            <div>
+            <Flex
+              gap="10px"
+              flexDirection="column"
+              style={{
+                flexWrap: "nowrap",
+              }}
+            >
               <Spacer height={"30px"} />
 
               <Text
@@ -179,44 +194,7 @@ const SearchPage = () => {
                   />
                 ),
               )}
-              {/* 
-                    <p
-                      style={{
-                        paddingTop: "10px",
-                        paddingBottom: "0px",
-                        paddingLeft: defaults.pageSideGap,
-                        paddingRight: defaults.pageSideGap,
-                        height: "100px",
-                        margin: "0 auto",
-                        display: "flex",
-                        justifyContent: "flex-start",
-                      }}
-                    >
-                      <Text
-                        size="3.5rem"
-                        color={colorSet.text}
-                        font={Font.Bold}
-                        style={{ padding: "0px" }}
-                      >
-                        📰 학사 공지
-                      </Text>
-                    </div>
-                    {Array.from({ length: n }).map((_, index) => (
-                      <div style={{ margin: "20px" }} key={index}>
-                        <SearchResultText
-                          deadline={dummySearchResult.deadline}
-                          title={dummySearchResult.title}
-                          author={dummySearchResult.author}
-                          tags={dummySearchResult.tags}
-                          date={dummySearchResult.date}
-                          viewCount={dummySearchResult.viewCount}
-                          content={dummySearchResult.content}
-                          searchQuery="이"
-                          thumbnailUrl=""
-                        />
-                      </div>
-                    ))} */}
-            </div>
+            </Flex>
           )}
 
           {data && isEmpty(data.list) && (
