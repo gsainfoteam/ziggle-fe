@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
@@ -60,6 +62,7 @@ const TextZabo = ({
   origin,
   size,
   id,
+  logName,
 }: ZaboProps) => {
   const [zaboHeight, zaboWidth] = [
     origin === "height" ? size : size * 1.5,
@@ -70,6 +73,10 @@ const TextZabo = ({
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
+    sendLog(LogEvents.NoticeClick, {
+      location: logName ?? "unknown",
+      isText: true,
+    });
   };
 
   // Line-clamp를 제목의 길이에 따라 처리

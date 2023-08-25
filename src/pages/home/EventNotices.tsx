@@ -22,6 +22,7 @@ const EventNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🎈 행사"}
+      logName={"EventNotices"}
     />
   );
 };

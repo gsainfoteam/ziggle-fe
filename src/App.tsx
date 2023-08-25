@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import useAuth from "./hooks/useAuth";
+import useViewLog from "./hooks/useViewLog";
 import Layout from "./layout/Layout";
 import AllNoticesPage from "./pages/allNotices/AllNoticesPage";
 import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
@@ -13,6 +14,8 @@ import Paths from "./types/paths";
 
 const App = () => {
   const { userInfo } = useAuth();
+
+  useViewLog();
 
   return (
     <>

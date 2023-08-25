@@ -22,6 +22,7 @@ const UrgentNotices = () => {
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🌟 마감임박"}
       carouselBGColor={"#FFF3F3"}
+      logName={"UrgentNotices"}
     />
   );
 };

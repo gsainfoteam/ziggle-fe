@@ -16,6 +16,7 @@ interface ZaboCarouselProps {
   manyZabos: Omit<ZaboProps, "origin" | "size">[];
   carouselTitle: string;
   carouselBGColor?: string;
+  logName?: string;
 }
 
 const EntireWrap = styled.div`
@@ -67,6 +68,7 @@ const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
+  logName,
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left
@@ -139,6 +141,7 @@ const ZaboCarousel = ({
                     organization={zabo.organization}
                     origin="height"
                     size={280}
+                    logName={logName}
                   />
                 );
               } else {
@@ -155,6 +158,7 @@ const ZaboCarousel = ({
                     thumbnailUrl={zabo.thumbnailUrl}
                     origin="height"
                     size={280}
+                    logName={logName}
                   />
                 );
               }
