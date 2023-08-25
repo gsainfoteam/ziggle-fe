@@ -115,25 +115,8 @@ const HowAboutThese = () => {
                 const zabo = noticeToZabo(notice, "width", 300);
 
                 console.log("page", pIndex, "list", lIndex, zabo);
-                if (zabo.thumbnailUrl === undefined) {
-                  // thumbnailUrl이 없으면 TextZabo로 렌더링
-                  return pIndex + 1 === data.pages.length &&
-                    lIndex + 1 === page.list.length ? (
-                    <div ref={observerRef} key={zabo.id}>
-                      <TextZabo
-                        key={zabo.id}
-                        id={zabo.id}
-                        title={zabo.title}
-                        date={zabo.date}
-                        viewCount={zabo.viewCount}
-                        author={zabo.author}
-                        content={zabo.content}
-                        organization={zabo.organization}
-                        origin="width"
-                        size={300}
-                      />
-                    </div>
-                  ) : (
+                const zaboComponent =
+                  zabo.thumbnailUrl === undefined ? (
                     <TextZabo
                       key={zabo.id}
                       id={zabo.id}
@@ -146,25 +129,6 @@ const HowAboutThese = () => {
                       origin="width"
                       size={300}
                     />
-                  );
-                } else {
-                  // thumbnailUrl이 있으면 Zabo로 렌더링
-                  return pIndex + 1 === data.pages.length &&
-                    lIndex + 1 === page.list.length ? (
-                    <div ref={observerRef} key={zabo.id}>
-                      <Zabo
-                        key={zabo.id}
-                        id={zabo.id}
-                        title={zabo.title}
-                        date={zabo.date}
-                        viewCount={zabo.viewCount}
-                        author={zabo.author}
-                        organization={zabo.organization}
-                        thumbnailUrl={zabo.thumbnailUrl}
-                        origin="width"
-                        size={300}
-                      />
-                    </div>
                   ) : (
                     <Zabo
                       key={zabo.id}
@@ -179,7 +143,14 @@ const HowAboutThese = () => {
                       size={300}
                     />
                   );
-                }
+                return pIndex + 1 === data.pages.length &&
+                  lIndex + 1 === page.list.length ? (
+                  <div ref={observerRef} key={zabo.id}>
+                    {zaboComponent}
+                  </div>
+                ) : (
+                  zaboComponent
+                );
               }),
             )}
           </Masonry>
