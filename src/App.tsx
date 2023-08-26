@@ -44,9 +44,9 @@ const router = createBrowserRouter(
         <Route path={NoticeSection.urgent} element={<UrgentNoticesPage />} />
         <Route path={NoticeSection.recruit} element={<RecruitNoticesPage />} />
         <Route path={NoticeSection.general} element={<GeneralNoticesPage />} />
+        <Route path={NoticeSection.all} element={<AllNoticesPage />} />
       </Route>
       <Route path={Paths.home} element={<HomePage />} />
-      <Route path={Paths.all} element={<AllNoticesPage />} />
       <Route path={Paths.search} element={<SearchPage />} />
       <Route
         path={Paths.noticeDetail + ":id"}

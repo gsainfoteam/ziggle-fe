@@ -68,9 +68,12 @@ const ZabosContainer = styled(Content)`
 `;
 
 const ZaboCarouselTitleText = ({ text }: { text: string }) => {
+  const isMobile = useIsMobile();
+
   return (
     <Text
-      size="2.8rem"
+      as={"h2"}
+      size={isMobile ? "1.75rem" : "2.75rem"}
       color={colorSet.text}
       font={Font.Bold}
       style={{ margin: 0 }}
@@ -84,11 +87,8 @@ const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
-<<<<<<< HEAD
   link,
-=======
   logName,
->>>>>>> master
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left
