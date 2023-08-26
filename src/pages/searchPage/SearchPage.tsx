@@ -57,7 +57,6 @@ const SearchPage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     // TODO : submit 동작
 
-    console.log(e.currentTarget.searchQuery);
     const searchQuery = e.currentTarget.searchQuery as HTMLInputElement;
     setSearchKeyword(searchQuery.value); // SearchBar 수정할 때 주의
     sendLog(LogEvents.SearchPageSubmit, {
