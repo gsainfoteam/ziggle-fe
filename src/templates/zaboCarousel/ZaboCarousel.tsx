@@ -84,11 +84,8 @@ const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
-<<<<<<< HEAD
   link,
-=======
   logName,
->>>>>>> master
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left

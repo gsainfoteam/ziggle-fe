@@ -15,6 +15,7 @@ interface ButtonProps {
   borderRadius?: React.CSSProperties["borderRadius"];
   disabled?: boolean;
   variant?: ButtonVariant;
+  animated?: boolean;
 }
 
 const Button = styled.button<ButtonProps>`
@@ -62,6 +63,14 @@ const Button = styled.button<ButtonProps>`
   :hover {
     cursor: pointer;
   }
+
+  ${({ animated }) =>
+    animated &&
+    css`
+      &:active {
+        transform: scale(0.95);
+      }
+    `}
 `;
 
 export default Button;
