@@ -4,8 +4,9 @@ import queryKeys from "src/apis/queryKeys";
 import { noticesToManyZabos } from "src/utils/noticeToZabo";
 
 import ZaboCarousel from "../../templates/zaboCarousel/ZaboCarousel";
+import { NoticeSectionProps } from "./HomePage";
 
-const HotNotices = () => {
+const HotNotices = ({ link }: NoticeSectionProps) => {
   const { data } = useQuery(
     [
       queryKeys.getNotice,
@@ -21,6 +22,7 @@ const HotNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🔥 오늘 끓는 공지"}
+      link={link}
       logName={"HotNotices"}
     />
   );

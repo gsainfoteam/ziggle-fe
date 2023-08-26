@@ -11,16 +11,40 @@ import AllNoticesPage from "./pages/allNotices/AllNoticesPage";
 import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
 import HomePage from "./pages/home/HomePage";
 import MyPage from "./pages/myPage/MyPage";
+import EventNoticesPage from "./pages/noticeSections/EventNoticesPage";
+import GeneralNoticesPage from "./pages/noticeSections/GeneralNoticesPage";
+import HotNoticesPage from "./pages/noticeSections/HotNoticesPage";
+import RecruitNoticesPage from "./pages/noticeSections/RecruitNoticesPage";
+import UrgentNoticesPage from "./pages/noticeSections/UrgentNoticesPage";
 import NoticeWritingPage from "./pages/noticeWriting/NoticeWritingPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
-import Paths from "./types/paths";
+import Paths, { NoticeSection } from "./types/paths";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       <Route path="*" element={<Navigate to={Paths.home} replace />} />
 
+      <Route path={Paths.home} element={<HomePage />} />
+      <Route
+        path={Paths.section + NoticeSection.all}
+        element={<AllNoticesPage />}
+      />
+      <Route path={Paths.search} element={<SearchPage />} />
+      <Route
+        path={Paths.noticeDetail + ":id"}
+        element={<DetailedNoticePage />}
+      />
+
+      {/* 각 공지 섹션별 */}
+      <Route path={Paths.section}>
+        <Route path={NoticeSection.event} element={<EventNoticesPage />} />
+        <Route path={NoticeSection.hot} element={<HotNoticesPage />} />
+        <Route path={NoticeSection.urgent} element={<UrgentNoticesPage />} />
+        <Route path={NoticeSection.recruit} element={<RecruitNoticesPage />} />
+        <Route path={NoticeSection.general} element={<GeneralNoticesPage />} />
+      </Route>
       <Route path={Paths.home} element={<HomePage />} />
       <Route path={Paths.all} element={<AllNoticesPage />} />
       <Route path={Paths.search} element={<SearchPage />} />

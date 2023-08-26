@@ -14,7 +14,7 @@ import useAuth from "src/hooks/useAuth";
 import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
-import Paths from "src/types/paths";
+import Paths, { NoticeSection } from "src/types/paths";
 import styled from "styled-components";
 
 const Bar = styled(Area)`
@@ -120,7 +120,7 @@ const Navbar = () => {
       </StylelessLink>
       <ButtonSum gap={"0 30px"}>
         <StylelessLink
-          to={Paths.all}
+          to={Paths.section + NoticeSection.all}
           onClick={() => sendLog(LogEvents.NavBarClickAll)}
         >
           <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
@@ -137,7 +137,6 @@ const Navbar = () => {
             </Text>
           </StylelessLink>
         )}
-
         <StylelessLink
           to={Paths.search}
           onClick={() => sendLog(LogEvents.NavBarClickSearch)}

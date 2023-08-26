@@ -12,16 +12,16 @@ import NoticesWithPagination from "src/templates/noticesWithPagination/NoticesWi
 
 const NOTICE_PER_PAGE = 30;
 
-const AllNoticesPage = () => {
+const EventNoticesPage = () => {
   const [page, setPage] = useState<number>(0);
 
   const { data, isLoading } = useQuery(
     [
-      queryKeys.getAllNotices,
+      queryKeys.getNotice,
       {
         offset: page * NOTICE_PER_PAGE,
         limit: NOTICE_PER_PAGE,
-        orderBy: "recent",
+        tags: ["event"],
       },
     ],
     getAllNotices,
@@ -32,13 +32,13 @@ const AllNoticesPage = () => {
       <Spacer height={"50px"} />
       <Content>
         <Text as={"h1"} size={"2.5rem"} font={Font.Bold}>
-          전체 공지
+          🎈 행사
         </Text>
 
         <Spacer height={"8px"} />
 
         <Text size={"1rem"} font={Font.Medium} color={colorSet.secondaryText}>
-          모든 공지들이 시간 순으로 정렬되어 있습니다.
+          지스트는 오늘도 뜨겁습니다
         </Text>
       </Content>
 
@@ -57,4 +57,4 @@ const AllNoticesPage = () => {
   );
 };
 
-export default AllNoticesPage;
+export default EventNoticesPage;
