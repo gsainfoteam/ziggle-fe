@@ -24,6 +24,7 @@ const GeneralNotices = ({ link }: NoticeSectionProps) => {
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🔔 일반"}
       link={link}
+      logName={"GeneralNotices"}
     />
   );
 };

@@ -22,6 +22,8 @@ export interface ZaboProps {
   /** TextZabo나 Image에 쓰이는 사이징 처리용 Props */
   origin: Origin;
   size: number;
+
+  logName?: string;
 }
 
 export type Origin = "width" | "height";
@@ -52,6 +54,7 @@ export interface SearchResultProps {
   viewCount: number;
   thumbnailUrl: string;
   searchQuery: string;
+  logName?: string;
 }
 
 /**

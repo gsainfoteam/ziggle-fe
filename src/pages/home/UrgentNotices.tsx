@@ -24,6 +24,7 @@ const UrgentNotices = ({ link }: NoticeSectionProps) => {
       carouselTitle={"🌟 마감임박"}
       carouselBGColor={"#FFF3F3"}
       link={link}
+      logName={"UrgentNotices"}
     />
   );
 };

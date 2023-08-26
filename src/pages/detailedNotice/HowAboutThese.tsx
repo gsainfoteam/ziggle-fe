@@ -1,5 +1,6 @@
 import { useViewportSize } from "@mantine/hooks";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { getAllNotices } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
@@ -34,12 +35,58 @@ const MasonryResizer = styled.div<{ observerWidth: number }>`
   }};
 `;
 
+const ITEMS_PER_CALL = 10;
+
 const HowAboutThese = () => {
   // masonry width 조정을 위해 HowboutThese 컴포넌트의 width를 가져옴
   const observer = useViewportSize();
   const observerWidth = observer.width;
 
-  const { data } = useQuery([queryKeys.getAllNotices, {}], getAllNotices);
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  const { data, fetchNextPage } = useInfiniteQuery(
+    [queryKeys.getAllNotices],
+    ({ queryKey, pageParam = 0 }) =>
+      getAllNotices({
+        queryKey: [
+          queryKey[0],
+          {
+            offset: pageParam * ITEMS_PER_CALL,
+          },
+        ],
+      }),
+    {
+      getNextPageParam: (lastPage, allPages) => {
+        if (
+          lastPage.total >
+          allPages.reduce((acc, cur) => acc + cur.list.length, 0)
+        ) {
+          return allPages.length;
+        }
+      },
+    },
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      const first = entries[0];
+      if (first.isIntersecting) {
+        fetchNextPage();
+        observer.disconnect();
+      }
+    });
+    const current = observerRef.current;
+
+    if (current) {
+      observer.observe(current);
+    }
+
+    return () => {
+      if (current) {
+        observer.unobserve(current);
+      }
+    };
+  }, [observerRef, fetchNextPage, data]);
 
   return (
     <>
@@ -62,43 +109,50 @@ const HowAboutThese = () => {
           columnsCountBreakPoints={{ 350: 1, 700: 2, 1200: 3, 1600: 4 }}
         >
           <Masonry gutter="15px">
-            {data?.list.map((notice) => {
-              const zabo = noticeToZabo(notice, "width", 300);
+            {data?.pages.map((page, pIndex) =>
+              page.list.map((notice, lIndex) => {
+                const zabo = noticeToZabo(notice, "width", 300);
 
-              if (zabo.thumbnailUrl === undefined) {
-                // thumbnailUrl이 없으면 TextZabo로 렌더링
-                return (
-                  <TextZabo
-                    key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    content={zabo.content}
-                    organization={zabo.organization}
-                    origin="width"
-                    size={300}
-                  />
+                const zaboComponent =
+                  zabo.thumbnailUrl === undefined ? (
+                    <TextZabo
+                      key={zabo.id}
+                      id={zabo.id}
+                      title={zabo.title}
+                      date={zabo.date}
+                      viewCount={zabo.viewCount}
+                      author={zabo.author}
+                      content={zabo.content}
+                      organization={zabo.organization}
+                      origin="width"
+                      size={300}
+                      logName={"howAboutThese"}
+                    />
+                  ) : (
+                    <Zabo
+                      key={zabo.id}
+                      id={zabo.id}
+                      title={zabo.title}
+                      date={zabo.date}
+                      viewCount={zabo.viewCount}
+                      author={zabo.author}
+                      organization={zabo.organization}
+                      thumbnailUrl={zabo.thumbnailUrl}
+                      origin="width"
+                      size={300}
+                      logName={"howAboutThese"}
+                    />
+                  );
+                return pIndex + 1 === data.pages.length &&
+                  lIndex + 1 === page.list.length ? (
+                  <div ref={observerRef} key={zabo.id}>
+                    {zaboComponent}
+                  </div>
+                ) : (
+                  zaboComponent
                 );
-              } else {
-                // thumbnailUrl이 있으면 Zabo로 렌더링
-                return (
-                  <Zabo
-                    key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    organization={zabo.organization}
-                    thumbnailUrl={zabo.thumbnailUrl}
-                    origin="width"
-                    size={300}
-                  />
-                );
-              }
-            })}
+              }),
+            )}
           </Masonry>
         </ResponsiveMasonry>
       </MasonryResizer>

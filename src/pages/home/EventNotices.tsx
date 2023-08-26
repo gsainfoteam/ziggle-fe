@@ -24,6 +24,7 @@ const EventNotices = ({ link }: NoticeSectionProps) => {
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🎈 행사"}
       link={link}
+      logName={"EventNotices"}
     />
   );
 };

@@ -1,8 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import LogEvents from "src/apis/log/log-event";
+import sendLog from "src/apis/log/sendLog";
 import { goToIdp } from "src/apis/user/user-api";
 import { Account, Search } from "src/assets/Icons";
 import { ZiggleLogo } from "src/assets/ZiggleLogo";
 import Button from "src/atoms/button/Button";
+import Flex from "src/atoms/containers/flex/Flex";
+import StylelessLink from "src/atoms/stylelessLink/StylelessLink";
 import Text from "src/atoms/text/Text";
 import useAuth from "src/hooks/useAuth";
 import colorSet from "src/styles/colorSet";
@@ -24,7 +28,7 @@ const Bar = styled.div<{ bgColor: string }>`
 const ButtonSum = styled.div`
   display: flex;
   align-items: center;
-  gap: 0 40px;
+  gap: 0 30px;
 `;
 
 const AccountSum = styled(Button)`
@@ -40,47 +44,55 @@ const Navbar = () => {
 
   const handleAccountClick = () => {
     if (userInfo) {
+      sendLog(LogEvents.NavBarClickMyPage);
+
       navigate(Paths.myPage);
     } else {
+      sendLog(LogEvents.NavBarClickLogin);
+
       goToIdp();
     }
   };
 
   return (
     <Bar bgColor={colorSet.primary}>
-      <Link to={Paths.home}>
+      <StylelessLink
+        to={Paths.home}
+        onClick={() => sendLog(LogEvents.NavBarClickLogo)}
+      >
         <ZiggleLogo />
-      </Link>
+      </StylelessLink>
       <ButtonSum>
-        <Link
+        <StylelessLink
           to={Paths.section + NoticeSection.all}
-          style={{ textDecoration: "none" }}
+          onClick={() => sendLog(LogEvents.NavBarClickAll)}
         >
           <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
             전체 공지
           </Text>
-        </Link>
+        </StylelessLink>
         {userInfo && (
-          <Link to={Paths.noticeWriting} style={{ textDecoration: "none" }}>
+          <StylelessLink
+            to={Paths.noticeWriting}
+            onClick={() => sendLog(LogEvents.NavBarClickWrite)}
+          >
             <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
               공지 작성
             </Text>
-          </Link>
+          </StylelessLink>
         )}
-        <Button
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0 10px",
-          }}
+        <StylelessLink
+          to={Paths.search}
+          onClick={() => sendLog(LogEvents.NavBarClickSearch)}
         >
-          <Search size="1.6rem" />
-          <Link to={Paths.search} style={{ textDecoration: "none" }}>
+          <Flex alignItems={"center"} gap={"5px"}>
+            <Search size="1.6rem" />
+
             <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
               공지 검색
             </Text>
-          </Link>
-        </Button>
+          </Flex>
+        </StylelessLink>
       </ButtonSum>
       <AccountSum onClick={handleAccountClick}>
         <Text color={colorSet.colorless} size="0.875rem" font={Font.Medium}>

@@ -24,6 +24,7 @@ const RecruitNotices = ({ link }: NoticeSectionProps) => {
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🎯 모집"}
       link={link}
+      logName={"RecruitNotices"}
     />
   );
 };
