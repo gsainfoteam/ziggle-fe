@@ -1,6 +1,5 @@
 import { useElementSize, useHover, useViewportSize } from "@mantine/hooks";
-import { prominent } from "color.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button, { ButtonVariant } from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Icon from "src/atoms/icon/Icon";
@@ -12,6 +11,7 @@ import styled from "styled-components";
 
 interface ZaboShowcaseProps {
   src: string;
+  isLoading?: boolean;
   onShow?: () => void;
 }
 
@@ -38,13 +38,7 @@ const ImageCTAButton = styled(Button)<{ left: number }>`
 `;
 
 const ZaboShowcase = ({ src, onShow }: ZaboShowcaseProps) => {
-  const [bannerColor, setBannerColor] = useState<string>(colorSet.primary);
-
-  useEffect(() => {
-    prominent(src, { amount: 1, format: "hex" }).then((color) => {
-      setBannerColor(color as string);
-    });
-  });
+  const [bannerColor] = useState<string>(colorSet.primary);
 
   const obeserverWidth = useViewportSize().width;
   const showcaseWidth = obeserverWidth * 0.45;

@@ -1,9 +1,4 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import Circle from "src/atoms/figures/circle/Circle";
-import FilledArrowBtn, {
-  HorizontalDirection,
-} from "src/atoms/filledArrow/FilledArrowBtn";
 import Spacer from "src/atoms/spacer/Spacer";
 import dummyBanners from "src/mock/dummy-banners";
 import BannerImage from "src/molecules/bannerImage/BannerImage";
@@ -13,32 +8,32 @@ import Flex from "../../atoms/containers/flex/Flex";
 
 // interface BannerProps {}
 
-interface IndexCircleProps {
-  isSelected: boolean;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-}
+// interface IndexCircleProps {
+//   isSelected: boolean;
+//   onClick?: React.MouseEventHandler<HTMLDivElement>;
+// }
 
-const IndexCircle = ({ isSelected, onClick }: IndexCircleProps) => {
-  return (
-    <Circle
-      style={{ cursor: "pointer" }}
-      onClick={onClick}
-      diameter={"20px"}
-      background={isSelected ? colorSet.primary : colorSet.colorless}
-      border={`2px solid ${colorSet.primary}}`}
-    />
-  );
-};
+// const IndexCircle = ({ isSelected, onClick }: IndexCircleProps) => {
+//   return (
+//     <Circle
+//       style={{ cursor: "pointer" }}
+//       onClick={onClick}
+//       diameter={"20px"}
+//       background={isSelected ? colorSet.primary : colorSet.colorless}
+//       border={`2px solid ${colorSet.primary}}`}
+//     />
+//   );
+// };
 
 const Banner = () => {
-  const [curIndex, setCurIndex] = useState(0);
-  const maxIndex = dummyBanners.length - 1;
+  // const [curIndex, setCurIndex] = useState(0);
+  // const maxIndex = dummyBanners.length - 1;
 
-  const ManipulateIndex = (amount: number) => {
-    setCurIndex((curIndex) =>
-      Math.max(0, Math.min(curIndex + amount, maxIndex)),
-    );
-  };
+  // const ManipulateIndex = (amount: number) => {
+  //   setCurIndex((curIndex) =>
+  //     Math.max(0, Math.min(curIndex + amount, maxIndex)),
+  //   );
+  // };
 
   return (
     <>
@@ -56,8 +51,8 @@ const Banner = () => {
         >
           <Link to="/notice-writing">
             <BannerImage
-              src={dummyBanners[curIndex].imageUrl}
-              objectPosition={dummyBanners[curIndex].objectPosition}
+              src={dummyBanners[0].imageUrl}
+              objectPosition={dummyBanners[0].objectPosition}
             />
           </Link>
         </Flex>

@@ -10,7 +10,6 @@ import Button from "src/atoms/button/Button";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
-import Image from "src/atoms/image/Image";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
@@ -22,7 +21,6 @@ import { NoticeType } from "src/types/types";
 import { isEmpty } from "src/utils/utils";
 
 import { ReactComponent as SearchNoResult } from "../../../src/atoms/icon/assets/searchNoResult.svg";
-import Catbounce from "../../assets/catbounce.gif";
 import SearchBar from "../../molecules/searchBar/SearchBar";
 import colorSet from "../../styles/colorSet";
 import CloseBtnAnimation from "./CloseBtnAnimation";

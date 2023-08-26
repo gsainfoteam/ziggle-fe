@@ -1,10 +1,9 @@
-import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import StylelessLink from "src/atoms/stylelessLink/StylelessLink";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
-import Paths, { NoticeSection } from "src/types/paths";
+import Paths from "src/types/paths";
 import { Notice } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 
