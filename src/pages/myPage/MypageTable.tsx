@@ -1,7 +1,10 @@
+import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
+import StylelessLink from "src/atoms/stylelessLink/StylelessLink";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import Paths, { NoticeSection } from "src/types/paths";
 import { Notice } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 
@@ -9,9 +12,10 @@ import LazyCat from "../../assets/LazyCat";
 interface MypageTableProps {
   title: string;
   articles: Notice[];
+  link: string;
 }
 
-const MypageTable = ({ title, articles }: MypageTableProps) => {
+const MypageTable = ({ title, articles, link }: MypageTableProps) => {
   return (
     <div
       style={{ borderRadius: "10px", boxShadow: "0 0 4px rgba(0, 0, 0, 0.3)" }}
@@ -52,12 +56,7 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                 borderTopRightRadius: "10px",
               }}
             >
-              {/*               <Button
-                style={{
-                  width: "100%",
-                  paddingRight: "20px",
-                }}
-              >
+              <StylelessLink to={link}>
                 <Text
                   size={"1rem"}
                   color={colorSet.colorless}
@@ -65,12 +64,12 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                   style={{
                     textDecoration: "underline",
                     textAlign: "right",
-                    padding: "10px",
+                    paddingRight: "20px",
                   }}
                 >
                   전체보기
                 </Text>
-              </Button> */}
+              </StylelessLink>
             </div>
           </div>
 
@@ -99,19 +98,22 @@ const MypageTable = ({ title, articles }: MypageTableProps) => {
                       width: "70%",
                     }}
                   >
-                    <Text
-                      size={"1.1rem"}
-                      color={colorSet.text}
-                      font={Font.Regular}
-                      style={{
-                        paddingLeft: "20px",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {articleObj.title}
-                    </Text>
+                    <StylelessLink to={Paths.noticeDetail + articleObj.id}>
+                      <Text
+                        size={"1.1rem"}
+                        color={colorSet.text}
+                        font={Font.Regular}
+                        style={{
+                          paddingLeft: "20px",
+                          textOverflow: "ellipsis",
+                          overflow: "hidden",
+                          whiteSpace: "nowrap",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        {articleObj.title}
+                      </Text>
+                    </StylelessLink>
                   </div>
                   <div
                     style={{

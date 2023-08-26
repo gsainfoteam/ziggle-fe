@@ -11,7 +11,9 @@ import EventNoticesPage from "./pages/noticeSections/EventNoticesPage";
 import GeneralNoticesPage from "./pages/noticeSections/GeneralNoticesPage";
 import HotNoticesPage from "./pages/noticeSections/HotNoticesPage";
 import RecruitNoticesPage from "./pages/noticeSections/RecruitNoticesPage";
+import RemindedNoticesPage from "./pages/noticeSections/RemindedNoticesPage";
 import UrgentNoticesPage from "./pages/noticeSections/UrgentNoticesPage";
+import WrittenNoticesPage from "./pages/noticeSections/WrittenNoticesPage";
 import NoticeWritingPage from "./pages/noticeWriting/NoticeWritingPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
@@ -68,6 +70,17 @@ const App = () => {
                 path={Paths.noticeWriting}
                 element={<NoticeWritingPage />}
               />
+
+              <Route path={Paths.section}>
+                <Route
+                  path={NoticeSection.written}
+                  element={<WrittenNoticesPage />}
+                />
+                <Route
+                  path={NoticeSection.reminded}
+                  element={<RemindedNoticesPage />}
+                />
+              </Route>
             </>
           )}
         </Route>

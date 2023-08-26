@@ -14,6 +14,9 @@ export enum NoticeSection {
   general = "general",
   recruit = "recruit",
   urgent = "urgent",
+
+  reminded = "reminded",
+  written = "written",
 }
 
 export default Paths;
