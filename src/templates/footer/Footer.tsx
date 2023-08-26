@@ -86,6 +86,10 @@ const linkSections = [
     links: [
       { name: "GIST 홈페이지", link: "https://www.gist.ac.kr/kr/main.html" },
       { name: "지졸", link: "https://gijol.im" },
+      {
+        name: "지스트 하우스",
+        link: "https://sites.google.com/view/gisthouse/home",
+      },
     ],
   },
 ];
