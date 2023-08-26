@@ -106,6 +106,10 @@ const linkSections = [
     title: "바로가기",
     links: [
       {
+        name: "지스트 하우스",
+        link: "https://sites.google.com/view/gisthouse/home",
+      },
+      {
         name: "GIST 홈페이지",
         link: "https://gist.ac.kr",
         logEvent: LogEvents.FooterClickGist,

@@ -140,3 +140,21 @@ export const Download = ({ size, color }: IconProps) => {
     </svg>
   );
 };
+
+export const SmallArrow = ({ size, color }: IconProps) => {
+  return (
+    <svg
+      width={size ?? "24px"}
+      height={size ?? "24px"}
+      viewBox="0 0 30 30"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.5 6.00024L19.5 15.0002L10.5 24.0002"
+        stroke={color ?? colorSet.colorless}
+        strokeWidth="2"
+      />
+    </svg>
+  );
+};

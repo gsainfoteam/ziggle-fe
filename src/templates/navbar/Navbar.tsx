@@ -11,7 +11,7 @@ import Text from "src/atoms/text/Text";
 import useAuth from "src/hooks/useAuth";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
-import Paths from "src/types/paths";
+import Paths, { NoticeSection } from "src/types/paths";
 import styled from "styled-components";
 
 const Bar = styled.div<{ bgColor: string }>`
@@ -64,7 +64,7 @@ const Navbar = () => {
       </StylelessLink>
       <ButtonSum>
         <StylelessLink
-          to={Paths.all}
+          to={Paths.section + NoticeSection.all}
           onClick={() => sendLog(LogEvents.NavBarClickAll)}
         >
           <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
@@ -81,7 +81,6 @@ const Navbar = () => {
             </Text>
           </StylelessLink>
         )}
-
         <StylelessLink
           to={Paths.search}
           onClick={() => sendLog(LogEvents.NavBarClickSearch)}

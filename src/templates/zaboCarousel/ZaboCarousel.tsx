@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { SmallArrow } from "src/assets/Icons";
 import LazyCat from "src/assets/LazyCat";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
@@ -14,6 +16,7 @@ import Content from "../../atoms/containers/content/Content";
 
 interface ZaboCarouselProps {
   manyZabos: Omit<ZaboProps, "origin" | "size">[];
+  link?: string;
   carouselTitle: string;
   carouselBGColor?: string;
   logName?: string;
@@ -64,11 +67,28 @@ const ZabosContainer = styled(Content)`
   scrollbar-width: none;
 `;
 
+const ZaboCarouselTitleText = ({ text }: { text: string }) => {
+  return (
+    <Text
+      size="2.8rem"
+      color={colorSet.text}
+      font={Font.Bold}
+      style={{ margin: 0 }}
+    >
+      {text}
+    </Text>
+  );
+};
+
 const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
+<<<<<<< HEAD
+  link,
+=======
   logName,
+>>>>>>> master
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left
@@ -100,14 +120,17 @@ const ZaboCarousel = ({
   return (
     <EntireWrap>
       <UpperWrap>
-        <Text
-          size="2.8rem"
-          color={colorSet.text}
-          font={Font.Bold}
-          style={{ margin: 0 }}
-        >
-          {carouselTitle}
-        </Text>
+        {link ? (
+          <Link to={link} style={{ textDecoration: "none" }}>
+            <Flex alignItems="center" gap="20px">
+              <ZaboCarouselTitleText text={carouselTitle} />
+              <SmallArrow color={colorSet.secondaryText} size={"20px"} />
+            </Flex>
+          </Link>
+        ) : (
+          <ZaboCarouselTitleText text={carouselTitle} />
+        )}
+
         <ScrollBtnWrap>
           <HorizontalScrollButton.Left
             onClick={() => Scroll(-scrollAmount)}
