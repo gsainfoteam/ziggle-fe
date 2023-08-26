@@ -38,7 +38,7 @@ const HotNoticesPage = () => {
         <Spacer height={"8px"} />
 
         <Text size={"1rem"} font={Font.Medium} color={colorSet.secondaryText}>
-          지난 일주일 동안 조회수가 150이 넘은 공지들이여기서 지글지글 끓고
+          지난 일주일 동안 조회수가 150이 넘은 공지들이 여기서 지글지글 끓고
           있어요
         </Text>
       </Content>

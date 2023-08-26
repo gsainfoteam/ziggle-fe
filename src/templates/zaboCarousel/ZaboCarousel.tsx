@@ -66,6 +66,19 @@ const ZabosContainer = styled(Content)`
   scrollbar-width: none;
 `;
 
+const ZaboCarouselTitleText = ({ text }: { text: string }) => {
+  return (
+    <Text
+      size="2.8rem"
+      color={colorSet.text}
+      font={Font.Bold}
+      style={{ margin: 0 }}
+    >
+      {text}
+    </Text>
+  );
+};
+
 const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
@@ -105,26 +118,12 @@ const ZaboCarousel = ({
         {link ? (
           <Link to={link} style={{ textDecoration: "none" }}>
             <Flex alignItems="center" gap="20px">
-              <Text
-                size="2.8rem"
-                color={colorSet.text}
-                font={Font.Bold}
-                style={{ margin: 0 }}
-              >
-                {carouselTitle}
-              </Text>
+              <ZaboCarouselTitleText text={carouselTitle} />
               <SmallArrow color={colorSet.secondaryText} size={"20px"} />
             </Flex>
           </Link>
         ) : (
-          <Text
-            size="2.8rem"
-            color={colorSet.text}
-            font={Font.Bold}
-            style={{ margin: 0 }}
-          >
-            {carouselTitle}
-          </Text>
+          <ZaboCarouselTitleText text={carouselTitle} />
         )}
 
         <ScrollBtnWrap>

@@ -38,26 +38,22 @@ const App = () => {
           />
 
           {/* 각 공지 섹션별 */}
-          <Route
-            path={Paths.section + NoticeSection.event}
-            element={<EventNoticesPage />}
-          />
-          <Route
-            path={Paths.section + NoticeSection.hot}
-            element={<HotNoticesPage />}
-          />
-          <Route
-            path={Paths.section + NoticeSection.urgent}
-            element={<UrgentNoticesPage />}
-          />
-          <Route
-            path={Paths.section + NoticeSection.recruit}
-            element={<RecruitNoticesPage />}
-          />
-          <Route
-            path={Paths.section + NoticeSection.general}
-            element={<GeneralNoticesPage />}
-          />
+          <Route path={Paths.section}>
+            <Route path={NoticeSection.event} element={<EventNoticesPage />} />
+            <Route path={NoticeSection.hot} element={<HotNoticesPage />} />
+            <Route
+              path={NoticeSection.urgent}
+              element={<UrgentNoticesPage />}
+            />
+            <Route
+              path={NoticeSection.recruit}
+              element={<RecruitNoticesPage />}
+            />
+            <Route
+              path={NoticeSection.general}
+              element={<GeneralNoticesPage />}
+            />
+          </Route>
 
           {userInfo && ( // Page에 userInfo props로 넘기기? 이거 말곤 당장 생각이 안나요. 좋은 방법 있으면 바꿔주세요.
             <>
