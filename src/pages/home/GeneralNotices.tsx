@@ -4,8 +4,9 @@ import queryKeys from "src/apis/queryKeys";
 import { noticesToManyZabos } from "src/utils/noticeToZabo";
 
 import ZaboCarousel from "../../templates/zaboCarousel/ZaboCarousel";
+import { NoticeSectionProps } from "./HomePage";
 
-const NormalNotices = () => {
+const GeneralNotices = ({ link }: NoticeSectionProps) => {
   const { data } = useQuery(
     [
       queryKeys.getNotice,
@@ -22,8 +23,9 @@ const NormalNotices = () => {
     <ZaboCarousel
       manyZabos={noticesToManyZabos(data.list)}
       carouselTitle={"🔔 일반"}
+      link={link}
     />
   );
 };
 
-export default NormalNotices;
+export default GeneralNotices;

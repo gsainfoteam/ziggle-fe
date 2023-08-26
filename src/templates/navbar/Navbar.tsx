@@ -7,7 +7,7 @@ import Text from "src/atoms/text/Text";
 import useAuth from "src/hooks/useAuth";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
-import Paths from "src/types/paths";
+import Paths, { NoticeSection } from "src/types/paths";
 import styled from "styled-components";
 
 const Bar = styled.div<{ bgColor: string }>`
@@ -52,7 +52,10 @@ const Navbar = () => {
         <ZiggleLogo />
       </Link>
       <ButtonSum>
-        <Link to={Paths.all} style={{ textDecoration: "none" }}>
+        <Link
+          to={Paths.section + NoticeSection.all}
+          style={{ textDecoration: "none" }}
+        >
           <Text color={colorSet.colorless} size="1.0625rem" font={Font.Bold}>
             전체 공지
           </Text>
