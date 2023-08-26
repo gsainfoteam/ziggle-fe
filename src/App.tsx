@@ -1,7 +1,11 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
-import useAuth from "./hooks/useAuth";
-import useViewLog from "./hooks/useViewLog";
 import Layout from "./layout/Layout";
 import AllNoticesPage from "./pages/allNotices/AllNoticesPage";
 import DetailedNoticePage from "./pages/detailedNotice/DetailedNoticePage";
@@ -12,40 +16,31 @@ import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
 import Paths from "./types/paths";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route element={<Layout />}>
+      <Route path="*" element={<Navigate to={Paths.home} replace />} />
+
+      <Route path={Paths.home} element={<HomePage />} />
+      <Route path={Paths.all} element={<AllNoticesPage />} />
+      <Route path={Paths.search} element={<SearchPage />} />
+      <Route
+        path={Paths.noticeDetail + ":id"}
+        element={<DetailedNoticePage />}
+      />
+
+      <Route path={Paths.myPage} element={<MyPage />} />
+      <Route path={Paths.noticeWriting} element={<NoticeWritingPage />} />
+    </Route>,
+  ),
+);
+
 const App = () => {
-  const { userInfo } = useAuth();
-
-  useViewLog();
-
   return (
     <>
       <GlobalStyle />
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="*" element={<Navigate to={Paths.home} replace />} />
 
-          <Route path={Paths.home} element={<HomePage />} />
-          <Route path={Paths.all} element={<AllNoticesPage />} />
-          <Route path={Paths.search} element={<SearchPage />} />
-          <Route
-            path={Paths.noticeDetail + ":id"}
-            element={<DetailedNoticePage />}
-          />
-
-          {userInfo && ( // Page에 userInfo props로 넘기기? 이거 말곤 당장 생각이 안나요. 좋은 방법 있으면 바꿔주세요.
-            <>
-              <Route
-                path={Paths.myPage}
-                element={<MyPage userInfo={userInfo} />}
-              />
-              <Route
-                path={Paths.noticeWriting}
-                element={<NoticeWritingPage />}
-              />
-            </>
-          )}
-        </Route>
-      </Routes>
+      <RouterProvider router={router} />
     </>
   );
 };

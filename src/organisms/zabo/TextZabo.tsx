@@ -4,8 +4,9 @@ import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import Paths from "src/types/paths";
-import { ZaboProps } from "src/types/types";
+import { MOBILE_BREAKPOINT, ZaboProps } from "src/types/types";
 import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
@@ -50,6 +51,10 @@ const ZaboWrapper = styled(Button)<{
       }
     `;
   }}
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    padding: 10px;
+  }
 `;
 
 const TextZabo = ({
@@ -70,6 +75,8 @@ const TextZabo = ({
   ];
 
   const navigate = useNavigate();
+
+  const isMobile = useIsMobile();
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
@@ -106,7 +113,7 @@ const TextZabo = ({
       <Flex flexDirection="column">
         <Text
           font={Font.Bold}
-          size="1.625rem"
+          size={isMobile ? "1.25rem" : "1.625rem"}
           style={{
             textAlign: "left",
             WebkitLineClamp: lineClamp,

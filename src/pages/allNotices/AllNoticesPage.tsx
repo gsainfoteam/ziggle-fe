@@ -11,7 +11,7 @@ import Pagination from "src/molecules/pagination/Pagination";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
-import SearchResult from "src/templates/searchResult/SearchResult";
+import SearchResultImage from "src/templates/searchResultImage/SearchResultImage";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
 
 const NOTICE_PER_PAGE = 30;
@@ -78,7 +78,7 @@ const AllNoticesPage = () => {
 
             {data?.list.map((notice) =>
               notice.imageUrl ? (
-                <SearchResult
+                <SearchResultImage
                   id={notice.id}
                   deadline={notice.deadline}
                   title={notice.title}

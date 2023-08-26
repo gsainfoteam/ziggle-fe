@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Circle from "src/atoms/figures/circle/Circle";
-import FilledArrowBtn, {
-  HorizontalDirection,
-} from "src/atoms/filledArrow/FilledArrowBtn";
 import Spacer from "src/atoms/spacer/Spacer";
 import dummyBanners from "src/mock/dummy-banners";
 import BannerImage from "src/molecules/bannerImage/BannerImage";

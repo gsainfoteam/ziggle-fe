@@ -1,5 +1,7 @@
 import { Account } from "src/assets/Icons";
+import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
@@ -14,9 +16,11 @@ interface InfoFieldProps {
   children?: React.ReactNode;
 }
 const InfoField = ({ children }: InfoFieldProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <Text
-      size="1.4rem"
+      size={isMobile ? "1.125rem" : "1.375rem"}
       color={colorSet.secondaryText}
       font={Font.Regular}
       style={{
@@ -33,6 +37,8 @@ const InfoField = ({ children }: InfoFieldProps) => {
 };
 
 const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <div>
       <div
@@ -43,7 +49,7 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
         }}
       >
         <Text
-          size="2.5rem"
+          size={isMobile ? "1.75rem" : "2.5rem"}
           color={colorSet.text}
           font={Font.Medium}
           style={{
@@ -62,11 +68,14 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
             alignItems: "center",
           }}
         >
-          <Account color={colorSet.secondaryText} size="200px"></Account>
+          <Account
+            color={colorSet.secondaryText}
+            size={isMobile ? "140px" : "200px"}
+          ></Account>
         </div>
-        <div style={{ height: "50px" }}></div>
+        <Spacer height={isMobile ? "0px" : "50px"} />
         <Text
-          size="2.0rem"
+          size={isMobile ? "1.5rem" : "2rem"}
           color={colorSet.text}
           font={Font.Bold}
           style={{
@@ -79,7 +88,7 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
         </Text>
       </div>
       <div
-        style={{ display: "flex", flexDirection: "column", padding: "20px" }}
+        style={{ display: "flex", flexDirection: "column", padding: "0 20px" }}
       >
         {id && <InfoField>{id}</InfoField>}
         {phone && <InfoField>{phone}</InfoField>}

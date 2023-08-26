@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import useIsMobile from "src/hooks/useIsMobile";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled from "styled-components";
 
 import Button from "../../atoms/button/Button";
@@ -12,6 +14,10 @@ const SearchWrapper = styled.form`
   border: 2px solid ${colorSet.primary};
   border-radius: 5px;
   padding: 10px 20px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    padding: 4px 8px;
+  }
 `;
 
 interface SearchProps {
@@ -25,6 +31,7 @@ interface SearchProps {
 const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   const [keyword, setKeyword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const isMobile = useIsMobile();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,20 +56,30 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
         placeholder={placeholder}
         value={keyword}
         onChange={handleKeywordChange}
-        fontSize={"1.5rem"}
+        fontSize={isMobile ? "1.125rem" : "1.5rem"}
         color={colorSet.primary}
+        padding={isMobile ? "0.375rem" : "0.5rem"}
         style={{
           flexGrow: 1,
           lineHeight: "1.5rem",
         }}
       />
       {isSubmitted ? (
-        <Button type={"button"} onClick={handleDeleteClick}>
-          <Icon.XPrimary />
+        <Button
+          type={"button"}
+          onClick={handleDeleteClick}
+          style={{
+            marginRight: "2px",
+          }}
+        >
+          <Icon.XPrimary width={isMobile ? "20px" : "27px"} />
         </Button>
       ) : (
         <Button type={"submit"}>
-          <Icon.SearchPrimary width={"32px"} height={"32px"} />
+          <Icon.SearchPrimary
+            width={isMobile ? "28px" : "32px"}
+            height={isMobile ? "28px" : "32px"}
+          />
         </Button>
       )}
     </SearchWrapper>

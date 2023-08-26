@@ -1,8 +1,10 @@
-export const ZiggleLogo = () => {
+import { SvgProps } from "src/types/types";
+
+export const ZiggleLogo = ({ width = "108", height = "58" }: SvgProps) => {
   return (
     <svg
-      width="108"
-      height="58"
+      width={width}
+      height={height}
       viewBox="0 0 108 58"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

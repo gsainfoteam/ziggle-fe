@@ -3,6 +3,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Image from "src/atoms/image/Image";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import HorizontalScrollButton from "src/molecules/horizontalScrollButton/HorizontalScrollButton";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -44,6 +45,7 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
     true, // left
     false, // right
   ]);
+  const isMobile = useIsMobile();
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const scroll = (amount: number) => {
@@ -68,7 +70,11 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
   return (
     <>
       <UpperWrap>
-        <Text size="2.8rem" font={Font.Bold} style={{ margin: 0 }}>
+        <Text
+          size={isMobile ? "1.5rem" : "2.5rem"}
+          font={Font.Bold}
+          style={{ margin: 0 }}
+        >
           첨부 사진
         </Text>
         <ScrollBtnWrap>
@@ -90,7 +96,7 @@ const ImageCarousel = ({ imageSrcs }: ImageCarouselProps) => {
           <Image
             src={src}
             key={src}
-            height={"333px"}
+            width={isMobile ? "200px" : "300px"}
             style={{
               border: `2px solid ${colorSet.colorless}`,
               borderRadius: "5px",

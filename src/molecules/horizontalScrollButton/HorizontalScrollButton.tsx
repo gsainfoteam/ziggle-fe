@@ -1,4 +1,5 @@
 import React from "react";
+import useIsMobile from "src/hooks/useIsMobile";
 import styled from "styled-components";
 
 import Button from "../../atoms/button/Button";
@@ -27,24 +28,40 @@ interface ButtonProps {
 }
 
 const Left = ({ disabled = false, onClick }: ButtonProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleLeftDeselected width={"36px"} height={"36px"} />
+        <Icon.ArrowCircleLeftDeselected
+          width={isMobile ? "32px" : "36px"}
+          height={isMobile ? "32px" : "36px"}
+        />
       ) : (
-        <Icon.ArrowCircleLeftPrimary width={"36px"} height={"36px"} />
+        <Icon.ArrowCircleLeftPrimary
+          width={isMobile ? "32px" : "32px"}
+          height={isMobile ? "32px" : "36px"}
+        />
       )}
     </AnimatedBtn>
   );
 };
 
 const Right = ({ disabled = false, onClick }: ButtonProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <AnimatedBtn onClick={onClick}>
       {disabled ? (
-        <Icon.ArrowCircleRightDeselected width={"36px"} height={"36px"} />
+        <Icon.ArrowCircleRightDeselected
+          width={isMobile ? "32px" : "36px"}
+          height={isMobile ? "32px" : "36px"}
+        />
       ) : (
-        <Icon.ArrowCircleRightPrimary width={"36px"} height={"36px"} />
+        <Icon.ArrowCircleRightPrimary
+          width={isMobile ? "32px" : "36px"}
+          height={isMobile ? "32px" : "36px"}
+        />
       )}
     </AnimatedBtn>
   );

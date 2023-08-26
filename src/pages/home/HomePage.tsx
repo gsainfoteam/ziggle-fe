@@ -1,3 +1,5 @@
+import useIsMobile from "src/hooks/useIsMobile";
+
 import Area from "../../atoms/containers/area/Area";
 import Spacer from "../../atoms/spacer/Spacer";
 import AcademicNotices from "./AcademicNotices";
@@ -9,13 +11,15 @@ import RecruitNotices from "./RecruitNotices";
 import UrgentNotices from "./UrgentNotices";
 
 const HomePage = () => {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <Area>
         <Banner />
       </Area>
 
-      <Spacer height={"60px"} />
+      <Spacer height={isMobile ? "0px" : "60px"} />
 
       <Area>
         <UrgentNotices />
