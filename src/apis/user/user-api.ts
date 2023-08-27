@@ -31,3 +31,8 @@ export const getUserInfo = async ({ queryKey }: { queryKey: [string] }) => {
 
   return data;
 };
+
+export const logout = async () => {
+  localStorage.removeItem("access_token");
+  window.location.href = "/";
+};

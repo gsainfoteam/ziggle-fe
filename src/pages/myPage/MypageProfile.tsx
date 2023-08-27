@@ -1,7 +1,9 @@
+import { logout } from "src/apis/user/user-api";
 import { Account } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import StylelessLink from "src/atoms/stylelessLink/StylelessLink";
 import Text from "src/atoms/text/Text";
 import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
@@ -38,32 +40,31 @@ const InfoField = ({ children }: InfoFieldProps) => {
   );
 };
 
-interface UnderLinedButtonProps {
-  onClick?: () => void;
+interface UnderLinedTextProps {
   text: string;
 }
 
-const UnderLinedButton = ({ onClick, text }: UnderLinedButtonProps) => {
+const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   return (
-    <Button onClick={onClick}>
-      <Text
-        size={"1rem"}
-        color={colorSet.secondaryText}
-        font={Font.Regular}
-        style={{
-          textDecoration: "underline",
-          textAlign: "right",
-          paddingRight: "20px",
-        }}
-      >
-        {text}
-      </Text>
-    </Button>
+    <Text
+      size={"1rem"}
+      color={colorSet.secondaryText}
+      font={Font.Regular}
+      style={{
+        textDecoration: "underline",
+        textAlign: "right",
+        paddingRight: "20px",
+      }}
+    >
+      {text}
+    </Text>
   );
 };
 
 const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
   const isMobile = useIsMobile();
+
+  const idpUrl = "https://idp.gistory.me";
 
   return (
     <div>
@@ -106,22 +107,25 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
         >
           {name}
         </Text>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "0 20px",
-          }}
-        >
+        <Flex flexDirection="column" style={{ padding: "0 20px" }}>
           {id && <InfoField>{id}</InfoField>}
           {phone && <InfoField>{phone}</InfoField>}
           {email && <InfoField>{email}</InfoField>}
 
-          <Flex gap="5px">
-            <UnderLinedButton text="로그아웃" />
-            <UnderLinedButton text="회원탈퇴" />
+          <Spacer height={"20px"} />
+          <Flex gap="5px" justifyContent="center">
+            <Button
+              onClick={() => {
+                logout();
+              }}
+            >
+              <UnderLinedText text="로그아웃" />
+            </Button>
+            <StylelessLink to={idpUrl}>
+              <UnderLinedText text="회원탈퇴" />
+            </StylelessLink>
           </Flex>
-        </div>
+        </Flex>
       </Flex>
     </div>
   );

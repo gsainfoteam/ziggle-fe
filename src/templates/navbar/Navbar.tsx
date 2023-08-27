@@ -76,7 +76,7 @@ const Navbar = () => {
         </Flex>
         <ButtonSum gap={"0 20px"}>
           <StylelessLink
-            to={Paths.all}
+            to={Paths.section + NoticeSection.all}
             onClick={() => sendLog(LogEvents.NavBarClickAll)}
           >
             <Text color={colorSet.colorless} size="0.875rem" font={Font.Bold}>
