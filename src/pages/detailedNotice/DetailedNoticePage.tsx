@@ -5,6 +5,7 @@ import { getNotice } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
+import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
@@ -13,11 +14,13 @@ import styled from "styled-components";
 
 import Banner from "../home/assets/banner2.png";
 import BackToMainBtn from "./BackToMainBtn";
+import CopyLinkButton from "./CopyLinkButton";
 import FullPageImageViewer from "./FullPageImageViewer";
 import HowAboutThese from "./HowAboutThese";
 import ImageCarousel from "./ImageCarousel";
 import NoticeContent from "./NoticeContent";
 import NoticeInfo from "./NoticeInfo";
+import ShareButton from "./ShareButton";
 import ZaboShowcase from "./ZaboShowcase";
 
 export interface dummyDetailedNotice {
@@ -80,7 +83,14 @@ const DetailedNoticePage = () => {
         <CoverContent>
           <Spacer height={isMobile ? "30px" : "50px"} />
 
-          <BackToMainBtn />
+          <Flex justifyContent={"space-between"}>
+            <Flex gap={"8px"}>
+              <CopyLinkButton title={data.title} />
+              <ShareButton title={data.title} />
+            </Flex>
+
+            <BackToMainBtn />
+          </Flex>
 
           <Spacer height={isMobile ? "15px" : "20px"} />
 

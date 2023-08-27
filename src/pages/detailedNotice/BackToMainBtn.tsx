@@ -14,39 +14,37 @@ const BackToMainBtn = () => {
     navigator("/");
   };
 
-  const { hovered, ref } = useHover();
+  const { hovered, ref } = useHover<HTMLButtonElement>();
   const isMobile = useIsMobile();
 
   return (
-    <Flex width="100%" justifyContent="right" ref={ref}>
-      <Button onClick={backToMain}>
-        <Flex
-          alignItems="center"
-          gap={hovered ? "14px" : "9px"}
-          style={{ transition: "0.2s" }}
+    <Button onClick={backToMain} ref={ref}>
+      <Flex
+        alignItems="center"
+        gap={hovered ? "14px" : isMobile ? "5px" : "9px"}
+        style={{ transition: "0.2s" }}
+      >
+        <Arrow
+          size={isMobile ? "16px" : "24px"}
+          color={hovered ? colorSet.primary : colorSet.secondaryText}
+        />
+        <Text
+          font={Font.Medium}
+          size={isMobile ? "0.875rem" : "1.125rem"}
+          color={hovered ? colorSet.primary : colorSet.secondaryText}
         >
-          <Arrow
-            size={isMobile ? "20px" : "24px"}
-            color={hovered ? colorSet.primary : colorSet.secondaryText}
-          />
-          <Text
-            font={Font.Medium}
-            size={isMobile ? "1rem" : "1.125rem"}
-            color={hovered ? colorSet.primary : colorSet.secondaryText}
-          >
-            메인 페이지로 돌아가기
-          </Text>
-          <div
-            style={{
-              borderRight: `${isMobile ? 3 : 4}px solid ${
-                hovered ? colorSet.primary : colorSet.secondaryText
-              }`,
-              height: isMobile ? "25px" : "32px",
-            }}
-          ></div>
-        </Flex>
-      </Button>
-    </Flex>
+          메인 페이지로 돌아가기
+        </Text>
+        <div
+          style={{
+            borderRight: `${isMobile ? 3 : 4}px solid ${
+              hovered ? colorSet.primary : colorSet.secondaryText
+            }`,
+            height: isMobile ? "20px" : "32px",
+          }}
+        ></div>
+      </Flex>
+    </Button>
   );
 };
 
