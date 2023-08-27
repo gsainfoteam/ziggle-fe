@@ -1,9 +1,10 @@
-import React from "react";
 import LogEvents from "src/apis/log/log-event";
 import sendLog from "src/apis/log/sendLog";
 import { AppStore, Github, PlayStore } from "src/assets/Icons";
 import { InfoteamLogo } from "src/assets/ZiggleLogo";
+import ExternalLink from "src/atoms/externalLink/ExternalLink";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import styled from "styled-components";
@@ -19,28 +20,6 @@ const Bar = styled(Flex)<{ padding: string; bgColor: string }>`
   min-height: 380px;
 `;
 
-const Link = styled(Text)`
-  text-decoration: none;
-`;
-
-const ExternalLink = ({
-  href,
-  children,
-  onClick,
-}: React.PropsWithChildren<{ href: string; onClick?: () => void }>) => (
-  <Link
-    as="a"
-    href={href}
-    target="_blank"
-    rel="noreferrer"
-    font={Font.Regular}
-    size="0.9rem"
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-);
-
 interface LinkSumProps {
   title: string;
   links: {
@@ -51,9 +30,15 @@ interface LinkSumProps {
 }
 
 const LinkSum = ({ title, links }: LinkSumProps) => {
+  const isMobile = useIsMobile();
+
   return (
-    <Flex flexDirection="column" gap="1.8rem" width="8rem">
-      <Text font={Font.Bold} size="0.9rem">
+    <Flex
+      flexDirection="column"
+      gap={isMobile ? "1rem" : "1.8125rem"}
+      width="8rem"
+    >
+      <Text font={Font.Bold} size="0.875rem">
         {title}
       </Text>
       <Flex gap="1rem" flexDirection="column">
@@ -124,12 +109,14 @@ const linkSections = [
 ];
 
 const Footer = () => {
+  const isMobile = useIsMobile();
+
   return (
     <Bar
       width={"100%"}
       padding={defaults.pageSideGap}
       bgColor={colorSet.primary}
-      gap="6rem"
+      gap={"3rem 6rem"}
     >
       <Flex flexDirection="column" justifyContent="space-between">
         <Flex flexDirection="column">
@@ -142,19 +129,19 @@ const Footer = () => {
               href="https://github.com/gsainfoteam"
               onClick={() => sendLog(LogEvents.FooterClickGithub)}
             >
-              <Github size="2.6rem" />
+              <Github size={isMobile ? "2rem" : "2.5rem"} />
             </ExternalLink>
             <ExternalLink
               href="https://play.google.com/store/apps/details?id=me.gistory.ziggle"
               onClick={() => sendLog(LogEvents.FooterClickPlayStore)}
             >
-              <PlayStore size="2.6rem" />
+              <PlayStore size={isMobile ? "2rem" : "2.5rem"} />
             </ExternalLink>
             <ExternalLink
               href="https://apps.apple.com/kr/app/ziggle/id6451740697"
               onClick={() => sendLog(LogEvents.FooterClickAppStore)}
             >
-              <AppStore size="2.6rem" />
+              <AppStore size={isMobile ? "2rem" : "2.5rem"} />
             </ExternalLink>
           </Flex>
         </Flex>

@@ -3,6 +3,8 @@ import LogEvents from "src/apis/log/log-event";
 import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
+import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
 import Paths from "src/types/paths";
 import { SearchResultProps } from "src/types/types";
@@ -21,7 +23,6 @@ const ZaboWrapper = styled.div`
   justify-content: space-between;
   gap: 10px;
   padding: 20px;
-  margin-top: 1rem;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
@@ -49,6 +50,7 @@ const SearchResultText = ({
   logName,
 }: SearchResultProps) => {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
@@ -60,9 +62,14 @@ const SearchResultText = ({
 
   return (
     <Button width={"100%"} onClick={handleZaboClick}>
-      <ZaboWrapper>
+      <ZaboWrapper
+        style={{
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         <Flex flexDirection="column" alignItems={"start"}>
-          <Text font={Font.Medium} size="1.2rem">
+          <Text font={Font.Medium} size={isMobile ? "0.875rem" : "1.25rem"}>
             {deadline &&
               `마감일 ${formatISODate(deadline)} (${getDayOfWeek(deadline)})`}
           </Text>
@@ -70,16 +77,17 @@ const SearchResultText = ({
             text={title}
             query={searchQuery}
             font={Font.Bold}
-            size="1.875rem"
+            size={isMobile ? "1.25rem" : "1.875rem"}
             textAlign={"start"}
             highlightColor={colorSet.primary}
           />
+          <Spacer height={"5px"} />
           <Flex gap="0.5rem" alignItems="center">
             <GetHighlightedText
               text={author}
               query={searchQuery}
               font={Font.Bold}
-              size="1.125rem"
+              size={isMobile ? "0.875rem" : "1.125rem"}
               highlightColor={colorSet.primary}
             />
             {organization && (
@@ -89,7 +97,7 @@ const SearchResultText = ({
                   text={organization}
                   query={searchQuery}
                   font={Font.Bold}
-                  size="1.125rem"
+                  size={isMobile ? "0.875rem" : "1.125rem"}
                   highlightColor={colorSet.primary}
                 />
               </>
@@ -110,7 +118,7 @@ const SearchResultText = ({
           </Flex>
           <Text
             font={Font.Medium}
-            size="1.125rem"
+            size={isMobile ? "0.875rem" : "1.125rem"}
             textAlign={"start"}
             style={{
               textOverflow: "ellipsis",
@@ -129,13 +137,25 @@ const SearchResultText = ({
 
         <Flex flexDirection="column">
           <Flex gap="0.25em">
-            <Text font={Font.Medium} color={colorSet.secondaryText}>
+            <Text
+              font={Font.Medium}
+              color={colorSet.secondaryText}
+              size={isMobile ? "0.75rem" : "1rem"}
+            >
               {formatISODate(date)}
             </Text>
-            <Text font={Font.Medium} color={colorSet.secondaryText}>
+            <Text
+              font={Font.Medium}
+              color={colorSet.secondaryText}
+              size={isMobile ? "0.75rem" : "1rem"}
+            >
               •
             </Text>
-            <Text font={Font.Bold} color={colorSet.secondaryText}>
+            <Text
+              font={Font.Bold}
+              color={colorSet.secondaryText}
+              size={isMobile ? "0.75rem" : "1rem"}
+            >
               조회수 {viewCount}
             </Text>
           </Flex>

@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import queryKeys from "src/apis/queryKeys";
 import { getUserInfo, loginWithIdp } from "src/apis/user/user-api";
+import Paths from "src/types/paths";
+
+const loginRequiredPaths = [Paths.myPage, Paths.noticeWriting];
 
 const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
   const [query, setQuery] = useSearchParams();
@@ -17,6 +20,7 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
   );
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -40,6 +44,16 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: string } = {}) => {
 
     handleLogin();
   }, [isError, navigate, query, redirectUrl, setQuery]);
+
+  useEffect(() => {
+    const pathname = location.pathname as Paths;
+
+    if (loginRequiredPaths.includes(pathname) && !userInfo) {
+      navigate(Paths.home, {
+        state: { from: pathname },
+      });
+    }
+  }, [location, navigate, userInfo]);
 
   return { userInfo };
 };

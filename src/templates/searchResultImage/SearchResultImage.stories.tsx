@@ -2,15 +2,15 @@ import { Meta, StoryFn } from "@storybook/react";
 import dummyTags from "src/mock/dummy-tags";
 
 // import colorSet from "src/styles/colorSet";
-import SearchResult from "./SearchResult";
+import SearchResultImage from "./SearchResultImage";
 
 export default {
   title: "templates/searchResult/SearchResult",
-  component: SearchResult,
-} as Meta<typeof SearchResult>;
+  component: SearchResultImage,
+} as Meta<typeof SearchResultImage>;
 
-const Template: StoryFn<typeof SearchResult> = (args) => (
-  <SearchResult {...args} />
+const Template: StoryFn<typeof SearchResultImage> = (args) => (
+  <SearchResultImage {...args} />
 );
 
 export const Default = Template.bind({});

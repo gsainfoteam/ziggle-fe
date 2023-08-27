@@ -1,17 +1,24 @@
 import colorSet from "src/styles/colorSet";
+import { SvgProps } from "src/types/types";
 
-interface LongArrowSvgProps {
+interface LongArrowSvgProps extends SvgProps {
   onClick?: () => void;
   right?: boolean;
   deselected?: boolean;
 }
 
-const LongArrowSvg = ({ onClick, right, deselected }: LongArrowSvgProps) => {
+const LongArrowSvg = ({
+  onClick,
+  right,
+  deselected,
+  width,
+  height,
+}: LongArrowSvgProps) => {
   return (
     <svg
-      width="62"
-      height="243"
-      viewBox="0 0 62 243"
+      width={width}
+      height={height}
+      viewBox={`0 0 62 243`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={onClick}

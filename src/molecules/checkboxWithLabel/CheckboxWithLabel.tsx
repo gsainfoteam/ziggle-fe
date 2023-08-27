@@ -1,4 +1,5 @@
 import React from "react";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import styled, { keyframes } from "styled-components";
 
@@ -103,29 +104,41 @@ const CheckboxWithLabel = ({
   checked,
   onChange,
   children,
-}: CheckboxWithLabelProps) => (
-  <CheckboxWrapper>
-    <input
-      className="inp-cbx"
-      id={id}
-      type="checkbox"
-      checked={checked}
-      onChange={(e) => onChange(e.target.checked)}
-    />
-    <label className="cbx" htmlFor={id}>
-      <span>
-        <svg width="12px" height="10px">
-          <use xlinkHref="#check-4"></use>
-        </svg>
-      </span>
-      <span>{children}</span>
-    </label>
-    <svg className="inline-svg">
-      <symbol id="check-4" viewBox="0 0 12 10">
-        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-      </symbol>
-    </svg>
-  </CheckboxWrapper>
-);
+}: CheckboxWithLabelProps) => {
+  const isMobile = useIsMobile();
+
+  return (
+    <CheckboxWrapper>
+      <input
+        className="inp-cbx"
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <label className="cbx" htmlFor={id}>
+        <span>
+          <svg
+            width={isMobile ? "calc(12px / 1.2)" : "12px"}
+            height={isMobile ? "calc(12px / 1.2)" : "10px"}
+          >
+            <use xlinkHref="#check-4"></use>
+          </svg>
+        </span>
+        <span>{children}</span>
+      </label>
+      <svg className="inline-svg">
+        <symbol
+          id="check-4"
+          viewBox="0 0 12 10"
+          width={isMobile ? "calc(12px / 1.2)" : "12px"}
+          height={isMobile ? "calc(12px / 1.2)" : "10px"}
+        >
+          <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </symbol>
+      </svg>
+    </CheckboxWrapper>
+  );
+};
 
 export default CheckboxWithLabel;

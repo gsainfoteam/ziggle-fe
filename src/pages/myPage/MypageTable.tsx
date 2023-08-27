@@ -1,6 +1,7 @@
 import Flex from "src/atoms/containers/flex/Flex";
 import StylelessLink from "src/atoms/stylelessLink/StylelessLink";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import Paths from "src/types/paths";
@@ -15,13 +16,15 @@ interface MypageTableProps {
 }
 
 const MypageTable = ({ title, articles, link }: MypageTableProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <div
       style={{ borderRadius: "10px", boxShadow: "0 0 4px rgba(0, 0, 0, 0.3)" }}
     >
       <div
         style={{
-          width: "700px",
+          width: isMobile ? "100%" : "700px",
           border: "1px solid #ccc",
           borderCollapse: "separate",
           borderSpacing: "0",

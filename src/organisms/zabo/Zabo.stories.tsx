@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from "@storybook/react";
 
-import Zabo from "./Zabo";
+import ImageZabo from "./ImageZabo";
 
 export default {
   title: "organisms/zabo/Zabo",
-  component: Zabo,
-} as Meta<typeof Zabo>;
+  component: ImageZabo,
+} as Meta<typeof ImageZabo>;
 
-const Template: StoryFn<typeof Zabo> = (args) => <Zabo {...args} />;
+const Template: StoryFn<typeof ImageZabo> = (args) => <ImageZabo {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

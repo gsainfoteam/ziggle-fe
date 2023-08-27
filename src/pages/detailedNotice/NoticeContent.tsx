@@ -2,6 +2,7 @@ import DOMPurify from "dompurify";
 import React from "react";
 import Text from "src/atoms/text/Text";
 import Font from "src/styles/font";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled from "styled-components";
 
 export interface NoticeContentProps {
@@ -23,6 +24,22 @@ const ContentShower = styled(Text)`
   }
   h3 {
     font-size: 1.25rem;
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    p {
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+    }
+    h3 {
+      font-size: 1.125rem;
+    }
   }
 `;
 

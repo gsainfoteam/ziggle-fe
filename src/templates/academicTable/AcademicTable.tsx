@@ -1,10 +1,9 @@
-import React from "react";
+import Grid from "src/atoms/containers/grid/Grid";
+import ExternalLink from "src/atoms/externalLink/ExternalLink";
 import Text from "src/atoms/text/Text";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import styled from "styled-components";
-
-import Flex from "../../atoms/containers/flex/Flex";
 
 export enum AcademicTableType {
   Title,
@@ -23,7 +22,6 @@ interface AcademicTableProps {
 const Cell = styled.div<{
   bgColor: string;
   borderColor: string;
-  flexGrow?: React.CSSProperties["flexGrow"];
   isLast?: boolean;
 }>`
   background-color: ${(props) => props.bgColor};
@@ -32,13 +30,11 @@ const Cell = styled.div<{
   border-left: none;
   border-right: ${(props) => (props.isLast ? "none" : undefined)};
 
-  flex-grow: ${(props) => props.flexGrow || 0};
-  width: 160px;
   padding: 16px 16px;
   box-sizing: border-box;
 `;
 
-const TableWrapper = styled(Flex)``;
+const TableWrapper = styled(Grid)``;
 
 const AcademicTable = ({
   type,
@@ -69,7 +65,7 @@ const AcademicTable = ({
           date,
         ];
   return (
-    <TableWrapper>
+    <TableWrapper gridTemplateColumns={"1fr 4.5fr 1fr 1fr"}>
       <Cell bgColor={bgColor} borderColor={borderColor}>
         <Text
           textAlign="center"
@@ -80,8 +76,8 @@ const AcademicTable = ({
           {Tags?.join("/")}
         </Text>
       </Cell>
-      <Cell bgColor={bgColor} borderColor={borderColor} flexGrow={4.5}>
-        <a href={link} target={"_blank"} rel="noreferrer">
+      <Cell bgColor={bgColor} borderColor={borderColor}>
+        <ExternalLink href={link || ""}>
           <Text
             textAlign={type == AcademicTableType.Title ? "center" : "left"}
             color={color}
@@ -90,7 +86,7 @@ const AcademicTable = ({
           >
             {Title}
           </Text>
-        </a>
+        </ExternalLink>
       </Cell>
       <Cell bgColor={bgColor} borderColor={borderColor}>
         <Text

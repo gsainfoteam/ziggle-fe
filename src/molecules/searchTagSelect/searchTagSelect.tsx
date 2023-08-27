@@ -1,4 +1,6 @@
 //import React from 'react';
+import useIsMobile from "src/hooks/useIsMobile";
+
 import Button from "../../atoms/button/Button";
 import Flex from "../../atoms/containers/flex/Flex";
 import { NoticeType } from "../../types/types";
@@ -10,6 +12,8 @@ interface NoticeTypeCheckboxProps {
 }
 
 const searchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
+  const isMobile = useIsMobile();
+
   const handleCheckboxChange = (type: NoticeType) => {
     const index = selected.indexOf(type);
     if (index === -1) {
@@ -24,7 +28,13 @@ const searchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
   };
 
   return (
-    <Flex gap={"12px"}>
+    <Flex
+      gap={isMobile ? "8px" : "12px"}
+      justifyContent={isMobile ? "space-between" : "start"}
+      style={{
+        padding: "0 2px",
+      }}
+    >
       <Button onClick={() => handleCheckboxChange(NoticeType.RECRUIT)}>
         <Chip
           label={"🎯 모집"}

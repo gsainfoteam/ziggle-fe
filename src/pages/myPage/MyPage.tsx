@@ -2,20 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
 import { getAllNotices } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
+import { getUserInfo } from "src/apis/user/user-api";
 import Area from "src/atoms/containers/area/Area";
+import Content from "src/atoms/containers/content/Content";
+import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
 import Paths, { NoticeSection } from "src/types/paths";
-import { User } from "src/types/types";
-
-interface MyPageProps {
-  userInfo: User;
-}
 
 const SHOW_NOTICE_PAGE = 4;
 
-const MyPage = ({ userInfo }: MyPageProps) => {
+const MyPage = () => {
+  const { data: userInfo } = useQuery([queryKeys.getUserInfo], getUserInfo);
+  const isMobile = useIsMobile();
+
   const isSmall = useMediaQuery({ maxWidth: 1200 });
   const { data: myNotices } = useQuery(
     [queryKeys.getAllNotices, { my: "own", limit: SHOW_NOTICE_PAGE }],
@@ -27,15 +29,17 @@ const MyPage = ({ userInfo }: MyPageProps) => {
   );
 
   const Height = isSmall ? "1500px" : "1000px";
-  return (
-    <>
-      <Area>
+
+  return userInfo ? (
+    <Area>
+      <Content>
         <div
           style={{
             display: "flex",
             height: Height,
             alignItems: "center",
             flexDirection: isSmall ? "column" : "row",
+            gap: "40px 0",
           }}
         >
           <div
@@ -59,14 +63,19 @@ const MyPage = ({ userInfo }: MyPageProps) => {
 
           <div
             style={{
-              flex: 3,
+              width: isMobile ? "100%" : undefined,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
             }}
           >
-            <div style={{ padding: "50px" }}>
+            <div
+              style={{
+                padding: isMobile ? 0 : "50px",
+                width: isMobile ? "100%" : undefined,
+              }}
+            >
               <MypageTable
                 title="내가 게시한 공지 목록"
                 articles={myNotices?.list ?? []}
@@ -74,7 +83,13 @@ const MyPage = ({ userInfo }: MyPageProps) => {
               />
             </div>
 
-            <div>
+            <Spacer height={isMobile ? "50px" : "0px"} />
+
+            <div
+              style={{
+                width: isMobile ? "100%" : undefined,
+              }}
+            >
               <MypageTable
                 title="리마인드 설정한 게시물 목록"
                 articles={reminders?.list ?? []}
@@ -83,8 +98,12 @@ const MyPage = ({ userInfo }: MyPageProps) => {
             </div>
           </div>
         </div>
-      </Area>
-    </>
+      </Content>
+      <Spacer height="50px" />
+      {/* Table이 Footer를 넘어가는 신기한 현상이 발생해서 임시조치 했습니다. */}
+    </Area>
+  ) : (
+    <></>
   );
 };
 

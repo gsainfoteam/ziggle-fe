@@ -1,11 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { ScrollRestoration, useParams } from "react-router-dom";
 import { getNotice } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
+import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import { isEmpty } from "src/utils/utils";
@@ -13,11 +15,13 @@ import styled from "styled-components";
 
 import Banner from "../home/assets/banner2.png";
 import BackToMainBtn from "./BackToMainBtn";
+import CopyLinkButton from "./CopyLinkButton";
 import FullPageImageViewer from "./FullPageImageViewer";
 import HowAboutThese from "./HowAboutThese";
 import ImageCarousel from "./ImageCarousel";
 import NoticeContent from "./NoticeContent";
 import NoticeInfo from "./NoticeInfo";
+import ShareButton from "./ShareButton";
 import ZaboShowcase from "./ZaboShowcase";
 
 export interface dummyDetailedNotice {
@@ -40,7 +44,7 @@ const CoverContent = styled(Content)`
 
 const DetailedNoticePage = () => {
   const [showImageViewer, setShowImageViewer] = useState<boolean>(false);
-
+  const isMobile = useIsMobile();
   const { id } = useParams();
 
   const { data, isLoading } = useQuery(
@@ -65,6 +69,8 @@ const DetailedNoticePage = () => {
 
   return (
     <>
+      <ScrollRestoration />
+
       <Area>
         {isImageExist ? (
           <ZaboShowcase
@@ -83,11 +89,18 @@ const DetailedNoticePage = () => {
         )}
 
         <CoverContent>
-          <Spacer height={"50px"} />
+          <Spacer height={isMobile ? "30px" : "50px"} />
 
-          <BackToMainBtn />
+          <Flex justifyContent={"space-between"}>
+            <Flex gap={"8px"}>
+              <CopyLinkButton title={data.title} />
+              <ShareButton title={data.title} />
+            </Flex>
 
-          <Spacer height={"20px"} />
+            <BackToMainBtn />
+          </Flex>
+
+          <Spacer height={isMobile ? "15px" : "20px"} />
 
           <NoticeInfo
             id={data.id}

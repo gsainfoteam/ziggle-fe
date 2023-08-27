@@ -3,6 +3,7 @@ import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
@@ -17,9 +18,11 @@ interface InfoFieldProps {
   children?: React.ReactNode;
 }
 const InfoField = ({ children }: InfoFieldProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <Text
-      size="1.4rem"
+      size={isMobile ? "1.125rem" : "1.375rem"}
       color={colorSet.secondaryText}
       font={Font.Regular}
       style={{
@@ -60,11 +63,13 @@ const UnderLinedButton = ({ onClick, text }: UnderLinedButtonProps) => {
 };
 
 const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <div>
       <Flex flexDirection="column" alignItems="center">
         <Text
-          size="2.5rem"
+          size={isMobile ? "1.75rem" : "2.5rem"}
           color={colorSet.text}
           font={Font.Medium}
           style={{
@@ -76,12 +81,21 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
         >
           INFO
         </Text>
-        <Flex flexDirection="column" alignItems="center">
-          <Account color={colorSet.secondaryText} size="200px"></Account>
-        </Flex>
-        <Spacer height="50px" />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Account
+            color={colorSet.secondaryText}
+            size={isMobile ? "140px" : "200px"}
+          ></Account>
+        </div>
+        <Spacer height={isMobile ? "0px" : "50px"} />
         <Text
-          size="2.0rem"
+          size={isMobile ? "1.5rem" : "2rem"}
           color={colorSet.text}
           font={Font.Bold}
           style={{
@@ -92,19 +106,22 @@ const MypageProfile = ({ name, id, phone, email }: MypageProfileProps) => {
         >
           {name}
         </Text>
-
-        <Flex flexDirection="column" style={{ padding: "20px" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "0 20px",
+          }}
+        >
           {id && <InfoField>{id}</InfoField>}
           {phone && <InfoField>{phone}</InfoField>}
           {email && <InfoField>{email}</InfoField>}
-        </Flex>
 
-        <Spacer height="20px" />
-
-        <Flex gap="5px">
-          <UnderLinedButton text="로그아웃" />
-          <UnderLinedButton text="회원탈퇴" />
-        </Flex>
+          <Flex gap="5px">
+            <UnderLinedButton text="로그아웃" />
+            <UnderLinedButton text="회원탈퇴" />
+          </Flex>
+        </div>
       </Flex>
     </div>
   );
