@@ -1,4 +1,5 @@
 import React from "react";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled from "styled-components";
 
 import colorSet from "../../../styles/colorSet";
@@ -33,6 +34,12 @@ const Input = styled.input<InputProps>`
     color: ${colorSet.placeholder};
     font-family: Noto Sans KR, sans-serif;
     font-weight: 700;
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    ::placeholder {
+      font-weight: 500;
+    }
   }
 `;
 

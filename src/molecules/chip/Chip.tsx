@@ -1,3 +1,5 @@
+import useIsMobile from "src/hooks/useIsMobile";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled, { css } from "styled-components";
 
 import Text from "../../atoms/text/Text";
@@ -23,6 +25,10 @@ const ChipWrapper = styled.div<ChipWrapperProps>`
   border: 1.75px solid ${colorSet.primary};
   border-radius: 10px;
   padding: 0 12px;
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    height: 26px;
+  }
 
   ${({ variant }) => {
     switch (variant) {
@@ -56,11 +62,13 @@ const Chip = ({
   label,
   font = Font.Medium,
 }: ChipProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <ChipWrapper variant={variant}>
       <Text
         font={font}
-        size={"1.125rem"}
+        size={isMobile ? "1rem" : "1.125rem"}
         color={variant === ChipVariant.outlined ? colorSet.primary : "#ffffff"}
       >
         {label}

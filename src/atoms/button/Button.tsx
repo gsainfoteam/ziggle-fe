@@ -1,4 +1,5 @@
 import React from "react";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled, { css } from "styled-components";
 
 import colorSet from "../../styles/colorSet";
@@ -28,12 +29,23 @@ const Button = styled.button<ButtonProps>`
   line-height: 0;
 
   ${({ variant }) => {
+    if (variant) {
+      return css`
+        border-radius: 5px;
+        padding: 10px 20px;
+
+        @media (max-width: ${MOBILE_BREAKPOINT}) {
+          padding: 3px 10px;
+        }
+      `;
+    }
+  }}
+
+  ${({ variant }) => {
     switch (variant) {
       case ButtonVariant.outlined:
         return css`
           border: 1px solid ${colorSet.primary};
-          border-radius: 5px;
-          padding: 10px 20px;
           color: ${colorSet.primary};
 
           :hover {
@@ -43,8 +55,6 @@ const Button = styled.button<ButtonProps>`
       case ButtonVariant.contained:
         return css`
           background-color: ${colorSet.primary};
-          border-radius: 5px;
-          padding: 10px 20px;
           color: ${colorSet.colorless};
 
           :hover {

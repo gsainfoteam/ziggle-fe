@@ -4,8 +4,8 @@ import { SmallArrow } from "src/assets/Icons";
 import LazyCat from "src/assets/LazyCat";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import HorizontalScrollButton from "src/molecules/horizontalScrollButton/HorizontalScrollButton";
-import TextZabo from "src/organisms/zabo/TextZabo";
 import Zabo from "src/organisms/zabo/Zabo";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -68,9 +68,12 @@ const ZabosContainer = styled(Content)`
 `;
 
 const ZaboCarouselTitleText = ({ text }: { text: string }) => {
+  const isMobile = useIsMobile();
+
   return (
     <Text
-      size="2.8rem"
+      as={"h2"}
+      size={isMobile ? "1.75rem" : "2.75rem"}
       color={colorSet.text}
       font={Font.Bold}
       style={{ margin: 0 }}
@@ -84,16 +87,15 @@ const ZaboCarousel = ({
   manyZabos,
   carouselTitle,
   carouselBGColor,
-<<<<<<< HEAD
   link,
-=======
   logName,
->>>>>>> master
 }: ZaboCarouselProps) => {
   const [scrollBtnDisabled, setScrollBtnDisabled] = useState<boolean[]>([
     true, // left
     false, // right
   ]);
+
+  const isMobile = useIsMobile();
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const Scroll = (amount: number) => {
@@ -149,43 +151,21 @@ const ZaboCarousel = ({
           justifyContent="center"
         >
           <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
-            {manyZabos.map((zabo) => {
-              if (zabo.thumbnailUrl === undefined) {
-                // thumbnailUrl이 없으면 TextZabo로 렌더링
-                return (
-                  <TextZabo
-                    key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    content={zabo.content}
-                    organization={zabo.organization}
-                    origin="height"
-                    size={280}
-                    logName={logName}
-                  />
-                );
-              } else {
-                // thumbnailUrl이 있으면 Zabo로 렌더링
-                return (
-                  <Zabo
-                    key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    organization={zabo.organization}
-                    thumbnailUrl={zabo.thumbnailUrl}
-                    origin="height"
-                    size={280}
-                    logName={logName}
-                  />
-                );
-              }
-            })}
+            {manyZabos.map((zabo) => (
+              <Zabo
+                key={zabo.id}
+                id={zabo.id}
+                title={zabo.title}
+                date={zabo.date}
+                viewCount={zabo.viewCount}
+                author={zabo.author}
+                organization={zabo.organization}
+                thumbnailUrl={zabo.thumbnailUrl}
+                origin="height"
+                size={isMobile ? 140 : 280}
+                logName={logName}
+              />
+            ))}
           </ZabosContainer>
         </LowerWrap>
       ) : (

@@ -36,6 +36,9 @@ export default defineConfig({
         },
       },
       enableBuild: false,
+      overlay: {
+        initialIsOpen: false,
+      },
     }),
     svgr(),
   ],

@@ -1,4 +1,5 @@
 import defaults from "src/styles/defaults";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import styled from "styled-components";
 
 const CONTENT_AREA_DESKTOP = `calc(100% - 2 * ${defaults.pageSideGap})`;
@@ -12,7 +13,7 @@ const Content = styled.div<ContentAreaProps>`
   width: ${({ width }) => (width ? width : CONTENT_AREA_DESKTOP)};
   max-width: ${({ width }) => width || "1240px"};
 
-  @media screen and (max-width: 768px) {
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
     width: ${({ width }) => (width ? width : CONTENT_AREA_MOBILE)};
   }
 `;

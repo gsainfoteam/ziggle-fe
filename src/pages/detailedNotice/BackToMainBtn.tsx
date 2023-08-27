@@ -4,6 +4,7 @@ import { Arrow } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
@@ -14,6 +15,7 @@ const BackToMainBtn = () => {
   };
 
   const { hovered, ref } = useHover();
+  const isMobile = useIsMobile();
 
   return (
     <Flex width="100%" justifyContent="right" ref={ref}>
@@ -24,22 +26,22 @@ const BackToMainBtn = () => {
           style={{ transition: "0.2s" }}
         >
           <Arrow
-            size="24px"
+            size={isMobile ? "20px" : "24px"}
             color={hovered ? colorSet.primary : colorSet.secondaryText}
           />
           <Text
             font={Font.Medium}
-            size="1.125rem"
+            size={isMobile ? "1rem" : "1.125rem"}
             color={hovered ? colorSet.primary : colorSet.secondaryText}
           >
             메인 페이지로 돌아가기
           </Text>
           <div
             style={{
-              borderRight: `4px solid ${
+              borderRight: `${isMobile ? 3 : 4}px solid ${
                 hovered ? colorSet.primary : colorSet.secondaryText
               }`,
-              height: "32px",
+              height: isMobile ? "25px" : "32px",
             }}
           ></div>
         </Flex>

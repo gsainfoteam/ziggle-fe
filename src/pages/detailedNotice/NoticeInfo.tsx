@@ -4,6 +4,7 @@ import { toggleReminder } from "src/apis/notice/notice-api";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import CustomCheckbox from "src/molecules/checkboxWithLabel/CheckboxWithLabel";
 import Chip, { ChipVariant } from "src/molecules/chip/Chip";
 import colorSet from "src/styles/colorSet";
@@ -36,6 +37,7 @@ const NoticeInfo = ({
 }: NoticeInfoProps) => {
   const dDayString = deadline ? dDayFormated(deadline) : "";
   const isPast = deadline ? dDayString === "기한 지남" : false;
+  const isMobile = useIsMobile();
 
   const [isRemindChecked, setIsRemindChecked] = useState(isReminded);
 
@@ -63,10 +65,10 @@ const NoticeInfo = ({
         deadline && (
           <>
             <Flex alignItems="center">
-              <Text font={Font.Medium} size={"1.5rem"}>
+              <Text font={Font.Medium} size={isMobile ? "1.125rem" : "1.5rem"}>
                 마감일&nbsp;
               </Text>
-              <Text font={Font.Bold} size={"1.5rem"}>
+              <Text font={Font.Bold} size={isMobile ? "1.125rem" : "1.5rem"}>
                 {formatISODate(deadline)} ({getDayOfWeek(deadline)})
               </Text>
               <Spacer width={"10px"} />
@@ -89,7 +91,7 @@ const NoticeInfo = ({
                     >
                       <Text
                         font={Font.Medium}
-                        size={"1.125rem"}
+                        size={isMobile ? "0.875rem" : "1rem"}
                         color={
                           isRemindChecked
                             ? colorSet.primary
@@ -113,7 +115,7 @@ const NoticeInfo = ({
                 <Spacer height={"5px"} />
                 <Text
                   font={Font.Regular}
-                  size={"1rem"}
+                  size={isMobile ? "0.75rem" : "1rem"}
                   color={colorSet.secondaryText}
                 >
                   게시물이 리마인드되었습니다!&nbsp;
@@ -128,7 +130,7 @@ const NoticeInfo = ({
       }
 
       {/* 제목 */}
-      <Text font={Font.Bold} size={"2.5rem"}>
+      <Text font={Font.Bold} size={isMobile ? "1.5rem" : "2.5rem"}>
         {title}
       </Text>
 
@@ -136,41 +138,44 @@ const NoticeInfo = ({
 
       {/* 글쓴이, 작성일, 조회수 */}
       <Flex alignItems="center">
-        <Text font={Font.Medium} size={"1.25rem"}>
+        <Text font={Font.Medium} size={isMobile ? "0.875rem" : "1.25rem"}>
           글쓴이&nbsp;
         </Text>
-        <Text font={Font.Bold} size={"1.25rem"}>
+        <Text font={Font.Bold} size={isMobile ? "0.875rem" : "1.25rem"}>
           {author}
         </Text>
         <Spacer width={"15px"} />
         <div
-          style={{ height: "28px", borderLeft: `2px solid ${colorSet.text}` }}
+          style={{
+            height: isMobile ? "20px" : "28px",
+            borderLeft: `2px solid ${colorSet.text}`,
+          }}
         ></div>
         <Spacer width={"15px"} />
         <Text
           font={Font.Regular}
-          size={"1.25rem"}
+          size={isMobile ? "0.875rem" : "1.25rem"}
           color={colorSet.secondaryText}
         >
           작성일&nbsp;
         </Text>
         <Text
           font={Font.Regular}
-          size={"1.25rem"}
+          size={isMobile ? "0.875rem" : "1.25rem"}
           color={colorSet.secondaryText}
         >
           {formatISODate(dateCreated)}&nbsp;·&nbsp;
         </Text>
         <Text
           font={Font.Medium}
-          size={"1.25rem"}
+          size={isMobile ? "0.875rem" : "1.25rem"}
           color={colorSet.secondaryText}
         >
           조회수&nbsp;
         </Text>
         <Text
           font={Font.Medium}
-          size={"1.25rem"}
+          size={isMobile ? "0.875rem" : "1.25rem"}
           color={colorSet.secondaryText}
         >
           {viewCount}

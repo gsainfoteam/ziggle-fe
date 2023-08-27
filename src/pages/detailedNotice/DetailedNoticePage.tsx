@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { ScrollRestoration, useParams } from "react-router-dom";
 import { getNotice } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
@@ -39,7 +40,7 @@ const CoverContent = styled(Content)`
 
 const DetailedNoticePage = () => {
   const [showImageViewer, setShowImageViewer] = useState<boolean>(false);
-
+  const isMobile = useIsMobile();
   const { id } = useParams();
 
   const { data, isLoading } = useQuery(
@@ -58,6 +59,8 @@ const DetailedNoticePage = () => {
 
   return (
     <>
+      <ScrollRestoration />
+
       <Area>
         {isImageExist ? (
           <ZaboShowcase
@@ -75,11 +78,11 @@ const DetailedNoticePage = () => {
         )}
 
         <CoverContent>
-          <Spacer height={"50px"} />
+          <Spacer height={isMobile ? "30px" : "50px"} />
 
           <BackToMainBtn />
 
-          <Spacer height={"20px"} />
+          <Spacer height={isMobile ? "15px" : "20px"} />
 
           <NoticeInfo
             id={data.id}

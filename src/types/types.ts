@@ -104,3 +104,10 @@ export interface User {
   user_phone_number: string;
   student_id: string;
 }
+
+export const MOBILE_BREAKPOINT = "768px";
+
+export interface SvgProps {
+  width?: React.CSSProperties["width"];
+  height?: React.CSSProperties["height"];
+}
