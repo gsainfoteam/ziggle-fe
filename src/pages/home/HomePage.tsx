@@ -1,3 +1,4 @@
+import useIsMobile from "src/hooks/useIsMobile";
 import Paths, { NoticeSection } from "src/types/paths";
 
 import Area from "../../atoms/containers/area/Area";
@@ -15,13 +16,15 @@ export interface NoticeSectionProps {
 }
 
 const HomePage = () => {
+  const isMobile = useIsMobile();
+
   return (
     <>
       <Area>
         <Banner />
       </Area>
 
-      <Spacer height={"60px"} />
+      <Spacer height={isMobile ? "0px" : "60px"} />
 
       <Area>
         <UrgentNotices link={Paths.section + NoticeSection.urgent} />

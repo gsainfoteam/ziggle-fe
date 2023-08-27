@@ -12,11 +12,11 @@ import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import SearchTagSelect from "src/molecules/searchTagSelect/searchTagSelect";
 import Font from "src/styles/font";
 import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
-import SearchResultText from "src/templates/searchResultText/SearchResultText";
 import { NoticeType } from "src/types/types";
 import { isEmpty } from "src/utils/utils";
 
@@ -30,6 +30,7 @@ import SearchGif from "./SearchGif";
 const SearchPage = () => {
   const [selectedTags, setSelectedTags] = useState<NoticeType[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const isMobile = useIsMobile();
 
   const { data, isLoading } = useQuery(
     [
@@ -80,20 +81,22 @@ const SearchPage = () => {
       <Area>
         <Content>
           <Spacer height={"50px"} />
-          <div
-            style={{
-              height: "100px",
-              margin: "0 auto",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-            <CloseBtnAnimation.AnimationWrapper>
-              <Button onClick={goBack}>
-                <Close size="25px" color={colorSet.secondaryText} />
-              </Button>
-            </CloseBtnAnimation.AnimationWrapper>
-          </div>
+          {!isMobile && (
+            <div
+              style={{
+                height: "100px",
+                margin: "0 auto",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <CloseBtnAnimation.AnimationWrapper>
+                <Button onClick={goBack}>
+                  <Close size="25px" color={colorSet.secondaryText} />
+                </Button>
+              </CloseBtnAnimation.AnimationWrapper>
+            </div>
+          )}
           <Flex>
             <div
               style={{
@@ -119,12 +122,16 @@ const SearchPage = () => {
           {/* 검색어를 입력하지 않았을 때만 */}
           {!data && !searchKeyword && (
             <Flex justifyContent={"center"} width={"100%"}>
-              <Flex justifyContent="center" flexDirection={"column"}>
+              <Flex
+                justifyContent="center"
+                flexDirection={"column"}
+                alignItems={"center"}
+              >
                 <Spacer height={"100px"} />
-                <SearchGif width={"230px"} />
+                <SearchGif width={isMobile ? "180px" : "230px"} />
                 <Spacer height={"10px"} />
                 <Text
-                  size="1.5rem"
+                  size={isMobile ? "1.125rem" : "1.5rem"}
                   color={colorSet.secondaryText}
                   font={Font.Medium}
                   style={{ paddingTop: "20px", marginTop: "-30px" }}
@@ -151,7 +158,7 @@ const SearchPage = () => {
               <Spacer height={"30px"} />
 
               <Text
-                size="2.5rem"
+                size={isMobile ? "1.5rem" : "2.5rem"}
                 color={colorSet.text}
                 font={Font.Bold}
                 style={{ padding: 0 }}
@@ -161,57 +168,47 @@ const SearchPage = () => {
 
               <Spacer height={"30px"} />
 
-              {data.list.map((notice) =>
-                notice.imageUrl ? (
-                  <SearchResult
-                    id={notice.id}
-                    deadline={notice.deadline}
-                    title={notice.title}
-                    author={notice.author}
-                    tags={notice.tags}
-                    date={notice.createdAt}
-                    viewCount={notice.views}
-                    thumbnailUrl={notice.imageUrl}
-                    searchQuery={searchKeyword}
-                    key={notice.id}
-                  />
-                ) : (
-                  <SearchResultText
-                    id={notice.id}
-                    deadline={notice.deadline}
-                    title={notice.title}
-                    author={notice.author}
-                    tags={notice.tags}
-                    date={notice.createdAt}
-                    viewCount={notice.views}
-                    content={notice.body}
-                    searchQuery={searchKeyword}
-                    thumbnailUrl=""
-                    key={notice.id}
-                  />
-                ),
-              )}
+              {data.list.map((notice) => (
+                <SearchResult
+                  id={notice.id}
+                  deadline={notice.deadline}
+                  title={notice.title}
+                  author={notice.author}
+                  tags={notice.tags}
+                  date={notice.createdAt}
+                  viewCount={notice.views}
+                  thumbnailUrl={notice.imageUrl || ""}
+                  searchQuery={searchKeyword}
+                  key={notice.id}
+                />
+              ))}
             </Flex>
           )}
 
           {data && isEmpty(data.list) && (
             <Flex justifyContent={"center"} width={"100%"}>
-              <Flex justifyContent={"center"} flexDirection={"column"}>
+              <Flex
+                justifyContent={"center"}
+                flexDirection={"column"}
+                alignItems={"center"}
+              >
                 <Spacer height={"80px"} />
                 <div style={{ height: "10px", margin: "0 auto" }}></div>
-                <SearchNoResult></SearchNoResult>
+                <SearchNoResult width={"50%"} />
                 <Text
-                  size="1.5rem"
+                  size={isMobile ? "1.125rem" : "1.5rem"}
                   color={colorSet.secondaryText}
                   font={Font.Bold}
-                  style={{ paddingTop: "20px" }}
+                  style={{ paddingTop: isMobile ? "0px" : "20px" }}
                 >
                   검색 결과가 존재하지 않습니다.
                 </Text>
               </Flex>
             </Flex>
           )}
-          <div style={{ height: "300px", margin: "0 auto" }} />
+          <div
+            style={{ height: isMobile ? "200px" : "300px", margin: "0 auto" }}
+          />
         </Content>
       </Area>
     </>

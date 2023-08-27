@@ -3,6 +3,7 @@ import { LinkIcon } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
@@ -12,6 +13,7 @@ interface CopyLinkButtonProps {
 
 const CopyLinkButton = ({ title }: CopyLinkButtonProps) => {
   const { hovered, ref } = useHover<HTMLButtonElement>();
+  const isMobile = useIsMobile();
 
   const handleCopyClick = () => {
     navigator.clipboard.writeText(
@@ -21,15 +23,15 @@ const CopyLinkButton = ({ title }: CopyLinkButtonProps) => {
 
   return (
     <Button ref={ref} onClick={handleCopyClick} animated>
-      <Flex alignItems={"center"} gap={"5px"}>
+      <Flex alignItems={"center"} gap={isMobile ? "4px" : "5px"}>
         <LinkIcon
-          size={"30px"}
+          size={isMobile ? "20px" : "30px"}
           color={hovered ? colorSet.primary : colorSet.secondaryText}
         />
         <Text
           font={Font.Medium}
           color={hovered ? colorSet.primary : colorSet.secondaryText}
-          size={"1rem"}
+          size={isMobile ? "0.75rem" : "1rem"}
         >
           주소 복사하기
         </Text>

@@ -5,6 +5,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Image from "src/atoms/image/Image";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import styled from "styled-components";
@@ -47,6 +48,7 @@ const FullPageImageViewer = ({
 }: FullPageImageViewerProps) => {
   const [imageIndex, setImageIndex] = useState<number>(startIndex ?? 0);
   const maxIndex = srcs.length - 1;
+  const isMobile = useIsMobile();
 
   const ManipulateIndex = (amount: number) => {
     setImageIndex((imageIndex) =>
@@ -87,27 +89,44 @@ const FullPageImageViewer = ({
     >
       <MenuSum gap="30px">
         <Menu alignItems="center" gap="10px" onClick={handleDownload}>
-          <Text font={Font.Medium} color={colorSet.colorless}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.colorless}
+            size={isMobile ? "0.875rem" : "1rem"}
+          >
             전체 다운로드하기
           </Text>
-          <Download size="32px" />
+          <Download size={isMobile ? "24px" : "32px"} />
         </Menu>
         <Menu alignItems="center" gap="10px" onClick={handleClose}>
-          <Text font={Font.Medium} color={colorSet.colorless}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.colorless}
+            size={isMobile ? "0.875rem" : "1rem"}
+          >
             닫기
           </Text>
-          <Close size="22px" />
+          <Close size={isMobile ? "16px" : "22px"} />
         </Menu>
       </MenuSum>
-      <Flex gap="50px" alignItems="center">
+      <Flex gap={isMobile ? "20px" : "50px"} alignItems="center">
         <LongArrowSvg
+          width={isMobile ? "20px" : "62px"}
           deselected={imageIndex <= 0}
           onClick={() => {
             ManipulateIndex(-1);
           }}
         />
-        <Image src={srcs[imageIndex]} maxHeight="80vh" maxWidth="90vw" />
+        <Image
+          src={srcs[imageIndex]}
+          maxHeight="75vh"
+          maxWidth="70vw"
+          style={{
+            flex: "1 1 auto",
+          }}
+        />
         <LongArrowSvg
+          width={isMobile ? "20px" : "62px"}
           right
           deselected={imageIndex >= maxIndex}
           onClick={() => {

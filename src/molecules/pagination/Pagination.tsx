@@ -5,6 +5,7 @@ import FilledArrowBtn, {
 } from "src/atoms/filledArrow/FilledArrowBtn";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 
@@ -21,13 +22,15 @@ const Pagination = ({
   totalItems,
   itemsPerPage,
 }: PaginationProps) => {
+  const isMobile = useIsMobile();
+
   return (
-    <Flex alignItems={"center"} gap={"10px"}>
+    <Flex alignItems={"center"} gap={isMobile ? "7px" : "10px"}>
       <FilledArrowBtn
         isPrimary={page > 0}
         direction={HorizontalDirection.LEFT}
-        height={"30px"}
-        width={"30px"}
+        height={isMobile ? "26px" : "30px"}
+        width={isMobile ? "26px" : "30px"}
         onClick={() => {
           setPage(Math.max(0, page - 1));
         }}
@@ -46,15 +49,15 @@ const Pagination = ({
           onClick={() => {
             setPage(i);
           }}
-          width={"34px"}
-          height={"34px"}
+          width={isMobile ? "30px" : "34px"}
+          height={isMobile ? "30px" : "34px"}
           style={{
             backgroundColor: i === page ? colorSet.primary : "white",
           }}
         >
           <Text
             color={i === page ? "white" : colorSet.primary}
-            size={"1.25rem"}
+            size={isMobile ? "1rem" : "1.25rem"}
             font={Font.Medium}
           >
             {i + 1}

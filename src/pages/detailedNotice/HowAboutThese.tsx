@@ -6,10 +6,12 @@ import { getAllNotices } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
-import TextZabo from "src/organisms/zabo/TextZabo";
+import useIsMobile from "src/hooks/useIsMobile";
 import Zabo from "src/organisms/zabo/Zabo";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
+import SearchResult from "src/templates/searchResult/SearchResult";
+import { MOBILE_BREAKPOINT } from "src/types/types";
 import { noticeToZabo } from "src/utils/noticeToZabo";
 import styled, { css } from "styled-components";
 
@@ -33,6 +35,10 @@ const MasonryResizer = styled.div<{ observerWidth: number }>`
       `;
     }
   }};
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    width: 100%;
+  }
 `;
 
 const ITEMS_PER_CALL = 10;
@@ -41,8 +47,8 @@ const HowAboutThese = () => {
   // masonry width 조정을 위해 HowboutThese 컴포넌트의 width를 가져옴
   const observer = useViewportSize();
   const observerWidth = observer.width;
-
   const observerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { data, fetchNextPage } = useInfiniteQuery(
     [queryKeys.getAllNotices],
@@ -91,7 +97,7 @@ const HowAboutThese = () => {
   return (
     <>
       <Text
-        size="2.8rem"
+        size={isMobile ? "1.5rem" : "2.5rem"}
         color={colorSet.text}
         font={Font.Bold}
         style={{ margin: 0 }}
@@ -113,36 +119,37 @@ const HowAboutThese = () => {
               page.list.map((notice, lIndex) => {
                 const zabo = noticeToZabo(notice, "width", 300);
 
-                const zaboComponent =
-                  zabo.thumbnailUrl === undefined ? (
-                    <TextZabo
-                      key={zabo.id}
-                      id={zabo.id}
-                      title={zabo.title}
-                      date={zabo.date}
-                      viewCount={zabo.viewCount}
-                      author={zabo.author}
-                      content={zabo.content}
-                      organization={zabo.organization}
-                      origin="width"
-                      size={300}
-                      logName={"howAboutThese"}
-                    />
-                  ) : (
-                    <Zabo
-                      key={zabo.id}
-                      id={zabo.id}
-                      title={zabo.title}
-                      date={zabo.date}
-                      viewCount={zabo.viewCount}
-                      author={zabo.author}
-                      organization={zabo.organization}
-                      thumbnailUrl={zabo.thumbnailUrl}
-                      origin="width"
-                      size={300}
-                      logName={"howAboutThese"}
-                    />
-                  );
+                const zaboComponent = isMobile ? (
+                  <SearchResult
+                    key={zabo.id}
+                    id={zabo.id}
+                    title={zabo.title}
+                    date={zabo.date}
+                    viewCount={zabo.viewCount}
+                    author={zabo.author}
+                    content={zabo.content}
+                    organization={zabo.organization}
+                    thumbnailUrl={zabo.thumbnailUrl ?? ""}
+                    logName={"howAboutThese"}
+                    searchQuery={""}
+                    tags={[]}
+                  />
+                ) : (
+                  <Zabo
+                    key={zabo.id}
+                    id={zabo.id}
+                    title={zabo.title}
+                    date={zabo.date}
+                    viewCount={zabo.viewCount}
+                    author={zabo.author}
+                    content={zabo.content}
+                    organization={zabo.organization}
+                    thumbnailUrl={zabo.thumbnailUrl}
+                    origin="width"
+                    size={300}
+                    logName={"howAboutThese"}
+                  />
+                );
                 return pIndex + 1 === data.pages.length &&
                   lIndex + 1 === page.list.length ? (
                   <div ref={observerRef} key={zabo.id}>
