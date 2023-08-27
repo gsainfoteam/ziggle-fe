@@ -15,7 +15,9 @@ import EventNoticesPage from "./pages/noticeSections/EventNoticesPage";
 import GeneralNoticesPage from "./pages/noticeSections/GeneralNoticesPage";
 import HotNoticesPage from "./pages/noticeSections/HotNoticesPage";
 import RecruitNoticesPage from "./pages/noticeSections/RecruitNoticesPage";
+import RemindedNoticesPage from "./pages/noticeSections/RemindedNoticesPage";
 import UrgentNoticesPage from "./pages/noticeSections/UrgentNoticesPage";
+import WrittenNoticesPage from "./pages/noticeSections/WrittenNoticesPage";
 import NoticeWritingPage from "./pages/noticeWriting/NoticeWritingPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import GlobalStyle from "./styles/globalStyles";
@@ -45,7 +47,14 @@ const router = createBrowserRouter(
         <Route path={NoticeSection.recruit} element={<RecruitNoticesPage />} />
         <Route path={NoticeSection.general} element={<GeneralNoticesPage />} />
         <Route path={NoticeSection.all} element={<AllNoticesPage />} />
+
+        <Route
+          path={NoticeSection.reminded}
+          element={<RemindedNoticesPage />}
+        />
+        <Route path={NoticeSection.written} element={<WrittenNoticesPage />} />
       </Route>
+
       <Route path={Paths.home} element={<HomePage />} />
       <Route path={Paths.search} element={<SearchPage />} />
       <Route
