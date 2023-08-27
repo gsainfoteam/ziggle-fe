@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+import React from "react";
 import Text from "src/atoms/text/Text";
 import Font from "src/styles/font";
 import { MOBILE_BREAKPOINT } from "src/types/types";

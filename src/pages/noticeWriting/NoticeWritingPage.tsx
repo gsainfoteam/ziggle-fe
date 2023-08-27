@@ -54,6 +54,32 @@ const noticeTypeToTagId = (noticeType: NoticeType): number => {
   }
 };
 
+const TagDescription = ({
+  title,
+  description,
+  example,
+}: {
+  title: string;
+  description: string;
+  example?: string;
+}) => {
+  return (
+    <>
+      <Text font={Font.Bold} size="24px" color={colorSet.text}>
+        {title}
+      </Text>
+      <Spacer height="10px" />
+      <Text font={Font.Regular} size="18px" color={colorSet.text}>
+        {description}
+      </Text>
+      <Spacer height="10px" />
+      <Text font={Font.Regular} size="18px" color={colorSet.secondaryText}>
+        {example}
+      </Text>
+    </>
+  );
+};
+
 const NoticeWritingPage = () => {
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
@@ -199,7 +225,34 @@ const NoticeWritingPage = () => {
           />
         </Flex>
 
-        <Spacer height={"35px"} />
+        <Spacer height="30px" />
+
+        {NoticeType.RECRUIT === noticeType && (
+          <TagDescription
+            title="🎯모집 공지를 선택하셨군요!"
+            description="동아리, 그룹이나 행사에 사람들을 모집하고 싶으시다면, 모집 공지를
+              작성해보세요."
+            example="예시) 동아리 신규부원 모집, 학생회 모집, 무한도전 팀원 구인, 공모전, 대회"
+          />
+        )}
+
+        {NoticeType.EVENT === noticeType && (
+          <TagDescription
+            title="🎈행사 공지를 선택하셨군요!"
+            description="여러분이 진행하시는 행사를 행사 공지에서 마음껏 홍보하세요."
+            example="예시) 축제, 전시회, 공연, 세미나, 강연, 워크숍"
+          />
+        )}
+
+        {NoticeType.NORMAL === noticeType && (
+          <TagDescription
+            title="🔔일반 공지를 선택하셨군요!"
+            description="모집이나 행사 공지에 해당되지 않는 공지들입니다."
+            example="예시) 하우스 공지, 학생회 공지, 통보 등"
+          />
+        )}
+
+        <Spacer height={"45px"} />
 
         <TagSelector tags={tags} setTags={setTags} />
 

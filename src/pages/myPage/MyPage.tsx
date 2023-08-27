@@ -10,17 +10,21 @@ import useIsMobile from "src/hooks/useIsMobile";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
 import MypageTable from "src/pages/myPage/MypageTable";
+import Paths, { NoticeSection } from "src/types/paths";
+
+const SHOW_NOTICE_PAGE = 4;
 
 const MyPage = () => {
   const { data: userInfo } = useQuery([queryKeys.getUserInfo], getUserInfo);
   const isMobile = useIsMobile();
+
   const isSmall = useMediaQuery({ maxWidth: 1200 });
   const { data: myNotices } = useQuery(
-    [queryKeys.getAllNotices, { my: "own" }],
+    [queryKeys.getAllNotices, { my: "own", limit: SHOW_NOTICE_PAGE }],
     getAllNotices,
   );
   const { data: reminders } = useQuery(
-    [queryKeys.getAllNotices, { my: "reminders" }],
+    [queryKeys.getAllNotices, { my: "reminders", limit: SHOW_NOTICE_PAGE }],
     getAllNotices,
   );
 
@@ -75,6 +79,7 @@ const MyPage = () => {
               <MypageTable
                 title="내가 게시한 공지 목록"
                 articles={myNotices?.list ?? []}
+                link={Paths.section + NoticeSection.written}
               />
             </div>
 
@@ -88,6 +93,7 @@ const MyPage = () => {
               <MypageTable
                 title="리마인드 설정한 게시물 목록"
                 articles={reminders?.list ?? []}
+                link={Paths.section + NoticeSection.reminded}
               />
             </div>
           </div>

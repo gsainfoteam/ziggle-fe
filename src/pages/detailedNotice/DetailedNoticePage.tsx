@@ -9,6 +9,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
+import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
 
@@ -55,10 +56,16 @@ const DetailedNoticePage = () => {
   );
 
   if (isLoading || !data) {
-    return <div>loading...</div>; // TODO: 스켈레톤 추가
+    return (
+      <Area>
+        <Spacer height={"200px"} />
+        <LoadingCatAnimation />
+        <Spacer height={"200px"} />
+      </Area>
+    );
   }
 
-  const isImageExist = !isEmpty(data.imagesUrl);
+  const isImageExist = !isEmpty(data.imagesUrl || []);
 
   return (
     <>
@@ -68,6 +75,7 @@ const DetailedNoticePage = () => {
         {isImageExist ? (
           <ZaboShowcase
             src={data?.imagesUrl[0] ?? Banner} // TODO: 이미지가 없을 때 대체 이미지
+            isLoading={isLoading}
             onShow={
               isEmpty(data.imagesUrl)
                 ? undefined

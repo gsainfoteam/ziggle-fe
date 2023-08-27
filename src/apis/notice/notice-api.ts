@@ -59,6 +59,14 @@ export const createNotice = async (props: {
   return data;
 };
 
+export const deleteNotice = async (props: { id: number }) => {
+  const { id } = props;
+
+  const { data } = await apiDeleter(`/notice/${id}`);
+
+  return data;
+};
+
 export const toggleReminder = async (props: {
   id: number;
   doRemind: boolean;
