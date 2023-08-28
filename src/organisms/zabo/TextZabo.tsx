@@ -79,8 +79,6 @@ const TextZabo = ({
     origin === "height" ? size * 1.5 : size,
   ];
 
-  console.log(content);
-
   const navigate = useNavigate();
 
   const isMobile = useIsMobile();
