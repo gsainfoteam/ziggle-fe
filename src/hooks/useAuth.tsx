@@ -53,23 +53,25 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: Paths } = {}) => {
   useEffect(() => {
     const pathname = location.pathname as Paths;
 
-    if (!isLoading && !userInfo && redirectUrl) {
-      toast(
-        <Text color={colorSet.primary} textAlign={"right"}>
-          공지를 작성하고 리마인드하려면 <br />
-          <Highlight font={Font.Bold}>로그인</Highlight>해주세요!
-        </Text>,
-        {
-          className: "toast-primary-colored",
-          autoClose: false,
-          closeButton: false,
-        },
-      );
+    if (!redirectUrl) return;
+    if (isLoading) return;
+    if (userInfo) return;
+    
+    toast(
+      <Text color={colorSet.primary} textAlign={"right"}>
+        공지를 작성하고 리마인드하려면 <br />
+        <Highlight font={Font.Bold}>로그인</Highlight>해주세요!
+      </Text>,
+      {
+        className: "toast-primary-colored",
+        autoClose: false,
+        closeButton: false,
+      },
+    );
 
-      navigate(redirectUrl, {
-        state: { from: pathname },
-      });
-    }
+    navigate(redirectUrl, {
+      state: { from: pathname },
+    });
   }, [isLoading, location, navigate, redirectUrl, userInfo]);
 
   return { userInfo };
