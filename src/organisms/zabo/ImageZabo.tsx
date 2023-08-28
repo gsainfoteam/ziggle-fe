@@ -37,6 +37,7 @@ const Title = styled(Text)<{ hovered: boolean }>`
   /* -webkit-box-orient: vertical; */
   overflow: hidden;
   transition: 0.1s;
+  text-align: left;
   ${({ hovered }) => {
     if (hovered) {
       return `
