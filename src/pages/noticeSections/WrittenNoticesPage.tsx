@@ -8,11 +8,13 @@ import Content from "src/atoms/containers/content/Content";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useAuth from "src/hooks/useAuth";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
 import SearchResult from "src/templates/searchResult/SearchResult";
 import SearchResultText from "src/templates/searchResultText/SearchResultText";
+import Paths from "src/types/paths";
 import Swal from "sweetalert2";
 
 interface MenuSumProps {
@@ -21,6 +23,10 @@ interface MenuSumProps {
 }
 
 const MenuSum = ({ children, onDelete }: MenuSumProps) => {
+  useAuth({
+    redirectUrl: Paths.home,
+  });
+
   return (
     <Flex flexDirection="column">
       {children}

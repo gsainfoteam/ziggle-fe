@@ -6,13 +6,18 @@ import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
+import useAuth from "src/hooks/useAuth";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import NoticesWithPagination from "src/templates/noticesWithPagination/NoticesWithPagination";
+import Paths from "src/types/paths";
 
 const NOTICE_PER_PAGE = 30;
 
 const RemindedNoticesPage = () => {
+  useAuth({
+    redirectUrl: Paths.home,
+  });
   const [page, setPage] = useState<number>(0);
 
   const { data, isLoading } = useQuery(

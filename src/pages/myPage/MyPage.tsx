@@ -6,6 +6,7 @@ import { getUserInfo } from "src/apis/user/user-api";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Spacer from "src/atoms/spacer/Spacer";
+import useAuth from "src/hooks/useAuth";
 import useIsMobile from "src/hooks/useIsMobile";
 import MypageProfile from "src/pages/myPage/MypageProfile";
 import MypageSeperate from "src/pages/myPage/MypageSeperate";
@@ -15,6 +16,9 @@ import Paths, { NoticeSection } from "src/types/paths";
 const SHOW_NOTICE_PAGE = 4;
 
 const MyPage = () => {
+  useAuth({
+    redirectUrl: Paths.home,
+  });
   const { data: userInfo } = useQuery([queryKeys.getUserInfo], getUserInfo);
   const isMobile = useIsMobile();
 

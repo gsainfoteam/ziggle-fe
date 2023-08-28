@@ -1,4 +1,7 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Spacer from "src/atoms/spacer/Spacer";
 import useAuth from "src/hooks/useAuth";
 import useViewLog from "src/hooks/useViewLog";
@@ -16,6 +19,12 @@ const Layout = () => {
 
       <Spacer height={"300px"} />
       <Footer />
+
+      <ToastContainer
+        style={{
+          width: "260px",
+        }}
+      />
     </div>
   );
 };
