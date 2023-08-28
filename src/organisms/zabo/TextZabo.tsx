@@ -40,6 +40,8 @@ const ZaboWrapper = styled(Button)<{
   border: 1px solid ${colorSet.secondaryText};
   cursor: pointer;
 
+  line-height: 0;
+
   p {
     margin: 0;
   }
@@ -139,7 +141,7 @@ const TextZabo = ({
             display: "-webkit-box",
             WebkitLineClamp: lineClamp,
             WebkitBoxOrient: "vertical",
-            lineHeight: "1.5rem",
+            lineHeight: isMobile ? "1rem" : "1.5rem",
             wordBreak: "break-word",
             textAlign: "left",
           }}
