@@ -1,6 +1,7 @@
 import { Close } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 
 interface ImagePreviewItemProps {
@@ -9,11 +10,13 @@ interface ImagePreviewItemProps {
 }
 
 const ImagePreviewItem = ({ src, onDelete }: ImagePreviewItemProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <Flex
       style={{
         position: "relative",
-        borderRadius: "10px",
+        borderRadius: isMobile ? "6px" : "10px",
         overflow: "hidden",
       }}
     >
@@ -33,15 +36,15 @@ const ImagePreviewItem = ({ src, onDelete }: ImagePreviewItemProps) => {
         }}
         style={{
           position: "absolute",
-          top: "10px",
-          right: "10px",
+          top: isMobile ? "6px" : "10px",
+          right: isMobile ? "6px" : "10px",
           backgroundColor: colorSet.primary,
           padding: "5px",
           borderRadius: "4px",
         }}
       >
         <Flex>
-          <Close size={"16px"} color={colorSet.colorless} />
+          <Close size={isMobile ? "10px" : "16px"} color={colorSet.colorless} />
         </Flex>
       </Button>
     </Flex>

@@ -48,7 +48,6 @@ const MyPage = () => {
         >
           <div
             style={{
-              flex: 2,
               display: "flex",
               flexDirection: "column",
               position: "relative",

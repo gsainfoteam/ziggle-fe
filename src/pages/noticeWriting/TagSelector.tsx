@@ -7,6 +7,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Icon from "src/atoms/icon/Icon";
 import Input from "src/atoms/inputs/input/Input";
 import Text from "src/atoms/text/Text";
+import useIsMobile from "src/hooks/useIsMobile";
 import TagChip from "src/molecules/tag/TagChip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
@@ -30,6 +31,7 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
   const { data } = useQuery([queryKeys.searchTags, keyword], searchTags, {
     enabled: keyword !== "",
   });
+  const isMobile = useIsMobile();
 
   const handleTag = useMutation(createTag, {});
 
@@ -72,9 +74,9 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
 
   return (
     <Flex flexDirection={"column"} gap={"15px"}>
-      <Flex gap={"12px"}>
-        <Icon.TagBlack width={"24px"} />
-        <Text font={Font.Medium} size={"1.25rem"}>
+      <Flex gap={isMobile ? "8px" : "12px"}>
+        <Icon.TagBlack width={isMobile ? "18px" : "24px"} />
+        <Text font={Font.Medium} size={isMobile ? "1rem" : "1.25rem"}>
           태그 설정
         </Text>
       </Flex>
@@ -82,10 +84,11 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
       <Flex flexDirection={"column"}>
         <Flex
           gap={"5px"}
+          alignItems={"center"}
           style={{
             border: `1.5px solid ${colorSet.primary}`,
             borderRadius: "8px",
-            padding: "12px",
+            padding: isMobile ? "8px" : "12px",
           }}
         >
           {tags.map((tag) => (
@@ -105,6 +108,7 @@ const TagSelector = ({ tags, setTags }: TagSelectorProps) => {
             onChange={handleKeywordChange}
             style={{
               flexGrow: 1,
+              fontSize: isMobile ? "0.75rem" : "1rem",
             }}
           />
         </Flex>
