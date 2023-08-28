@@ -8,7 +8,7 @@ import useIsMobile from "src/hooks/useIsMobile";
 import DDay from "src/molecules/d-day/DDay";
 import Paths from "src/types/paths";
 import { MOBILE_BREAKPOINT, ZaboProps } from "src/types/types";
-import { calculateDDay } from "src/utils/calculateDDay";
+import { calculateDDay } from "src/utils/date";
 import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
