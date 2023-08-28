@@ -107,6 +107,7 @@ const TextZabo = ({
 
   const titleLength = title.length;
   const lineClamp = calculateLineClamp(titleLength, origin);
+  const dDay = deadline ? calculateDDay(deadline) : 0;
 
   return (
     <ZaboWrapper
@@ -124,6 +125,7 @@ const TextZabo = ({
             WebkitLineClamp: lineClamp,
           }}
         >
+          {dDay > 0 && <Spacer height={isMobile ? "1rem" : "1.5rem"} />}
           {/* title이 50이 넘을 일은 없지만 혹시 모르니 이렇게 처리 */}
           {titleLength > 50 ? title.slice(0, 50) + "..." : title}
         </Text>
@@ -182,7 +184,7 @@ const TextZabo = ({
         </Text>
       </Flex>
 
-      {deadline && calculateDDay(deadline) > 0 && (
+      {dDay > 0 && (
         <Flex
           style={{
             position: "absolute",
@@ -191,7 +193,7 @@ const TextZabo = ({
             zIndex: 1,
           }}
         >
-          <DDay dayLeft={calculateDDay(deadline)} />
+          <DDay dayLeft={dDay} />
         </Flex>
       )}
     </ZaboWrapper>
