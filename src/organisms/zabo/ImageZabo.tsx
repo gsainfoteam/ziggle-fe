@@ -5,9 +5,11 @@ import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import DDay from "src/molecules/d-day/DDay";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
+import { calculateDDay } from "src/utils/calculateDDay";
 import formatISODate from "src/utils/formatISODate";
 import styled from "styled-components";
 
@@ -16,6 +18,8 @@ import colorSet from "../../styles/colorSet";
 import Font from "../../styles/font";
 
 const ZaboWrapper = styled(Button)`
+  position: relative;
+
   margin-top: 1rem;
   width: min-content;
   display: flex;
@@ -49,6 +53,7 @@ Title.defaultProps = {
 const ImageZabo = ({
   title,
   date,
+  deadline,
   viewCount,
   author,
   thumbnailUrl,
@@ -96,6 +101,19 @@ const ImageZabo = ({
       <Text font={Font.Medium} textAlign="left">
         {author} {organization && `• ${organization}`}
       </Text>
+
+      {deadline && calculateDDay(deadline) > 0 && (
+        <Flex
+          style={{
+            position: "absolute",
+            top: "8px",
+            left: "8px",
+            zIndex: 1,
+          }}
+        >
+          <DDay dayLeft={calculateDDay(deadline)} />
+        </Flex>
+      )}
     </ZaboWrapper>
   );
 };

@@ -5,8 +5,10 @@ import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import useIsMobile from "src/hooks/useIsMobile";
+import DDay from "src/molecules/d-day/DDay";
 import Paths from "src/types/paths";
 import { MOBILE_BREAKPOINT, ZaboProps } from "src/types/types";
+import { calculateDDay } from "src/utils/calculateDDay";
 import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
@@ -19,6 +21,8 @@ const ZaboWrapper = styled(Button)<{
   width: number;
   shadowColor: string;
 }>`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,6 +64,7 @@ const ZaboWrapper = styled(Button)<{
 const TextZabo = ({
   title,
   date,
+  deadline,
   viewCount,
   author,
   content,
@@ -113,7 +118,7 @@ const TextZabo = ({
       <Flex flexDirection="column">
         <Text
           font={Font.Bold}
-          size={isMobile ? "1.25rem" : "1.625rem"}
+          size={isMobile ? "1rem" : "1.625rem"}
           style={{
             textAlign: "left",
             WebkitLineClamp: lineClamp,
@@ -127,7 +132,7 @@ const TextZabo = ({
 
         <Text
           font={Font.Medium}
-          size="1.125rem"
+          size={isMobile ? "0.875rem" : "1.125rem"}
           style={{
             textOverflow: "ellipsis",
             overflow: "hidden",
@@ -145,21 +150,50 @@ const TextZabo = ({
 
       <Flex flexDirection="column">
         <Flex gap="0.25em">
-          <Text font={Font.Medium} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             {formatISODate(date)}
           </Text>
-          <Text font={Font.Medium} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             •
           </Text>
-          <Text font={Font.Bold} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Bold}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             조회수 {viewCount}
           </Text>
         </Flex>
         <Spacer height={"3px"} />
-        <Text font={Font.Medium} textAlign="left">
+        <Text
+          font={Font.Medium}
+          textAlign="left"
+          size={isMobile ? "0.75rem" : "1rem"}
+        >
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>
+
+      {deadline && calculateDDay(deadline) > 0 && (
+        <Flex
+          style={{
+            position: "absolute",
+            top: "8px",
+            left: "8px",
+            zIndex: 1,
+          }}
+        >
+          <DDay dayLeft={calculateDDay(deadline)} />
+        </Flex>
+      )}
     </ZaboWrapper>
   );
 };

@@ -9,6 +9,7 @@ export const noticeToZabo = (
     id: notice.id,
     title: notice.title,
     date: notice.createdAt,
+    deadline: notice.deadline ?? undefined,
     viewCount: notice.views,
     author: notice.author,
     organization: "", // TODO : 백엔드 처리 시 넣어주기
@@ -29,6 +30,7 @@ export const noticesToManyZabos = (
       id: notice.id,
       title: notice.title,
       date: notice.createdAt,
+      deadline: notice.deadline ?? undefined,
       viewCount: notice.views,
       author: notice.author,
       organization: "", // TODO : 백엔드 처리 시 넣어주기

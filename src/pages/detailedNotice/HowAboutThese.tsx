@@ -125,6 +125,7 @@ const HowAboutThese = () => {
                     id={zabo.id}
                     title={zabo.title}
                     date={zabo.date}
+                    deadline={zabo.deadline}
                     viewCount={zabo.viewCount}
                     author={zabo.author}
                     content={zabo.content}
@@ -140,6 +141,7 @@ const HowAboutThese = () => {
                     id={zabo.id}
                     title={zabo.title}
                     date={zabo.date}
+                    deadline={zabo.deadline}
                     viewCount={zabo.viewCount}
                     author={zabo.author}
                     content={zabo.content}

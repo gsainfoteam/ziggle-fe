@@ -1,3 +1,5 @@
+import "src/styles/color-set.css";
+
 import {
   createBrowserRouter,
   createRoutesFromElements,

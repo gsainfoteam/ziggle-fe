@@ -12,6 +12,7 @@ export interface ZaboProps {
   viewCount: number;
   author: string;
   organization?: string;
+  deadline?: string;
 
   /** 이미지가 있는 경우 Zabo, 없는 경우 TextZabo */
   thumbnailUrl?: string;
@@ -65,7 +66,7 @@ export interface NoticeBase {
   title: string;
   views: number;
   body: string;
-  deadline: string;
+  deadline: string | null;
   createdAt: string;
   author: string;
   tags: Tag[];

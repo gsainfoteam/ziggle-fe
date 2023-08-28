@@ -130,7 +130,7 @@ const WrittenNoticesPage = () => {
               {notice.imageUrl ? (
                 <SearchResult
                   id={notice.id}
-                  deadline={notice.deadline}
+                  deadline={notice.deadline ?? undefined}
                   title={notice.title}
                   author={notice.author}
                   tags={notice.tags}
@@ -143,7 +143,7 @@ const WrittenNoticesPage = () => {
               ) : (
                 <SearchResultText
                   id={notice.id}
-                  deadline={notice.deadline}
+                  deadline={notice.deadline ?? undefined}
                   title={notice.title}
                   author={notice.author}
                   tags={notice.tags}
