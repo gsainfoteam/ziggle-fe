@@ -10,7 +10,7 @@ import Chip, { ChipVariant } from "src/molecules/chip/Chip";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import { Tag } from "src/types/types";
-import { dDayFormated } from "src/utils/calculateDDay";
+import { dDayFormated } from "src/utils/date";
 import formatISODate from "src/utils/formatISODate";
 import getDayOfWeek from "src/utils/getDayOfWeek";
 

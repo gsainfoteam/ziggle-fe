@@ -9,7 +9,7 @@ import DDay from "src/molecules/d-day/DDay";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
 import { ZaboProps } from "src/types/types";
-import { calculateDDay } from "src/utils/calculateDDay";
+import { calculateDDay } from "src/utils/date";
 import formatISODate from "src/utils/formatISODate";
 import styled from "styled-components";
 
