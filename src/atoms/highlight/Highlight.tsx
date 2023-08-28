@@ -12,7 +12,7 @@ export interface HightlightProps {
 
 // 폰트별 letter-spacing 도 추가해야할 수도
 
-const Highlight = styled.p<HightlightProps>`
+const Highlight = styled.span<HightlightProps>`
   margin: 0;
   ${({ font }) => {
     switch (font) {

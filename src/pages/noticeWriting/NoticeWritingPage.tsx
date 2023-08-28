@@ -6,6 +6,7 @@ import { uploadImages } from "src/apis/image/image-api";
 import LogEvents from "src/apis/log/log-event";
 import sendLog from "src/apis/log/sendLog";
 import { createNotice } from "src/apis/notice/notice-api";
+import useAuth from "src/hooks/useAuth";
 import Paths from "src/types/paths";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
@@ -81,6 +82,8 @@ const TagDescription = ({
 };
 
 const NoticeWritingPage = () => {
+  useAuth({ redirectUrl: Paths.home });
+
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
