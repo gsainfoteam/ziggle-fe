@@ -171,7 +171,7 @@ const SearchPage = () => {
               {data.list.map((notice) => (
                 <SearchResult
                   id={notice.id}
-                  deadline={notice.deadline}
+                  deadline={notice.deadline ?? undefined}
                   title={notice.title}
                   author={notice.author}
                   tags={notice.tags}

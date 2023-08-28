@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-const calculateDDay = (deadline: string): number | never => {
+export const calculateDDay = (deadline: string): number | never => {
   // Validate date format
   const parsedDeadline = dayjs(deadline);
   if (!parsedDeadline.isValid()) {
@@ -18,7 +18,7 @@ const calculateDDay = (deadline: string): number | never => {
   return daysDiff;
 };
 
-const dDayFormated = (deadline: string): string => {
+export const dDayFormated = (deadline: string): string => {
   const daysDiff = calculateDDay(deadline);
 
   if (daysDiff < 0) {
@@ -29,5 +29,3 @@ const dDayFormated = (deadline: string): string => {
     return `D - ${daysDiff}`;
   }
 };
-
-export default dDayFormated;

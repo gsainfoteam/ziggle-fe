@@ -5,8 +5,10 @@ import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import useIsMobile from "src/hooks/useIsMobile";
+import DDay from "src/molecules/d-day/DDay";
 import Paths from "src/types/paths";
 import { MOBILE_BREAKPOINT, ZaboProps } from "src/types/types";
+import { calculateDDay } from "src/utils/calculateDDay";
 import formatISODate from "src/utils/formatISODate";
 import styled, { css } from "styled-components";
 
@@ -19,6 +21,8 @@ const ZaboWrapper = styled(Button)<{
   width: number;
   shadowColor: string;
 }>`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -60,6 +64,7 @@ const ZaboWrapper = styled(Button)<{
 const TextZabo = ({
   title,
   date,
+  deadline,
   viewCount,
   author,
   content,
@@ -160,6 +165,19 @@ const TextZabo = ({
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>
+
+      {deadline && calculateDDay(deadline) > 0 && (
+        <Flex
+          style={{
+            position: "absolute",
+            top: "8px",
+            left: "8px",
+            zIndex: 1,
+          }}
+        >
+          <DDay dayLeft={calculateDDay(deadline)} />
+        </Flex>
+      )}
     </ZaboWrapper>
   );
 };

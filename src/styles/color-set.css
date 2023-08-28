@@ -1,0 +1,11 @@
+#root {
+  --color-primary: #eb6263;
+  --color-primary-translucent: rgba(235, 98, 99, 0.9);
+  --color-secondary: #ffeaea;
+
+  --color-text: #252525;
+  --color-secondary-text: #959595;
+  --color-deselected: #d6d6d6;
+  --placeholder: #e3e3e3;
+  --colorless: #ffffff;
+}
