@@ -156,6 +156,7 @@ const ZaboCarousel = ({
                 key={zabo.id}
                 id={zabo.id}
                 title={zabo.title}
+                content={zabo.content}
                 date={zabo.date}
                 deadline={zabo.deadline}
                 viewCount={zabo.viewCount}

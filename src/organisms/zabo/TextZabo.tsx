@@ -79,6 +79,8 @@ const TextZabo = ({
     origin === "height" ? size * 1.5 : size,
   ];
 
+  console.log(content);
+
   const navigate = useNavigate();
 
   const isMobile = useIsMobile();
@@ -118,7 +120,7 @@ const TextZabo = ({
       <Flex flexDirection="column">
         <Text
           font={Font.Bold}
-          size={isMobile ? "1.25rem" : "1.625rem"}
+          size={isMobile ? "1rem" : "1.625rem"}
           style={{
             textAlign: "left",
             WebkitLineClamp: lineClamp,
@@ -132,7 +134,7 @@ const TextZabo = ({
 
         <Text
           font={Font.Medium}
-          size="1.125rem"
+          size={isMobile ? "0.875rem" : "1.125rem"}
           style={{
             textOverflow: "ellipsis",
             overflow: "hidden",
@@ -150,18 +152,34 @@ const TextZabo = ({
 
       <Flex flexDirection="column">
         <Flex gap="0.25em">
-          <Text font={Font.Medium} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             {formatISODate(date)}
           </Text>
-          <Text font={Font.Medium} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Medium}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             •
           </Text>
-          <Text font={Font.Bold} color={colorSet.secondaryText}>
+          <Text
+            font={Font.Bold}
+            color={colorSet.secondaryText}
+            size={isMobile ? "0.75rem" : "1rem"}
+          >
             조회수 {viewCount}
           </Text>
         </Flex>
         <Spacer height={"3px"} />
-        <Text font={Font.Medium} textAlign="left">
+        <Text
+          font={Font.Medium}
+          textAlign="left"
+          size={isMobile ? "0.75rem" : "1rem"}
+        >
           {author} {organization && `• ${organization}`}
         </Text>
       </Flex>
