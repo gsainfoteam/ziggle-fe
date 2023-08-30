@@ -24,6 +24,7 @@ const ZaboWrapper = styled(Button)<{
   position: relative;
 
   display: flex;
+  flex: 0;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
