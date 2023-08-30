@@ -96,7 +96,7 @@ const linkSections = [
       },
       {
         name: "GIST 홈페이지",
-        link: "https://gist.ac.kr",
+        link: "https://www.gist.ac.kr/kr/main.html",
         logEvent: LogEvents.FooterClickGist,
       },
       {

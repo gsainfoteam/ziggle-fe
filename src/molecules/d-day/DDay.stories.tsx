@@ -11,5 +11,5 @@ const Template: StoryFn<typeof DDay> = (args) => <DDay {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  dayLeft: 7,
+  deadline: "2023-09-01T00:00:00.000Z",
 };

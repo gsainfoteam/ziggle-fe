@@ -11,7 +11,6 @@ const PlaygroundPage = () => {
 
   const handleImageLoad = () => {
     setIsLoaded(true);
-    console.log("loaded");
   };
 
   return (
@@ -27,12 +26,7 @@ const PlaygroundPage = () => {
           }}
         />
         {!isLoaded && <Skeleton width={"300px"} height={"300px"} />}
-        <img
-          src="https://picsum.photos/300/300?random=2"
-          onLoad={() => {
-            console.log("loaded");
-          }}
-        />
+        <img src="https://picsum.photos/300/300?random=2" onLoad={() => {}} />
       </Content>
     </Area>
   );
