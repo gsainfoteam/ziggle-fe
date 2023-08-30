@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useMediaQuery } from "react-responsive";
 import { getAllNotices } from "src/apis/notice/notice-api";
 import queryKeys from "src/apis/queryKeys";
-import { getUserInfo } from "src/apis/user/user-api";
 import Area from "src/atoms/containers/area/Area";
 import Content from "src/atoms/containers/content/Content";
 import Spacer from "src/atoms/spacer/Spacer";
@@ -16,10 +15,9 @@ import Paths, { NoticeSection } from "src/types/paths";
 const SHOW_NOTICE_PAGE = 4;
 
 const MyPage = () => {
-  useAuth({
+  const { userInfo } = useAuth({
     redirectUrl: Paths.home,
   });
-  const { data: userInfo } = useQuery([queryKeys.getUserInfo], getUserInfo);
   const isMobile = useIsMobile();
 
   const isSmall = useMediaQuery({ maxWidth: 1200 });

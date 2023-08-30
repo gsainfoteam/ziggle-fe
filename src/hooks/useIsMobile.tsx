@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import MobileContext from "src/layout/MobileContext";
 
-const useIsMobile = (breakpoint = 768) => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= breakpoint);
+const useIsMobile = () => {
+  const context = useContext(MobileContext);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= breakpoint);
-    };
+  if (!context) {
+    throw new Error("useIsMobile must be used within a MobileProvider");
+  }
 
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [breakpoint]);
-
-  return isMobile;
+  return context.isMobile;
 };
 
 export default useIsMobile;
