@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 
 export const calculateDDay = (deadline: string): number | never => {
   // Validate date format
+  console.log("deadline", deadline);
   const parsedDeadline = dayjs(deadline);
   if (!parsedDeadline.isValid()) {
     throw new Error("The deadline date format is incorrect.");

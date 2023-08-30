@@ -1,10 +1,11 @@
 import { MOBILE_BREAKPOINT } from "src/types/types";
+import { dDayFormated } from "src/utils/date";
 import styled from "styled-components";
 
 import Text from "../../atoms/text/Text";
 
 interface DDayProps {
-  dayLeft: number;
+  deadline: string;
 }
 
 const DdayWrapper = styled.div`
@@ -13,14 +14,13 @@ const DdayWrapper = styled.div`
   align-items: center;
 
   height: 28px;
-  width: 67px;
   border: 1px solid #ffffff;
   border-radius: 5px;
   background-color: var(--color-primary-translucent);
+  padding: 0 5px;
 
   @media (max-width: ${MOBILE_BREAKPOINT}) {
     height: 20px;
-    width: 50px;
 
     margin: -5px 0 0 -5px;
   }
@@ -36,10 +36,10 @@ const DdayText = styled(Text)`
   }
 `;
 
-const DDay = ({ dayLeft }: DDayProps) => {
+const DDay = ({ deadline }: DDayProps) => {
   return (
     <DdayWrapper>
-      <DdayText>D - {dayLeft}</DdayText>
+      <DdayText>{dDayFormated(deadline)}</DdayText>
     </DdayWrapper>
   );
 };

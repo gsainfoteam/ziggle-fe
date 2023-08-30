@@ -127,7 +127,7 @@ const ImageZabo = ({
         {author} {organization && `• ${organization}`}
       </Text>
 
-      {deadline && calculateDDay(deadline) > 0 && (
+      {deadline && calculateDDay(deadline) >= 0 && (
         <Flex
           style={{
             position: "absolute",
@@ -136,7 +136,7 @@ const ImageZabo = ({
             zIndex: 1,
           }}
         >
-          <DDay dayLeft={calculateDDay(deadline)} />
+          <DDay deadline={deadline} />
         </Flex>
       )}
     </ZaboWrapper>
