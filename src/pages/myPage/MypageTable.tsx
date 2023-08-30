@@ -34,7 +34,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
         <div>
           <div
             style={{
-              height: "70px",
+              height: isMobile ? "58px" : "70px",
               backgroundColor: colorSet.primary,
               borderRadius: "10px 10px 0 0",
               display: "flex",
@@ -44,7 +44,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
           >
             <div style={{ width: "75%", borderTopLeftRadius: "10px" }}>
               <Text
-                size={"1.3rem"}
+                size={isMobile ? "1rem" : "1.3125rem"}
                 color={colorSet.colorless}
                 font={Font.Bold}
                 style={{ paddingLeft: "20px" }}
@@ -94,7 +94,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
                 >
                   <div
                     style={{
-                      padding: "20px 0",
+                      padding: isMobile ? "10px 0 0 0" : "20px 0",
                       borderBottomLeftRadius: borderBottomRadius,
                       lineHeight: "1.5",
                       width: "70%",
@@ -102,7 +102,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
                   >
                     <StylelessLink to={Paths.noticeDetail + articleObj.id}>
                       <Text
-                        size={"1.1rem"}
+                        size={isMobile ? "0.9375rem" : "1.125rem"}
                         color={colorSet.text}
                         font={Font.Regular}
                         style={{
@@ -124,7 +124,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
                     }}
                   >
                     <Text
-                      size={"1.1rem"}
+                      size={isMobile ? "0.875rem" : "1.125rem"}
                       color={colorSet.secondaryText}
                       font={Font.Regular}
                       style={{ padding: "10px", textAlign: "center" }}

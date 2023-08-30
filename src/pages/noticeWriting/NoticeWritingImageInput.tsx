@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Grid from "src/atoms/containers/grid/Grid";
+import useIsMobile from "src/hooks/useIsMobile";
 import styled from "styled-components";
 
 import Button, { ButtonVariant } from "../../atoms/button/Button";
@@ -25,6 +26,8 @@ const NoticeWritingImageInput = ({
   setFiles,
 }: NoticeWritingImageInputProps) => {
   const hiddenFileInput = useRef<HTMLInputElement>(null);
+
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     return () => {
@@ -52,14 +55,18 @@ const NoticeWritingImageInput = ({
   };
 
   return (
-    <Flex flexDirection={"column"} gap={"15px"}>
-      <Flex gap={"12px"}>
-        <Icon.AddImgBlack width={"24px"} />
-        <Text font={Font.Medium} size={"1.25rem"}>
+    <Flex flexDirection={"column"} gap={isMobile ? "10px" : "15px"}>
+      <Flex gap={isMobile ? "8px" : "12px"}>
+        <Icon.AddImgBlack width={isMobile ? "18px" : "24px"} />
+        <Text font={Font.Medium} size={isMobile ? "1rem" : "1.25rem"}>
           사진 첨부
         </Text>
       </Flex>
-      <Text font={Font.Regular} color={colorSet.secondaryText}>
+      <Text
+        font={Font.Regular}
+        color={colorSet.secondaryText}
+        size={isMobile ? "0.8125rem" : "1rem"}
+      >
         첨부된 사진 중 첫 번째 사진이 대표 사진으로 설정됩니다.
       </Text>
 
@@ -89,9 +96,9 @@ const NoticeWritingImageInput = ({
         {files.length > 0 ? (
           <Grid
             gridTemplateColumns="1fr 1fr 1fr"
-            gap="12px"
+            gap={isMobile ? "6px" : "12px"}
             style={{
-              padding: "10px",
+              padding: isMobile ? "6px" : "10px",
             }}
           >
             {files.map((file, index) => (
@@ -105,7 +112,7 @@ const NoticeWritingImageInput = ({
               />
             ))}
             <Button
-              borderRadius={"10px"}
+              borderRadius={isMobile ? "6px" : "10px"}
               style={{
                 aspectRatio: "1/1",
                 backgroundColor: colorSet.placeholder,
@@ -119,7 +126,7 @@ const NoticeWritingImageInput = ({
           </Grid>
         ) : (
           <Flex flexDirection={"column"} alignItems={"center"}>
-            <Spacer height={"80px"} />
+            <Spacer height={isMobile ? "30px" : "80px"} />
 
             <Flex
               width={"100px"}
@@ -131,28 +138,30 @@ const NoticeWritingImageInput = ({
               <div
                 style={{
                   position: "absolute",
-                  width: "90px",
-                  height: "12px",
+                  width: isMobile ? "45px" : "90px",
+                  height: isMobile ? "6px" : "12px",
                   backgroundColor: colorSet.secondaryText,
-                  top: "calc(50% - 6px)",
+                  top: `calc(50% - ${isMobile ? 3 : 6}px)`,
+                  left: `calc(50% - ${isMobile ? 22.5 : 45}px)`,
                 }}
               />
               <div
                 style={{
                   position: "absolute",
-                  width: "90px",
-                  height: "12px",
+                  width: isMobile ? "45px" : "90px",
+                  height: isMobile ? "6px" : "12px",
                   backgroundColor: colorSet.secondaryText,
                   transform: "rotate(90deg)",
-                  top: "calc(50% - 6px)",
+                  top: `calc(50% - ${isMobile ? 3 : 6}px)`,
+                  left: `calc(50% - ${isMobile ? 22.5 : 45}px)`,
                 }}
               />
             </Flex>
 
-            <Spacer height={"25px"} />
+            <Spacer height={isMobile ? "0px" : "25px"} />
 
             <Text
-              size={"1.5rem"}
+              size={isMobile ? "1rem" : "1.5rem"}
               font={Font.Bold}
               color={colorSet.secondaryText}
             >
@@ -166,13 +175,16 @@ const NoticeWritingImageInput = ({
               onClick={() => {
                 hiddenFileInput.current?.click();
               }}
+              style={{
+                padding: isMobile ? "8px 12px" : "12px 16px",
+              }}
             >
-              <Text size={"1rem"} font={Font.Bold}>
+              <Text size={isMobile ? "0.75rem" : "1rem"} font={Font.Bold}>
                 또는 내 컴퓨터에서 선택
               </Text>
             </Button>
 
-            <Spacer height={"50px"} />
+            <Spacer height={isMobile ? "30px" : "50px"} />
           </Flex>
         )}
       </Flex>

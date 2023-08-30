@@ -7,6 +7,7 @@ import LogEvents from "src/apis/log/log-event";
 import sendLog from "src/apis/log/sendLog";
 import { createNotice } from "src/apis/notice/notice-api";
 import useAuth from "src/hooks/useAuth";
+import useIsMobile from "src/hooks/useIsMobile";
 import Paths from "src/types/paths";
 import { isEmpty } from "src/utils/utils";
 import styled from "styled-components";
@@ -23,7 +24,7 @@ import Text from "../../atoms/text/Text";
 import NoticeTypeRadio from "../../molecules/noticeTypeRadio/NoticeTypeRadio";
 import colorSet from "../../styles/colorSet";
 import Font from "../../styles/font";
-import { NoticeType, Tag } from "../../types/types";
+import { MOBILE_BREAKPOINT, NoticeType, Tag } from "../../types/types";
 import dateFormat from "../../utils/dateFormat";
 import NoticeWritingActions from "./NoticeWritingActions";
 import NoticeWritingImageInput from "./NoticeWritingImageInput";
@@ -39,6 +40,10 @@ const DateInput = styled.input`
 
   ::-webkit-calendar-picker-indicator {
     // TODO: primary color로 바꾸기
+  }
+
+  @media (max-width: ${MOBILE_BREAKPOINT}) {
+    font-size: 0.875rem;
   }
 `;
 
@@ -64,17 +69,31 @@ const TagDescription = ({
   description: string;
   example?: string;
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <>
-      <Text font={Font.Bold} size="24px" color={colorSet.text}>
+      <Text
+        font={Font.Bold}
+        size={isMobile ? "1rem" : "1.5rem"}
+        color={colorSet.text}
+      >
         {title}
       </Text>
-      <Spacer height="10px" />
-      <Text font={Font.Regular} size="18px" color={colorSet.text}>
+      <Spacer height={isMobile ? "6px" : "10px"} />
+      <Text
+        font={Font.Regular}
+        size={isMobile ? "0.875rem" : "1.125rem"}
+        color={colorSet.text}
+      >
         {description}
       </Text>
-      <Spacer height="10px" />
-      <Text font={Font.Regular} size="18px" color={colorSet.secondaryText}>
+      <Spacer height={isMobile ? "6px" : "10px"} />
+      <Text
+        font={Font.Regular}
+        size={isMobile ? "0.875rem" : "1.125rem"}
+        color={colorSet.secondaryText}
+      >
         {example}
       </Text>
     </>
@@ -83,6 +102,8 @@ const TagDescription = ({
 
 const NoticeWritingPage = () => {
   useAuth({ redirectUrl: Paths.home });
+
+  const isMobile = useIsMobile();
 
   const [title, setTitle] = useState<string>("");
   const [noticeType, setNoticeType] = useState<NoticeType>(NoticeType.RECRUIT);
@@ -162,7 +183,7 @@ const NoticeWritingPage = () => {
   return (
     <Area>
       <Content>
-        <Spacer height={"100px"} />
+        <Spacer height={"50px"} />
 
         <Input
           value={title}
@@ -170,7 +191,7 @@ const NoticeWritingPage = () => {
             setTitle(event.target.value);
           }}
           placeholder={"제목을 입력하세요"}
-          fontSize={"3rem"}
+          fontSize={isMobile ? "1.375rem" : "3rem"}
           padding="0"
           onBlur={(event) =>
             sendLog(LogEvents.NoticeWritingPageTypeTitle, {
@@ -181,7 +202,7 @@ const NoticeWritingPage = () => {
 
         <Spacer height={"15px"} />
 
-        <Flex alignItems={"center"} gap={"10px"}>
+        <Flex alignItems={"center"} gap={isMobile ? "5px" : "10px"}>
           <Checkbox
             label={"마감일 설정"}
             checked={hasDeadline}
@@ -211,8 +232,8 @@ const NoticeWritingPage = () => {
 
         <Flex flexDirection={"column"} gap={"15px"}>
           <Flex alignItems={"center"} gap={"12px"}>
-            <Icon.LinesBlack width={"24px"} />
-            <Text font={Font.Medium} size={"1.25rem"}>
+            <Icon.LinesBlack width={isMobile ? "20px" : "24px"} />
+            <Text font={Font.Medium} size={isMobile ? "0.875rem" : "1.25rem"}>
               분류
             </Text>
           </Flex>
@@ -262,9 +283,9 @@ const NoticeWritingPage = () => {
         <Spacer height={"25px"} />
 
         <Flex flexDirection={"column"} gap={"15px"}>
-          <Flex gap={"12px"}>
-            <Icon.DocumentBlack width={"24px"} />
-            <Text font={Font.Medium} size={"1.25rem"}>
+          <Flex gap={isMobile ? "8px" : "12px"}>
+            <Icon.DocumentBlack width={isMobile ? "18px" : "24px"} />
+            <Text font={Font.Medium} size={isMobile ? "1rem" : "1.25rem"}>
               본문 내용 입력
             </Text>
           </Flex>

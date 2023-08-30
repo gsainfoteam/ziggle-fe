@@ -1,4 +1,5 @@
 import { InputHTMLAttributes, useId } from "react";
+import useIsMobile from "src/hooks/useIsMobile";
 
 import colorSet from "../../../styles/colorSet";
 import Font from "../../../styles/font";
@@ -21,6 +22,8 @@ const Checkbox = ({
 }: CheckboxProps) => {
   const id = useId();
 
+  const isMobile = useIsMobile();
+
   return (
     <label htmlFor={htmlId || id}>
       <input
@@ -38,20 +41,24 @@ const Checkbox = ({
         {...props}
       />
 
-      <Flex gap={"10px"}>
+      <Flex gap={isMobile ? "8px" : "10px"}>
         {checked ? (
-          <img src={checkboxChecked} alt={"checked checkbox"} width={"20px"} />
+          <img
+            src={checkboxChecked}
+            alt={"checked checkbox"}
+            width={isMobile ? "16px" : "20px"}
+          />
         ) : (
           <img
             src={checkboxUnchecked}
             alt={"unchecked checkbox"}
-            width={"20px"}
+            width={isMobile ? "16px" : "20px"}
           />
         )}
 
         <Text
           font={Font.Medium}
-          size={"1.25rem"}
+          size={isMobile ? "0.875rem" : "1.25rem"}
           color={checked ? colorSet.text : colorSet.secondaryText}
         >
           {label}

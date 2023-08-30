@@ -9,6 +9,7 @@ import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
 import Text from "src/atoms/text/Text";
 import useAuth from "src/hooks/useAuth";
+import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import LoadingCatAnimation from "src/templates/loadingCatAnimation/LoadingCatAnimation";
@@ -54,6 +55,7 @@ const MenuSum = ({ children, onDelete }: MenuSumProps) => {
 };
 
 const WrittenNoticesPage = () => {
+  const isMobile = useIsMobile();
   const queryClient = useQueryClient();
 
   const handleNotice = useMutation(deleteNotice, {
@@ -95,20 +97,24 @@ const WrittenNoticesPage = () => {
 
   return (
     <Area>
-      <Spacer height={"50px"} />
+      <Spacer height={isMobile ? "30px" : "50px"} />
       <Content>
-        <Text as={"h1"} size={"2.5rem"} font={Font.Bold}>
+        <Text as={"h1"} size={isMobile ? "1.5rem" : "2.5rem"} font={Font.Bold}>
           ✍️ 내가 게시한 공지
         </Text>
 
         <Spacer height={"8px"} />
 
-        <Text size={"1rem"} font={Font.Medium} color={colorSet.secondaryText}>
+        <Text
+          size={isMobile ? "0.75rem" : "1rem"}
+          font={Font.Medium}
+          color={colorSet.secondaryText}
+        >
           내가 작성한 공지들을 모아서 보여드려요
         </Text>
       </Content>
 
-      <Spacer height={"50px"} />
+      <Spacer height={isMobile ? "30px" : "50px"} />
 
       <Content>
         <Flex

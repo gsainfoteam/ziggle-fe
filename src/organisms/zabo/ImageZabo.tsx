@@ -5,6 +5,7 @@ import sendLog from "src/apis/log/sendLog";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
 import Spacer from "src/atoms/spacer/Spacer";
+import useIsMobile from "src/hooks/useIsMobile";
 import DDay from "src/molecules/d-day/DDay";
 import ZaboImage from "src/molecules/zaboImage/ZaboImage";
 import Paths from "src/types/paths";
@@ -26,6 +27,9 @@ const ZaboWrapper = styled(Button)`
   flex-direction: column;
   gap: 3px;
   cursor: pointer;
+
+  line-height: 0;
+
   p {
     margin: 0;
   }
@@ -48,7 +52,7 @@ const Title = styled(Text)<{ hovered: boolean }>`
 `;
 Title.defaultProps = {
   font: Font.Bold,
-  size: "1.2rem",
+  size: "1.1875rem",
 };
 
 const ImageZabo = ({
@@ -65,6 +69,8 @@ const ImageZabo = ({
   logName,
 }: Omit<ZaboProps, "content"> & { thumbnailUrl: string }) => {
   const { hovered, ref } = useHover<HTMLButtonElement>(); // useHover가 HTMLDivElement만 받아서 부득이하게 ZaboWrapper와 Button 분리
+
+  const isMobile = useIsMobile();
 
   const navigate = useNavigate();
 
@@ -87,19 +93,37 @@ const ImageZabo = ({
 
       <Spacer height="3px" />
 
-      <Title hovered={hovered}>{title}</Title>
+      <Title hovered={hovered} size={isMobile ? "0.875rem" : "1.1875rem"}>
+        {title}
+      </Title>
       <Flex gap="0.25em">
-        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
+        <Text
+          font={Font.Medium}
+          color={colorSet.secondaryText}
+          size={isMobile ? "0.75rem" : "0.875rem"}
+        >
           {formatISODate(date)}
         </Text>
-        <Text font={Font.Medium} color={colorSet.secondaryText} size={"0.9rem"}>
+        <Text
+          font={Font.Medium}
+          color={colorSet.secondaryText}
+          size={isMobile ? "0.75rem" : "0.875rem"}
+        >
           •
         </Text>
-        <Text font={Font.Bold} color={colorSet.secondaryText} size={"0.9rem"}>
+        <Text
+          font={Font.Bold}
+          color={colorSet.secondaryText}
+          size={isMobile ? "0.75rem" : "0.875rem"}
+        >
           조회수 {viewCount}
         </Text>
       </Flex>
-      <Text font={Font.Medium} textAlign="left">
+      <Text
+        font={Font.Medium}
+        textAlign="left"
+        size={isMobile ? "0.75rem" : "1rem"}
+      >
         {author} {organization && `• ${organization}`}
       </Text>
 
