@@ -8,7 +8,6 @@ import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import styled from "styled-components";
-import Swal from "sweetalert2";
 
 import Flex from "../../atoms/containers/flex/Flex";
 import defaults from "../../styles/defaults";
@@ -132,30 +131,18 @@ const Footer = () => {
             >
               <Github size={isMobile ? "2rem" : "2.5rem"} />
             </ExternalLink>
-            <div
-              onClick={() => {
-                Swal.fire({
-                  title: "준비중입니다.",
-                  text: "열심히 준비중입니다. 조금만 기다려주세요!",
-                  icon: "info",
-                });
-                return sendLog(LogEvents.FooterClickPlayStore);
-              }}
+            <ExternalLink
+              href="https://play.google.com/store/apps/details?id=me.gistory.ziggle"
+              onClick={() => sendLog(LogEvents.FooterClickPlayStore)}
             >
               <PlayStore size={isMobile ? "2rem" : "2.5rem"} />
-            </div>
-            <div
-              onClick={() => {
-                Swal.fire({
-                  title: "준비중입니다.",
-                  text: "열심히 준비중입니다. 조금만 기다려주세요!",
-                  icon: "info",
-                });
-                return sendLog(LogEvents.FooterClickAppStore);
-              }}
+            </ExternalLink>
+            <ExternalLink
+              href="https://apps.apple.com/kr/app/ziggle/id6451740697"
+              onClick={() => sendLog(LogEvents.FooterClickAppStore)}
             >
               <AppStore size={isMobile ? "2rem" : "2.5rem"} />
-            </div>
+            </ExternalLink>
           </Flex>
         </Flex>
         <Text font={Font.Regular} size="1rem">
