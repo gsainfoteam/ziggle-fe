@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,6 +24,7 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: Paths } = {}) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const handleLogin = async () => {
@@ -34,6 +35,7 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: Paths } = {}) => {
           code,
         });
         if (isLoggedIn) {
+          await queryClient.invalidateQueries([queryKeys.getUserInfo]);
           setQuery();
         }
 
@@ -46,7 +48,7 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: Paths } = {}) => {
     };
 
     handleLogin();
-  }, [isError, navigate, query, redirectUrl, setQuery]);
+  }, [isError, navigate, query, queryClient, redirectUrl, setQuery]);
 
   useEffect(() => {
     const pathname = location.pathname as Paths;
@@ -56,7 +58,7 @@ const useAuth = ({ redirectUrl }: { redirectUrl?: Paths } = {}) => {
     if (userInfo) return;
 
     toast(
-      <Text color={colorSet.primary} textAlign={"right"}>
+      <Text color={colorSet.primary} textAlign={"right"} size={"0.9375rem"}>
         공지를 작성하고 리마인드하려면 <br />
         <Highlight font={Font.Bold}>로그인</Highlight>해주세요!
       </Text>,

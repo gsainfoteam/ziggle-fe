@@ -8,24 +8,28 @@ import useViewLog from "src/hooks/useViewLog";
 import Footer from "src/templates/footer/Footer";
 import Navbar from "src/templates/navbar/Navbar";
 
+import MobileProvider from "./MobileProvider";
+
 const Layout = () => {
   useViewLog();
   useAuth();
 
   return (
-    <div>
-      <Navbar />
-      <Outlet />
+    <MobileProvider>
+      <div>
+        <Navbar />
+        <Outlet />
 
-      <Spacer height={"300px"} />
-      <Footer />
+        <Spacer height={"300px"} />
+        <Footer />
 
-      <ToastContainer
-        style={{
-          width: "260px",
-        }}
-      />
-    </div>
+        <ToastContainer
+          style={{
+            width: "260px",
+          }}
+        />
+      </div>
+    </MobileProvider>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useHover } from "@mantine/hooks";
+import { toast } from "react-toastify";
 import { LinkIcon } from "src/assets/Icons";
 import Button from "src/atoms/button/Button";
 import Flex from "src/atoms/containers/flex/Flex";
@@ -18,6 +19,17 @@ const CopyLinkButton = ({ title }: CopyLinkButtonProps) => {
   const handleCopyClick = () => {
     navigator.clipboard.writeText(
       `${title} \n\nZiggle에서 공지를 확인해보세요 \n${window.location.href}`,
+    );
+
+    toast.success(
+      <Flex flexDirection={"column"} alignItems={"center"}>
+        <Text font={Font.Medium} size={"0.875rem"}>
+          공지 주소가 복사되었습니다!
+        </Text>
+        <Text font={Font.Medium} size={"0.75rem"}>
+          친구들에게 공지를 공유해보세요
+        </Text>
+      </Flex>,
     );
   };
 
