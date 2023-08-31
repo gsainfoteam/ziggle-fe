@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import LogEvents from "src/apis/log/log-event";
 import sendLog from "src/apis/log/sendLog";
 import { AppStore, Github, PlayStore } from "src/assets/Icons";
@@ -8,6 +9,7 @@ import useIsMobile from "src/hooks/useIsMobile";
 import colorSet from "src/styles/colorSet";
 import Font from "src/styles/font";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 import Flex from "../../atoms/containers/flex/Flex";
 import defaults from "../../styles/defaults";
@@ -110,6 +112,30 @@ const linkSections = [
 
 const Footer = () => {
   const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const mobileAppSwalTimer = setTimeout(() => {
+      Swal.fire({
+        title: "모바일 앱을 설치해보세요!",
+        text: "더욱 편리한 서비스를 이용하실 수 있습니다.",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Android",
+        cancelButtonText: "iOS",
+        buttonsStyling: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.open(
+            "https://play.google.com/store/apps/details?id=me.gistory.ziggle",
+          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          window.open("https://apps.apple.com/kr/app/ziggle/id6451740697");
+        }
+      });
+    }, 5000);
+  }, [isMobile]);
 
   return (
     <Bar
