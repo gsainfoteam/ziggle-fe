@@ -120,6 +120,11 @@ const NoticeWritingPage = () => {
 
   const handleNotice = useMutation(createNotice, {
     onSuccess: () => {
+      Swal.fire({
+        text: "공지가 작성되었습니다",
+        icon: "success",
+        confirmButtonText: "확인",
+      });
       navigate(Paths.home);
     },
   });
@@ -150,7 +155,7 @@ const NoticeWritingPage = () => {
       return;
     }
 
-    if (!editorRef.current) {
+    if (!editorRef.current.getContent()) {
       Swal.fire({
         text: "내용을 입력해주세요",
         icon: "warning",
@@ -158,6 +163,12 @@ const NoticeWritingPage = () => {
       });
       return;
     }
+
+    Swal.fire({
+      text: "공지를 작성 중입니다",
+      icon: "info",
+      showConfirmButton: false,
+    });
 
     if (isEmpty(images)) {
       writeNotice(null);
@@ -198,6 +209,7 @@ const NoticeWritingPage = () => {
               title: event.target.value,
             })
           }
+          width={"100%"}
         />
 
         <Spacer height={"15px"} />
@@ -223,6 +235,13 @@ const NoticeWritingPage = () => {
                 sendLog(LogEvents.NoticeWritingPageSetDeadline, {
                   deadline: event.target.value,
                 });
+              }}
+              onKeyDown={(event) => {
+                event.preventDefault();
+              }}
+              onClick={(event: React.MouseEvent<HTMLInputElement>) => {
+                // @ts-ignore
+                event.target.showPicker();
               }}
             />
           )}
