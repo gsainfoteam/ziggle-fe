@@ -155,9 +155,20 @@ const NoticeWritingPage = () => {
       return;
     }
 
-    if (!editorRef.current.getContent()) {
+    const content = editorRef.current.getContent();
+
+    if (!content) {
       Swal.fire({
         text: "내용을 입력해주세요",
+        icon: "warning",
+        confirmButtonText: "확인",
+      });
+      return;
+    }
+
+    if (content.length >= 3000) {
+      Swal.fire({
+        text: `내용이 너무 길어요 ${content.length}/3000자`,
         icon: "warning",
         confirmButtonText: "확인",
       });
