@@ -110,7 +110,7 @@ const TextZabo = ({
 
   const titleLength = title.length;
   const lineClamp = calculateLineClamp(titleLength, origin);
-  const dDay = deadline ? calculateDDay(deadline) : 0;
+  const dDay = deadline ? calculateDDay(deadline) : -1;
 
   return (
     <ZaboWrapper
