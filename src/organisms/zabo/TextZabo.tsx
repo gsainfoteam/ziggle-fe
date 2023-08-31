@@ -34,7 +34,7 @@ const ZaboWrapper = styled(Button)<{
   height: ${(props) => props.height}px;
   min-width: ${(props) => props.width}px;
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
 
   background-color: ${colorSet.colorless};
   border-radius: 5px;
@@ -81,6 +81,8 @@ const TextZabo = ({
     origin === "height" ? size : size * 1.5,
     origin === "height" ? size * 1.5 : size,
   ];
+  // origin : height -> height : size, width : size * 1.5
+  // origin : width -> height : size * 1.5, width : size
 
   const navigate = useNavigate();
 
