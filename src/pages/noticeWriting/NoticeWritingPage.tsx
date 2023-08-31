@@ -295,6 +295,12 @@ const NoticeWritingPage = () => {
             onInit={(_, editor) => (editorRef.current = editor)}
             init={{
               promotion: false,
+              plugins: ["link", "image", "code"],
+              toolbar:
+                "undo redo | formatselect | " +
+                "bold italic backcolor | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | link",
             }}
             onBlur={(event) =>
               sendLog(LogEvents.NoticeWritingPageTypeContent, {
