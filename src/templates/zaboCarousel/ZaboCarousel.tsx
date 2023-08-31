@@ -58,6 +58,7 @@ const ZabosContainer = styled(Content)`
   display: flex;
   gap: 20px;
   overflow-x: scroll;
+  overflow-y: hidden;
 
   &::-webkit-scrollbar {
     display: none;
