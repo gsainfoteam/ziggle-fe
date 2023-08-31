@@ -3,3 +3,16 @@
   src: url("./assets/fonts/Aharoni-Bold.ttf") format(".ttf");
   font-weight: 700;
 }
+
+button {
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-text);
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  color: var(--color-text);
+}
