@@ -1,7 +1,7 @@
 import LoginResponse from "src/models/login-response";
 import { User } from "src/types/types";
 
-import { apiGetter } from "../interceptor/interceptor";
+import { apiGetter, apiPoster } from "../interceptor/interceptor";
 
 export const goToIdp = () => {
   const idp_url = `${
@@ -33,6 +33,9 @@ export const getUserInfo = async ({ queryKey }: { queryKey: [string] }) => {
 };
 
 export const logout = async () => {
+  await apiPoster("/user/logout", {
+    access_token: localStorage.getItem("access_token"),
+  });
   localStorage.removeItem("access_token");
   window.location.href = "/";
 };
