@@ -30,10 +30,14 @@ interceptor.interceptors.response.use(
   async (error) => {
     if (!(error instanceof AxiosError)) throw error;
     if (error.response?.status !== 401) throw error;
-    const config = error.config as InternalAxiosRequestConfig & {
-      _retried?: boolean;
-    };
-    if (config?._retried) throw error;
+    const config = error.config as
+      | (InternalAxiosRequestConfig & {
+          _retried?: boolean;
+        })
+      | undefined;
+    if (!config) throw error;
+    if (config.url?.endsWith("/user/refresh")) throw error;
+    if (config._retried) throw error;
     config._retried = true;
 
     const res = await interceptor.post<LoginResponse>(
