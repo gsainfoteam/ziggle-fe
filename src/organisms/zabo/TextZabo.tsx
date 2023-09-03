@@ -43,6 +43,8 @@ const ZaboWrapper = styled(Button)<{
 
   line-height: 0;
 
+  overflow: hidden;
+
   p {
     margin: 0;
   }

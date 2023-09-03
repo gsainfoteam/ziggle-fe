@@ -7,6 +7,9 @@ declare global {
 }
 
 const sendLog = (event: LogEvents, data?: object) => {
+  if (!window.smartlook) {
+    return;
+  }
   window.smartlook("track", event, data);
 };
 
