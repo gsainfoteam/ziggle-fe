@@ -1,4 +1,9 @@
-import axios, { AxiosResponse } from "axios";
+import axios, {
+  AxiosError,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from "axios";
+import LoginResponse from "src/models/login-response";
 
 const interceptor = axios.create();
 
@@ -15,20 +20,28 @@ interceptor.interceptors.request.use(
     return config;
   },
   (error) => {
-    // Do something with request error
     return Promise.reject(error);
   },
 );
 
 // Add a response interceptor
 interceptor.interceptors.response.use(
-  (response) => {
-    // Do something with response data
-    return response;
-  },
-  (error) => {
-    // 로그인 에러 & 리다이렉트를 보성이가 보여준 코드처럼 useAuth 내에서 처리하려고 하는데 그럼 만약 useAuth로 테스트 할 때는 valid했지만 공지 등록 버튼을 누르는 사이 토큰이 만료된 케이스는 어떻게 처리해야 할까요
-    return Promise.reject(error);
+  (response) => response,
+  async (error) => {
+    if (!(error instanceof AxiosError)) throw error;
+    if (error.response?.status !== 401) throw error;
+    const config = error.config as InternalAxiosRequestConfig & {
+      _retried?: boolean;
+    };
+    if (config?._retried) throw error;
+    config._retried = true;
+
+    const res = await interceptor.post<LoginResponse>(
+      import.meta.env.VITE_DOMAIN + "/user/refresh",
+    );
+    if (res.status !== 200) throw error;
+    localStorage.setItem("access_token", res.data.access_token);
+    return interceptor.request(config);
   },
 );
 

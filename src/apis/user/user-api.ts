@@ -8,7 +8,7 @@ export const goToIdp = () => {
     import.meta.env.VITE_IDP_URL
   }/authorize?client_id=ziggle2023&redirect_uri=${
     (import.meta.env.DEV ? "http://" : "https://") + window.location.host
-  }&scope=openid%20profile%20email%20student_id&response_type=code`;
+  }&scope=openid%20profile%20email%20student_id%20offline_access&response_type=code&prompt=consent`;
 
   window.location.href = idp_url;
 };
