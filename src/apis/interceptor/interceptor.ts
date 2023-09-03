@@ -39,7 +39,7 @@ interceptor.interceptors.response.use(
     const res = await interceptor.post<LoginResponse>(
       import.meta.env.VITE_DOMAIN + "/user/refresh",
     );
-    if (res.status !== 200) throw error;
+    if (res.status !== 201) throw error;
     localStorage.setItem("access_token", res.data.access_token);
     return interceptor.request(config);
   },
