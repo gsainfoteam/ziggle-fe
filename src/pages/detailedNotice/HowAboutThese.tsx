@@ -122,14 +122,7 @@ const HowAboutThese = () => {
                 const zaboComponent = isMobile ? (
                   <SearchResult
                     key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    deadline={zabo.deadline}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    content={zabo.content}
-                    organization={zabo.organization}
+                    {...zabo}
                     thumbnailUrl={zabo.thumbnailUrl ?? ""}
                     logName={"howAboutThese"}
                     searchQuery={""}
@@ -138,15 +131,7 @@ const HowAboutThese = () => {
                 ) : (
                   <Zabo
                     key={zabo.id}
-                    id={zabo.id}
-                    title={zabo.title}
-                    date={zabo.date}
-                    deadline={zabo.deadline}
-                    viewCount={zabo.viewCount}
-                    author={zabo.author}
-                    content={zabo.content}
-                    organization={zabo.organization}
-                    thumbnailUrl={zabo.thumbnailUrl}
+                    {...zabo}
                     origin="width"
                     size={300}
                     logName={"howAboutThese"}
