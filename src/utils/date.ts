@@ -7,13 +7,12 @@ export const calculateDDay = (deadline: string): number | never => {
     throw new Error("The deadline date format is incorrect.");
   }
 
-  // Set time to 23:59:59
-  const finalDeadline = parsedDeadline.hour(23).minute(59).second(59);
+  const finalDeadline = parsedDeadline.startOf("day");
 
-  const now = dayjs();
+  const today = dayjs().startOf("day");
 
   // Calculate the difference in days
-  const daysDiff = finalDeadline.diff(now, "day");
+  const daysDiff = finalDeadline.diff(today, "day");
 
   return daysDiff;
 };
