@@ -1,4 +1,5 @@
 import useIsMobile from "src/hooks/useIsMobile";
+import AdditionalNotice from "src/templates/addtionalNotice/AdditionalNotice";
 import Paths, { NoticeSection } from "src/types/paths";
 
 import Area from "../../atoms/containers/area/Area";
@@ -21,6 +22,7 @@ const HomePage = () => {
   return (
     <>
       <Area>
+        <AdditionalNotice />
         <Banner />
       </Area>
 
