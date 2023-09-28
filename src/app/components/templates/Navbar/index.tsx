@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <header className="bg-primary px-4 py-0.5 flex justify-between items-center">
+    <header className="bg-primary px-4 py-0.5 flex justify-between items-center text-white">
       <Link href="/">
         <ZiggleLogo />
       </Link>
