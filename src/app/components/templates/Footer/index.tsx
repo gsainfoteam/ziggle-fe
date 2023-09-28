@@ -2,7 +2,7 @@ import InfoteamLogo from '@/assets/logos/infoteam.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
-import Link from 'next/link';
+import ExternalLink from '../../atoms/ExternalLink';
 
 const linkSections = [
   {
@@ -65,15 +65,15 @@ const Footer = () => {
             <div className="font-medium">지스트대학 총학생회 산하 정보국</div>
           </div>
           <div className="flex gap-4">
-            <Link href="https://github.com/gsainfoteam">
+            <ExternalLink href="https://github.com/gsainfoteam">
               <GitHubLogo className="w-10" />
-            </Link>
-            <Link href="https://play.google.com/store/apps/details?id=me.gistory.ziggle">
+            </ExternalLink>
+            <ExternalLink href="https://play.google.com/store/apps/details?id=me.gistory.ziggle">
               <PlayStoreLogo className="w-10" />
-            </Link>
-            <Link href="https://apps.apple.com/kr/app/ziggle/id6451740697">
+            </ExternalLink>
+            <ExternalLink href="https://apps.apple.com/kr/app/ziggle/id6451740697">
               <AppStoreLogo className="w-10" />
-            </Link>
+            </ExternalLink>
           </div>
         </div>
         <div>ⓒ 2023. INFOTEAM all rights reserved.</div>
@@ -84,9 +84,9 @@ const Footer = () => {
             <div className="font-bold text-sm">{title}</div>
             <div className="flex flex-col gap-2">
               {links.map(({ link, name }) => (
-                <Link key={name} href={link}>
+                <ExternalLink key={name} href={link}>
                   {name}
-                </Link>
+                </ExternalLink>
               ))}
             </div>
           </div>
