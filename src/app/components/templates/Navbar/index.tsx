@@ -1,4 +1,4 @@
-import ZiggleLogo from '@/assets/icons/ziggle.svg';
+import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 import AccountIcon from '@/assets/icons/account.svg';
 import Link from 'next/link';

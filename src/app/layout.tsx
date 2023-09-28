@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import Navbar from './components/templates/Navbar';
+import Footer from './components/templates/Footer';
 
 const notoSansKR = Noto_Sans_KR({
   weight: ['400', '500', '700'],
@@ -20,9 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={notoSansKR.className}>
+      <body className={`${notoSansKR.className} flex flex-col min-h-screen`}>
         <Navbar />
-        {children}
+        <main className="flex-1">{children}</main>
+        <div className="basis-80" />
+        <Footer />
       </body>
     </html>
   );
