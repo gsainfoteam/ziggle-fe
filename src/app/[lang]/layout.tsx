@@ -1,4 +1,5 @@
 import '@/app/globals.css';
+import '@/app/initDayjs';
 import type { Metadata } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Navbar from '@/app/components/templates/Navbar';

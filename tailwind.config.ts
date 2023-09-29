@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#eb6263',
+        secondayText: '#959595',
         white: '#ffffff',
       },
       spacing: {

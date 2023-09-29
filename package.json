@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.4.2",
+    "dayjs": "^1.11.10",
     "negotiator": "^0.6.3",
     "next": "latest",
     "react": "latest",
