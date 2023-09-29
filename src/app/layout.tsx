@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import Navbar from './components/templates/Navbar';
 import Footer from './components/templates/Footer';
+import Script from 'next/script';
 
 const notoSansKR = Noto_Sans_KR({
   weight: ['400', '500', '700'],
@@ -21,6 +22,32 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <Script id="smartlook-api">
+        {`
+          window.smartlook ||
+          (function (d) {
+            var o = (smartlook = function () {
+                o.api.push(arguments);
+              }),
+              h = d.getElementsByTagName("head")[0];
+            var c = d.createElement("script");
+            o.api = new Array();
+            c.async = true;
+            c.type = "text/javascript";
+            c.charset = "utf-8";
+            c.src = "https://web-sdk.smartlook.com/recorder.js";
+            h.appendChild(c);
+          })(document);
+          smartlook("init", "ec3783dc608b665c4753eb3025ccf6674e73ab19", {
+            region: "eu",
+          });
+          smartlook("record", {
+            forms: true,
+            numbers: true,
+            ips: true,
+          });
+        `}
+      </Script>
       <body className={`${notoSansKR.className} flex flex-col min-h-screen`}>
         <Navbar />
         <main className="flex-1">{children}</main>
