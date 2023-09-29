@@ -45,6 +45,6 @@
     ]
   },
   "zabo": {
-    "dateView": "{{date}} · <strong>조회수 {{views}}</strong>"
+    "dateView": "{{date}} ·\u00A0<strong>조회수 {{views}}</strong>"
   }
 }

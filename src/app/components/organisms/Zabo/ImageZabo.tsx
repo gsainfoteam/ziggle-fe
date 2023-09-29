@@ -1,8 +1,10 @@
 import { T } from '@/app/i18next';
 import dayjs from 'dayjs';
+import Image from 'next/image';
 import { Trans } from 'react-i18next';
 
-interface TextZaboProps {
+interface ImageZaboProps {
+  thumbnailUrl: string;
   title: string;
   content: string;
   date: dayjs.Dayjs;
@@ -10,18 +12,26 @@ interface TextZaboProps {
   author: string;
 }
 
-const TextZabo = ({
+const ImageZabo = ({
+  thumbnailUrl,
   title,
-  content,
   date,
   views,
   author,
   t,
-}: TextZaboProps & { t: T }) => {
+}: ImageZaboProps & { t: T }) => {
   return (
-    <div className="border rounded border-secondayText p-5 flex flex-col gap-2.5">
+    <div className="flex flex-col gap-1">
+      <div className="w-64 h-64 bg-gray-200 rounded relative">
+        <Image
+          src={thumbnailUrl}
+          alt={title}
+          fill
+          objectFit="cover"
+          className="rounded"
+        />
+      </div>
       <div className="font-bold text-3xl">{title}</div>
-      <div className="font-medium text-lg">{content}</div>
       <div className="text-sm text-secondayText font-medium flex">
         <Trans t={t} i18nKey="zabo.dateView">
           {{ date: date.format('L') }} ·
@@ -33,4 +43,4 @@ const TextZabo = ({
   );
 };
 
-export default TextZabo;
+export default ImageZabo;
