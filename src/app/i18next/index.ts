@@ -13,6 +13,7 @@ import type translation from '@/app/i18next/locales/en/translation.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
+    allowObjectInHTMLChildren: true;
     defaultNS: 'translation';
     resources: {
       translation: typeof translation;

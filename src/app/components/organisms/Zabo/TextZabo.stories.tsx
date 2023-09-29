@@ -2,13 +2,17 @@ import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import TextZabo from './TextZabo';
+import { useTranslation } from '@/app/i18next/client';
 
 export default {
   title: 'organisms/zabo/Zabo',
   component: TextZabo,
 } as Meta<typeof TextZabo>;
 
-const Template: StoryFn<typeof TextZabo> = (args) => <TextZabo {...args} />;
+const Template: StoryFn<typeof TextZabo> = (args) => {
+  const { t } = useTranslation();
+  return <TextZabo {...args} t={t} />;
+};
 
 export const Default = Template.bind({});
 Default.args = {
