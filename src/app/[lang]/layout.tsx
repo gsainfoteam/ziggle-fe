@@ -1,8 +1,8 @@
-import './globals.css';
+import '@/app/globals.css';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
-import Navbar from './components/templates/Navbar';
-import Footer from './components/templates/Footer';
+import Navbar from '@/app/components/templates/Navbar';
+import Footer from '@/app/components/templates/Footer';
 import Script from 'next/script';
 
 const notoSansKR = Noto_Sans_KR({
