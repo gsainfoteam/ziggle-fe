@@ -7,6 +7,6 @@ export default {
 };
 
 export function Default() {
-  const { t } = useTranslation('en');
+  const { t } = useTranslation();
   return <Navbar t={t} />;
 }

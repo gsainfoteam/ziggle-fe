@@ -1,3 +1,4 @@
+import { useTranslation } from '@/app/i18next/client';
 import Footer from '.';
 
 export default {
@@ -5,4 +6,7 @@ export default {
   component: Footer,
 };
 
-export const Default = () => <Footer />;
+export const Default = () => {
+  const { t } = useTranslation();
+  return <Footer t={t} />;
+};

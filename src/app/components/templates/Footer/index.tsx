@@ -3,54 +3,9 @@ import GitHubLogo from '@/assets/logos/github.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import ExternalLink from '../../atoms/ExternalLink';
+import { T } from '@/app/i18next';
 
-const linkSections = [
-  {
-    title: '소개',
-    links: [
-      {
-        name: '인포팀 소개',
-        link: 'https://introduce.gistory.me',
-      },
-    ],
-  },
-  {
-    title: '약관',
-    links: [
-      {
-        name: '서비스이용약관',
-        link: 'https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257',
-      },
-      {
-        name: '개인정보처리방침',
-        link: 'https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1',
-      },
-      {
-        name: '문의',
-        link: 'mailto:ziggle@gistory.me',
-      },
-    ],
-  },
-  {
-    title: '바로가기',
-    links: [
-      {
-        name: '지스트 하우스',
-        link: 'https://sites.google.com/view/gisthouse/home',
-      },
-      {
-        name: 'GIST 홈페이지',
-        link: 'https://www.gist.ac.kr/kr/main.html',
-      },
-      {
-        name: '지졸',
-        link: 'https://gijol.im',
-      },
-    ],
-  },
-];
-
-const Footer = () => {
+const Footer = ({ t }: { t: T }) => {
   return (
     <footer
       className="bg-primary text-white
@@ -62,7 +17,7 @@ const Footer = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <InfoteamLogo />
-            <div className="font-medium">지스트대학 총학생회 산하 정보국</div>
+            <div className="font-medium">{t('footer.copyright')}</div>
           </div>
           <div className="flex gap-4">
             <ExternalLink href="https://github.com/gsainfoteam">
@@ -76,21 +31,23 @@ const Footer = () => {
             </ExternalLink>
           </div>
         </div>
-        <div>ⓒ 2023. INFOTEAM all rights reserved.</div>
+        <div>{t('footer.copyright')}</div>
       </div>
       <div className="flex flex-col md:flex-row gap-x-24 gap-y-12">
-        {linkSections.map(({ title, links }) => (
-          <div key={title} className="flex flex-col gap-2 md:gap-6 w-32">
-            <div className="font-bold text-sm">{title}</div>
-            <div className="flex flex-col gap-2">
-              {links.map(({ link, name }) => (
-                <ExternalLink key={name} href={link}>
-                  {name}
-                </ExternalLink>
-              ))}
+        {t('footer.sections', { returnObjects: true }).map(
+          ({ title, links }) => (
+            <div key={title} className="flex flex-col gap-2 md:gap-6 w-32">
+              <div className="font-bold text-sm">{title}</div>
+              <div className="flex flex-col gap-2">
+                {links.map(({ link, name }) => (
+                  <ExternalLink key={name} href={link}>
+                    {name}
+                  </ExternalLink>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ),
+        )}
       </div>
     </footer>
   );

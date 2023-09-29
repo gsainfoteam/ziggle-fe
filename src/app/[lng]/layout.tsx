@@ -75,7 +75,7 @@ export default async function RootLayout({
         <Navbar lng={lng} t={t} />
         <main className="flex-1">{children}</main>
         <div className="basis-80" />
-        <Footer />
+        <Footer t={t} />
       </body>
     </html>
   );

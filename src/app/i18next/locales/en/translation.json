@@ -3,5 +3,45 @@
     "all": "전체 공지",
     "query": "공지 검색",
     "login": "로그인"
+  },
+  "footer": {
+    "infoteam": "지스트대학 총학생회 산하 정보국",
+    "copyright": "ⓒ 2023. INFOTEAM all rights reserved.",
+    "sections": [
+      {
+        "title": "소개",
+        "links": [
+          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" }
+        ]
+      },
+      {
+        "title": "약관",
+        "links": [
+          {
+            "name": "서비스이용약관",
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257"
+          },
+          {
+            "name": "개인정보처리방침",
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
+          },
+          { "name": "문의", "link": "mailto:ziggle@gistory.me" }
+        ]
+      },
+      {
+        "title": "바로가기",
+        "links": [
+          {
+            "name": "지스트 하우스",
+            "link": "https://sites.google.com/view/gisthouse/home"
+          },
+          {
+            "name": "GIST 홈페이지",
+            "link": "https://www.gist.ac.kr/kr/main.html"
+          },
+          { "name": "지졸", "link": "https://gijol.im" }
+        ]
+      }
+    ]
   }
 }

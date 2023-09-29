@@ -5,9 +5,9 @@ import Link from 'next/link';
 import Analytics from '../../atoms/Analytics';
 import LogEvents from '@/api/log/log-events';
 import { T } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { Locale, fallbackLng } from '@/app/i18next/settings';
 
-const Navbar = ({ lng, t }: { lng: Locale; t: T }) => {
+const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
   return (
     <header className="bg-primary px-4 py-0.5 flex justify-between items-center text-white">
       <Analytics event={LogEvents.navBarClickLogo}>

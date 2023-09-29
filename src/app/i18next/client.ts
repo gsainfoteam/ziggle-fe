@@ -9,7 +9,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useCookies } from 'react-cookie';
 
-import { Locale, cookieName, getOptions, languages } from './settings';
+import {
+  Locale,
+  cookieName,
+  fallbackLng,
+  getOptions,
+  languages,
+} from './settings';
 import { useEffect, useState } from 'react';
 
 const runsOnServerSide = typeof window === 'undefined';
@@ -30,7 +36,7 @@ i18next
   });
 
 export function useTranslation(
-  lng: Locale,
+  lng: Locale = fallbackLng,
   ...args: Parameters<typeof useTranslationOrg>
 ) {
   const [cookies, setCookie] = useCookies([cookieName]);
