@@ -15,7 +15,8 @@
     "negotiator": "^0.6.3",
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.5",

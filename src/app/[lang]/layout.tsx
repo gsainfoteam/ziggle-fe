@@ -1,9 +1,15 @@
 import '@/app/globals.css';
 import type { Metadata } from 'next';
-import { Noto_Sans_KR } from 'next/font/google';
+import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Navbar from '@/app/components/templates/Navbar';
 import Footer from '@/app/components/templates/Footer';
 import Script from 'next/script';
+import type { Locales } from '@/middleware';
+
+const inter = Inter({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+});
 
 const notoSansKR = Noto_Sans_KR({
   weight: ['400', '500', '700'],
@@ -17,11 +23,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params: { lang },
 }: {
   children: React.ReactNode;
+  params: { lang: Locales };
 }) {
   return (
-    <html lang="ko">
+    <html lang={lang}>
       <Script id="smartlook-api">
         {`
           window.smartlook ||
@@ -48,8 +56,12 @@ export default function RootLayout({
           });
         `}
       </Script>
-      <body className={`${notoSansKR.className} flex flex-col min-h-screen`}>
-        <Navbar />
+      <body
+        className={`${
+          lang === 'ko' ? notoSansKR.className : inter.className
+        } flex flex-col min-h-screen`}
+      >
+        <Navbar locale={lang} />
         <main className="flex-1">{children}</main>
         <div className="basis-80" />
         <Footer />
