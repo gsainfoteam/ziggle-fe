@@ -61,7 +61,9 @@ export default async function RootLayout({
       <body
         className={`${
           lang === 'ko' ? notoSansKR.className : inter.className
-        } flex flex-col min-h-screen`}
+        } flex flex-col min-h-screen
+        selection:bg-primary/20
+        `}
       >
         <Navbar dict={dict.navbar} />
         <main className="flex-1">{children}</main>
