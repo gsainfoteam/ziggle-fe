@@ -1,4 +1,4 @@
-import { locales } from '@/middleware';
+import { languages } from '@/middleware';
 import 'server-only';
 
 const dictionaries = {
@@ -7,6 +7,6 @@ const dictionaries = {
 };
 
 export const getDictionary = async (locale?: keyof typeof dictionaries) =>
-  dictionaries[locale ?? locales[0]]();
+  dictionaries[locale ?? languages[0]]();
 
 export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;

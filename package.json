@@ -11,12 +11,14 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.4.2",
+    "accept-language": "^3.0.18",
     "dayjs": "^1.11.10",
-    "negotiator": "^0.6.3",
+    "i18next": "^23.5.1",
+    "i18next-resources-to-backend": "^1.1.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-i18next": "^13.2.2",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
@@ -30,7 +32,6 @@
     "@storybook/react": "^7.4.5",
     "@storybook/testing-library": "^0.2.1",
     "@svgr/webpack": "^8.1.0",
-    "@types/negotiator": "^0",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",

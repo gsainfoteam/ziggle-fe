@@ -4,7 +4,7 @@ import AccountIcon from '@/assets/icons/account.svg';
 import Link from 'next/link';
 import Analytics from '../../atoms/Analytics';
 import LogEvents from '@/api/log/log-events';
-import { Dictionary } from '@/app/[lang]/dictionaries';
+import { Dictionary } from '@/app/[lng]/dictionaries';
 
 const Navbar = ({ dict }: { dict: Dictionary['navbar'] }) => {
   return (
