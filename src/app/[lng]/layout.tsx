@@ -6,8 +6,8 @@ import { dir } from 'i18next';
 import Navbar from '@/app/components/templates/Navbar';
 import Footer from '@/app/components/templates/Footer';
 import Script from 'next/script';
-import { languages, type Locales } from '@/middleware';
-import { getDictionary } from './dictionaries';
+import { Locale, languages } from '@/app/i18next/settings';
+import { useTranslation } from '@/app/i18next';
 
 const inter = Inter({
   weight: ['400', '500', '700'],
@@ -33,9 +33,10 @@ export default async function RootLayout({
   params: { lng },
 }: {
   children: React.ReactNode;
-  params: { lng: Locales };
+  params: { lng: Locale };
 }) {
-  const dict = await getDictionary(lng);
+  const { t } = await useTranslation(lng, 'translation');
+
   return (
     <html lang={lng} dir={dir(lng)}>
       <Script id="smartlook-api">
@@ -71,7 +72,7 @@ export default async function RootLayout({
         selection:bg-primary/20
         `}
       >
-        <Navbar dict={dict.navbar} />
+        <Navbar lng={lng} t={t} />
         <main className="flex-1">{children}</main>
         <div className="basis-80" />
         <Footer />

@@ -4,29 +4,30 @@ import AccountIcon from '@/assets/icons/account.svg';
 import Link from 'next/link';
 import Analytics from '../../atoms/Analytics';
 import LogEvents from '@/api/log/log-events';
-import { Dictionary } from '@/app/[lng]/dictionaries';
+import { T } from '@/app/i18next';
+import { Locale } from '@/app/i18next/settings';
 
-const Navbar = ({ dict }: { dict: Dictionary['navbar'] }) => {
+const Navbar = ({ lng, t }: { lng: Locale; t: T }) => {
   return (
     <header className="bg-primary px-4 py-0.5 flex justify-between items-center text-white">
       <Analytics event={LogEvents.navBarClickLogo}>
-        <Link href="/">
+        <Link href={`/${lng}`}>
           <ZiggleLogo />
         </Link>
       </Analytics>
       <div className="flex gap-x-8 font-bold text-lg">
         <Analytics event={LogEvents.navBarClickAll}>
-          <Link href="/section/all">{dict.all}</Link>
+          <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
         </Analytics>
         <Analytics event={LogEvents.navBarClickSearch}>
-          <Link href="/search" className="flex items-center gap-x-1">
+          <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
             <SearchIcon width="1.6rem" height="1.6rem" />
-            {dict.search}
+            {t('navbar.query')}
           </Link>
         </Analytics>
       </div>
-      <Link href="/" className="flex items-center gap-x-1 font-bold">
-        {dict.login}
+      <Link href={`/${lng}`} className="flex items-center gap-x-1 font-bold">
+        {t('navbar.login')}
         <AccountIcon width="1.6rem" height="1.6rem" />
       </Link>
     </header>

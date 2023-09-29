@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import acceptLanguage from 'accept-language';
+import { cookieName, fallbackLng, languages } from './app/i18next/settings';
 
-const fallbackLng = 'en';
-export const languages = [fallbackLng, 'ko'] as const;
-export type Locales = (typeof languages)[number];
-
-const cookieName = 'next-locale';
+acceptLanguage.languages([...languages]);
 
 const getLang = (req: NextRequest) => {
   if (req.cookies.has(cookieName)) {
