@@ -8,10 +8,12 @@ import { T } from '@/app/i18next';
 const Footer = ({ t }: { t: T }) => {
   return (
     <footer
-      className="bg-primary text-white
-      box-content px-pageSide py-16 min-h-[300px]
-      flex flex-col gap-x-24 gap-y-12
-      xl:flex-row"
+      className={
+        'bg-primary text-white ' +
+        'box-content px-pageSide py-16 min-h-[300px] ' +
+        'flex flex-col gap-x-24 gap-y-12 ' +
+        'xl:flex-row'
+      }
     >
       <div className="flex flex-col justify-between gap-4">
         <div className="flex flex-col gap-4">
