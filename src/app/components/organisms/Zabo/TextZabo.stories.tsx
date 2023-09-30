@@ -14,15 +14,17 @@ const Template: StoryFn<typeof TextZabo> = (args) => {
   return <TextZabo {...args} t={t} />;
 };
 
-export const Default = Template.bind({});
-Default.args = {
-  // thumbnailUrl: "https://picsum.photos/200/300",
+const args = {
   title: '23년도 인포팀 신규 부원 모집',
   content: '인포팀에서는 23년도 신규 부원을 모집합니다. 많은 지원 바랍니다.',
   date: dayjs('2023-02-14T11:57:18.740Z'),
   views: 110,
   author: '이정우',
   // organization: "INFOTEAM",
-  // origin: "height",
-  // size: 300,
 };
+
+export const Height = Template.bind({});
+Height.args = { ...args, height: 300 };
+
+export const Width = Template.bind({});
+Width.args = { ...args, width: 300 };
