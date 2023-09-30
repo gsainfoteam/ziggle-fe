@@ -31,7 +31,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   return (
     <div
       className={
-        'border rounded border-secondayText ' +
+        'border rounded border-secondayText mt-4 ' +
         'p-5 flex flex-col gap-2.5 justify-between group ' +
         'transition hover:-translate-y-2 ' +
         'hover:shadow-primary/10 hover:shadow-thumbnail'

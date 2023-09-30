@@ -27,7 +27,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
 }: ImageZaboProps & ZaboSize<Origin> & { t: T }) => {
   const size = { width, height } as ZaboSize<Origin>;
   return (
-    <div className="flex flex-col gap-3 group w-min">
+    <div className="flex flex-col gap-3 group w-min mt-4">
       <div
         className={
           'rounded w-fit ' +

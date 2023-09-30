@@ -44,6 +44,7 @@
     "postcss": "latest",
     "react-cookie": "^6.1.1",
     "storybook": "^7.4.5",
+    "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "latest",
     "typescript": "latest",
     "webpack": "^5.88.2"

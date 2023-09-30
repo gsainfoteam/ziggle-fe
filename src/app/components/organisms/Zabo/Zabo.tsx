@@ -9,10 +9,10 @@ export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
   ? { height: number; width?: never }
   : never;
 
-const Zabo = (
-  props:
-    | React.ComponentProps<typeof ImageZabo>
-    | React.ComponentProps<typeof TextZabo>,
+const Zabo = <IsImage extends boolean = true>(
+  props: IsImage extends true
+    ? React.ComponentProps<typeof ImageZabo>
+    : React.ComponentProps<typeof TextZabo>,
 ) =>
   'thumbnailUrl' in props ? <ImageZabo {...props} /> : <TextZabo {...props} />;
 

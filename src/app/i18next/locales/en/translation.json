@@ -46,5 +46,6 @@
   },
   "zabo": {
     "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>"
-  }
+  },
+  "emptyNotices": "글이 없습니다. =ㅅ="
 }

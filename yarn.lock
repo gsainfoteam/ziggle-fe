@@ -13400,6 +13400,15 @@ react@latest:
   languageName: node
   linkType: hard
 
+"tailwind-scrollbar@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "tailwind-scrollbar@npm:3.0.5"
+  peerDependencies:
+    tailwindcss: 3.x
+  checksum: 5bd7f36c90dce14f789d946fa37969d5951fd0282fdf0bac7ea38d7f252fc5d7acff942e21ccf1eca23cd6d31906dac08ef873530f296b5b75e01118d805cc91
+  languageName: node
+  linkType: hard
+
 tailwindcss@latest:
   version: 3.3.3
   resolution: "tailwindcss@npm:3.3.3"
@@ -14604,6 +14613,7 @@ typescript@latest:
     react-loading-skeleton: ^3.3.1
     server-only: ^0.0.1
     storybook: ^7.4.5
+    tailwind-scrollbar: ^3.0.5
     tailwindcss: latest
     typescript: latest
     webpack: ^5.88.2
