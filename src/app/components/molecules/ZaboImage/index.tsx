@@ -26,21 +26,21 @@ const ZaboImage = <Origin extends ZaboOrigin>({
   height,
   ...props
 }: ZaboImageProps & ZaboImageSize<Origin>) => {
-  const size = width ?? height;
   const [imageSize, setImageSize] = useState<{
     width: number;
     height: number;
   }>();
-  // const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) =>
-  //   setImageSize({
-  //     width: e.currentTarget.naturalWidth,
-  //     height: e.currentTarget.naturalHeight,
-  //   });
   const handleImageLoad = (img: HTMLImageElement) =>
     setImageSize({
       width: img.naturalWidth,
       height: img.naturalHeight,
     });
+  const origin = width ? 'width' : 'height';
+  const antiOrigin = width ? 'height' : 'width';
+  const originSize = (origin === 'width' ? width : height) ?? 0;
+  const antiOriginSize = imageSize
+    ? (imageSize[antiOrigin] / imageSize[origin]) * (originSize ?? 0)
+    : 0;
 
   return (
     <div
@@ -51,16 +51,26 @@ const ZaboImage = <Origin extends ZaboOrigin>({
       style={
         imageSize
           ? {
-              [width ? 'width' : 'height']: size,
-              [width ? 'height' : 'width']:
-                (imageSize[width ? 'height' : 'width'] /
-                  imageSize[width ? 'width' : 'height']) *
-                size,
+              [origin]: originSize,
+              [antiOrigin]: antiOriginSize,
+              [antiOrigin === 'width' ? 'minWidth' : 'minHeight']:
+                originSize / 1.5,
+              [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']:
+                originSize * 2,
             }
-          : { width: size, height: size }
+          : { width: originSize, height: originSize }
       }
     >
-      <Image alt={alt} {...props} fill onLoadingComplete={handleImageLoad} />
+      <Image
+        alt={alt}
+        {...props}
+        className={[
+          ...(props.className ? [props.className] : []),
+          'object-left-top',
+        ].join(' ')}
+        fill
+        onLoadingComplete={handleImageLoad}
+      />
       {!imageSize && <Skeleton className="absolute w-full h-full" />}
     </div>
   );
