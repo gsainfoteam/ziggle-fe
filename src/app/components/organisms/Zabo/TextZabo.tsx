@@ -23,10 +23,12 @@ const TextZabo = <Origin extends ZaboOrigin>({
 }: TextZaboProps & ZaboSize<Origin> & { t: T }) => {
   return (
     <div
-      className="border rounded border-secondayText
-      p-5 flex flex-col gap-2.5 justify-between group
-      transition hover:-translate-y-2
-      hover:shadow-primary/10 hover:shadow-thumbnail"
+      className={
+        'border rounded border-secondayText ' +
+        'p-5 flex flex-col gap-2.5 justify-between group ' +
+        'transition hover:-translate-y-2 ' +
+        'hover:shadow-primary/10 hover:shadow-thumbnail'
+      }
       style={{ height, width }}
     >
       <div className="flex flex-col gap-2.5">

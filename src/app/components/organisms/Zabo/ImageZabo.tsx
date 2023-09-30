@@ -25,11 +25,13 @@ const ImageZabo = <Origin extends ZaboOrigin>({
 }: ImageZaboProps & ZaboSize<Origin> & { t: T }) => {
   const size = { width, height } as ZaboSize<Origin>;
   return (
-    <div className="flex flex-col gap-3 group">
+    <div className="flex flex-col gap-3 group w-min">
       <div
-        className="rounded w-fit
-        transition group-hover:-translate-y-2
-        group-hover:shadow-primary/10 group-hover:shadow-thumbnail"
+        className={
+          'rounded w-fit ' +
+          'transition group-hover:-translate-y-2 ' +
+          'group-hover:shadow-primary/10 group-hover:shadow-thumbnail'
+        }
       >
         <ZaboImage
           src={thumbnailUrl}
@@ -40,7 +42,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         />
       </div>
       <div className="flex flex-col gap-1">
-        <div className="font-bold text-3xl transition-colors group-hover:text-primary">
+        <div className="font-bold text-3xl transition-colors group-hover:text-primary line-clamp-2 overflow-hidden text-ellipsis">
           {title}
         </div>
         <div className="text-sm text-secondayText font-medium flex">
