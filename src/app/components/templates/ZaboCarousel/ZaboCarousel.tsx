@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRef, useState } from 'react';
 
 import { T } from '@/app/i18next';
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg';
@@ -12,9 +13,7 @@ import ImageZabo from '../../organisms/Zabo/ImageZabo';
 import TextZabo from '../../organisms/Zabo/TextZabo';
 import { ZaboOrigin, ZaboSize } from '../../organisms/Zabo/Zabo';
 
-let b:
-  | React.ComponentProps<typeof ImageZabo>
-  | React.ComponentProps<typeof TextZabo>;
+const SCROLL_AMOUNT = 800;
 
 interface ZaboCarouselProps {
   notices: (Omit<
@@ -38,6 +37,22 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   containerClassName,
   carouselClassName,
 }: ZaboCarouselProps & ZaboSize<Origin> & { t: T }) => {
+  const carouselEl = useRef<HTMLDivElement>(null);
+  const [carouselLeft, setCarouselLeft] = useState(0);
+  const leftDisabled = carouselLeft === 0;
+  const rightDisabled = carouselEl.current
+    ? carouselLeft + 10 >
+      carouselEl.current.scrollWidth - carouselEl.current.clientWidth
+    : false;
+
+  const scroll = (amount: number) => {
+    if (!carouselEl.current) return;
+    carouselEl.current.scrollBy({ left: amount, behavior: 'smooth' });
+  };
+  const handleCarouselScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    setCarouselLeft(e.currentTarget.scrollLeft);
+  };
+
   return (
     <div
       className={[
@@ -45,7 +60,14 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
         ...(containerClassName ? [containerClassName] : []),
       ].join(' ')}
     >
-      <Title title={title} href={sectionHref} />
+      <Title
+        title={title}
+        href={sectionHref}
+        onLeft={() => scroll(-SCROLL_AMOUNT)}
+        onRight={() => scroll(SCROLL_AMOUNT)}
+        leftDisabled={leftDisabled}
+        rightDisabled={rightDisabled}
+      />
       {notices.length > 0 ? (
         <div
           className={[
@@ -53,7 +75,11 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
             ...(carouselClassName ? [carouselClassName] : []),
           ].join(' ')}
         >
-          <div className="flex gap-5 overflow-x-scroll content scrollbar-none">
+          <div
+            ref={carouselEl}
+            onScroll={handleCarouselScroll}
+            className="flex gap-5 overflow-x-scroll content scrollbar-none"
+          >
             {notices.map((notice) => (
               <div key={notice.id} className="shrink-0">
                 <Zabo {...notice} width={width} height={height} />
@@ -68,7 +94,21 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   );
 };
 
-const Title = ({ title, href }: { title: string; href?: string }) => (
+const Title = ({
+  title,
+  href,
+  onLeft,
+  onRight,
+  leftDisabled,
+  rightDisabled,
+}: {
+  title: string;
+  href?: string;
+  onLeft: () => void;
+  onRight: () => void;
+  leftDisabled: boolean;
+  rightDisabled: boolean;
+}) => (
   <div className="flex w-full justify-between items-center px-5">
     {href ? (
       <Link href={href} className="group">
@@ -81,8 +121,11 @@ const Title = ({ title, href }: { title: string; href?: string }) => (
       <TitleText title={title} />
     )}
     <HorizontalScrollButton>
-      <HorizontalScrollButton.Left disabled />
-      <HorizontalScrollButton.Right />
+      <HorizontalScrollButton.Left disabled={leftDisabled} onClick={onLeft} />
+      <HorizontalScrollButton.Right
+        disabled={rightDisabled}
+        onClick={onRight}
+      />
     </HorizontalScrollButton>
   </div>
 );
