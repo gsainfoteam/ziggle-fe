@@ -31,7 +31,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/addon-essentials", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/addon-interactions", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/addon-links", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
-            ["@storybook/addon-onboarding", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:1.0.8"],\
             ["@storybook/addon-postcss", "npm:2.0.0"],\
             ["@storybook/blocks", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/nextjs", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
@@ -4850,34 +4849,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
             ["tiny-invariant", "npm:1.3.1"]\
-          ],\
-          "packagePeers": [\
-            "@types/react-dom",\
-            "@types/react",\
-            "react-dom",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@storybook/addon-onboarding", [\
-        ["npm:1.0.8", {\
-          "packageLocation": "./.yarn/cache/@storybook-addon-onboarding-npm-1.0.8-79fd8683f8-f7f27869a0.zip/node_modules/@storybook/addon-onboarding/",\
-          "packageDependencies": [\
-            ["@storybook/addon-onboarding", "npm:1.0.8"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:1.0.8", {\
-          "packageLocation": "./.yarn/__virtual__/@storybook-addon-onboarding-virtual-971da8be30/0/cache/@storybook-addon-onboarding-npm-1.0.8-79fd8683f8-f7f27869a0.zip/node_modules/@storybook/addon-onboarding/",\
-          "packageDependencies": [\
-            ["@storybook/addon-onboarding", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:1.0.8"],\
-            ["@storybook/telemetry", "npm:7.4.5"],\
-            ["@types/react", "npm:18.2.23"],\
-            ["@types/react-dom", "npm:18.2.8"],\
-            ["react", "npm:18.2.0"],\
-            ["react-confetti", "virtual:971da8be3091d70863381ce55e46083d76c7b657ef3a383e0da39208377474513a9780eff973dcfe19bdbf4c6b3f6083e84e27032f99b8f107299e6c694cac7e#npm:6.1.0"],\
-            ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\
@@ -15600,29 +15571,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["react-confetti", [\
-        ["npm:6.1.0", {\
-          "packageLocation": "./.yarn/cache/react-confetti-npm-6.1.0-9b9e19a3c8-24b6975df1.zip/node_modules/react-confetti/",\
-          "packageDependencies": [\
-            ["react-confetti", "npm:6.1.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:971da8be3091d70863381ce55e46083d76c7b657ef3a383e0da39208377474513a9780eff973dcfe19bdbf4c6b3f6083e84e27032f99b8f107299e6c694cac7e#npm:6.1.0", {\
-          "packageLocation": "./.yarn/__virtual__/react-confetti-virtual-60de884130/0/cache/react-confetti-npm-6.1.0-9b9e19a3c8-24b6975df1.zip/node_modules/react-confetti/",\
-          "packageDependencies": [\
-            ["react-confetti", "virtual:971da8be3091d70863381ce55e46083d76c7b657ef3a383e0da39208377474513a9780eff973dcfe19bdbf4c6b3f6083e84e27032f99b8f107299e6c694cac7e#npm:6.1.0"],\
-            ["@types/react", "npm:18.2.23"],\
-            ["react", "npm:18.2.0"],\
-            ["tween-functions", "npm:1.2.0"]\
-          ],\
-          "packagePeers": [\
-            "@types/react",\
-            "react"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["react-cookie", [\
         ["npm:6.1.1", {\
           "packageLocation": "./.yarn/cache/react-cookie-npm-6.1.1-db1551f9d4-d04a2be8cb.zip/node_modules/react-cookie/",\
@@ -17796,15 +17744,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["tween-functions", [\
-        ["npm:1.2.0", {\
-          "packageLocation": "./.yarn/cache/tween-functions-npm-1.2.0-4c24ac77a5-880708d680.zip/node_modules/tween-functions/",\
-          "packageDependencies": [\
-            ["tween-functions", "npm:1.2.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["type-check", [\
         ["npm:0.4.0", {\
           "packageLocation": "./.yarn/cache/type-check-npm-0.4.0-60565800ce-ec688ebfc9.zip/node_modules/type-check/",\
@@ -18782,7 +18721,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/addon-essentials", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/addon-interactions", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/addon-links", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
-            ["@storybook/addon-onboarding", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:1.0.8"],\
             ["@storybook/addon-postcss", "npm:2.0.0"],\
             ["@storybook/blocks", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/nextjs", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
