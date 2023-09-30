@@ -47,7 +47,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
               [origin]: originSize,
               [antiOrigin]: antiOriginSize,
               [antiOrigin === 'width' ? 'minWidth' : 'minHeight']:
-                originSize / 1.5,
+                origin === 'height' ? originSize / 1.5 : originSize,
               [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']:
                 originSize * 2,
             }

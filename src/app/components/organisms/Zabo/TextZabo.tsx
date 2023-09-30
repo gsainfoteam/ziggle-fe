@@ -21,6 +21,10 @@ const TextZabo = <Origin extends ZaboOrigin>({
   height,
   width,
 }: TextZaboProps & ZaboSize<Origin> & { t: T }) => {
+  const origin = width ? 'width' : 'height';
+  const antiOrigin = width ? 'height' : 'width';
+  const originSize = (origin === 'width' ? width : height) ?? 0;
+
   return (
     <div
       className={
@@ -29,7 +33,12 @@ const TextZabo = <Origin extends ZaboOrigin>({
         'transition hover:-translate-y-2 ' +
         'hover:shadow-primary/10 hover:shadow-thumbnail'
       }
-      style={{ height, width }}
+      style={{
+        [origin]: originSize,
+        [antiOrigin === 'width' ? 'minWidth' : 'minHeight']:
+          origin === 'height' ? originSize / 1.5 : originSize,
+        [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']: originSize * 2,
+      }}
     >
       <div className="flex flex-col gap-2.5">
         <div className="font-bold text-3xl transition-colors group-hover:text-primary">
