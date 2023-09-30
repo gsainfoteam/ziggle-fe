@@ -1,4 +1,5 @@
 import { useTranslation } from '@/app/i18next/client';
+
 import Footer from '.';
 
 export default {

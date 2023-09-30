@@ -1,4 +1,5 @@
 import { useTranslation } from '@/app/i18next/client';
+
 import Navbar from '.';
 
 export default {

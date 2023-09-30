@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { ZaboOrigin, ZaboSize } from '../../organisms/Zabo/Zabo';
+
+import { ZaboOrigin, ZaboSize } from '@/app/components/organisms/Zabo/Zabo';
 
 interface ZaboImageProps
   extends Omit<React.ComponentProps<typeof Image>, ZaboOrigin> {

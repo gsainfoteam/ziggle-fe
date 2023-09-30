@@ -1,6 +1,8 @@
-import { T } from '@/app/i18next';
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
+
+import { T } from '@/app/i18next';
+
 import { ZaboOrigin, ZaboSize } from './Zabo';
 
 interface TextZaboProps {

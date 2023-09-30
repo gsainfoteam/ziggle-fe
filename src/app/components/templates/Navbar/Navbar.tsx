@@ -1,11 +1,12 @@
-import ZiggleLogo from '@/assets/logos/ziggle.svg';
-import SearchIcon from '@/assets/icons/search.svg';
-import AccountIcon from '@/assets/icons/account.svg';
 import Link from 'next/link';
-import Analytics from '../../atoms/Analytics';
+
 import LogEvents from '@/api/log/log-events';
+import Analytics from '@/app/components/atoms/Analytics';
 import { T } from '@/app/i18next';
-import { Locale, fallbackLng } from '@/app/i18next/settings';
+import { fallbackLng, Locale } from '@/app/i18next/settings';
+import AccountIcon from '@/assets/icons/account.svg';
+import SearchIcon from '@/assets/icons/search.svg';
+import ZiggleLogo from '@/assets/logos/ziggle.svg';
 
 const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
   const nav = (

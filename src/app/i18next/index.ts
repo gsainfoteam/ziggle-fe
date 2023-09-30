@@ -1,15 +1,16 @@
 import {
   createInstance,
+  DefaultNamespace,
+  KeyPrefix,
   Namespace,
   TFunction,
-  KeyPrefix,
-  DefaultNamespace,
 } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
-import { Locale, getOptions } from './settings';
 
 import type translation from '@/app/i18next/locales/en/translation.json';
+
+import { getOptions,Locale } from './settings';
 
 declare module 'i18next' {
   interface CustomTypeOptions {

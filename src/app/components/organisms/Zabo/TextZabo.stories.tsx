@@ -1,8 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import TextZabo from './TextZabo';
 import { useTranslation } from '@/app/i18next/client';
+
+import TextZabo from './TextZabo';
 
 export default {
   title: 'organisms/zabo/TextZabo',

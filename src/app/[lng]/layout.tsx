@@ -1,13 +1,15 @@
 import '@/app/globals.css';
 import '@/app/initDayjs';
+
+import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
-import { dir } from 'i18next';
-import Navbar from '@/app/components/templates/Navbar';
-import Footer from '@/app/components/templates/Footer';
 import Script from 'next/script';
-import { Locale, languages } from '@/app/i18next/settings';
+
+import Footer from '@/app/components/templates/Footer';
+import Navbar from '@/app/components/templates/Navbar';
 import { useTranslation } from '@/app/i18next';
+import { languages,Locale } from '@/app/i18next/settings';
 
 const inter = Inter({
   weight: ['400', '500', '700'],
