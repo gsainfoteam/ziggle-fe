@@ -2,6 +2,10 @@ import { T } from '@/app/i18next';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import { Trans } from 'react-i18next';
+import ZaboImage, {
+  ZaboImageSize,
+  ZaboOrigin,
+} from '../../molecules/ZaboImage';
 
 interface ImageZaboProps {
   thumbnailUrl: string;
@@ -12,28 +16,30 @@ interface ImageZaboProps {
   author: string;
 }
 
-const ImageZabo = ({
+const ImageZabo = <Origin extends ZaboOrigin>({
   thumbnailUrl,
   title,
   date,
   views,
   author,
   t,
-}: ImageZaboProps & { t: T }) => {
+  width,
+  height,
+}: ImageZaboProps & ZaboImageSize<Origin> & { t: T }) => {
+  const size = { width, height } as ZaboImageSize<Origin>;
   return (
     <div className="flex flex-col gap-3 group">
       <div
-        className="w-64 h-64
-        bg-gray-200 rounded relative
+        className="rounded w-fit
         transition group-hover:-translate-y-2
         group-hover:shadow-primary/10 group-hover:shadow-thumbnail"
       >
-        <Image
+        <ZaboImage
           src={thumbnailUrl}
           alt={title}
-          fill
           objectFit="cover"
           className="rounded border border-secondayText"
+          {...size}
         />
       </div>
       <div className="flex flex-col gap-1">

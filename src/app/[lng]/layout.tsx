@@ -66,11 +66,11 @@ export default async function RootLayout({
         `}
       </Script>
       <body
-        className={`${
-          lng === 'ko' ? notoSansKR.className : inter.className
-        } flex flex-col min-h-screen
-        selection:bg-primary/20
-        `}
+        className={
+          `${lng === 'ko' ? notoSansKR.className : inter.className} ` +
+          'flex flex-col min-h-screen ' +
+          'selection:bg-primary/20'
+        }
       >
         <Navbar lng={lng} t={t} />
         <main className="flex-1">{children}</main>

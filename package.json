@@ -20,6 +20,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-i18next": "^13.2.2",
+    "react-loading-skeleton": "^3.3.1",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
