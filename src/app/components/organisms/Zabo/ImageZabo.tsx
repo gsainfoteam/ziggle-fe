@@ -24,9 +24,9 @@ const ImageZabo = ({
     <div className="flex flex-col gap-3 group">
       <div
         className="w-64 h-64
-      bg-gray-200 rounded relative
-      transition group-hover:-translate-y-2
-      group-hover:shadow-primary/20 group-hover:shadow-thumbnail"
+        bg-gray-200 rounded relative
+        transition group-hover:-translate-y-2
+        group-hover:shadow-primary/10 group-hover:shadow-thumbnail"
       >
         <Image
           src={thumbnailUrl}
