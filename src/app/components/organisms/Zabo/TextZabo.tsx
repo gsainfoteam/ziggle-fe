@@ -24,6 +24,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
+  const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;
 
   return (
     <div
@@ -41,7 +42,16 @@ const TextZabo = <Origin extends ZaboOrigin>({
       }}
     >
       <div className="flex flex-col gap-2.5">
-        <div className="font-bold text-3xl transition-colors group-hover:text-primary">
+        <div
+          className={
+            'font-bold text-3xl transition-colors group-hover:text-primary ' +
+            (origin === 'height'
+              ? ['line-clamp-2', 'line-clamp-3', 'line-clamp-5']
+              : ['line-clamp-6', 'line-clamp-8', 'line-clamp-10'])[
+              lineClampLevel
+            ]
+          }
+        >
           {title}
         </div>
         <div className="font-medium text-lg">{content}</div>
