@@ -2,7 +2,7 @@ import { T } from '@/app/i18next';
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 import ZaboImage from '../../molecules/ZaboImage';
-import { ZaboOrigin, ZaboSize } from '.';
+import { ZaboOrigin, ZaboSize } from './Zabo';
 
 interface ImageZaboProps {
   thumbnailUrl: string;
