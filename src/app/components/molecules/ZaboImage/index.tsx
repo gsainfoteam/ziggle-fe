@@ -14,8 +14,8 @@ export type ZaboImageSize<Origin extends ZaboOrigin> = Origin extends 'width'
 
 interface ZaboImageProps
   extends Omit<React.ComponentProps<typeof Image>, ZaboOrigin> {
-  // src: string;
-  // alt: string;
+  src: string;
+  alt: string;
   wrapperClassName?: string;
 }
 
