@@ -8,28 +8,34 @@ import { T } from '@/app/i18next';
 import { Locale, fallbackLng } from '@/app/i18next/settings';
 
 const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
-  return (
-    <header className="bg-primary px-4 py-0.5 flex justify-between items-center text-white">
-      <Analytics event={LogEvents.navBarClickLogo}>
-        <Link href={`/${lng}`}>
-          <ZiggleLogo />
+  const nav = (
+    <>
+      <Analytics event={LogEvents.navBarClickAll}>
+        <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
+      </Analytics>
+      <Analytics event={LogEvents.navBarClickSearch}>
+        <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
+          <SearchIcon className="w-5 md:w-7" />
+          {t('navbar.query')}
         </Link>
       </Analytics>
-      <div className="flex gap-x-8 font-bold text-lg">
-        <Analytics event={LogEvents.navBarClickAll}>
-          <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
-        </Analytics>
-        <Analytics event={LogEvents.navBarClickSearch}>
-          <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
-            <SearchIcon width="1.6rem" height="1.6rem" />
-            {t('navbar.query')}
+    </>
+  );
+  return (
+    <header className="bg-primary px-4 py-2 md:py-0.5 text-white">
+      <div className="flex justify-between items-center">
+        <Analytics event={LogEvents.navBarClickLogo}>
+          <Link href={`/${lng}`}>
+            <ZiggleLogo className="w-20 md:w-auto" />
           </Link>
         </Analytics>
+        <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
+        <Link href={`/${lng}`} className="flex items-center gap-x-1 font-bold">
+          {t('navbar.login')}
+          <AccountIcon width="1.6rem" height="1.6rem" />
+        </Link>
       </div>
-      <Link href={`/${lng}`} className="flex items-center gap-x-1 font-bold">
-        {t('navbar.login')}
-        <AccountIcon width="1.6rem" height="1.6rem" />
-      </Link>
+      <nav className="flex font-bold text-sm gap-x-8 md:hidden">{nav}</nav>
     </header>
   );
 };
