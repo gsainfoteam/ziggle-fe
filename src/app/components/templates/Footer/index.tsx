@@ -10,7 +10,7 @@ const Footer = ({ t }: { t: T }) => {
     <footer
       className={
         'bg-primary text-white ' +
-        'box-content px-pageSide py-16 min-h-[300px] ' +
+        'box-content px-pageSide py-8 sm:py-16 min-h-[300px] ' +
         'flex flex-col gap-x-24 gap-y-12 ' +
         'xl:flex-row'
       }
@@ -18,8 +18,10 @@ const Footer = ({ t }: { t: T }) => {
       <div className="flex flex-col justify-between gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
-            <InfoteamLogo />
-            <div className="font-medium">{t('footer.copyright')}</div>
+            <InfoteamLogo className="w-8/12 sm:w-fit" />
+            <div className="font-medium text-sm sm:text-base">
+              {t('footer.infoteam')}
+            </div>
           </div>
           <div className="flex gap-4">
             <ExternalLink href="https://github.com/gsainfoteam">
@@ -33,7 +35,7 @@ const Footer = ({ t }: { t: T }) => {
             </ExternalLink>
           </div>
         </div>
-        <div>{t('footer.copyright')}</div>
+        <div className="text-xs sm:text-base">{t('footer.copyright')}</div>
       </div>
       <div className="flex flex-col md:flex-row gap-x-24 gap-y-12">
         {t('footer.sections', { returnObjects: true }).map(
