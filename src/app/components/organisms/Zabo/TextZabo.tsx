@@ -24,8 +24,8 @@ const TextZabo = ({
       <div className="font-medium text-lg">{content}</div>
       <div className="text-sm text-secondayText font-medium flex">
         <Trans t={t} i18nKey="zabo.dateView">
-          {{ date: date.format('L') }} ·
-          <strong className="font-bold">{{ views }}</strong>
+          {{ date: date.format('L') }}
+          <strong className="font-bold"> · {{ views }}</strong>
         </Trans>
       </div>
       <div className="font-bold">{author}</div>

@@ -16,6 +16,9 @@ const config: Config = {
       spacing: {
         pageSide: '10vw',
       },
+      boxShadow: {
+        thumbnail: `rgb(0 0 0 / 20%) 0 5px, rgb(0 0 0 / 20%) 0 10px, rgb(0 0 0 / 15%) 0 15px, rgb(0 0 0 / 10%) 0 20px, rgb(0 0 0 / 5%) 0 25px`,
+      },
     },
   },
   plugins: [],
