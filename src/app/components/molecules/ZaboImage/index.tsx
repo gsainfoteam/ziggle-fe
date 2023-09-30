@@ -3,14 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-
-export type ZaboOrigin = 'width' | 'height';
-
-export type ZaboImageSize<Origin extends ZaboOrigin> = Origin extends 'width'
-  ? { width: number; height?: never }
-  : Origin extends 'height'
-  ? { height: number; width?: never }
-  : never;
+import { ZaboOrigin, ZaboSize } from '../../organisms/Zabo';
 
 interface ZaboImageProps
   extends Omit<React.ComponentProps<typeof Image>, ZaboOrigin> {
@@ -25,7 +18,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
   width,
   height,
   ...props
-}: ZaboImageProps & ZaboImageSize<Origin>) => {
+}: ZaboImageProps & ZaboSize<Origin>) => {
   const [imageSize, setImageSize] = useState<{
     width: number;
     height: number;

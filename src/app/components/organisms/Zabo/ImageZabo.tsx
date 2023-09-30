@@ -1,11 +1,8 @@
 import { T } from '@/app/i18next';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import { Trans } from 'react-i18next';
-import ZaboImage, {
-  ZaboImageSize,
-  ZaboOrigin,
-} from '../../molecules/ZaboImage';
+import ZaboImage from '../../molecules/ZaboImage';
+import { ZaboOrigin, ZaboSize } from '.';
 
 interface ImageZaboProps {
   thumbnailUrl: string;
@@ -25,8 +22,8 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   t,
   width,
   height,
-}: ImageZaboProps & ZaboImageSize<Origin> & { t: T }) => {
-  const size = { width, height } as ZaboImageSize<Origin>;
+}: ImageZaboProps & ZaboSize<Origin> & { t: T }) => {
+  const size = { width, height } as ZaboSize<Origin>;
   return (
     <div className="flex flex-col gap-3 group">
       <div
