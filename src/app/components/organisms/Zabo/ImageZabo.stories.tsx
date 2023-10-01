@@ -3,16 +3,16 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from '@/app/i18next/client';
 
-import ImageZabo from './ImageZabo';
+import Zabo from '.';
 
 export default {
   title: 'organisms/zabo/ImageZabo',
-  component: ImageZabo,
-} as Meta<typeof ImageZabo>;
+  component: Zabo,
+} as Meta<typeof Zabo>;
 
-const Template: StoryFn<typeof ImageZabo> = (args) => {
+const Template: StoryFn<typeof Zabo> = (args) => {
   const { t } = useTranslation();
-  return <ImageZabo {...args} t={t} />;
+  return <Zabo {...args} t={t} />;
 };
 const args = {
   thumbnailUrl: 'https://picsum.photos/200/300',

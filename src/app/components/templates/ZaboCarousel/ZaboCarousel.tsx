@@ -16,11 +16,10 @@ import { ZaboOrigin, ZaboSize } from '../../organisms/Zabo/Zabo';
 const SCROLL_AMOUNT = 800;
 
 interface ZaboCarouselProps {
-  notices: (Omit<
-    | React.ComponentProps<typeof ImageZabo>
-    | React.ComponentProps<typeof TextZabo>,
-    'width' | 'height' | 't'
-  > & { id: number })[];
+  notices: ((
+    | Omit<React.ComponentProps<typeof ImageZabo>, 'width' | 'height' | 't'>
+    | Omit<React.ComponentProps<typeof TextZabo>, 'width' | 'height' | 't'>
+  ) & { id: number })[];
   title: string;
   sectionHref?: string;
   containerClassName?: string;
@@ -37,6 +36,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   containerClassName,
   carouselClassName,
 }: ZaboCarouselProps & ZaboSize<Origin> & { t: T }) => {
+  const size = { width, height } as ZaboSize<Origin>;
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
   const leftDisabled = carouselLeft === 0;
@@ -82,7 +82,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
           >
             {notices.map((notice) => (
               <div key={notice.id} className="shrink-0">
-                <Zabo {...notice} width={width} height={height} />
+                <Zabo {...notice} {...size} t={t} />
               </div>
             ))}
           </div>

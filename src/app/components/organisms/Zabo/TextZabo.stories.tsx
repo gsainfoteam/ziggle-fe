@@ -3,16 +3,16 @@ import dayjs from 'dayjs';
 
 import { useTranslation } from '@/app/i18next/client';
 
-import TextZabo from './TextZabo';
+import Zabo from '.';
 
 export default {
   title: 'organisms/zabo/TextZabo',
-  component: TextZabo,
-} as Meta<typeof TextZabo>;
+  component: Zabo,
+} as Meta<typeof Zabo>;
 
-const Template: StoryFn<typeof TextZabo> = (args) => {
+const Template: StoryFn<typeof Zabo> = (args) => {
   const { t } = useTranslation();
-  return <TextZabo {...args} t={t} />;
+  return <Zabo {...args} t={t} />;
 };
 
 const args = {
