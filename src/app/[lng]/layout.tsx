@@ -33,7 +33,6 @@ export const generateMetadata = async ({
   const { t } = await createTranslation(lng, 'translation');
 
   return {
-    metadataBase: new URL('https://ziggle.gistory.me'),
     alternates: {
       canonical: '/',
       languages: languages.reduce(
