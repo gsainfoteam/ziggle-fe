@@ -4354,6 +4354,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/debug@npm:^4":
+  version: 4.1.9
+  resolution: "@types/debug@npm:4.1.9"
+  dependencies:
+    "@types/ms": "*"
+  checksum: e88ee8b19d106f33eb0d3bc58bacff9702e98d821fd1ebd1de8942e6b97419e19a1ccf39370f1764a1dc66f79fd4619f3412e1be6eeb9f0b76412f5ffe4ead93
+  languageName: node
+  linkType: hard
+
 "@types/detect-port@npm:^1.3.0":
   version: 1.3.3
   resolution: "@types/detect-port@npm:1.3.3"
@@ -4558,6 +4567,13 @@ __metadata:
   version: 1.3.3
   resolution: "@types/mime@npm:1.3.3"
   checksum: 7e27dede6517c1d604821a8a5412d6b7131decc8397ad4bac9216fc90dea26c9571426623ebeea2a9b89dbfb89ad98f7370a3c62cd2be8896c6e897333b117c9
+  languageName: node
+  linkType: hard
+
+"@types/ms@npm:*":
+  version: 0.7.32
+  resolution: "@types/ms@npm:0.7.32"
+  checksum: 610744605c5924aa2657c8a62d307052af4f0e38e2aa015f154ef03391fabb4fd903f9c9baacb41f6e5798b8697e898463c351e5faf638738603ed29137b5254
   languageName: node
   linkType: hard
 
@@ -13347,6 +13363,15 @@ react@latest:
   languageName: node
   linkType: hard
 
+"supports-color@npm:8.1.1, supports-color@npm:^8.0.0":
+  version: 8.1.1
+  resolution: "supports-color@npm:8.1.1"
+  dependencies:
+    has-flag: ^4.0.0
+  checksum: c052193a7e43c6cdc741eb7f378df605636e01ad434badf7324f17fb60c69a880d8d8fcdcb562cf94c2350e57b937d7425ab5b8326c67c2adc48f7c87c1db406
+  languageName: node
+  linkType: hard
+
 "supports-color@npm:^5.3.0":
   version: 5.5.0
   resolution: "supports-color@npm:5.5.0"
@@ -13362,15 +13387,6 @@ react@latest:
   dependencies:
     has-flag: ^4.0.0
   checksum: 3dda818de06ebbe5b9653e07842d9479f3555ebc77e9a0280caf5a14fb877ffee9ed57007c3b78f5a6324b8dbeec648d9e97a24e2ed9fdb81ddc69ea07100f4a
-  languageName: node
-  linkType: hard
-
-"supports-color@npm:^8.0.0":
-  version: 8.1.1
-  resolution: "supports-color@npm:8.1.1"
-  dependencies:
-    has-flag: ^4.0.0
-  checksum: c052193a7e43c6cdc741eb7f378df605636e01ad434badf7324f17fb60c69a880d8d8fcdcb562cf94c2350e57b937d7425ab5b8326c67c2adc48f7c87c1db406
   languageName: node
   linkType: hard
 
@@ -14612,6 +14628,7 @@ typescript@latest:
     "@storybook/react": ^7.4.5
     "@storybook/testing-library": ^0.2.1
     "@svgr/webpack": ^8.1.0
+    "@types/debug": ^4
     "@types/node": latest
     "@types/react": latest
     "@types/react-dom": latest
@@ -14619,6 +14636,7 @@ typescript@latest:
     autoprefixer: latest
     axios: ^1.5.1
     dayjs: ^1.11.10
+    debug: ^4.3.4
     eslint: latest
     eslint-config-next: latest
     eslint-plugin-simple-import-sort: ^10.0.0
@@ -14635,6 +14653,7 @@ typescript@latest:
     react-loading-skeleton: ^3.3.1
     server-only: ^0.0.1
     storybook: ^7.4.5
+    supports-color: 8.1.1
     tailwind-scrollbar: ^3.0.5
     tailwindcss: latest
     typescript: latest

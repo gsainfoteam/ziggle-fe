@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/testing-library", "npm:0.2.1"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@types/debug", "npm:4.1.9"],\
             ["@types/node", "npm:20.7.1"],\
             ["@types/react", "npm:18.2.23"],\
             ["@types/react-dom", "npm:18.2.8"],\
@@ -44,6 +45,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.4.16"],\
             ["axios", "npm:1.5.1"],\
             ["dayjs", "npm:1.11.10"],\
+            ["debug", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4"],\
             ["eslint", "npm:8.50.0"],\
             ["eslint-config-next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["eslint-plugin-simple-import-sort", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.0.0"],\
@@ -60,6 +62,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-loading-skeleton", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.3.1"],\
             ["server-only", "npm:0.0.1"],\
             ["storybook", "npm:7.4.5"],\
+            ["supports-color", "npm:8.1.1"],\
             ["tailwind-scrollbar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.0.5"],\
             ["tailwindcss", "npm:3.3.3"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
@@ -6586,6 +6589,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/debug", [\
+        ["npm:4.1.9", {\
+          "packageLocation": "./.yarn/cache/@types-debug-npm-4.1.9-8e7cf27fbd-e88ee8b19d.zip/node_modules/@types/debug/",\
+          "packageDependencies": [\
+            ["@types/debug", "npm:4.1.9"],\
+            ["@types/ms", "npm:0.7.32"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/detect-port", [\
         ["npm:1.3.3", {\
           "packageLocation": "./.yarn/cache/@types-detect-port-npm-1.3.3-6e7844725c-0dadb52028.zip/node_modules/@types/detect-port/",\
@@ -6829,6 +6842,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-mime-types-npm-2.1.2-da52892816-9e3c78f1c6.zip/node_modules/@types/mime-types/",\
           "packageDependencies": [\
             ["@types/mime-types", "npm:2.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/ms", [\
+        ["npm:0.7.32", {\
+          "packageLocation": "./.yarn/cache/@types-ms-npm-0.7.32-38dadca018-610744605c.zip/node_modules/@types/ms/",\
+          "packageDependencies": [\
+            ["@types/ms", "npm:0.7.32"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -9597,6 +9619,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/supports-color", null],\
             ["ms", "npm:2.0.0"],\
             ["supports-color", null]\
+          ],\
+          "packagePeers": [\
+            "@types/supports-color",\
+            "supports-color"\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4", {\
+          "packageLocation": "./.yarn/__virtual__/debug-virtual-6994cfd0e8/0/cache/debug-npm-4.3.4-4513954577-3dbad3f94e.zip/node_modules/debug/",\
+          "packageDependencies": [\
+            ["debug", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4"],\
+            ["@types/supports-color", null],\
+            ["ms", "npm:2.1.2"],\
+            ["supports-color", "npm:8.1.1"]\
           ],\
           "packagePeers": [\
             "@types/supports-color",\
@@ -18785,6 +18821,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.4.5"],\
             ["@storybook/testing-library", "npm:0.2.1"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@types/debug", "npm:4.1.9"],\
             ["@types/node", "npm:20.7.1"],\
             ["@types/react", "npm:18.2.23"],\
             ["@types/react-dom", "npm:18.2.8"],\
@@ -18792,6 +18829,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["autoprefixer", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.4.16"],\
             ["axios", "npm:1.5.1"],\
             ["dayjs", "npm:1.11.10"],\
+            ["debug", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4"],\
             ["eslint", "npm:8.50.0"],\
             ["eslint-config-next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["eslint-plugin-simple-import-sort", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.0.0"],\
@@ -18808,6 +18846,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-loading-skeleton", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.3.1"],\
             ["server-only", "npm:0.0.1"],\
             ["storybook", "npm:7.4.5"],\
+            ["supports-color", "npm:8.1.1"],\
             ["tailwind-scrollbar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.0.5"],\
             ["tailwindcss", "npm:3.3.3"],\
             ["typescript", "patch:typescript@npm%3A5.2.2#~builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
