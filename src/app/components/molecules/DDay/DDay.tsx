@@ -10,7 +10,7 @@ const DDay = ({ deadline, t }: DDayProps & { t: T }) => (
   <div
     className={
       'grid place-items-center w-fit ' +
-      'border border-white rounded bg-primary/90 px-2 py-1'
+      'border border-white rounded bg-primary/90 px-2 py-0.5'
     }
   >
     <div className="text-white text-sm md:text-lg font-bold">
