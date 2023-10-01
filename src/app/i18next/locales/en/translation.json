@@ -52,6 +52,7 @@
     "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
+  "loading": "로딩 중입니다! -ㅅ-",
   "ddayPlus": "기한 지남",
   "notices": {
     "deadline": {
