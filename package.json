@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "accept-language": "^3.0.18",
+    "axios": "^1.5.1",
     "dayjs": "^1.11.10",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",

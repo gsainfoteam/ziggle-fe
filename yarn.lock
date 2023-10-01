@@ -5611,6 +5611,17 @@ autoprefixer@latest:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "axios@npm:1.5.1"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 4444f06601f4ede154183767863d2b8e472b4a6bfc5253597ed6d21899887e1fd0ee2b3de792ac4f8459fe2e359d2aa07c216e45fd8b9e4e0688a6ebf48a5a8d
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^3.1.1":
   version: 3.2.1
   resolution: "axobject-query@npm:3.2.1"
@@ -8296,6 +8307,16 @@ eslint@latest:
   version: 0.217.0
   resolution: "flow-parser@npm:0.217.0"
   checksum: 086d7ef5e7ae448bbb666e3a30e73d7424627fcca6c1000fb497b84bc7e13608fac2c82399b5a056317b67e2d3741e53fbb3b0510a368f743fd21333c1c7914d
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.15.0":
+  version: 1.15.3
+  resolution: "follow-redirects@npm:1.15.3"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 584da22ec5420c837bd096559ebfb8fe69d82512d5585004e36a3b4a6ef6d5905780e0c74508c7b72f907d1fa2b7bd339e613859e9c304d0dc96af2027fd0231
   languageName: node
   linkType: hard
 
@@ -11801,7 +11822,7 @@ next@latest:
   languageName: node
   linkType: hard
 
-"proxy-from-env@npm:^1.0.0":
+"proxy-from-env@npm:^1.0.0, proxy-from-env@npm:^1.1.0":
   version: 1.1.0
   resolution: "proxy-from-env@npm:1.1.0"
   checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
@@ -14596,6 +14617,7 @@ typescript@latest:
     "@types/react-dom": latest
     accept-language: ^3.0.18
     autoprefixer: latest
+    axios: ^1.5.1
     dayjs: ^1.11.10
     eslint: latest
     eslint-config-next: latest
