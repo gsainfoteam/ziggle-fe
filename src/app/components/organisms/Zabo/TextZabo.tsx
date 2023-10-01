@@ -47,13 +47,13 @@ const TextZabo = <Origin extends ZaboOrigin>({
         [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']: originSize * 2,
       }}
     >
-      {deadline && deadline.isAfter() && (
-        <>
-          <DDay deadline={deadline} t={t} className="absolute top-2 left-2" />
-          <div className="h-4 md:h-6" />
-        </>
-      )}
       <div className="flex flex-col gap-2.5">
+        {deadline && deadline.isAfter() && (
+          <>
+            <DDay deadline={deadline} t={t} className="absolute top-2 left-2" />
+            <div className="h-2 md:h-4" />
+          </>
+        )}
         <div
           className={
             'font-bold text-3xl transition-colors group-hover:text-primary ' +
