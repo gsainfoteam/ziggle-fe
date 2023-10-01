@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "지글",
+    "description": "지스트의 모든 공지를 한눈에"
+  },
   "navbar": {
     "all": "전체 공지",
     "query": "공지 검색",
