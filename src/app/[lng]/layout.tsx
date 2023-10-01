@@ -46,6 +46,12 @@ export const generateMetadata = async ({
     },
     description: t('metadata.description'),
     themeColor: '#eb6263',
+    twitter: {
+      card: 'summary_large_image',
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      images: ['/api/og'],
+    },
     openGraph: {
       title: t('metadata.title'),
       description: t('metadata.description'),
