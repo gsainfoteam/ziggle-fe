@@ -1,18 +1,13 @@
-import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
 import ZaboImage from '@/app/components/molecules/ZaboImage';
 import { T } from '@/app/i18next';
 
+import { TextZaboProps } from './TextZabo';
 import { ZaboOrigin, ZaboSize } from './Zabo';
 
-interface ImageZaboProps {
+interface ImageZaboProps extends Omit<TextZaboProps, 'content'> {
   thumbnailUrl: string;
-  title: string;
-  content: string;
-  date: dayjs.Dayjs;
-  views: number;
-  author: string;
 }
 
 const ImageZabo = <Origin extends ZaboOrigin>({

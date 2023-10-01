@@ -5,7 +5,7 @@ import { T } from '@/app/i18next';
 
 import { ZaboOrigin, ZaboSize } from './Zabo';
 
-interface TextZaboProps {
+export interface TextZaboProps {
   title: string;
   content: string;
   date: dayjs.Dayjs;
