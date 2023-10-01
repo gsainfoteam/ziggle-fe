@@ -12,7 +12,64 @@ export default {
 
 const Template: StoryFn<typeof Zabo> = (args) => {
   const { t } = useTranslation();
-  return <Zabo {...args} t={t} />;
+  const lineClampLevel =
+    args.title.length > 40 ? 2 : args.title.length > 20 ? 1 : 0;
+
+  return (
+    <>
+      <div>length of title: {args.title.length}</div>
+      <br />
+      <code className="whitespace-pre">
+        {'const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;\n\n' +
+          `(origin === 'height'
+  ? `}
+        {args.height ? (
+          <>
+            {`[`}
+            <span
+              className={lineClampLevel === 0 ? 'text-red-500' : undefined}
+            >{`'line-clamp-2'`}</span>
+            {`, `}
+            <span
+              className={lineClampLevel === 1 ? 'text-red-500' : undefined}
+            >{`'line-clamp-3'`}</span>
+            {`, `}
+            <span
+              className={lineClampLevel === 2 ? 'text-red-500' : undefined}
+            >{`'line-clamp-5'`}</span>
+            {`]`}
+          </>
+        ) : (
+          `['line-clamp-2', 'line-clamp-3', 'line-clamp-5']`
+        )}
+        {`
+  : `}
+        {args.width ? (
+          <>
+            {`[`}
+            <span
+              className={lineClampLevel === 0 ? 'text-red-500' : undefined}
+            >{`'line-clamp-6'`}</span>
+            {`, `}
+            <span
+              className={lineClampLevel === 1 ? 'text-red-500' : undefined}
+            >{`'line-clamp-8'`}</span>
+            {`, `}
+            <span
+              className={lineClampLevel === 2 ? 'text-red-500' : undefined}
+            >{`'line-clamp-10'`}</span>
+            {`]`}
+          </>
+        ) : (
+          `['line-clamp-6', 'line-clamp-8', 'line-clamp-10']`
+        )}
+        {`)[
+  lineClampLevel
+]`}
+      </code>
+      <Zabo {...args} t={t} />
+    </>
+  );
 };
 
 const args = {
