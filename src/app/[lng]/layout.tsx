@@ -51,9 +51,10 @@ export const generateMetadata = async ({
       title: t('metadata.title'),
       description: t('metadata.description'),
       url: 'https://ziggle.gistory.me',
-      siteName: 'Ziggle',
+      siteName: t('metadata.title'),
       locale: lng,
       type: 'website',
+      images: '/api/og',
     },
   };
 };
