@@ -10,6 +10,9 @@ export const generateMetadata = async (
   const previousImages = (await parent).openGraph?.images ?? [];
   return {
     title: notice.title,
+    description: notice.body.slice(0, 100),
+    keywords: notice.tags.map((tag) => tag.name),
+    authors: [{ name: notice.author }],
     openGraph: { images: [...notice.imagesUrl, ...previousImages] },
   };
 };
