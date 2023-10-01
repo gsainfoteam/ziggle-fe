@@ -43,7 +43,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   const rightDisabled = carouselEl.current
     ? carouselLeft + 10 >
       carouselEl.current.scrollWidth - carouselEl.current.clientWidth
-    : false;
+    : true;
 
   const scroll = (amount: number) => {
     if (!carouselEl.current) return;
