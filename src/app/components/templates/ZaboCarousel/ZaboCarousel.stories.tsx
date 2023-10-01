@@ -10,10 +10,9 @@ export default {
   component: ZaboCarousel,
 };
 
-export const Default: StoryFn<typeof ZaboCarousel> = (args) => {
-  const { t } = useTranslation();
-  return <ZaboCarousel {...args} t={t} />;
-};
+export const Default: StoryFn<typeof ZaboCarousel> = (args) => (
+  <ZaboCarousel {...args} />
+);
 Default.args = {
   notices: [
     {
