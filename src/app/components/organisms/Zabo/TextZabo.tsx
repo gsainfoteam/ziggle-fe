@@ -67,7 +67,6 @@ const TextZabo = <Origin extends ZaboOrigin>({
           {title}
         </div>
         <div className="font-medium text-lg">{body}</div>
-        di
       </div>
       <div className="flex flex-col gap-2.5">
         <div className="text-sm text-secondayText font-medium flex">
