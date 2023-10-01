@@ -35,7 +35,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   containerClassName,
   carouselClassName,
 }: ZaboCarouselProps & ZaboSize<Origin>) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const size = { width, height } as ZaboSize<Origin>;
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
@@ -80,9 +80,11 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
             onScroll={handleCarouselScroll}
             className="flex gap-5 overflow-x-scroll content scrollbar-none"
           >
-            {notices.map((notice) => (
-              <div key={notice.id} className="shrink-0">
-                <Zabo {...notice} {...size} t={t} />
+            {notices.map(({ id, ...notice }) => (
+              <div key={id} className="shrink-0">
+                <Link href={`/${i18n.language}/notice/${id}`}>
+                  <Zabo {...notice} {...size} t={t} />
+                </Link>
               </div>
             ))}
           </div>

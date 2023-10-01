@@ -1,0 +1,26 @@
+import { Metadata, ResolvingMetadata } from 'next';
+
+import { getNotice } from '@/api/notice/notice';
+
+export const generateMetadata = async ({
+  params: { id },
+  parent,
+}: {
+  params: { id: string };
+  parent: ResolvingMetadata;
+}): Promise<Metadata> => {
+  const notice = await getNotice(Number.parseInt(id));
+  return { title: notice.title };
+};
+
+const DetailedNoticePage = async ({
+  params: { id },
+}: {
+  params: { id: string };
+}) => {
+  const notice = await getNotice(Number.parseInt(id));
+  const hasImage = notice.imagesUrl.length > 0;
+  return <>{JSON.stringify(notice)}</>;
+};
+
+export default DetailedNoticePage;

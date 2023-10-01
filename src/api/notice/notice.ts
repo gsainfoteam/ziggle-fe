@@ -14,7 +14,7 @@ interface NoticeSearchParams {
   my?: 'own' | 'reminders';
 }
 
-interface Notice {
+interface NoticeBase {
   id: number;
   title: string;
   views: number;
@@ -23,7 +23,15 @@ interface Notice {
   createdAt: string;
   author: string;
   tags: { id: number; name: string }[];
+}
+
+interface Notice extends NoticeBase {
   imageUrl: string | null;
+}
+
+interface NoticeDetail extends NoticeBase {
+  imagesUrl: string[];
+  reminder: boolean;
 }
 
 export const getAllNotices = async (
@@ -38,3 +46,6 @@ export const getAllNotices = async (
       ...(imageUrl && { thumbnailUrl: imageUrl }),
     })),
   }));
+
+export const getNotice = async (id: number) =>
+  api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({ ...data }));
