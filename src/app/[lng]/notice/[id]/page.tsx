@@ -8,7 +8,10 @@ export const generateMetadata = async (
 ): Promise<Metadata> => {
   const notice = await getNotice(Number.parseInt(id));
   const previousImages = (await parent).openGraph?.images ?? [];
-  return { title: notice.title, openGraph: { images: [...previousImages] } };
+  return {
+    title: notice.title,
+    openGraph: { images: [...notice.imagesUrl, ...previousImages] },
+  };
 };
 
 const DetailedNoticePage = async ({
