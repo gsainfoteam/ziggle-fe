@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
-import { T } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg';
 import LazyCat from '@/assets/lazy-cat.svg';
 
@@ -30,12 +30,12 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   notices,
   width,
   height,
-  t,
   title,
   sectionHref,
   containerClassName,
   carouselClassName,
-}: ZaboCarouselProps & ZaboSize<Origin> & { t: T }) => {
+}: ZaboCarouselProps & ZaboSize<Origin>) => {
+  const { t } = useTranslation();
   const size = { width, height } as ZaboSize<Origin>;
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
@@ -88,7 +88,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
           </div>
         </div>
       ) : (
-        <Empty t={t} />
+        <Empty />
       )}
     </div>
   );
@@ -130,14 +130,17 @@ const Title = ({
   </div>
 );
 
-const Empty = ({ t }: { t: T }) => (
-  <div className="flex flex-col items-center justify-center h-72">
-    <LazyCat />
-    <div className="text-xl text-secondayText font-medium p-5">
-      {t('emptyNotices')}
+const Empty = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex flex-col items-center justify-center h-72">
+      <LazyCat />
+      <div className="text-xl text-secondayText font-medium p-5">
+        {t('emptyNotices')}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const TitleText = ({ title }: { title: string }) => (
   <h2 className="text-3xl md:text-5xl font-bold m-0">{title}</h2>
