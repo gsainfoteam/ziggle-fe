@@ -109,7 +109,7 @@ const Title = ({
   leftDisabled: boolean;
   rightDisabled: boolean;
 }) => (
-  <div className="flex w-full justify-between items-center px-5">
+  <div className="flex justify-between items-center py-5 content">
     {href ? (
       <Link href={href} className="group">
         <div className="flex gap-5">
