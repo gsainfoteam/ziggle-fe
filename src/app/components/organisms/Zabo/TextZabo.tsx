@@ -8,24 +8,25 @@ import { ZaboOrigin, ZaboSize } from './Zabo';
 
 export interface TextZaboProps {
   title: string;
-  content: string;
-  date: dayjs.Dayjs;
-  deadline?: dayjs.Dayjs;
+  body: string;
+  createdAt: dayjs.Dayjs | string;
+  deadline?: dayjs.Dayjs | string;
   views: number;
   author: string;
 }
 
 const TextZabo = <Origin extends ZaboOrigin>({
   title,
-  content,
-  date,
+  body,
+  createdAt,
   views,
   author,
-  deadline,
+  deadline: rawDeadline,
   t,
   height,
   width,
 }: TextZaboProps & ZaboSize<Origin> & { t: T }) => {
+  const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
@@ -34,7 +35,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   return (
     <div
       className={
-        'border rounded border-secondayText mt-4 relative ' +
+        'border rounded border-secondayText mt-4 relative bg-white dark:bg-neutral-900 ' +
         'p-5 flex flex-col gap-2.5 justify-between group ' +
         'transition hover:-translate-y-2 ' +
         'hover:shadow-primary/10 hover:shadow-thumbnail'
@@ -65,13 +66,13 @@ const TextZabo = <Origin extends ZaboOrigin>({
         >
           {title}
         </div>
-        <div className="font-medium text-lg">{content}</div>
+        <div className="font-medium text-lg">{body}</div>
         di
       </div>
       <div className="flex flex-col gap-2.5">
         <div className="text-sm text-secondayText font-medium flex">
           <Trans t={t} i18nKey="zabo.dateView">
-            {{ date: date.format('L') }}
+            {{ date: dayjs(createdAt).format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>
