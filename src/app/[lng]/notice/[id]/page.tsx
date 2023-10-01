@@ -2,15 +2,13 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 import { getNotice } from '@/api/notice/notice';
 
-export const generateMetadata = async ({
-  params: { id },
-  parent,
-}: {
-  params: { id: string };
-  parent: ResolvingMetadata;
-}): Promise<Metadata> => {
+export const generateMetadata = async (
+  { params: { id } }: { params: { id: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> => {
   const notice = await getNotice(Number.parseInt(id));
-  return { title: notice.title };
+  const previousImages = (await parent).openGraph?.images ?? [];
+  return { title: notice.title, openGraph: { images: [...previousImages] } };
 };
 
 const DetailedNoticePage = async ({
