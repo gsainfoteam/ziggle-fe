@@ -1,8 +1,6 @@
 import { StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { useTranslation } from '@/app/i18next/client';
-
 import ZaboCarousel from '.';
 
 export default {
