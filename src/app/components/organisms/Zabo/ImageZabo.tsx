@@ -37,8 +37,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         <ZaboImage
           src={thumbnailUrl}
           alt={title}
-          objectFit="cover"
-          className="rounded border border-secondayText"
+          className="rounded border border-secondayText object-cover"
           {...size}
         />
         {deadline && deadline.isAfter() && (
