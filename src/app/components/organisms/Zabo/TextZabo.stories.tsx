@@ -21,6 +21,7 @@ const args = {
   date: dayjs('2023-02-14T11:57:18.740Z'),
   views: 110,
   author: '이정우',
+  deadline: dayjs().add(1, 'd'),
   // organization: "INFOTEAM",
 };
 

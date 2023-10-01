@@ -3,12 +3,14 @@ import { Trans } from 'react-i18next';
 
 import { T } from '@/app/i18next';
 
+import DDay from '../../molecules/DDay';
 import { ZaboOrigin, ZaboSize } from './Zabo';
 
 export interface TextZaboProps {
   title: string;
   content: string;
   date: dayjs.Dayjs;
+  deadline?: dayjs.Dayjs;
   views: number;
   author: string;
 }
@@ -19,6 +21,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   date,
   views,
   author,
+  deadline,
   t,
   height,
   width,
@@ -31,7 +34,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   return (
     <div
       className={
-        'border rounded border-secondayText mt-4 ' +
+        'border rounded border-secondayText mt-4 relative ' +
         'p-5 flex flex-col gap-2.5 justify-between group ' +
         'transition hover:-translate-y-2 ' +
         'hover:shadow-primary/10 hover:shadow-thumbnail'
@@ -43,6 +46,14 @@ const TextZabo = <Origin extends ZaboOrigin>({
         [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']: originSize * 2,
       }}
     >
+      {deadline && deadline.isAfter() && (
+        <>
+          <div className="absolute top-2 left-2">
+            <DDay deadline={deadline} t={t} />
+          </div>
+          <div className="h-4 md:h-6" />
+        </>
+      )}
       <div className="flex flex-col gap-2.5">
         <div
           className={
@@ -57,6 +68,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
           {title}
         </div>
         <div className="font-medium text-lg">{content}</div>
+        di
       </div>
       <div className="flex flex-col gap-2.5">
         <div className="text-sm text-secondayText font-medium flex">
