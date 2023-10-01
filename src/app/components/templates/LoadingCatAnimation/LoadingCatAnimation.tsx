@@ -9,7 +9,7 @@ const LoadingCatAnimation = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <div className="h-12" />
       <Image src={CatBounceAnimation} alt="loading" />
       <div className="text-secondayText font-medium text-2xl">
