@@ -52,5 +52,30 @@
     "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
-  "ddayPlus": "기한 지남"
+  "ddayPlus": "기한 지남",
+  "notices": {
+    "deadline": {
+      "label": "🌟 마감임박",
+      "description": "마감 시간이 일주일도 안 남은 공지를 모아서 보여 드려요"
+    },
+    "hot": {
+      "label": "🔥 오늘 끓는 공지",
+      "description": "지난 일주일 동안 조회수가 150이 넘은 공지들이 여기서 지글지글 끓고 있어요"
+    },
+    "event": {
+      "label": "🎈 행사",
+      "description": "지스트는 오늘도 뜨겁습니다"
+    },
+    "recruit": {
+      "label": "🎯 모집",
+      "description": "언제나 여러분께 열린 기회"
+    },
+    "general": {
+      "label": "🔔 일반",
+      "description": "지스트인들이 해야 하는 일들"
+    },
+    "academic": {
+      "label": "📰 학사공지"
+    }
+  }
 }
