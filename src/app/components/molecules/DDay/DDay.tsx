@@ -4,14 +4,16 @@ import { T } from '@/app/i18next';
 
 interface DDayProps {
   deadline: dayjs.Dayjs;
+  className?: string;
 }
 
-const DDay = ({ deadline, t }: DDayProps & { t: T }) => (
+const DDay = ({ deadline, t, className }: DDayProps & { t: T }) => (
   <div
-    className={
+    className={[
       'grid place-items-center w-fit ' +
-      'border border-white rounded bg-primary/90 px-2 py-0.5'
-    }
+        'border border-white rounded bg-primary/90 px-2 py-0.5',
+      ...(className ? [className] : []),
+    ].join(' ')}
   >
     <div className="text-white text-sm md:text-lg font-bold">
       {ddayFormatted(dayjs(deadline), t)}

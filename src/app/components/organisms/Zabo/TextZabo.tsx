@@ -48,9 +48,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
     >
       {deadline && deadline.isAfter() && (
         <>
-          <div className="absolute top-2 left-2">
-            <DDay deadline={deadline} t={t} />
-          </div>
+          <DDay deadline={deadline} t={t} className="absolute top-2 left-2" />
           <div className="h-4 md:h-6" />
         </>
       )}
