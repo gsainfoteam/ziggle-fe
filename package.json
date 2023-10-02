@@ -23,7 +23,9 @@
     "react-dom": "latest",
     "react-i18next": "^13.2.2",
     "react-loading-skeleton": "^3.3.1",
-    "server-only": "^0.0.1"
+    "react-toastify": "^9.1.3",
+    "server-only": "^0.0.1",
+    "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.5",
