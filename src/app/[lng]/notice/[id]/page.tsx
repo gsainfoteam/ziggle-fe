@@ -42,7 +42,7 @@ const DetailedNoticePage = async ({
     <>
       <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />
       <div className="mt-8 md:mt-12 content mx-auto">
-        {/* <Actions title={notice.title} />
+        <Actions title={notice.title} />
         <div className="h-4 md:h-5" />
         <NoticeInfo
           title={notice.title}
@@ -54,7 +54,7 @@ const DetailedNoticePage = async ({
           t={t}
         />
         <div className="h-5" />
-        <Content content={notice.body} />
+        {/* <Content content={notice.body} /> */}
         {notice.imagesUrl.length > 0 && (
           <>
             <div className="h-20" />
@@ -62,7 +62,7 @@ const DetailedNoticePage = async ({
           </>
         )}
         <div className="h-20" />
-        <HowAboutThese /> */}
+        <HowAboutThese />
       </div>
     </>
   );
