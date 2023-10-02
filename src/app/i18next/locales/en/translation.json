@@ -66,7 +66,8 @@
       "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
       "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
     },
-    "backToMain": "메인 페이지로 돌아가기"
+    "backToMain": "메인 페이지로 돌아가기",
+    "images": "첨부 사진"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",

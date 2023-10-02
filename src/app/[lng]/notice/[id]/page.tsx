@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
 import { getNotice } from '@/api/notice/notice';
+import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import NoticeInfo from '@/app/components/organisms/NoticeInfo';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { useTranslation } from '@/app/i18next';
@@ -55,6 +56,7 @@ const DetailedNoticePage = async ({
         <div className="h-5" />
         <Content content={notice.body} />
         <div className="h-20" />
+        <ImageCarousel srcs={notice.imagesUrl} alt={notice.title} />
         <div className="h-20" />
       </div>
     </>
