@@ -14,6 +14,7 @@ const config: Config = {
         text: '#252525',
         secondayText: '#959595',
         white: '#ffffff',
+        deselected: '#d6d6d6',
       },
       spacing: {
         pageSide: '10vw',
