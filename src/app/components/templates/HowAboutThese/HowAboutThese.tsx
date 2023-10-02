@@ -29,10 +29,7 @@ const HowAboutThese = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        console.log(entries[0].isIntersecting);
-        return entries[0].isIntersecting && fetchNextPage();
-      },
+      (entries) => entries[0].isIntersecting && fetchNextPage(),
       { threshold: 0.1 },
     );
 
