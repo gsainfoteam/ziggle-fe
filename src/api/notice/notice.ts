@@ -37,20 +37,20 @@ interface NoticeDetail extends NoticeBase {
 export const getAllNotices = async (
   params: NoticePaginationParams & NoticeSearchParams = {},
 ) =>
-  api.get<{ list: Notice[] }>('/notice/all', { params }).then(({ data }) => ({
-    ...data,
-    list: data.list.map(({ imageUrl, ...notice }) => ({
-      ...notice,
-      // createdAt: dayjs(notice.createdAt),
-      deadline: notice.deadline ? notice.deadline : undefined,
-      ...(imageUrl && { thumbnailUrl: imageUrl }),
-    })),
-  }));
-
-export const getNotice = async (id: number) =>
   api
-    .get<NoticeDetail>(`/notice/${id}`)
+    .get<{ list: Notice[]; total: number }>('/notice/all', { params })
     .then(({ data }) => ({
       ...data,
-      deadline: data.deadline ? data.deadline : undefined,
+      list: data.list.map(({ imageUrl, ...notice }) => ({
+        ...notice,
+        // createdAt: dayjs(notice.createdAt),
+        deadline: notice.deadline ? notice.deadline : undefined,
+        ...(imageUrl && { thumbnailUrl: imageUrl }),
+      })),
     }));
+
+export const getNotice = async (id: number) =>
+  api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({
+    ...data,
+    deadline: data.deadline ? data.deadline : undefined,
+  }));
