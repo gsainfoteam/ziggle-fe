@@ -113,12 +113,13 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <InitClient />
-        <Navbar lng={lng} t={t} />
-        <main className="flex-1">{children}</main>
-        <div className="basis-80" />
-        <Footer t={t} />
-        <ToastContainer className="w-64" />
+        <InitClient>
+          <Navbar lng={lng} t={t} />
+          <main className="flex-1">{children}</main>
+          <div className="basis-80" />
+          <Footer t={t} />
+          <ToastContainer className="w-64" />
+        </InitClient>
       </body>
     </html>
   );

@@ -1,7 +1,12 @@
+import React from 'react';
+
 import type { Preview } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import '../src/app/globals.css';
 import '@/app/initDayjs';
+
+const queryClient = new QueryClient();
 
 const preview: Preview = {
   parameters: {
@@ -13,6 +18,13 @@ const preview: Preview = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default preview;
