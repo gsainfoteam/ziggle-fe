@@ -50,7 +50,6 @@
     "@types/react-dom": "latest",
     "@types/react-responsive-masonry": "^2.1.1",
     "autoprefixer": "latest",
-    "bufferutil": "^4.0.7",
     "canvas": "^2.11.2",
     "debug": "^4.3.4",
     "eslint": "latest",
@@ -61,11 +60,9 @@
     "prop-types": "^15.8.1",
     "react-cookie": "^6.1.1",
     "storybook": "^7.4.5",
-    "supports-color": "8.1.1",
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "utf-8-validate": "^6.0.3",
     "webpack": "^5.88.2"
   },
   "packageManager": "yarn@3.6.3"
