@@ -14,5 +14,8 @@ export const getOptions = (lng = fallbackLng, ns: Namespace = defaultNS) => {
     fallbackNS: defaultNS,
     defaultNS,
     ns,
+    react: {
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p', 'small'],
+    },
   };
 };

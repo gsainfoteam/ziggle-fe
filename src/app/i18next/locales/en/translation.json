@@ -63,7 +63,8 @@
     },
     "share": {
       "action": "공유하기",
-      "content": "{{title}}\nZiggle에서 공지를 확인해보세요"
+      "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
+      "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
     },
     "backToMain": "메인 페이지로 돌아가기"
   },

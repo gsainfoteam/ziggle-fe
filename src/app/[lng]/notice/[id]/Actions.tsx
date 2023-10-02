@@ -1,6 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { Trans } from 'react-i18next';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 import Button from '@/app/components/atoms/Button';
 import { useTranslation } from '@/app/i18next/client';
@@ -28,6 +31,14 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
     navigator.clipboard.writeText(
       t('zabo.copyLink.content', { title, link: window.location.href }),
     );
+
+    toast.success(
+      <div className="font-medium text-sm flex flex-col">
+        <Trans i18nKey="zabo.copyLink.success">
+          successed <div className="text-xs">share to friends</div>
+        </Trans>
+      </div>,
+    );
   };
 
   return (
@@ -47,7 +58,9 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
 const ShareButton = ({ title }: ActionsProps) => {
   const { t } = useTranslation();
   const handleShare = () => {
-    if (!navigator.canShare) return;
+    if (!navigator.canShare) {
+      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
+    }
     navigator.share({
       title,
       text: t('zabo.share.content', { title }),
