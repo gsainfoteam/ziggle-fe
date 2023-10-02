@@ -34,6 +34,11 @@ export const generateMetadata = async ({
   const { t } = await createTranslation(lng, 'translation');
 
   return {
+    metadataBase: new URL(
+      process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : `http://localhost:${process.env.PORT || 3000}`,
+    ),
     alternates: {
       canonical: '/',
       languages: languages.reduce(
