@@ -48,7 +48,7 @@ const ImageCarousel = ({ srcs, alt }: ImageCarouselProps) => {
         </HorizontalScrollButton>
       </div>
       <div
-        className="w-full flex gap-5 bg-deselected border-y-2 border-text p-3 overflow-x-scroll scrollbar-none"
+        className="w-full flex gap-5 bg-deselected dark:bg-text border-y-2 border-text dark:border-secondayText p-3 overflow-x-scroll scrollbar-none"
         ref={carouselEl}
         onScroll={handleCarouselScroll}
       >

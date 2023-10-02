@@ -61,7 +61,7 @@ const Metadata = ({
         author <span className="font-bold">{{ author }}</span>
       </Trans>
     </div>
-    <div className="h-5 md:h-7 w-0.5 bg-text" />
+    <div className="h-5 md:h-7 w-0.5 bg-text dark:bg-secondayText" />
     <div className="flex gap-4 text-secondayText font-normal">
       <Trans t={t} i18nKey="zabo.createdAt">
         createdAt {{ createdAt: createdAt.format('L') }}
