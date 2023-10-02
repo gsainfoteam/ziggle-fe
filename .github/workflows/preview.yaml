@@ -6,7 +6,6 @@ on:
   push:
     branches-ignore:
       - master
-  pull_request:
 
 jobs:
   preview-deploy:
@@ -39,13 +38,19 @@ jobs:
           environment-url: ${{ steps.vercel-deploy.outputs.url }}
           state: 'success'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: Find Pull Request
+        if: success()
+        uses: juliangruber/find-pull-request-action@v1
+        id: find-pull-request
+        with:
+          branch: ${{ github.ref_name }}
       - name: write deployment comment (in PR)
-        if: github.event_name == 'pull_request' && success()
+        if: success() && steps.find-pull-request.outputs.number
         uses: actions/github-script@v6
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.find-pull-request.outputs.number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: 'Preview URL: ' + '${{ steps.vercel-deploy.outputs.url }}'
