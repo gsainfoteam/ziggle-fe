@@ -48,4 +48,9 @@ export const getAllNotices = async (
   }));
 
 export const getNotice = async (id: number) =>
-  api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({ ...data }));
+  api
+    .get<NoticeDetail>(`/notice/${id}`)
+    .then(({ data }) => ({
+      ...data,
+      deadline: data.deadline ? data.deadline : undefined,
+    }));
