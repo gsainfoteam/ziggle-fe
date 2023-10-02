@@ -55,7 +55,17 @@
     "close": "닫기",
     "author": "글쓴이 <strong>{{author}}</strong>",
     "createdAt": "작성일 {{createdAt}}",
-    "views": "조회수 {{views}}"
+    "views": "조회수 {{views}}",
+    "copyLink": {
+      "action": "주소 복사하기",
+      "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
+      "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
+    },
+    "share": {
+      "action": "공유하기",
+      "content": "{{title}}\nZiggle에서 공지를 확인해보세요"
+    },
+    "backToMain": "메인 페이지로 돌아가기"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",

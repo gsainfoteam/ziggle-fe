@@ -6,6 +6,8 @@ import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { useTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
+import Actions from './Actions';
+
 export const generateMetadata = async (
   { params: { id } }: { params: { id: string } },
   parent: ResolvingMetadata,
@@ -38,6 +40,8 @@ const DetailedNoticePage = async ({
     <>
       {hasImage && <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />}
       <div className="mt-8 md:mt-12 content mx-auto">
+        <Actions title={notice.title} />
+        <div className="h-4 md:h-5" />
         <NoticeInfo
           title={notice.title}
           createdAt={notice.createdAt}
