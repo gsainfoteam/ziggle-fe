@@ -5,6 +5,7 @@ import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
@@ -117,6 +118,7 @@ export default async function RootLayout({
         <main className="flex-1">{children}</main>
         <div className="basis-80" />
         <Footer t={t} />
+        <ToastContainer className="w-64" />
       </body>
     </html>
   );
