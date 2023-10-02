@@ -49,7 +49,10 @@
     ]
   },
   "zabo": {
-    "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>"
+    "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>",
+    "clickPoster": "포스터 클릭하여 자세히 보기",
+    "downloadAll": "전체 다운로드하기",
+    "close": "닫기"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",

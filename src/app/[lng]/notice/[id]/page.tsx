@@ -1,6 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
 import { getNotice } from '@/api/notice/notice';
+import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 
 export const generateMetadata = async (
   { params: { id } }: { params: { id: string } },
@@ -29,7 +30,12 @@ const DetailedNoticePage = async ({
 }) => {
   const notice = await getNotice(Number.parseInt(id));
   const hasImage = notice.imagesUrl.length > 0;
-  return <>{JSON.stringify(notice)}</>;
+  return (
+    <>
+      {hasImage && <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />}
+      {JSON.stringify(notice)}
+    </>
+  );
 };
 
 export default DetailedNoticePage;
