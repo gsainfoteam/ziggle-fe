@@ -62,6 +62,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
           ...(props.className ? [props.className] : []),
           'object-left-top',
         ].join(' ')}
+        sizes="25vw"
         fill
         onLoadingComplete={handleImageLoad}
       />
