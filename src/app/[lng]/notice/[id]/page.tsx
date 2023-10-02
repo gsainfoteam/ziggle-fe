@@ -7,6 +7,7 @@ import { useTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';
+import Content from './Content';
 
 export const generateMetadata = async (
   { params: { id } }: { params: { id: string } },
@@ -52,6 +53,7 @@ const DetailedNoticePage = async ({
           t={t}
         />
         <div className="h-5" />
+        <Content content={notice.body} />
         <div className="h-20" />
         <div className="h-20" />
       </div>
