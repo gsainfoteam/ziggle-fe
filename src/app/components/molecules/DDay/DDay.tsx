@@ -22,7 +22,10 @@ const DDay = ({ deadline, t, className }: DDayProps & { t: T }) => (
 );
 
 const ddayFormatted = (deadline: dayjs.Dayjs, t: T) => {
-  const daysLeft = deadline.startOf('d').diff(dayjs().startOf('d'), 'd');
+  const daysLeft = deadline
+    .tz()
+    .startOf('d')
+    .diff(dayjs.tz().startOf('d'), 'd');
 
   if (daysLeft < 0) return t('ddayPlus');
   if (daysLeft === 0) return 'D - Day';
