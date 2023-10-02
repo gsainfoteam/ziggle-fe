@@ -1,10 +1,13 @@
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'dompurify';
+import { JSDOM } from 'jsdom';
 
 interface ContentProps {
   content: string;
 }
 
 const Content = ({ content }: ContentProps) => {
+  const dompurify = DOMPurify(new JSDOM('<!DOCTYPE html>').window);
+  const sanitizedHtml = dompurify.sanitize(content);
   return (
     <div
       className={[
@@ -14,7 +17,7 @@ const Content = ({ content }: ContentProps) => {
         '[&_h2]:text-xl md:[&_h2]:text-2xl',
         '[&_h3]:text-lg md:[&_h3]:text-xl',
       ].join(' ')}
-      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
+      dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
     />
   );
 };

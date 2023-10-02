@@ -4415,7 +4415,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/dompurify@npm:^3.0.3":
+"@types/dompurify@npm:^3":
   version: 3.0.3
   resolution: "@types/dompurify@npm:3.0.3"
   dependencies:
@@ -4565,6 +4565,17 @@ __metadata:
   dependencies:
     "@types/istanbul-lib-report": "*"
   checksum: f52028d6fe4d28f0085dd7ed66ccfa6af632579e9a4091b90928ffef93d4dbec0bacd49e9caf1b939d05df9eafc5ac1f5939413cdf8ac59fbe4b29602d4d0939
+  languageName: node
+  linkType: hard
+
+"@types/jsdom@npm:^21.1.3":
+  version: 21.1.3
+  resolution: "@types/jsdom@npm:21.1.3"
+  dependencies:
+    "@types/node": "*"
+    "@types/tough-cookie": "*"
+    parse5: ^7.0.0
+  checksum: be8e42eb2d24db8abd3a19a229ce2c2e5d0809351765d9053272604ddf1df04fd16ff193eee9a2d79130952c4f91ee995148deae836a4d43451e64db8a698281
   languageName: node
   linkType: hard
 
@@ -4765,6 +4776,13 @@ __metadata:
     "@types/mime": "*"
     "@types/node": "*"
   checksum: afa52252f0ba94cdb5391e80f23e17fd629bdf2a31be8876e2c4490312ed6b0570822dd7de7cea04c9002049e207709563568b7f4ee10bb9f456321db1e83e40
+  languageName: node
+  linkType: hard
+
+"@types/tough-cookie@npm:*":
+  version: 4.0.3
+  resolution: "@types/tough-cookie@npm:4.0.3"
+  checksum: f201be1bbca2f2d3572032513cdb9825845114d2604a7f4091af848eeee3228a573cdc5e8082b04468a2848bb1d058f1adbb97db822e22c975ebd6fcd851a453
   languageName: node
   linkType: hard
 
@@ -9935,17 +9953,6 @@ eslint@latest:
   languageName: node
   linkType: hard
 
-"isomorphic-dompurify@npm:^1.9.0":
-  version: 1.9.0
-  resolution: "isomorphic-dompurify@npm:1.9.0"
-  dependencies:
-    "@types/dompurify": ^3.0.3
-    dompurify: ^3.0.6
-    jsdom: ^22.1.0
-  checksum: 44cbcc42ec1dffbb1f61b47feeca5b627830776fa183e4ec86367e93ea27062c89490d41ed33e47e0781750223551a71fb0e061f991b7ef638f5ebd26dab76d7
-  languageName: node
-  linkType: hard
-
 "istanbul-lib-coverage@npm:^3.0.0, istanbul-lib-coverage@npm:^3.2.0":
   version: 3.2.0
   resolution: "istanbul-lib-coverage@npm:3.2.0"
@@ -11725,7 +11732,7 @@ next@latest:
   languageName: node
   linkType: hard
 
-"parse5@npm:^7.1.2":
+"parse5@npm:^7.0.0, parse5@npm:^7.1.2":
   version: 7.1.2
   resolution: "parse5@npm:7.1.2"
   dependencies:
@@ -15348,6 +15355,8 @@ typescript@latest:
     "@storybook/testing-library": ^0.2.1
     "@svgr/webpack": ^8.1.0
     "@types/debug": ^4
+    "@types/dompurify": ^3
+    "@types/jsdom": ^21.1.3
     "@types/node": latest
     "@types/prop-types": ^15
     "@types/react": latest
@@ -15361,6 +15370,7 @@ typescript@latest:
     canvas: ^2.11.2
     dayjs: ^1.11.10
     debug: ^4.3.4
+    dompurify: ^3.0.6
     eslint: latest
     eslint-config-next: latest
     eslint-plugin-simple-import-sort: ^10.0.0
@@ -15368,7 +15378,7 @@ typescript@latest:
     i18next: ^23.5.1
     i18next-browser-languagedetector: ^7.1.0
     i18next-resources-to-backend: ^1.1.4
-    isomorphic-dompurify: ^1.9.0
+    jsdom: ^22.1.0
     next: latest
     postcss: latest
     prop-types: ^15.8.1
