@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { getNotice } from '@/api/notice/notice';
 import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import NoticeInfo from '@/app/components/organisms/NoticeInfo';
-import HowAboutThese from '@/app/components/templates/HowAboutThese';
+// import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { useTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
@@ -62,7 +62,7 @@ const DetailedNoticePage = async ({
           </>
         )}
         <div className="h-20" />
-        <HowAboutThese />
+        {/* <HowAboutThese /> */}
       </div>
     </>
   );
