@@ -38,10 +38,9 @@ const DetailedNoticePage = async ({
 }) => {
   const { t } = await useTranslation(lng, 'translation');
   const notice = await getNotice(Number.parseInt(id));
-  const hasImage = notice.imagesUrl.length > 0;
   return (
     <>
-      {hasImage && <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />}
+      <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />
       <div className="mt-8 md:mt-12 content mx-auto">
         <Actions title={notice.title} />
         <div className="h-4 md:h-5" />
