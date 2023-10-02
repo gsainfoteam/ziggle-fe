@@ -4,6 +4,7 @@ const nextConfig = {
     domains: ['s3.ap-northeast-2.amazonaws.com'],
   },
   webpack: (config) => {
+    config.externals = [...config.externals, 'canvas', 'jsdom'];
     config.module.rules.push({
       test: /\.svg$/,
       use: [

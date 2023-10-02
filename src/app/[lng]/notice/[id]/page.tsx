@@ -54,7 +54,7 @@ const DetailedNoticePage = async ({
           t={t}
         />
         <div className="h-5" />
-        {/* <Content content={notice.body} /> */}
+        <Content content={notice.body} />
         {notice.imagesUrl.length > 0 && (
           <>
             <div className="h-20" />
