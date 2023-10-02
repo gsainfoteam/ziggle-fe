@@ -56,8 +56,12 @@ const DetailedNoticePage = async ({
         />
         <div className="h-5" />
         <Content content={notice.body} />
-        <div className="h-20" />
-        <ImageCarousel srcs={notice.imagesUrl} alt={notice.title} />
+        {notice.imagesUrl.length > 0 && (
+          <>
+            <div className="h-20" />
+            <ImageCarousel srcs={notice.imagesUrl} alt={notice.title} />
+          </>
+        )}
         <div className="h-20" />
         <HowAboutThese />
       </div>
