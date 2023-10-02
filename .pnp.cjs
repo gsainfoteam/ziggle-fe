@@ -38,6 +38,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/testing-library", "npm:0.2.1"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@types/debug", "npm:4.1.9"],\
+            ["@types/dompurify", "npm:3.0.3"],\
             ["@types/node", "npm:20.7.1"],\
             ["@types/react", "npm:18.2.23"],\
             ["@types/react-dom", "npm:18.2.8"],\
@@ -47,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:1.5.1"],\
             ["dayjs", "npm:1.11.10"],\
             ["debug", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4"],\
+            ["dompurify", "npm:3.0.6"],\
             ["eslint", "npm:8.50.0"],\
             ["eslint-config-next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["eslint-plugin-simple-import-sort", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.0.0"],\
@@ -6640,6 +6642,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/dompurify", [\
+        ["npm:3.0.3", {\
+          "packageLocation": "./.yarn/cache/@types-dompurify-npm-3.0.3-5a54f100b1-ff629277db.zip/node_modules/@types/dompurify/",\
+          "packageDependencies": [\
+            ["@types/dompurify", "npm:3.0.3"],\
+            ["@types/trusted-types", "npm:2.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/ejs", [\
         ["npm:3.1.3", {\
           "packageLocation": "./.yarn/cache/@types-ejs-npm-3.1.3-a4f0c9ec5f-b1b1c6c9d3.zip/node_modules/@types/ejs/",\
@@ -7027,6 +7039,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/http-errors", "npm:2.0.2"],\
             ["@types/mime", "npm:3.0.2"],\
             ["@types/node", "npm:20.7.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/trusted-types", [\
+        ["npm:2.0.4", {\
+          "packageLocation": "./.yarn/cache/@types-trusted-types-npm-2.0.4-61127ed24e-5256c4576c.zip/node_modules/@types/trusted-types/",\
+          "packageDependencies": [\
+            ["@types/trusted-types", "npm:2.0.4"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10100,6 +10121,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["domhandler", "npm:5.0.3"],\
             ["domelementtype", "npm:2.3.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["dompurify", [\
+        ["npm:3.0.6", {\
+          "packageLocation": "./.yarn/cache/dompurify-npm-3.0.6-7fc9c1bb20-e5c6cdc5fe.zip/node_modules/dompurify/",\
+          "packageDependencies": [\
+            ["dompurify", "npm:3.0.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19061,6 +19091,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/testing-library", "npm:0.2.1"],\
             ["@svgr/webpack", "npm:8.1.0"],\
             ["@types/debug", "npm:4.1.9"],\
+            ["@types/dompurify", "npm:3.0.3"],\
             ["@types/node", "npm:20.7.1"],\
             ["@types/react", "npm:18.2.23"],\
             ["@types/react-dom", "npm:18.2.8"],\
@@ -19070,6 +19101,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["axios", "npm:1.5.1"],\
             ["dayjs", "npm:1.11.10"],\
             ["debug", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.4"],\
+            ["dompurify", "npm:3.0.6"],\
             ["eslint", "npm:8.50.0"],\
             ["eslint-config-next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["eslint-plugin-simple-import-sort", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:10.0.0"],\

@@ -4396,6 +4396,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/dompurify@npm:^3":
+  version: 3.0.3
+  resolution: "@types/dompurify@npm:3.0.3"
+  dependencies:
+    "@types/trusted-types": "*"
+  checksum: ff629277db4d19d836b0d878e93efb27d876d1073db81507c39d44d509b30ee3bcdc9e951dbbf9574b1fc6c52e1eaa95abf4279fa45aca281868717f8a7298da
+  languageName: node
+  linkType: hard
+
 "@types/ejs@npm:^3.1.1":
   version: 3.1.3
   resolution: "@types/ejs@npm:3.1.3"
@@ -4721,6 +4730,13 @@ __metadata:
     "@types/mime": "*"
     "@types/node": "*"
   checksum: afa52252f0ba94cdb5391e80f23e17fd629bdf2a31be8876e2c4490312ed6b0570822dd7de7cea04c9002049e207709563568b7f4ee10bb9f456321db1e83e40
+  languageName: node
+  linkType: hard
+
+"@types/trusted-types@npm:*":
+  version: 2.0.4
+  resolution: "@types/trusted-types@npm:2.0.4"
+  checksum: 5256c4576cd1c90d33ddd9cc9cbd4f202b39c98cbe8b7f74963298f9eb2159c285ea5c25a6181b4c594d8d75641765bff85d72c2d251ad076e6529ce0eeedd1c
   languageName: node
   linkType: hard
 
@@ -7248,6 +7264,13 @@ autoprefixer@latest:
   dependencies:
     domelementtype: ^2.3.0
   checksum: 0f58f4a6af63e6f3a4320aa446d28b5790a009018707bce2859dcb1d21144c7876482b5188395a188dfa974238c019e0a1e610d2fc269a12b2c192ea2b0b131c
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "dompurify@npm:3.0.6"
+  checksum: e5c6cdc5fe972a9d0859d939f1d86320de275be00bbef7bd5591c80b1e538935f6ce236624459a1b0c84ecd7c6a1e248684aa4637512659fccc0ce7c353828a6
   languageName: node
   linkType: hard
 
@@ -14821,6 +14844,7 @@ typescript@latest:
     "@storybook/testing-library": ^0.2.1
     "@svgr/webpack": ^8.1.0
     "@types/debug": ^4
+    "@types/dompurify": ^3
     "@types/node": latest
     "@types/react": latest
     "@types/react-dom": latest
@@ -14830,6 +14854,7 @@ typescript@latest:
     axios: ^1.5.1
     dayjs: ^1.11.10
     debug: ^4.3.4
+    dompurify: ^3.0.6
     eslint: latest
     eslint-config-next: latest
     eslint-plugin-simple-import-sort: ^10.0.0
