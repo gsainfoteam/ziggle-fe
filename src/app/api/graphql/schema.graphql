@@ -1,0 +1,36 @@
+scalar Date
+
+type Tag {
+  id: Int!
+  name: String!
+}
+
+type Notice {
+  id: Int!
+  title: String!
+  views: Int!
+  body: String!
+  deadline: Date
+  createdAt: Date!
+  author: String!
+  tags: [Tag!]!
+  imageUrl: String
+}
+
+type DetailedNotice {
+  id: Int!
+  title: String!
+  views: Int!
+  body: String!
+  deadline: Date
+  createdAt: Date!
+  author: String!
+  tags: [Tag!]!
+  imagesUrl: [String!]!
+  reminder: Boolean!
+}
+
+type Query {
+  notices: [Notice!]!
+  notice(id: Int!): Notice
+}
