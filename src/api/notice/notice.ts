@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { gql } from '@/generated';
+
 import api from '..';
 
 export interface NoticePaginationParams {
@@ -57,3 +59,25 @@ export const getNotice = async (id: number) =>
     ...data,
     deadline: data.deadline ? data.deadline : undefined,
   }));
+
+export const GET_NOTICES = gql(`
+  query GetNotices($offset: Int, $limit: Int) {
+    notices(offset: $offset, limit: $limit) {
+      list {
+        id
+        title
+        views
+        body
+        deadline
+        createdAt
+        author
+        thumbnailUrl
+        tags {
+          id
+          name
+        }
+      }
+      total
+    }
+  }
+`);

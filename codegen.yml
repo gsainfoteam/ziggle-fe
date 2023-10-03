@@ -1,9 +1,14 @@
 overwrite: true
 schema: './src/app/api/graphql/schema.graphql'
+documents: './src/**/*.{ts,tsx}'
 generates:
-  src/generated/graphql.ts:
+  src/generated/server.ts:
     plugins:
       - 'typescript'
       - 'typescript-resolvers'
     config:
       contextType: '../app/api/graphql/route#MyContext'
+  src/generated/:
+    preset: 'client'
+    presetConfig:
+      gqlTagName: 'gql'
