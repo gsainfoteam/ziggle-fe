@@ -56,7 +56,10 @@ const HowAboutThese = () => {
       <ResponsiveMasonry
         columnsCountBreakPoints={{ 350: 1, 700: 2, 1200: 3, 1600: 4 }}
       >
-        <Masonry gutter="16px">
+        <Masonry
+          gutter="16px"
+          className="[&>*]:!basis-[fit-content] [&>*]:!grow-0 !place-content-start"
+        >
           {notices.map(({ id, ...notice }) => (
             <Link key={id} href={`/${i18n.language}/notice/${id}`}>
               <Zabo t={t} width={300} {...notice} />
