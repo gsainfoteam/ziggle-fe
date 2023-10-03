@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate": "gql-gen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/server": "^4.9.3",
@@ -36,6 +37,9 @@
     "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-resolvers": "^4.0.1",
     "@graphql-tools/schema": "^10.0.0",
     "@graphql-tools/utils": "^10.0.6",
     "@storybook/addon-essentials": "^7.4.5",
@@ -67,7 +71,12 @@
     "tailwind-scrollbar": "^3.0.5",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "webpack": "^5.88.2"
+    "webpack": "^5.88.2",
+    "graphql-codegen-typescript-common": "0.18.2",
+    "graphql-codegen-typescript-server": "0.18.2",
+    "graphql-codegen-typescript-resolvers": "0.18.2",
+    "graphql-codegen-typescript-react-apollo": "0.18.2",
+    "graphql-codegen-typescript-graphql-files-modules": "0.18.2"
   },
   "packageManager": "yarn@3.6.3"
 }
