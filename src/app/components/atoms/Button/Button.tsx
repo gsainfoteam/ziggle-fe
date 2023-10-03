@@ -24,7 +24,7 @@ const Button = ({
       ...(variant === 'contained'
         ? ['bg-primary text-white hover:brightness-90']
         : []),
-      ...(animated ? ['hover:scale-95'] : []),
+      ...(animated ? ['active:scale-95'] : []),
       ...(className ? [className] : []),
     ].join(' ')}
     {...props}
