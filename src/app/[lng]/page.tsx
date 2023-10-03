@@ -57,6 +57,7 @@ export default async function Home({
         notices={academic.list}
         title={t('notices.academic.label')}
         height={300}
+        sectionHref="https://www.gist.ac.kr/kr/html/sub05/050209.html"
       />
     </main>
   );
