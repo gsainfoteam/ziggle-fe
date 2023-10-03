@@ -1,12 +1,10 @@
 import React from 'react';
 
 import type { Preview } from '@storybook/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { ApolloProvider } from '@apollo/client';
 
 import '../src/app/globals.css';
-import '@/app/initDayjs';
-
-const queryClient = new QueryClient();
+import { apolloClient } from '../src/app/[lng]/InitClient';
 
 const preview: Preview = {
   parameters: {
@@ -20,9 +18,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={apolloClient}>
         <Story />
-      </QueryClientProvider>
+      </ApolloProvider>
     ),
   ],
 };
