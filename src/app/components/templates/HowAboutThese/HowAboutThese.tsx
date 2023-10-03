@@ -1,11 +1,11 @@
 'use client';
 
+import { useQuery } from '@apollo/client';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import { useEffect, useMemo, useRef } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-import { getAllNotices } from '@/api/notice/notice';
+import { GET_NOTICES } from '@/api/notice/notice';
 import { useTranslation } from '@/app/i18next/client';
 
 import Zabo from '../../organisms/Zabo';
@@ -15,21 +15,25 @@ const ITEMS_PER_CALL = 10;
 const HowAboutThese = () => {
   const { t, i18n } = useTranslation();
   const endEl = useRef<HTMLDivElement>(null);
-  const { data: notices, fetchNextPage } = useInfiniteQuery(
-    'howAboutThese',
-    ({ pageParam = 0 }) =>
-      getAllNotices({ offset: pageParam * ITEMS_PER_CALL }),
-    {
-      getNextPageParam: (lastPage, allPages) => {
-        const items = allPages.reduce((acc, cur) => acc + cur.list.length, 0);
-        if (lastPage.total > items) return allPages.length;
-      },
-    },
+  const { data, loading, fetchMore } = useQuery(GET_NOTICES, {
+    variables: { offset: 0, limit: ITEMS_PER_CALL },
+  });
+
+  const notices = useMemo(
+    () =>
+      data?.notices.list.map(({ thumbnailUrl, ...notice }) => ({
+        ...notice,
+        ...(thumbnailUrl && { thumbnailUrl }),
+      })) ?? [],
+    [data],
   );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => entries[0].isIntersecting && fetchNextPage(),
+      (entries) =>
+        entries[0].isIntersecting &&
+        notices.length &&
+        fetchMore({ variables: { offset: notices.length } }),
       { threshold: 0.1 },
     );
 
@@ -40,7 +44,9 @@ const HowAboutThese = () => {
     return () => {
       observer.unobserve(el);
     };
-  }, [fetchNextPage]);
+  }, [notices, fetchMore]);
+
+  if (loading) return null;
 
   return (
     <section className="flex flex-col gap-6">
@@ -51,14 +57,11 @@ const HowAboutThese = () => {
         columnsCountBreakPoints={{ 350: 1, 700: 2, 1200: 3, 1600: 4 }}
       >
         <Masonry gutter="16px">
-          {notices?.pages
-            .map((page) => page.list)
-            .flat()
-            .map(({ id, ...notice }) => (
-              <Link key={id} href={`/${i18n.language}/notice/${id}`}>
-                <Zabo t={t} width={300} {...notice} />
-              </Link>
-            )) ?? []}
+          {notices.map(({ id, ...notice }) => (
+            <Link key={id} href={`/${i18n.language}/notice/${id}`}>
+              <Zabo t={t} width={300} {...notice} />
+            </Link>
+          ))}
         </Masonry>
       </ResponsiveMasonry>
       <div ref={endEl} />

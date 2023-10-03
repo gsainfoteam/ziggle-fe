@@ -2,8 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { NextRequest } from 'next/server';
 
-import { getAllNotices, getNotice } from '@/api/notice/notice';
-import { Resolvers } from '@/generated/graphql';
+import { Resolvers } from '@/generated/server';
 
 import NoticesAPI from './notices-api';
 import typeDefs from './schema.graphql';
