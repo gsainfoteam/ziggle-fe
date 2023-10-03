@@ -30,7 +30,12 @@ type DetailedNotice {
   reminder: Boolean!
 }
 
+type Notices {
+  list: [Notice!]!
+  total: Int!
+}
+
 type Query {
-  notices: [Notice!]!
+  notices(offset: Int, limit: Int): Notices!
   notice(id: Int!): Notice
 }

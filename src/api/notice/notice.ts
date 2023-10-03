@@ -2,12 +2,12 @@ import dayjs from 'dayjs';
 
 import api from '..';
 
-interface NoticePaginationParams {
+export interface NoticePaginationParams {
   offset?: number;
   limit?: number;
 }
 
-interface NoticeSearchParams {
+export interface NoticeSearchParams {
   search?: string;
   tags?: string[];
   orderBy?: 'deadline' | 'hot' | 'recent';
@@ -29,25 +29,28 @@ interface Notice extends NoticeBase {
   imageUrl: string | null;
 }
 
-interface NoticeDetail extends NoticeBase {
+export interface NoticeDetail extends NoticeBase {
   imagesUrl: string[];
   reminder: boolean;
+}
+
+export interface Notices {
+  list: Notice[];
+  total: number;
 }
 
 export const getAllNotices = async (
   params: NoticePaginationParams & NoticeSearchParams = {},
 ) =>
-  api
-    .get<{ list: Notice[]; total: number }>('/notice/all', { params })
-    .then(({ data }) => ({
-      ...data,
-      list: data.list.map(({ imageUrl, ...notice }) => ({
-        ...notice,
-        // createdAt: dayjs(notice.createdAt),
-        deadline: notice.deadline ? notice.deadline : undefined,
-        ...(imageUrl && { thumbnailUrl: imageUrl }),
-      })),
-    }));
+  api.get<Notices>('/notice/all', { params }).then(({ data }) => ({
+    ...data,
+    list: data.list.map(({ imageUrl, ...notice }) => ({
+      ...notice,
+      // createdAt: dayjs(notice.createdAt),
+      deadline: notice.deadline ? notice.deadline : undefined,
+      ...(imageUrl && { thumbnailUrl: imageUrl }),
+    })),
+  }));
 
 export const getNotice = async (id: number) =>
   api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({
