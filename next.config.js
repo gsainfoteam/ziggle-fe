@@ -5,7 +5,7 @@ const nextConfig = {
   },
   /** @argument {import('webpack').Configuration} config */
   webpack: (config) => {
-    config.externals = [...config.externals, 'jsdom'];
+    config.externals = [...config.externals, 'jsdom', 'debug', 'node-fetch'];
     config.module.rules.push(
       {
         test: /\.svg$/,
