@@ -11,10 +11,14 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@apollo/server": "^4.9.3",
+    "@as-integrations/next": "^2.0.2",
     "@vercel/og": "^0.5.17",
     "accept-language": "^3.0.18",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-resources-to-backend": "^1.1.4",
@@ -32,6 +36,8 @@
     "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-tools/utils": "^10.0.6",
     "@storybook/addon-essentials": "^7.4.5",
     "@storybook/addon-interactions": "^7.4.5",
     "@storybook/addon-links": "^7.4.5",
