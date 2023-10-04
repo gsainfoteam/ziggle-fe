@@ -27,6 +27,7 @@
     "i18next-resources-to-backend": "^1.1.4",
     "isomorphic-dompurify": "^1.9.0",
     "jsdom": "^22.1.0",
+    "lottie-react": "^2.4.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

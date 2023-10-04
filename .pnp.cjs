@@ -73,6 +73,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["i18next-resources-to-backend", "npm:1.1.4"],\
             ["isomorphic-dompurify", "npm:1.9.0"],\
             ["jsdom", "virtual:83b023ebdab1314ff947ce99f7ade4167acbe4884bade3517f8af451f59f14135954817a677debeda585604140e91ee5221d2475b34f0fef082a5f253dd488c2#npm:22.1.0"],\
+            ["lottie-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0"],\
             ["next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["node-fetch", "virtual:6d5ed7ff3987b98e7eb8848f40363901ed6a625e6b91d0f281bac57540a5198a34e8fdd3e2cfe4ea342cbefe245a22a5ffd415061f2195fcdccd5c8655fcc72a#npm:2.7.0"],\
             ["postcss", "npm:8.4.30"],\
@@ -16595,6 +16596,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["lottie-react", [\
+        ["npm:2.4.0", {\
+          "packageLocation": "./.yarn/cache/lottie-react-npm-2.4.0-d4d95c55aa-e9ea4a89be.zip/node_modules/lottie-react/",\
+          "packageDependencies": [\
+            ["lottie-react", "npm:2.4.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0", {\
+          "packageLocation": "./.yarn/__virtual__/lottie-react-virtual-b950bcb992/0/cache/lottie-react-npm-2.4.0-d4d95c55aa-e9ea4a89be.zip/node_modules/lottie-react/",\
+          "packageDependencies": [\
+            ["lottie-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0"],\
+            ["@types/react", "npm:18.2.23"],\
+            ["@types/react-dom", "npm:18.2.8"],\
+            ["lottie-web", "npm:5.12.2"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["lottie-web", [\
+        ["npm:5.12.2", {\
+          "packageLocation": "./.yarn/cache/lottie-web-npm-5.12.2-942dc9e22a-af5bc3bc40.zip/node_modules/lottie-web/",\
+          "packageDependencies": [\
+            ["lottie-web", "npm:5.12.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lower-case", [\
         ["npm:2.0.2", {\
           "packageLocation": "./.yarn/cache/lower-case-npm-2.0.2-151055f1c2-83a0a5f159.zip/node_modules/lower-case/",\
@@ -22922,6 +22959,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["i18next-resources-to-backend", "npm:1.1.4"],\
             ["isomorphic-dompurify", "npm:1.9.0"],\
             ["jsdom", "virtual:83b023ebdab1314ff947ce99f7ade4167acbe4884bade3517f8af451f59f14135954817a677debeda585604140e91ee5221d2475b34f0fef082a5f253dd488c2#npm:22.1.0"],\
+            ["lottie-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0"],\
             ["next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:13.5.3"],\
             ["node-fetch", "virtual:6d5ed7ff3987b98e7eb8848f40363901ed6a625e6b91d0f281bac57540a5198a34e8fdd3e2cfe4ea342cbefe245a22a5ffd415061f2195fcdccd5c8655fcc72a#npm:2.7.0"],\
             ["postcss", "npm:8.4.30"],\
