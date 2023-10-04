@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
+import Lottie from 'lottie-react';
 
 import { useTranslation } from '@/app/i18next/client';
-import CatBounceAnimation from '@/assets/cat-bounce.gif';
+import CatBounceAnimation from '@/assets/animations/cat-bounce.json';
 
 const LoadingCatAnimation = () => {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ const LoadingCatAnimation = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="h-12" />
-      <Image src={CatBounceAnimation} alt="loading" />
+      <Lottie animationData={CatBounceAnimation} loop />
       <div className="text-secondayText font-medium text-2xl">
         {t('loading')}
       </div>
