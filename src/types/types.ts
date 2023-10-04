@@ -112,3 +112,8 @@ export interface SvgProps {
   width?: React.CSSProperties["width"];
   height?: React.CSSProperties["height"];
 }
+
+export enum AddType {
+  ToReminder = "ToReminder",
+  ToAll = "ToAll",
+}

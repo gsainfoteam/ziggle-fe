@@ -36,6 +36,9 @@ enum LogEvents {
   NoticeWritingPageTypeContent = "notice_writing_page_type_content",
   NoticeWritingPageClickSubmit = "notice_writing_page_click_submit",
 
+  //Notice Add Page
+  NoticeAddPageTo = "notice_add_page_to",
+
   // Components
   NoticeClick = "notice_click",
   SearchResultClick = "search_result_click",
