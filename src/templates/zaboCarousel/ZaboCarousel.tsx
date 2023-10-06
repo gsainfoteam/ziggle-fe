@@ -118,7 +118,6 @@ const ZaboCarousel = ({
       const isEnd = scrollWidth - scrollLeft <= clientWidth;
       const isStart = scrollLeft === 0;
       setScrollBtnDisabled([isStart, isEnd]);
-      console.log(isStart, isEnd);
     }
   };
 
