@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SmallArrow } from "src/assets/Icons";
 import LazyCat from "src/assets/LazyCat";
@@ -47,11 +47,15 @@ const LowerWrap = styled(Flex)<{ bgColor?: string }>`
   width: 100%;
   background-color: ${({ bgColor }) => bgColor ?? undefined};
 
-  padding: 5px 0 15px 0;
+  padding: 0;
 
   box-sizing: border-box;
   flex-wrap: nowrap;
   overflow-y: hidden;
+
+  :has(> div > button) {
+    padding: 5px 0 15px 0;
+  }
 `;
 
 const ZabosContainer = styled(Content)`
@@ -117,6 +121,10 @@ const ZaboCarousel = ({
     }
   };
 
+  useEffect(() => {
+    CheckEnd();
+  }, [manyZabos]);
+
   /** 한 번에 얼마나 Scroll 할건지 강도 결정 */
   const scrollAmount = 800;
 
@@ -145,33 +153,32 @@ const ZaboCarousel = ({
           ></HorizontalScrollButton.Right>
         </ScrollBtnWrap>
       </UpperWrap>
-      {manyZabos.length > 0 ? (
-        <LowerWrap
-          bgColor={carouselBGColor}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
-            {manyZabos.map((zabo) => (
-              <Zabo
-                key={zabo.id}
-                id={zabo.id}
-                title={zabo.title}
-                content={zabo.content}
-                date={zabo.date}
-                deadline={zabo.deadline}
-                viewCount={zabo.viewCount}
-                author={zabo.author}
-                organization={zabo.organization}
-                thumbnailUrl={zabo.thumbnailUrl}
-                origin="height"
-                size={isMobile ? 140 : 280}
-                logName={logName}
-              />
-            ))}
-          </ZabosContainer>
-        </LowerWrap>
-      ) : (
+      <LowerWrap
+        bgColor={carouselBGColor}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <ZabosContainer ref={carouselRef} onScroll={CheckEnd}>
+          {manyZabos.map((zabo) => (
+            <Zabo
+              key={zabo.id}
+              id={zabo.id}
+              title={zabo.title}
+              content={zabo.content}
+              date={zabo.date}
+              deadline={zabo.deadline}
+              viewCount={zabo.viewCount}
+              author={zabo.author}
+              organization={zabo.organization}
+              thumbnailUrl={zabo.thumbnailUrl}
+              origin="height"
+              size={isMobile ? 140 : 280}
+              logName={logName}
+            />
+          ))}
+        </ZabosContainer>
+      </LowerWrap>
+      {manyZabos.length <= 0 && (
         <>
           <Flex
             flexDirection="column"
