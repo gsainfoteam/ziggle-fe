@@ -116,7 +116,6 @@ const ZaboCarousel = ({
     if (carouselRef.current) {
       const { scrollWidth, scrollLeft, clientWidth } = carouselRef.current;
       const isEnd = scrollWidth - scrollLeft <= clientWidth;
-      console.log(scrollWidth, scrollLeft, clientWidth);
       const isStart = scrollLeft === 0;
       setScrollBtnDisabled([isStart, isEnd]);
       console.log(isStart, isEnd);
