@@ -1,0 +1,47 @@
+name: Preview Deploy
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  preview-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: chrnorm/deployment-action@v2
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: '${{ github.token }}'
+          environment-url: https://ziggle.gistory.me
+          environment: production
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        id: vercel-deploy
+        run: echo "url=vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_OUTPUT
+      - name: Update GitHub Deployment Status (success)
+        if: success()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          environment-url: ${{ steps.vercel-deploy.outputs.url }}
+          state: 'success'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+      - name: Update GitHub Deployment Status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: '${{ github.token }}'
+          state: 'failure'
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}

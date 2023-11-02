@@ -1,0 +1,31 @@
+@import 'react-loading-skeleton/dist/skeleton.css';
+@import 'react-toastify/dist/ReactToastify.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .content {
+    @apply w-[calc(100%-40px)];
+    @apply md:w-[calc(100%-2*theme(spacing.pageSide))];
+    @apply max-w-[1240px];
+  }
+}
+
+:root {
+  --foreground-rgb: theme(colors.black);
+  --background-rgb: theme(colors.white);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: theme(colors.white);
+    --background-rgb: theme(colors.neutral.900);
+  }
+}
+
+body {
+  color: var(--foreground-rgb);
+  background: var(--background-rgb);
+}
