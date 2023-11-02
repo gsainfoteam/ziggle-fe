@@ -2,7 +2,7 @@ import '@/app/globals.css';
 import '@/app/initDayjs';
 
 import { dir } from 'i18next';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
 import { ToastContainer } from 'react-toastify';
@@ -51,7 +51,6 @@ export const generateMetadata = async ({
       default: t('metadata.title'),
     },
     description: t('metadata.description'),
-    themeColor: '#eb6263',
     twitter: {
       card: 'summary_large_image',
       title: t('metadata.title'),
@@ -68,6 +67,10 @@ export const generateMetadata = async ({
       images: '/api/og',
     },
   };
+};
+
+export const viewport: Viewport = {
+  themeColor: '#eb6263',
 };
 
 export async function generateStaticParams() {

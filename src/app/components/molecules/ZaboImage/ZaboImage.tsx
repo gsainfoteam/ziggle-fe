@@ -64,7 +64,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
         ].join(' ')}
         sizes="25vw"
         fill
-        onLoadingComplete={handleImageLoad}
+        onLoad={handleImageLoad}
       />
       {!imageSize && <Skeleton className="absolute w-full h-full" />}
     </div>
