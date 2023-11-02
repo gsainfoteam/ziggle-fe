@@ -29,7 +29,7 @@ jobs:
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         id: vercel-deploy
-        run: echo "url=vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}" >> $GITHUB_OUTPUT
+        run: echo "url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
       - name: Update GitHub Deployment Status (success)
         if: success()
         uses: chrnorm/deployment-status@v2
