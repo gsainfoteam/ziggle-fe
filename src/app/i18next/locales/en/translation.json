@@ -74,6 +74,10 @@
   "loading": "로딩 중입니다! -ㅅ-",
   "ddayPlus": "기한 지남",
   "notices": {
+    "all": {
+      "label": "전체 공지",
+      "description": "모든 공지들이 시간 순으로 정렬되어 있습니다."
+    },
     "deadline": {
       "label": "🌟 마감임박",
       "description": "마감 시간이 일주일도 안 남은 공지를 모아서 보여 드려요"
