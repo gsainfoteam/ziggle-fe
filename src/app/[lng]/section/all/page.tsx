@@ -13,7 +13,6 @@ const AllNoticePage = async ({
   const { page } = searchParams;
   const pageNumber = Number(page) || 0;
   const notices = await getAllNotices({ limit: 0, orderBy: 'recent' });
-  console.log(pageNumber);
 
   return (
     <div className="content mx-auto">
