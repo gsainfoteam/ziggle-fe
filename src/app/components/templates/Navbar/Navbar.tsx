@@ -31,7 +31,10 @@ const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
           </Link>
         </Analytics>
         <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
-        <Link href={`/${lng}`} className="flex items-center gap-x-1 font-bold">
+        <Link
+          href={`/${lng}/login`}
+          className="flex items-center gap-x-1 font-bold"
+        >
           {t('navbar.login')}
           <AccountIcon width="1.6rem" height="1.6rem" />
         </Link>
