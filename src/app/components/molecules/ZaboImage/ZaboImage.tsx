@@ -43,7 +43,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
         'relative',
       ].join(' ')}
       style={
-        imageSize
+        imageSize && imageSize.width && imageSize.height
           ? {
               [origin]: originSize,
               [antiOrigin]: antiOriginSize,
