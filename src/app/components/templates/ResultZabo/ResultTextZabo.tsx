@@ -3,8 +3,9 @@ import { Trans } from "react-i18next";
 
 import { T } from "@/app/i18next";
 
-import { TextZaboProps } from "../../organisms/Zabo/TextZabo";
+import Chip from "../../molecules/Chip";
 import HighlightedText from "../../molecules/HighlightedText";
+import { TextZaboProps } from "../../organisms/Zabo/TextZabo";
 
 const ResultTextZabo = ({
   title,
@@ -13,9 +14,10 @@ const ResultTextZabo = ({
   views,
   author,
   deadline: rawDeadline,
+  tags,
   searchQuery,
   t,
-}: TextZaboProps & { t: T } & { searchQuery: string }) => {
+}: TextZaboProps & { t: T } & { tags: string[]; searchQuery: string }) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
 
   return (
@@ -35,9 +37,36 @@ const ResultTextZabo = ({
         <div className="font-bold text-3xl text-start">
           <HighlightedText query={searchQuery}>{title}</HighlightedText>
         </div>
+
         <div className="flex gap-0.5 items-center">
-          <div>
+          <div className="font-bold text-lg">
             <HighlightedText query={searchQuery}>{author}</HighlightedText>
+          </div>
+          {/* organization here (for futer update) */}
+        </div>
+
+        <div className="flex gap-0.5 my-0.5">
+          {tags.map((tag, index) => (
+            <Chip
+              key={index}
+              variant={tag === searchQuery ? "contained" : undefined}
+            >
+              {"#" + tag}
+            </Chip>
+          ))}
+        </div>
+
+        <div className="font-medium text-sm text-start text-ellipsis line-clamp-4">
+          {body}
+          {!body && <Trans t={t} i18nKey="zabo.noContent" />}
+        </div>
+
+        <div className="flex gap-0.5">
+          <div className="text-sm text-secondayText font-medium flex">
+            <Trans t={t} i18nKey="zabo.dateView">
+              {{ date: dayjs(createdAt).format("L") }}
+              <strong className="font-bold"> · {{ views }}</strong>
+            </Trans>
           </div>
         </div>
       </div>
