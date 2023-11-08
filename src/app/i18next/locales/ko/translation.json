@@ -61,6 +61,7 @@
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
+    "dueAt": "마감일 {{dueAt}}",
     "share": {
       "action": "공유하기",
       "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
