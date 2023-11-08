@@ -9,7 +9,7 @@ const HighlightedText = ({ children, query }: GetHighlightedTextProps) => {
     return <>{children}</>;
   }
 
-  const regex = new RegExp(query, "gi");
+  const regex = new RegExp(query, 'gi');
   const match = children.match(regex);
 
   if (!match) return <></>;
