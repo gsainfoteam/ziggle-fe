@@ -1,10 +1,9 @@
-import LoadingCatAnimation from "@/app/components/templates/LoadingCatAnimation";
-import { T } from "@/app/i18next";
+import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 
-const Loading = ({ t }: { t: T }) => (
+const Loading = () => (
   <>
     <div className="h-48" />
-    <LoadingCatAnimation t={t} />
+    <LoadingCatAnimation />
     <div className="h-48" />
   </>
 );
