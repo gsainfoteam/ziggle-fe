@@ -1,4 +1,4 @@
-import { useTranslation } from '@/app/i18next';
+import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 const AllNoticeLayout = async ({
@@ -8,7 +8,7 @@ const AllNoticeLayout = async ({
   params: { lng: Locale };
   children: React.ReactNode;
 }) => {
-  const { t } = await useTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng, 'translation');
 
   return (
     <div className="content mx-auto">

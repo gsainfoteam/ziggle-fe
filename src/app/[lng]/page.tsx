@@ -1,7 +1,7 @@
 import { getAllNotices } from '@/api/notice/notice';
 
 import ZaboCarousel from '../components/templates/ZaboCarousel';
-import { useTranslation } from '../i18next';
+import { createTranslation } from '../i18next';
 import { Locale } from '../i18next/settings';
 
 export default async function Home({
@@ -9,7 +9,7 @@ export default async function Home({
 }: {
   params: { lng: Locale };
 }) {
-  const { t } = await useTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng, 'translation');
 
   const [deadline, hot, event, recruit, general, academic] = await Promise.all([
     getAllNotices({ orderBy: 'deadline' }),
