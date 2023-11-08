@@ -1,4 +1,5 @@
 import LazyCat from "@/assets/lazy-cat.svg";
+import dayjs from "dayjs";
 
 interface Tag {
   id: number;
@@ -61,7 +62,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
                 </div>
                 <div className={`rounded-br-${borderBottomRadius} p-0 sm:p-10`}>
                   <div className="text-regular m-5 text-white">
-                    {formatISODate(articleObj.createdAt)}
+                    {dayjs(articleObj.createdAt).format("YYYY-MM-DD")}
                   </div>
                 </div>
               </div>
