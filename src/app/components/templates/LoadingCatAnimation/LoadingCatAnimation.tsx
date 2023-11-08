@@ -2,12 +2,10 @@
 
 import Lottie from "lottie-react";
 
-import { useTranslation } from "@/app/i18next/client";
+import { T } from "@/app/i18next";
 import CatBounceAnimation from "@/assets/animations/cat-bounce.json";
 
-const LoadingCatAnimation = () => {
-  const { t } = useTranslation();
-
+const LoadingCatAnimation = ({ t }: { t: T }) => {
   return (
     <div className="flex flex-col items-center">
       <div className="h-12" />

@@ -1,8 +1,13 @@
-import LoadingCatAnimation from '.';
+import { useTranslation } from "@/app/i18next/client";
+
+import LoadingCatAnimation from ".";
 
 export default {
-  title: 'temlates/LoadingCatAnimation',
+  title: "temlates/LoadingCatAnimation",
   component: LoadingCatAnimation,
 };
 
-export const Default = () => <LoadingCatAnimation />;
+export const Default = () => {
+  const { t } = useTranslation();
+  return <LoadingCatAnimation t={t} />;
+};
