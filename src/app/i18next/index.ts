@@ -10,7 +10,7 @@ import { initReactI18next } from 'react-i18next/initReactI18next';
 
 import type translation from '@/app/i18next/locales/en/translation.json';
 
-import { getOptions,Locale } from './settings';
+import { getOptions, Locale } from './settings';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -36,7 +36,7 @@ const initI18next = async (lng: Locale, ns: Namespace) => {
   return i18nInstance;
 };
 
-export async function useTranslation<
+export async function createTranslation<
   Ns extends Namespace = DefaultNamespace,
   TKPrefix extends KeyPrefix<Ns> = undefined,
 >(

@@ -5,7 +5,7 @@ import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import NoticeInfo from '@/app/components/organisms/NoticeInfo';
 import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
-import { useTranslation } from '@/app/i18next';
+import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';
@@ -36,7 +36,7 @@ const DetailedNoticePage = async ({
 }: {
   params: { id: string; lng: Locale };
 }) => {
-  const { t } = await useTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng, 'translation');
   const notice = await getNotice(Number.parseInt(id));
   return (
     <>

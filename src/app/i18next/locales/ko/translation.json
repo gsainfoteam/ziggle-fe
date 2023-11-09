@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "title": "지글",
+    "description": "지스트의 모든 공지를 한눈에"
+  },
+  "navbar": {
+    "all": "전체 공지",
+    "query": "공지 검색",
+    "login": "로그인"
+  },
+  "footer": {
+    "infoteam": "지스트대학 총학생회 산하 정보국",
+    "copyright": "ⓒ 2023. INFOTEAM all rights reserved.",
+    "sections": [
+      {
+        "title": "소개",
+        "links": [
+          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" }
+        ]
+      },
+      {
+        "title": "약관",
+        "links": [
+          {
+            "name": "서비스이용약관",
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257"
+          },
+          {
+            "name": "개인정보처리방침",
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
+          },
+          { "name": "문의", "link": "mailto:ziggle@gistory.me" }
+        ]
+      },
+      {
+        "title": "바로가기",
+        "links": [
+          {
+            "name": "지스트 하우스",
+            "link": "https://sites.google.com/view/gisthouse/home"
+          },
+          {
+            "name": "GIST 홈페이지",
+            "link": "https://www.gist.ac.kr/kr/main.html"
+          },
+          { "name": "지졸", "link": "https://gijol.im" }
+        ]
+      }
+    ]
+  },
+  "zabo": {
+    "dateView": "{{date}}\u00a0<strong>· 조회수 {{views}}</strong>",
+    "clickPoster": "포스터 클릭하여 자세히 보기",
+    "downloadAll": "전체 다운로드하기",
+    "close": "닫기",
+    "author": "글쓴이 <strong>{{author}}</strong>",
+    "createdAt": "작성일 {{createdAt}}",
+    "views": "조회수 {{views}}",
+    "copyLink": {
+      "action": "주소 복사하기",
+      "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
+      "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
+    },
+    "dueAt": "마감일 {{dueAt}}",
+    "noContent": "내용 없음",
+    "share": {
+      "action": "공유하기",
+      "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
+      "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
+    },
+    "backToMain": "메인 페이지로 돌아가기",
+    "images": "첨부 사진",
+    "howAboutThese": "🫧 이런 공지는 어떠신가요?"
+  },
+  "emptyNotices": "글이 없습니다. =ㅅ=",
+  "loading": "로딩 중입니다! -ㅅ-",
+  "ddayPlus": "기한 지남",
+  "notices": {
+    "all": {
+      "label": "전체 공지",
+      "description": "모든 공지들이 시간 순으로 정렬되어 있습니다."
+    },
+    "deadline": {
+      "label": "🌟 마감임박",
+      "description": "마감 시간이 일주일도 안 남은 공지를 모아서 보여 드려요"
+    },
+    "hot": {
+      "label": "🔥 오늘 끓는 공지",
+      "description": "지난 일주일 동안 조회수가 150이 넘은 공지들이 여기서 지글지글 끓고 있어요"
+    },
+    "event": {
+      "label": "🎈 행사",
+      "description": "지스트는 오늘도 뜨겁습니다"
+    },
+    "recruit": {
+      "label": "🎯 모집",
+      "description": "언제나 여러분께 열린 기회"
+    },
+    "general": {
+      "label": "🔔 일반",
+      "description": "지스트인들이 해야 하는 일들"
+    },
+    "academic": {
+      "label": "📰 학사공지"
+    }
+  }
+}
