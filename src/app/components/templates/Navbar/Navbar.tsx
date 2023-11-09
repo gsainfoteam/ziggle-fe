@@ -19,6 +19,9 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
       <Analytics event={LogEvents.navBarClickAll}>
         <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
       </Analytics>
+      <Analytics event={LogEvents.navBarClickWrite}>
+        <Link href={`/${lng}/write`}>{t('navbar.write')}</Link>
+      </Analytics>
       <Analytics event={LogEvents.navBarClickSearch}>
         <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
           <SearchIcon className="w-5 md:w-7" />

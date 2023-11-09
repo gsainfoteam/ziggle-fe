@@ -5,6 +5,7 @@
   },
   "navbar": {
     "all": "All Notices",
+    "write": "Write Notice",
     "query": "Search Notice",
     "login": "Login"
   },
