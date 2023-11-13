@@ -14660,7 +14660,7 @@ eslint@latest:
   languageName: node
   linkType: hard
 
-"react-calendar@npm:^4.6.0":
+"react-calendar@npm:^4.6.0, react-calendar@npm:^4.6.1":
   version: 4.6.1
   resolution: "react-calendar@npm:4.6.1"
   dependencies:
@@ -14680,7 +14680,7 @@ eslint@latest:
   languageName: node
   linkType: hard
 
-"react-clock@npm:^4.5.0":
+"react-clock@npm:^4.5.0, react-clock@npm:^4.5.1":
   version: 4.5.1
   resolution: "react-clock@npm:4.5.1"
   dependencies:
@@ -18132,6 +18132,8 @@ typescript@latest:
     prettier-plugin-tailwindcss: ^0.5.7
     prop-types: ^15.8.1
     react: latest
+    react-calendar: ^4.6.1
+    react-clock: ^4.5.1
     react-cookie: ^6.1.1
     react-datetime-picker: ^5.5.3
     react-dom: latest

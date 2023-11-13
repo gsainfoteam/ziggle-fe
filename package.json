@@ -30,6 +30,8 @@
     "lottie-react": "^2.4.0",
     "next": "latest",
     "react": "latest",
+    "react-calendar": "^4.6.1",
+    "react-clock": "^4.5.1",
     "react-datetime-picker": "^5.5.3",
     "react-dom": "latest",
     "react-i18next": "^13.2.2",
