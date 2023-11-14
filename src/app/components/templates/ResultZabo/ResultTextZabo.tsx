@@ -1,11 +1,9 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
-import { T } from '@/app/i18next';
-
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
-import { TextZaboProps } from '../../organisms/Zabo/TextZabo';
+import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = ({
   title,
@@ -17,7 +15,7 @@ const ResultTextZabo = ({
   tags,
   searchQuery,
   t,
-}: TextZaboProps & { t: T } & { tags: string[]; searchQuery: string }) => {
+}: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
 
   return (
@@ -49,7 +47,7 @@ const ResultTextZabo = ({
           {tags.map((tag, index) => (
             <Chip
               key={index}
-              variant={tag === searchQuery ? 'contained' : undefined}
+              variant={tag.name === searchQuery ? 'contained' : undefined}
             >
               {`#${tag}`}
             </Chip>
@@ -72,3 +70,5 @@ const ResultTextZabo = ({
     </div>
   );
 };
+
+export default ResultTextZabo;
