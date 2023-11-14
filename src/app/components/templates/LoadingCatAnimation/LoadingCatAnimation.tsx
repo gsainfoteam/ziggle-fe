@@ -11,7 +11,7 @@ const LoadingCatAnimation = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="h-12" />
-      <Lottie animationData={CatBounceAnimation} loop />
+      <Lottie animationData={CatBounceAnimation} loop className="w-40" />
       <div className="text-secondayText font-medium text-2xl">
         {t('loading')}
       </div>

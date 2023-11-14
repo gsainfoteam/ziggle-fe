@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
-import { useTranslation } from '@/app/i18next';
+import { createTranslation } from '@/app/i18next';
 import { languages, Locale } from '@/app/i18next/settings';
 
 import InitClient from './InitClient';
@@ -29,8 +29,6 @@ export const generateMetadata = async ({
 }: {
   params: { lng: Locale };
 }): Promise<Metadata> => {
-  // use hook in generateMetadata
-  const createTranslation = useTranslation;
   const { t } = await createTranslation(lng, 'translation');
 
   return {
@@ -84,7 +82,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { lng: Locale };
 }) {
-  const { t } = await useTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng, 'translation');
 
   return (
     <html lang={lng} dir={dir(lng)}>
