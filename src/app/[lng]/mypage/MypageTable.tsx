@@ -65,20 +65,21 @@ const MypageTable = ({
           articles.map((articleObj, index) => {
             const isLastRow = index === articles.length - 1;
             const borderBottomRadius = isLastRow ? "10px" : "0px";
+            const underLine = isLastRow ? "" : "border-b border-gray-300";
             return (
               <div
                 key={index}
-                className={`flex items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius} border border-gray-800`}
+                className={`flex h-[70px] ${underLine} items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius}`}
               >
                 <div
                   className={`pb-0 sm:pb-0 rounded-bl-${borderBottomRadius} leading-1.5`}
                 >
-                  <div className="text-regular text-black">
+                  <div className="text-regular m-3.5 text-text">
                     {articleObj.title}
                   </div>
                 </div>
-                <div className={`rounded-br-${borderBottomRadius} p-0 sm:p-10`}>
-                  <div className="text-regular m-5 text-black">
+                <div className={`items-end justify-end rounded-br-${borderBottomRadius}`}>
+                  <div className="text-regular m-5 text-secondayText">
                     {dayjs(articleObj.createdAt).format("YYYY-MM-DD")}
                   </div>
                 </div>
