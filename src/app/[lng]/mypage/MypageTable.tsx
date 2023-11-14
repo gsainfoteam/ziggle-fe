@@ -1,45 +1,62 @@
 import LazyCat from "@/assets/lazy-cat.svg";
 import dayjs from "dayjs";
 
-interface Tag {
-  id: number;
-  name: string;
-}
+// interface Tag {
+//   id: number;
+//   name: string;
+// }
 
 interface NoticeBase {
-  id: number;
+  //id: number;
   title: string;
-  views: number;
-  body: string;
-  deadline: string | null;
+  //views: number;
+  //body: string;
+  //deadline: string | null;
   createdAt: string;
-  author: string;
-  tags: Tag[];
+  //author: string;
+  //tags: Tag[];
 }
 
 interface Notice extends NoticeBase {
-  imageUrl: string | null;
+  //imageUrl: string | null;
 }
 
 interface MypageTableProps {
   title: string;
   articles: Notice[];
   link: string;
+  noArticle: string;
+  totalList: string;
 }
 
-const MypageTable = ({ title, articles, link }: MypageTableProps) => {
+interface UnderLinedTextProps {
+  text: string;
+}
+
+const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   return (
-    <div className="rounded-lg shadow-md bg-white w-[700px]">
-      <div className="w-full border border-white border-separate border-collapse border-spacing-0 rounded-lg">
-        <div className="m-0 flex flex-row w-full border border-separate border-collapse border-spacing-0 rounded-tl-lg rounded-tr-lg bg-primary">
-          <div className="w-4/5 rounded-tl-10">
+    <div className="m-5 border-b border-gray-200 w-50 text-white">
+      {text}
+    </div>
+  );
+};
+
+const MypageTable = ({ 
+  title, articles, link, noArticle, totalList }: MypageTableProps,
+  ) => {
+
+  return (
+    <div className="rounded-lg shadow-md bg-white w-[550px] xl:w-[600px]">
+      <div className="w-full border border-white border-collapse border-spacing-0 rounded-lg">
+        <div className="m-0 flex flex-row w-full border border-collapse border-spacing-0 rounded-tl-lg rounded-tr-lg bg-primary">
+          <div className="w-3/4 rounded-tl-10">
             <div className="text-xl m-5 text-white font-bold">
               {title}
             </div>
           </div>
-          <div className="rounded-tr-10">
-            <div className="flex items-center justify-center text-s text-regular text-white h-full">
-              전체보기
+          <div className="w-1/4 rounded-tr-10 text-right">
+            <div className="flex items-end justify-end text-s text-regular text-white h-full">
+              <UnderLinedText text={totalList}></UnderLinedText>
             </div>
           </div>
         </div>
@@ -51,17 +68,17 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
             return (
               <div
                 key={index}
-                className={`flex items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius} border border-gray-200`}
+                className={`flex items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius} border border-gray-800`}
               >
                 <div
-                  className={`p-10 sm:p-20 pb-0 sm:pb-0 rounded-bl-${borderBottomRadius} leading-1.5 w-70`}
+                  className={`pb-0 sm:pb-0 rounded-bl-${borderBottomRadius} leading-1.5`}
                 >
-                  <div className="text-regular m-5 text-white">
+                  <div className="text-regular text-black">
                     {articleObj.title}
                   </div>
                 </div>
                 <div className={`rounded-br-${borderBottomRadius} p-0 sm:p-10`}>
-                  <div className="text-regular m-5 text-white">
+                  <div className="text-regular m-5 text-black">
                     {dayjs(articleObj.createdAt).format("YYYY-MM-DD")}
                   </div>
                 </div>
@@ -72,7 +89,7 @@ const MypageTable = ({ title, articles, link }: MypageTableProps) => {
           <div className="flex flex-col h-full justify-center items-center p-30 bg-colorless rounded-bl-0 rounded-br-10">
             <LazyCat className="p-5 w-50 h-50" />
             <div className="text-regular m-5 text-secondayText">
-              아직 저장된 글이 없습니다. =ㅅ=
+              {noArticle}
             </div>
           </div>
         )}

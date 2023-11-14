@@ -106,4 +106,14 @@
     "academic": {
       "label": "📰 Academic Notices"
     }
+  },
+  "mypage": {
+    "info": "INFO",
+    "myNotice": "List of My Notices",
+    "remindNotice": "List of Rminded Notices",
+    "totalList":"view all",
+    "logout":"logout",
+    "quit":"withdrawal",
+    "noArticle":"No article has been saved yet. =ㅅ="
   }
+}
