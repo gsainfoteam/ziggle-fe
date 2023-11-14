@@ -1,5 +1,5 @@
-@import 'react-loading-skeleton/dist/skeleton.css';
-@import 'react-toastify/dist/ReactToastify.css';
+@import "react-loading-skeleton/dist/skeleton.css";
+@import "react-toastify/dist/ReactToastify.css";
 
 @tailwind base;
 @tailwind components;
@@ -28,4 +28,19 @@
 body {
   color: var(--foreground-rgb);
   background: var(--background-rgb);
+}
+
+@keyframes fadeInWithGoUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.search-bar-animation {
+  animation: fadeInWithGoUp 0.5s cubic-bezier(0, 0.51, 0.38, 1);
 }
