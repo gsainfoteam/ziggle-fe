@@ -1,19 +1,8 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
-import { T } from '@/app/i18next';
-
 import DDay from '../../molecules/DDay';
-import { ZaboOrigin, ZaboSize } from './Zabo';
-
-export interface TextZaboProps {
-  title: string;
-  body: string;
-  createdAt: dayjs.Dayjs | string;
-  deadline?: dayjs.Dayjs | string;
-  views: number;
-  author: string;
-}
+import { TextZaboProps, ZaboOrigin } from './Zabo';
 
 const TextZabo = <Origin extends ZaboOrigin>({
   title,
@@ -25,7 +14,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   t,
   height,
   width,
-}: TextZaboProps & ZaboSize<Origin> & { t: T }) => {
+}: TextZaboProps<Origin>) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';

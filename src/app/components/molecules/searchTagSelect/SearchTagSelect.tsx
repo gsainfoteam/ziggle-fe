@@ -1,16 +1,16 @@
-import { NoticeType } from "@/app/[lng]/search/page";
-
-import Button from "../../atoms/Button";
-import Chip from "../Chip";
+import { NoticeKind } from '@/api/notice/notice';
+import React from 'react';
+import Button from '../../atoms/Button';
+import Chip from '../Chip';
 
 //import React from 'react';
 interface NoticeTypeCheckboxProps {
-  selected: NoticeType[];
-  onChange: (selected: NoticeType[]) => void;
+  selected: NoticeKind[];
+  onChange: (selected: NoticeKind[]) => void;
 }
 
 const SearchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
-  const handleCheckboxChange = (type: NoticeType) => {
+  const handleCheckboxChange = (type: NoticeKind) => {
     const index = selected.indexOf(type);
     if (index === -1) {
       // Add the type to the selected array
@@ -26,43 +26,43 @@ const SearchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
   return (
     <div
       className={
-        "flex gap-2 md:gap-3 justify-between md:justify-start px-[2px]"
+        'flex gap-2 md:gap-3 justify-between md:justify-start px-[2px]'
       }
     >
-      <Button onClick={() => handleCheckboxChange(NoticeType.RECRUIT)}>
+      <Button onClick={() => handleCheckboxChange(NoticeKind.RECRUIT)}>
         <Chip
           variant={
-            selected.includes(NoticeType.RECRUIT) ? "contained" : "outlined"
+            selected.includes(NoticeKind.RECRUIT) ? 'contained' : 'outlined'
           }
         >
-          {"🎯 모집"}
+          {'🎯 모집'}
         </Chip>
       </Button>
-      <Button onClick={() => handleCheckboxChange(NoticeType.EVENT)}>
+      <Button onClick={() => handleCheckboxChange(NoticeKind.EVENT)}>
         <Chip
           variant={
-            selected.includes(NoticeType.EVENT) ? "contained" : "outlined"
+            selected.includes(NoticeKind.EVENT) ? 'contained' : 'outlined'
           }
         >
-          {"🎈 행사"}
+          {'🎈 행사'}
         </Chip>
       </Button>
-      <Button onClick={() => handleCheckboxChange(NoticeType.NORMAL)}>
+      <Button onClick={() => handleCheckboxChange(NoticeKind.NORMAL)}>
         <Chip
           variant={
-            selected.includes(NoticeType.NORMAL) ? "contained" : "outlined"
+            selected.includes(NoticeKind.NORMAL) ? 'contained' : 'outlined'
           }
         >
-          {"🔔 일반"}
+          {'🔔 일반'}
         </Chip>
       </Button>
-      <Button onClick={() => handleCheckboxChange(NoticeType.ACADEMIC)}>
+      <Button onClick={() => handleCheckboxChange(NoticeKind.ACADEMIC)}>
         <Chip
           variant={
-            selected.includes(NoticeType.ACADEMIC) ? "contained" : "outlined"
+            selected.includes(NoticeKind.ACADEMIC) ? 'contained' : 'outlined'
           }
         >
-          {"🎈 행사"}
+          {'🎈 행사'}
         </Chip>
       </Button>
     </div>

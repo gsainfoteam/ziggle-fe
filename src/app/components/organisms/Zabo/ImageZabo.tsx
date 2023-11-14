@@ -2,18 +2,12 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
 import ZaboImage from '@/app/components/molecules/ZaboImage';
-import { T } from '@/app/i18next';
 
 import DDay from '../../molecules/DDay';
-import { TextZaboProps } from './TextZabo';
-import { ZaboOrigin, ZaboSize } from './Zabo';
-
-interface ImageZaboProps extends Omit<TextZaboProps, 'body'> {
-  thumbnailUrl: string;
-}
+import { ImageZaboProps, ZaboOrigin, ZaboSize } from './Zabo';
 
 const ImageZabo = <Origin extends ZaboOrigin>({
-  thumbnailUrl,
+  imageUrl,
   title,
   createdAt,
   views,
@@ -22,7 +16,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   t,
   width,
   height,
-}: ImageZaboProps & ZaboSize<Origin> & { t: T }) => {
+}: ImageZaboProps<Origin>) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const size = { width, height } as ZaboSize<Origin>;
   return (
@@ -35,7 +29,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         }
       >
         <ZaboImage
-          src={thumbnailUrl}
+          src={imageUrl}
           alt={title}
           className="rounded border border-secondayText object-cover"
           {...size}

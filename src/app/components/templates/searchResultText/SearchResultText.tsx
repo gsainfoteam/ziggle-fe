@@ -1,21 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import LogEvents from "src/apis/log/log-event";
-import sendLog from "src/apis/log/sendLog";
-import Button from "src/atoms/button/Button";
-import Flex from "src/atoms/containers/flex/Flex";
-import Spacer from "src/atoms/spacer/Spacer";
-import useIsMobile from "src/hooks/useIsMobile";
-import Chip, { ChipVariant } from "src/molecules/chip/Chip";
-import Paths from "src/types/paths";
-import { SearchResultProps } from "src/types/types";
-import formatISODate from "src/utils/formatISODate";
-import getDayOfWeek from "src/utils/getDayOfWeek";
-import GetHighlightedText from "src/utils/GetHighlightedText";
-import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import LogEvents from 'src/apis/log/log-event';
+import sendLog from 'src/apis/log/sendLog';
+import Button from 'src/atoms/button/Button';
+import Flex from 'src/atoms/containers/flex/Flex';
+import Spacer from 'src/atoms/spacer/Spacer';
+import useIsMobile from 'src/hooks/useIsMobile';
+import Chip, { ChipVariant } from 'src/molecules/chip/Chip';
+import Paths from 'src/types/paths';
+import { SearchResultProps } from 'src/types/types';
+import formatISODate from 'src/utils/formatISODate';
+import getDayOfWeek from 'src/utils/getDayOfWeek';
+import GetHighlightedText from 'src/utils/GetHighlightedText';
+import styled from 'styled-components';
 
-import Text from "../../atoms/text/Text";
-import colorSet from "../../styles/colorSet";
-import Font from "../../styles/font";
+import Text from '../../atoms/text/Text';
+import colorSet from '../../styles/colorSet';
+import Font from '../../styles/font';
 
 const ZaboWrapper = styled.div`
   display: flex;
@@ -55,21 +55,21 @@ const SearchResultText = ({
   const handleZaboClick = () => {
     navigate(Paths.noticeDetail + id);
     sendLog(LogEvents.SearchResultClick, {
-      location: logName ?? "unknown",
+      location: logName ?? 'unknown',
       isText: true,
     });
   };
 
   return (
-    <Button width={"100%"} onClick={handleZaboClick}>
+    <Button width={'100%'} onClick={handleZaboClick}>
       <ZaboWrapper
         style={{
-          width: "100%",
-          overflow: "hidden",
+          width: '100%',
+          overflow: 'hidden',
         }}
       >
-        <Flex flexDirection="column" alignItems={"start"}>
-          <Text font={Font.Medium} size={isMobile ? "0.875rem" : "1.25rem"}>
+        <Flex flexDirection="column" alignItems={'start'}>
+          <Text font={Font.Medium} size={isMobile ? '0.875rem' : '1.25rem'}>
             {deadline &&
               `마감일 ${formatISODate(deadline)} (${getDayOfWeek(deadline)})`}
           </Text>
@@ -77,17 +77,17 @@ const SearchResultText = ({
             text={title}
             query={searchQuery}
             font={Font.Bold}
-            size={isMobile ? "1.25rem" : "1.875rem"}
-            textAlign={"start"}
+            size={isMobile ? '1.25rem' : '1.875rem'}
+            textAlign={'start'}
             highlightColor={colorSet.primary}
           />
-          <Spacer height={"5px"} />
+          <Spacer height={'5px'} />
           <Flex gap="0.5rem" alignItems="center">
             <GetHighlightedText
               text={author}
               query={searchQuery}
               font={Font.Bold}
-              size={isMobile ? "0.875rem" : "1.125rem"}
+              size={isMobile ? '0.875rem' : '1.125rem'}
               highlightColor={colorSet.primary}
             />
             {organization && (
@@ -97,18 +97,18 @@ const SearchResultText = ({
                   text={organization}
                   query={searchQuery}
                   font={Font.Bold}
-                  size={isMobile ? "0.875rem" : "1.125rem"}
+                  size={isMobile ? '0.875rem' : '1.125rem'}
                   highlightColor={colorSet.primary}
                 />
               </>
             )}
           </Flex>
 
-          <Flex gap="0.5rem" style={{ margin: "0.5rem 0" }}>
+          <Flex gap="0.5rem" style={{ margin: '0.5rem 0' }}>
             {tags.map((tag, index) => (
               <Chip
                 key={index}
-                label={"#" + tag.name}
+                label={'#' + tag.name}
                 font={Font.Regular}
                 variant={
                   tag.name === searchQuery ? ChipVariant.contained : undefined
@@ -118,18 +118,18 @@ const SearchResultText = ({
           </Flex>
           <Text
             font={Font.Medium}
-            size={isMobile ? "0.875rem" : "1.125rem"}
-            textAlign={"start"}
+            size={isMobile ? '0.875rem' : '1.125rem'}
+            textAlign={'start'}
             style={{
-              textOverflow: "ellipsis",
+              textOverflow: 'ellipsis',
 
-              overflow: "hidden",
-              display: "-webkit-box",
+              overflow: 'hidden',
+              display: '-webkit-box',
               WebkitLineClamp: 3, // 이렇게밖에 안됨
-              WebkitBoxOrient: "vertical",
+              WebkitBoxOrient: 'vertical',
             }}
           >
-            {!content && "<내용없음>"}
+            {!content && '<내용없음>'}
             {content}
             {/* 여기 HTML 처리 해야할 거 같음 */}
           </Text>
@@ -140,21 +140,21 @@ const SearchResultText = ({
             <Text
               font={Font.Medium}
               color={colorSet.secondaryText}
-              size={isMobile ? "0.75rem" : "1rem"}
+              size={isMobile ? '0.75rem' : '1rem'}
             >
               {formatISODate(date)}
             </Text>
             <Text
               font={Font.Medium}
               color={colorSet.secondaryText}
-              size={isMobile ? "0.75rem" : "1rem"}
+              size={isMobile ? '0.75rem' : '1rem'}
             >
               •
             </Text>
             <Text
               font={Font.Bold}
               color={colorSet.secondaryText}
-              size={isMobile ? "0.75rem" : "1rem"}
+              size={isMobile ? '0.75rem' : '1rem'}
             >
               조회수 {viewCount}
             </Text>
