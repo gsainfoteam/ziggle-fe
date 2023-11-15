@@ -172,6 +172,7 @@
     "photoDescription": "The first of the attached photos is set as the representative photo.",
     "dragToAddPhoto": "Drag to add photos",
     "orAddFromPC": "...or browse files",
+    "addFromMyDevice": "Add from my device",
 
     "submit": "Submit Notice",
     "submitDescription": ""

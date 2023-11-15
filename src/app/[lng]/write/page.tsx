@@ -15,6 +15,7 @@ import Chip from '@/app/components/molecules/Chip';
 import { createTranslation } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
+import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ContentIcon from '@/assets/icons/content.svg';
 import LanguageIcon from '@/assets/icons/language.svg';
 import TagIcon from '@/assets/icons/tag.svg';
@@ -58,9 +59,8 @@ export default function WritePage({
     }
   };
 
-  // need to hide the key
-  const TINYMCE_API_KEY = '11hgm7c99hquhlmkl38lvqzg7a0n7srlvicwsvk14swrcsei';
-  const editorRef = useRef<any>(null);
+  const koreanEditorRef = useRef<any>(null);
+  const englishEditorRef = useRef<any>(null);
 
   return (
     <main className="flex flex-col items-center md:py-12">
@@ -179,9 +179,8 @@ export default function WritePage({
             </div>
 
             <Editor
-              onInit={(_, editor) => (editorRef.current = editor)}
-              // tinymceScriptSrc="/tinymce/tinymce.min.js"
-              // apiKey={TINYMCE_API_KEY}
+              onInit={(_, editor) => (koreanEditorRef.current = editor)}
+              tinymceScriptSrc="/tinymce/tinymce.min.js"
               init={{
                 promotion: false,
                 plugins: ['link', 'image', 'code'],
@@ -201,14 +200,42 @@ export default function WritePage({
         )}
 
         {isWriteEnglish && (
-          <div className="flex gap-2 mt-10 mb-3 items-center">
-            <ContentIcon className="w-5 md:w-6" />
-            <div className="font-medium text-lg mr-4">
-              {t('write.enterEnglishContent')}
+          <div>
+            <div className="flex gap-2 mt-10 mb-3 items-center">
+              <ContentIcon className="w-5 md:w-6" />
+              <div className="font-medium text-lg mr-4">
+                {t('write.enterEnglishContent')}
+              </div>
+              <DeepLButton t={t} />
             </div>
-            <DeepLButton t={t} />
+            <Editor
+              onInit={(_, editor) => (englishEditorRef.current = editor)}
+              tinymceScriptSrc="/tinymce/tinymce.min.js"
+              init={{
+                promotion: false,
+                plugins: ['link', 'image', 'code'],
+                toolbar:
+                  'undo redo | formatselect | ' +
+                  'bold italic backcolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | link',
+              }}
+              onBlur={(event) =>
+                sendLog(LogEvents.noticeWritingPageTypeContent, {
+                  content: event.target.getContent(),
+                })
+              }
+            />
           </div>
         )}
+
+        <div className="flex gap-2 mt-10 mb-1 items-center">
+          <AddPhotoIcon className="w-5 md:w-6" />
+          <div className="font-medium text-lg">{t('write.attatchPhoto')}</div>
+        </div>
+        <div className="font-regular text-secondayText text-sm mb-3">
+          {t('write.photoDescription')}
+        </div>
       </div>
     </main>
   );

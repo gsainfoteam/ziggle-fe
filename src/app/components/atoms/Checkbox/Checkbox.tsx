@@ -34,9 +34,9 @@ const Checkbox = ({
 
       <div className="flex gap-2">
         {checked ? (
-          <CheckboxCheckedIcon className="w-5 md:w-6" />
+          <CheckboxCheckedIcon className="w-5 md:w-6 dark:fill-white" />
         ) : (
-          <CheckboxNotCheckedIcon className="w-5 md:w-6" />
+          <CheckboxNotCheckedIcon className="w-5 md:w-6 dark:fill-white" />
         )}
         {children}
       </div>

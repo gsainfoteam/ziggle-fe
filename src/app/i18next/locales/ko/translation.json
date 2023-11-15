@@ -168,7 +168,8 @@
     "attatchPhoto": "사진 첨부하기",
     "photoDescription": "첨부된 사진 중 첫 번째 사진이 대표 사진으로 설정됩니다.",
     "dragToAddPhoto": "드래그해서 사진 추가",
-    "orAddFromPC": "또는 내 컴퓨터에서 선택",
+    "orAddFromPC": "또는 내 기기에서 선택",
+    "addFromMyDevice": "내 기기에서 사진 선택하기",
 
     "submit": "공지 제출하기",
     "submitDescription": ""
