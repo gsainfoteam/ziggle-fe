@@ -1,4 +1,5 @@
-import { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 import { gql } from '@/generated';
 
@@ -28,8 +29,8 @@ interface NoticeBase {
   title: string;
   views: number;
   body: string;
-  deadline?: Dayjs | string | null;
-  createdAt: Dayjs | string;
+  deadline?: dayjs.Dayjs | string | null;
+  createdAt: dayjs.Dayjs | string;
   author: string;
   tags: Tag[];
   logName?: string;
@@ -72,6 +73,24 @@ export const getNotice = async (id: number) =>
     ...data,
     deadline: data.deadline ? data.deadline : undefined,
   }));
+
+export const useGetAllNotices = (
+  params: NoticePaginationParams & NoticeSearchParams = {},
+) => {
+  const [notices, setNotices] = useState<Notices | null>(null);
+
+  useEffect(() => {
+    const fetchNotices = async () => {
+      const data = await getAllNotices(params);
+      setNotices(data);
+    };
+
+    fetchNotices();
+    console.log('fetch', params);
+  }, [JSON.stringify(params)]);
+
+  return notices;
+};
 
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {

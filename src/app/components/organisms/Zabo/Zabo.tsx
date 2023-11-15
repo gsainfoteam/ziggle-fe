@@ -21,6 +21,15 @@ export type ImageZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin> & {
 
 export type TextZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin>;
 
+export type ZaboProps<Origin extends ZaboOrigin> = Notice &
+  ZaboSize<Origin> & { t: T };
+
+export type ImageZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin> & {
+  imageUrl: string;
+};
+
+export type TextZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin>;
+
 const Zabo = <IsImage extends boolean>(
   props: IsImage extends true
     ? ImageZaboProps<ZaboOrigin>

@@ -56,13 +56,11 @@ const SearchPage = ({
       <div className="flex flex-col align-center">
         <div className={'flex justify-center'}>
           <div
-            className={
-              'animate-none search-bar-animation flex flex-col gap-3 mt-20 mb-10'
-            }
+            className={'animate-none search-bar-animation flex flex-col gap-3'}
           >
             <SearchBar
               onSubmit={handleSubmit}
-              placeholder={t('searchPage.searchBar.placeholder')}
+              placeholder={'공지 제목이나 태그로 검색'}
             />
             <SearchTagSelect
               selected={selectedTags}
