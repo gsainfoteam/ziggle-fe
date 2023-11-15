@@ -1,4 +1,6 @@
+import dayjs from 'dayjs';
 import Link from 'next/link';
+import { Trans } from 'react-i18next';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
@@ -6,9 +8,6 @@ import GetHighlightedText from '@/utils/GetHighlightedText';
 
 import Chip from '../../molecules/Chip';
 import ZaboImage from '../../molecules/ZaboImage';
-
-import dayjs from 'dayjs';
-import { Trans } from 'react-i18next';
 import { ResultImageZaboProps } from './ResultZabo';
 
 const ResultImageZabo = ({
@@ -29,6 +28,7 @@ const ResultImageZabo = ({
 
   return (
     <Link
+      className={'w-full'}
       onClick={() =>
         sendLog(LogEvents.searchResultClick, {
           location: logName ?? 'unknown',
@@ -38,7 +38,7 @@ const ResultImageZabo = ({
       href={`/ko/notice/` + id}
     >
       {/* fix /ko/ to /lng/ */}
-      <div className="flex justify-center gap-5 w-full flex-nowrap overflow-hidden box-border items-stretch">
+      <div className="flex justify-start gap-5 w-full flex-nowrap overflow-hidden box-border items-stretch">
         <ZaboImage
           // origin="width"
           // size={isMobile ? 120 : 230}
@@ -57,26 +57,26 @@ const ResultImageZabo = ({
           <div className="flex flex-col align-start">
             <p className={'font-medium text-sm md:text-xl'}>
               <Trans t={t} i18nKey="zabo.dueAt">
-                {/* {{ dueAt: dayjs(deadline).format('LLLL') }} */}
+                {{ dueAt: dayjs(deadline).format('LLLL') }}
               </Trans>
             </p>
             <GetHighlightedText
-              className={'font-bold text-xl md:text-3xl text-center'}
+              className={'font-bold text-xl md:text-3xl text-start'}
               text={title}
               query={searchQuery}
               highlightColor={'primary'}
             />
             <div className={'h-1'} />
 
-            <div className={'gap-2 align-middle'}>
+            <div className={'gap-2'}>
               <GetHighlightedText
                 text={author}
                 query={searchQuery}
-                className={'font-bold text-sm md:text-lg text-center'}
+                className={'font-bold text-sm md:text-lg text-start'}
                 highlightColor={'primary'}
               />
             </div>
-            <div className={'gap-2 my-2 flex-nowrap'}>
+            <div className={'flex gap-2 my-0.5 flex-nowrap'}>
               {tags.map((tag, index) => (
                 <Chip
                   key={index}
@@ -88,11 +88,11 @@ const ResultImageZabo = ({
               ))}
             </div>
           </div>
-          <div className={'gap-2 align-middle'}>
+          <div className={'gap-2 align-middle flex'}>
             <p
               className={'font-regular text-secondaryText text-xs md:text-base'}
             >
-              {dayjs(createdAt).format('LLLL')}
+              {dayjs(createdAt).format('L')}
             </p>
             <p className={'text-secondaryText text-xs md:text-base'}>•</p>
             <p className={'font-bold text-secondaryText text-xs md:text-base'}>

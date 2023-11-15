@@ -1,6 +1,5 @@
 import { gql } from '@/generated';
 
-import { useEffect, useState } from 'react';
 import api from '..';
 
 export enum NoticeKind {
@@ -71,24 +70,6 @@ export const getNotice = async (id: number) =>
     ...data,
     deadline: data.deadline ? data.deadline : undefined,
   }));
-
-export const useGetAllNotices = (
-  params: NoticePaginationParams & NoticeSearchParams = {},
-) => {
-  const [notices, setNotices] = useState<Notices | null>(null);
-
-  useEffect(() => {
-    const fetchNotices = async () => {
-      const data = await getAllNotices(params);
-      setNotices(data);
-    };
-
-    fetchNotices();
-    console.log('fetch', params);
-  }, [JSON.stringify(params)]);
-
-  return notices;
-};
 
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {

@@ -61,7 +61,7 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
           <LongArrowIcon
             className={[
               'w-5 md:w-16',
-              ...(index === 0 ? ['stroke-secondayText'] : []),
+              ...(index === 0 ? ['stroke-secondaryText'] : []),
             ].join(' ')}
           />
         </Button>
@@ -78,7 +78,7 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
           <LongArrowIcon
             className={[
               'rotate-180 w-5 md:w-16',
-              ...(index === srcs.length - 1 ? ['stroke-secondayText'] : []),
+              ...(index === srcs.length - 1 ? ['stroke-secondaryText'] : []),
             ].join(' ')}
           />
         </Button>
