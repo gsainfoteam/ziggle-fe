@@ -4,7 +4,8 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import { ChangeEvent, useEffect, useState } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
@@ -21,7 +22,6 @@ import TypeIcon from '@/assets/icons/type.svg';
 
 import DeepLButton from './DeepLButton';
 import TagInput, { Tag } from './TagInput';
-
 type NoticeType = 'recruit' | 'event' | 'general';
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 
@@ -57,6 +57,10 @@ export default function WritePage({
       setIsWriteEnglish(e.target.checked);
     }
   };
+
+  // need to hide the key
+  const TINYMCE_API_KEY = '11hgm7c99hquhlmkl38lvqzg7a0n7srlvicwsvk14swrcsei';
+  const editorRef = useRef<any>(null);
 
   return (
     <main className="flex flex-col items-center md:py-12">
@@ -173,6 +177,26 @@ export default function WritePage({
                 {t('write.enterKoreanContent')}
               </div>
             </div>
+
+            <Editor
+              onInit={(_, editor) => (editorRef.current = editor)}
+              // tinymceScriptSrc="/tinymce/tinymce.min.js"
+              // apiKey={TINYMCE_API_KEY}
+              init={{
+                promotion: false,
+                plugins: ['link', 'image', 'code'],
+                toolbar:
+                  'undo redo | formatselect | ' +
+                  'bold italic backcolor | alignleft aligncenter ' +
+                  'alignright alignjustify | bullist numlist outdent indent | ' +
+                  'removeformat | link',
+              }}
+              onBlur={(event) =>
+                sendLog(LogEvents.noticeWritingPageTypeContent, {
+                  content: event.target.getContent(),
+                })
+              }
+            />
           </div>
         )}
 
