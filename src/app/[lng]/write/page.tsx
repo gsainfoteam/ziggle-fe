@@ -4,30 +4,47 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
+import Chip from '@/app/components/molecules/Chip';
+import { createTranslation } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
+import TagIcon from '@/assets/icons/tag.svg';
+import TypeIcon from '@/assets/icons/type.svg';
+
+import TagInput, { Tag } from './TagInput';
+
+type NoticeType = 'recruit' | 'event' | 'general';
+const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 
 // for react-datetime-picker
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function WritePage() {
-  const { t } = useTranslation();
+export default function WritePage({
+  params: { lng },
+}: {
+  params: { lng: Locale };
+}) {
+  const { t } = useTranslation(lng, 'translation');
 
   const [hasDeadline, setHasDeadline] = useState(false);
   const [deadline, onDeadlineChange] = useState<Value>(new Date());
+  const [selectedNoticeType, setSelectedNoticeType] =
+    useState<NoticeType>('recruit');
+
+  const [tags, setTags] = useState<Tag[]>([]);
 
   return (
     <main className="flex flex-col items-center md:py-12">
       <div className="flex flex-col content">
         <input
-          className="text-4xl font-bold mt-16 mb-4 p-0 content outline-none"
+          className="text-4xl font-bold mt-16 mb-4 p-0 content outline-none dark:bg-transparent w-full"
           type="text"
           placeholder={t('write.writeTitle')}
           onBlur={(e) => {
@@ -36,7 +53,7 @@ export default function WritePage() {
             });
           }}
         />
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-5 mb-10 flex-wrap md:flex-nowrap">
           <Checkbox
             checked={hasDeadline}
             onChange={(e) => {
@@ -51,8 +68,64 @@ export default function WritePage() {
             </div>
           </Checkbox>
 
-          <DateTimePicker onChange={onDeadlineChange} value={deadline} />
+          {hasDeadline && (
+            <DateTimePicker onChange={onDeadlineChange} value={deadline} />
+          )}
         </div>
+
+        <div className="flex gap-2 mb-3">
+          <TypeIcon className="w-5 md:w-6" />
+          <div className="font-medium text-lg">{t('write.noticeType')}</div>
+        </div>
+
+        <div className="flex gap-1 mb-4">
+          {noticeTypes.map((noticeType) => (
+            <div
+              className="cursor-pointer"
+              key={noticeType}
+              onClick={() => {
+                setSelectedNoticeType(noticeType);
+                sendLog(LogEvents.noticeWritingPageSetType, {
+                  type: noticeType,
+                });
+              }}
+            >
+              <Chip
+                variant={
+                  selectedNoticeType === noticeType ? 'contained' : 'outlined'
+                }
+              >
+                <div className="text-sm md:text-base">
+                  {t(`write.noticeTypes.${noticeType}.label`)}
+                </div>
+              </Chip>
+            </div>
+          ))}
+        </div>
+
+        {noticeTypes.map((noticeType) => (
+          <div
+            key={noticeType}
+            className={`${selectedNoticeType !== noticeType && 'hidden'}`}
+          >
+            <div className="font-bold text-base md:text-xl">
+              {t(`write.noticeTypes.${noticeType}.description.title`)}
+            </div>
+            <div className="font-regular text-sm md:text-lg">
+              {t(`write.noticeTypes.${noticeType}.description.content`)}
+            </div>
+            <div className="font-regular text-sm md:text-lg text-secondayText">
+              {t(`write.noticeTypes.${noticeType}.description.example`)}
+            </div>
+          </div>
+        ))}
+
+        <div className="flex gap-2 mt-10 mb-3">
+          <TagIcon className="w-5 md:w-6" />
+          <div className="font-medium text-lg">{t('write.setupTags')}</div>
+        </div>
+
+        <TagInput tags={tags} setTags={setTags} t={t} />
       </div>
     </main>
   );
