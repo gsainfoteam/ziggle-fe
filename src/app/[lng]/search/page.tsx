@@ -61,7 +61,7 @@ const SearchPage = ({
           >
             <SearchBar
               onSubmit={handleSubmit}
-              placeholder={'공지 제목이나 태그로 검색'}
+              placeholder={t('searchPage.searchBar.placeholder')}
             />
             <SearchTagSelect
               selected={selectedTags}
@@ -71,7 +71,9 @@ const SearchPage = ({
         </div>
         {data && data.list.length > 0 && (
           <div className={'gap-[10px] flex flex-col flex-nowrap'}>
-            <p className={'text-lg md:text-4xl font-bold'}>♨ 지글 공지</p>
+            <p className={'text-lg md:text-4xl font-bold'}>
+              {t('searchPage.title')}
+            </p>
 
             <div className={'h-8'} />
 
@@ -99,7 +101,7 @@ const SearchPage = ({
                   'text-lg md:text-2xl text-secondaryText font-medium pt-5 mt-[-30px]'
                 }
               >
-                검색어를 입력해주세요
+                {t('searchPage.prompt')}
               </p>
             </div>
           </div>
@@ -120,7 +122,7 @@ const SearchPage = ({
                   'text-center text-secondaryText font-bold font-lg md:font-2xl pt-5'
                 }
               >
-                검색 결과가 존재하지 않습니다.
+                {t('searchPage.noResult')}
               </p>
             </div>
           </div>
