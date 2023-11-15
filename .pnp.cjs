@@ -48,6 +48,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/testing-library", "npm:0.2.2"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@tinymce/tinymce-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.0"],\
             ["@types/debug", "npm:4.1.12"],\
             ["@types/jsdom", "npm:21.1.5"],\
             ["@types/node", "npm:20.9.0"],\
@@ -83,6 +84,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier-plugin-tailwindcss", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:0.5.7"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
+            ["react-calendar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1"],\
+            ["react-clock", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1"],\
             ["react-cookie", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:6.1.1"],\
             ["react-datetime-picker", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:5.5.3"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
@@ -8233,6 +8236,34 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@testing-library/dom",\
             "@types/testing-library__dom"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@tinymce/tinymce-react", [\
+        ["npm:4.3.0", {\
+          "packageLocation": "./.yarn/cache/@tinymce-tinymce-react-npm-4.3.0-af61da74d4-73b3765ae9.zip/node_modules/@tinymce/tinymce-react/",\
+          "packageDependencies": [\
+            ["@tinymce/tinymce-react", "npm:4.3.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.0", {\
+          "packageLocation": "./.yarn/__virtual__/@tinymce-tinymce-react-virtual-72883608e8/0/cache/@tinymce-tinymce-react-npm-4.3.0-af61da74d4-73b3765ae9.zip/node_modules/@tinymce/tinymce-react/",\
+          "packageDependencies": [\
+            ["@tinymce/tinymce-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.0"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["@types/react-dom", "npm:18.2.15"],\
+            ["prop-types", "npm:15.8.1"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
+            ["tinymce", "npm:6.7.3"]\
+          ],\
+          "packagePeers": [\
+            "@types/react-dom",\
+            "@types/react",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -19277,10 +19308,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.6.1", {\
-          "packageLocation": "./.yarn/__virtual__/react-calendar-virtual-f4937c8df4/0/cache/react-calendar-npm-4.6.1-86ff8fbeeb-54e9414a79.zip/node_modules/react-calendar/",\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-calendar-virtual-079cc82fc2/0/cache/react-calendar-npm-4.6.1-86ff8fbeeb-54e9414a79.zip/node_modules/react-calendar/",\
           "packageDependencies": [\
-            ["react-calendar", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.6.1"],\
+            ["react-calendar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
             ["@wojtekmaj/date-utils", "npm:1.5.1"],\
@@ -19308,10 +19339,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.5.1", {\
-          "packageLocation": "./.yarn/__virtual__/react-clock-virtual-080926951a/0/cache/react-clock-npm-4.5.1-7dac2e9341-3a183345f7.zip/node_modules/react-clock/",\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1", {\
+          "packageLocation": "./.yarn/__virtual__/react-clock-virtual-035fd4a7b0/0/cache/react-clock-npm-4.5.1-7dac2e9341-3a183345f7.zip/node_modules/react-clock/",\
           "packageDependencies": [\
-            ["react-clock", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.5.1"],\
+            ["react-clock", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1"],\
             ["@types/react", "npm:18.2.37"],\
             ["@types/react-dom", "npm:18.2.15"],\
             ["@wojtekmaj/date-utils", "npm:1.5.1"],\
@@ -19401,7 +19432,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["make-event-props", "npm:1.6.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-calendar", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.6.1"],\
+            ["react-calendar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
             ["react-fit", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:1.7.1"],\
             ["update-input-width", "npm:1.4.2"]\
@@ -19435,8 +19466,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["make-event-props", "npm:1.6.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-calendar", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.6.1"],\
-            ["react-clock", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.5.1"],\
+            ["react-calendar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1"],\
+            ["react-clock", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1"],\
             ["react-date-picker", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:10.5.2"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
             ["react-fit", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:1.7.1"],\
@@ -19817,7 +19848,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["make-event-props", "npm:1.6.2"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-clock", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:4.5.1"],\
+            ["react-clock", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\
             ["react-fit", "virtual:8c9bc7cc1f385740a4339b65a1e930c949edbbc988481e68535d3af14792b77d1fdc77aba00faf9f9efa39dba995c90e6bf7e067c23cfe21e09ad7b36278b695#npm:1.7.1"],\
             ["update-input-width", "npm:1.4.2"]\
@@ -21867,6 +21898,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["tinymce", [\
+        ["npm:6.7.3", {\
+          "packageLocation": "./.yarn/cache/tinymce-npm-6.7.3-b0d2925f74-b87d5a3152.zip/node_modules/tinymce/",\
+          "packageDependencies": [\
+            ["tinymce", "npm:6.7.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["title-case", [\
         ["npm:3.0.3", {\
           "packageLocation": "./.yarn/cache/title-case-npm-3.0.3-101a1194a3-e8b7ea006b.zip/node_modules/title-case/",\
@@ -23469,6 +23509,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@storybook/react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/testing-library", "npm:0.2.2"],\
             ["@svgr/webpack", "npm:8.1.0"],\
+            ["@tinymce/tinymce-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.3.0"],\
             ["@types/debug", "npm:4.1.12"],\
             ["@types/jsdom", "npm:21.1.5"],\
             ["@types/node", "npm:20.9.0"],\
@@ -23504,6 +23545,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["prettier-plugin-tailwindcss", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:0.5.7"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
+            ["react-calendar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.6.1"],\
+            ["react-clock", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:4.5.1"],\
             ["react-cookie", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:6.1.1"],\
             ["react-datetime-picker", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:5.5.3"],\
             ["react-dom", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:18.2.0"],\

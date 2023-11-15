@@ -5346,6 +5346,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tinymce/tinymce-react@npm:^4.3.0":
+  version: 4.3.0
+  resolution: "@tinymce/tinymce-react@npm:4.3.0"
+  dependencies:
+    prop-types: ^15.6.2
+    tinymce: ^6.3.1
+  peerDependencies:
+    react: ^18.0.0 || ^17.0.1 || ^16.7.0
+    react-dom: ^18.0.0 || ^17.0.1 || ^16.7.0
+  checksum: 73b3765ae9bacc58df760c1bb8968fc6c8dd498373a8f99f782292f0c3bbc4c1ff71d6aaa1d8ac66349a79ebfc6091698c2891532c3efd8f795399b59bb427b8
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -14427,7 +14440,7 @@ eslint@latest:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -16747,6 +16760,13 @@ tailwindcss@latest:
   languageName: node
   linkType: hard
 
+"tinymce@npm:^6.3.1":
+  version: 6.7.3
+  resolution: "tinymce@npm:6.7.3"
+  checksum: b87d5a31527c59a8dfacd5560a76fbb5dbb573db251c8c79b9b6eed88054944022ccae226c54fff3218e95228ce58063569bd4f698de4b161342e9c7c40948f9
+  languageName: node
+  linkType: hard
+
 "title-case@npm:^3.0.3":
   version: 3.0.3
   resolution: "title-case@npm:3.0.3"
@@ -18097,6 +18117,7 @@ typescript@latest:
     "@storybook/react": ^7.4.5
     "@storybook/testing-library": ^0.2.1
     "@svgr/webpack": ^8.1.0
+    "@tinymce/tinymce-react": ^4.3.0
     "@types/debug": ^4
     "@types/jsdom": ^21.1.3
     "@types/node": latest

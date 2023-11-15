@@ -16,6 +16,7 @@
     "@apollo/datasource-rest": "^6.2.1",
     "@apollo/server": "^4.9.3",
     "@as-integrations/next": "^2.0.2",
+    "@tinymce/tinymce-react": "^4.3.0",
     "@vercel/og": "^0.5.17",
     "accept-language": "^3.0.18",
     "axios": "^1.5.1",

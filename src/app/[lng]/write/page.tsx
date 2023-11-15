@@ -4,7 +4,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
@@ -14,9 +14,12 @@ import Chip from '@/app/components/molecules/Chip';
 import { createTranslation } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
+import ContentIcon from '@/assets/icons/content.svg';
+import LanguageIcon from '@/assets/icons/language.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
 
+import DeepLButton from './DeepLButton';
 import TagInput, { Tag } from './TagInput';
 
 type NoticeType = 'recruit' | 'event' | 'general';
@@ -39,6 +42,21 @@ export default function WritePage({
     useState<NoticeType>('recruit');
 
   const [tags, setTags] = useState<Tag[]>([]);
+
+  const [isWriteKorean, setIsWriteKorean] = useState(true);
+  const [isWriteEnglish, setIsWriteEnglish] = useState(false);
+
+  const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isWriteEnglish) {
+      setIsWriteKorean(e.target.checked);
+    }
+  };
+
+  const handleEnglishLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (isWriteKorean) {
+      setIsWriteEnglish(e.target.checked);
+    }
+  };
 
   return (
     <main className="flex flex-col items-center md:py-12">
@@ -126,6 +144,47 @@ export default function WritePage({
         </div>
 
         <TagInput tags={tags} setTags={setTags} t={t} />
+
+        <div className="flex gap-2 mt-10 mb-3 items-center">
+          <LanguageIcon className="w-5 md:w-6" />
+          <div className="font-medium text-lg">{t('write.setupLanguage')}</div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Checkbox
+            checked={isWriteKorean}
+            onChange={handleKoreanLanguageChange}
+          >
+            {t('write.languages.korean')}
+          </Checkbox>
+          <Checkbox
+            checked={isWriteEnglish}
+            onChange={handleEnglishLanguageChange}
+          >
+            {t('write.languages.english')}
+          </Checkbox>
+        </div>
+
+        {isWriteKorean && (
+          <div>
+            <div className="flex gap-2 mt-10 mb-3 items-center">
+              <ContentIcon className="w-5 md:w-6" />
+              <div className="font-medium text-lg">
+                {t('write.enterKoreanContent')}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {isWriteEnglish && (
+          <div className="flex gap-2 mt-10 mb-3 items-center">
+            <ContentIcon className="w-5 md:w-6" />
+            <div className="font-medium text-lg mr-4">
+              {t('write.enterEnglishContent')}
+            </div>
+            <DeepLButton t={t} />
+          </div>
+        )}
       </div>
     </main>
   );
