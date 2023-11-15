@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 import LogEvents from '@/api/log/log-events';
@@ -92,7 +93,7 @@ const SearchPage = ({
         {!data && !searchKeyword && (
           <div className={'flex justify-center w-full'}>
             <div className={'flex flex-col items-center'}>
-              <img src={SearchGif} alt="search" className={'w-[200px]'} />
+              <Image src={SearchGif} alt="search" className={'w-[200px]'} />
 
               <div className={'h-[100px]'} />
               <div className={'h-[10px]'} />

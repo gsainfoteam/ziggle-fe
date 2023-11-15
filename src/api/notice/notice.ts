@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 import { gql } from '@/generated';
 
 import api from '..';
@@ -26,8 +28,8 @@ interface NoticeBase {
   title: string;
   views: number;
   body: string;
-  deadline: string | null;
-  createdAt: string;
+  deadline?: Dayjs | string | null;
+  createdAt: Dayjs | string;
   author: string;
   tags: Tag[];
   logName?: string;
@@ -82,7 +84,7 @@ export const GET_NOTICES = gql(`
         deadline
         createdAt
         author
-        thumbnailUrl
+        imageUrl
         tags {
           id
           name

@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import { TextZaboProps } from '@/app/components/organisms/Zabo/TextZabo';
+import { NoticeDetail, Tag } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
 
-interface NoticeInfoProps extends Omit<TextZaboProps, 'body'> {
-  tags?: string[];
+interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {
+  t: T;
 }
 
 const NoticeInfo = ({
@@ -74,10 +74,10 @@ const Metadata = ({
   </div>
 );
 
-const Tags = ({ tags }: { tags: string[] }) => (
+const Tags = ({ tags }: { tags: Tag[] }) => (
   <div className="flex flex-wrap gap-2">
     {tags.map((tag, i) => (
-      <Chip key={i} className="font-normal">{`#${tag}`}</Chip>
+      <Chip key={i} className="font-normal">{`#${tag.name}`}</Chip>
     ))}
   </div>
 );
