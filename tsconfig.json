@@ -14,6 +14,7 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": false,
+    "allowImportingTsExtensions": true,
     "plugins": [
       {
         "name": "next"
