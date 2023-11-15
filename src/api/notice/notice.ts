@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import { gql } from '@/generated';
 
 import api from '..';
@@ -44,7 +42,7 @@ export interface Notices {
 export const getAllNotices = async (
   params: NoticePaginationParams & NoticeSearchParams = {},
 ) =>
-  api.get<Notices>('/notice/all', { params }).then(({ data }) => ({
+  api.get<Notices>('/notice', { params }).then(({ data }) => ({
     ...data,
     list: data.list.map(({ imageUrl, ...notice }) => ({
       ...notice,
