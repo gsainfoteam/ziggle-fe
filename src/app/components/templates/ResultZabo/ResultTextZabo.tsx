@@ -22,7 +22,7 @@ const ResultTextZabo = ({
     <div
       className={
         'flex flex-col justify-between gap-2.5 p-5 ' +
-        'w-full box-border overflow-hidden rounded border cursor-pointer border-secondayText ' +
+        'w-full box-border overflow-hidden rounded border cursor-pointer border-secondaryText ' +
         'bg-white dark:bg-neutral-900'
       }
     >
@@ -43,13 +43,13 @@ const ResultTextZabo = ({
           {/* organization here (for futer update) */}
         </div>
 
-        <div className="flex gap-0.5 my-0.5">
+        <div className="flex gap-2 my-0.5">
           {tags.map((tag, index) => (
             <Chip
               key={index}
               variant={tag.name === searchQuery ? 'contained' : undefined}
             >
-              {`#${tag}`}
+              {`#${tag.name}`}
             </Chip>
           ))}
         </div>
@@ -59,7 +59,7 @@ const ResultTextZabo = ({
         </div>
 
         <div className="flex gap-0.5">
-          <div className="text-sm text-secondayText font-medium flex">
+          <div className="text-sm text-secondaryText font-medium flex">
             <Trans t={t} i18nKey="zabo.dateView">
               {{ date: dayjs(createdAt).format('L') }}
               <strong className="font-bold"> · {{ views }}</strong>

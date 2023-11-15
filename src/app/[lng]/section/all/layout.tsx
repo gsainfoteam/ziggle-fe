@@ -16,7 +16,7 @@ const AllNoticeLayout = async ({
         <h1 className="text-2xl md:text-4xl font-bold">
           {t('notices.all.label')}
         </h1>
-        <div className="text-xs md:text-base font-medium text-secondayText">
+        <div className="text-xs md:text-base font-medium text-secondaryText">
           {t('notices.all.description')}
         </div>
       </div>

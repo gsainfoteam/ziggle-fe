@@ -1,5 +1,6 @@
 import { Notice } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
+
 import ImageZabo from './ImageZabo';
 import TextZabo from './TextZabo';
 

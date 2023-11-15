@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import CloseIcon from '@/assets/icons/close.svg';
+import SearchIcon from '@/assets/icons/search.svg';
+
 import Button from '../../atoms/Button';
 
 interface SearchProps {
@@ -33,13 +36,13 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   return (
     <form
       className={
-        'flex align-middle border-primary border-2 rounded-[5px] px-[10px] py-[20px] md:px-[4px] md:py-[8px]'
+        'flex align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]'
       }
       onSubmit={handleSubmit}
     >
       <input
         className={
-          'w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg md:text-2xl'
+          'w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg md:text-xl'
         }
         name={'searchQuery'}
         placeholder={placeholder}
@@ -47,21 +50,12 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
         onChange={handleKeywordChange}
       />
       {isSubmitted ? (
-        <Button
-          type={'button'}
-          onClick={handleDeleteClick}
-          style={{
-            marginRight: '2px',
-          }}
-        >
-          {/* <Icon.XPrimary width={isMobile ? "20px" : "27px"} /> */}
+        <Button type={'button'} onClick={handleDeleteClick}>
+          <CloseIcon className={'fill-primary w-5 h-5 mx-[6px]'} />
         </Button>
       ) : (
         <Button type={'submit'}>
-          {/* <Icon.SearchPrimary
-            width={isMobile ? "28px" : "32px"}
-            height={isMobile ? "28px" : "32px"}
-          /> */}
+          <SearchIcon className={'fill-primary w-8 h-8'} />
         </Button>
       )}
     </form>

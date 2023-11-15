@@ -24,7 +24,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   return (
     <div
       className={
-        'border rounded border-secondayText mt-4 relative bg-white dark:bg-neutral-900 ' +
+        'border rounded border-secondaryText mt-4 relative bg-white dark:bg-neutral-900 ' +
         'p-5 flex flex-col gap-2.5 justify-between group ' +
         'transition hover:-translate-y-2 ' +
         'hover:shadow-primary/10 hover:shadow-thumbnail'
@@ -58,7 +58,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
         <div className="font-medium text-lg overflow-hidden">{body}</div>
       </div>
       <div className="flex flex-col gap-2.5">
-        <div className="text-sm text-secondayText font-medium flex">
+        <div className="text-sm text-secondaryText font-medium flex">
           <Trans t={t} i18nKey="zabo.dateView">
             {{ date: dayjs(createdAt).format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>

@@ -12,7 +12,7 @@ const config: Config = {
         primary: '#eb6263',
         secondary: '#ffeaea',
         text: '#252525',
-        secondayText: '#959595',
+        secondaryText: '#959595',
         white: '#ffffff',
         deselected: '#d6d6d6',
       },
