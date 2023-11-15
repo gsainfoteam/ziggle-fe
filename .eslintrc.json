@@ -1,9 +1,10 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:storybook/recommended"],
-  "plugins": ["simple-import-sort"],
+  "extends": ["next/core-web-vitals", "plugin:storybook/recommended", "prettier"],
+  "plugins": ["simple-import-sort", "prettier"],
   "rules": {
     "simple-import-sort/imports": "warn",
-    "simple-import-sort/exports": "warn"
+    "simple-import-sort/exports": "warn",
+    "prettier/prettier": "warn"
   },
   "ignorePatterns": "src/generated"
 }

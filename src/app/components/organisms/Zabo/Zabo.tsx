@@ -6,8 +6,8 @@ export type ZaboOrigin = 'width' | 'height';
 export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
   ? { width: number; height?: never }
   : Origin extends 'height'
-  ? { height: number; width?: never }
-  : never;
+    ? { height: number; width?: never }
+    : never;
 
 const Zabo = <IsImage extends boolean>(
   props: IsImage extends true
