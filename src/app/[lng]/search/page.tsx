@@ -62,7 +62,7 @@ const SearchPage = ({
           >
             <SearchBar
               onSubmit={handleSubmit}
-              placeholder={'공지 제목이나 태그로 검색'}
+              placeholder={t('searchPage.searchBar.placeholder')}
             />
             <SearchTagSelect
               selected={selectedTags}
