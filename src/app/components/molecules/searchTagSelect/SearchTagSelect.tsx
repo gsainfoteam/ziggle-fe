@@ -1,5 +1,5 @@
 import { NoticeKind } from '@/api/notice/notice';
-import React from 'react';
+
 import Button from '../../atoms/Button';
 import Chip from '../Chip';
 
@@ -26,7 +26,7 @@ const SearchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
   return (
     <div
       className={
-        'flex gap-2 md:gap-3 justify-between md:justify-start px-[2px]'
+        'flex gap-2 md:gap-2 justify-between md:justify-start px-[2px]'
       }
     >
       <Button onClick={() => handleCheckboxChange(NoticeKind.RECRUIT)}>

@@ -116,7 +116,7 @@ const Title = ({
       <Link href={href} className="group">
         <div className="flex gap-5">
           <TitleText title={title} />
-          <ArrowRightIcon className="stroke-secondayText w-5 transition-transform group-hover:translate-x-2" />
+          <ArrowRightIcon className="stroke-secondaryText w-5 transition-transform group-hover:translate-x-2" />
         </div>
       </Link>
     ) : (
@@ -137,7 +137,7 @@ const Empty = () => {
   return (
     <div className="flex flex-col items-center justify-center h-72">
       <LazyCat />
-      <div className="text-xl text-secondayText font-medium p-5">
+      <div className="text-xl text-secondaryText font-medium p-5">
         {t('emptyNotices')}
       </div>
     </div>

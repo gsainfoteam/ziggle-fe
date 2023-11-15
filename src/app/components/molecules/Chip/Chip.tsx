@@ -15,7 +15,7 @@ const Chip = ({
         ...(variant === 'outlined' ? ['text-primary bg-transparent'] : []),
         ...(variant === 'contained' ? ['text-white bg-primary'] : []),
         ...(variant === 'deselected'
-          ? ['bg-deselected text-secondayText border-none']
+          ? ['bg-deselected text-secondaryText border-none']
           : []),
         ...(className ? [className] : []),
       ].join(' ')}

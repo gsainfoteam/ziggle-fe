@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Button from "../../atoms/Button";
+import CloseIcon from '@/assets/icons/close.svg';
+import SearchIcon from '@/assets/icons/search.svg';
+
+import Button from '../../atoms/Button';
 
 interface SearchProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -11,7 +14,7 @@ interface SearchProps {
 // Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
 
 const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,42 +29,33 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   };
 
   const handleDeleteClick = () => {
-    setKeyword("");
+    setKeyword('');
     setIsSubmitted(false);
   };
 
   return (
     <form
       className={
-        "flex align-middle border-primary border-2 rounded-[5px] px-[10px] py-[20px] md:px-[4px] md:py-[8px]"
+        'flex align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]'
       }
       onSubmit={handleSubmit}
     >
       <input
         className={
-          "w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg md:text-2xl"
+          'w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg md:text-xl'
         }
-        name={"searchQuery"}
+        name={'searchQuery'}
         placeholder={placeholder}
         value={keyword}
         onChange={handleKeywordChange}
       />
       {isSubmitted ? (
-        <Button
-          type={"button"}
-          onClick={handleDeleteClick}
-          style={{
-            marginRight: "2px",
-          }}
-        >
-          {/* <Icon.XPrimary width={isMobile ? "20px" : "27px"} /> */}
+        <Button type={'button'} onClick={handleDeleteClick}>
+          <CloseIcon className={'fill-primary w-5 h-5 mx-[6px]'} />
         </Button>
       ) : (
-        <Button type={"submit"}>
-          {/* <Icon.SearchPrimary
-            width={isMobile ? "28px" : "32px"}
-            height={isMobile ? "28px" : "32px"}
-          /> */}
+        <Button type={'submit'}>
+          <SearchIcon className={'fill-primary w-8 h-8'} />
         </Button>
       )}
     </form>

@@ -31,7 +31,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         <ZaboImage
           src={imageUrl}
           alt={title}
-          className="rounded border border-secondayText object-cover"
+          className="rounded border border-secondaryText object-cover"
           {...size}
         />
         {deadline && deadline.isAfter() && (
@@ -46,7 +46,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         <div className="font-bold text-3xl transition-colors group-hover:text-primary line-clamp-2 overflow-hidden text-ellipsis">
           {title}
         </div>
-        <div className="text-sm text-secondayText font-medium flex">
+        <div className="text-sm text-secondaryText font-medium flex">
           <Trans t={t} i18nKey="zabo.dateView">
             {{ date: dayjs(createdAt).format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>
