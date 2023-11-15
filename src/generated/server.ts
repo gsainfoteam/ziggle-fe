@@ -59,7 +59,7 @@ export type Notice = {
   deadline?: Maybe<Scalars['Date']['output']>;
   id: Scalars['Int']['output'];
   tags: Array<Tag>;
-  thumbnailUrl?: Maybe<Scalars['String']['output']>;
+  imageUrl?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -229,8 +229,7 @@ export interface DateScalarConfig
 
 export type DetailedNoticeResolvers<
   ContextType = MyContext,
-  ParentType extends
-    ResolversParentTypes['DetailedNotice'] = ResolversParentTypes['DetailedNotice'],
+  ParentType extends ResolversParentTypes['DetailedNotice'] = ResolversParentTypes['DetailedNotice'],
 > = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -251,8 +250,7 @@ export type DetailedNoticeResolvers<
 
 export type NoticeResolvers<
   ContextType = MyContext,
-  ParentType extends
-    ResolversParentTypes['Notice'] = ResolversParentTypes['Notice'],
+  ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice'],
 > = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -260,11 +258,7 @@ export type NoticeResolvers<
   deadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-  thumbnailUrl?: Resolver<
-    Maybe<ResolversTypes['String']>,
-    ParentType,
-    ContextType
-  >;
+  imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -272,8 +266,7 @@ export type NoticeResolvers<
 
 export type NoticesResolvers<
   ContextType = MyContext,
-  ParentType extends
-    ResolversParentTypes['Notices'] = ResolversParentTypes['Notices'],
+  ParentType extends ResolversParentTypes['Notices'] = ResolversParentTypes['Notices'],
 > = {
   list?: Resolver<Array<ResolversTypes['Notice']>, ParentType, ContextType>;
   total?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
@@ -282,8 +275,7 @@ export type NoticesResolvers<
 
 export type QueryResolvers<
   ContextType = MyContext,
-  ParentType extends
-    ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
+  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
   notice?: Resolver<
     Maybe<ResolversTypes['Notice']>,

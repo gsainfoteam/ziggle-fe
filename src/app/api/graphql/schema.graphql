@@ -14,7 +14,7 @@ type Notice {
   createdAt: Date!
   author: String!
   tags: [Tag!]!
-  thumbnailUrl: String
+  imageUrl: String
 }
 
 type DetailedNotice {

@@ -52,7 +52,7 @@ export type Notice = {
   deadline?: Maybe<Scalars['Date']['output']>;
   id: Scalars['Int']['output'];
   tags: Array<Tag>;
-  thumbnailUrl?: Maybe<Scalars['String']['output']>;
+  imageUrl?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -103,7 +103,7 @@ export type GetNoticesQuery = {
       deadline?: any | null;
       createdAt: any;
       author: string;
-      thumbnailUrl?: string | null;
+      imageUrl?: string | null;
       tags: Array<{ __typename?: 'Tag'; id: number; name: string }>;
     }>;
   };
@@ -185,7 +185,7 @@ export const GetNoticesDocument = {
                       },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'thumbnailUrl' },
+                        name: { kind: 'Name', value: 'imageUrl' },
                       },
                       {
                         kind: 'Field',
