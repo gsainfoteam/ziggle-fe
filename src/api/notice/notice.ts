@@ -1,8 +1,14 @@
-import dayjs from 'dayjs';
-
 import { gql } from '@/generated';
 
+import { useEffect, useState } from 'react';
 import api from '..';
+
+export enum NoticeKind {
+  RECRUIT = 'recruit',
+  EVENT = 'event',
+  NORMAL = 'general',
+  ACADEMIC = 'academic',
+}
 
 export interface NoticePaginationParams {
   offset?: number;
@@ -24,10 +30,16 @@ interface NoticeBase {
   deadline: string | null;
   createdAt: string;
   author: string;
-  tags: { id: number; name: string }[];
+  tags: Tag[];
+  logName?: string;
 }
 
-interface Notice extends NoticeBase {
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface Notice extends NoticeBase {
   imageUrl: string | null;
 }
 
@@ -49,8 +61,8 @@ export const getAllNotices = async (
     list: data.list.map(({ imageUrl, ...notice }) => ({
       ...notice,
       // createdAt: dayjs(notice.createdAt),
-      deadline: notice.deadline ? notice.deadline : undefined,
-      ...(imageUrl && { thumbnailUrl: imageUrl }),
+      deadline: notice.deadline ? notice.deadline : null,
+      imageUrl: imageUrl ? imageUrl : null,
     })),
   }));
 
@@ -59,6 +71,24 @@ export const getNotice = async (id: number) =>
     ...data,
     deadline: data.deadline ? data.deadline : undefined,
   }));
+
+export const useGetAllNotices = (
+  params: NoticePaginationParams & NoticeSearchParams = {},
+) => {
+  const [notices, setNotices] = useState<Notices | null>(null);
+
+  useEffect(() => {
+    const fetchNotices = async () => {
+      const data = await getAllNotices(params);
+      setNotices(data);
+    };
+
+    fetchNotices();
+    console.log('fetch', params);
+  }, [JSON.stringify(params)]);
+
+  return notices;
+};
 
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {

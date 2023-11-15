@@ -1,5 +1,5 @@
-import SearchResultImage from "../searchResultImage/SearchResultImage";
-import SearchResultText from "../searchResultText/SearchResultText";
+import SearchResultImage from '../searchResultImage/SearchResultImage';
+import SearchResultText from '../searchResultText/SearchResultText';
 
 export interface Tag {
   id: number;
