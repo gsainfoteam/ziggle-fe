@@ -12,11 +12,10 @@ interface MypageProfileProps {
   quit?: string;
 }
 
-
 const Account = ({ size, color }: IconProps) => {
-  const sizeClass = size ? size : "h-6 w-6";
+  const sizeClass = size ? size : 'h-6 w-6';
 
-  const colorClass = color ? `text-${color}` : "text-gray-400"; 
+  const colorClass = color ? `text-${color}` : 'text-gray-400';
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -45,34 +44,37 @@ const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   );
 };
 
-export default async function MypageProfile({ name, id, phone, email, logout='', quit=''}: MypageProfileProps)
-
-{
-  
-    return (
-      <div>
-        <div className="flex flex-col items-center mr-20">
-            <div className="text-4xl font-medium m-10">INFO</div>
-            <div className="flex flex-col items-center">
-                <Account size="300px" color="gray-400"></Account>
-                <h3 className="text-3xl md:text-2.8xl font-bold p-10 flex justify-center items-center">
-                  {name}</h3>
-            </div>
-              <div className="flex flex-col items-center">
-              <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-8">
-                {id}
-              </div>
-              <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-0">
-               {email}
-              </div>
-            </div>
-            <div className="flex flex-row items-center ">
-              <UnderLinedText text={logout}></UnderLinedText>
-              <UnderLinedText text={quit}></UnderLinedText>
-            </div>
+export default async function MypageProfile({
+  name,
+  id,
+  phone,
+  email,
+  logout = '',
+  quit = '',
+}: MypageProfileProps) {
+  return (
+    <div>
+      <div className="flex flex-col items-center mr-20">
+        <div className="text-4xl font-medium m-10">INFO</div>
+        <div className="flex flex-col items-center">
+          <Account size="300px" color="gray-400"></Account>
+          <h3 className="text-3xl md:text-2.8xl font-bold p-10 flex justify-center items-center">
+            {name}
+          </h3>
+        </div>
+        <div className="flex flex-col items-center">
+          <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-8">
+            {id}
+          </div>
+          <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-0">
+            {email}
+          </div>
+        </div>
+        <div className="flex flex-row items-center ">
+          <UnderLinedText text={logout}></UnderLinedText>
+          <UnderLinedText text={quit}></UnderLinedText>
         </div>
       </div>
-    );
-  };
-  
-  
+    </div>
+  );
+}

@@ -1,5 +1,6 @@
-import LazyCat from "@/assets/lazy-cat.svg";
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
+
+import LazyCat from '@/assets/lazy-cat.svg';
 
 // interface Tag {
 //   id: number;
@@ -35,24 +36,23 @@ interface UnderLinedTextProps {
 
 const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   return (
-    <div className="m-5 border-b border-gray-200 w-50 text-white">
-      {text}
-    </div>
+    <div className="m-5 border-b border-gray-200 w-50 text-white">{text}</div>
   );
 };
 
-const MypageTable = ({ 
-  title, articles, link, noArticle, totalList }: MypageTableProps,
-  ) => {
-
+const MypageTable = ({
+  title,
+  articles,
+  link,
+  noArticle,
+  totalList,
+}: MypageTableProps) => {
   return (
     <div className="rounded-lg shadow-md bg-white w-[550px] xl:w-[600px]">
       <div className="w-full border border-white border-collapse border-spacing-0 rounded-lg">
         <div className="m-0 flex flex-row w-full border border-collapse border-spacing-0 rounded-tl-lg rounded-tr-lg bg-primary">
           <div className="w-3/4 rounded-tl-10">
-            <div className="text-xl m-5 text-white font-bold">
-              {title}
-            </div>
+            <div className="text-xl m-5 text-white font-bold">{title}</div>
           </div>
           <div className="w-1/4 rounded-tr-10 text-right">
             <div className="flex items-end justify-end text-s text-regular text-white h-full">
@@ -64,8 +64,8 @@ const MypageTable = ({
         {articles.length > 0 &&
           articles.map((articleObj, index) => {
             const isLastRow = index === articles.length - 1;
-            const borderBottomRadius = isLastRow ? "10px" : "0px";
-            const underLine = isLastRow ? "" : "border-b border-gray-300";
+            const borderBottomRadius = isLastRow ? '10px' : '0px';
+            const underLine = isLastRow ? '' : 'border-b border-gray-300';
             return (
               <div
                 key={index}
@@ -78,9 +78,11 @@ const MypageTable = ({
                     {articleObj.title}
                   </div>
                 </div>
-                <div className={`items-end justify-end rounded-br-${borderBottomRadius}`}>
+                <div
+                  className={`items-end justify-end rounded-br-${borderBottomRadius}`}
+                >
                   <div className="text-regular m-5 text-secondayText">
-                    {dayjs(articleObj.createdAt).format("YYYY-MM-DD")}
+                    {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
                   </div>
                 </div>
               </div>
