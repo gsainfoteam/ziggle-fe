@@ -34,7 +34,13 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
         </Analytics>
         <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
         {user ? (
-          <Link href={`/${lng}/mypage`}>{user.name}</Link>
+          <Link
+            href={`/${lng}/mypage`}
+            className="flex items-center gap-x-1 font-bold"
+          >
+            {user.name}
+            <AccountIcon width="1.6rem" height="1.6rem" />
+          </Link>
         ) : (
           <Link
             href={`/${lng}/login`}
