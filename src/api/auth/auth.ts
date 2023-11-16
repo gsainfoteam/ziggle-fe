@@ -35,15 +35,15 @@ export const auth = async () => {
   const accessToken = store.get('access_token');
   if (!accessToken) return null;
   try {
-    const user = await api.get<UserResponse>('/user/info', {
+    const { data: user } = await api.get<UserResponse>('/user/info', {
       headers: { Authorization: `Bearer ${accessToken.value}` },
     });
     return {
-      id: user.data.user_uuid,
-      email: user.data.user_email_id,
-      name: user.data.user_name,
-      phone: user.data.user_phone_number,
-      studentId: user.data.student_id,
+      id: user.user_uuid,
+      email: user.user_email_id,
+      name: user.user_name,
+      phone: user.user_phone_number,
+      studentId: user.student_id,
     };
   } catch {
     return null;
