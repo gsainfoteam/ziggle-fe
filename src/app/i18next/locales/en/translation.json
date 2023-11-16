@@ -156,7 +156,8 @@
       }
     },
     "setupTags": "Set Tags",
-    "writeTags": "Enter tags. (seperated by spaces - you don't need to put #)",
+    "writeTagsDescription": "Separate them with a space; you don't need to type #.",
+    "writeTags": "Enter tags.",
 
     "setupLanguage": "Language",
     "languages": {
@@ -175,6 +176,6 @@
     "addFromMyDevice": "Add from my device",
 
     "submit": "Submit Notice",
-    "submitDescription": ""
+    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting."
   }
 }

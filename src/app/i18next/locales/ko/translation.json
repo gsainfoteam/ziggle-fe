@@ -153,7 +153,8 @@
       }
     },
     "setupTags": "태그 설정하기",
-    "writeTags": "태그를 입력하세요. (띄어쓰기로 구분 - #을 입력하지 않아도 됩니다)",
+    "writeTagsDescription": "띄어쓰기로 구분해주세요. #은 입력하지 않으셔도 됩니다.",
+    "writeTags": "태그를 입력하세요.",
 
     "setupLanguage": "언어",
     "languages": {
@@ -172,6 +173,6 @@
     "addFromMyDevice": "내 기기에서 사진 선택하기",
 
     "submit": "공지 제출하기",
-    "submitDescription": ""
+    "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요."
   }
 }

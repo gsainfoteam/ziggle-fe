@@ -4,15 +4,14 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 
-import { Editor } from '@tinymce/tinymce-react';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import Chip from '@/app/components/molecules/Chip';
-import { createTranslation } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
@@ -21,8 +20,10 @@ import LanguageIcon from '@/assets/icons/language.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
 
+import AttatchPhotoArea from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
 import TagInput, { Tag } from './TagInput';
+import TinyMCEEditor from './TinyMCEEditor';
 type NoticeType = 'recruit' | 'event' | 'general';
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 
@@ -47,6 +48,11 @@ export default function WritePage({
   const [isWriteKorean, setIsWriteKorean] = useState(true);
   const [isWriteEnglish, setIsWriteEnglish] = useState(false);
 
+  const [images, setImages] = useState<File[]>([]);
+
+  const koreanEditorRef = useRef<any>(null);
+  const englishEditorRef = useRef<any>(null);
+
   const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isWriteEnglish) {
       setIsWriteKorean(e.target.checked);
@@ -58,9 +64,6 @@ export default function WritePage({
       setIsWriteEnglish(e.target.checked);
     }
   };
-
-  const koreanEditorRef = useRef<any>(null);
-  const englishEditorRef = useRef<any>(null);
 
   return (
     <main className="flex flex-col items-center md:py-12">
@@ -96,7 +99,7 @@ export default function WritePage({
         </div>
 
         <div className="flex gap-2 mb-3">
-          <TypeIcon className="w-5 md:w-6" />
+          <TypeIcon className="w-5 md:w-6 dark:fill-white" />
           <div className="font-medium text-lg">{t('write.noticeType')}</div>
         </div>
 
@@ -142,15 +145,19 @@ export default function WritePage({
           </div>
         ))}
 
-        <div className="flex gap-2 mt-10 mb-3">
-          <TagIcon className="w-5 md:w-6" />
+        <div className="flex gap-2 mt-10 mb-2">
+          <TagIcon className="w-5 md:w-6 dark:fill-white" />
           <div className="font-medium text-lg">{t('write.setupTags')}</div>
+        </div>
+
+        <div className="font-regular text-sm text-secondayText mb-3">
+          {t('write.writeTagsDescription')}
         </div>
 
         <TagInput tags={tags} setTags={setTags} t={t} />
 
         <div className="flex gap-2 mt-10 mb-3 items-center">
-          <LanguageIcon className="w-5 md:w-6" />
+          <LanguageIcon className="w-5 md:w-6 dark:fill-white" />
           <div className="font-medium text-lg">{t('write.setupLanguage')}</div>
         </div>
 
@@ -172,70 +179,47 @@ export default function WritePage({
         {isWriteKorean && (
           <div>
             <div className="flex gap-2 mt-10 mb-3 items-center">
-              <ContentIcon className="w-5 md:w-6" />
+              <ContentIcon className="w-5 md:w-6 dark:fill-white" />
               <div className="font-medium text-lg">
                 {t('write.enterKoreanContent')}
               </div>
             </div>
 
-            <Editor
-              onInit={(_, editor) => (koreanEditorRef.current = editor)}
-              tinymceScriptSrc="/tinymce/tinymce.min.js"
-              init={{
-                promotion: false,
-                plugins: ['link', 'image', 'code'],
-                toolbar:
-                  'undo redo | formatselect | ' +
-                  'bold italic backcolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | link',
-              }}
-              onBlur={(event) =>
-                sendLog(LogEvents.noticeWritingPageTypeContent, {
-                  content: event.target.getContent(),
-                })
-              }
-            />
+            <TinyMCEEditor ref={koreanEditorRef} />
           </div>
         )}
 
         {isWriteEnglish && (
           <div>
             <div className="flex gap-2 mt-10 mb-3 items-center">
-              <ContentIcon className="w-5 md:w-6" />
+              <ContentIcon className="w-5 md:w-6 dark:fill-white" />
               <div className="font-medium text-lg mr-4">
                 {t('write.enterEnglishContent')}
               </div>
-              <DeepLButton t={t} />
+              <DeepLButton t={t} query={koreanEditorRef.current.getContent()} />
             </div>
-            <Editor
-              onInit={(_, editor) => (englishEditorRef.current = editor)}
-              tinymceScriptSrc="/tinymce/tinymce.min.js"
-              init={{
-                promotion: false,
-                plugins: ['link', 'image', 'code'],
-                toolbar:
-                  'undo redo | formatselect | ' +
-                  'bold italic backcolor | alignleft aligncenter ' +
-                  'alignright alignjustify | bullist numlist outdent indent | ' +
-                  'removeformat | link',
-              }}
-              onBlur={(event) =>
-                sendLog(LogEvents.noticeWritingPageTypeContent, {
-                  content: event.target.getContent(),
-                })
-              }
-            />
+            <TinyMCEEditor ref={englishEditorRef} />
           </div>
         )}
 
         <div className="flex gap-2 mt-10 mb-1 items-center">
-          <AddPhotoIcon className="w-5 md:w-6" />
+          <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
           <div className="font-medium text-lg">{t('write.attatchPhoto')}</div>
         </div>
         <div className="font-regular text-secondayText text-sm mb-3">
           {t('write.photoDescription')}
         </div>
+
+        <AttatchPhotoArea t={t} files={images} setFiles={setImages} />
+      </div>
+
+      <Button variant="contained" className="mt-[10rem] mb-4">
+        <div className="font-bold text-base md:text-xl mx-3 my-1">
+          {t('write.submit')}
+        </div>
+      </Button>
+      <div className="font-regular text-sm text-secondayText max-w-[70%] text-center">
+        {t('write.submitDescription')}
       </div>
     </main>
   );
