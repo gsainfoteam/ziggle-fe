@@ -33,6 +33,20 @@ const resolvers: Resolvers = {
     notice: (_, { id }, { dataSources }) =>
       dataSources.noticesAPI.getNotice(id),
   },
+  Mutation: {
+    createNotice: (
+      _,
+      { title, body, deadline, tags, images },
+      { dataSources },
+    ) =>
+      dataSources.noticesAPI.createNotice({
+        title,
+        body,
+        deadline,
+        tags,
+        images,
+      }),
+  },
 };
 
 const server = new ApolloServer<MyContext>({

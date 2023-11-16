@@ -50,3 +50,13 @@ type Query {
   notices(offset: Int, limit: Int, search: String, tags: [String!], orderBy: OrderBy, my: MineNotice): Notices!
   notice(id: Int!): Notice
 }
+
+type Mutation {
+  createNotice(
+    title: String!
+    body: String!
+    deadline: Date
+    images: [String!]
+    tags: [Int!]
+  ): DetailedNotice!
+}

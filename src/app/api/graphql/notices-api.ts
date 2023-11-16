@@ -29,4 +29,14 @@ export default class NoticesAPI extends RESTDataSource {
   async getNotice(id: number) {
     return this.get<NoticeDetail>(`notice/${id}`);
   }
+
+  async createNotice(data: {
+    title: string;
+    body: string;
+    deadline?: Date;
+    tags?: number[] | null;
+    images?: string[] | null;
+  }) {
+    return this.post<NoticeDetail>('notice', data);
+  }
 }

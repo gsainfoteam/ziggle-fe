@@ -1,6 +1,3 @@
-import dayjs from 'dayjs';
-import { cookies } from 'next/headers';
-
 import { gql } from '@/generated';
 
 import api from '..';
@@ -96,13 +93,9 @@ export const GET_NOTICES = gql(`
 `);
 
 export const CREATE_NOTICE = gql(`
-  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!]!, $images: [String!]) {
-    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags) {
+  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
+    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {
       id
-      body
-      deadline
-      tags
-      images
     }
   }
 `);
