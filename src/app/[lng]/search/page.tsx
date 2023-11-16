@@ -1,10 +1,11 @@
-import { getAllNotices } from '@/api/notice/notice';
+import { Suspense } from 'react';
+
 import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
-import SearchNoResult from './assets/searchNoResult.svg';
+import Result from './Result';
 import SearchBar from './SearchBar';
 import SearchTagSelect from './SearchTagSelect';
 
@@ -21,12 +22,6 @@ const SearchPage = async ({
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
 
   const { t } = await createTranslation(lng, 'translation');
-  const data = await getAllNotices({
-    search,
-    tags,
-    offset: 0,
-    limit: ITEMS_PER_CALL,
-  });
 
   return (
     <div className="content mx-auto">
@@ -37,50 +32,26 @@ const SearchPage = async ({
             <SearchTagSelect />
           </div>
         </div>
-        {data?.list.length !== 0 && (
-          <div className="gap-[10px] flex flex-col flex-nowrap">
-            <p className="text-lg md:text-4xl font-bold">
-              {t('searchPage.title')}
-            </p>
-
-            <div className="h-8" />
-
-            {/* {data.list.map((notice) => (
-              <ResultZabo
-                {...notice}
-                searchQuery={search}
-                logName="SearchPage"
-                t={t}
-                key={notice.id}
-              />
-            ))} */}
-          </div>
-        )}
-        {/* 검색어를 입력하지 않았을 때만 */}
-        {!search && (
+        {search ? (
+          <Suspense
+            key={[search, tags.join(',')].join(',')}
+            fallback={<LoadingCatAnimation />}
+          >
+            <Result
+              lng={lng}
+              search={search}
+              limit={ITEMS_PER_CALL}
+              offset={0}
+              tags={tags}
+            />
+          </Suspense>
+        ) : (
           <div className="flex justify-center w-full">
             <div className="flex flex-col items-center">
               <SearchAnimation />
               <div className="h-[10px]" />
               <p className="text-lg md:text-2xl text-secondaryText font-medium pt-5 mt-[-30px]">
                 {t('searchPage.prompt')}
-              </p>
-            </div>
-          </div>
-        )}
-        {/* 검색어를 입력했을 때 로딩 */}
-        {search && <LoadingCatAnimation />}
-
-        {search && data.list.length === 0 && (
-          <div className="flex justify-center w-full">
-            <div className="flex justify-center flex-col align-center">
-              <div className="h-[100px]" />
-              <div style={{ height: '10px', margin: '0 auto' }}></div>
-
-              <SearchNoResult />
-
-              <p className="text-center text-secondaryText font-bold font-lg md:font-2xl pt-5">
-                {t('searchPage.noResult')}
               </p>
             </div>
           </div>

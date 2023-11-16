@@ -1,5 +1,6 @@
+'use client';
+
 import { Notice } from '@/api/notice/notice';
-import { T } from '@/app/i18next';
 
 import ResultImageZabo from './ResultImageZabo';
 import ResultTextZabo from './ResultTextZabo';
@@ -7,7 +8,6 @@ import ResultTextZabo from './ResultTextZabo';
 export type ResultZaboProps = Notice & {
   searchQuery: string;
   logName?: string;
-  t: T;
 };
 
 export type ResultImageZaboProps = ResultZaboProps & {
