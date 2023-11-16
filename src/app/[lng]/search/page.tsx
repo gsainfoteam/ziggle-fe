@@ -70,7 +70,7 @@ const SearchPage = ({
             />
           </div>
         </div>
-        {data && data.list.length > 0 && (
+        {data?.list.length && (
           <div className={'gap-[10px] flex flex-col flex-nowrap'}>
             <p className={'text-lg md:text-4xl font-bold'}>
               {t('searchPage.title')}
