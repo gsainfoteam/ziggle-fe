@@ -61,33 +61,32 @@ const MypageTable = async ({
           </div>
         </div>
 
-        {articles.length > 0 &&
-          articles.map((articleObj, index) => {
-            const isLastRow = index === articles.length - 1;
-            const borderBottomRadius = isLastRow ? '10px' : '0px';
-            const underLine = isLastRow ? '' : 'border-b border-gray-300';
-            return (
+        {articles.map((articleObj, index) => {
+          const isLastRow = index === articles.length - 1;
+          const borderBottomRadius = isLastRow ? '10px' : '0px';
+          const underLine = isLastRow ? '' : 'border-b border-gray-300';
+          return (
+            <div
+              key={index}
+              className={`flex h-[70px] ${underLine} items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius}`}
+            >
               <div
-                key={index}
-                className={`flex h-[70px] ${underLine} items-center flex-row justify-between bg-colorless rounded-bl-${borderBottomRadius} rounded-br-${borderBottomRadius}`}
+                className={`pb-0 sm:pb-0 rounded-bl-${borderBottomRadius} leading-1.5`}
               >
-                <div
-                  className={`pb-0 sm:pb-0 rounded-bl-${borderBottomRadius} leading-1.5`}
-                >
-                  <div className="text-regular m-3.5 text-text">
-                    {articleObj.title}
-                  </div>
-                </div>
-                <div
-                  className={`items-end justify-end rounded-br-${borderBottomRadius}`}
-                >
-                  <div className="text-regular m-5 text-secondayText">
-                    {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
-                  </div>
+                <div className="text-regular m-3.5 text-text">
+                  {articleObj.title}
                 </div>
               </div>
-            );
-          })}
+              <div
+                className={`items-end justify-end rounded-br-${borderBottomRadius}`}
+              >
+                <div className="text-regular m-5 text-secondayText">
+                  {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
+                </div>
+              </div>
+            </div>
+          );
+        })}
         {articles.length === 0 && (
           <div className="flex flex-col h-full justify-center items-center p-30 bg-colorless rounded-bl-0 rounded-br-10">
             <LazyCat className="p-5 w-50 h-50" />
