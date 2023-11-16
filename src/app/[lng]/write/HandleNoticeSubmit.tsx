@@ -2,7 +2,10 @@ import Swal from 'sweetalert2';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import { CREATE_NOTICE } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
+
+import { apolloClient } from '../InitClient';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 
@@ -129,11 +132,32 @@ const handleNoticeSubmit = async ({
     images,
   );
 
-  // Swal.fire({
-  //   text: '공지를 작성 중입니다',
-  //   icon: 'info',
-  //   showConfirmButton: false,
-  // });
+  Swal.fire({
+    text: '공지를 작성 중입니다',
+    icon: 'info',
+    showConfirmButton: false,
+  });
+
+  const notice = await apolloClient.mutate({
+    mutation: CREATE_NOTICE,
+    variables: {
+      title,
+      deadline,
+      body: koreanBody!,
+    },
+  });
+
+  const id = notice.data?.createNotice.id;
+  if (!id) {
+    Swal.fire({
+      text: '공지를 작성하는데 실패했습니다',
+      icon: 'error',
+      confirmButtonText: '확인',
+    });
+    return;
+  }
+
+  return id;
 };
 
 const handleTagSubmit = async (tags: string[]) => {

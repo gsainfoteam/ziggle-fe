@@ -1,10 +1,11 @@
 'use client';
 
-import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
@@ -38,6 +39,7 @@ export default function WritePage({
   params: { lng: Locale };
 }) {
   const { t } = useTranslation(lng, 'translation');
+  const { push } = useRouter();
 
   const [title, setTitle] = useState('');
 
@@ -68,7 +70,7 @@ export default function WritePage({
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const koreanBody = koreanEditorRef.current
       ? koreanEditorRef.current.getContent()
       : undefined;
@@ -76,7 +78,7 @@ export default function WritePage({
       ? englishEditorRef.current.getContent()
       : undefined;
 
-    handleNoticeSubmit({
+    const noticeId = await handleNoticeSubmit({
       title,
       deadline: deadline ?? undefined,
       noticeLanguage: isWriteKorean ? (isWriteEnglish ? 'both' : 'ko') : 'en',
@@ -85,6 +87,8 @@ export default function WritePage({
       tags: tags.map((tag) => tag.name),
       images,
     });
+    if (!noticeId) return;
+    push(`/${lng}/notice/${noticeId}`);
   };
 
   return (
