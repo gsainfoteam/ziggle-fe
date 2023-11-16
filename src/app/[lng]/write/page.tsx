@@ -22,6 +22,7 @@ import TypeIcon from '@/assets/icons/type.svg';
 
 import AttatchPhotoArea from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
+import handleNoticeSubmit from './HandleNoticeSubmit';
 import TagInput, { Tag } from './TagInput';
 import TinyMCEEditor from './TinyMCEEditor';
 type NoticeType = 'recruit' | 'event' | 'general';
@@ -38,8 +39,10 @@ export default function WritePage({
 }) {
   const { t } = useTranslation(lng, 'translation');
 
+  const [title, setTitle] = useState('');
+
   const [hasDeadline, setHasDeadline] = useState(false);
-  const [deadline, onDeadlineChange] = useState<Value>(new Date());
+  const [deadline, onDeadlineChange] = useState<Date | null>(new Date());
   const [selectedNoticeType, setSelectedNoticeType] =
     useState<NoticeType>('recruit');
 
@@ -65,10 +68,33 @@ export default function WritePage({
     }
   };
 
+  const handleSubmit = () => {
+    const koreanBody = koreanEditorRef.current
+      ? koreanEditorRef.current.getContent()
+      : undefined;
+    const englishBody = englishEditorRef.current
+      ? englishEditorRef.current.getContent()
+      : undefined;
+
+    handleNoticeSubmit({
+      title,
+      deadline: deadline ?? undefined,
+      noticeLanguage: isWriteKorean ? (isWriteEnglish ? 'both' : 'ko') : 'en',
+      koreanBody,
+      englishBody,
+      tags: tags.map((tag) => tag.name),
+      images,
+    });
+  };
+
   return (
     <main className="flex flex-col items-center md:py-12">
       <div className="flex flex-col content">
         <input
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
           className="text-4xl font-bold mt-16 mb-4 p-0 content outline-none dark:bg-transparent w-full"
           type="text"
           placeholder={t('write.writeTitle')}
@@ -213,7 +239,11 @@ export default function WritePage({
         <AttatchPhotoArea t={t} files={images} setFiles={setImages} />
       </div>
 
-      <Button variant="contained" className="mt-[10rem] mb-4">
+      <Button
+        variant="contained"
+        className="mt-[10rem] mb-4"
+        onClick={handleSubmit}
+      >
         <div className="font-bold text-base md:text-xl mx-3 my-1">
           {t('write.submit')}
         </div>
