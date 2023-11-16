@@ -31,8 +31,8 @@ interface UserResponse {
 }
 
 export const auth = async () => {
-  const store = cookies();
-  const accessToken = store.get('access_token');
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token');
   if (!accessToken) return null;
   try {
     const { data: user } = await api.get<UserResponse>('/user/info', {
