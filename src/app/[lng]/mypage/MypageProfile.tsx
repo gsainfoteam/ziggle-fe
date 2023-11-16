@@ -1,3 +1,6 @@
+import { createTranslation } from '@/app/i18next';
+import { Locale } from '@/app/i18next/settings';
+
 interface IconProps {
   size?: string;
   color?: string;
@@ -49,9 +52,9 @@ export default async function MypageProfile({
   id,
   phone,
   email,
-  logout = '',
-  quit = '',
-}: MypageProfileProps) {
+  lng,
+}: MypageProfileProps & { lng: Locale }) {
+  const { t } = await createTranslation(lng, 'translation');
   return (
     <div>
       <div className="flex flex-col items-center mr-20">
@@ -71,8 +74,8 @@ export default async function MypageProfile({
           </div>
         </div>
         <div className="flex flex-row items-center ">
-          <UnderLinedText text={logout}></UnderLinedText>
-          <UnderLinedText text={quit}></UnderLinedText>
+          <UnderLinedText text={t('mypage.logout')}></UnderLinedText>
+          <UnderLinedText text={t('mypage.quit')}></UnderLinedText>
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+import { createTranslation } from '@/app/i18next';
+import { Locale } from '@/app/i18next/settings';
 import LazyCat from '@/assets/lazy-cat.svg';
 
 // interface Tag {
@@ -26,8 +28,6 @@ interface MypageTableProps {
   title: string;
   articles: Notice[];
   link: string;
-  noArticle: string;
-  totalList: string;
 }
 
 interface UnderLinedTextProps {
@@ -40,13 +40,13 @@ const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   );
 };
 
-const MypageTable = ({
+const MypageTable = async ({
   title,
   articles,
   link,
-  noArticle,
-  totalList,
-}: MypageTableProps) => {
+  lng,
+}: MypageTableProps & { lng: Locale }) => {
+  const { t } = await createTranslation(lng, 'translation');
   return (
     <div className="rounded-lg shadow-md bg-white w-[550px] xl:w-[600px]">
       <div className="w-full border border-white border-collapse border-spacing-0 rounded-lg">
@@ -56,7 +56,7 @@ const MypageTable = ({
           </div>
           <div className="w-1/4 rounded-tr-10 text-right">
             <div className="flex items-end justify-end text-s text-regular text-white h-full">
-              <UnderLinedText text={totalList}></UnderLinedText>
+              <UnderLinedText text={t('mypage.totalList')}></UnderLinedText>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ const MypageTable = ({
           <div className="flex flex-col h-full justify-center items-center p-30 bg-colorless rounded-bl-0 rounded-br-10">
             <LazyCat className="p-5 w-50 h-50" />
             <div className="text-regular m-5 text-secondayText">
-              {noArticle}
+              {t('mypage.noArticle')}
             </div>
           </div>
         )}

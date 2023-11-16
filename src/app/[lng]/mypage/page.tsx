@@ -17,8 +17,7 @@ export default async function MyPage({
       <div className="mt-10 w-full flex h-1500 xl:h-1000 justify-center items-center flex-col xl:flex-row gap-20">
         <div className="flex flex-col relative m-10">
           <MypageProfile
-            logout={t('mypage.logout')}
-            quit={t('mypage.quit')}
+            lng={lng}
             name={'김지현'}
             id={'201910808'}
             email={'ss@gm.gist.ac.kr'}
@@ -31,8 +30,7 @@ export default async function MyPage({
         <div className="flex justify-center items-center flex-col">
           <div className="mb-10 p-0 xl:p-50">
             <MypageTable
-              totalList={t('mypage.totalList')}
-              noArticle={t('mypage.noArticle')}
+              lng={lng}
               title={t('mypage.myNotice')}
               articles={[]}
               link={''}
@@ -40,8 +38,7 @@ export default async function MyPage({
           </div>
           <div className="p-0 xl:p-50">
             <MypageTable
-              totalList={t('mypage.totalList')}
-              noArticle={t('mypage.noArticle')}
+              lng={lng}
               title={t('mypage.remindNotice')}
               articles={[
                 { title: '제목1', createdAt: '2021-09-01' },
