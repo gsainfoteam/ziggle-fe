@@ -1,12 +1,9 @@
-import Image from 'next/image';
-
 import { getAllNotices } from '@/api/notice/notice';
 import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
-import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
+import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
-import SearchGif from './assets/search.gif';
 import SearchNoResult from './assets/searchNoResult.svg';
 import SearchBar from './SearchBar';
 import SearchTagSelect from './SearchTagSelect';
@@ -48,7 +45,7 @@ const SearchPage = async ({
 
             <div className="h-8" />
 
-            {data.list.map((notice) => (
+            {/* {data.list.map((notice) => (
               <ResultZabo
                 {...notice}
                 searchQuery={search}
@@ -56,16 +53,14 @@ const SearchPage = async ({
                 t={t}
                 key={notice.id}
               />
-            ))}
+            ))} */}
           </div>
         )}
         {/* 검색어를 입력하지 않았을 때만 */}
         {!search && (
           <div className="flex justify-center w-full">
             <div className="flex flex-col items-center">
-              <Image src={SearchGif} alt="search" className="w-[200px]" />
-
-              <div className="h-[100px]" />
+              <SearchAnimation />
               <div className="h-[10px]" />
               <p className="text-lg md:text-2xl text-secondaryText font-medium pt-5 mt-[-30px]">
                 {t('searchPage.prompt')}
