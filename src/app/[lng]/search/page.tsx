@@ -54,7 +54,7 @@ const SearchPage = ({
   return (
     <div className="content mx-auto">
       <div className="flex flex-col align-center">
-        <div className={'flex justify-center'}>
+        <div className="flex justify-center">
           <div
             className={
               'animate-none search-bar-animation flex flex-col gap-3 mt-20 mb-10'
