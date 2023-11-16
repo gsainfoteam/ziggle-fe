@@ -4,11 +4,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { NoticeKind } from '@/api/notice/notice';
+import { useTranslation } from '@/app/i18next/client';
 
 import Button from '../../components/atoms/Button';
 import Chip from '../../components/molecules/Chip';
 
 const SearchTagSelect = () => {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -39,7 +41,7 @@ const SearchTagSelect = () => {
       {...Object.values(NoticeKind).map((kind) => (
         <Button key={kind} onClick={() => handleCheckboxChange(kind)}>
           <Chip variant={selected.includes(kind) ? 'contained' : 'outlined'}>
-            {'🎯 모집'}
+            {t(`notices.${kind}.label`)}
           </Chip>
         </Button>
       ))}

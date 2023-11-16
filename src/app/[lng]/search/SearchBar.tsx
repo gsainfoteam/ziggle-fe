@@ -45,10 +45,10 @@ export const SearchBar = () => {
   return (
     <form
       action={search}
-      className="flex align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]"
+      className="flex justify-between align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]"
     >
       <input
-        className="w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg outline-none bg-transparent md:text-xl"
+        className="flex-1 md:w-96 p-0.375 md:p-0.5 text-primary text-lg outline-none bg-transparent md:text-xl"
         name="searchQuery"
         placeholder={t('searchPage.searchBar.placeholder')}
         value={keyword}
