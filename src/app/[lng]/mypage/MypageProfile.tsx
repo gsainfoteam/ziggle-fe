@@ -2,11 +2,6 @@ import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import AccountIcon from '@/assets/icons/account.svg';
 
-interface IconProps {
-  size?: string;
-  color?: string;
-}
-
 interface MypageProfileProps {
   name?: string;
   id?: string;
@@ -54,7 +49,7 @@ export default async function MypageProfile({
             {email}
           </div>
         </div>
-        <div className="flex flex-row items-center ">
+        <div className="flex flex-row items-center">
           <UnderLinedText text={t('mypage.logout')}></UnderLinedText>
           <UnderLinedText text={t('mypage.quit')}></UnderLinedText>
         </div>
