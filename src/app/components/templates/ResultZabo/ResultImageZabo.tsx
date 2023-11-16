@@ -1,3 +1,5 @@
+'use client';
+
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { Trans } from 'react-i18next';
@@ -18,7 +20,6 @@ const ResultImageZabo = ({
   deadline: rawDeadline,
   tags,
   searchQuery,
-  t,
   imageUrl,
   logName,
   id,
@@ -56,7 +57,7 @@ const ResultImageZabo = ({
         >
           <div className="flex flex-col align-start">
             <p className={'font-medium text-sm md:text-xl'}>
-              <Trans t={t} i18nKey="zabo.dueAt">
+              <Trans i18nKey="zabo.dueAt">
                 {{ dueAt: dayjs(deadline).format('LLLL') }}
               </Trans>
             </p>
