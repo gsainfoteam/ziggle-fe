@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { T } from '@/app/i18next';
-import DeepLLogo from '@/assets/logos/DeepL.svg';
+import DeepLLogo from '@/assets/logos/deepL.svg';
 
 interface DeepLButtonProps {
   query?: string;
