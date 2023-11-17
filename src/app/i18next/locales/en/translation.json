@@ -176,6 +176,24 @@
     "addFromMyDevice": "Add from my device",
 
     "submit": "Submit Notice",
-    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting."
+    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
+
+    "alerts": {
+      "title": "Please enter a title",
+      "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters",
+      "deadline": "Please set the deadline after the current time",
+      "body": "Please enter the content",
+      "koreanBody": "Please enter Korean text content",
+      "englishBody": "Please enter English text content",
+      "bodyLengthLessThan": "Please enter body content within {{bodyMaxLength}} characters",
+      "koreanBodyLengthLessThan": "Please enter Korean body content within {{bodyMaxLength}} characters",
+      "englishBodyLengthLessThan": "Please enter English body content within {{bodyMaxLength}} characters",
+      "bothBodyLengthLessThan": "Please enter both Korean and English content within {{bodyMaxLength}} characters",
+      "numberOfCharacter": "({{length}}/{{maxLength}} characters)",
+      "submittingNotice": "Creating a notice...",
+      "submitSuccess": "The notice was submitted successfully",
+      "submitFail": "Failed to submit notice",
+      "tagCreationFail": "Failed to create tag"
+    }
   }
 }

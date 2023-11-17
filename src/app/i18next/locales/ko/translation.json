@@ -173,6 +173,24 @@
     "addFromMyDevice": "내 기기에서 사진 선택하기",
 
     "submit": "공지 제출하기",
-    "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요."
+    "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
+
+    "alerts": {
+      "title": "제목을 입력해주세요",
+      "titleLengthLessThan": "제목은 {{titleMaxLength}}자 이내로 입력해주세요",
+      "deadline": "마감 시간은 현재 시간 이후로 설정해주세요",
+      "body": "본문 내용을 입력해주세요",
+      "koreanBody": "한국어 본문 내용을 입력해주세요",
+      "englishBody": "영어 본문 내용을 입력해주세요",
+      "bodyLengthLessThan": "본문 내용은 {{bodyMaxLength}}자 이내로 입력해주세요",
+      "koreanBodyLengthLessThan": "한국어 본문을 {{bodyMaxLength}}자 이내로 입력해주세요",
+      "englishBodyLengthLessThan": "영어 본문을 {{bodyMaxLength}}자 이내로 입력해주세요",
+      "bothBodyLengthLessThan": "한국어와 영어 본문 모두 {{bodyMaxLength}}자 이내로 입력해주세요",
+      "numberOfCharacter": "({{length}}/{{maxLength}} 자)",
+      "submittingNotice": "공지를 작성 중입니다",
+      "submitSuccess": "공지가 성공적으로 작성되었습니다",
+      "submitFail": "공지 작성에 실패했습니다",
+      "tagCreationFail": "태그 생성에 실패했습니다"
+    }
   }
 }

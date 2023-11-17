@@ -4,6 +4,7 @@ import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import { CREATE_NOTICE } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
+import { T } from '@/app/i18next';
 
 import { apolloClient } from '../InitClient';
 
@@ -27,9 +28,11 @@ const handleNoticeSubmit = async ({
   englishBody,
   tags,
   images,
-}: NoticeSubmitForm) => {
+  t,
+}: NoticeSubmitForm & { t: T }) => {
   sendLog(LogEvents.noticeWritingPageClickSubmit);
 
+  const TITLE_MAX_LENGTH = 50;
   const BODY_MAX_LENGTH = 3000;
 
   const WarningSwal = (text: string) => {
@@ -41,44 +44,48 @@ const handleNoticeSubmit = async ({
   };
 
   if (!title) {
-    WarningSwal('제목을 입력해주세요');
+    WarningSwal(t('write.alerts.body'));
     return;
   }
 
-  if (title.length > 50) {
-    WarningSwal('제목은 50자 이내로 입력해주세요');
+  if (title.length > TITLE_MAX_LENGTH) {
+    WarningSwal(
+      t('write.alerts.bodyLengthLessThan', {
+        titleMaxLength: TITLE_MAX_LENGTH,
+      }),
+    );
     return;
   }
 
   if (deadline && deadline < new Date()) {
-    WarningSwal('마감 시간은 현재 시간 이후로 설정해주세요');
+    WarningSwal(t('write.alerts.deadline'));
     return;
   }
 
   switch (noticeLanguage) {
     case 'ko':
       if (!koreanBody) {
-        WarningSwal('본문 내용을 입력해주세요');
+        WarningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'en':
       if (!englishBody) {
-        WarningSwal('본문 내용을 입력해주세요');
+        WarningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'both':
       if (!koreanBody && !englishBody) {
-        WarningSwal('본문 내용을 입력해주세요');
+        WarningSwal(t('write.alerts.body'));
         return;
       }
       if (!koreanBody && englishBody) {
-        WarningSwal('한국어 본문 내용을 입력해주세요');
+        WarningSwal(t('write.alerts.englishBody'));
         return;
       }
       if (koreanBody && !englishBody) {
-        WarningSwal('영어 본문 내용을 입력해주세요');
+        WarningSwal(t('write.alerts.koreanBody'));
         return;
       }
       break;
@@ -87,13 +94,29 @@ const handleNoticeSubmit = async ({
   switch (noticeLanguage) {
     case 'ko':
       if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(`본문은 ${BODY_MAX_LENGTH}자 이내로 입력해주세요`);
+        WarningSwal(
+          t('write.alerts.bodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            t('write.alerts.numberOfCharacter', {
+              length: koreanBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        );
         return;
       }
       break;
     case 'en':
       if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(`본문은 ${BODY_MAX_LENGTH}자 이내로 입력해주세요`);
+        WarningSwal(
+          t('write.alerts.bodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            t('write.alerts.numberOfCharacter', {
+              length: englishBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        );
         return;
       }
       break;
@@ -105,7 +128,17 @@ const handleNoticeSubmit = async ({
         englishBody.length > BODY_MAX_LENGTH
       ) {
         WarningSwal(
-          `한국어 본문과 영어 본문 모두 ${BODY_MAX_LENGTH}자 이내로 입력해주세요`,
+          t('write.alerts.bothBodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            t('write.alerts.numberOfCharacter', {
+              length: koreanBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }) +
+            t('write.alerts.numberOfCharacter', {
+              length: englishBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
         );
         return;
       } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
