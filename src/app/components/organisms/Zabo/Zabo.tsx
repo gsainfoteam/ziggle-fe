@@ -9,8 +9,17 @@ export type ZaboOrigin = 'width' | 'height';
 export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
   ? { width: number; height?: never }
   : Origin extends 'height'
-  ? { height: number; width?: never }
-  : never;
+    ? { height: number; width?: never }
+    : never;
+
+export type ZaboProps<Origin extends ZaboOrigin> = Notice &
+  ZaboSize<Origin> & { t: T };
+
+export type ImageZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin> & {
+  imageUrl: string;
+};
+
+export type TextZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin>;
 
 export type ZaboProps<Origin extends ZaboOrigin> = Notice &
   ZaboSize<Origin> & { t: T };

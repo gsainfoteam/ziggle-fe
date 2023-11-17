@@ -35,7 +35,18 @@ type Notices {
   total: Int!
 }
 
+enum OrderBy {
+  DEADLINE
+  HOT
+  RECENT
+}
+
+enum MineNotice {
+  OWN
+  REMINDERS
+}
+
 type Query {
-  notices(offset: Int, limit: Int): Notices!
+  notices(offset: Int, limit: Int, search: String, tags: [String!], orderBy: OrderBy, my: MineNotice): Notices!
   notice(id: Int!): Notice
 }

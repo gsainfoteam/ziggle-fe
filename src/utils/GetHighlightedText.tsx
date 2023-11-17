@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface GetHighlightedTextProps {
   text: string;
@@ -18,7 +18,7 @@ const GetHighlightedText = ({
     return <p className={className}>{text}</p>;
   }
 
-  const regex = new RegExp(query, "gi");
+  const regex = new RegExp(query, 'gi');
   const match = text.match(regex);
 
   if (!match) return <></>;

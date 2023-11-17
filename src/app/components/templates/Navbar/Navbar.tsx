@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
 import { T } from '@/app/i18next';
@@ -8,7 +9,8 @@ import AccountIcon from '@/assets/icons/account.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 import ZiggleLogo from '@/assets/logos/ziggle.svg';
 
-const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
+const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
+  const user = await auth();
   const nav = (
     <>
       <Analytics event={LogEvents.navBarClickAll}>
@@ -31,13 +33,23 @@ const Navbar = ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
           </Link>
         </Analytics>
         <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
-        <Link
-          href={`/${lng}/login`}
-          className="flex items-center gap-x-1 font-bold"
-        >
-          {t('navbar.login')}
-          <AccountIcon width="1.6rem" height="1.6rem" />
-        </Link>
+        {user ? (
+          <Link
+            href={`/${lng}/mypage`}
+            className="flex items-center gap-x-1 font-bold"
+          >
+            {user.name}
+            <AccountIcon width="1.6rem" height="1.6rem" />
+          </Link>
+        ) : (
+          <Link
+            href={`/${lng}/login`}
+            className="flex items-center gap-x-1 font-bold"
+          >
+            {t('navbar.login')}
+            <AccountIcon width="1.6rem" height="1.6rem" />
+          </Link>
+        )}
       </div>
       <nav className="flex font-bold text-sm gap-x-8 md:hidden">{nav}</nav>
     </header>

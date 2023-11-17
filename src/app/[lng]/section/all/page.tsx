@@ -4,6 +4,8 @@ import { Locale } from '@/app/i18next/settings';
 
 import NoticesLoadingWrapper from './NoticesLoadingWrapper';
 
+export const dynamic = 'force-dynamic';
+
 const AllNoticePage = async ({
   searchParams,
 }: {

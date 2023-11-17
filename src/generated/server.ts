@@ -51,6 +51,11 @@ export type DetailedNotice = {
   views: Scalars['Int']['output'];
 };
 
+export enum MineNotice {
+  Own = 'OWN',
+  Reminders = 'REMINDERS'
+}
+
 export type Notice = {
   __typename?: 'Notice';
   author: Scalars['String']['output'];
@@ -58,8 +63,12 @@ export type Notice = {
   createdAt: Scalars['Date']['output'];
   deadline?: Maybe<Scalars['Date']['output']>;
   id: Scalars['Int']['output'];
-  tags: Array<Tag>;
   imageUrl?: Maybe<Scalars['String']['output']>;
+  tags: Array<Tag>;
+<<<<<<< HEAD
+  imageUrl?: Maybe<Scalars['String']['output']>;
+=======
+>>>>>>> origin/118-feature-migration-to-nextjs-search-page
   title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -69,6 +78,12 @@ export type Notices = {
   list: Array<Notice>;
   total: Scalars['Int']['output'];
 };
+
+export enum OrderBy {
+  Deadline = 'DEADLINE',
+  Hot = 'HOT',
+  Recent = 'RECENT'
+}
 
 export type Query = {
   __typename?: 'Query';
@@ -82,7 +97,11 @@ export type QueryNoticeArgs = {
 
 export type QueryNoticesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
+  my?: InputMaybe<MineNotice>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<OrderBy>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 export type Tag = {
@@ -202,8 +221,10 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
   DetailedNotice: ResolverTypeWrapper<DetailedNotice>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  MineNotice: MineNotice;
   Notice: ResolverTypeWrapper<Notice>;
   Notices: ResolverTypeWrapper<Notices>;
+  OrderBy: OrderBy;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Tag: ResolverTypeWrapper<Tag>;
@@ -257,8 +278,12 @@ export type NoticeResolvers<
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   deadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
   imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
+<<<<<<< HEAD
+  imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+=======
+>>>>>>> origin/118-feature-migration-to-nextjs-search-page
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

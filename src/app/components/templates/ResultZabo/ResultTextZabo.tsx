@@ -1,5 +1,9 @@
+'use client';
+
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
+
+import { useTranslation } from '@/app/i18next/client';
 
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
@@ -14,9 +18,9 @@ const ResultTextZabo = ({
   deadline: rawDeadline,
   tags,
   searchQuery,
-  t,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
+  const { t } = useTranslation();
 
   return (
     <div
@@ -59,7 +63,7 @@ const ResultTextZabo = ({
         </div>
 
         <div className="flex gap-0.5">
-          <div className="text-sm text-secondaryText font-medium flex">
+          <div className="text-sm text-secondayText font-medium flex">
             <Trans t={t} i18nKey="zabo.dateView">
               {{ date: dayjs(createdAt).format('L') }}
               <strong className="font-bold"> · {{ views }}</strong>
