@@ -209,32 +209,33 @@ export default function WritePage({
           </Checkbox>
         </div>
 
-        {isWriteKorean && (
-          <div>
-            <div className="flex gap-2 mt-10 mb-3 items-center">
-              <ContentIcon className="w-5 md:w-6 dark:fill-white" />
-              <div className="font-medium text-lg">
-                {t('write.enterKoreanContent')}
-              </div>
+        <div className={`${isWriteKorean ? '' : 'hidden'}`}>
+          <div className="flex gap-2 mt-10 mb-3 items-center">
+            <ContentIcon className="w-5 md:w-6 dark:fill-white" />
+            <div className="font-medium text-lg">
+              {t('write.enterKoreanContent')}
             </div>
-
-            <TinyMCEEditor ref={koreanEditorRef} />
           </div>
-        )}
 
-        {isWriteEnglish && (
-          <div>
-            <div className="flex gap-2 mt-10 mb-3 items-center">
-              <ContentIcon className="w-5 md:w-6 dark:fill-white" />
-              <div className="font-medium text-lg mr-4">
-                {t('write.enterEnglishContent')}
-              </div>
-              <DeepLButton t={t} query={koreanEditorRef.current.getContent()} />
+          <TinyMCEEditor ref={koreanEditorRef} />
+        </div>
+
+        <div className={`${isWriteEnglish ? '' : 'hidden'}`}>
+          <div className="flex gap-2 mt-10 mb-3 items-center">
+            <ContentIcon className="w-5 md:w-6 dark:fill-white" />
+            <div className="font-medium text-lg mr-4">
+              {t('write.enterEnglishContent')}
             </div>
-
-            <TinyMCEEditor ref={englishEditorRef} />
+            {isWriteKorean && (
+              <DeepLButton
+                t={t}
+                query={koreanEditorRef.current?.getContent()}
+              />
+            )}
           </div>
-        )}
+
+          <TinyMCEEditor ref={englishEditorRef} />
+        </div>
 
         <div className="flex gap-2 mt-10 mb-1 items-center">
           <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
