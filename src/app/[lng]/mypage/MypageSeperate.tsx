@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 const MypageSeperate = () => {
   return (
     <div className="pl-40 pt-40 m-20">

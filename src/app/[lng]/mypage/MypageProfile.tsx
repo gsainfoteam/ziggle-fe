@@ -33,7 +33,7 @@ export default async function MypageProfile({
   const { t } = await createTranslation(lng, 'translation');
   return (
     <div>
-      <div className="flex flex-col items-center mr-20">
+      <div className="flex flex-col items-center">
         <div className="text-4xl font-medium m-10">INFO</div>
         <div className="flex flex-col items-center">
           <AccountIcon className="fill-gray-400 w-48" />

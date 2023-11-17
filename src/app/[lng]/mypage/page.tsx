@@ -20,14 +20,11 @@ export default async function MyPage({
             lng={lng}
             name={'김지현'}
             id={'201910808'}
-            email={'ss@gm.gist.ac.kr'}
+            email={'mynameisjihyunkim@gm.gist.ac.kr'}
             phone={'010-0000-0000'}
           />
-          <div className="xl:flex hidden">
-            <MypageSeperate />
-          </div>
         </div>
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex justify-center items-center flex-col my-5">
           <div className="mb-10 p-0 xl:p-50">
             <MypageTable
               lng={lng}
@@ -42,6 +39,8 @@ export default async function MyPage({
               title={t('mypage.remindNotice')}
               articles={[
                 { title: '제목1', createdAt: '2021-09-01' },
+                { title: '제목2', createdAt: '2021-09-02' },
+                { title: '제목2', createdAt: '2021-09-02' },
                 { title: '제목2', createdAt: '2021-09-02' },
               ]}
               link={''}
