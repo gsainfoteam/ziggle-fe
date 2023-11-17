@@ -7,8 +7,10 @@ import { T } from '@/app/i18next';
 import { fallbackLng, Locale } from '@/app/i18next/settings';
 import AccountIcon from '@/assets/icons/account.svg';
 import SearchIcon from '@/assets/icons/search.svg';
-import ZiggleEnglishLogo from '@/assets/logos/ziggle-eng.svg';
-import ZiggleKoreanLogo from '@/assets/logos/ziggle-kor.svg';
+import LocaleToggleButtonEnglish from '@/assets/locale-btn-en.svg';
+import LocaleToggleButtonKorean from '@/assets/locale-btn-ko.svg';
+import ZiggleEnglishLogo from '@/assets/logos/ziggle-en.svg';
+import ZiggleKoreanLogo from '@/assets/logos/ziggle-ko.svg';
 
 const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
   const user = await auth();
@@ -28,15 +30,25 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
   return (
     <header className="bg-primary px-4 py-2 md:py-0.5 text-white">
       <div className="flex justify-between items-center">
-        <Analytics event={LogEvents.navBarClickLogo}>
-          <Link href={`/${lng}`}>
+        <div className="flex items-center gap-5">
+          <Analytics event={LogEvents.navBarClickLogo}>
+            <Link href={`/${lng}`}>
+              {lng === 'en' ? (
+                <ZiggleEnglishLogo className="h-15 md:w-auto" />
+              ) : (
+                <ZiggleKoreanLogo className="h-15 md:w-auto" />
+              )}
+            </Link>
+          </Analytics>
+
+          <Link href={`/${lng === 'en' ? 'ko' : 'en'}`}>
             {lng === 'en' ? (
-              <ZiggleEnglishLogo className="w-20 md:w-auto" />
+              <LocaleToggleButtonEnglish className="w-13 md:w-auto" />
             ) : (
-              <ZiggleKoreanLogo className="w-20 md:w-auto" />
+              <LocaleToggleButtonKorean className="w-13 md:w-auto" />
             )}
           </Link>
-        </Analytics>
+        </div>
         <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
         {user ? (
           <Link
