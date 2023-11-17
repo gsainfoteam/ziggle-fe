@@ -7,7 +7,8 @@ import { T } from '@/app/i18next';
 import { fallbackLng, Locale } from '@/app/i18next/settings';
 import AccountIcon from '@/assets/icons/account.svg';
 import SearchIcon from '@/assets/icons/search.svg';
-import ZiggleLogo from '@/assets/logos/ziggle.svg';
+import ZiggleEnglishLogo from '@/assets/logos/ziggle-eng.svg';
+import ZiggleKoreanLogo from '@/assets/logos/ziggle-kor.svg';
 
 const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
   const user = await auth();
@@ -29,7 +30,11 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
       <div className="flex justify-between items-center">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
-            <ZiggleLogo className="w-20 md:w-auto" />
+            {lng === 'en' ? (
+              <ZiggleEnglishLogo className="w-20 md:w-auto" />
+            ) : (
+              <ZiggleKoreanLogo className="w-20 md:w-auto" />
+            )}
           </Link>
         </Analytics>
         <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
