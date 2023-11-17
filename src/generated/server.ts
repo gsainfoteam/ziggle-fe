@@ -65,10 +65,6 @@ export type Notice = {
   id: Scalars['Int']['output'];
   imageUrl?: Maybe<Scalars['String']['output']>;
   tags: Array<Tag>;
-<<<<<<< HEAD
-  imageUrl?: Maybe<Scalars['String']['output']>;
-=======
->>>>>>> origin/118-feature-migration-to-nextjs-search-page
   title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
@@ -280,10 +276,6 @@ export type NoticeResolvers<
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-<<<<<<< HEAD
-  imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-=======
->>>>>>> origin/118-feature-migration-to-nextjs-search-page
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

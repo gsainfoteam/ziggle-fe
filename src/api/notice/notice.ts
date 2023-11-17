@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { Dayjs } from 'dayjs';
-=======
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
->>>>>>> origin/118-feature-migration-to-nextjs-search-page
 
 import { gql } from '@/generated';
 
@@ -33,13 +28,8 @@ interface NoticeBase {
   title: string;
   views: number;
   body: string;
-<<<<<<< HEAD
-  deadline?: Dayjs | string | null;
-  createdAt: Dayjs | string;
-=======
   deadline?: dayjs.Dayjs | string | null;
   createdAt: dayjs.Dayjs | string;
->>>>>>> origin/118-feature-migration-to-nextjs-search-page
   author: string;
   tags: Tag[];
   logName?: string;
@@ -71,7 +61,6 @@ export const getAllNotices = async (
     ...data,
     list: data.list.map(({ imageUrl, ...notice }) => ({
       ...notice,
-      // createdAt: dayjs(notice.createdAt),
       deadline: notice.deadline ? notice.deadline : null,
       imageUrl: imageUrl ? imageUrl : null,
     })),

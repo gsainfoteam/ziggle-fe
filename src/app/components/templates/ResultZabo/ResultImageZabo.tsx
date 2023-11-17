@@ -4,6 +4,7 @@ import { Trans } from 'react-i18next';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import { useTranslation } from '@/app/i18next/client';
 import GetHighlightedText from '@/utils/GetHighlightedText';
 
 import Chip from '../../molecules/Chip';
@@ -18,13 +19,15 @@ const ResultImageZabo = ({
   deadline: rawDeadline,
   tags,
   searchQuery,
-  t,
+
   imageUrl,
   logName,
   id,
 }: ResultImageZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
+
+  const { t } = useTranslation();
 
   return (
     <Link
@@ -40,12 +43,9 @@ const ResultImageZabo = ({
       {/* fix /ko/ to /lng/ */}
       <div className="flex justify-start gap-5 w-full flex-nowrap overflow-hidden box-border items-stretch">
         <ZaboImage
-          // origin="width"
-          // size={isMobile ? 120 : 230}
           width={230} // handle mobile
           src={imageUrl}
           alt={title}
-          // isHover={false}
         />
         <div
           className="flex flex-col justify-between box-border"
@@ -88,16 +88,13 @@ const ResultImageZabo = ({
               ))}
             </div>
           </div>
-          <div className={'gap-2 align-middle flex'}>
-            <p
-              className={'font-regular text-secondaryText text-xs md:text-base'}
-            >
-              {dayjs(createdAt).format('L')}
-            </p>
-            <p className={'text-secondaryText text-xs md:text-base'}>•</p>
-            <p className={'font-bold text-secondaryText text-xs md:text-base'}>
-              조회수 {views}
-            </p>
+          <div className="flex gap-0.5">
+            <div className="text-sm text-secondayText font-medium flex">
+              <Trans t={t} i18nKey="zabo.dateView">
+                {{ date: dayjs(createdAt).format('L') }}
+                <strong className="font-bold"> · {{ views }}</strong>
+              </Trans>
+            </div>
           </div>
         </div>
       </div>

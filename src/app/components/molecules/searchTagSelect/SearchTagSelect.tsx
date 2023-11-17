@@ -3,7 +3,6 @@ import { NoticeKind } from '@/api/notice/notice';
 import Button from '../../atoms/Button';
 import Chip from '../Chip';
 
-//import React from 'react';
 interface NoticeTypeCheckboxProps {
   selected: NoticeKind[];
   onChange: (selected: NoticeKind[]) => void;
