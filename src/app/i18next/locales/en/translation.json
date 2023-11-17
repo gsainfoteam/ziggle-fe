@@ -179,6 +179,7 @@
     "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
 
     "alerts": {
+      "confimationButtonText": "Confirm",
       "title": "Please enter a title",
       "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters",
       "deadline": "Please set the deadline after the current time",

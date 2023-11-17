@@ -1,7 +1,5 @@
 import dynamic from 'next/dynamic';
 
-const dynamicImportedWritePage = dynamic(() => import('./WritePage'), {
-  ssr: false,
-});
+const dynamicWritePage = dynamic(() => import('./WritePage'), { ssr: false });
 
-export default dynamicImportedWritePage;
+export default dynamicWritePage;

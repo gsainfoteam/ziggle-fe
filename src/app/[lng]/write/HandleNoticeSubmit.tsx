@@ -39,7 +39,7 @@ const handleNoticeSubmit = async ({
     Swal.fire({
       text,
       icon: 'warning',
-      confirmButtonText: '확인',
+      confirmButtonText: t('write.alerts.confimationButtonText'),
     });
   };
 
@@ -81,11 +81,11 @@ const handleNoticeSubmit = async ({
         return;
       }
       if (!koreanBody && englishBody) {
-        WarningSwal(t('write.alerts.englishBody'));
+        WarningSwal(t('write.alerts.koreanBody'));
         return;
       }
       if (koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.koreanBody'));
+        WarningSwal(t('write.alerts.englishBody'));
         return;
       }
       break;
@@ -142,16 +142,34 @@ const handleNoticeSubmit = async ({
         );
         return;
       } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(`한국어 본문은 ${BODY_MAX_LENGTH}자 이내로 입력해주세요`);
+        WarningSwal(
+          t('write.alerts.koreanBodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            t('write.alerts.numberOfCharacter', {
+              length: koreanBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        );
+
         return;
       } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(`영어 본문은 ${BODY_MAX_LENGTH}자 이내로 입력해주세요`);
+        WarningSwal(
+          t('write.alerts.englishBodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            t('write.alerts.numberOfCharacter', {
+              length: englishBody.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        );
+
         return;
       }
       break;
   }
 
-  const tagIds: number[] | undefined = await handleTagSubmit(tags);
+  const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
   if (!tagIds) return;
 
   // need to remove log later
@@ -166,7 +184,7 @@ const handleNoticeSubmit = async ({
   );
 
   Swal.fire({
-    text: '공지를 작성 중입니다',
+    text: t('write.alerts.submittingNotice'),
     icon: 'info',
     showConfirmButton: false,
   });
@@ -183,9 +201,9 @@ const handleNoticeSubmit = async ({
   const id = notice.data?.createNotice.id;
   if (!id) {
     Swal.fire({
-      text: '공지를 작성하는데 실패했습니다',
+      text: t('write.alerts.submitFail'),
       icon: 'error',
-      confirmButtonText: '확인',
+      confirmButtonText: t('write.alerts.confimationButtonText'),
     });
     return;
   }
@@ -193,7 +211,7 @@ const handleNoticeSubmit = async ({
   return id;
 };
 
-const handleTagSubmit = async (tags: string[]) => {
+const handleTagSubmit = async (tags: string[], t: T) => {
   const tagIds: number[] = [];
 
   for (const tagName of tags) {
@@ -204,9 +222,9 @@ const handleTagSubmit = async (tags: string[]) => {
 
       if (!createdTag) {
         Swal.fire({
-          text: '태그를 생성하는데 실패했습니다',
+          text: t('write.alerts.tagCreationFail'),
           icon: 'error',
-          confirmButtonText: '확인',
+          confirmButtonText: t('write.alerts.confimationButtonText'),
         });
         return;
       }

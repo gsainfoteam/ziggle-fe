@@ -45,7 +45,7 @@ export default function WritePage({
   const [title, setTitle] = useState('');
 
   const [hasDeadline, setHasDeadline] = useState(false);
-  const [deadline, onDeadlineChange] = useState<Date | null>(new Date());
+  const [deadline, setDeadline] = useState<Date | null>(new Date());
   const [selectedNoticeType, setSelectedNoticeType] =
     useState<NoticeType>('recruit');
 
@@ -81,7 +81,7 @@ export default function WritePage({
 
     const noticeId = await handleNoticeSubmit({
       title,
-      deadline: deadline ?? undefined,
+      deadline: hasDeadline ? deadline ?? undefined : undefined,
       noticeLanguage: isWriteKorean ? (isWriteEnglish ? 'both' : 'ko') : 'en',
       koreanBody,
       englishBody,
@@ -115,6 +115,7 @@ export default function WritePage({
             checked={hasDeadline}
             onChange={(e) => {
               setHasDeadline(e.target.checked);
+
               sendLog(LogEvents.noticeWritingPageCheckDeadline, {
                 hasDeadline: e.target.checked,
               });
@@ -126,7 +127,7 @@ export default function WritePage({
           </Checkbox>
 
           {hasDeadline && (
-            <DateTimePicker onChange={onDeadlineChange} value={deadline} />
+            <DateTimePicker onChange={setDeadline} value={deadline} />
           )}
         </div>
 
