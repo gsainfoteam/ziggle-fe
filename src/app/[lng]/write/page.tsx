@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
@@ -90,6 +91,10 @@ export default function WritePage({
     if (!noticeId) return;
     push(`/${lng}/notice/${noticeId}`);
   };
+
+  const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
+    ssr: false,
+  });
 
   return (
     <main className="flex flex-col items-center md:py-12">
@@ -215,7 +220,7 @@ export default function WritePage({
               </div>
             </div>
 
-            <TinyMCEEditor ref={koreanEditorRef} />
+            <DynamicTinyMCEEditor ref={koreanEditorRef} />
           </div>
         )}
 
@@ -228,7 +233,8 @@ export default function WritePage({
               </div>
               <DeepLButton t={t} query={koreanEditorRef.current.getContent()} />
             </div>
-            <TinyMCEEditor ref={englishEditorRef} />
+
+            <DynamicTinyMCEEditor ref={englishEditorRef} />
           </div>
         )}
 
