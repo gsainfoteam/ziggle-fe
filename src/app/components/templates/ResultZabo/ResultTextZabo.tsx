@@ -43,28 +43,28 @@ const ResultTextZabo = ({
       <div
         className={
           'flex flex-col justify-between gap-2.5 p-5 ' +
-          'w-full box-border overflow-hidden rounded border cursor-pointer border-secondaryText ' +
+          'box-border w-full cursor-pointer overflow-hidden rounded border border-secondaryText ' +
           'bg-white dark:bg-neutral-900'
         }
       >
         <div className="flex flex-col items-start">
-          <div className="font-medium text-lg mb-1.5">
+          <div className="mb-1.5 text-lg font-medium">
             <Trans t={t} i18nKey="zabo.dueAt">
               {{ dueAt: dayjs(deadline).format('LLLL') }}
             </Trans>
           </div>
-          <div className="font-bold text-3xl text-start">
+          <div className="text-start text-3xl font-bold">
             <HighlightedText query={searchQuery}>{title}</HighlightedText>
           </div>
 
-          <div className="flex gap-0.5 items-center">
-            <div className="font-bold text-lg">
+          <div className="flex items-center gap-0.5">
+            <div className="text-lg font-bold">
               <HighlightedText query={searchQuery}>{author}</HighlightedText>
             </div>
             {/* organization here (for futer update) */}
           </div>
 
-          <div className="flex gap-2 my-0.5">
+          <div className="my-0.5 flex gap-2">
             {tags.map((tag, index) => (
               <Chip
                 key={index}
@@ -75,12 +75,12 @@ const ResultTextZabo = ({
             ))}
           </div>
 
-          <div className="font-medium text-sm text-start text-ellipsis line-clamp-4">
+          <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
             {body ?? t('zabo.noContent')}
           </div>
 
           <div className="flex gap-0.5">
-            <div className="text-sm text-secondayText font-medium flex">
+            <div className="text-secondayText flex text-sm font-medium">
               <Trans t={t} i18nKey="zabo.dateView">
                 {{ date: dayjs(createdAt).format('L') }}
                 <strong className="font-bold"> · {{ views }}</strong>

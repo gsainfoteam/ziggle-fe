@@ -32,7 +32,7 @@ interface MypageTableProps {
 
 const UnderLinedText = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="m-5 border-b border-gray-200 w-50 text-white">
+    <div className="w-50 m-5 border-b border-gray-200 text-white">
       {children}
     </div>
   );
@@ -46,14 +46,14 @@ const MypageTable = async ({
 }: MypageTableProps & { lng: Locale }) => {
   const { t } = await createTranslation(lng, 'translation');
   return (
-    <div className="rounded-lg shadow-md bg-white dark:bg-text w-[550px] xl:w-[600px]">
-      <div className="w-full border border-white border-collapse border-spacing-0 rounded-lg overflow-hidden">
-        <div className="m-0 flex flex-row w-full border-collapse border-spacing-0 bg-primary">
-          <div className="w-3/4 rounded-tl-10">
-            <div className="text-xl m-5 text-white font-bold">{title}</div>
+    <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
+      <div className="w-full border-collapse border-spacing-0 overflow-hidden rounded-lg border border-white">
+        <div className="m-0 flex w-full border-collapse border-spacing-0 flex-row bg-primary">
+          <div className="rounded-tl-10 w-3/4">
+            <div className="m-5 text-xl font-bold text-white">{title}</div>
           </div>
-          <div className="w-1/4 rounded-tr-10 text-right">
-            <div className="flex items-end justify-end text-s text-regular text-white h-full">
+          <div className="rounded-tr-10 w-1/4 text-right">
+            <div className="text-s text-regular flex h-full items-end justify-end text-white">
               <UnderLinedText>{t('mypage.totalList')}</UnderLinedText>
             </div>
           </div>
@@ -65,15 +65,15 @@ const MypageTable = async ({
           return (
             <div
               key={index}
-              className={`flex h-[70px] ${underLine} items-center flex-row justify-between bg-colorless`}
+              className={`flex h-[70px] ${underLine} bg-colorless flex-row items-center justify-between`}
             >
-              <div className="pb-0 sm:pb-0  leading-1.5">
+              <div className="leading-1.5 pb-0  sm:pb-0">
                 <div className="text-regular m-3.5 text-text dark:text-white">
                   {articleObj.title}
                 </div>
               </div>
               <div className="items-end justify-end">
-                <div className="text-regular m-5 text-secondayText">
+                <div className="text-regular text-secondayText m-5">
                   {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
                 </div>
               </div>
@@ -81,9 +81,9 @@ const MypageTable = async ({
           );
         })}
         {articles.length === 0 && (
-          <div className="flex flex-col h-full justify-center items-center p-30 bg-colorless rounded-bl-0 rounded-br-10">
-            <LazyCat className="p-5 w-50 h-50" />
-            <div className="text-regular m-5 text-secondayText">
+          <div className="p-30 bg-colorless rounded-bl-0 rounded-br-10 flex h-full flex-col items-center justify-center">
+            <LazyCat className="w-50 h-50 p-5" />
+            <div className="text-regular text-secondayText m-5">
               {t('mypage.noArticle')}
             </div>
           </div>

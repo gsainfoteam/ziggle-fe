@@ -15,11 +15,11 @@ const ShowcaseButton = ({ onShow }: ShowcaseButtonProps) => {
   return (
     <Button
       variant="contained"
-      className="absolute bottom-4 flex gap-4 items-center left-1/2 -translate-x-1/2"
+      className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-4"
       onClick={onShow}
     >
       <div>{t('zabo.clickPoster')}</div>
-      <ArrowLeftIcon className="-rotate-90 w-4" />
+      <ArrowLeftIcon className="w-4 -rotate-90" />
     </Button>
   );
 };

@@ -18,12 +18,12 @@ const Pagination = ({ pages, page }: PaginationProps) => {
       {page !== 0 ? (
         <Button animated>
           <Link href={{ query: { page: page - 1 } }}>
-            <ArrowRightFilledIcon className="rotate-180 w-7 md:w-8 fill-primary" />
+            <ArrowRightFilledIcon className="w-7 rotate-180 fill-primary md:w-8" />
           </Link>
         </Button>
       ) : (
         <Button disabled>
-          <ArrowRightFilledIcon className="rotate-180 w-7 md:w-8" />
+          <ArrowRightFilledIcon className="w-7 rotate-180 md:w-8" />
         </Button>
       )}
       <div className="w-2 shrink-0" />
@@ -31,7 +31,7 @@ const Pagination = ({ pages, page }: PaginationProps) => {
         <Link key={index} href={{ query: { page: index } }}>
           <Button
             className={[
-              'rounded-lg w-7 h-7 md:w-8 md:h-8 shrink-0 md:text-xl font-medium',
+              'h-7 w-7 shrink-0 rounded-lg font-medium md:h-8 md:w-8 md:text-xl',
               index === page
                 ? 'bg-primary text-white'
                 : 'bg-white text-primary',
@@ -45,7 +45,7 @@ const Pagination = ({ pages, page }: PaginationProps) => {
       {page + 1 !== pages ? (
         <Button animated>
           <Link href={{ query: { page: page + 1 } }}>
-            <ArrowRightFilledIcon className="w-7 md:w-8 fill-primary" />
+            <ArrowRightFilledIcon className="w-7 fill-primary md:w-8" />
           </Link>
         </Button>
       ) : (

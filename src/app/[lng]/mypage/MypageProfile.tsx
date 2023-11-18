@@ -17,7 +17,7 @@ interface UnderLinedTextProps {
 
 const UnderLinedText = ({ text }: UnderLinedTextProps) => {
   return (
-    <div className="text-regular m-5 border-b border-gray-500 w-50 text-secondayText">
+    <div className="text-regular w-50 text-secondayText m-5 border-b border-gray-500">
       {text}
     </div>
   );
@@ -34,18 +34,18 @@ export default async function MypageProfile({
   return (
     <div>
       <div className="flex flex-col items-center">
-        <div className="text-4xl font-medium m-10">INFO</div>
+        <div className="m-10 text-4xl font-medium">INFO</div>
         <div className="flex flex-col items-center">
-          <AccountIcon className="fill-gray-400 w-48" />
-          <h3 className="text-3xl md:text-2.8xl font-bold p-10 flex justify-center items-center">
+          <AccountIcon className="w-48 fill-gray-400" />
+          <h3 className="md:text-2.8xl flex items-center justify-center p-10 text-3xl font-bold">
             {name}
           </h3>
         </div>
         <div className="flex flex-col items-center">
-          <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-8">
+          <div className="text-secondayText mb-8 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl">
             {id}
           </div>
-          <div className="h-8 text-secondayText text-xl border-b border-gray-300 pb-10 pl-2 pr-10 w-full mb-0">
+          <div className="text-secondayText mb-0 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl">
             {email}
           </div>
         </div>

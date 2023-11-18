@@ -50,7 +50,7 @@ const HowAboutThese = () => {
 
   return (
     <section className="flex flex-col gap-6">
-      <div className="text-2xl md:text-4xl text-text dark:text-white font-bold">
+      <div className="text-2xl font-bold text-text dark:text-white md:text-4xl">
         {t('zabo.howAboutThese')}
       </div>
       <ResponsiveMasonry
@@ -58,7 +58,7 @@ const HowAboutThese = () => {
       >
         <Masonry
           gutter="16px"
-          className="[&>*]:!basis-[fit-content] [&>*]:!grow-0 !place-content-start"
+          className="!place-content-start [&>*]:!grow-0 [&>*]:!basis-[fit-content]"
         >
           {notices.map((notice) => (
             <Link

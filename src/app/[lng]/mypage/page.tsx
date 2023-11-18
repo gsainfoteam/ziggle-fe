@@ -14,8 +14,8 @@ export default async function MyPage({
 
   return (
     <>
-      <div className="mt-10 w-full flex h-1500 xl:h-1000 justify-center items-center flex-col xl:flex-row gap-20">
-        <div className="flex flex-col relative m-10">
+      <div className="h-1500 xl:h-1000 mt-10 flex w-full flex-col items-center justify-center gap-20 xl:flex-row">
+        <div className="relative m-10 flex flex-col">
           <MypageProfile
             lng={lng}
             name={'김지현'}
@@ -24,8 +24,8 @@ export default async function MyPage({
             phone={'010-0000-0000'}
           />
         </div>
-        <div className="flex justify-center items-center flex-col my-5">
-          <div className="mb-10 p-0 xl:p-50">
+        <div className="my-5 flex flex-col items-center justify-center">
+          <div className="xl:p-50 mb-10 p-0">
             <MypageTable
               lng={lng}
               title={t('mypage.myNotice')}
@@ -33,7 +33,7 @@ export default async function MyPage({
               link={''}
             />
           </div>
-          <div className="p-0 xl:p-50">
+          <div className="xl:p-50 p-0">
             <MypageTable
               lng={lng}
               title={t('mypage.remindNotice')}
