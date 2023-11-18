@@ -19441,7 +19441,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/__virtual__/react-responsive-virtual-f91d92d60d/0/cache/react-responsive-npm-9.0.2-bca9a3ccf7-97c827db90.zip/node_modules/react-responsive/",\
           "packageDependencies": [\
             ["react-responsive", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:9.0.2"],\
-            ["@types/react", "npm:18.2.23"],\
+            ["@types/react", "npm:18.2.37"],\
             ["hyphenate-style-name", "npm:1.0.4"],\
             ["matchmediaquery", "npm:0.3.1"],\
             ["prop-types", "npm:15.8.1"],\
