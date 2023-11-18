@@ -23,6 +23,7 @@ const ResultImageZabo = ({
   imageUrl,
   logName,
   id,
+  lng,
 }: ResultImageZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
@@ -38,9 +39,8 @@ const ResultImageZabo = ({
           isText: false,
         })
       }
-      href={`/ko/notice/` + id}
+      href={`/${lng}/notice/` + id}
     >
-      {/* fix /ko/ to /lng/ */}
       <div className="flex justify-start gap-5 w-full flex-nowrap overflow-hidden box-border items-stretch">
         <ZaboImage
           width={230} // handle mobile

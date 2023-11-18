@@ -33,6 +33,7 @@ const Result = async ({
               searchQuery={props.search}
               logName="SearchPage"
               key={notice.id}
+              lng={lng}
             />
           ))}
         </div>
