@@ -16,20 +16,14 @@ export default class NoticesAPI extends RESTDataSource {
     tags = [],
     ...params
   }: NoticeSearchParams & NoticePaginationParams = {}) {
-    return this.get<Notices>('notice/all', {
+    return this.get<Notices>('notice', {
       params: {
         ...params,
         offset: offset?.toString(),
         limit: limit?.toString(),
         tags: tags.length > 0 ? tags.join(',') : undefined,
       },
-    }).then(({ list, ...rest }) => ({
-      ...rest,
-      list: list.map(({ imageUrl, ...notice }) => ({
-        ...notice,
-        ...(imageUrl && { thumbnailUrl: imageUrl }),
-      })),
-    }));
+    });
   }
 
   async getNotice(id: number) {

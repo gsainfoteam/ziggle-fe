@@ -80,9 +80,9 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
             onScroll={handleCarouselScroll}
             className="flex gap-5 overflow-x-scroll content scrollbar-none"
           >
-            {notices.map(({ id, ...notice }) => (
-              <div key={id} className="shrink-0">
-                <Link href={`/${i18n.language}/notice/${id}`}>
+            {notices.map((notice) => (
+              <div key={notice.id} className="shrink-0">
+                <Link href={`/${i18n.language}/notice/${notice.id}`}>
                   <Zabo {...notice} {...size} t={t} />
                 </Link>
               </div>
@@ -116,7 +116,7 @@ const Title = ({
       <Link href={href} className="group">
         <div className="flex gap-5">
           <TitleText title={title} />
-          <ArrowRightIcon className="stroke-secondayText w-5 transition-transform group-hover:translate-x-2" />
+          <ArrowRightIcon className="stroke-secondaryText w-5 transition-transform group-hover:translate-x-2" />
         </div>
       </Link>
     ) : (
@@ -137,7 +137,7 @@ const Empty = () => {
   return (
     <div className="flex flex-col items-center justify-center h-72">
       <LazyCat />
-      <div className="text-xl text-secondayText font-medium p-5">
+      <div className="text-xl text-secondaryText font-medium p-5">
         {t('emptyNotices')}
       </div>
     </div>

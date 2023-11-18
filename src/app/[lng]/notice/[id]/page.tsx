@@ -44,15 +44,7 @@ const DetailedNoticePage = async ({
       <div className="mt-8 md:mt-12 content mx-auto">
         <Actions title={notice.title} />
         <div className="h-4 md:h-5" />
-        <NoticeInfo
-          title={notice.title}
-          createdAt={notice.createdAt}
-          views={notice.views}
-          author={notice.author}
-          deadline={notice.deadline}
-          tags={notice.tags.map((tag) => tag.name)}
-          t={t}
-        />
+        <NoticeInfo {...notice} deadline={notice.deadline ?? null} t={t} />
         <div className="h-5" />
         <Content content={notice.body} />
         {notice.imagesUrl.length > 0 && (

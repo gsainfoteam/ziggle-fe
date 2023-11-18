@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import { TextZaboProps } from '@/app/components/organisms/Zabo/TextZabo';
+import { NoticeDetail, Tag } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
 
-interface NoticeInfoProps extends Omit<TextZaboProps, 'body'> {
-  tags?: string[];
+interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {
+  t: T;
 }
 
 const NoticeInfo = ({
@@ -61,8 +61,8 @@ const Metadata = ({
         author <span className="font-bold">{{ author }}</span>
       </Trans>
     </div>
-    <div className="h-5 md:h-7 w-0.5 bg-text dark:bg-secondayText" />
-    <div className="flex gap-4 text-secondayText font-normal">
+    <div className="h-5 md:h-7 w-0.5 bg-text dark:bg-secondaryText" />
+    <div className="flex gap-4 text-secondaryText font-normal">
       <Trans t={t} i18nKey="zabo.createdAt">
         createdAt {{ createdAt: createdAt.format('L') }}
       </Trans>
@@ -74,10 +74,10 @@ const Metadata = ({
   </div>
 );
 
-const Tags = ({ tags }: { tags: string[] }) => (
+const Tags = ({ tags }: { tags: Tag[] }) => (
   <div className="flex flex-wrap gap-2">
     {tags.map((tag, i) => (
-      <Chip key={i} className="font-normal">{`#${tag}`}</Chip>
+      <Chip key={i} className="font-normal">{`#${tag.name}`}</Chip>
     ))}
   </div>
 );
