@@ -33,19 +33,19 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
         <div className="flex items-center gap-5">
           <Analytics event={LogEvents.navBarClickLogo}>
             <Link href={`/${lng}`}>
-              {lng === 'en' ? (
-                <ZiggleEnglishLogo className="h-15 md:w-auto" />
-              ) : (
+              {lng === 'ko' ? (
                 <ZiggleKoreanLogo className="h-15 md:w-auto" />
+              ) : (
+                <ZiggleEnglishLogo className="h-15 md:w-auto" />
               )}
             </Link>
           </Analytics>
 
           <Link href={`/${lng === 'en' ? 'ko' : 'en'}`}>
-            {lng === 'en' ? (
-              <LocaleToggleButtonEnglish className="w-13 md:w-auto" />
-            ) : (
+            {lng === 'ko' ? (
               <LocaleToggleButtonKorean className="w-13 md:w-auto" />
+            ) : (
+              <LocaleToggleButtonEnglish className="w-13 md:w-auto" />
             )}
           </Link>
         </div>
