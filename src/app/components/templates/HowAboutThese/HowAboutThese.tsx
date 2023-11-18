@@ -21,9 +21,9 @@ const HowAboutThese = () => {
 
   const notices = useMemo(
     () =>
-      data?.notices.list.map(({ thumbnailUrl, ...notice }) => ({
+      data?.notices.list.map(({ imageUrl, ...notice }) => ({
         ...notice,
-        ...(thumbnailUrl && { thumbnailUrl }),
+        imageUrl: imageUrl ?? null,
       })) ?? [],
     [data],
   );
@@ -60,8 +60,11 @@ const HowAboutThese = () => {
           gutter="16px"
           className="[&>*]:!basis-[fit-content] [&>*]:!grow-0 !place-content-start"
         >
-          {notices.map(({ id, ...notice }) => (
-            <Link key={id} href={`/${i18n.language}/notice/${id}`}>
+          {notices.map((notice) => (
+            <Link
+              key={notice.id}
+              href={`/${i18n.language}/notice/${notice.id}`}
+            >
               <Zabo t={t} width={300} {...notice} />
             </Link>
           ))}

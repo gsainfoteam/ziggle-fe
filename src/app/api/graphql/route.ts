@@ -15,10 +15,20 @@ export interface MyContext {
 
 const resolvers: Resolvers = {
   Query: {
-    notices: (_, { offset, limit }, { dataSources }) =>
+    notices: (
+      _,
+      { offset, limit, my, orderBy, search, tags },
+      { dataSources },
+    ) =>
       dataSources.noticesAPI.getNotices({
         offset: offset ?? 0,
         limit: limit ?? 10,
+        my: my ? (my.toLowerCase() as Lowercase<typeof my>) : undefined,
+        orderBy: orderBy
+          ? (orderBy.toLowerCase() as Lowercase<typeof orderBy>)
+          : undefined,
+        search: search ?? undefined,
+        tags: tags ?? undefined,
       }),
     notice: (_, { id }, { dataSources }) =>
       dataSources.noticesAPI.getNotice(id),

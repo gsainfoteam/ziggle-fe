@@ -1,6 +1,15 @@
+import dayjs from 'dayjs';
+
 import { gql } from '@/generated';
 
 import api from '..';
+
+export enum NoticeKind {
+  RECRUIT = 'recruit',
+  EVENT = 'event',
+  NORMAL = 'general',
+  ACADEMIC = 'academic',
+}
 
 export interface NoticePaginationParams {
   offset?: number;
@@ -19,13 +28,19 @@ interface NoticeBase {
   title: string;
   views: number;
   body: string;
-  deadline: string | null;
-  createdAt: string;
+  deadline?: dayjs.Dayjs | string | null;
+  createdAt: dayjs.Dayjs | string;
   author: string;
-  tags: { id: number; name: string }[];
+  tags: Tag[];
+  logName?: string;
 }
 
-interface Notice extends NoticeBase {
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface Notice extends NoticeBase {
   imageUrl: string | null;
 }
 
@@ -46,9 +61,8 @@ export const getAllNotices = async (
     ...data,
     list: data.list.map(({ imageUrl, ...notice }) => ({
       ...notice,
-      // createdAt: dayjs(notice.createdAt),
-      deadline: notice.deadline ? notice.deadline : undefined,
-      ...(imageUrl && { thumbnailUrl: imageUrl }),
+      deadline: notice.deadline ? notice.deadline : null,
+      imageUrl: imageUrl ? imageUrl : null,
     })),
   }));
 
@@ -69,7 +83,7 @@ export const GET_NOTICES = gql(`
         deadline
         createdAt
         author
-        thumbnailUrl
+        imageUrl
         tags {
           id
           name

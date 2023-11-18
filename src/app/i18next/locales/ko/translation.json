@@ -103,5 +103,13 @@
     "academic": {
       "label": "📰 학사공지"
     }
+  },
+  "searchPage": {
+    "searchBar": {
+      "placeholder": "공지 제목이나 태그로 검색"
+    },
+    "prompt": "검색어를 입력해주세요",
+    "noResult": "검색 결과가 존재하지 않습니다.",
+    "title": "♨ 지글 공지"
   }
 }
