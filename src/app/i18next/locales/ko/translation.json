@@ -112,6 +112,7 @@
     "logout":"로그아웃",
     "quit":"회원탈퇴",
     "noArticle":"아직 저장된 글이 없습니다. =ㅅ="
+  },
   "searchPage": {
     "searchBar": {
       "placeholder": "공지 제목이나 태그로 검색"
