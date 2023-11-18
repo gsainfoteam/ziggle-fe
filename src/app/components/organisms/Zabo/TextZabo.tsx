@@ -24,10 +24,10 @@ const TextZabo = <Origin extends ZaboOrigin>({
   return (
     <div
       className={
-        'border rounded border-secondaryText mt-4 relative bg-white dark:bg-neutral-900 ' +
-        'p-5 flex flex-col gap-2.5 justify-between group ' +
+        'relative mt-4 rounded border border-secondaryText bg-white dark:bg-neutral-900 ' +
+        'group flex flex-col justify-between gap-2.5 p-5 ' +
         'transition hover:-translate-y-2 ' +
-        'hover:shadow-primary/10 hover:shadow-thumbnail'
+        'hover:shadow-thumbnail hover:shadow-primary/10'
       }
       style={{
         [origin]: originSize,
@@ -39,13 +39,13 @@ const TextZabo = <Origin extends ZaboOrigin>({
       <div className="flex flex-col gap-2.5">
         {deadline && deadline.isAfter() && (
           <>
-            <DDay deadline={deadline} t={t} className="absolute top-2 left-2" />
+            <DDay deadline={deadline} t={t} className="absolute left-2 top-2" />
             <div className="h-2 md:h-4" />
           </>
         )}
         <div
           className={
-            'font-bold text-3xl transition-colors group-hover:text-primary ' +
+            'text-3xl font-bold transition-colors group-hover:text-primary ' +
             (origin === 'height'
               ? ['line-clamp-2', 'line-clamp-3', 'line-clamp-5']
               : ['line-clamp-6', 'line-clamp-8', 'line-clamp-10'])[
@@ -55,10 +55,10 @@ const TextZabo = <Origin extends ZaboOrigin>({
         >
           {title}
         </div>
-        <div className="font-medium text-lg overflow-hidden">{body}</div>
+        <div className="overflow-hidden text-lg font-medium">{body}</div>
       </div>
       <div className="flex flex-col gap-2.5">
-        <div className="text-sm text-secondaryText font-medium flex">
+        <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
             {{ date: dayjs(createdAt).format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>

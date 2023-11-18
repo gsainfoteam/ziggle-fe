@@ -36,13 +36,13 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
   return (
     <form
       className={
-        'flex align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]'
+        'flex rounded-[5px] border-2 border-primary px-[4px] py-[8px] align-middle md:px-[10px] md:py-[8px]'
       }
       onSubmit={handleSubmit}
     >
       <input
         className={
-          'w-full md:w-96 p-0.375 md:p-0.5 text-primary text-lg md:text-xl'
+          'p-0.375 w-full text-lg text-primary md:w-96 md:p-0.5 md:text-xl'
         }
         name={'searchQuery'}
         placeholder={placeholder}
@@ -51,11 +51,11 @@ const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
       />
       {isSubmitted ? (
         <Button type={'button'} onClick={handleDeleteClick}>
-          <CloseIcon className={'fill-primary w-5 h-5 mx-[6px]'} />
+          <CloseIcon className={'mx-[6px] h-5 w-5 fill-primary'} />
         </Button>
       ) : (
         <Button type={'submit'}>
-          <SearchIcon className={'fill-primary w-8 h-8'} />
+          <SearchIcon className={'h-8 w-8 fill-primary'} />
         </Button>
       )}
     </form>

@@ -12,11 +12,11 @@ const AllNoticeLayout = async ({
 
   return (
     <div className="content mx-auto">
-      <div className="flex flex-col gap-2 my-7 md:my-12">
-        <h1 className="text-2xl md:text-4xl font-bold">
+      <div className="my-7 flex flex-col gap-2 md:my-12">
+        <h1 className="text-2xl font-bold md:text-4xl">
           {t('notices.all.label')}
         </h1>
-        <div className="text-xs md:text-base font-medium text-secondaryText">
+        <div className="text-xs font-medium text-secondaryText md:text-base">
           {t('notices.all.description')}
         </div>
       </div>

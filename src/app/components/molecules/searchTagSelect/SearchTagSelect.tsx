@@ -25,7 +25,7 @@ const SearchTagSelect = ({ selected, onChange }: NoticeTypeCheckboxProps) => {
   return (
     <div
       className={
-        'flex gap-2 md:gap-2 justify-between md:justify-start px-[2px]'
+        'flex justify-between gap-2 px-[2px] md:justify-start md:gap-2'
       }
     >
       <Button onClick={() => handleCheckboxChange(NoticeKind.RECRUIT)}>

@@ -25,9 +25,9 @@ const SearchPage = async ({
 
   return (
     <div className="content mx-auto">
-      <div className="flex flex-col align-center">
+      <div className="align-center flex flex-col">
         <div className="flex justify-center">
-          <div className="animate-none search-bar-animation flex flex-col gap-3 mt-20 mb-10">
+          <div className="search-bar-animation mb-10 mt-20 flex animate-none flex-col gap-3">
             <SearchBar />
             <SearchTagSelect />
           </div>
@@ -46,11 +46,11 @@ const SearchPage = async ({
             />
           </Suspense>
         ) : (
-          <div className="flex justify-center w-full">
+          <div className="flex w-full justify-center">
             <div className="flex flex-col items-center">
               <SearchAnimation />
               <div className="h-[10px]" />
-              <p className="text-lg md:text-2xl text-secondaryText font-medium pt-5 mt-[-30px]">
+              <p className="mt-[-30px] pt-5 text-lg font-medium text-secondaryText md:text-2xl">
                 {t('searchPage.prompt')}
               </p>
             </div>

@@ -17,7 +17,7 @@ const Button = ({
   <button
     className={[
       'transition',
-      ...(variant ? ['rounded py-1 px-2.5 md:py-2.5 md:px-5'] : []),
+      ...(variant ? ['rounded px-2.5 py-1 md:px-5 md:py-2.5'] : []),
       ...(variant === 'outlined'
         ? ['border border-primary text-primary hover:bg-secondary']
         : []),

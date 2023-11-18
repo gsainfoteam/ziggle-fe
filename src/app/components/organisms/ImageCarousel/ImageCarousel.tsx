@@ -33,9 +33,9 @@ const ImageCarousel = ({ srcs, alt }: ImageCarouselProps) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-8">
+    <div className="flex w-full flex-col gap-8">
       <div className="flex justify-between">
-        <div className="text-2xl md:text-4xl font-bold">{t('zabo.images')}</div>
+        <div className="text-2xl font-bold md:text-4xl">{t('zabo.images')}</div>
         <HorizontalScrollButton>
           <HorizontalScrollButton.Left
             disabled={leftDisabled}
@@ -48,7 +48,7 @@ const ImageCarousel = ({ srcs, alt }: ImageCarouselProps) => {
         </HorizontalScrollButton>
       </div>
       <div
-        className="w-full flex gap-5 bg-deselected dark:bg-text border-y-2 border-text dark:border-secondaryText p-3 overflow-x-scroll scrollbar-none"
+        className="flex w-full gap-5 overflow-x-scroll border-y-2 border-text bg-deselected p-3 scrollbar-none dark:border-secondaryText dark:bg-text"
         ref={carouselEl}
         onScroll={handleCarouselScroll}
       >
@@ -59,7 +59,7 @@ const ImageCarousel = ({ srcs, alt }: ImageCarouselProps) => {
             alt={alt}
             width={300}
             height={300}
-            className="border-2 border-white rounded basis-48 md:basis-80 shrink-0"
+            className="shrink-0 basis-48 rounded border-2 border-white md:basis-80"
           />
         ))}
       </div>

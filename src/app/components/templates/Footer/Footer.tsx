@@ -10,7 +10,7 @@ const Footer = ({ t }: { t: T }) => {
     <footer
       className={
         'bg-primary text-white ' +
-        'box-content px-pageSide py-8 sm:py-16 min-h-[300px] ' +
+        'box-content min-h-[300px] px-pageSide py-8 sm:py-16 ' +
         'flex flex-col gap-x-24 gap-y-12 ' +
         'xl:flex-row'
       }
@@ -19,7 +19,7 @@ const Footer = ({ t }: { t: T }) => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <InfoteamLogo className="w-8/12 sm:w-fit" />
-            <div className="font-medium text-sm sm:text-base">
+            <div className="text-sm font-medium sm:text-base">
               {t('footer.infoteam')}
             </div>
           </div>
@@ -37,11 +37,11 @@ const Footer = ({ t }: { t: T }) => {
         </div>
         <div className="text-xs sm:text-base">{t('footer.copyright')}</div>
       </div>
-      <div className="flex flex-col md:flex-row gap-x-24 gap-y-12">
+      <div className="flex flex-col gap-x-24 gap-y-12 md:flex-row">
         {t('footer.sections', { returnObjects: true }).map(
           ({ title, links }) => (
-            <div key={title} className="flex flex-col gap-2 md:gap-6 w-32">
-              <div className="font-bold text-sm">{title}</div>
+            <div key={title} className="flex w-32 flex-col gap-2 md:gap-6">
+              <div className="text-sm font-bold">{title}</div>
               <div className="flex flex-col gap-2">
                 {links.map(({ link, name }) => (
                   <ExternalLink key={name} href={link}>
