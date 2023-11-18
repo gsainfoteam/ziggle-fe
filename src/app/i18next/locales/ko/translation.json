@@ -104,6 +104,15 @@
       "label": "📰 학사공지"
     }
   },
+  "mypage": {
+    "info": "정보",
+    "myNotice": "내가 게시한 공지 목록",
+    "remindNotice": "리마인드 설정한 게시물 목록",
+    "totalList":"전체보기",
+    "logout":"로그아웃",
+    "quit":"회원탈퇴",
+    "noArticle":"아직 저장된 글이 없습니다. =ㅅ="
+  },
   "searchPage": {
     "searchBar": {
       "placeholder": "공지 제목이나 태그로 검색"
