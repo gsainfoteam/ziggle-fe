@@ -33,7 +33,7 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
     );
 
     toast.success(
-      <div className="font-medium text-sm flex flex-col">
+      <div className="flex flex-col text-sm font-medium">
         <Trans i18nKey="zabo.copyLink.success">
           successed <div className="text-xs">share to friends</div>
         </Trans>
@@ -44,11 +44,11 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
   return (
     <Button
       animated
-      className="group items-center gap-1 flex"
+      className="group flex items-center gap-1"
       onClick={handleCopy}
     >
-      <LinkIcon className="w-5 md:w-7 fill-secondaryText group-hover:fill-primary" />
-      <div className="font-medium text-secondaryText group-hover:text-primary text-xs md:text-base">
+      <LinkIcon className="w-5 fill-secondaryText group-hover:fill-primary md:w-7" />
+      <div className="text-xs font-medium text-secondaryText group-hover:text-primary md:text-base">
         {t('zabo.copyLink.action')}
       </div>
     </Button>
@@ -71,11 +71,11 @@ const ShareButton = ({ title }: ActionsProps) => {
   return (
     <Button
       animated
-      className="group items-center gap-1 flex"
+      className="group flex items-center gap-1"
       onClick={handleShare}
     >
-      <ShareIcon className="w-4 md:w-6 fill-secondaryText group-hover:fill-primary" />
-      <div className="font-medium text-secondaryText group-hover:text-primary text-xs md:text-base">
+      <ShareIcon className="w-4 fill-secondaryText group-hover:fill-primary md:w-6" />
+      <div className="text-xs font-medium text-secondaryText group-hover:text-primary md:text-base">
         {t('zabo.share.action')}
       </div>
     </Button>
@@ -86,12 +86,12 @@ const BackToMainButton = () => {
   const { t, i18n } = useTranslation();
   return (
     <Link href={`/${i18n.language}`}>
-      <div className="flex items-center transition-[gap] gap-1 md:gap-2 group hover:gap-4">
-        <ArrowLeftIcon className="transition-colors fill-secondaryText group-hover:fill-primary w-4 md:w-6 rotate-180" />
-        <div className="transition-colors font-medium text-sm md:text-lg text-secondaryText group-hover:text-primary">
+      <div className="group flex items-center gap-1 transition-[gap] hover:gap-4 md:gap-2">
+        <ArrowLeftIcon className="w-4 rotate-180 fill-secondaryText transition-colors group-hover:fill-primary md:w-6" />
+        <div className="text-sm font-medium text-secondaryText transition-colors group-hover:text-primary md:text-lg">
           {t('zabo.backToMain')}
         </div>
-        <div className="transition-colors h-5 md:h-8 w-1 bg-secondaryText group-hover:bg-primary" />
+        <div className="h-5 w-1 bg-secondaryText transition-colors group-hover:bg-primary md:h-8" />
       </div>
     </Link>
   );

@@ -115,7 +115,7 @@ export default async function RootLayout({
       <body
         className={
           `${lng === 'ko' ? notoSansKR.className : inter.className} ` +
-          'flex flex-col min-h-screen ' +
+          'flex min-h-screen flex-col ' +
           'selection:bg-primary/20'
         }
       >

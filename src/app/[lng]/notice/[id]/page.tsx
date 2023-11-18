@@ -41,7 +41,7 @@ const DetailedNoticePage = async ({
   return (
     <>
       <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />
-      <div className="mt-8 md:mt-12 content mx-auto">
+      <div className="content mx-auto mt-8 md:mt-12">
         <Actions title={notice.title} />
         <div className="h-4 md:h-5" />
         <NoticeInfo {...notice} deadline={notice.deadline ?? null} t={t} />

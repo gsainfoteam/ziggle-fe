@@ -28,8 +28,8 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
     </>
   );
   return (
-    <header className="bg-primary px-4 py-2 md:py-0.5 text-white">
-      <div className="flex justify-between items-center">
+    <header className="bg-primary px-4 py-2 text-white md:py-0.5">
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-5">
           <Analytics event={LogEvents.navBarClickLogo}>
             <Link href={`/${lng}`}>
@@ -49,7 +49,7 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
             )}
           </Link>
         </div>
-        <nav className="gap-x-8 font-bold text-lg hidden md:flex">{nav}</nav>
+        <nav className="hidden gap-x-8 text-lg font-bold md:flex">{nav}</nav>
         {user ? (
           <Link
             href={`/${lng}/mypage`}
@@ -68,7 +68,7 @@ const Navbar = async ({ lng = fallbackLng, t }: { lng?: Locale; t: T }) => {
           </Link>
         )}
       </div>
-      <nav className="flex font-bold text-sm gap-x-8 md:hidden">{nav}</nav>
+      <nav className="flex gap-x-8 text-sm font-bold md:hidden">{nav}</nav>
     </header>
   );
 };

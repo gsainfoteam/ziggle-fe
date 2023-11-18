@@ -17,7 +17,7 @@ const Button = ({
     >
       <ArrowRightOutlinedIcon
         className={
-          'w-8 h-8 md:w-9 md:h-9' +
+          'h-8 w-8 md:h-9 md:w-9' +
           (direction === 'left' ? ' rotate-180' : '') +
           (props.disabled ? '' : ' stroke-primary')
         }

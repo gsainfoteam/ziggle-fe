@@ -41,7 +41,7 @@ const Deadline = ({ deadline }: { deadline: dayjs.Dayjs }) => {
 };
 
 const Title = ({ title }: { title: string }) => (
-  <div className="font-bold text-2xl md:text-4xl">{title}</div>
+  <div className="text-2xl font-bold md:text-4xl">{title}</div>
 );
 
 const Metadata = ({
@@ -55,14 +55,14 @@ const Metadata = ({
   views: number;
   t: T;
 }) => (
-  <div className="flex items-center gap-2 font-medium text-sm md:text-xl">
+  <div className="flex items-center gap-2 text-sm font-medium md:text-xl">
     <div>
       <Trans t={t} i18nKey="zabo.author">
         author <span className="font-bold">{{ author }}</span>
       </Trans>
     </div>
-    <div className="h-5 md:h-7 w-0.5 bg-text dark:bg-secondaryText" />
-    <div className="flex gap-4 text-secondaryText font-normal">
+    <div className="h-5 w-0.5 bg-text dark:bg-secondaryText md:h-7" />
+    <div className="flex gap-4 font-normal text-secondaryText">
       <Trans t={t} i18nKey="zabo.createdAt">
         createdAt {{ createdAt: createdAt.format('L') }}
       </Trans>

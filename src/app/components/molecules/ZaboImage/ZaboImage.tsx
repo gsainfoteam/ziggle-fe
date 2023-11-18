@@ -66,7 +66,7 @@ const ZaboImage = <Origin extends ZaboOrigin>({
         fill
         onLoad={handleImageLoad}
       />
-      {!imageSize && <Skeleton className="absolute w-full h-full" />}
+      {!imageSize && <Skeleton className="absolute h-full w-full" />}
     </div>
   );
 };

@@ -36,7 +36,7 @@ const SearchTagSelect = () => {
   }, [pathname, replace, searchParams, selected]);
 
   return (
-    <div className="flex gap-2 md:gap-2 justify-between md:justify-start px-[2px]">
+    <div className="flex justify-between gap-2 px-[2px] md:justify-start md:gap-2">
       <input type="hidden" name="tags" value={selected} />
       {...Object.values(NoticeKind).map((kind) => (
         <Button key={kind} onClick={() => handleCheckboxChange(kind)}>
