@@ -26,7 +26,7 @@ const Zabo = <IsImage extends boolean>(
     ? ImageZaboProps<ZaboOrigin>
     : TextZaboProps<ZaboOrigin>,
 ) =>
-  'imageUrl' in props ? (
+  'imageUrl' in props && props.imageUrl && props.imageUrl.length > 0 ? (
     <ImageZabo
       {...(props as ImageZaboProps<ZaboOrigin>)}
       imageUrl={props.imageUrl || ''}
