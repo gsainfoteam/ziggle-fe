@@ -34,10 +34,6 @@ const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
 });
 
-// for react-datetime-picker
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 export default function WritePage({
   params: { lng },
 }: {
@@ -131,7 +127,11 @@ export default function WritePage({
           </Checkbox>
 
           {hasDeadline && (
-            <DateTimePicker onChange={setDeadline} value={deadline} />
+            <DateTimePicker
+              onChange={setDeadline}
+              value={deadline}
+              className="text-black bg-white"
+            />
           )}
         </div>
 
