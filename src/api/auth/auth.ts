@@ -55,10 +55,15 @@ export const logout = async () => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('access_token');
   if (!accessToken) return;
-  await api.post('/user/logout', {
-    access_token: accessToken.value,
-    Headers: { Cookie: `refresh_token=${cookieStore.get('refresh_token')}` },
-  });
+  await api.post(
+    '/user/logout',
+    { access_token: accessToken.value },
+    {
+      headers: {
+        Cookie: `refresh_token=${cookieStore.get('refresh_token')?.value}`,
+      },
+    },
+  );
   cookieStore.delete('refresh_token');
   cookieStore.delete('access_token');
   redirect('/');
