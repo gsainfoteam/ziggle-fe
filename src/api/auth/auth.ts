@@ -3,6 +3,7 @@
 import 'server-only';
 
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 import api from '..';
 
@@ -48,4 +49,21 @@ export const auth = async () => {
   } catch {
     return null;
   }
+};
+
+export const logout = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token');
+  if (!accessToken) return;
+  await api.post('/user/logout', {
+    access_token: accessToken.value,
+    Headers: { Cookie: `refresh_token=${cookieStore.get('refresh_token')}` },
+  });
+  cookieStore.delete('refresh_token');
+  cookieStore.delete('access_token');
+  redirect('/');
+};
+
+export const withdraw = async () => {
+  redirect(process.env.NEXT_PUBLIC_IDP_BASE_URL!);
 };

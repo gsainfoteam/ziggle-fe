@@ -1,3 +1,6 @@
+import { redirect } from 'next/dist/server/api-utils';
+
+import { logout, withdraw } from '@/api/auth/auth';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import AccountIcon from '@/assets/icons/account.svg';
@@ -13,13 +16,19 @@ interface MypageProfileProps {
 
 interface UnderLinedTextProps {
   text: string;
+  action?: () => void;
 }
 
-const UnderLinedText = ({ text }: UnderLinedTextProps) => {
+const UnderLinedText = ({ text, action }: UnderLinedTextProps) => {
   return (
-    <div className="text-regular w-50 text-secondayText m-5 border-b border-gray-500">
-      {text}
-    </div>
+    <form>
+      <button
+        className="text-regular w-50 text-secondayText m-5 border-b border-gray-500"
+        formAction={action}
+      >
+        {text}
+      </button>
+    </form>
   );
 };
 
@@ -50,8 +59,14 @@ export default async function MypageProfile({
           </div>
         </div>
         <div className="flex flex-row items-center">
-          <UnderLinedText text={t('mypage.logout')}></UnderLinedText>
-          <UnderLinedText text={t('mypage.quit')}></UnderLinedText>
+          <UnderLinedText
+            text={t('mypage.logout')}
+            action={logout}
+          ></UnderLinedText>
+          <UnderLinedText
+            text={t('mypage.quit')}
+            action={withdraw}
+          ></UnderLinedText>
         </div>
       </div>
     </div>
