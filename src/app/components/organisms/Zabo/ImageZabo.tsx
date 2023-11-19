@@ -30,12 +30,12 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   const title = localContents[0].title;
 
   return (
-    <div className="flex flex-col gap-3 group w-min mt-4">
+    <div className="group mt-4 flex w-min flex-col gap-3">
       <div
         className={
-          'rounded w-fit relative ' +
+          'relative w-fit rounded ' +
           'transition group-hover:-translate-y-2 ' +
-          'group-hover:shadow-primary/10 group-hover:shadow-thumbnail'
+          'group-hover:shadow-thumbnail group-hover:shadow-primary/10'
         }
       >
         <ZaboImage
@@ -48,15 +48,15 @@ const ImageZabo = <Origin extends ZaboOrigin>({
           <DDay
             deadline={deadline}
             t={t}
-            className="absolute top-2 left-2 z-10"
+            className="absolute left-2 top-2 z-10"
           />
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <div className="font-bold text-3xl transition-colors group-hover:text-primary line-clamp-2 overflow-hidden text-ellipsis">
+        <div className="line-clamp-2 overflow-hidden text-ellipsis text-3xl font-bold transition-colors group-hover:text-primary">
           {title}
         </div>
-        <div className="text-sm text-secondaryText font-medium flex">
+        <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
             {{ date: dayjs(createdAt).format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>

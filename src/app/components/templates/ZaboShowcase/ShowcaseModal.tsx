@@ -42,11 +42,11 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 flex flex-col gap-3 items-center justify-center"
+      className="fixed inset-0 flex flex-col items-center justify-center gap-3 bg-black/60"
       aria-modal
       role="modal"
     >
-      <div className="absolute top-3 right-5 flex gap-7 text-white text-sm md:text-base font-medium">
+      <div className="absolute right-5 top-3 flex gap-7 text-sm font-medium text-white md:text-base">
         <Button className="flex items-center gap-2" onClick={handleDownload}>
           {t('zabo.downloadAll')}
           <DownloadIcon className="w-6 md:w-8" />
@@ -56,7 +56,7 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
           <CloseIcon className="w-4 md:w-6" />
         </Button>
       </div>
-      <div className="flex justify-center items-center gap-5 md:gap-12 w-full">
+      <div className="flex w-full items-center justify-center gap-5 md:gap-12">
         <Button disabled={index === 0} onClick={left}>
           <LongArrowIcon
             className={[
@@ -72,12 +72,12 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
           width={0}
           height={0}
           sizes="100vw"
-          className="max-h-[75vh] max-w-[70vw] w-auto grow object-contain"
+          className="max-h-[75vh] w-auto max-w-[70vw] grow object-contain"
         />
         <Button disabled={index === srcs.length - 1} onClick={right}>
           <LongArrowIcon
             className={[
-              'rotate-180 w-5 md:w-16',
+              'w-5 rotate-180 md:w-16',
               ...(index === srcs.length - 1 ? ['stroke-secondaryText'] : []),
             ].join(' ')}
           />
@@ -91,7 +91,7 @@ const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
             alt={alt}
             width={50}
             height={0}
-            className={'pointer box-border border h-auto'}
+            className={'pointer box-border h-auto border'}
             onClick={() => setIndex(index)}
           />
         ))}

@@ -52,6 +52,20 @@ export enum MineNotice {
   Reminders = 'REMINDERS'
 }
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createNotice: DetailedNotice;
+};
+
+
+export type MutationCreateNoticeArgs = {
+  body: Scalars['String']['input'];
+  deadline?: InputMaybe<Scalars['Date']['input']>;
+  images?: InputMaybe<Array<Scalars['String']['input']>>;
+  tags?: InputMaybe<Array<Scalars['Int']['input']>>;
+  title: Scalars['String']['input'];
+};
+
 export type Notice = {
   __typename?: 'Notice';
   author: Scalars['String']['output'];
@@ -194,6 +208,7 @@ export type ResolversTypes = {
   DetailedNotice: ResolverTypeWrapper<DetailedNotice>;
   Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   MineNotice: MineNotice;
+  Mutation: ResolverTypeWrapper<{}>;
   Notice: ResolverTypeWrapper<Notice>;
   NoticeFile: ResolverTypeWrapper<NoticeFile>;
   Notices: ResolverTypeWrapper<Notices>;
@@ -210,6 +225,7 @@ export type ResolversParentTypes = {
   Date: Scalars['Date']['output'];
   DetailedNotice: DetailedNotice;
   Int: Scalars['Int']['output'];
+  Mutation: {};
   Notice: Notice;
   NoticeFile: NoticeFile;
   Notices: Notices;
@@ -249,6 +265,10 @@ export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends 
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateNoticeArgs, 'body' | 'title'>>;
 };
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {
@@ -298,6 +318,7 @@ export type Resolvers<ContextType = MyContext> = {
   Content?: ContentResolvers<ContextType>;
   Date?: GraphQLScalarType;
   DetailedNotice?: DetailedNoticeResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Notice?: NoticeResolvers<ContextType>;
   NoticeFile?: NoticeFileResolvers<ContextType>;
   Notices?: NoticesResolvers<ContextType>;

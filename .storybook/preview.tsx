@@ -1,9 +1,9 @@
+import '../src/app/globals.css';
+
+import { ApolloProvider } from '@apollo/client';
+import type { Preview } from '@storybook/react';
 import React from 'react';
 
-import type { Preview } from '@storybook/react';
-import { ApolloProvider } from '@apollo/client';
-
-import '../src/app/globals.css';
 import { apolloClient } from '../src/app/[lng]/InitClient';
 
 const preview: Preview = {

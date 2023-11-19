@@ -11,11 +11,11 @@ const Chip = ({
   <div className="font-medium md:text-lg">
     <div
       className={[
-        'flex items-center h-6 md:h-8 w-max border-2 border-primary rounded-lg px-3',
-        ...(variant === 'outlined' ? ['text-primary bg-transparent'] : []),
-        ...(variant === 'contained' ? ['text-white bg-primary'] : []),
+        'flex h-6 w-max items-center rounded-lg border-2 border-primary px-3 md:h-8',
+        ...(variant === 'outlined' ? ['bg-transparent text-primary'] : []),
+        ...(variant === 'contained' ? ['bg-primary text-white'] : []),
         ...(variant === 'deselected'
-          ? ['bg-deselected text-secondaryText border-none']
+          ? ['border-none bg-deselected text-secondaryText']
           : []),
         ...(className ? [className] : []),
       ].join(' ')}

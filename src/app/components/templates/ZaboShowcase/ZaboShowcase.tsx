@@ -16,7 +16,7 @@ const ZaboShowcase = ({ srcs, alt }: ZaboShowcaseProps) => {
   const [show, setShow] = useState(false);
   if (srcs.length === 0) return null;
   return (
-    <div className="w-full h-96 bg-primary overflow-y-hidden relative">
+    <div className="relative h-96 w-full overflow-y-hidden bg-primary">
       <Image
         src={srcs[0]}
         alt={alt}
@@ -24,8 +24,8 @@ const ZaboShowcase = ({ srcs, alt }: ZaboShowcaseProps) => {
         height={0}
         sizes="100vw"
         className={
-          'relative transition-transform hover:-translate-y-5 top-36 left-1/2 -translate-x-1/2 ' +
-          'w-6/12 h-auto rounded-xl border-4 border-white cursor-pointer'
+          'relative left-1/2 top-36 -translate-x-1/2 transition-transform hover:-translate-y-5 ' +
+          'h-auto w-6/12 cursor-pointer rounded-xl border-4 border-white'
         }
         onClick={() => setShow(true)}
       />

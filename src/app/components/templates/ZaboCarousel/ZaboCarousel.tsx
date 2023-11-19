@@ -56,7 +56,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   return (
     <div
       className={[
-        'flex flex-col w-full items-center',
+        'flex w-full flex-col items-center',
         ...(containerClassName ? [containerClassName] : []),
       ].join(' ')}
     >
@@ -71,14 +71,14 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
       {notices.length > 0 ? (
         <div
           className={[
-            'w-full flex flex-nowrap pt-1 pb-4 items-center justify-center overflow-y-hidden',
+            'flex w-full flex-nowrap items-center justify-center overflow-y-hidden pb-4 pt-1',
             ...(carouselClassName ? [carouselClassName] : []),
           ].join(' ')}
         >
           <div
             ref={carouselEl}
             onScroll={handleCarouselScroll}
-            className="flex gap-5 overflow-x-scroll content scrollbar-none"
+            className="content flex gap-5 overflow-x-scroll scrollbar-none"
           >
             {notices.map((notice) => (
               <div key={notice.id} className="shrink-0">
@@ -111,12 +111,12 @@ const Title = ({
   leftDisabled: boolean;
   rightDisabled: boolean;
 }) => (
-  <div className="flex justify-between items-center py-5 content">
+  <div className="content flex items-center justify-between py-5">
     {href ? (
       <Link href={href} className="group">
         <div className="flex gap-5">
           <TitleText title={title} />
-          <ArrowRightIcon className="stroke-secondaryText w-5 transition-transform group-hover:translate-x-2" />
+          <ArrowRightIcon className="w-5 stroke-secondaryText transition-transform group-hover:translate-x-2" />
         </div>
       </Link>
     ) : (
@@ -135,9 +135,9 @@ const Title = ({
 const Empty = () => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center h-72">
+    <div className="flex h-72 flex-col items-center justify-center">
       <LazyCat />
-      <div className="text-xl text-secondaryText font-medium p-5">
+      <div className="p-5 text-xl font-medium text-secondaryText">
         {t('emptyNotices')}
       </div>
     </div>
@@ -145,7 +145,7 @@ const Empty = () => {
 };
 
 const TitleText = ({ title }: { title: string }) => (
-  <h2 className="text-3xl md:text-5xl font-bold m-0">{title}</h2>
+  <h2 className="m-0 text-3xl font-bold md:text-5xl">{title}</h2>
 );
 
 export default ZaboCarousel;

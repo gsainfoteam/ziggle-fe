@@ -45,27 +45,27 @@ const ResultImageZabo = ({
       }
       href={`/${lng}/notice/` + id}
     >
-      <div className="flex justify-start gap-5 w-full flex-nowrap overflow-hidden box-border items-stretch">
+      <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden">
         <ZaboImage
           width={230} // handle mobile
           src={imageUrl}
           alt={title}
         />
         <div
-          className="flex flex-col justify-between box-border"
+          className="box-border flex flex-col justify-between"
           style={{
             boxSizing: 'border-box',
             padding: '1rem 0',
           }}
         >
-          <div className="flex flex-col align-start">
-            <p className={'font-medium text-sm md:text-xl'}>
+          <div className="align-start flex flex-col">
+            <p className={'text-sm font-medium md:text-xl'}>
               <Trans t={t} i18nKey="zabo.dueAt">
                 {{ dueAt: dayjs(deadline).format('LLLL') }}
               </Trans>
             </p>
             <GetHighlightedText
-              className={'font-bold text-xl md:text-3xl text-start'}
+              className={'text-start text-xl font-bold md:text-3xl'}
               text={title}
               query={searchQuery}
               highlightColor={'primary'}
@@ -76,11 +76,11 @@ const ResultImageZabo = ({
               <GetHighlightedText
                 text={author}
                 query={searchQuery}
-                className={'font-bold text-sm md:text-lg text-start'}
+                className={'text-start text-sm font-bold md:text-lg'}
                 highlightColor={'primary'}
               />
             </div>
-            <div className={'flex gap-2 my-0.5 flex-nowrap'}>
+            <div className={'my-0.5 flex flex-nowrap gap-2'}>
               {tags.map((tag, index) => (
                 <Chip
                   key={index}
@@ -93,7 +93,7 @@ const ResultImageZabo = ({
             </div>
           </div>
           <div className="flex gap-0.5">
-            <div className="text-sm text-secondayText font-medium flex">
+            <div className="text-secondayText flex text-sm font-medium">
               <Trans t={t} i18nKey="zabo.dateView">
                 {{ date: dayjs(createdAt).format('L') }}
                 <strong className="font-bold"> · {{ views }}</strong>

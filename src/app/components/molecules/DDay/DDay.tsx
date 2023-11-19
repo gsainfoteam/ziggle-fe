@@ -10,12 +10,12 @@ interface DDayProps {
 const DDay = ({ deadline, t, className }: DDayProps & { t: T }) => (
   <div
     className={[
-      'grid place-items-center w-fit ' +
-        'border border-white rounded bg-primary/90 px-2 py-0.5',
+      'grid w-fit place-items-center ' +
+        'rounded border border-white bg-primary/90 px-2 py-0.5',
       ...(className ? [className] : []),
     ].join(' ')}
   >
-    <div className="text-white text-sm md:text-lg font-bold">
+    <div className="text-sm font-bold text-white md:text-lg">
       {ddayFormatted(dayjs(deadline), t)}
     </div>
   </div>

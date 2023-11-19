@@ -45,10 +45,10 @@ export const SearchBar = () => {
   return (
     <form
       action={search}
-      className="flex justify-between align-middle border-primary border-2 rounded-[5px] px-[4px] py-[8px] md:px-[10px] md:py-[8px]"
+      className="flex justify-between rounded-[5px] border-2 border-primary px-[4px] py-[8px] align-middle md:px-[10px] md:py-[8px]"
     >
       <input
-        className="flex-1 md:w-96 p-0.375 md:p-0.5 text-primary text-lg outline-none bg-transparent md:text-xl"
+        className="p-0.375 flex-1 bg-transparent text-lg text-primary outline-none md:w-96 md:p-0.5 md:text-xl"
         name="searchQuery"
         placeholder={t('searchPage.searchBar.placeholder')}
         value={keyword}
@@ -56,11 +56,11 @@ export const SearchBar = () => {
       />
       {isSubmitted ? (
         <Button type="button" onClick={handleDeleteClick}>
-          <CloseIcon className="fill-primary w-5 h-5 mx-[6px]" />
+          <CloseIcon className="mx-[6px] h-5 w-5 fill-primary" />
         </Button>
       ) : (
         <Button type="submit">
-          <SearchIcon className="fill-primary w-8 h-8" />
+          <SearchIcon className="h-8 w-8 fill-primary" />
         </Button>
       )}
     </form>
