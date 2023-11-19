@@ -95,13 +95,13 @@ export default function WritePage({
 
   return (
     <main className="flex flex-col items-center md:py-12">
-      <div className="flex flex-col content">
+      <div className="content flex flex-col">
         <input
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
           }}
-          className="text-4xl font-bold mt-16 mb-4 p-0 content outline-none dark:bg-transparent w-full"
+          className="content mb-4 mt-16 w-full p-0 text-4xl font-bold outline-none dark:bg-transparent"
           type="text"
           placeholder={t('write.writeTitle')}
           onBlur={(e) => {
@@ -110,7 +110,7 @@ export default function WritePage({
             });
           }}
         />
-        <div className="flex items-center gap-5 mb-10 flex-wrap md:flex-nowrap">
+        <div className="mb-10 flex flex-wrap items-center gap-5 md:flex-nowrap">
           <Checkbox
             checked={hasDeadline}
             onChange={(e) => {
@@ -121,7 +121,7 @@ export default function WritePage({
               });
             }}
           >
-            <div className="font-medium text-lg">
+            <div className="text-lg font-medium">
               {t('write.setupDeadline')}
             </div>
           </Checkbox>
@@ -130,17 +130,17 @@ export default function WritePage({
             <DateTimePicker
               onChange={setDeadline}
               value={deadline}
-              className="text-black bg-white"
+              className="bg-white text-black"
             />
           )}
         </div>
 
-        <div className="flex gap-2 mb-3">
-          <TypeIcon className="w-5 md:w-6 dark:fill-white" />
-          <div className="font-medium text-lg">{t('write.noticeType')}</div>
+        <div className="mb-3 flex gap-2">
+          <TypeIcon className="w-5 dark:fill-white md:w-6" />
+          <div className="text-lg font-medium">{t('write.noticeType')}</div>
         </div>
 
-        <div className="flex gap-1 mb-4">
+        <div className="mb-4 flex gap-1">
           {noticeTypes.map((noticeType) => (
             <div
               className="cursor-pointer"
@@ -170,32 +170,32 @@ export default function WritePage({
             key={noticeType}
             className={`${selectedNoticeType !== noticeType && 'hidden'}`}
           >
-            <div className="font-bold text-base md:text-xl">
+            <div className="text-base font-bold md:text-xl">
               {t(`write.noticeTypes.${noticeType}.description.title`)}
             </div>
             <div className="font-regular text-sm md:text-lg">
               {t(`write.noticeTypes.${noticeType}.description.content`)}
             </div>
-            <div className="font-regular text-sm md:text-lg text-secondayText">
+            <div className="font-regular text-secondayText text-sm md:text-lg">
               {t(`write.noticeTypes.${noticeType}.description.example`)}
             </div>
           </div>
         ))}
 
-        <div className="flex gap-2 mt-10 mb-2">
-          <TagIcon className="w-5 md:w-6 dark:fill-white" />
-          <div className="font-medium text-lg">{t('write.setupTags')}</div>
+        <div className="mb-2 mt-10 flex gap-2">
+          <TagIcon className="w-5 dark:fill-white md:w-6" />
+          <div className="text-lg font-medium">{t('write.setupTags')}</div>
         </div>
 
-        <div className="font-regular text-sm text-secondayText mb-3">
+        <div className="font-regular text-secondayText mb-3 text-sm">
           {t('write.writeTagsDescription')}
         </div>
 
         <TagInput tags={tags} setTags={setTags} t={t} />
 
-        <div className="flex gap-2 mt-10 mb-3 items-center">
-          <LanguageIcon className="w-5 md:w-6 dark:fill-white" />
-          <div className="font-medium text-lg">{t('write.setupLanguage')}</div>
+        <div className="mb-3 mt-10 flex items-center gap-2">
+          <LanguageIcon className="w-5 dark:fill-white md:w-6" />
+          <div className="text-lg font-medium">{t('write.setupLanguage')}</div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -214,9 +214,9 @@ export default function WritePage({
         </div>
 
         <div className={`${isWriteKorean ? '' : 'hidden'}`}>
-          <div className="flex gap-2 mt-10 mb-3 items-center">
-            <ContentIcon className="w-5 md:w-6 dark:fill-white" />
-            <div className="font-medium text-lg">
+          <div className="mb-3 mt-10 flex items-center gap-2">
+            <ContentIcon className="w-5 dark:fill-white md:w-6" />
+            <div className="text-lg font-medium">
               {t('write.enterKoreanContent')}
             </div>
           </div>
@@ -227,9 +227,9 @@ export default function WritePage({
         </div>
 
         <div className={`${isWriteEnglish ? '' : 'hidden'}`}>
-          <div className="flex gap-2 mt-10 mb-3 items-center">
-            <ContentIcon className="w-5 md:w-6 dark:fill-white" />
-            <div className="font-medium text-lg mr-4">
+          <div className="mb-3 mt-10 flex items-center gap-2">
+            <ContentIcon className="w-5 dark:fill-white md:w-6" />
+            <div className="mr-4 text-lg font-medium">
               {t('write.enterEnglishContent')}
             </div>
             {isWriteKorean && (
@@ -244,11 +244,11 @@ export default function WritePage({
           </React.Suspense>
         </div>
 
-        <div className="flex gap-2 mt-10 mb-1 items-center">
-          <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
-          <div className="font-medium text-lg">{t('write.attatchPhoto')}</div>
+        <div className="mb-1 mt-10 flex items-center gap-2">
+          <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
+          <div className="text-lg font-medium">{t('write.attatchPhoto')}</div>
         </div>
-        <div className="font-regular text-secondayText text-sm mb-3">
+        <div className="font-regular text-secondayText mb-3 text-sm">
           {t('write.photoDescription')}
         </div>
 
@@ -257,14 +257,14 @@ export default function WritePage({
 
       <Button
         variant="contained"
-        className="mt-[10rem] mb-4"
+        className="mb-4 mt-[10rem]"
         onClick={handleSubmit}
       >
-        <div className="font-bold text-base md:text-xl mx-3 my-1">
+        <div className="mx-3 my-1 text-base font-bold md:text-xl">
           {t('write.submit')}
         </div>
       </Button>
-      <div className="font-regular text-sm text-secondayText max-w-[70%] text-center">
+      <div className="font-regular text-secondayText max-w-[70%] text-center text-sm">
         {t('write.submitDescription')}
       </div>
     </main>

@@ -61,12 +61,12 @@ const AttatchPhotoArea = ({
       <label htmlFor="file-input" />
 
       <div
-        className="flex items-center justify-center border-2 border-dashed border-secondayText"
+        className="border-secondayText flex items-center justify-center border-2 border-dashed"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         {files.length > 0 ? (
-          <div className="grid grid-cols-3 gap-1.5 md:gap-3 p-1.5 md:p-2.5 w-full">
+          <div className="grid w-full grid-cols-3 gap-1.5 p-1.5 md:gap-3 md:p-2.5">
             {files.map((file, index) => (
               <AttatchedPhoto
                 key={index}
@@ -79,8 +79,8 @@ const AttatchPhotoArea = ({
             ))}
             <button
               className={
-                'rounded-md md:rounded-xl aspect-square bg-deselected ' +
-                'flex justify-center items-center'
+                'aspect-square rounded-md bg-deselected md:rounded-xl ' +
+                'flex items-center justify-center'
               }
               onClick={() => {
                 fileInputRef.current?.click();
@@ -91,9 +91,9 @@ const AttatchPhotoArea = ({
           </div>
         ) : (
           <div className="flex flex-col items-center py-8 md:py-12">
-            <AddIcon className="w-[45px] md:w-[90px] fill-secondayText" />
+            <AddIcon className="fill-secondayText w-[45px] md:w-[90px]" />
 
-            <div className="font-bold text-base md:text-2xl text-secondayText">
+            <div className="text-secondayText text-base font-bold md:text-2xl">
               {t('write.dragToAddPhoto')}
             </div>
 
@@ -104,7 +104,7 @@ const AttatchPhotoArea = ({
               }}
               className="mx-3 my-2 md:mx-4 md:my-3"
             >
-              <div className="font-medium text-sm md:text-base">
+              <div className="text-sm font-medium md:text-base">
                 {t('write.orAddFromPC')}
               </div>
             </Button>

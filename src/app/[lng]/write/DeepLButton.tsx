@@ -13,11 +13,11 @@ const DeepLButton = ({ query = '', t }: DeepLButtonProps & { t: T }) => {
   return (
     <Link
       href={`${DEEPL_URL}/${query}`}
-      className="rounded-md bg-[#042B48] py-2 px-4"
+      className="rounded-md bg-[#042B48] px-4 py-2"
     >
       <div className="flex gap-2">
         <DeepLLogo />
-        <div className="text-white font-medium">
+        <div className="font-medium text-white">
           {t('write.translateWithDeepL')}
         </div>
       </div>

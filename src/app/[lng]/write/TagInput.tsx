@@ -86,7 +86,7 @@ const TagInput = ({ tags, setTags, t }: TagInputProps & { t: T }) => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex gap-1.5 items-center border-solid border-2 rounded-lg border-primary p-3 md:p-2">
+      <div className="flex items-center gap-1.5 rounded-lg border-2 border-solid border-primary p-3 md:p-2">
         {tags.map((tag) => (
           <TagChip
             key={tag.name}
@@ -101,19 +101,19 @@ const TagInput = ({ tags, setTags, t }: TagInputProps & { t: T }) => {
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('write.writeTags') : ''}
-          className="flex-grow text-sm md:text-base bg-transparent outline-none p-1 md:p-2"
+          className="flex-grow bg-transparent p-1 text-sm outline-none md:p-2 md:text-base"
         />
       </div>
 
-      <div className="flex relative">
-        <div className="flex flex-col absolute top-[-4px] left-2.5 z-10 bg-white w-[calc(100%-20px)]">
+      <div className="relative flex">
+        <div className="absolute left-2.5 top-[-4px] z-10 flex w-[calc(100%-20px)] flex-col bg-white">
           {searchedTags.slice(0, 5).map((tag) => (
             <div
               className="p-2.5 [&:hover]:bg-secondary"
               key={tag.id}
               onClick={() => handleTagOptionClick(tag)}
             >
-              <div className="font-regular text-sm text-left text-black">
+              <div className="font-regular text-left text-sm text-black">
                 {tag.name}
               </div>
             </div>
@@ -134,17 +134,17 @@ const TagChip = ({
   return (
     <div
       className={
-        'flex items-center gap-2 w-max  bg-primary ' +
-        'md:h-8 md:pr-1 md:pl-2.5 md:rounded-2x h-6 pr-4 pl-1.5 rounded-2xl'
+        'flex w-max items-center gap-2  bg-primary ' +
+        'md:rounded-2x h-6 rounded-2xl pl-1.5 pr-4 md:h-8 md:pl-2.5 md:pr-1'
       }
     >
-      <div className="font-medium text-white text-sm md:text-base">
+      <div className="text-sm font-medium text-white md:text-base">
         #{children}
       </div>
 
       <div onClick={onClick} className="cursor-pointer">
-        <div className="bg-white w-4 h-4 md:w-5 md:h-5 rounded-xl flex justify-center items-center">
-          <CloseIcon className="w-1.5 h-1.5 md:w-2 md:h-2 fill-primary" />
+        <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
+          <CloseIcon className="h-1.5 w-1.5 fill-primary md:h-2 md:w-2" />
         </div>
       </div>
     </div>
