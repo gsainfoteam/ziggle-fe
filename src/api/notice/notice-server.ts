@@ -11,7 +11,7 @@ export const getAllNotices = async (
     .get<Notices>('/notice', {
       params,
       headers: {
-        Authorization: `Bearer ${cookieStore.get('access_token')}`,
+        Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
       },
     })
     .then(({ data }) => ({
