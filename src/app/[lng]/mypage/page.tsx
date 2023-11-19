@@ -1,5 +1,5 @@
 import { auth } from '@/api/auth/auth';
-import { getAllNotices } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 import { createTranslation } from '@/app/i18next';
 import { Notice } from '@/generated/graphql';
 
