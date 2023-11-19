@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { NoticeKind } from '@/api/notice/notice';
+import { NoticeKind } from '@/api/notice/notice-kind';
 import { useTranslation } from '@/app/i18next/client';
 
 import Button from '../../components/atoms/Button';

@@ -5,13 +5,6 @@ import { gql } from '@/generated';
 
 import api from '..';
 
-export enum NoticeKind {
-  RECRUIT = 'recruit',
-  EVENT = 'event',
-  NORMAL = 'general',
-  ACADEMIC = 'academic',
-}
-
 export interface NoticePaginationParams {
   offset?: number;
   limit?: number;
