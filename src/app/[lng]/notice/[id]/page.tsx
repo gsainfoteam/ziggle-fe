@@ -1,5 +1,6 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
+import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/notice';
 import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import NoticeInfo from '@/app/components/organisms/NoticeInfo';
@@ -7,8 +8,11 @@ import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
+import getLocaleContents from '@/utils/getLocaleContents';
 
 import Actions from './Actions';
+import AddAddtionalNotice from './AddAddtionalNotice';
+import AddtionalNotices from './AddtionalNotices';
 import Content from './Content';
 
 export const generateMetadata = async (
@@ -18,13 +22,13 @@ export const generateMetadata = async (
   const notice = await getNotice(Number.parseInt(id));
   const previousImages = (await parent).openGraph?.images ?? [];
   return {
-    title: notice.title,
-    description: notice.body.slice(0, 100).replace(/\n/g, ' '),
+    title: notice.contents[0].title,
+    description: notice.contents[0].body.slice(0, 100).replace(/\n/g, ' '),
     keywords: notice.tags.map((tag) => tag.name),
     authors: [{ name: notice.author }],
     openGraph: {
-      title: notice.title,
-      description: notice.body.slice(0, 100).replace(/\n/g, ' '),
+      title: notice.contents[0].title,
+      description: notice.contents[0].body.slice(0, 100).replace(/\n/g, ' '),
       url: `https://ziggle.gistory.me/notice/${id}`,
       images: [...notice.imagesUrl, ...previousImages],
     },
@@ -36,21 +40,38 @@ const DetailedNoticePage = async ({
 }: {
   params: { id: string; lng: Locale };
 }) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t, i18n } = await createTranslation(lng, 'translation');
+  const language = i18n.language;
   const notice = await getNotice(Number.parseInt(id));
+
+  const localContents = getLocaleContents(notice.contents, language);
+
+  const title = localContents[0].title;
+
+  const user = await auth();
+
   return (
     <>
-      <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />
+      <ZaboShowcase srcs={notice.imagesUrl} alt={title} />
       <div className="mt-8 md:mt-12 content mx-auto">
-        <Actions title={notice.title} />
+        <Actions title={localContents[0].body} />
         <div className="h-4 md:h-5" />
-        <NoticeInfo {...notice} deadline={notice.deadline ?? null} t={t} />
+        <NoticeInfo
+          {...notice}
+          currentDeadline={notice.currentDeadline ?? null}
+          t={t}
+        />
         <div className="h-5" />
-        <Content content={notice.body} />
+        <Content content={localContents[0].body} />
+
+        <AddtionalNotices contents={localContents} t={t} />
+
+        {user && user.id === notice.authorId && <AddAddtionalNotice />}
+
         {notice.imagesUrl.length > 0 && (
           <>
             <div className="h-20" />
-            <ImageCarousel srcs={notice.imagesUrl} alt={notice.title} />
+            <ImageCarousel srcs={notice.imagesUrl} alt={title} />
           </>
         )}
         <div className="h-20" />

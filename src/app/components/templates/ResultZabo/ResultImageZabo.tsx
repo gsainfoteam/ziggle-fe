@@ -6,17 +6,18 @@ import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import { useTranslation } from '@/app/i18next/client';
 import GetHighlightedText from '@/utils/GetHighlightedText';
+import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
 import ZaboImage from '../../molecules/ZaboImage';
 import { ResultImageZaboProps } from './ResultZabo';
 
 const ResultImageZabo = ({
-  title,
+  contents,
   createdAt: rawCreatedAt,
   views,
   author,
-  deadline: rawDeadline,
+  currentDeadline: rawDeadline,
   tags,
   searchQuery,
 
@@ -25,10 +26,13 @@ const ResultImageZabo = ({
   id,
   lng,
 }: ResultImageZaboProps) => {
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+  const localeContents = getLocaleContents(contents, language);
+
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
-
-  const { t } = useTranslation();
+  const title = localeContents[0].title;
 
   return (
     <Link

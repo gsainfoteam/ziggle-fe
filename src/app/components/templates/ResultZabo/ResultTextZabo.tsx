@@ -7,18 +7,19 @@ import { Trans } from 'react-i18next';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import { useTranslation } from '@/app/i18next/client';
+import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = ({
-  title,
+  contents,
   body,
   createdAt,
   views,
   author,
-  deadline: rawDeadline,
+  currentDeadline: rawDeadline,
   tags,
   searchQuery,
 
@@ -27,7 +28,11 @@ const ResultTextZabo = ({
   lng,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = i18n.language;
+  const localeContents = getLocaleContents(contents, language);
+
+  const title = localeContents[0].title;
 
   return (
     <Link
@@ -76,7 +81,7 @@ const ResultTextZabo = ({
           </div>
 
           <div className="font-medium text-sm text-start text-ellipsis line-clamp-4">
-            {body ?? t('zabo.noContent')}
+            {localeContents[0].body ?? t('zabo.noContent')}
           </div>
 
           <div className="flex gap-0.5">

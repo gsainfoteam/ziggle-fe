@@ -1,4 +1,5 @@
 {
+  "lang": "en",
   "metadata": {
     "title": "Ziggle",
     "description": "All Notices in GIST at a glance"
@@ -73,7 +74,10 @@
     },
     "backToMain": "Go back to main page",
     "images": "Photos",
-    "howAboutThese": "🫧 How about these notices?"
+    "howAboutThese": "🫧 How about these notices?",
+    "addtionalNotices": "Additional Notices",
+    "deadlineChanged": "Deadline Changed",
+    "addAdditionalNotice": "Write an additional notice"
   },
   "emptyNotices": "No content. =ㅅ=",
   "loading": "Loading! -ㅅ-",

@@ -5,28 +5,54 @@ type Tag {
   name: String!
 }
 
-type Notice {
+type Content {
   id: Int!
+  lang: String!
   title: String!
-  views: Int!
   body: String!
   deadline: Date
   createdAt: Date!
+  noticeId: Int!
+}
+
+type NoticeFile {
+  uuid: String!
+  name: String!
+  createdAt: Date!
+  url: String!
+  type: String!
+  noticeId: Int!
+}
+
+type Notice {
+  id: Int!
+  views: Int!
+  body: String!
+  currentDeadline: Date
+  createdAt: Date!
+  updatedAt: Date!
+  deletedAt: Date
   author: String!
   tags: [Tag!]!
   imageUrl: String
+  contents: [Content!]!
+  files: [NoticeFile!]!
 }
 
 type DetailedNotice {
   id: Int!
-  title: String!
   views: Int!
   body: String!
-  deadline: Date
+  currentDeadline: Date
   createdAt: Date!
+  updatedAt: Date!
+  deletedAt: Date
+  authorId: String!
   author: String!
   tags: [Tag!]!
   imagesUrl: [String!]!
+  contents: [Content!]!
+  files: [NoticeFile!]!
   reminder: Boolean!
 }
 

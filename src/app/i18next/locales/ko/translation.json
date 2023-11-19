@@ -1,4 +1,5 @@
 {
+  "lang": "ko",
   "metadata": {
     "title": "지글",
     "description": "지스트의 모든 공지를 한눈에"
@@ -70,7 +71,10 @@
     },
     "backToMain": "메인 페이지로 돌아가기",
     "images": "첨부 사진",
-    "howAboutThese": "🫧 이런 공지는 어떠신가요?"
+    "howAboutThese": "🫧 이런 공지는 어떠신가요?",
+    "addtionalNotices": "추가 공지",
+    "deadlineChanged": "마감시간 변경",
+    "addAdditionalNotice": "추가 공지 작성하기"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",

@@ -2,45 +2,47 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  Date: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Date: { input: any; output: any; }
+};
+
+export type Content = {
+  __typename?: 'Content';
+  body: Scalars['String']['output'];
+  createdAt: Scalars['Date']['output'];
+  deadline?: Maybe<Scalars['Date']['output']>;
+  id: Scalars['Int']['output'];
+  lang: Scalars['String']['output'];
+  noticeId: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
 };
 
 export type DetailedNotice = {
   __typename?: 'DetailedNotice';
   author: Scalars['String']['output'];
+  authorId: Scalars['String']['output'];
   body: Scalars['String']['output'];
+  contents: Array<Content>;
   createdAt: Scalars['Date']['output'];
-  deadline?: Maybe<Scalars['Date']['output']>;
+  currentDeadline?: Maybe<Scalars['Date']['output']>;
+  deletedAt?: Maybe<Scalars['Date']['output']>;
+  files: Array<NoticeFile>;
   id: Scalars['Int']['output'];
   imagesUrl: Array<Scalars['String']['output']>;
   reminder: Scalars['Boolean']['output'];
   tags: Array<Tag>;
-  title: Scalars['String']['output'];
+  updatedAt: Scalars['Date']['output'];
   views: Scalars['Int']['output'];
 };
 
@@ -53,13 +55,26 @@ export type Notice = {
   __typename?: 'Notice';
   author: Scalars['String']['output'];
   body: Scalars['String']['output'];
+  contents: Array<Content>;
   createdAt: Scalars['Date']['output'];
-  deadline?: Maybe<Scalars['Date']['output']>;
+  currentDeadline?: Maybe<Scalars['Date']['output']>;
+  deletedAt?: Maybe<Scalars['Date']['output']>;
+  files: Array<NoticeFile>;
   id: Scalars['Int']['output'];
   imageUrl?: Maybe<Scalars['String']['output']>;
   tags: Array<Tag>;
-  title: Scalars['String']['output'];
+  updatedAt: Scalars['Date']['output'];
   views: Scalars['Int']['output'];
+};
+
+export type NoticeFile = {
+  __typename?: 'NoticeFile';
+  createdAt: Scalars['Date']['output'];
+  name: Scalars['String']['output'];
+  noticeId: Scalars['Int']['output'];
+  type: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
 };
 
 export type Notices = {
@@ -80,9 +95,11 @@ export type Query = {
   notices: Notices;
 };
 
+
 export type QueryNoticeArgs = {
   id: Scalars['Int']['input'];
 };
+
 
 export type QueryNoticesArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -105,7 +122,7 @@ export type GetNoticesQueryVariables = Exact<{
 }>;
 
 
-export type GetNoticesQuery = { __typename?: 'Query', notices: { __typename?: 'Notices', total: number, list: Array<{ __typename?: 'Notice', id: number, title: string, views: number, body: string, deadline?: any | null, createdAt: any, author: string, imageUrl?: string | null, tags: Array<{ __typename?: 'Tag', id: number, name: string }> }> } };
+export type GetNoticesQuery = { __typename?: 'Query', notices: { __typename?: 'Notices', total: number, list: Array<{ __typename?: 'Notice', id: number, views: number, body: string, currentDeadline?: any | null, createdAt: any, updatedAt: any, deletedAt?: any | null, author: string, imageUrl?: string | null, tags: Array<{ __typename?: 'Tag', id: number, name: string }>, contents: Array<{ __typename?: 'Content', id: number, lang: string, title: string, body: string, deadline?: any | null, createdAt: any, noticeId: number }>, files: Array<{ __typename?: 'NoticeFile', uuid: string, name: string, createdAt: any, url: string, type: string, noticeId: number }> }> } };
 
 
-export const GetNoticesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNotices"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"views"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"deadline"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"total"}}]}}]}}]} as unknown as DocumentNode<GetNoticesQuery, GetNoticesQueryVariables>;
+export const GetNoticesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetNotices"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notices"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"list"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"views"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"currentDeadline"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"deletedAt"}},{"kind":"Field","name":{"kind":"Name","value":"author"}},{"kind":"Field","name":{"kind":"Name","value":"imageUrl"}},{"kind":"Field","name":{"kind":"Name","value":"tags"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"contents"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lang"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"deadline"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"noticeId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"files"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"noticeId"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"total"}}]}}]}}]} as unknown as DocumentNode<GetNoticesQuery, GetNoticesQueryVariables>;

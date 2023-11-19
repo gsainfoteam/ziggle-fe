@@ -3,6 +3,7 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail, Tag } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
+import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
 
@@ -11,18 +12,21 @@ interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {
 }
 
 const NoticeInfo = ({
-  deadline,
-  title,
+  currentDeadline: deadline,
+  contents,
   author,
   createdAt,
   views,
   tags = [],
   t,
 }: NoticeInfoProps & { t: T }) => {
+  const language = t('lang');
+  const localeContents = getLocaleContents(contents, language);
+
   return (
     <div>
       {deadline && <Deadline deadline={dayjs(deadline)} />}
-      <Title title={title} />
+      <Title title={localeContents[0].title} />
       <div className="h-1" />
       <Metadata
         author={author}
