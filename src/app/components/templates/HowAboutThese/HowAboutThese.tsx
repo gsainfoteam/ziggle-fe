@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-import { GET_NOTICES } from '@/api/notice/notice-gql';
+import { GET_NOTICES } from '@/api/notice/notice';
 import { useTranslation } from '@/app/i18next/client';
 
 import Zabo from '../../organisms/Zabo';
