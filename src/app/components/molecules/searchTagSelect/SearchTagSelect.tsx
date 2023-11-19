@@ -1,4 +1,4 @@
-import { NoticeKind } from '@/api/notice/notice-kind';
+import { NoticeKind } from '@/api/notice/notice';
 
 import Button from '../../atoms/Button';
 import Chip from '../Chip';
