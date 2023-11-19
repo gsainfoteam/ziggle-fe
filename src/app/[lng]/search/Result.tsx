@@ -1,4 +1,5 @@
 import { getAllNotices } from '@/api/notice/notice';
+import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
@@ -12,19 +13,26 @@ const Result = async ({
   lng: Locale;
   search: string;
   tags: string[];
-  offset: number;
+  page: number;
   limit: number;
 }) => {
   const { t } = await createTranslation(lng, 'translation');
-  const data = await getAllNotices(props);
+  const data = await getAllNotices({
+    ...props,
+    offset: props.page * props.limit,
+  });
+
   return (
     <>
+      <div className={'flex justify-center'}>
+        <Pagination
+          pages={Math.ceil(data.total / props.limit)}
+          page={props.page}
+        />
+      </div>
+
       {data?.list.length !== 0 && (
         <div className="flex flex-col flex-nowrap gap-[10px]">
-          <p className="text-lg font-bold md:text-4xl">
-            {t('searchPage.title')}
-          </p>
-
           <div className="h-8" />
 
           {data.list.map((notice) => (
@@ -53,6 +61,13 @@ const Result = async ({
           </div>
         </div>
       )}
+
+      <div className={'mt-10 flex justify-center'}>
+        <Pagination
+          pages={Math.ceil(data.total / props.limit)}
+          page={props.page}
+        />
+      </div>
     </>
   );
 };
