@@ -1,5 +1,3 @@
-import { redirect } from 'next/dist/server/api-utils';
-
 import { logout, withdraw } from '@/api/auth/auth';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
