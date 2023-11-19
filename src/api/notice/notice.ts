@@ -93,3 +93,11 @@ export const GET_NOTICES = gql(`
     }
   }
 `);
+
+export const CREATE_NOTICE = gql(`
+  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
+    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {
+      id
+    }
+  }
+`);

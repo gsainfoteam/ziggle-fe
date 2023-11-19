@@ -5,6 +5,7 @@
   },
   "navbar": {
     "all": "All Notices",
+    "write": "Write Notice",
     "query": "Search Notice",
     "login": "Login"
   },
@@ -123,5 +124,77 @@
     "prompt": "Please enter a search term",
     "noResult": "There are no search results.",
     "title": "♨ Ziggle Announcements"
+  },
+  "write": {
+    "writeTitle": "Enter a title here",
+    "setupDeadline": "Set a deadline",
+    "noticeType": "Notice Type",
+    "noticeTypes": {
+      "recruit": {
+        "label": "🎯 Recruiting",
+        "description": {
+          "title": "🎯 You've selected a Recruiting notice!",
+          "content": "If you're looking to recruit people to your club, group, or event, try creating a recruitment announcement.",
+          "example": "Ex) club recruitment, student association recruitment, Infinite Challenge team member recruitment, contests, competitions, etc."
+        }
+      },
+      "event": {
+        "label": "🎈 Events",
+        "description": {
+          "title": "🎈 You've selected an Event notice!",
+          "content": "Feel free to promote your event in the event notice.",
+          "example": "Ex) festivals, exhibitions, performances, seminars, lectures, workshops"
+        }
+      },
+      "general": {
+        "label": "🔔 General",
+        "description": {
+          "title": "🔔 You've selected a General notice!",
+          "content": "Notices that are not part of a recruitment or event notices.",
+          "example": "Ex) GIST House notices, student association notices, notifications, etc."
+        }
+      }
+    },
+    "setupTags": "Set Tags",
+    "writeTagsDescription": "Separate them with a space; you don't need to type #.",
+    "writeTags": "Enter tags.",
+
+    "setupLanguage": "Language",
+    "languages": {
+      "korean": "Korean",
+      "english": "English"
+    },
+
+    "enterKoreanContent": "Enter Content - Korean",
+    "enterEnglishContent": "Enter Content - English",
+    "translateWithDeepL": "Translate with DeepL",
+
+    "attatchPhoto": "Attach Photos",
+    "photoDescription": "The first of the attached photos is set as the representative photo.",
+    "dragToAddPhoto": "Drag to add photos",
+    "orAddFromPC": "...or browse files",
+    "addFromMyDevice": "Add from my device",
+
+    "submit": "Submit Notice",
+    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
+
+    "alerts": {
+      "confimationButtonText": "Confirm",
+      "title": "Please enter a title",
+      "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters",
+      "deadline": "Please set the deadline after the current time",
+      "body": "Please enter the content",
+      "koreanBody": "Please enter Korean text content",
+      "englishBody": "Please enter English text content",
+      "bodyLengthLessThan": "Please enter body content within {{bodyMaxLength}} characters",
+      "koreanBodyLengthLessThan": "Please enter Korean body content within {{bodyMaxLength}} characters",
+      "englishBodyLengthLessThan": "Please enter English body content within {{bodyMaxLength}} characters",
+      "bothBodyLengthLessThan": "Please enter both Korean and English content within {{bodyMaxLength}} characters",
+      "numberOfCharacter": "({{length}}/{{maxLength}} characters)",
+      "submittingNotice": "Creating a notice...",
+      "submitSuccess": "The notice was submitted successfully",
+      "submitFail": "Failed to submit notice",
+      "tagCreationFail": "Failed to create tag"
+    }
   }
 }
