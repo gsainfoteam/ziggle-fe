@@ -9,12 +9,11 @@ import Button from '../../atoms/Button';
 
 interface PaginationProps {
   pages: number;
-  page: number;
+  page: number | string;
 }
 
 const Pagination = ({ pages, page }: PaginationProps) => {
-  if (page < 0) redirect('?page=0');
-  if (page >= pages) redirect(`?page=${pages - 1}`);
+  const pageAsNumber = Number.parseInt(page as string);
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -25,11 +24,15 @@ const Pagination = ({ pages, page }: PaginationProps) => {
     return `${pathname}?${params.toString()}`;
   };
 
+  if (pageAsNumber < 0 || isNaN(pageAsNumber)) redirect(generateLink(0));
+
+  if (pageAsNumber >= pages) redirect(generateLink(pages - 1));
+
   return (
     <div className="flex items-center gap-2 md:gap-2.5">
       {page !== 0 ? (
         <Button animated>
-          <Link href={generateLink(page - 1)}>
+          <Link href={generateLink(pageAsNumber - 1)}>
             <ArrowRightFilledIcon className="w-7 rotate-180 fill-primary md:w-8" />
           </Link>
         </Button>
@@ -54,9 +57,9 @@ const Pagination = ({ pages, page }: PaginationProps) => {
         </Link>
       ))}
       <div className="w-2 shrink-0" />
-      {page + 1 !== pages ? (
+      {pageAsNumber + 1 !== pages ? (
         <Button animated>
-          <Link href={generateLink(page + 1)}>
+          <Link href={generateLink(pageAsNumber + 1)}>
             <ArrowRightFilledIcon className="w-7 fill-primary md:w-8" />
           </Link>
         </Button>

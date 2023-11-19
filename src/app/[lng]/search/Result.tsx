@@ -13,13 +13,18 @@ const Result = async ({
   lng: Locale;
   search: string;
   tags: string[];
-  page: number;
+  page: string | number;
   limit: number;
 }) => {
   const { t } = await createTranslation(lng, 'translation');
+  const pageAsNumber =
+    Number.parseInt(props.page as string) >= 0
+      ? Number.parseInt(props.page as string)
+      : 0;
+
   const data = await getAllNotices({
     ...props,
-    offset: props.page * props.limit,
+    offset: pageAsNumber * props.limit,
   });
 
   return (

@@ -42,7 +42,7 @@ const SearchPage = async ({
               lng={lng}
               search={search}
               limit={ITEMS_PER_CALL}
-              page={Number.parseInt(searchParams.page) || 0}
+              page={searchParams.page}
               tags={tags}
             />
           </Suspense>
