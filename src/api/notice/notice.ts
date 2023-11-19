@@ -4,16 +4,16 @@ import { gql } from '@/generated';
 
 import api from '..';
 
+export interface NoticePaginationParams {
+  offset?: number;
+  limit?: number;
+}
+
 export enum NoticeKind {
   RECRUIT = 'recruit',
   EVENT = 'event',
   NORMAL = 'general',
   ACADEMIC = 'academic',
-}
-
-export interface NoticePaginationParams {
-  offset?: number;
-  limit?: number;
 }
 
 export interface NoticeSearchParams {
@@ -53,18 +53,6 @@ export interface Notices {
   list: Notice[];
   total: number;
 }
-
-export const getAllNotices = async (
-  params: NoticePaginationParams & NoticeSearchParams = {},
-) =>
-  api.get<Notices>('/notice', { params }).then(({ data }) => ({
-    ...data,
-    list: data.list.map(({ imageUrl, ...notice }) => ({
-      ...notice,
-      deadline: notice.deadline ? notice.deadline : null,
-      imageUrl: imageUrl ? imageUrl : null,
-    })),
-  }));
 
 export const getNotice = async (id: number) =>
   api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({

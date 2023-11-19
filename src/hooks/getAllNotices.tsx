@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import {
-  getAllNotices,
   NoticePaginationParams,
   Notices,
   NoticeSearchParams,
 } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 
 export const useGetAllNotices = (
   params: NoticePaginationParams & NoticeSearchParams = {},

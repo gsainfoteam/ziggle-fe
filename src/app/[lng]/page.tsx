@@ -1,4 +1,4 @@
-import { getAllNotices } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 
 import ZaboCarousel from '../components/templates/ZaboCarousel';
 import { createTranslation } from '../i18next';
