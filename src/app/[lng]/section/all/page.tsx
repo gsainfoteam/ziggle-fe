@@ -1,4 +1,4 @@
-import { getAllNotices } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 import Pagination from '@/app/components/molecules/Pagination';
 import { Locale } from '@/app/i18next/settings';
 

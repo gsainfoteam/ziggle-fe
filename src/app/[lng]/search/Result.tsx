@@ -1,4 +1,4 @@
-import { getAllNotices } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
