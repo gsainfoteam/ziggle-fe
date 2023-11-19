@@ -2,7 +2,10 @@ import Swal from 'sweetalert2';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { CREATE_NOTICE } from '@/api/notice/notice';
+import {
+  ATTACH_INTERNATIONAL_NOTICE,
+  CREATE_NOTICE,
+} from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
 
@@ -44,13 +47,13 @@ const handleNoticeSubmit = async ({
   };
 
   if (!title) {
-    WarningSwal(t('write.alerts.body'));
+    WarningSwal(t('write.alerts.title'));
     return;
   }
 
   if (title.length > TITLE_MAX_LENGTH) {
     WarningSwal(
-      t('write.alerts.bodyLengthLessThan', {
+      t('write.alerts.titleLengthLessThan', {
         titleMaxLength: TITLE_MAX_LENGTH,
       }),
     );
@@ -172,17 +175,6 @@ const handleNoticeSubmit = async ({
   const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
   if (!tagIds) return;
 
-  // need to remove log later
-  console.log(
-    title,
-    deadline,
-    noticeLanguage,
-    koreanBody,
-    englishBody,
-    tagIds,
-    images,
-  );
-
   Swal.fire({
     text: t('write.alerts.submittingNotice'),
     icon: 'info',
@@ -199,6 +191,7 @@ const handleNoticeSubmit = async ({
   });
 
   const id = notice.data?.createNotice.id;
+
   if (!id) {
     Swal.fire({
       text: t('write.alerts.submitFail'),
@@ -206,6 +199,17 @@ const handleNoticeSubmit = async ({
       confirmButtonText: t('write.alerts.confimationButtonText'),
     });
     return;
+  }
+
+  if (noticeLanguage === 'both') {
+    const englishNotice = await apolloClient.mutate({
+      mutation: ATTACH_INTERNATIONAL_NOTICE,
+      variables: {
+        title,
+        deadline,
+        body: englishBody!,
+      },
+    });
   }
 
   return id;

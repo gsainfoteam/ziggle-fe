@@ -19,7 +19,6 @@ export const useGetAllNotices = (
     };
 
     fetchNotices();
-    console.log('fetch', params);
   }, [JSON.stringify(params)]);
 
   return notices;

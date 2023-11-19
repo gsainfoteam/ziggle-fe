@@ -20,14 +20,14 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
         return index > 0 ? (
           <div
             key={content.id}
-            className={'border-2 border-primary rounded-xl'}
+            className={'rounded-xl border-2 border-primary'}
           >
             <div className={'flex items-center gap-1'}>
               <PlusIcon />
-              <p className={'text-primary font-bold text-lg'}>
+              <p className={'text-lg font-bold text-primary'}>
                 {t('zabo.addtionalNotices')}
               </p>
-              <p className={'text-secondaryText font-regular text-base ml-2 '}>
+              <p className={'font-regular ml-2 text-base text-secondaryText '}>
                 {dayjs(content.createdAt).format('YYYY.MM.DD')}
               </p>
             </div>
@@ -38,10 +38,10 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
                   'YYYY.MM.DD',
                 ) && (
                 <div>
-                  <p className={'font-bold text-base'}>
+                  <p className={'text-base font-bold'}>
                     {t('zabo.deadlineChanged')}
                   </p>
-                  <p className={'text-secondaryText font-medium text-base'}>
+                  <p className={'text-base font-medium text-secondaryText'}>
                     {dayjs(localeContents[index - 1].deadline).format(
                       'YYYY.MM.DD',
                     )}
@@ -49,7 +49,7 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
 
                   <p>▶</p>
 
-                  <p className={'font-medium text-base'}>
+                  <p className={'text-base font-medium'}>
                     {dayjs(content.deadline).format('YYYY.MM.DD')}
                   </p>
                 </div>

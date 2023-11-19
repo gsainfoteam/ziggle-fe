@@ -44,6 +44,24 @@ const resolvers: Resolvers = {
         { title, body, deadline, tags, images },
         accessToken!,
       ),
+    attachInternationalNotice: (
+      _,
+      { title, body, deadline, noticeId, contentId },
+      { dataSources, accessToken },
+    ) =>
+      dataSources.noticesAPI.attachInternationalNotice(
+        { title, body, deadline, noticeId, contentId },
+        accessToken!,
+      ),
+    createAdditionalNotice: (
+      _,
+      { title, body, deadline, noticeId, contentId },
+      { dataSources, accessToken },
+    ) =>
+      dataSources.noticesAPI.createAdditionalNotice(
+        { title, body, deadline, noticeId, contentId },
+        accessToken!,
+      ),
   },
 };
 

@@ -75,7 +75,13 @@
     "howAboutThese": "🫧 이런 공지는 어떠신가요?",
     "addtionalNotices": "추가 공지",
     "deadlineChanged": "마감시간 변경",
-    "addAdditionalNotice": "추가 공지 작성하기"
+    "addAdditionalNotice": "추가 공지 작성하기",
+    "changeDeadline": "마감일 변경하기",
+    "additionalNoticePlaceholder": "여기에 추가 공지를 입력하세요",
+    "cancelAdditionalNotice": "취소하기",
+    "submitAdditionalNotice": "제출하기",
+    "alertToReminded": "리마인드 설정한 사람들에게만 알림 보내기",
+    "alertToAll": "모든 사람들에게 알림 보내기"
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",

@@ -78,7 +78,13 @@
     "howAboutThese": "🫧 How about these notices?",
     "addtionalNotices": "Additional Notices",
     "deadlineChanged": "Deadline Changed",
-    "addAdditionalNotice": "Write an additional notice"
+    "addAdditionalNotice": "Write an additional notice",
+    "changeDeadline": "마감일 변경하기",
+    "additionalNoticePlaceholder": "Write an additional notice here",
+    "cancelAdditionalNotice": "Cancel",
+    "submitAdditionalNotice": "Submit",
+    "alertToReminded": "Alert to those who have been reminded",
+    "alertToAll": "Alert to everyone"
   },
   "emptyNotices": "No content. =ㅅ=",
   "loading": "Loading! -ㅅ-",

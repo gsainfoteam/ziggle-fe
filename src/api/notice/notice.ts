@@ -150,3 +150,19 @@ export const CREATE_NOTICE = gql(`
     }
   }
 `);
+
+export const ATTACH_INTERNATIONAL_NOTICE = gql(`
+  mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!) {
+    attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId) {
+      id
+    }
+  }
+`);
+
+export const CREATE_ADDITIONAL_NOTICE = gql(`
+  mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {
+    createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
+      id
+    }
+  }
+`);

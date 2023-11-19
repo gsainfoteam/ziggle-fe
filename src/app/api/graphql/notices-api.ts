@@ -45,4 +45,39 @@ export default class NoticesAPI extends RESTDataSource {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  async attachInternationalNotice(
+    data: {
+      title: string;
+      body: string;
+      deadline?: Date;
+      noticeId: number;
+      contentId: number;
+    },
+    token: string,
+  ) {
+    const { noticeId, contentId, ...body } = data;
+
+    return this.post<NoticeDetail>(`notice/${noticeId}/${contentId}/foreign}`, {
+      body: body,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async createAdditionalNotice(
+    data: {
+      title?: string;
+      body: string;
+      deadline?: Date;
+      noticeId: number;
+    },
+    token: string,
+  ) {
+    const { noticeId, ...body } = data;
+
+    return this.post<NoticeDetail>(`notice/${noticeId}/additional`, {
+      body: body,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }

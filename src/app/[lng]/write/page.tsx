@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
+import { Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
@@ -56,8 +57,8 @@ export default function WritePage({
 
   const [images, setImages] = useState<File[]>([]);
 
-  const koreanEditorRef = useRef<any>(null);
-  const englishEditorRef = useRef<any>(null);
+  const koreanEditorRef = useRef<TinyMCEEditorRef | null>(null);
+  const englishEditorRef = useRef<TinyMCEEditorRef | null>(null);
 
   const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isWriteEnglish) {
@@ -222,7 +223,7 @@ export default function WritePage({
           </div>
 
           <React.Suspense>
-            <DynamicTinyMCEEditor ref={koreanEditorRef} />
+            <DynamicTinyMCEEditor forwardedRef={koreanEditorRef} />
           </React.Suspense>
         </div>
 
@@ -232,15 +233,10 @@ export default function WritePage({
             <div className="mr-4 text-lg font-medium">
               {t('write.enterEnglishContent')}
             </div>
-            {isWriteKorean && (
-              <DeepLButton
-                t={t}
-                query={koreanEditorRef.current?.getContent()}
-              />
-            )}
+            {isWriteKorean && <DeepLButton t={t} editorRef={koreanEditorRef} />}
           </div>
           <React.Suspense>
-            <DynamicTinyMCEEditor ref={englishEditorRef} />
+            <DynamicTinyMCEEditor forwardedRef={englishEditorRef} />
           </React.Suspense>
         </div>
 

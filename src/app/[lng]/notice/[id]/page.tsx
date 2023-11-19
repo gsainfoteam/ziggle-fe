@@ -66,7 +66,12 @@ const DetailedNoticePage = async ({
 
         <AddtionalNotices contents={localContents} t={t} />
 
-        {user && user.id === notice.authorId && <AddAddtionalNotice />}
+        {user && user.id === notice.authorId && (
+          <AddAddtionalNotice
+            noticeId={Number(id)}
+            supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique
+          />
+        )}
 
         {notice.imagesUrl.length > 0 && (
           <>

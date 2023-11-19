@@ -1,33 +1,32 @@
-import { InputHTMLAttributes, useId } from 'react';
+import { InputHTMLAttributes } from 'react';
 
-import RadioDeselected from './assets/radioDeselected.svg';
-import RadioSelected from './assets/radioSelected.svg';
+import RadioDeselected from './assets/radio-deselected.svg';
+import RadioSelected from './assets/radio-selected.svg';
 
 export interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   htmlId?: string;
+  selected: string;
 }
 const AddNoticeRadio = ({
   label,
-  htmlId,
-  checked,
+  selected,
   onChange,
   ...props
 }: CheckboxProps) => {
-  const id = useId();
-
   return (
-    <div className={'flex gap-[10px]'}>
-      <label htmlFor={htmlId || id}>
+    <div className={'flex flex-col gap-[10px]'}>
+      <label htmlFor={'remindId'}>
         <input
-          id={htmlId || id}
+          id={'remindId'}
           type={'checkbox'}
-          checked={checked}
+          checked={selected === 'remind'}
           onChange={(event) => {
             if (onChange) {
               onChange(event);
             }
           }}
+          value={'remind'}
           style={{
             display: 'none',
           }}
@@ -35,32 +34,32 @@ const AddNoticeRadio = ({
         />
 
         <div className={'flex gap-2 md:gap-[10px]'}>
-          {checked ? (
+          {selected === 'remind' ? (
             <RadioSelected className={'w-[16px] md:w-[20px]'} />
           ) : (
             <RadioDeselected className={'w-[16px] md:w-[20px]'} />
           )}
 
           <p
-            className={
-              'font-medium text-secondaryText group-hover:text-text text-sm md:text-xl'
-            }
-            // color={checked ? colorSet.text : colorSet.secondaryText}
+            className={`text-sm font-medium ${
+              selected === 'remind' ? 'text-primary' : 'text-secondaryText'
+            } group-hover:text-text md:text-xl`}
           >
             리마인드 설정한 사람에게만 알림 보내기
           </p>
         </div>
       </label>
-      <label htmlFor={htmlId || id}>
+      <label htmlFor={'allId'}>
         <input
-          id={htmlId || id}
+          id={'allId'}
           type={'checkbox'}
-          checked={checked}
+          checked={selected === 'all'}
           onChange={(event) => {
             if (onChange) {
               onChange(event);
             }
           }}
+          value={'all'}
           style={{
             display: 'none',
           }}
@@ -68,16 +67,16 @@ const AddNoticeRadio = ({
         />
 
         <div className={'flex gap-2 md:gap-[10px]'}>
-          {checked ? (
-            <RadioSelected className={'w-[16px] md:w-[20px]'} />
+          {selected === 'all' ? (
+            <RadioSelected className={'w-4 md:w-5'} />
           ) : (
             <RadioDeselected className={'w-[16px] md:w-[20px]'} />
           )}
 
           <p
-            className={
-              'font-medium text-secondaryText group-hover:text-text text-sm md:text-xl'
-            }
+            className={`text-sm font-medium ${
+              selected === 'all' ? 'text-primary' : 'text-secondaryText'
+            } group-hover:text-text md:text-xl`}
           >
             모든 사람에게 알림 보내기
           </p>
