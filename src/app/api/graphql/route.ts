@@ -11,6 +11,7 @@ export interface MyContext {
   dataSources: {
     noticesAPI: NoticesAPI;
   };
+  accessToken: string | null;
 }
 
 const resolvers: Resolvers = {
@@ -33,6 +34,17 @@ const resolvers: Resolvers = {
     notice: (_, { id }, { dataSources }) =>
       dataSources.noticesAPI.getNotice(id),
   },
+  Mutation: {
+    createNotice: (
+      _,
+      { title, body, deadline, tags, images },
+      { dataSources, accessToken },
+    ) =>
+      dataSources.noticesAPI.createNotice(
+        { title, body, deadline, tags, images },
+        accessToken!,
+      ),
+  },
 };
 
 const server = new ApolloServer<MyContext>({
@@ -43,12 +55,16 @@ const server = new ApolloServer<MyContext>({
 const handler = startServerAndCreateNextHandler<NextRequest, MyContext>(
   server,
   {
-    context: async (req) => ({
-      req,
-      dataSources: {
-        noticesAPI: new NoticesAPI({ cache: server.cache }),
-      },
-    }),
+    context: async (req) => {
+      const accessToken = req.cookies.get('access_token')?.value ?? null;
+      return {
+        req,
+        accessToken,
+        dataSources: {
+          noticesAPI: new NoticesAPI({ cache: server.cache }),
+        },
+      };
+    },
   },
 );
 

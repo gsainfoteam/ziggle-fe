@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as types from './graphql';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 /**
  * Map of all GraphQL operations in the project.
@@ -14,6 +14,7 @@ import * as types from './graphql';
  */
 const documents = {
     "\n  query GetNotices($offset: Int, $limit: Int) {\n    notices(offset: $offset, limit: $limit) {\n      list {\n        id\n        title\n        views\n        body\n        deadline\n        createdAt\n        author\n        imageUrl\n        tags {\n          id\n          name\n        }\n      }\n      total\n    }\n  }\n": types.GetNoticesDocument,
+    "\n  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {\n    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {\n      id\n    }\n  }\n": types.CreateNoticeDocument,
 };
 
 /**
@@ -34,10 +35,13 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetNotices($offset: Int, $limit: Int) {\n    notices(offset: $offset, limit: $limit) {\n      list {\n        id\n        title\n        views\n        body\n        deadline\n        createdAt\n        author\n        imageUrl\n        tags {\n          id\n          name\n        }\n      }\n      total\n    }\n  }\n"): (typeof documents)["\n  query GetNotices($offset: Int, $limit: Int) {\n    notices(offset: $offset, limit: $limit) {\n      list {\n        id\n        title\n        views\n        body\n        deadline\n        createdAt\n        author\n        imageUrl\n        tags {\n          id\n          name\n        }\n      }\n      total\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {\n    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {\n    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {\n      id\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;
