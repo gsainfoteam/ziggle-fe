@@ -12,7 +12,7 @@ const DeepLButton = ({ query = '', t }: DeepLButtonProps & { t: T }) => {
 
   return (
     <Link
-      href={`${DEEPL_URL}/${query}`}
+      href={`${DEEPL_URL}/${query.replaceAll('/', '\\/')}`}
       className="rounded-md bg-[#042B48] px-4 py-2"
     >
       <div className="flex gap-2">
