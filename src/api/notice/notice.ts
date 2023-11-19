@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { cookies } from 'next/headers';
 
 import { gql } from '@/generated';
 
@@ -56,16 +57,24 @@ export interface Notices {
 
 export const getAllNotices = async (
   params: NoticePaginationParams & NoticeSearchParams = {},
-) =>
-  api.get<Notices>('/notice', { params }).then(({ data }) => ({
-    ...data,
-    list: data.list.map(({ imageUrl, ...notice }) => ({
-      ...notice,
-      deadline: notice.deadline ? notice.deadline : null,
-      imageUrl: imageUrl ? imageUrl : null,
-    })),
-  }));
-
+) => {
+  const cookieStore = cookies();
+  return api
+    .get<Notices>('/notice', {
+      params,
+      headers: {
+        Authorization: `Bearer ${cookieStore.get('access_token')}`,
+      },
+    })
+    .then(({ data }) => ({
+      ...data,
+      list: data.list.map(({ imageUrl, ...notice }) => ({
+        ...notice,
+        deadline: notice.deadline ? notice.deadline : null,
+        imageUrl: imageUrl ? imageUrl : null,
+      })),
+    }));
+};
 export const getNotice = async (id: number) =>
   api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({
     ...data,
