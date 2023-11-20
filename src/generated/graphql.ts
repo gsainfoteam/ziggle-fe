@@ -56,6 +56,7 @@ export type Mutation = {
   attachInternationalNotice: DetailedNotice;
   createAdditionalNotice: DetailedNotice;
   createNotice: DetailedNotice;
+  deleteNotice: Scalars['Boolean']['output'];
 };
 
 
@@ -82,6 +83,11 @@ export type MutationCreateNoticeArgs = {
   images?: InputMaybe<Array<Scalars['String']['input']>>;
   tags?: InputMaybe<Array<Scalars['Int']['input']>>;
   title: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteNoticeArgs = {
+  id: Scalars['Int']['input'];
 };
 
 export type Notice = {

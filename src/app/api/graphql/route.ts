@@ -62,6 +62,8 @@ const resolvers: Resolvers = {
         { title: title || undefined, body, deadline, noticeId },
         accessToken!,
       ),
+    deleteNotice: (_, { id }, { dataSources, accessToken }) =>
+      dataSources.noticesAPI.deleteNotice(id, accessToken!),
   },
 };
 

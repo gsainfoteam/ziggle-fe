@@ -57,6 +57,7 @@ export type Mutation = {
   attachInternationalNotice: DetailedNotice;
   createAdditionalNotice: DetailedNotice;
   createNotice: DetailedNotice;
+  deleteNotice: Scalars['Boolean']['output'];
 };
 
 
@@ -83,6 +84,11 @@ export type MutationCreateNoticeArgs = {
   images?: InputMaybe<Array<Scalars['String']['input']>>;
   tags?: InputMaybe<Array<Scalars['Int']['input']>>;
   title: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteNoticeArgs = {
+  id: Scalars['Int']['input'];
 };
 
 export type Notice = {
@@ -290,6 +296,7 @@ export type MutationResolvers<ContextType = MyContext, ParentType extends Resolv
   attachInternationalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationAttachInternationalNoticeArgs, 'body' | 'contentId' | 'noticeId' | 'title'>>;
   createAdditionalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateAdditionalNoticeArgs, 'body' | 'noticeId'>>;
   createNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateNoticeArgs, 'body' | 'title'>>;
+  deleteNotice?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteNoticeArgs, 'id'>>;
 };
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {

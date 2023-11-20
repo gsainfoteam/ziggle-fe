@@ -98,4 +98,5 @@ type Mutation {
     deadline: Date
     noticeId: Int!
   ): DetailedNotice!
+  deleteNotice(id: Int!): Boolean!
 }

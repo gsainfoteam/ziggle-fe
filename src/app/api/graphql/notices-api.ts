@@ -80,4 +80,10 @@ export default class NoticesAPI extends RESTDataSource {
       headers: { Authorization: `Bearer ${token}` },
     });
   }
+
+  async deleteNotice(id: number, token: string) {
+    return this.delete(`notice/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }
