@@ -16,7 +16,7 @@ const SearchPage = async ({
   params: { lng },
 }: {
   params: { lng: Locale };
-  searchParams: { query: string; tags: string };
+  searchParams: { query: string; tags: string; page: string };
 }) => {
   const { query: search, tags: rawTags } = searchParams;
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
@@ -32,6 +32,7 @@ const SearchPage = async ({
             <SearchTagSelect />
           </div>
         </div>
+
         {search ? (
           <Suspense
             key={[search, tags.join(',')].join(',')}
@@ -41,7 +42,7 @@ const SearchPage = async ({
               lng={lng}
               search={search}
               limit={ITEMS_PER_CALL}
-              offset={0}
+              page={searchParams.page}
               tags={tags}
             />
           </Suspense>
