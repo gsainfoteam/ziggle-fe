@@ -55,11 +55,11 @@ const resolvers: Resolvers = {
       ),
     createAdditionalNotice: (
       _,
-      { title, body, deadline, noticeId, contentId },
+      { title, body, deadline, noticeId },
       { dataSources, accessToken },
     ) =>
       dataSources.noticesAPI.createAdditionalNotice(
-        { title, body, deadline, noticeId, contentId },
+        { title: title || undefined, body, deadline, noticeId },
         accessToken!,
       ),
   },

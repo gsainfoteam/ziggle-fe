@@ -54,7 +54,26 @@ export enum MineNotice {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  attachInternationalNotice: DetailedNotice;
+  createAdditionalNotice: DetailedNotice;
   createNotice: DetailedNotice;
+};
+
+
+export type MutationAttachInternationalNoticeArgs = {
+  body: Scalars['String']['input'];
+  contentId: Scalars['Int']['input'];
+  deadline?: InputMaybe<Scalars['Date']['input']>;
+  noticeId: Scalars['Int']['input'];
+  title: Scalars['String']['input'];
+};
+
+
+export type MutationCreateAdditionalNoticeArgs = {
+  body: Scalars['String']['input'];
+  deadline?: InputMaybe<Scalars['Date']['input']>;
+  noticeId: Scalars['Int']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -268,6 +287,8 @@ export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends 
 };
 
 export type MutationResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  attachInternationalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationAttachInternationalNoticeArgs, 'body' | 'contentId' | 'noticeId' | 'title'>>;
+  createAdditionalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateAdditionalNoticeArgs, 'body' | 'noticeId'>>;
   createNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateNoticeArgs, 'body' | 'title'>>;
 };
 

@@ -85,4 +85,17 @@ type Mutation {
     images: [String!]
     tags: [Int!]
   ): DetailedNotice!
+  attachInternationalNotice(
+    title: String!
+    body: String!
+    deadline: Date
+    noticeId: Int!
+    contentId: Int!
+  ): DetailedNotice!
+  createAdditionalNotice(
+    title: String
+    body: String!
+    deadline: Date
+    noticeId: Int!
+  ): DetailedNotice!
 }
