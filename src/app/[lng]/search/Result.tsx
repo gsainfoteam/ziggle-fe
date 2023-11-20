@@ -1,4 +1,5 @@
 import { getAllNotices } from '@/api/notice/notice-server';
+import Analytics from '@/app/components/atoms/Analytics';
 import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
@@ -39,13 +40,21 @@ const Result = async ({
           <div className="h-8" />
 
           {data.list.map((notice) => (
-            <ResultZabo
-              {...notice}
-              searchQuery={props.search}
-              logName="SearchPage"
+            <Analytics
+              event="search_result_click"
+              properties={{
+                location: 'SearchPage',
+                isText: notice.imageUrl === null,
+              }}
               key={notice.id}
-              lng={lng}
-            />
+            >
+              <ResultZabo
+                {...notice}
+                t={t}
+                searchQuery={props.search}
+                lng={lng}
+              />
+            </Analytics>
           ))}
         </div>
       )}

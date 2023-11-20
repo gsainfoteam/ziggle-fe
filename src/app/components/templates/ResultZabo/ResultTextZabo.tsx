@@ -1,12 +1,8 @@
-'use client';
+'use server';
 
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { Trans } from 'react-i18next';
-
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
-import { useTranslation } from '@/app/i18next/client';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
@@ -23,23 +19,13 @@ const ResultTextZabo = ({
   searchQuery,
 
   id,
-  logName,
   lng,
+  t,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-  const { t } = useTranslation(lng);
 
   return (
-    <Link
-      className={'w-full'}
-      onClick={() =>
-        sendLog(LogEvents.searchResultClick, {
-          location: logName ?? 'unknown',
-          isText: true,
-        })
-      }
-      href={`/${lng}/notice/` + id}
-    >
+    <Link className={'w-full'} href={`/${lng}/notice/` + id}>
       <div
         className={
           'flex flex-col justify-between gap-2.5 p-5 ' +

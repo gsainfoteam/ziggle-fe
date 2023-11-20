@@ -1,10 +1,12 @@
+'use server';
+import 'server-only';
+
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { Trans } from 'react-i18next';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { useTranslation } from '@/app/i18next/client';
 import GetHighlightedText from '@/utils/GetHighlightedText';
 
 import Chip from '../../molecules/Chip';
@@ -21,26 +23,15 @@ const ResultImageZabo = ({
   searchQuery,
 
   imageUrl,
-  logName,
   id,
   lng,
+  t,
 }: ResultImageZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
 
-  const { t } = useTranslation(lng);
-
   return (
-    <Link
-      className={'w-full'}
-      onClick={() =>
-        sendLog(LogEvents.searchResultClick, {
-          location: logName ?? 'unknown',
-          isText: false,
-        })
-      }
-      href={`/${lng}/notice/` + id}
-    >
+    <Link className={'w-full'} href={`/${lng}/notice/` + id}>
       <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden">
         <ZaboImage
           width={230} // handle mobile

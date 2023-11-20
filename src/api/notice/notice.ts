@@ -32,7 +32,6 @@ interface NoticeBase {
   createdAt: dayjs.Dayjs | string;
   author: string;
   tags: Tag[];
-  logName?: string;
 }
 
 export interface Tag {
