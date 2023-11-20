@@ -43,26 +43,22 @@ export function useTranslation<
   const [cookies, setCookie] = useCookies([cookieName]);
   const ret = useTranslationOrg(ns, options);
   const { i18n } = ret;
-  const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
+  // const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
 
   if (runsOnServerSide && lng && i18n.resolvedLanguage !== lng) {
     i18n.changeLanguage(lng);
   }
 
   useEffect(() => {
-    if (runsOnServerSide) return;
-    if (activeLng === i18n.resolvedLanguage) return;
-    setActiveLng(i18n.resolvedLanguage);
-  }, [i18n, activeLng]);
-
-  useEffect(() => {
-    if (!lng || i18n.resolvedLanguage === lng) return;
+    if (i18n.resolvedLanguage === lng) return;
     i18n.changeLanguage(lng);
+    console.log('changeLanguage', lng);
   }, [i18n, lng]);
 
   useEffect(() => {
-    if (!lng || cookies[cookieName] === lng) return;
+    if (cookies[cookieName] === lng) return;
     setCookie(cookieName, lng, { path: '/' });
+    console.log('setCookie', lng);
   }, [cookies, lng, setCookie]);
 
   return ret;

@@ -4,13 +4,14 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { NoticeKind } from '@/api/notice/notice';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
 import Button from '../../components/atoms/Button';
 import Chip from '../../components/molecules/Chip';
 
-const SearchTagSelect = () => {
-  const { t } = useTranslation();
+const SearchTagSelect = ({ lng }: PropsWithLng) => {
+  const { t } = useTranslation(lng);
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();

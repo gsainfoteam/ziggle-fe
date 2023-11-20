@@ -6,14 +6,15 @@ import { useEffect, useMemo, useRef } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
 import { GET_NOTICES } from '@/api/notice/notice';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
 import Zabo from '../../organisms/Zabo';
 
 const ITEMS_PER_CALL = 10;
 
-const HowAboutThese = () => {
-  const { t, i18n } = useTranslation();
+const HowAboutThese = ({ lng }: PropsWithLng) => {
+  const { t, i18n } = useTranslation(lng);
   const endEl = useRef<HTMLDivElement>(null);
   const { data, loading, fetchMore } = useQuery(GET_NOTICES, {
     variables: { offset: 0, limit: ITEMS_PER_CALL },

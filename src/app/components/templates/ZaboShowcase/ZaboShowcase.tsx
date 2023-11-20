@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { PropsWithLng } from '@/app/i18next';
+
 import ShowcaseButton from './ShowcaseButton';
 import ShowcaseModal from './ShowcaseModal';
 
@@ -12,7 +14,7 @@ interface ZaboShowcaseProps {
   alt: string;
 }
 
-const ZaboShowcase = ({ srcs, alt }: ZaboShowcaseProps) => {
+const ZaboShowcase = ({ srcs, alt, lng }: ZaboShowcaseProps & PropsWithLng) => {
   const [show, setShow] = useState(false);
   if (srcs.length === 0) return null;
   return (
@@ -29,10 +31,15 @@ const ZaboShowcase = ({ srcs, alt }: ZaboShowcaseProps) => {
         }
         onClick={() => setShow(true)}
       />
-      <ShowcaseButton onShow={() => setShow(true)} />
+      <ShowcaseButton onShow={() => setShow(true)} lng={lng} />
       {show &&
         createPortal(
-          <ShowcaseModal onHide={() => setShow(false)} srcs={srcs} alt={alt} />,
+          <ShowcaseModal
+            onHide={() => setShow(false)}
+            srcs={srcs}
+            alt={alt}
+            lng={lng}
+          />,
           document.body,
         )}
     </div>

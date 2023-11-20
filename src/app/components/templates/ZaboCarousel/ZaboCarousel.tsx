@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
+import { fallbackLng, Locale } from '@/app/i18next/settings';
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg';
 import LazyCat from '@/assets/lazy-cat.svg';
 
@@ -24,6 +26,7 @@ interface ZaboCarouselProps {
   sectionHref?: string;
   containerClassName?: string;
   carouselClassName?: string;
+  lng: Locale;
 }
 
 const ZaboCarousel = <Origin extends ZaboOrigin>({
@@ -34,8 +37,9 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   sectionHref,
   containerClassName,
   carouselClassName,
+  lng,
 }: ZaboCarouselProps & ZaboSize<Origin>) => {
-  const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation(fallbackLng);
   const size = { width, height } as ZaboSize<Origin>;
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
@@ -90,7 +94,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
           </div>
         </div>
       ) : (
-        <Empty />
+        <Empty lng={lng} />
       )}
     </div>
   );
@@ -132,8 +136,8 @@ const Title = ({
   </div>
 );
 
-const Empty = () => {
-  const { t } = useTranslation();
+const Empty = ({ lng }: PropsWithLng) => {
+  const { t } = useTranslation(lng);
   return (
     <div className="flex h-72 flex-col items-center justify-center">
       <LazyCat />

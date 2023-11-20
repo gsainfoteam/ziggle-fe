@@ -8,6 +8,7 @@ export const dynamic = 'force-dynamic';
 
 const AllNoticePage = async ({
   searchParams,
+  params: { lng },
 }: {
   params: PropsWithLng;
   searchParams: { [key: string]: string | string[] | undefined };
@@ -22,7 +23,7 @@ const AllNoticePage = async ({
         <Pagination page={pageNumber} pages={Math.ceil(notices.total / 30)} />
       </div>
       <div className="h-7" />
-      <NoticesLoadingWrapper key={pageNumber} />
+      <NoticesLoadingWrapper key={pageNumber} lng={lng} />
       <div className="h-24" />
       <div className="flex justify-center">
         <Pagination page={pageNumber} pages={Math.ceil(notices.total / 30)} />

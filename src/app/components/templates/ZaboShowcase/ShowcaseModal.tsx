@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import CloseIcon from '@/assets/icons/close.svg';
 import DownloadIcon from '@/assets/icons/download.svg';
@@ -16,8 +17,13 @@ interface ShowcaseModalProps {
   onHide: () => void;
 }
 
-const ShowcaseModal = ({ srcs, alt, onHide }: ShowcaseModalProps) => {
-  const { t } = useTranslation();
+const ShowcaseModal = ({
+  srcs,
+  alt,
+  onHide,
+  lng,
+}: ShowcaseModalProps & PropsWithLng) => {
+  const { t } = useTranslation(lng);
   const [index, setIndex] = useState(0);
 
   const left = useCallback(() => setIndex((prev) => Math.max(prev - 1, 0)), []);
