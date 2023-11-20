@@ -61,3 +61,5 @@ export type T<
   Ns extends Namespace = DefaultNamespace,
   TKPrefix extends KeyPrefix<Ns> = undefined,
 > = TFunction<Ns, TKPrefix>;
+
+export type PropsWithT<P = unknown> = P & { t: T };

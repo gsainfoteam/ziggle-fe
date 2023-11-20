@@ -120,7 +120,7 @@ export default async function RootLayout({
         }
       >
         <InitClient>
-          <Navbar lng={lng} t={t} />
+          <Navbar lng={lng} />
           <main className="flex-1">{children}</main>
           <div className="basis-80" />
           <Footer t={t} />
