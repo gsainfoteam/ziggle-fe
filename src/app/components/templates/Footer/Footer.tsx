@@ -1,11 +1,11 @@
 import ExternalLink from '@/app/components/atoms/ExternalLink';
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 
-const Footer = ({ t }: { t: T }) => {
+const Footer = ({ t }: PropsWithT) => {
   return (
     <footer
       className={

@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 import DeepLLogo from '@/assets/logos/deepL.svg';
 
 interface DeepLButtonProps {
   query?: string;
 }
 
-const DeepLButton = ({ query = '', t }: DeepLButtonProps & { t: T }) => {
+const DeepLButton = ({ query = '', t }: PropsWithT<DeepLButtonProps>) => {
   const DEEPL_URL = 'https://www.deepl.com/translator#ko/en';
 
   return (

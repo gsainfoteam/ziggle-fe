@@ -1,5 +1,5 @@
 import { Notice } from '@/api/notice/notice';
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 
 import ImageZabo from './ImageZabo';
 import TextZabo from './TextZabo';
@@ -12,8 +12,9 @@ export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
     ? { height: number; width?: never }
     : never;
 
-export type ZaboProps<Origin extends ZaboOrigin> = Notice &
-  ZaboSize<Origin> & { t: T };
+export type ZaboProps<Origin extends ZaboOrigin> = PropsWithT<
+  Notice & ZaboSize<Origin>
+>;
 
 export type ImageZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin> & {
   imageUrl: string;

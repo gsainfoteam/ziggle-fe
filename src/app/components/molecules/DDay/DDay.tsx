@@ -1,13 +1,13 @@
 import dayjs from 'dayjs';
 
-import { T } from '@/app/i18next';
+import { PropsWithT, T } from '@/app/i18next';
 
 interface DDayProps {
   deadline: dayjs.Dayjs;
   className?: string;
 }
 
-const DDay = ({ deadline, t, className }: DDayProps & { t: T }) => (
+const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => (
   <div
     className={[
       'grid w-fit place-items-center ' +

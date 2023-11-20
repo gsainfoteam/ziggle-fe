@@ -1,6 +1,5 @@
 import { logout, withdraw } from '@/api/auth/auth';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 
 interface MypageProfileProps {
@@ -36,7 +35,7 @@ export default async function MypageProfile({
   phone,
   email,
   lng,
-}: MypageProfileProps & { lng: Locale }) {
+}: PropsWithLng<MypageProfileProps>) {
   const { t } = await createTranslation(lng, 'translation');
   return (
     <div>

@@ -1,11 +1,10 @@
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 const AllNoticeLayout = async ({
   params: { lng },
   children,
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
   children: React.ReactNode;
 }) => {
   const { t } = await createTranslation(lng, 'translation');

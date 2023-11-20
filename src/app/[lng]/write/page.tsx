@@ -14,8 +14,8 @@ import sendLog from '@/api/log/send-log';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import Chip from '@/app/components/molecules/Chip';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import { Locale } from '@/app/i18next/settings';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ContentIcon from '@/assets/icons/content.svg';
 import LanguageIcon from '@/assets/icons/language.svg';
@@ -37,7 +37,7 @@ const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
 export default function WritePage({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
   const { t } = useTranslation(lng, 'translation');
   const { push } = useRouter();

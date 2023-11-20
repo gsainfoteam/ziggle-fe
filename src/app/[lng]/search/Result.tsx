@@ -1,21 +1,19 @@
 import { getAllNotices } from '@/api/notice/notice-server';
 import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import SearchNoResult from './assets/searchNoResult.svg';
 
 const Result = async ({
   lng,
   ...props
-}: {
-  lng: Locale;
+}: PropsWithLng<{
   search: string;
   tags: string[];
   page: string | number;
   limit: number;
-}) => {
+}>) => {
   const { t } = await createTranslation(lng, 'translation');
   const pageAsNumber = Number.parseInt(props.page as string);
 

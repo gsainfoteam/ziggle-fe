@@ -2,13 +2,11 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail, Tag } from '@/api/notice/notice';
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
 
-interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {
-  t: T;
-}
+interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
 const NoticeInfo = ({
   deadline,
@@ -18,7 +16,7 @@ const NoticeInfo = ({
   views,
   tags = [],
   t,
-}: NoticeInfoProps & { t: T }) => {
+}: PropsWithT<NoticeInfoProps>) => {
   return (
     <div>
       {deadline && <Deadline deadline={dayjs(deadline)} />}
@@ -49,12 +47,11 @@ const Metadata = ({
   createdAt,
   views,
   t,
-}: {
+}: PropsWithT<{
   author: string;
   createdAt: dayjs.Dayjs;
   views: number;
-  t: T;
-}) => (
+}>) => (
   <div className="flex items-center gap-2 text-sm font-medium md:text-xl">
     <div>
       <Trans t={t} i18nKey="zabo.author">

@@ -1,17 +1,15 @@
 import { auth } from '@/api/auth/auth';
 import { getAllNotices } from '@/api/notice/notice-server';
-import { createTranslation } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Notice } from '@/generated/graphql';
 
-import { Locale } from '../../i18next/settings';
 import MypageProfile from './MypageProfile';
-import MypageSeperate from './MypageSeperate';
 import MypageTable from './MypageTable';
 
 export default async function MyPage({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
   const { t } = await createTranslation(lng, 'translation');
   const userData = await auth();

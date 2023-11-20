@@ -1,15 +1,14 @@
 import { getAllNotices } from '@/api/notice/notice-server';
 
 import ZaboCarousel from '../components/templates/ZaboCarousel';
-import { createTranslation } from '../i18next';
-import { Locale } from '../i18next/settings';
+import { createTranslation, PropsWithLng } from '../i18next';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
   const { t } = await createTranslation(lng, 'translation');
 

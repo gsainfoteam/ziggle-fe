@@ -1,6 +1,6 @@
 import { getAllNotices } from '@/api/notice/notice-server';
 import Pagination from '@/app/components/molecules/Pagination';
-import { Locale } from '@/app/i18next/settings';
+import { PropsWithLng } from '@/app/i18next';
 
 import NoticesLoadingWrapper from './NoticesLoadingWrapper';
 
@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic';
 const AllNoticePage = async ({
   searchParams,
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const { page } = searchParams;

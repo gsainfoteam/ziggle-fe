@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
-import { createTranslation } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import LazyCat from '@/assets/lazy-cat.svg';
 
@@ -44,7 +44,7 @@ const MypageTable = async ({
   articles,
   link,
   lng,
-}: MypageTableProps & { lng: Locale }) => {
+}: PropsWithLng<MypageTableProps>) => {
   const { t } = await createTranslation(lng, 'translation');
   return (
     <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">

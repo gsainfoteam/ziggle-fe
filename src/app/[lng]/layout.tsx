@@ -9,8 +9,8 @@ import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
-import { createTranslation } from '@/app/i18next';
-import { languages, Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { languages } from '@/app/i18next/settings';
 
 import InitClient from './InitClient';
 
@@ -27,7 +27,7 @@ const notoSansKR = Noto_Sans_KR({
 export const generateMetadata = async ({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }): Promise<Metadata> => {
   const { t } = await createTranslation(lng, 'translation');
 
@@ -80,7 +80,7 @@ export default async function RootLayout({
   params: { lng },
 }: {
   children: React.ReactNode;
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
   const { t } = await createTranslation(lng, 'translation');
 
@@ -120,7 +120,7 @@ export default async function RootLayout({
         }
       >
         <InitClient>
-          <Navbar lng={lng} t={t} />
+          <Navbar lng={lng} />
           <main className="flex-1">{children}</main>
           <div className="basis-80" />
           <Footer t={t} />
