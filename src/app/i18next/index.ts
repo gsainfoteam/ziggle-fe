@@ -63,3 +63,4 @@ export type T<
 > = TFunction<Ns, TKPrefix>;
 
 export type PropsWithT<P = unknown> = P & { t: T };
+export type PropsWithLng<P = unknown> = P & { lng: Locale };

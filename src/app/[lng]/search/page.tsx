@@ -2,8 +2,7 @@ import { Suspense } from 'react';
 
 import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import Result from './Result';
 import SearchBar from './SearchBar';
@@ -15,7 +14,7 @@ const SearchPage = async ({
   searchParams,
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
   searchParams: { query: string; tags: string };
 }) => {
   const { query: search, tags: rawTags } = searchParams;

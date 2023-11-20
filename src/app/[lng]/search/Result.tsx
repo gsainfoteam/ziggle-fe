@@ -1,20 +1,18 @@
 import { getAllNotices } from '@/api/notice/notice-server';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import SearchNoResult from './assets/searchNoResult.svg';
 
 const Result = async ({
   lng,
   ...props
-}: {
-  lng: Locale;
+}: PropsWithLng<{
   search: string;
   tags: string[];
   offset: number;
   limit: number;
-}) => {
+}>) => {
   const { t } = await createTranslation(lng, 'translation');
   const data = await getAllNotices(props);
   return (
