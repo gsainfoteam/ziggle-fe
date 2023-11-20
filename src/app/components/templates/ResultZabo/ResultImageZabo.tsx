@@ -5,8 +5,6 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
 import GetHighlightedText from '@/utils/GetHighlightedText';
 
 import Chip from '../../molecules/Chip';
