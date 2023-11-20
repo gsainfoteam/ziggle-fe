@@ -1,4 +1,5 @@
 import { getAllNotices } from '@/api/notice/notice-server';
+import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
@@ -10,19 +11,31 @@ const Result = async ({
 }: PropsWithLng<{
   search: string;
   tags: string[];
-  offset: number;
+  page: string | number;
   limit: number;
 }>) => {
   const { t } = await createTranslation(lng, 'translation');
-  const data = await getAllNotices(props);
+  const pageAsNumber = Number.parseInt(props.page as string);
+
+  const data = await getAllNotices({
+    ...props,
+    offset: pageAsNumber * props.limit,
+  }).catch(() => ({ list: [], total: 0 }));
+
+  const pagination = (
+    <div className="flex justify-center">
+      <Pagination
+        pages={Math.ceil(data.total / props.limit)}
+        page={pageAsNumber}
+      />
+    </div>
+  );
+
   return (
     <>
+      {pagination}
       {data?.list.length !== 0 && (
         <div className="flex flex-col flex-nowrap gap-[10px]">
-          <p className="text-lg font-bold md:text-4xl">
-            {t('searchPage.title')}
-          </p>
-
           <div className="h-8" />
 
           {data.list.map((notice) => (
@@ -51,6 +64,9 @@ const Result = async ({
           </div>
         </div>
       )}
+
+      <div className="h-8" />
+      {pagination}
     </>
   );
 };
