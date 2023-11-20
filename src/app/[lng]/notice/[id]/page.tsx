@@ -36,7 +36,7 @@ const DetailedNoticePage = async ({
 }: {
   params: PropsWithLng<{ id: string }>;
 }) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   const notice = await getNotice(Number.parseInt(id));
   return (
     <>

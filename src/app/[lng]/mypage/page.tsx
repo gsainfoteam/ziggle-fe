@@ -11,7 +11,7 @@ export default async function MyPage({
 }: {
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   const userData = await auth();
   const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
     .list;

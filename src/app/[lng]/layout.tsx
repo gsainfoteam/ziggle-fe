@@ -29,7 +29,7 @@ export const generateMetadata = async ({
 }: {
   params: PropsWithLng;
 }): Promise<Metadata> => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return {
     metadataBase: new URL(
@@ -82,7 +82,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return (
     <html lang={lng} dir={dir(lng)}>

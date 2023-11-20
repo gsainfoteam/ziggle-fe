@@ -10,7 +10,7 @@ export default async function Home({
 }: {
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   const [deadline, hot, event, recruit, general, academic] = await Promise.all([
     getAllNotices({ orderBy: 'deadline' }),

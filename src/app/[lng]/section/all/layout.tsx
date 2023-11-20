@@ -7,7 +7,7 @@ const AllNoticeLayout = async ({
   params: PropsWithLng;
   children: React.ReactNode;
 }) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="content mx-auto">

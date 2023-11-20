@@ -12,7 +12,7 @@ import ZiggleKoreanLogo from '@/assets/logos/ziggle-ko.svg';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Navbar = async ({ lng }: PropsWithLng) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   const user = await auth();
   const nav = (
     <>

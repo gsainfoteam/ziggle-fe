@@ -20,7 +20,7 @@ const SearchPage = async ({
   const { query: search, tags: rawTags } = searchParams;
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
 
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="content mx-auto">
