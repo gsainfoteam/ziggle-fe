@@ -1,6 +1,6 @@
 'use client';
 
-import i18next from 'i18next';
+import i18next, { DefaultNamespace, KeyPrefix, Namespace } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import {
   initReactI18next,
   useTranslation as useTranslationOrg,
+  UseTranslationOptions,
 } from 'react-i18next';
 
 import {
@@ -35,12 +36,16 @@ i18next
     preload: runsOnServerSide ? languages : [],
   });
 
-export function useTranslation(
+export function useTranslation<
+  Ns extends Namespace = DefaultNamespace,
+  TKPrefix extends KeyPrefix<Ns> = undefined,
+>(
   lng: Locale = fallbackLng,
-  ...args: Parameters<typeof useTranslationOrg>
+  ns?: Namespace,
+  options?: UseTranslationOptions<TKPrefix>,
 ) {
   const [cookies, setCookie] = useCookies([cookieName]);
-  const ret = useTranslationOrg(...args);
+  const ret = useTranslationOrg(ns, options);
   const { i18n } = ret;
   const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
 
