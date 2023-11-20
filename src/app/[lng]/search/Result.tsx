@@ -17,25 +17,25 @@ const Result = async ({
   limit: number;
 }) => {
   const { t } = await createTranslation(lng, 'translation');
-  const pageAsNumber =
-    Number.parseInt(props.page as string) >= 0
-      ? Number.parseInt(props.page as string)
-      : 0;
+  const pageAsNumber = Math.max(Number.parseInt(props.page as string), 0);
 
   const data = await getAllNotices({
     ...props,
     offset: pageAsNumber * props.limit,
   });
 
+  const pagination = (
+    <div className="flex justify-center">
+      <Pagination
+        pages={Math.ceil(data.total / props.limit)}
+        page={pageAsNumber}
+      />
+    </div>
+  );
+
   return (
     <>
-      <div className={'flex justify-center'}>
-        <Pagination
-          pages={Math.ceil(data.total / props.limit)}
-          page={props.page}
-        />
-      </div>
-
+      {pagination}
       {data?.list.length !== 0 && (
         <div className="flex flex-col flex-nowrap gap-[10px]">
           <div className="h-8" />
@@ -67,12 +67,8 @@ const Result = async ({
         </div>
       )}
 
-      <div className={'mt-10 flex justify-center'}>
-        <Pagination
-          pages={Math.ceil(data.total / props.limit)}
-          page={props.page}
-        />
-      </div>
+      <div className="h-8" />
+      {pagination}
     </>
   );
 };
