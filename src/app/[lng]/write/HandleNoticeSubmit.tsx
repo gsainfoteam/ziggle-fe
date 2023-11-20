@@ -42,7 +42,7 @@ const handleNoticeSubmit = async ({
     Swal.fire({
       text,
       icon: 'warning',
-      confirmButtonText: t('write.alerts.confimationButtonText'),
+      confirmButtonText: t('alertResponse.confirm'),
     });
   };
 
@@ -196,7 +196,7 @@ const handleNoticeSubmit = async ({
     Swal.fire({
       text: t('write.alerts.submitFail'),
       icon: 'error',
-      confirmButtonText: t('write.alerts.confimationButtonText'),
+      confirmButtonText: t('alertResponse.confirm'),
     });
     return;
   }
@@ -228,7 +228,7 @@ const handleTagSubmit = async (tags: string[], t: T) => {
         Swal.fire({
           text: t('write.alerts.tagCreationFail'),
           icon: 'error',
-          confirmButtonText: t('write.alerts.confimationButtonText'),
+          confirmButtonText: t('alertResponse.confirm'),
         });
         return;
       }

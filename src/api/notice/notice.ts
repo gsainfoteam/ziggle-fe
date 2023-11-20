@@ -103,6 +103,8 @@ export const getNotice = async (id: number) =>
     })),
   }));
 
+export const deleteNotice = async (id: number) => api.delete(`/notice/${id}`);
+
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {
     notices(offset: $offset, limit: $limit) {

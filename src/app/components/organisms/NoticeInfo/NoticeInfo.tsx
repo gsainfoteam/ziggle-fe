@@ -6,6 +6,7 @@ import { T } from '@/app/i18next';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
+import DDay from '../../molecules/DDay';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {
   t: T;
@@ -25,23 +26,35 @@ const NoticeInfo = ({
 
   return (
     <div>
-      {deadline && <Deadline deadline={dayjs(deadline)} />}
+      {deadline && (
+        <>
+          <Deadline deadline={dayjs(deadline)} t={t} />
+          <div className="h-2" />
+        </>
+      )}
       <Title title={localeContents[0].title} />
-      <div className="h-1" />
+      <div className="h-2" />
       <Metadata
         author={author}
         createdAt={dayjs(createdAt)}
         views={views}
         t={t}
       />
-      <div className="h-1" />
+      <div className="h-4" />
       <Tags tags={tags} />
     </div>
   );
 };
 
-const Deadline = ({ deadline }: { deadline: dayjs.Dayjs }) => {
-  return null;
+const Deadline = ({ deadline, t }: { deadline: dayjs.Dayjs } & { t: T }) => {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="text-lg font-medium md:text-2xl">
+        {t('zabo.dueAt', { dueAt: deadline.format('LLLL') })}
+      </div>
+      <DDay deadline={deadline} t={t} />
+    </div>
+  );
 };
 
 const Title = ({ title }: { title: string }) => (

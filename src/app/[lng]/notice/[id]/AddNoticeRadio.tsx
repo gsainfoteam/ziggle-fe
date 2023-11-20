@@ -1,5 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 
+import { T } from '@/app/i18next';
+
 import RadioDeselected from './assets/radio-deselected.svg';
 import RadioSelected from './assets/radio-selected.svg';
 
@@ -12,8 +14,9 @@ const AddNoticeRadio = ({
   label,
   selected,
   onChange,
+  t,
   ...props
-}: CheckboxProps) => {
+}: CheckboxProps & { t: T }) => {
   return (
     <div className={'flex flex-col gap-[10px]'}>
       <label htmlFor={'remindId'}>
@@ -45,7 +48,7 @@ const AddNoticeRadio = ({
               selected === 'remind' ? 'text-primary' : 'text-secondaryText'
             } group-hover:text-text md:text-xl`}
           >
-            리마인드 설정한 사람에게만 알림 보내기
+            {t('zabo.additionalNotices.alertToReminded')}
           </p>
         </div>
       </label>
@@ -78,7 +81,7 @@ const AddNoticeRadio = ({
               selected === 'all' ? 'text-primary' : 'text-secondaryText'
             } group-hover:text-text md:text-xl`}
           >
-            모든 사람에게 알림 보내기
+            {t('zabo.additionalNotices.alertToAll')}
           </p>
         </div>
       </label>

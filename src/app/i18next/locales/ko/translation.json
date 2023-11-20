@@ -10,6 +10,12 @@
     "query": "공지 검색",
     "login": "로그인"
   },
+  "alertResponse": {
+    "yes": "네",
+    "no": "아니오",
+    "cancel": "취소",
+    "confirm": "확인"
+  },
   "footer": {
     "infoteam": "지스트대학 총학생회 산하 정보국",
     "copyright": "ⓒ 2023. INFOTEAM all rights reserved.",
@@ -73,15 +79,28 @@
     "backToMain": "메인 페이지로 돌아가기",
     "images": "첨부 사진",
     "howAboutThese": "🫧 이런 공지는 어떠신가요?",
-    "addtionalNotices": "추가 공지",
-    "deadlineChanged": "마감시간 변경",
-    "addAdditionalNotice": "추가 공지 작성하기",
-    "changeDeadline": "마감일 변경하기",
-    "additionalNoticePlaceholder": "여기에 추가 공지를 입력하세요",
-    "cancelAdditionalNotice": "취소하기",
-    "submitAdditionalNotice": "제출하기",
-    "alertToReminded": "리마인드 설정한 사람들에게만 알림 보내기",
-    "alertToAll": "모든 사람들에게 알림 보내기"
+
+    "additionalNotices": {
+      "title": "추가 공지",
+      "deadlineChanged": "마감시간 변경",
+      "addAdditionalNotice": "추가 공지 작성하기",
+      "changeDeadline": "마감일 변경하기",
+      "additionalNoticePlaceholder": "여기에 추가 공지를 입력하세요",
+      "cancel": "취소하기",
+      "submit": "제출하기",
+      "alertToReminded": "리마인드 설정한 사람들에게만 알림 보내기",
+      "alertToAll": "모든 사람들에게 알림 보내기"
+    },
+
+    "authorActions": {
+      "title": "작성자 설정",
+      "removeNotice": "이 공지 삭제하기",
+      "removeSure": "정말로 이 공지를 삭제하시겠습니까?",
+      "writeEnglishNotice": "영어 공지 작성하기",
+      "alreadyWroteEnglishNotice": "영어 공지를 작성하셨습니다!",
+      "writeAdditionalNotice": "추가 공지 작성하기",
+      "writeAdditionalNoticeDescription": "기존 공지사항에서 정정해야 할 부분이 있거나, 마감일을 변경하고 싶을 때 추가 공지를 작성해보세요."
+    }
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
   "loading": "로딩 중입니다! -ㅅ-",
@@ -186,7 +205,6 @@
     "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
 
     "alerts": {
-      "confimationButtonText": "확인",
       "title": "제목을 입력해주세요",
       "titleLengthLessThan": "제목은 {{titleMaxLength}}자 이내로 입력해주세요",
       "deadline": "마감 시간은 현재 시간 이후로 설정해주세요",

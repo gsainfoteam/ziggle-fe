@@ -1,4 +1,5 @@
-import { Metadata, ResolvingMetadata } from 'next';
+import { GetServerSideProps, Metadata, ResolvingMetadata } from 'next';
+import { useRouter } from 'next/router';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/notice';
@@ -13,6 +14,7 @@ import getLocaleContents from '@/utils/getLocaleContents';
 import Actions from './Actions';
 import AddAddtionalNotice from './AddAddtionalNotice';
 import AddtionalNotices from './AddtionalNotices';
+import AuthorActions from './AuthorActions';
 import Content from './Content';
 
 export const generateMetadata = async (
@@ -50,11 +52,25 @@ const DetailedNoticePage = async ({
 
   const user = await auth();
 
+  const isAdditionalNoticeShow = true;
+
   return (
     <>
       <ZaboShowcase srcs={notice.imagesUrl} alt={title} />
       <div className="content mx-auto mt-8 md:mt-12">
         <Actions title={localContents[0].body} />
+
+        {user && user.id === notice.authorId && (
+          <>
+            <div className="h-5" />
+            <AuthorActions
+              isEnglishNoticeExist={false}
+              isAdditionalNoticeLimit={false}
+              lng={lng}
+            />
+          </>
+        )}
+
         <div className="h-4 md:h-5" />
         <NoticeInfo
           {...notice}
@@ -64,13 +80,18 @@ const DetailedNoticePage = async ({
         <div className="h-5" />
         <Content content={localContents[0].body} />
 
+        <div className="h-10" />
         <AddtionalNotices contents={localContents} t={t} />
 
-        {user && user.id === notice.authorId && (
-          <AddAddtionalNotice
-            noticeId={Number(id)}
-            supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique
-          />
+        {user && user.id === notice.authorId && isAdditionalNoticeShow && (
+          <>
+            <div className="h-10" />
+            <AddAddtionalNotice
+              noticeId={Number(id)}
+              originallyHasDeadline={notice.currentDeadline}
+              supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique
+            />
+          </>
         )}
 
         {notice.imagesUrl.length > 0 && (
