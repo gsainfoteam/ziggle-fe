@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
-import { createTranslation, T } from '@/app/i18next';
-import { fallbackLng, Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 import ZiggleEnglishLogo from '@/assets/logos/ziggle-en.svg';
@@ -12,7 +11,7 @@ import ZiggleKoreanLogo from '@/assets/logos/ziggle-ko.svg';
 
 import LanguageSwitcher from './LanguageSwitcher';
 
-const Navbar = async ({ lng }: { lng: Locale }) => {
+const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng, 'translation');
   const user = await auth();
   const nav = (
