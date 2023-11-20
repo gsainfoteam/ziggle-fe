@@ -1,7 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { redirect, usePathname, useSearchParams } from 'next/navigation';
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import { useCallback, useEffect } from 'react';
 
 import ArrowRightFilledIcon from '@/assets/icons/arrow-right-filled.svg';
 
@@ -15,16 +21,24 @@ interface PaginationProps {
 const Pagination = ({ pages, page }: PaginationProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const { replace } = useRouter();
 
-  const generateLink = (page: number) => {
-    const params = new URLSearchParams(searchParams);
-    params.set('page', page.toString());
-    return `${pathname}?${params.toString()}`;
-  };
+  const generateLink = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams(searchParams);
+      params.set('page', page.toString());
+      return `${pathname}?${params.toString()}`;
+    },
+    [pathname, searchParams],
+  );
 
-  if (page < 0 || Number.isNaN(page)) redirect(generateLink(0));
+  useEffect(() => {
+    if (page < 0 || Number.isNaN(page)) replace(generateLink(0));
 
-  if (page >= pages) redirect(generateLink(pages - 1));
+    if (page >= pages) replace(generateLink(pages - 1));
+  }, [generateLink, page, pages, replace]);
+
+  if (pages === 0) return null;
 
   return (
     <div className="flex items-center gap-2 md:gap-2.5">

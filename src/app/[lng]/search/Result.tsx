@@ -17,12 +17,12 @@ const Result = async ({
   limit: number;
 }) => {
   const { t } = await createTranslation(lng, 'translation');
-  const pageAsNumber = Math.max(Number.parseInt(props.page as string), 0);
+  const pageAsNumber = Number.parseInt(props.page as string);
 
   const data = await getAllNotices({
     ...props,
     offset: pageAsNumber * props.limit,
-  });
+  }).catch(() => ({ list: [], total: 0 }));
 
   const pagination = (
     <div className="flex justify-center">
