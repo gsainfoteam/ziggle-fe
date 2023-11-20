@@ -61,7 +61,7 @@ export function useTranslation<
   }, [i18n, lng]);
 
   useEffect(() => {
-    if (cookies['next-i18next'] === lng) return;
+    if (cookies[cookieName] === lng) return;
     setCookie(cookieName, lng, { path: '/' });
   }, [cookies, lng, setCookie]);
 
