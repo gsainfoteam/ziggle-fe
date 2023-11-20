@@ -43,7 +43,7 @@ const Navbar = async ({ lng }: PropsWithLng) => {
               )}
             </Link>
           </Analytics>
-          <LanguageSwitcher />
+          <LanguageSwitcher lng={lng} />
         </div>
         <nav className="hidden gap-x-8 text-lg font-bold md:flex">{nav}</nav>
         {user ? (
