@@ -14,7 +14,8 @@
     "yes": "Yes",
     "no": "No",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "submit": "Submit"
   },
   "footer": {
     "infoteam": "GIST Student Council - Information Department",
@@ -93,6 +94,11 @@
       "submit": "Submit",
       "alertToReminded": "Alert to those who have been reminded",
       "alertToAll": "Alert to everyone"
+    },
+
+    "writeEnglishNotice": {
+      "title": "Write English Notice",
+      "writeTitle": "Write a title of English notice here"
     },
 
     "authorActions": {

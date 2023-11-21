@@ -2,13 +2,14 @@
 
 import { Dayjs } from 'dayjs';
 import { useState } from 'react';
+import DateTimePicker from 'react-datetime-picker';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { useTranslation } from '@/app/i18next/client';
-import PlusIcon from '@/assets/icons/plus.svg';
+import AddIcon from '@/assets/icons/add.svg';
 
 import AddNoticeRadio from './AddNoticeRadio';
 
@@ -24,7 +25,7 @@ const AddAddtionalNotice = ({
   originallyHasDeadline,
 }: AddAddtionalNoticesProps) => {
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
-  const [deadline, setDeadline] = useState<string>();
+  const [deadline, setDeadline] = useState<Date | null>(new Date());
   const [alertOption, setAlertOption] = useState<string>('all');
   const [content, setContent] = useState<string>('');
   const [englishContent, setEnglishContent] = useState<string>('');
@@ -38,7 +39,7 @@ const AddAddtionalNotice = ({
   return (
     <div className={'rounded-xl border-2 border-primary p-4'}>
       <div className={'flex items-center gap-1'}>
-        <PlusIcon />
+        <AddIcon className="w-7 fill-primary" />
         <p className={'text-lg font-bold text-primary'}>
           {t('zabo.additionalNotices.title')}
         </p>
@@ -57,25 +58,10 @@ const AddAddtionalNotice = ({
             <p>{t('zabo.additionalNotices.changeDeadline')}</p>
           </Checkbox>
           {hasDeadline && (
-            <input
-              className={
-                'border-none text-lg font-medium text-primary outline-none'
-              }
-              type={'date'}
+            <DateTimePicker
+              onChange={setDeadline}
               value={deadline}
-              onChange={(event) => {
-                setDeadline(event.target.value);
-                sendLog(LogEvents.noticeWritingPageSetDeadline, {
-                  deadline: event.target.value,
-                });
-              }}
-              onKeyDown={(event) => {
-                event.preventDefault();
-              }}
-              onClick={(event: React.MouseEvent<HTMLInputElement>) => {
-                // @ts-ignore
-                event.target.showPicker();
-              }}
+              className="w-min-content bg-white text-black"
             />
           )}
         </div>
@@ -126,14 +112,14 @@ const AddAddtionalNotice = ({
           className={'h-[40px] w-[133px] bg-secondaryText text-white'}
           variant={'contained'}
         >
-          <p className={'font-medium'}>{t('zabo.additionalNotices.cancel')}</p>
+          <p className={'font-medium'}>{t('alertResponse.cancel')}</p>
         </Button>
         <Button
           className={'h-[40px] w-[133px]'}
           variant={'contained'}
           onClick={handleSubmit}
         >
-          <p className={'font-medium'}>{t('zabo.additionalNotices.submit')}</p>
+          <p className={'font-medium'}>{t('alertResponse.submit')}</p>
         </Button>
       </div>
     </div>

@@ -14,7 +14,8 @@
     "yes": "네",
     "no": "아니오",
     "cancel": "취소",
-    "confirm": "확인"
+    "confirm": "확인",
+    "submit": "제출"
   },
   "footer": {
     "infoteam": "지스트대학 총학생회 산하 정보국",
@@ -69,7 +70,7 @@
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
-    "dueAt": "마감일 {{dueAt}}",
+    "dueAt": "마감시간 {{dueAt}}",
     "noContent": "내용 없음",
     "share": {
       "action": "공유하기",
@@ -84,12 +85,17 @@
       "title": "추가 공지",
       "deadlineChanged": "마감시간 변경",
       "addAdditionalNotice": "추가 공지 작성하기",
-      "changeDeadline": "마감일 변경하기",
+      "changeDeadline": "마감시간 변경하기",
       "additionalNoticePlaceholder": "여기에 추가 공지를 입력하세요",
       "cancel": "취소하기",
       "submit": "제출하기",
       "alertToReminded": "리마인드 설정한 사람들에게만 알림 보내기",
       "alertToAll": "모든 사람들에게 알림 보내기"
+    },
+
+    "writeEnglishNotice": {
+      "title": "영어 공지 작성하기",
+      "writeTitle": "영어 공지 제목을 입력하세요"
     },
 
     "authorActions": {
@@ -99,7 +105,7 @@
       "writeEnglishNotice": "영어 공지 작성하기",
       "alreadyWroteEnglishNotice": "영어 공지를 작성하셨습니다!",
       "writeAdditionalNotice": "추가 공지 작성하기",
-      "writeAdditionalNoticeDescription": "기존 공지사항에서 정정해야 할 부분이 있거나, 마감일을 변경하고 싶을 때 추가 공지를 작성해보세요."
+      "writeAdditionalNoticeDescription": "기존 공지사항에서 정정해야 할 부분이 있거나, 마감 시간을 변경하고 싶을 때 추가 공지를 작성해보세요."
     }
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",

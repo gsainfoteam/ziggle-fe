@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 import { Content } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
-import PlusIcon from '@/assets/icons/plus.svg';
+import AddIcon from '@/assets/icons/add.svg';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 interface AddtionalNoticesProps {
@@ -23,9 +23,9 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
             className={'rounded-xl border-2 border-primary'}
           >
             <div className={'flex items-center gap-1'}>
-              <PlusIcon />
+              <AddIcon />
               <p className={'text-lg font-bold text-primary'}>
-                {t('zabo.addtionalNotices')}
+                {t('zabo.additionalNotices.title')}
               </p>
               <p className={'font-regular ml-2 text-base text-secondaryText '}>
                 {dayjs(content.createdAt).format('YYYY.MM.DD')}
@@ -39,7 +39,7 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
                 ) && (
                 <div>
                   <p className={'text-base font-bold'}>
-                    {t('zabo.deadlineChanged')}
+                    {t('zabo.additionalNotices.deadlineChanged')}
                   </p>
                   <p className={'text-base font-medium text-secondaryText'}>
                     {dayjs(localeContents[index - 1].deadline).format(

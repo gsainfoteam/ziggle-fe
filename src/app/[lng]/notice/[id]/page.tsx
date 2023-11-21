@@ -1,5 +1,6 @@
 import { GetServerSideProps, Metadata, ResolvingMetadata } from 'next';
 import { useRouter } from 'next/router';
+import { createServerContext } from 'react';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/notice';
@@ -16,6 +17,7 @@ import AddAddtionalNotice from './AddAddtionalNotice';
 import AddtionalNotices from './AddtionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
+import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
   { params: { id } }: { params: { id: string } },
@@ -37,11 +39,13 @@ export const generateMetadata = async (
   };
 };
 
+interface DetailedNoticePageProps {
+  params: { id: string; lng: Locale };
+}
+
 const DetailedNoticePage = async ({
   params: { id, lng },
-}: {
-  params: { id: string; lng: Locale };
-}) => {
+}: DetailedNoticePageProps) => {
   const { t, i18n } = await createTranslation(lng, 'translation');
   const language = i18n.language;
   const notice = await getNotice(Number.parseInt(id));
@@ -53,6 +57,7 @@ const DetailedNoticePage = async ({
   const user = await auth();
 
   const isAdditionalNoticeShow = true;
+  const isWriteEnglishNoticeShow = true;
 
   return (
     <>
@@ -91,6 +96,13 @@ const DetailedNoticePage = async ({
               originallyHasDeadline={notice.currentDeadline}
               supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique
             />
+          </>
+        )}
+
+        {user && user.id === notice.authorId && isWriteEnglishNoticeShow && (
+          <>
+            <div className="h-10" />
+            <WriteEnglishNotice noticeId={Number(id)} lng={lng} />
           </>
         )}
 
