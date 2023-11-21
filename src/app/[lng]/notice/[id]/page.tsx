@@ -13,8 +13,8 @@ import { Locale } from '@/app/i18next/settings';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import Actions from './Actions';
-import AddAddtionalNotice from './AddAddtionalNotice';
-import AddtionalNotices from './AddtionalNotices';
+import AddAdditionalNotice from './AddAdditionalNotice';
+import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
 import WriteEnglishNotice from './WriteEnglishNotice';
@@ -71,6 +71,7 @@ const DetailedNoticePage = async ({
             <AuthorActions
               isEnglishNoticeExist={false}
               isAdditionalNoticeLimit={false}
+              noticeId={Number(id)}
               lng={lng}
             />
           </>
@@ -91,7 +92,7 @@ const DetailedNoticePage = async ({
         {user && user.id === notice.authorId && isAdditionalNoticeShow && (
           <>
             <div className="h-10" />
-            <AddAddtionalNotice
+            <AddAdditionalNotice
               noticeId={Number(id)}
               originallyHasDeadline={notice.currentDeadline}
               supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique

@@ -19,7 +19,7 @@ interface AddAddtionalNoticesProps {
   supportLanguage: string[];
 }
 
-const AddAddtionalNotice = ({
+const AddAdditionalNotice = ({
   noticeId,
   supportLanguage,
   originallyHasDeadline,
@@ -45,7 +45,7 @@ const AddAddtionalNotice = ({
         </p>
       </div>
       {originallyHasDeadline && (
-        <div className={'my-2 flex items-center gap-[10px]'}>
+        <div className={'my-2 flex flex-nowrap items-center gap-[10px]'}>
           <Checkbox
             checked={hasDeadline}
             onChange={(event) => {
@@ -61,7 +61,7 @@ const AddAddtionalNotice = ({
             <DateTimePicker
               onChange={setDeadline}
               value={deadline}
-              className="w-min-content bg-white text-black"
+              className="bg-white text-black"
             />
           )}
         </div>
@@ -126,4 +126,4 @@ const AddAddtionalNotice = ({
   );
 };
 
-export default AddAddtionalNotice;
+export default AddAdditionalNotice;

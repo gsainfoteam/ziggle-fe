@@ -44,9 +44,9 @@ const AddNoticeRadio = ({
           )}
 
           <p
-            className={`text-sm font-medium ${
+            className={`font-regular text-sm ${
               selected === 'remind' ? 'text-primary' : 'text-secondaryText'
-            } group-hover:text-text md:text-xl`}
+            } group-hover:text-text md:text-base`}
           >
             {t('zabo.additionalNotices.alertToReminded')}
           </p>
@@ -77,9 +77,9 @@ const AddNoticeRadio = ({
           )}
 
           <p
-            className={`text-sm font-medium ${
+            className={`font-regular text-sm ${
               selected === 'all' ? 'text-primary' : 'text-secondaryText'
-            } group-hover:text-text md:text-xl`}
+            } group-hover:text-text md:text-base`}
           >
             {t('zabo.additionalNotices.alertToAll')}
           </p>

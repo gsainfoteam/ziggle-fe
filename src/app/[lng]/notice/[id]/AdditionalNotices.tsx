@@ -5,12 +5,12 @@ import { T } from '@/app/i18next';
 import AddIcon from '@/assets/icons/add.svg';
 import getLocaleContents from '@/utils/getLocaleContents';
 
-interface AddtionalNoticesProps {
+interface AdditionalNoticesProps {
   contents: Content[];
   t: T;
 }
 
-const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
+const AdditionalNotices = async ({ contents, t }: AdditionalNoticesProps) => {
   const language = t('lang');
   const localeContents = getLocaleContents(contents, language);
 
@@ -23,7 +23,7 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
             className={'rounded-xl border-2 border-primary'}
           >
             <div className={'flex items-center gap-1'}>
-              <AddIcon />
+              <AddIcon className='fill-primary w-7'/>
               <p className={'text-lg font-bold text-primary'}>
                 {t('zabo.additionalNotices.title')}
               </p>
@@ -63,4 +63,4 @@ const AddtionalNotices = async ({ contents, t }: AddtionalNoticesProps) => {
   );
 };
 
-export default AddtionalNotices;
+export default AdditionalNotices;

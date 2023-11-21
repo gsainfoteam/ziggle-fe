@@ -1,8 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
+import { DELETE_NOTICE } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
@@ -11,19 +13,56 @@ import ArrowIcon from '@/assets/icons/arrow-right.svg';
 import LanguageIcon from '@/assets/icons/language.svg';
 import RemoveIcon from '@/assets/icons/remove.svg';
 
+import { apolloClient } from '../../InitClient';
+
 interface WriterActionsProps {
   isEnglishNoticeExist: boolean;
   isAdditionalNoticeLimit: boolean;
+  noticeId: number;
 }
 
 const AuthorActions = ({
   isEnglishNoticeExist,
   isAdditionalNoticeLimit,
+  noticeId,
   lng,
 }: WriterActionsProps & { lng: Locale }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const { t } = useTranslation(lng);
+  const router = useRouter();
+
+  const handleRemoveNotice = ({
+    noticeId,
+    t,
+  }: { noticeId: number } & { t: T }) => {
+    Swal.fire({
+      text: t('zabo.authorActions.removeSure'),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: t('alertResponse.confirm'),
+      cancelButtonText: t('alertResponse.cancel'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteNotice(noticeId)
+          .then(() => {
+            router.push(`/${lng}`);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
+  };
+
+  const deleteNotice = async (noticeId: number) => {
+    return await apolloClient.mutate({
+      mutation: DELETE_NOTICE,
+      variables: { id: noticeId },
+    });
+  };
+
+  const handleWriteEnglishNotice = async () => {}
 
   return (
     <>
@@ -55,9 +94,9 @@ const AuthorActions = ({
             }
           >
             <div
-              className="flex items-center gap-2"
+              className="flex cursor-pointer items-center gap-2"
               onClick={() => {
-                handleRemoveNotice({ t });
+                handleRemoveNotice({ noticeId, t });
               }}
             >
               <RemoveIcon className="w-6" />
@@ -67,7 +106,7 @@ const AuthorActions = ({
             </div>
 
             {!isEnglishNoticeExist && (
-              <div className="flex items-center gap-2">
+              <div className="flex cursor-pointer items-center gap-2">
                 <LanguageIcon className="w-6 fill-primary" />
                 <div className="font-regular text-base text-primary">
                   {t('zabo.authorActions.writeEnglishNotice')}
@@ -75,7 +114,7 @@ const AuthorActions = ({
               </div>
             )}
 
-            <div className="flex flex-col">
+            <div className="flex cursor-pointer flex-col">
               <div className="flex items-center gap-2">
                 <AddIcon className="w-6 fill-primary" />
                 <div className="font-regular text-base text-primary">
@@ -106,16 +145,6 @@ const AuthorActions = ({
       )}
     </>
   );
-};
-
-const handleRemoveNotice = ({ t }: { t: T }) => {
-  Swal.fire({
-    text: t('zabo.authorActions.removeSure'),
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: t('alertResponse.confirm'),
-    cancelButtonText: t('alertResponse.cancel'),
-  });
 };
 
 export default AuthorActions;

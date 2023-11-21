@@ -103,8 +103,6 @@ export const getNotice = async (id: number) =>
     })),
   }));
 
-export const deleteNotice = async (id: number) => api.delete(`/notice/${id}`);
-
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {
     notices(offset: $offset, limit: $limit) {
@@ -166,5 +164,11 @@ export const CREATE_ADDITIONAL_NOTICE = gql(`
     createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
       id
     }
+  }
+`);
+
+export const DELETE_NOTICE = gql(`
+  mutation DeleteNotice($id: Int!) {
+    deleteNotice(id: $id) {}
   }
 `);
