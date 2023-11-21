@@ -5,13 +5,15 @@ import sendLog from '@/api/log/send-log';
 
 interface AnalyticsProps {
   event: (typeof LogEvents)[keyof typeof LogEvents];
+  properties?: object;
 }
 
 const Analytics = ({
   event,
+  properties,
   children,
 }: React.PropsWithChildren<AnalyticsProps>) => (
-  <div onClick={() => sendLog(event)}>{children}</div>
+  <div onClick={() => sendLog(event, properties)}>{children}</div>
 );
 
 export default Analytics;

@@ -1,15 +1,18 @@
-'use client';
+'use server';
+
+import 'server-only';
 
 import { Notice } from '@/api/notice/notice';
-import { PropsWithLng } from '@/app/i18next';
+import { PropsWithT, T } from '@/app/i18next';
+import { Locale } from '@/app/i18next/settings';
 
 import ResultImageZabo from './ResultImageZabo';
 import ResultTextZabo from './ResultTextZabo';
 
-export type ResultZaboProps = PropsWithLng<
+export type ResultZaboProps = PropsWithT<
   Notice & {
     searchQuery: string;
-    logName?: string;
+    lng: Locale;
   }
 >;
 
