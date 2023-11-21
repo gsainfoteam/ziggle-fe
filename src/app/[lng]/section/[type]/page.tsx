@@ -8,7 +8,7 @@ import { PropsWithLng } from '@/app/i18next';
 export const dynamic = 'force-dynamic';
 
 const tags = ['event', 'recruit', 'general', 'academic'];
-const types = ['all', 'urgent', 'hot', ...tags];
+const types = ['all', 'urgent', 'hot', ...tags, 'written', 'reminded'];
 
 const AllNoticePage = async ({
   searchParams,
@@ -28,6 +28,13 @@ const AllNoticePage = async ({
         limit={30}
         lng={lng}
         page={pageNumber}
+        my={
+          type === 'written'
+            ? 'own'
+            : type === 'reminded'
+              ? 'reminders'
+              : undefined
+        }
         tags={tags.includes(type) ? [type] : undefined}
         orderBy={
           type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : undefined
