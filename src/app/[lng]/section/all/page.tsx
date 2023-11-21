@@ -1,8 +1,8 @@
-import { getAllNotices } from '@/api/notice/notice-server';
-import Pagination from '@/app/components/molecules/Pagination';
-import { PropsWithLng } from '@/app/i18next';
+import { Suspense } from 'react';
 
-import NoticesLoadingWrapper from './NoticesLoadingWrapper';
+import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
+import SearchResults from '@/app/components/templates/SearchResults';
+import { PropsWithLng } from '@/app/i18next';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,20 +15,18 @@ const AllNoticePage = async ({
 }) => {
   const { page } = searchParams;
   const pageNumber = Number(page) || 0;
-  const notices = await getAllNotices({ limit: 0, orderBy: 'recent' });
 
   return (
-    <div className="content mx-auto">
-      <div className="flex justify-center">
-        <Pagination page={pageNumber} pages={Math.ceil(notices.total / 30)} />
-      </div>
-      <div className="h-7" />
-      <NoticesLoadingWrapper key={pageNumber} lng={lng} />
-      <div className="h-24" />
-      <div className="flex justify-center">
-        <Pagination page={pageNumber} pages={Math.ceil(notices.total / 30)} />
-      </div>
-    </div>
+    <Suspense key={pageNumber} fallback={<LoadingCatAnimation lng={lng} />}>
+      <SearchResults
+        logName="AllPage"
+        limit={30}
+        lng={lng}
+        page={pageNumber}
+        search=""
+        tags={[]}
+      />
+    </Suspense>
   );
 };
 

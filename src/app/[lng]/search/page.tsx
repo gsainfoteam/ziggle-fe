@@ -4,7 +4,7 @@ import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation'
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import Result from './Result';
+import SearchResults from '../../components/templates/SearchResults';
 import SearchBar from './SearchBar';
 import SearchTagSelect from './SearchTagSelect';
 
@@ -37,7 +37,8 @@ const SearchPage = async ({
             key={[search, tags.join(',')].join(',')}
             fallback={<LoadingCatAnimation lng={lng} />}
           >
-            <Result
+            <SearchResults
+              logName="SearchPage"
               lng={lng}
               search={search}
               limit={ITEMS_PER_CALL}

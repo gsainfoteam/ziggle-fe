@@ -3,13 +3,14 @@ import Analytics from '@/app/components/atoms/Analytics';
 import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
+import SearchNoResult from '@/assets/search-no-result.svg';
 
-import SearchNoResult from './assets/searchNoResult.svg';
-
-const Result = async ({
+const SearchResults = async ({
   lng,
+  logName,
   ...props
 }: PropsWithLng<{
+  logName?: string;
   search: string;
   tags: string[];
   page: string | number;
@@ -48,12 +49,7 @@ const Result = async ({
               }}
               key={notice.id}
             >
-              <ResultZabo
-                {...notice}
-                t={t}
-                searchQuery={props.search}
-                lng={lng}
-              />
+              <ResultZabo {...notice} searchQuery={props.search} lng={lng} />
             </Analytics>
           ))}
         </div>
@@ -80,4 +76,4 @@ const Result = async ({
   );
 };
 
-export default Result;
+export default SearchResults;
