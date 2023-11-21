@@ -35,7 +35,7 @@ const Pagination = ({ pages, page }: PaginationProps) => {
   useEffect(() => {
     if (page < 0 || Number.isNaN(page)) replace(generateLink(0));
 
-    if (page >= pages) replace(generateLink(pages - 1));
+    if (page >= pages) replace(generateLink(Math.max(pages - 1, 0)));
   }, [generateLink, page, pages, replace]);
 
   if (pages === 0) return null;
