@@ -9,13 +9,13 @@ const SearchResults = async ({
   lng,
   logName,
   ...props
-}: PropsWithLng<{
-  logName?: string;
-  search: string;
-  tags: string[];
-  page: string | number;
-  limit: number;
-}>) => {
+}: PropsWithLng<
+  {
+    logName?: string;
+    page: string | number;
+    limit: number;
+  } & Parameters<typeof getAllNotices>[0]
+>) => {
   const { t } = await createTranslation(lng);
   const pageAsNumber = Number.parseInt(props.page as string);
 

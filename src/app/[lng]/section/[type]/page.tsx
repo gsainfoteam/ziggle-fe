@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
@@ -6,25 +7,31 @@ import { PropsWithLng } from '@/app/i18next';
 
 export const dynamic = 'force-dynamic';
 
+const tags = ['event', 'recruit', 'general', 'academic'];
+const types = ['all', 'urgent', 'hot', ...tags];
+
 const AllNoticePage = async ({
   searchParams,
-  params: { lng },
+  params: { lng, type },
 }: {
-  params: PropsWithLng;
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: PropsWithLng<{ type: string }>;
+  searchParams: { page: string };
 }) => {
+  if (!types.includes(type)) notFound();
   const { page } = searchParams;
   const pageNumber = Number(page) || 0;
 
   return (
     <Suspense key={pageNumber} fallback={<LoadingCatAnimation lng={lng} />}>
       <SearchResults
-        logName="AllPage"
+        logName={`${type}-notice`}
         limit={30}
         lng={lng}
         page={pageNumber}
-        search=""
-        tags={[]}
+        tags={tags.includes(type) ? [type] : undefined}
+        orderBy={
+          type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : undefined
+        }
       />
     </Suspense>
   );
