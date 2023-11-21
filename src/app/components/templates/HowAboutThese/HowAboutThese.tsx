@@ -14,7 +14,7 @@ import Zabo from '../../organisms/Zabo';
 const ITEMS_PER_CALL = 10;
 
 const HowAboutThese = ({ lng }: PropsWithLng) => {
-  const { t, i18n } = useTranslation(lng);
+  const { t } = useTranslation(lng);
   const endEl = useRef<HTMLDivElement>(null);
   const { data, loading, fetchMore } = useQuery(GET_NOTICES, {
     variables: { offset: 0, limit: ITEMS_PER_CALL },
@@ -62,10 +62,7 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
           className="!place-content-start [&>*]:!grow-0 [&>*]:!basis-[fit-content]"
         >
           {notices.map((notice) => (
-            <Link
-              key={notice.id}
-              href={`/${i18n.language}/notice/${notice.id}`}
-            >
+            <Link key={notice.id} href={`/${lng}/notice/${notice.id}`}>
               <Zabo t={t} width={300} {...notice} />
             </Link>
           ))}

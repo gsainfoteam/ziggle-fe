@@ -39,7 +39,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   carouselClassName,
   lng,
 }: ZaboCarouselProps & ZaboSize<Origin>) => {
-  const { t, i18n } = useTranslation(fallbackLng);
+  const { t } = useTranslation(lng);
   const size = { width, height } as ZaboSize<Origin>;
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
@@ -86,7 +86,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
           >
             {notices.map((notice) => (
               <div key={notice.id} className="shrink-0">
-                <Link href={`/${i18n.language}/notice/${notice.id}`}>
+                <Link href={`/${lng}/notice/${notice.id}`}>
                   <Zabo {...notice} {...size} t={t} />
                 </Link>
               </div>

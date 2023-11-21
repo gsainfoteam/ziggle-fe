@@ -86,9 +86,9 @@ const ShareButton = ({ title, lng }: ActionsProps) => {
 };
 
 const BackToMainButton = ({ lng }: PropsWithLng) => {
-  const { t, i18n } = useTranslation(lng);
+  const { t } = useTranslation(lng);
   return (
-    <Link href={`/${i18n.language}`}>
+    <Link href={`/${lng}`}>
       <div className="group flex items-center gap-1 transition-[gap] hover:gap-4 md:gap-2">
         <ArrowLeftIcon className="w-4 rotate-180 fill-secondaryText transition-colors group-hover:fill-primary md:w-6" />
         <div className="text-sm font-medium text-secondaryText transition-colors group-hover:text-primary md:text-lg">
