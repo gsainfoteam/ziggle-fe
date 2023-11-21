@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 import { useTranslation } from '@/app/i18next/client';
+import { Locale } from '@/app/i18next/settings';
 
 import HorizontalScrollButton from '../../molecules/HorizontalScrollButton';
 
@@ -12,10 +13,11 @@ const SCROLL_AMOUNT = 800;
 interface ImageCarouselProps {
   srcs: string[];
   alt: string;
+  lng: Locale;
 }
 
-const ImageCarousel = ({ srcs, alt }: ImageCarouselProps) => {
-  const { t } = useTranslation();
+const ImageCarousel = ({ srcs, alt, lng }: ImageCarouselProps) => {
+  const { t } = useTranslation(lng);
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
   const leftDisabled = carouselLeft === 0;

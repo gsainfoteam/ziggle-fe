@@ -14,7 +14,7 @@ const Result = async ({
   page: string | number;
   limit: number;
 }>) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   const pageAsNumber = Number.parseInt(props.page as string);
 
   const data = await getAllNotices({

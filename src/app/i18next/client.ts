@@ -39,31 +39,14 @@ i18next
 export function useTranslation<
   Ns extends Namespace = DefaultNamespace,
   TKPrefix extends KeyPrefix<Ns> = undefined,
->(
-  lng: Locale = fallbackLng,
-  ns?: Namespace,
-  options?: UseTranslationOptions<TKPrefix>,
-) {
+>(lng: Locale, ns?: Namespace, options?: UseTranslationOptions<TKPrefix>) {
   const [cookies, setCookie] = useCookies([cookieName]);
-  const ret = useTranslationOrg(ns, options);
-  const { i18n } = ret;
-  const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
+  const ret = useTranslationOrg(ns, { lng, ...options });
 
   useEffect(() => {
-    if (runsOnServerSide) return;
-    if (activeLng === i18n.resolvedLanguage) return;
-    setActiveLng(i18n.resolvedLanguage);
-  }, [i18n, activeLng]);
-
-  useEffect(() => {
-    if (!lng || i18n.resolvedLanguage === lng) return;
-    i18n.changeLanguage(lng);
-  }, [i18n, lng]);
-
-  useEffect(() => {
-    if (cookies['next-i18next'] === lng) return;
+    if (cookies[cookieName] === lng) return;
     setCookie(cookieName, lng, { path: '/' });
-  }, [cookies, lng, setCookie]);
+  }, [lng, cookies, setCookie]);
 
   return ret;
 }

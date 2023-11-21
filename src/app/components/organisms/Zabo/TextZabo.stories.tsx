@@ -2,6 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import { useTranslation } from '@/app/i18next/client';
+import { fallbackLng } from '@/app/i18next/settings';
 
 import Zabo from '.';
 
@@ -11,7 +12,7 @@ export default {
 } as Meta<typeof Zabo>;
 
 const Template: StoryFn<typeof Zabo> = (args) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(fallbackLng);
   const lineClampLevel =
     args.title.length > 40 ? 2 : args.title.length > 20 ? 1 : 0;
 

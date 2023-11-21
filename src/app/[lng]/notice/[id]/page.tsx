@@ -36,13 +36,13 @@ const DetailedNoticePage = async ({
 }: {
   params: PropsWithLng<{ id: string }>;
 }) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   const notice = await getNotice(Number.parseInt(id));
   return (
     <>
-      <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} />
+      <ZaboShowcase srcs={notice.imagesUrl} alt={notice.title} lng={lng} />
       <div className="content mx-auto mt-8 md:mt-12">
-        <Actions title={notice.title} />
+        <Actions title={notice.title} lng={lng} />
         <div className="h-4 md:h-5" />
         <NoticeInfo {...notice} deadline={notice.deadline ?? null} t={t} />
         <div className="h-5" />
@@ -50,11 +50,15 @@ const DetailedNoticePage = async ({
         {notice.imagesUrl.length > 0 && (
           <>
             <div className="h-20" />
-            <ImageCarousel srcs={notice.imagesUrl} alt={notice.title} />
+            <ImageCarousel
+              srcs={notice.imagesUrl}
+              alt={notice.title}
+              lng={lng}
+            />
           </>
         )}
         <div className="h-20" />
-        <HowAboutThese />
+        <HowAboutThese lng={lng} />
       </div>
     </>
   );

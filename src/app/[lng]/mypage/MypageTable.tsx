@@ -45,7 +45,7 @@ const MypageTable = async ({
   link,
   lng,
 }: PropsWithLng<MypageTableProps>) => {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   return (
     <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
       <div className="w-full border-collapse border-spacing-0 overflow-hidden rounded-lg border border-white">

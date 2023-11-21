@@ -36,7 +36,7 @@ export default async function MypageProfile({
   email,
   lng,
 }: PropsWithLng<MypageProfileProps>) {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
   return (
     <div>
       <div className="flex flex-col items-center">

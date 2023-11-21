@@ -39,7 +39,7 @@ export default function WritePage({
 }: {
   params: PropsWithLng;
 }) {
-  const { t } = useTranslation(lng, 'translation');
+  const { t } = useTranslation(lng);
   const { push } = useRouter();
 
   const [title, setTitle] = useState('');

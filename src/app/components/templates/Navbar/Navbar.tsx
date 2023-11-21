@@ -3,17 +3,16 @@ import Link from 'next/link';
 import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 import SearchIcon from '@/assets/icons/search.svg';
-import LocaleToggleButtonEnglish from '@/assets/locale-btn-en.svg';
-import LocaleToggleButtonKorean from '@/assets/locale-btn-ko.svg';
 import ZiggleEnglishLogo from '@/assets/logos/ziggle-en.svg';
 import ZiggleKoreanLogo from '@/assets/logos/ziggle-ko.svg';
 
-const Navbar = async ({ lng }: { lng: Locale }) => {
-  const { t } = await createTranslation(lng, 'translation');
+import LanguageSwitcher from './LanguageSwitcher';
+
+const Navbar = async ({ lng }: PropsWithLng) => {
+  const { t } = await createTranslation(lng);
   const user = await auth();
   const nav = (
     <>
@@ -46,14 +45,7 @@ const Navbar = async ({ lng }: { lng: Locale }) => {
               )}
             </Link>
           </Analytics>
-
-          <Link href={`/${lng === 'en' ? 'ko' : 'en'}`}>
-            {lng === 'ko' ? (
-              <LocaleToggleButtonKorean className="w-13 md:w-auto" />
-            ) : (
-              <LocaleToggleButtonEnglish className="w-13 md:w-auto" />
-            )}
-          </Link>
+          <LanguageSwitcher lng={lng} />
         </div>
         <nav className="hidden gap-x-8 text-lg font-bold md:flex">{nav}</nav>
         {user ? (

@@ -6,27 +6,30 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 import Button from '@/app/components/atoms/Button';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
+import { Locale } from '@/app/i18next/settings';
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
 import LinkIcon from '@/assets/icons/link.svg';
 import ShareIcon from '@/assets/icons/share.svg';
 
 interface ActionsProps {
   title: string;
+  lng: Locale;
 }
 
-const Actions = ({ title }: ActionsProps) => (
+const Actions = ({ title, lng }: ActionsProps) => (
   <div className="flex justify-between">
     <div className="flex gap-2">
-      <CopyLinkButton title={title} />
-      <ShareButton title={title} />
+      <CopyLinkButton title={title} lng={lng} />
+      <ShareButton title={title} lng={lng} />
     </div>
-    <BackToMainButton />
+    <BackToMainButton lng={lng} />
   </div>
 );
 
-const CopyLinkButton = ({ title }: ActionsProps) => {
-  const { t } = useTranslation();
+const CopyLinkButton = ({ title, lng }: ActionsProps) => {
+  const { t } = useTranslation(lng);
   const handleCopy = () => {
     navigator.clipboard.writeText(
       t('zabo.copyLink.content', { title, link: window.location.href }),
@@ -55,8 +58,8 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
   );
 };
 
-const ShareButton = ({ title }: ActionsProps) => {
-  const { t } = useTranslation();
+const ShareButton = ({ title, lng }: ActionsProps) => {
+  const { t } = useTranslation(lng);
   const handleShare = () => {
     if (!navigator.canShare) {
       return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
@@ -82,10 +85,10 @@ const ShareButton = ({ title }: ActionsProps) => {
   );
 };
 
-const BackToMainButton = () => {
-  const { t, i18n } = useTranslation();
+const BackToMainButton = ({ lng }: PropsWithLng) => {
+  const { t } = useTranslation(lng);
   return (
-    <Link href={`/${i18n.language}`}>
+    <Link href={`/${lng}`}>
       <div className="group flex items-center gap-1 transition-[gap] hover:gap-4 md:gap-2">
         <ArrowLeftIcon className="w-4 rotate-180 fill-secondaryText transition-colors group-hover:fill-primary md:w-6" />
         <div className="text-sm font-medium text-secondaryText transition-colors group-hover:text-primary md:text-lg">

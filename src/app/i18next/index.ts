@@ -10,12 +10,12 @@ import { initReactI18next } from 'react-i18next/initReactI18next';
 
 import type translation from '@/app/i18next/locales/en/translation.json';
 
-import { getOptions, Locale } from './settings';
+import { defaultNS, getOptions, Locale } from './settings';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
     allowObjectInHTMLChildren: true;
-    defaultNS: 'translation';
+    defaultNS: typeof defaultNS;
     resources: {
       translation: typeof translation;
     };
@@ -41,12 +41,12 @@ export async function createTranslation<
   TKPrefix extends KeyPrefix<Ns> = undefined,
 >(
   lng: Locale,
-  ns: Ns,
+  ns?: Ns,
   options = {
     keyPrefix: undefined as TKPrefix,
   },
 ) {
-  const i18nextInstance = await initI18next(lng, ns);
+  const i18nextInstance = await initI18next(lng, ns ?? defaultNS);
   return {
     t: i18nextInstance.getFixedT(
       lng,

@@ -27,7 +27,7 @@ const ResultTextZabo = ({
   lng,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-  const { t } = useTranslation();
+  const { t } = useTranslation(lng);
 
   return (
     <Link

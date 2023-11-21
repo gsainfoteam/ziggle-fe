@@ -20,22 +20,22 @@ const SearchPage = async ({
   const { query: search, tags: rawTags } = searchParams;
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
 
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="content mx-auto">
       <div className="align-center flex flex-col">
         <div className="flex justify-center">
           <div className="search-bar-animation mb-10 mt-20 flex animate-none flex-col gap-3">
-            <SearchBar />
-            <SearchTagSelect />
+            <SearchBar lng={lng} />
+            <SearchTagSelect lng={lng} />
           </div>
         </div>
 
         {search ? (
           <Suspense
             key={[search, tags.join(',')].join(',')}
-            fallback={<LoadingCatAnimation />}
+            fallback={<LoadingCatAnimation lng={lng} />}
           >
             <Result
               lng={lng}

@@ -28,7 +28,7 @@ const ResultImageZabo = ({
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(lng);
 
   return (
     <Link

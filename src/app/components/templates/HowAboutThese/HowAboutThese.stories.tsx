@@ -1,3 +1,5 @@
+import { fallbackLng } from '@/app/i18next/settings';
+
 import HowAboutThese from '.';
 
 export default {
@@ -5,4 +7,4 @@ export default {
   component: HowAboutThese,
 };
 
-export const Default = () => <HowAboutThese />;
+export const Default = () => <HowAboutThese lng={fallbackLng} />;
