@@ -5,6 +5,10 @@ import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 
+export const playStoreLink =
+  'https://play.google.com/store/apps/details?id=me.gistory.ziggle';
+export const appStoreLink = 'https://apps.apple.com/kr/app/ziggle/id6451740697';
+
 const Footer = ({ t }: PropsWithT) => {
   return (
     <footer
@@ -27,10 +31,10 @@ const Footer = ({ t }: PropsWithT) => {
             <ExternalLink href="https://github.com/gsainfoteam">
               <GitHubLogo className="w-10" />
             </ExternalLink>
-            <ExternalLink href="https://play.google.com/store/apps/details?id=me.gistory.ziggle">
+            <ExternalLink href={playStoreLink}>
               <PlayStoreLogo className="w-10" />
             </ExternalLink>
-            <ExternalLink href="https://apps.apple.com/kr/app/ziggle/id6451740697">
+            <ExternalLink href={appStoreLink}>
               <AppStoreLogo className="w-10" />
             </ExternalLink>
           </div>
