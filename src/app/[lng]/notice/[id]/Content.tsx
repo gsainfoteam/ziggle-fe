@@ -5,6 +5,7 @@ interface ContentProps {
 }
 
 const Content = ({ content }: ContentProps) => {
+  console.log(content);
   return (
     <div
       className={[
@@ -13,6 +14,7 @@ const Content = ({ content }: ContentProps) => {
         '[&_h1]:text-2xl md:[&_h1]:text-4xl',
         '[&_h2]:text-xl md:[&_h2]:text-2xl',
         '[&_h3]:text-lg md:[&_h3]:text-xl',
+        '[&_a]:text-secondaryText [&_a]:underline',
       ].join(' ')}
       dangerouslySetInnerHTML={{ __html: sanitize(content) }}
     />
