@@ -1,17 +1,16 @@
-import { getAllNotices } from '@/api/notice/notice';
+import { getAllNotices } from '@/api/notice/notice-server';
 
 import ZaboCarousel from '../components/templates/ZaboCarousel';
-import { createTranslation } from '../i18next';
-import { Locale } from '../i18next/settings';
+import { createTranslation, PropsWithLng } from '../i18next';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   const [deadline, hot, event, recruit, general, academic] = await Promise.all([
     getAllNotices({ orderBy: 'deadline' }),
@@ -30,36 +29,42 @@ export default async function Home({
         height={300}
         carouselClassName="bg-primary/10"
         sectionHref="/section/urgent"
+        lng={lng}
       />
       <ZaboCarousel
         notices={hot.list}
         title={t('notices.hot.label')}
         height={300}
         sectionHref="/section/hot"
+        lng={lng}
       />
       <ZaboCarousel
         notices={event.list}
         title={t('notices.event.label')}
         height={300}
         sectionHref="/section/event"
+        lng={lng}
       />
       <ZaboCarousel
         notices={recruit.list}
         title={t('notices.recruit.label')}
         height={300}
         sectionHref="/section/recruit"
+        lng={lng}
       />
       <ZaboCarousel
         notices={general.list}
         title={t('notices.general.label')}
         height={300}
         sectionHref="/section/general"
+        lng={lng}
       />
       <ZaboCarousel
         notices={academic.list}
         title={t('notices.academic.label')}
         height={300}
         sectionHref="https://www.gist.ac.kr/kr/html/sub05/050209.html"
+        lng={lng}
       />
     </main>
   );

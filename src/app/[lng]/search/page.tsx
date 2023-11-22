@@ -1,11 +1,7 @@
-import { Suspense } from 'react';
-
-import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
-import { createTranslation } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import Result from './Result';
+import SearchResults from '../../components/templates/SearchResults';
 import SearchBar from './SearchBar';
 import SearchTagSelect from './SearchTagSelect';
 
@@ -15,36 +11,33 @@ const SearchPage = async ({
   searchParams,
   params: { lng },
 }: {
-  params: { lng: Locale };
-  searchParams: { query: string; tags: string };
+  params: PropsWithLng;
+  searchParams: { query: string; tags: string; page: string };
 }) => {
   const { query: search, tags: rawTags } = searchParams;
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
 
-  const { t } = await createTranslation(lng, 'translation');
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="content mx-auto">
       <div className="align-center flex flex-col">
         <div className="flex justify-center">
           <div className="search-bar-animation mb-10 mt-20 flex animate-none flex-col gap-3">
-            <SearchBar />
-            <SearchTagSelect />
+            <SearchBar lng={lng} />
+            <SearchTagSelect lng={lng} />
           </div>
         </div>
+
         {search ? (
-          <Suspense
-            key={[search, tags.join(',')].join(',')}
-            fallback={<LoadingCatAnimation />}
-          >
-            <Result
-              lng={lng}
-              search={search}
-              limit={ITEMS_PER_CALL}
-              offset={0}
-              tags={tags}
-            />
-          </Suspense>
+          <SearchResults
+            logName="SearchPage"
+            lng={lng}
+            search={search}
+            limit={ITEMS_PER_CALL}
+            page={searchParams.page}
+            tags={tags}
+          />
         ) : (
           <div className="flex w-full justify-center">
             <div className="flex flex-col items-center">

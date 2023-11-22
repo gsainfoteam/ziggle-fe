@@ -1,5 +1,6 @@
 'use client';
 
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
 
@@ -9,8 +10,11 @@ interface ShowcaseButtonProps {
   onShow: () => void;
 }
 
-const ShowcaseButton = ({ onShow }: ShowcaseButtonProps) => {
-  const { t } = useTranslation();
+const ShowcaseButton = ({
+  onShow,
+  lng,
+}: ShowcaseButtonProps & PropsWithLng) => {
+  const { t } = useTranslation(lng);
 
   return (
     <Button

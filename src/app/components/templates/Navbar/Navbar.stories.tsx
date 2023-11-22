@@ -1,4 +1,5 @@
-import { useTranslation } from '@/app/i18next/client';
+import {} from '@/app/i18next/client';
+import { fallbackLng } from '@/app/i18next/settings';
 
 import Navbar from '.';
 
@@ -8,6 +9,5 @@ export default {
 };
 
 export function Default() {
-  const { t } = useTranslation();
-  return <Navbar t={t} />;
+  return <Navbar lng={fallbackLng} />;
 }

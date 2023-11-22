@@ -1,6 +1,6 @@
 'use client';
 
-import i18next from 'i18next';
+import i18next, { DefaultNamespace, KeyPrefix, Namespace } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useEffect, useState } from 'react';
@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import {
   initReactI18next,
   useTranslation as useTranslationOrg,
+  UseTranslationOptions,
 } from 'react-i18next';
 
 import {
@@ -35,30 +36,17 @@ i18next
     preload: runsOnServerSide ? languages : [],
   });
 
-export function useTranslation(
-  lng: Locale = fallbackLng,
-  ...args: Parameters<typeof useTranslationOrg>
-) {
+export function useTranslation<
+  Ns extends Namespace = DefaultNamespace,
+  TKPrefix extends KeyPrefix<Ns> = undefined,
+>(lng: Locale, ns?: Namespace, options?: UseTranslationOptions<TKPrefix>) {
   const [cookies, setCookie] = useCookies([cookieName]);
-  const ret = useTranslationOrg(...args);
-  const { i18n } = ret;
-  const [activeLng, setActiveLng] = useState(i18n.resolvedLanguage);
+  const ret = useTranslationOrg(ns, { lng, ...options });
 
   useEffect(() => {
-    if (runsOnServerSide) return;
-    if (activeLng === i18n.resolvedLanguage) return;
-    setActiveLng(i18n.resolvedLanguage);
-  }, [i18n, activeLng]);
-
-  useEffect(() => {
-    if (!lng || i18n.resolvedLanguage === lng) return;
-    i18n.changeLanguage(lng);
-  }, [i18n, lng]);
-
-  useEffect(() => {
-    if (cookies['next-i18next'] === lng) return;
+    if (cookies[cookieName] === lng) return;
     setCookie(cookieName, lng, { path: '/' });
-  }, [cookies, lng, setCookie]);
+  }, [lng, cookies, setCookie]);
 
   return ret;
 }

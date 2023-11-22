@@ -1,3 +1,5 @@
+import { fallbackLng } from '@/app/i18next/settings';
+
 import LoadingCatAnimation from '.';
 
 export default {
@@ -5,4 +7,4 @@ export default {
   component: LoadingCatAnimation,
 };
 
-export const Default = () => <LoadingCatAnimation />;
+export const Default = () => <LoadingCatAnimation lng={fallbackLng} />;

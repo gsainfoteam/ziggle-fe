@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2';
 
+import { uploadImages } from '@/api/image/image';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import {
@@ -181,12 +182,15 @@ const handleNoticeSubmit = async ({
     showConfirmButton: false,
   });
 
+  const imageKeys = await uploadImages(images);
+
   const notice = await apolloClient.mutate({
     mutation: CREATE_NOTICE,
     variables: {
       title,
       deadline,
       body: koreanBody!,
+      images: imageKeys,
     },
   });
 

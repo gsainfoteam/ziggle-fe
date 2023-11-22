@@ -1,11 +1,12 @@
-'use client';
+'use server';
 
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { Trans } from 'react-i18next';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import { createTranslation } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
@@ -13,7 +14,7 @@ import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import { ResultZaboProps } from './ResultZabo';
 
-const ResultTextZabo = ({
+const ResultTextZabo = async ({
   contents,
   body,
   createdAt,
@@ -24,27 +25,18 @@ const ResultTextZabo = ({
   searchQuery,
 
   id,
-  logName,
   lng,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-  const { t, i18n } = useTranslation();
+
+  const { t } = await createTranslation(lng);
   const language = i18n.language;
   const localeContents = getLocaleContents(contents, language);
 
   const title = localeContents[0].title;
 
   return (
-    <Link
-      className={'w-full'}
-      onClick={() =>
-        sendLog(LogEvents.searchResultClick, {
-          location: logName ?? 'unknown',
-          isText: true,
-        })
-      }
-      href={`/${lng}/notice/` + id}
-    >
+    <Link className={'w-full'} href={`/${lng}/notice/` + id}>
       <div
         className={
           'flex flex-col justify-between gap-2.5 p-5 ' +
@@ -59,12 +51,20 @@ const ResultTextZabo = ({
             </Trans>
           </div>
           <div className="text-start text-3xl font-bold">
-            <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            {searchQuery ? (
+              <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            ) : (
+              title
+            )}
           </div>
 
           <div className="flex items-center gap-0.5">
             <div className="text-lg font-bold">
-              <HighlightedText query={searchQuery}>{author}</HighlightedText>
+              {searchQuery ? (
+                <HighlightedText query={searchQuery}>{author}</HighlightedText>
+              ) : (
+                author
+              )}
             </div>
             {/* organization here (for futer update) */}
           </div>

@@ -1,27 +1,33 @@
-import { createTranslation } from '@/app/i18next';
+import { auth } from '@/api/auth/auth';
+import { getAllNotices } from '@/api/notice/notice-server';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { Notice } from '@/generated/graphql';
 
-import { Locale } from '../../i18next/settings';
 import MypageProfile from './MypageProfile';
-import MypageSeperate from './MypageSeperate';
 import MypageTable from './MypageTable';
 
 export default async function MyPage({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng, 'translation');
-
+  const { t } = await createTranslation(lng);
+  const userData = await auth();
+  const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
+    .list;
+  const ownNotice: Notice[] = (
+    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent' })
+  ).list;
   return (
     <>
       <div className="h-1500 xl:h-1000 mt-10 flex w-full flex-col items-center justify-center gap-20 xl:flex-row">
         <div className="relative m-10 flex flex-col">
           <MypageProfile
             lng={lng}
-            name={'김지현'}
-            id={'201910808'}
-            email={'mynameisjihyunkim@gm.gist.ac.kr'}
-            phone={'010-0000-0000'}
+            name={userData?.name ?? ''}
+            id={userData?.studentId ?? ''}
+            email={userData?.email ?? ''}
+            phone={userData?.phone ?? ''}
           />
         </div>
         <div className="my-5 flex flex-col items-center justify-center">
@@ -29,21 +35,16 @@ export default async function MyPage({
             <MypageTable
               lng={lng}
               title={t('mypage.myNotice')}
-              articles={[]}
-              link={''}
+              articles={ownNotice}
+              link={`/${lng}/section/written`}
             />
           </div>
           <div className="xl:p-50 p-0">
             <MypageTable
               lng={lng}
               title={t('mypage.remindNotice')}
-              articles={[
-                { title: '제목1', createdAt: '2021-09-01' },
-                { title: '제목2', createdAt: '2021-09-02' },
-                { title: '제목2', createdAt: '2021-09-02' },
-                { title: '제목2', createdAt: '2021-09-02' },
-              ]}
-              link={''}
+              articles={remindedNotice}
+              link={`/${lng}/section/reminded`}
             />
           </div>
         </div>

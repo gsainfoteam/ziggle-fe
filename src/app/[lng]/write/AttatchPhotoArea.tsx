@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import Button from '@/app/components/atoms/Button';
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 import AddIcon from '@/assets/icons/add.svg';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 
@@ -16,7 +16,7 @@ const AttatchPhotoArea = ({
   files,
   setFiles,
   t,
-}: AttatchPhotoAreaProps & { t: T }) => {
+}: PropsWithT<AttatchPhotoAreaProps>) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

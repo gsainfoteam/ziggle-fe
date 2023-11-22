@@ -2,6 +2,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
 import { useTranslation } from '@/app/i18next/client';
+import { fallbackLng } from '@/app/i18next/settings';
 
 import NoticeInfo from '.';
 
@@ -11,7 +12,7 @@ export default {
 } as Meta<typeof NoticeInfo>;
 
 const Template: StoryFn<typeof NoticeInfo> = (args) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(fallbackLng);
 
   return <NoticeInfo {...args} t={t} />;
 };

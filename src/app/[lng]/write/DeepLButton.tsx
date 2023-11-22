@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 import DeepLLogo from '@/assets/logos/deepL.svg';
 
 interface DeepLButtonProps {

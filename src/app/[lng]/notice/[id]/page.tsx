@@ -8,7 +8,7 @@ import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import NoticeInfo from '@/app/components/organisms/NoticeInfo';
 import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
-import { createTranslation } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import getLocaleContents from '@/utils/getLocaleContents';
 
@@ -61,9 +61,9 @@ const DetailedNoticePage = async ({
 
   return (
     <>
-      <ZaboShowcase srcs={notice.imagesUrl} alt={title} />
+      <ZaboShowcase srcs={notice.imagesUrl} alt={title} lng={lng} />
       <div className="content mx-auto mt-8 md:mt-12">
-        <Actions title={localContents[0].body} />
+        <Actions title={localContents[0].body} lng={lng} />
 
         {user && user.id === notice.authorId && (
           <>
@@ -110,11 +110,11 @@ const DetailedNoticePage = async ({
         {notice.imagesUrl.length > 0 && (
           <>
             <div className="h-20" />
-            <ImageCarousel srcs={notice.imagesUrl} alt={title} />
+            <ImageCarousel srcs={notice.imagesUrl} alt={title} lng={lng} />
           </>
         )}
         <div className="h-20" />
-        <HowAboutThese />
+        <HowAboutThese lng={lng} />
       </div>
     </>
   );

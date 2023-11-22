@@ -6,5 +6,11 @@
   "eslint.nodePath": ".yarn/sdks",
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.sortImports": false,
+    "source.organizeImports": false
+  },
+  "editor.formatOnSave": false
 }

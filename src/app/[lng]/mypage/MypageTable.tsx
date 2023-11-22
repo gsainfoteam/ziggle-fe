@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
-import { createTranslation } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import LazyCat from '@/assets/lazy-cat.svg';
 
@@ -10,7 +11,7 @@ import LazyCat from '@/assets/lazy-cat.svg';
 // }
 
 interface NoticeBase {
-  //id: number;
+  id: number;
   title: string;
   //views: number;
   //body: string;
@@ -43,8 +44,8 @@ const MypageTable = async ({
   articles,
   link,
   lng,
-}: MypageTableProps & { lng: Locale }) => {
-  const { t } = await createTranslation(lng, 'translation');
+}: PropsWithLng<MypageTableProps>) => {
+  const { t } = await createTranslation(lng);
   return (
     <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
       <div className="w-full border-collapse border-spacing-0 overflow-hidden rounded-lg border border-white">
@@ -53,9 +54,12 @@ const MypageTable = async ({
             <div className="m-5 text-xl font-bold text-white">{title}</div>
           </div>
           <div className="rounded-tr-10 w-1/4 text-right">
-            <div className="text-s text-regular flex h-full items-end justify-end text-white">
+            <Link
+              href={link}
+              className="text-s text-regular flex h-full items-end justify-end text-white"
+            >
               <UnderLinedText>{t('mypage.totalList')}</UnderLinedText>
-            </div>
+            </Link>
           </div>
         </div>
 
@@ -63,9 +67,10 @@ const MypageTable = async ({
           const isLastRow = index === articles.length - 1;
           const underLine = isLastRow ? '' : 'border-b border-gray-300';
           return (
-            <div
+            <Link
               key={index}
               className={`flex h-[70px] ${underLine} bg-colorless flex-row items-center justify-between`}
+              href={`/notice/${articleObj.id}`}
             >
               <div className="leading-1.5 pb-0  sm:pb-0">
                 <div className="text-regular m-3.5 text-text dark:text-white">
@@ -77,7 +82,7 @@ const MypageTable = async ({
                   {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
         {articles.length === 0 && (

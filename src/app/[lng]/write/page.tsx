@@ -8,15 +8,15 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
-import { Editor as TinyMCEEditorRef } from 'tinymce';
+import { Editor } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import Chip from '@/app/components/molecules/Chip';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import { Locale } from '@/app/i18next/settings';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ContentIcon from '@/assets/icons/content.svg';
 import LanguageIcon from '@/assets/icons/language.svg';
@@ -25,8 +25,9 @@ import TypeIcon from '@/assets/icons/type.svg';
 
 import AttatchPhotoArea from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
-import handleNoticeSubmit from './HandleNoticeSubmit';
+import handleNoticeSubmit from './handle-notice-submit';
 import TagInput, { Tag } from './TagInput';
+import TinyMCEEditor from './TinyMCEEditor';
 
 type NoticeType = 'recruit' | 'event' | 'general';
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
@@ -38,9 +39,9 @@ const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
 export default function WritePage({
   params: { lng },
 }: {
-  params: { lng: Locale };
+  params: PropsWithLng;
 }) {
-  const { t } = useTranslation(lng, 'translation');
+  const { t } = useTranslation(lng);
   const { push } = useRouter();
 
   const [title, setTitle] = useState('');
@@ -57,8 +58,8 @@ export default function WritePage({
 
   const [images, setImages] = useState<File[]>([]);
 
-  const koreanEditorRef = useRef<TinyMCEEditorRef | null>(null);
-  const englishEditorRef = useRef<TinyMCEEditorRef | null>(null);
+  const koreanEditorRef = useRef<Editor>(null);
+  const englishEditorRef = useRef<Editor>(null);
 
   const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isWriteEnglish) {
@@ -73,12 +74,8 @@ export default function WritePage({
   };
 
   const handleSubmit = async () => {
-    const koreanBody = koreanEditorRef.current
-      ? koreanEditorRef.current.getContent()
-      : undefined;
-    const englishBody = englishEditorRef.current
-      ? englishEditorRef.current.getContent()
-      : undefined;
+    const koreanBody = koreanEditorRef.current?.getContent();
+    const englishBody = englishEditorRef.current?.getContent();
 
     const noticeId = await handleNoticeSubmit({
       title,
@@ -223,7 +220,7 @@ export default function WritePage({
           </div>
 
           <React.Suspense>
-            <DynamicTinyMCEEditor forwardedRef={koreanEditorRef} />
+            <DynamicTinyMCEEditor editorRef={koreanEditorRef} />
           </React.Suspense>
         </div>
 
@@ -236,7 +233,7 @@ export default function WritePage({
             {isWriteKorean && <DeepLButton t={t} editorRef={koreanEditorRef} />}
           </div>
           <React.Suspense>
-            <DynamicTinyMCEEditor forwardedRef={englishEditorRef} />
+            <DynamicTinyMCEEditor editorRef={englishEditorRef} />
           </React.Suspense>
         </div>
 

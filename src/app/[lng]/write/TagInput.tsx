@@ -1,7 +1,7 @@
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { searchTags } from '@/api/tag/tag';
-import { T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 import CloseIcon from '@/assets/icons/close.svg';
 
 export interface Tag {
@@ -14,7 +14,7 @@ interface TagInputProps {
   setTags: (tags: Tag[]) => void;
 }
 
-const TagInput = ({ tags, setTags, t }: TagInputProps & { t: T }) => {
+const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
   const [keyword, setKeyword] = useState<string>('');
   const [searchedTags, setSearchedTags] = useState<Tag[]>([]);
 
