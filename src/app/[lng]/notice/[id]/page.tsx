@@ -89,7 +89,7 @@ const DetailedNoticePage = async ({
         <NoticeInfo
           {...notice}
           currentDeadline={notice.currentDeadline ?? null}
-          t={t}
+          lng={lng}
         />
         <div className="h-5" />
         <Content content={localContents[0].body} />

@@ -14,7 +14,7 @@ export default {
 const Template: StoryFn<typeof NoticeInfo> = (args) => {
   const { t } = useTranslation(fallbackLng);
 
-  return <NoticeInfo {...args} t={t} />;
+  return <NoticeInfo {...args} />;
 };
 
 const args = {

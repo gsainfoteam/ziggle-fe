@@ -2,8 +2,9 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail, Tag } from '@/api/notice/notice';
-import { PropsWithT } from '@/app/i18next';
+import { PropsWithLng, PropsWithT } from '@/app/i18next';
 import { T } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
@@ -18,9 +19,9 @@ const NoticeInfo = ({
   createdAt,
   views,
   tags = [],
-  t,
   lng,
-}: PropsWithT<NoticeInfoProps>) => {
+}: PropsWithLng<NoticeInfoProps>) => {
+  const { t } = useTranslation(lng);
   const localeContents = getLocaleContents(contents, lng);
 
   return (
@@ -45,7 +46,7 @@ const NoticeInfo = ({
   );
 };
 
-const Deadline = ({ deadline, t }: { deadline: dayjs.Dayjs } & { t: T }) => {
+const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
   return (
     <div className="flex items-center gap-4">
       <div className="text-lg font-medium md:text-2xl">

@@ -42,7 +42,7 @@ const handleNoticeSubmit = async ({
   const TITLE_MAX_LENGTH = 50;
   const BODY_MAX_LENGTH = 3000;
 
-  const warningSwal = WarningSwal(t('write.alerts.title'), t);
+  const warningSwal = WarningSwal(t);
 
   if (!title) {
     warningSwal(t('write.alerts.title'));

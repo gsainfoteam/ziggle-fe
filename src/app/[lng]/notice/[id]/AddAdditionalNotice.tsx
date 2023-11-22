@@ -40,7 +40,7 @@ const AddAdditionalNotice = ({
   const [content, setContent] = useState<string>('');
   const [englishContent, setEnglishContent] = useState<string>('');
 
-  const { t, i18n } = useTranslation(lng);
+  const { t } = useTranslation(lng);
 
   const supportEnglish = supportLanguage.includes('en');
 
@@ -50,12 +50,12 @@ const AddAdditionalNotice = ({
 
   const handleSubmit = async () => {
     if (!content) {
-      warningSwal(t('write.alerts.body'), t);
+      warningSwal(t('write.alerts.body'));
       return;
     }
 
     if (supportEnglish && !englishContent) {
-      warningSwal(t('write.alerts.englishBody'), t);
+      warningSwal(t('write.alerts.englishBody'));
       return;
     }
 
