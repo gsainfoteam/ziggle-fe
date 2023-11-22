@@ -53,12 +53,11 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
 
   const [rightDisabled, setRightDisabled] = useState(false);
   useEffect(() => {
-    if (carouselEl.current) {
-      const isRightDisabled =
-        carouselLeft + 10 >
-        carouselEl.current.scrollWidth - carouselEl.current.clientWidth;
-      setRightDisabled(isRightDisabled);
-    }
+    if (!carouselEl.current) return;
+    const isRightDisabled =
+      carouselLeft + 10 >
+      carouselEl.current.scrollWidth - carouselEl.current.clientWidth;
+    setRightDisabled(isRightDisabled);
   }, [carouselLeft]);
 
   const scroll = (amount: number) => {
