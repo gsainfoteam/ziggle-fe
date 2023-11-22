@@ -16,7 +16,7 @@ const AddNoticeRadio = ({
   onChange,
   t,
   ...props
-}: CheckboxProps & { t: T }) => {
+}: PropsWithT<CheckboxProps>) => {
   return (
     <div className={'flex flex-col gap-[10px]'}>
       <label htmlFor={'remindId'}>
