@@ -136,13 +136,13 @@ const AddAdditionalNotice = ({
         </div>
       )}
       <div className={'flex flex-col gap-2'}>
-        <div>
-          <div className="ml-8 text-lg font-bold">
-            {t('zabo.additionalNotices.koreanAdditionalNotice')}
-          </div>
+        <div className="ml-8 text-lg font-bold">
+          {t('zabo.additionalNotices.koreanAdditionalNotice')}
+        </div>
+        <div className={'flex w-full'}>
           <textarea
             className={
-              'mb-3 ml-8 mt-1 w-full resize-none border-none text-base outline-none dark:bg-transparent dark:text-white'
+              'mb-3 ml-8 mt-1 grow resize-none border-none text-base outline-none dark:bg-transparent dark:text-white'
             }
             name={'searchQuery'}
             placeholder={t(

@@ -43,29 +43,26 @@ const TextZabo = <Origin extends ZaboOrigin>({
         [antiOrigin === 'width' ? 'maxWidth' : 'maxHeight']: originSize * 2,
       }}
     >
-      <div className="flex flex-col gap-2.5">
-        {deadline && deadline.isAfter() && (
-          <>
-            <DDay deadline={deadline} t={t} className="absolute left-2 top-2" />
-            <div className="h-2 md:h-4" />
-          </>
-        )}
-        <div
-          className={
-            'text-3xl font-bold leading-snug transition-colors  group-hover:text-primary' +
-            (origin === 'height'
-              ? ['line-clamp-2', 'line-clamp-3', 'line-clamp-5']
-              : ['line-clamp-6', 'line-clamp-8', 'line-clamp-10'])[
-              lineClampLevel
-            ]
-          }
-        >
-          {title}
-        </div>
-        <div className="overflow-hidden text-lg font-medium">
-          {localContents[0].body}
-        </div>
+      {deadline && deadline.isAfter() && (
+        <>
+          <DDay deadline={deadline} t={t} className="absolute left-2 top-2" />
+          <div className="h-2 shrink-0 md:h-4" />
+        </>
+      )}
+      <div
+        className={
+          'text-3xl font-bold leading-snug transition-colors  group-hover:text-primary' +
+          (origin === 'height'
+            ? ['line-clamp-2', 'line-clamp-3', 'line-clamp-5']
+            : ['line-clamp-6', 'line-clamp-8', 'line-clamp-10'])[lineClampLevel]
+        }
+      >
+        {title}
       </div>
+      <div className="shrink overflow-hidden text-lg font-medium">
+        {localContents[0].body}
+      </div>
+      <div className={'grow'} />
       <div className="flex flex-col gap-2.5">
         <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
