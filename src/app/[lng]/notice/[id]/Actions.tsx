@@ -37,7 +37,7 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
 
     toast.success(
       <div className="flex flex-col text-sm font-medium">
-        <Trans i18nKey="zabo.copyLink.success">
+        <Trans t={t} i18nKey="zabo.copyLink.success">
           successed <div className="text-xs">share to friends</div>
         </Trans>
       </div>,
