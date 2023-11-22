@@ -34,7 +34,7 @@ const AllNoticePage = async ({
       }
       tags={tags.includes(type) ? [type] : undefined}
       orderBy={
-        type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : undefined
+        type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : 'recent'
       }
     />
   );
