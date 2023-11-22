@@ -37,8 +37,7 @@ const ResultImageZabo = async ({
           width={230} // handle mobile
           src={imageUrl}
           alt={title}
-          objectFit="cover"
-          objectPosition="center"
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
         <div
           className="box-border flex flex-col justify-between"
