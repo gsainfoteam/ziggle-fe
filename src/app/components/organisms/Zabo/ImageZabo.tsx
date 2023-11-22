@@ -43,7 +43,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <div className="line-clamp-2 overflow-hidden text-ellipsis text-3xl font-bold transition-colors group-hover:text-primary">
+        <div className="line-clamp-2 overflow-hidden text-ellipsis text-3xl font-bold leading-normal transition-colors group-hover:text-primary">
           {title}
         </div>
         <div className="flex text-sm font-medium text-secondaryText">

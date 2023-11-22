@@ -45,7 +45,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
         )}
         <div
           className={
-            'text-3xl font-bold transition-colors group-hover:text-primary ' +
+            'text-3xl font-bold leading-snug transition-colors  group-hover:text-primary' +
             (origin === 'height'
               ? ['line-clamp-2', 'line-clamp-3', 'line-clamp-5']
               : ['line-clamp-6', 'line-clamp-8', 'line-clamp-10'])[

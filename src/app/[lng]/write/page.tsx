@@ -99,7 +99,7 @@ export default function WritePage({
           onChange={(e) => {
             setTitle(e.target.value);
           }}
-          className="content mb-4 mt-16 w-full p-0 text-4xl font-bold outline-none dark:bg-transparent"
+          className="content mb-4 mt-16 w-full p-0 text-4xl font-bold leading-normal outline-none dark:bg-transparent"
           type="text"
           placeholder={t('write.writeTitle')}
           onBlur={(e) => {
