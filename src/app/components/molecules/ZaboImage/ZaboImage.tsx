@@ -24,11 +24,12 @@ const ZaboImage = <Origin extends ZaboOrigin>({
     width: number;
     height: number;
   }>();
-  const handleImageLoad = (img: HTMLImageElement) =>
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     setImageSize({
-      width: img.naturalWidth,
-      height: img.naturalHeight,
+      width: e.currentTarget.naturalWidth,
+      height: e.currentTarget.naturalHeight,
     });
+  };
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
