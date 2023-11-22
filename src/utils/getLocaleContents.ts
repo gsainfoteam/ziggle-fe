@@ -5,7 +5,7 @@ const getLocaleContents = (contents: Content[], language: string) => {
     (content) => content.lang === language && content.id !== 1,
   );
 
-  return localeContents.length > 0 ? localeContents : contents;
+  return localeContents.length > 0 ? localeContents : contents.slice(1);
 };
 
 export default getLocaleContents;
