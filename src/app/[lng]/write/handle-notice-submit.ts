@@ -43,12 +43,12 @@ const handleNoticeSubmit = async ({
   const BODY_MAX_LENGTH = 3000;
 
   if (!title) {
-    WarningSwal(t('write.alerts.title'));
+    WarningSwal(t('write.alerts.title'), t);
     return;
   }
 
   if (noticeLanguage === 'both' && !enTitle) {
-    WarningSwal(t('write.alerts.enTitle'));
+    WarningSwal(t('write.alerts.enTitle'), t);
     return;
   }
 
@@ -57,39 +57,40 @@ const handleNoticeSubmit = async ({
       t('write.alerts.titleLengthLessThan', {
         titleMaxLength: TITLE_MAX_LENGTH,
       }),
+      t,
     );
     return;
   }
 
   if (deadline && deadline < new Date()) {
-    WarningSwal(t('write.alerts.deadline'));
+    WarningSwal(t('write.alerts.deadline'), t);
     return;
   }
 
   switch (noticeLanguage) {
     case 'ko':
       if (!koreanBody) {
-        WarningSwal(t('write.alerts.body'));
+        WarningSwal(t('write.alerts.body'), t);
         return;
       }
       break;
     case 'en':
       if (!englishBody) {
-        WarningSwal(t('write.alerts.body'));
+        WarningSwal(t('write.alerts.body'), t);
         return;
       }
       break;
     case 'both':
       if (!koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.body'));
+        WarningSwal(t('write.alerts.body'), t);
         return;
       }
       if (!koreanBody && englishBody) {
-        WarningSwal(t('write.alerts.koreanBody'));
+        WarningSwal(t('write.alerts.koreanBody'), t);
         return;
       }
       if (koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.englishBody'));
+        WarningSwal(t('write.alerts.englishBody'), t);
         return;
       }
       break;
@@ -106,6 +107,7 @@ const handleNoticeSubmit = async ({
               length: koreanBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
+          t,
         );
         return;
       }
@@ -120,6 +122,7 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
+          t,
         );
         return;
       }
@@ -143,6 +146,7 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
+          t,
         );
         return;
       } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
@@ -154,6 +158,7 @@ const handleNoticeSubmit = async ({
               length: koreanBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
+          t,
         );
 
         return;
@@ -166,6 +171,7 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
+          t,
         );
 
         return;

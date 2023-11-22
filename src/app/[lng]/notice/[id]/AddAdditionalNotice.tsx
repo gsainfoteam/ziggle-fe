@@ -48,12 +48,12 @@ const AddAdditionalNotice = ({
 
   const handleSubmit = async () => {
     if (!content) {
-      WarningSwal(t('write.alerts.body'));
+      WarningSwal(t('write.alerts.body'), t);
       return;
     }
 
     if (supportEnglish && !englishContent) {
-      WarningSwal(t('write.alerts.englishBody'));
+      WarningSwal(t('write.alerts.englishBody'), t);
       return;
     }
 

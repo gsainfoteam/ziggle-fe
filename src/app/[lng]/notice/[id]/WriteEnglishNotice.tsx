@@ -48,7 +48,7 @@ const WriteEnglishNotice = ({
     const englishContent = englishEditorRef.current?.getContent();
 
     if (!englishContent) {
-      WarningSwal(t('write.alerts.body'));
+      WarningSwal(t('write.alerts.body'), t);
       return;
     }
 
