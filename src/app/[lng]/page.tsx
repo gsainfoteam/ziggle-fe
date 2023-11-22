@@ -24,7 +24,7 @@ export default async function Home({
   return (
     <main className="flex flex-col gap-16 md:py-12">
       <ZaboCarousel
-        notices={...deadline.list}
+        notices={deadline.list}
         title={t('notices.deadline.label')}
         height={300}
         carouselClassName="bg-primary/10"

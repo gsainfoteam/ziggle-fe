@@ -17,7 +17,7 @@ const AdditionalNotices = async ({ contents, t }: AdditionalNoticesProps) => {
   return (
     <div className={'flex flex-col gap-4'}>
       {localeContents.map((content, index) => {
-        return index >= 0 ? (
+        return index > 0 ? (
           <div
             key={`${content.id}+${content.lang}`}
             className={'rounded-xl border-2 border-primary'}
