@@ -32,11 +32,13 @@ const ResultImageZabo = async ({
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>
-      <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden">
+      <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden rounded border border-secondaryText">
         <ZaboImage
           width={230} // handle mobile
           src={imageUrl}
           alt={title}
+          objectFit="cover"
+          objectPosition="center"
         />
         <div
           className="box-border flex flex-col justify-between"
