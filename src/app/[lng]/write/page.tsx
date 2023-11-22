@@ -198,12 +198,12 @@ export default function WritePage({
         </div>
 
         <div className="flex items-center gap-2">
-          <Checkbox
+          {/* <Checkbox
             checked={isWriteKorean}
             onChange={handleKoreanLanguageChange}
           >
             {t('write.languages.korean')}
-          </Checkbox>
+          </Checkbox> */}
           <Checkbox
             checked={isWriteEnglish}
             onChange={handleEnglishLanguageChange}
