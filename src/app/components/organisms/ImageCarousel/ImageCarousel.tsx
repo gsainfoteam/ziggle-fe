@@ -61,7 +61,7 @@ const ImageCarousel = ({ srcs, alt, lng }: ImageCarouselProps) => {
             alt={alt}
             width={300}
             height={300}
-            className="shrink-0 basis-48 rounded border-2 border-white md:basis-80"
+            className="aspect-square shrink-0 basis-48 rounded border-2 border-white object-cover md:basis-80"
           />
         ))}
       </div>

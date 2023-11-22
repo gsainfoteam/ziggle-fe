@@ -9,8 +9,15 @@ interface ImagePreviewItemProps {
 
 const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
   return (
-    <div className="relative flex overflow-hidden rounded-md md:rounded-xl [&>img]:object-contain">
-      <Image alt="preview image" src={src} fill />
+    <div className="relative flex overflow-hidden rounded-md md:rounded-xl">
+      <Image
+        alt="preview image"
+        src={src}
+        width={0}
+        height={0}
+        sizes="30vw"
+        className="aspect-square h-auto w-full object-cover"
+      />
 
       <button
         onClick={(e) => {

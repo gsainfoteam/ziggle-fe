@@ -23,11 +23,10 @@ import LanguageIcon from '@/assets/icons/language.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
 
-import AttatchPhotoArea from './AttatchPhotoArea';
+import AttatchPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
 import handleNoticeSubmit from './handle-notice-submit';
 import TagInput, { Tag } from './TagInput';
-import TinyMCEEditor from './TinyMCEEditor';
 
 type NoticeType = 'recruit' | 'event' | 'general';
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
@@ -56,7 +55,7 @@ export default function WritePage({
   const [isWriteKorean, setIsWriteKorean] = useState(true);
   const [isWriteEnglish, setIsWriteEnglish] = useState(false);
 
-  const [images, setImages] = useState<File[]>([]);
+  const [photos, setPhotos] = useState<FileWithUrl[]>([]);
 
   const koreanEditorRef = useRef<Editor>(null);
   const englishEditorRef = useRef<Editor>(null);
@@ -84,7 +83,7 @@ export default function WritePage({
       koreanBody,
       englishBody,
       tags: tags.map((tag) => tag.name),
-      images,
+      images: photos.map((image) => image.file),
       t,
     });
     if (!noticeId) return;
@@ -250,7 +249,7 @@ export default function WritePage({
           {t('write.photoDescription')}
         </div>
 
-        <AttatchPhotoArea t={t} files={images} setFiles={setImages} />
+        <AttatchPhotoArea t={t} photos={photos} setPhotos={setPhotos} />
       </div>
 
       <Button
