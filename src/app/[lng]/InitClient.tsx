@@ -4,6 +4,7 @@ import '@/app/initDayjs';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 import { PropsWithLng } from '../i18next';
 
@@ -45,7 +46,9 @@ const InitClient = ({
   children,
 }: React.PropsWithChildren<PropsWithLng>) => (
   <ApolloProvider client={apolloClient}>
-    <InstallApp lng={lng} />
+    <Suspense>
+      <InstallApp lng={lng} />
+    </Suspense>
     {children}
   </ApolloProvider>
 );

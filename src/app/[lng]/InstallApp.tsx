@@ -9,12 +9,12 @@ import { PropsWithLng } from '../i18next';
 import { useTranslation } from '../i18next/client';
 
 const InstallApp = ({ lng }: PropsWithLng) => {
-  const userAgent = window.navigator.userAgent;
-  const isAndroid = Boolean(userAgent.match(/Android/i));
-  const isIos = Boolean(userAgent.match(/iPhone|iPad|iPod/i));
   const { t } = useTranslation(lng);
 
   useEffect(() => {
+    const userAgent = window.navigator.userAgent;
+    const isAndroid = Boolean(userAgent.match(/Android/i));
+    const isIos = Boolean(userAgent.match(/iPhone|iPad|iPod/i));
     if (!isAndroid && !isIos) return;
     Swal.fire({
       title: t('installApp.title'),
@@ -25,7 +25,7 @@ const InstallApp = ({ lng }: PropsWithLng) => {
       if (!result.isConfirmed) return;
       window.open(isIos ? appStoreLink : playStoreLink);
     });
-  }, [isAndroid, isIos, t]);
+  }, [t]);
 
   return null;
 };
