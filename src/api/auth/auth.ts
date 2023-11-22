@@ -31,15 +31,7 @@ interface UserResponse {
   student_id: string;
 }
 
-interface User {
-  id: string;
-  email: string;
-  name: string;
-  phone: string;
-  studentId: string;
-}
-
-export const auth = async (): Promise<User | null> => {
+export const auth = async () => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('access_token');
   if (!accessToken) return null;
