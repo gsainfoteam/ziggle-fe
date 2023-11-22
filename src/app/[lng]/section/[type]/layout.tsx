@@ -1,10 +1,10 @@
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 const AllNoticeLayout = async ({
-  params: { lng },
+  params: { lng, type },
   children,
 }: {
-  params: PropsWithLng;
+  params: PropsWithLng<{ type: 'all' | 'urgent' }>;
   children: React.ReactNode;
 }) => {
   const { t } = await createTranslation(lng);
@@ -13,10 +13,10 @@ const AllNoticeLayout = async ({
     <div className="content mx-auto">
       <div className="my-7 flex flex-col gap-2 md:my-12">
         <h1 className="text-2xl font-bold md:text-4xl">
-          {t('notices.all.label')}
+          {t(`notices.${type === 'urgent' ? 'deadline' : type}.label`)}
         </h1>
         <div className="text-xs font-medium text-secondaryText md:text-base">
-          {t('notices.all.description')}
+          {t(`notices.${type === 'urgent' ? 'deadline' : type}.description`)}
         </div>
       </div>
       {children}

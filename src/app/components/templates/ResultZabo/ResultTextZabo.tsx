@@ -4,11 +4,13 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
+import { createTranslation } from '@/app/i18next';
+
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import { ResultZaboProps } from './ResultZabo';
 
-const ResultTextZabo = ({
+const ResultTextZabo = async ({
   title,
   body,
   createdAt,
@@ -20,9 +22,10 @@ const ResultTextZabo = ({
 
   id,
   lng,
-  t,
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
+
+  const { t } = await createTranslation(lng);
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>
@@ -40,12 +43,20 @@ const ResultTextZabo = ({
             </Trans>
           </div>
           <div className="text-start text-3xl font-bold">
-            <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            {searchQuery ? (
+              <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            ) : (
+              title
+            )}
           </div>
 
           <div className="flex items-center gap-0.5">
             <div className="text-lg font-bold">
-              <HighlightedText query={searchQuery}>{author}</HighlightedText>
+              {searchQuery ? (
+                <HighlightedText query={searchQuery}>{author}</HighlightedText>
+              ) : (
+                author
+              )}
             </div>
             {/* organization here (for futer update) */}
           </div>

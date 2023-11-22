@@ -106,6 +106,14 @@
     },
     "academic": {
       "label": "📰 Academic Notices"
+    },
+    "written": {
+      "label": "✍️ My Notices",
+      "description": "Here are the notices you've written."
+    },
+    "reminded": {
+      "label": "🔔 Reminded Notices",
+      "description": "Here are the notices you've set reminders for."
     }
   },
   "mypage": {

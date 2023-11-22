@@ -1,40 +1,29 @@
+import { ComponentProps, Suspense } from 'react';
+
 import { getAllNotices } from '@/api/notice/notice-server';
 import Analytics from '@/app/components/atoms/Analytics';
 import Pagination from '@/app/components/molecules/Pagination';
 import ResultZabo from '@/app/components/templates/ResultZabo/ResultZabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
+import SearchNoResult from '@/assets/search-no-result.svg';
 
-import SearchNoResult from './assets/searchNoResult.svg';
+import LoadingCatAnimation from '../LoadingCatAnimation';
 
-const Result = async ({
+const Results = async ({
   lng,
+  logName,
+  page,
   ...props
-}: PropsWithLng<{
-  search: string;
-  tags: string[];
-  page: string | number;
-  limit: number;
-}>) => {
+}: ComponentProps<typeof SearchResults>) => {
+  const pageAsNumber = Number.parseInt(page as string);
   const { t } = await createTranslation(lng);
-  const pageAsNumber = Number.parseInt(props.page as string);
-
   const data = await getAllNotices({
     ...props,
     offset: pageAsNumber * props.limit,
   }).catch(() => ({ list: [], total: 0 }));
 
-  const pagination = (
-    <div className="flex justify-center">
-      <Pagination
-        pages={Math.ceil(data.total / props.limit)}
-        page={pageAsNumber}
-      />
-    </div>
-  );
-
   return (
     <>
-      {pagination}
       {data?.list.length !== 0 && (
         <div className="flex flex-col flex-nowrap gap-[10px]">
           <div className="h-8" />
@@ -48,17 +37,11 @@ const Result = async ({
               }}
               key={notice.id}
             >
-              <ResultZabo
-                {...notice}
-                t={t}
-                searchQuery={props.search}
-                lng={lng}
-              />
+              <ResultZabo {...notice} searchQuery={props.search} lng={lng} />
             </Analytics>
           ))}
         </div>
       )}
-
       {props.search && data.list.length === 0 && (
         <div className="flex w-full justify-center">
           <div className="align-center flex flex-col justify-center">
@@ -73,6 +56,46 @@ const Result = async ({
           </div>
         </div>
       )}
+    </>
+  );
+};
+
+const SearchResults = async ({
+  lng,
+  page,
+  ...props
+}: PropsWithLng<
+  {
+    logName?: string;
+    page: string | number;
+    limit: number;
+  } & Parameters<typeof getAllNotices>[0]
+>) => {
+  const pageAsNumber = Number.parseInt(page as string);
+
+  const data = await getAllNotices({
+    ...props,
+    limit: 0,
+  }).catch(() => ({ list: [], total: 0 }));
+
+  const pagination = (
+    <div className="flex justify-center">
+      <Pagination
+        pages={Math.ceil(data.total / props.limit)}
+        page={pageAsNumber}
+      />
+    </div>
+  );
+
+  return (
+    <>
+      {pagination}
+      <Suspense
+        key={JSON.stringify(page)}
+        fallback={<LoadingCatAnimation lng={lng} />}
+      >
+        <Results lng={lng} page={page} {...props} />
+      </Suspense>
 
       <div className="h-8" />
       {pagination}
@@ -80,4 +103,4 @@ const Result = async ({
   );
 };
 
-export default Result;
+export default SearchResults;

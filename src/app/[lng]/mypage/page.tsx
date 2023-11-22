@@ -36,7 +36,7 @@ export default async function MyPage({
               lng={lng}
               title={t('mypage.myNotice')}
               articles={ownNotice}
-              link={''}
+              link={`/${lng}/section/written`}
             />
           </div>
           <div className="xl:p-50 p-0">
@@ -44,7 +44,7 @@ export default async function MyPage({
               lng={lng}
               title={t('mypage.remindNotice')}
               articles={remindedNotice}
-              link={''}
+              link={`/${lng}/section/reminded`}
             />
           </div>
         </div>

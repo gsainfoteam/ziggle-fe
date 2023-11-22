@@ -54,9 +54,12 @@ const MypageTable = async ({
             <div className="m-5 text-xl font-bold text-white">{title}</div>
           </div>
           <div className="rounded-tr-10 w-1/4 text-right">
-            {/* <div className="text-s text-regular flex h-full items-end justify-end text-white">
+            <Link
+              href={link}
+              className="text-s text-regular flex h-full items-end justify-end text-white"
+            >
               <UnderLinedText>{t('mypage.totalList')}</UnderLinedText>
-            </div> */}
+            </Link>
           </div>
         </div>
 

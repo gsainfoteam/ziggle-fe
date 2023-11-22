@@ -5,13 +5,14 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import GetHighlightedText from '@/utils/GetHighlightedText';
+import { createTranslation } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
+import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
 import { ResultImageZaboProps } from './ResultZabo';
 
-const ResultImageZabo = ({
+const ResultImageZabo = async ({
   title,
   createdAt: rawCreatedAt,
   views,
@@ -23,10 +24,11 @@ const ResultImageZabo = ({
   imageUrl,
   id,
   lng,
-  t,
 }: ResultImageZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
+
+  const { t } = await createTranslation(lng);
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>
@@ -49,21 +51,25 @@ const ResultImageZabo = ({
                 {{ dueAt: dayjs(deadline).format('LLLL') }}
               </Trans>
             </p>
-            <GetHighlightedText
-              className={'text-start text-xl font-bold md:text-3xl'}
-              text={title}
-              query={searchQuery}
-              highlightColor={'primary'}
-            />
+            <p className="text-start text-xl font-bold md:text-3xl">
+              {searchQuery ? (
+                <HighlightedText query={searchQuery}>{title}</HighlightedText>
+              ) : (
+                title
+              )}
+            </p>
             <div className={'h-1'} />
 
             <div className={'gap-2'}>
-              <GetHighlightedText
-                text={author}
-                query={searchQuery}
-                className={'text-start text-sm font-bold md:text-lg'}
-                highlightColor={'primary'}
-              />
+              <p className="text-start text-sm font-bold md:text-lg">
+                {searchQuery ? (
+                  <HighlightedText query={searchQuery}>
+                    {author}
+                  </HighlightedText>
+                ) : (
+                  author
+                )}
+              </p>
             </div>
             <div className={'my-0.5 flex flex-nowrap gap-2'}>
               {tags.map((tag, index) => (

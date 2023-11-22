@@ -3,16 +3,15 @@
 import 'server-only';
 
 import { Notice } from '@/api/notice/notice';
-import { PropsWithT, T } from '@/app/i18next';
-import { Locale } from '@/app/i18next/settings';
+import { PropsWithLng } from '@/app/i18next';
 
 import ResultImageZabo from './ResultImageZabo';
 import ResultTextZabo from './ResultTextZabo';
 
-export type ResultZaboProps = PropsWithT<
+export type ResultZaboProps = PropsWithLng<
   Notice & {
-    searchQuery: string;
-    lng: Locale;
+    searchQuery?: string;
+    logName?: string;
   }
 >;
 

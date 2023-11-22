@@ -103,6 +103,14 @@
     },
     "academic": {
       "label": "📰 학사공지"
+    },
+    "written": {
+      "label": "✍️ 내가 게시한 공지",
+      "description": "내가 작성한 공지들을 모아서 보여드려요"
+    },
+    "reminded": {
+      "label": "🔔 리마인더 설정한 공지",
+      "description": "알림을 설정한 공지들을 모아서 보여드려요"
     }
   },
   "mypage": {
