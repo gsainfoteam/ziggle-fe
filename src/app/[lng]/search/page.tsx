@@ -1,6 +1,3 @@
-import { Suspense } from 'react';
-
-import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
@@ -33,19 +30,14 @@ const SearchPage = async ({
         </div>
 
         {search ? (
-          <Suspense
-            key={[search, tags.join(',')].join(',')}
-            fallback={<LoadingCatAnimation lng={lng} />}
-          >
-            <SearchResults
-              logName="SearchPage"
-              lng={lng}
-              search={search}
-              limit={ITEMS_PER_CALL}
-              page={searchParams.page}
-              tags={tags}
-            />
-          </Suspense>
+          <SearchResults
+            logName="SearchPage"
+            lng={lng}
+            search={search}
+            limit={ITEMS_PER_CALL}
+            page={searchParams.page}
+            tags={tags}
+          />
         ) : (
           <div className="flex w-full justify-center">
             <div className="flex flex-col items-center">

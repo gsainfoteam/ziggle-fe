@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
 
-import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import SearchResults from '@/app/components/templates/SearchResults';
 import { PropsWithLng } from '@/app/i18next';
 
@@ -22,25 +20,23 @@ const AllNoticePage = async ({
   const pageNumber = Number(page) || 0;
 
   return (
-    <Suspense key={pageNumber} fallback={<LoadingCatAnimation lng={lng} />}>
-      <SearchResults
-        logName={`${type}-notice`}
-        limit={30}
-        lng={lng}
-        page={pageNumber}
-        my={
-          type === 'written'
-            ? 'own'
-            : type === 'reminded'
-              ? 'reminders'
-              : undefined
-        }
-        tags={tags.includes(type) ? [type] : undefined}
-        orderBy={
-          type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : undefined
-        }
-      />
-    </Suspense>
+    <SearchResults
+      logName={`${type}-notice`}
+      limit={30}
+      lng={lng}
+      page={pageNumber}
+      my={
+        type === 'written'
+          ? 'own'
+          : type === 'reminded'
+            ? 'reminders'
+            : undefined
+      }
+      tags={tags.includes(type) ? [type] : undefined}
+      orderBy={
+        type === 'urgent' ? 'deadline' : type === 'hot' ? 'hot' : undefined
+      }
+    />
   );
 };
 
