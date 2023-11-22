@@ -1,8 +1,10 @@
+'use server';
+
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail, Tag } from '@/api/notice/notice';
-import { PropsWithLng, PropsWithT } from '@/app/i18next';
+import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import { T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
@@ -12,7 +14,7 @@ import DDay from '../../molecules/DDay';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
-const NoticeInfo = ({
+const NoticeInfo = async ({
   currentDeadline: deadline,
   contents,
   author,
@@ -21,7 +23,7 @@ const NoticeInfo = ({
   tags = [],
   lng,
 }: PropsWithLng<NoticeInfoProps>) => {
-  const { t } = useTranslation(lng);
+  const { t } = await createTranslation(lng);
   const localeContents = getLocaleContents(contents, lng);
 
   return (
