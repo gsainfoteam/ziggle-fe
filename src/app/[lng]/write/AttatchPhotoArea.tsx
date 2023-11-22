@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 
 import Button from '@/app/components/atoms/Button';
 import { PropsWithT } from '@/app/i18next';
@@ -7,29 +7,34 @@ import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 
 import AttatchedPhoto from './AttatchedPhoto';
 
+export interface FileWithUrl {
+  file: File;
+  url: string;
+}
+
 interface AttatchPhotoAreaProps {
-  files: File[];
-  setFiles: (files: File[]) => void;
+  photos: FileWithUrl[];
+  setPhotos: Dispatch<SetStateAction<FileWithUrl[]>>;
 }
 
 const AttatchPhotoArea = ({
-  files,
-  setFiles,
+  photos,
+  setPhotos,
   t,
 }: PropsWithT<AttatchPhotoAreaProps>) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    return () => {
-      files.forEach((file) => URL.revokeObjectURL(URL.createObjectURL(file)));
-    };
-  }, [files]);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const droppedfiles = Array.from(event.dataTransfer.files);
 
-    setFiles([...files, ...droppedfiles]);
+    setPhotos((prev) => [
+      ...prev,
+      ...droppedfiles.map((file) => ({
+        file,
+        url: URL.createObjectURL(file),
+      })),
+    ]);
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -40,7 +45,13 @@ const AttatchPhotoArea = ({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedFiles = Array.from(event.target.files || []);
-    setFiles([...files, ...selectedFiles]);
+    setPhotos((prev) => [
+      ...prev,
+      ...selectedFiles.map((file) => ({
+        file,
+        url: URL.createObjectURL(file),
+      })),
+    ]);
     event.target.value = '';
   };
 
@@ -65,15 +76,18 @@ const AttatchPhotoArea = ({
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
-        {files.length > 0 ? (
+        {photos.length > 0 ? (
           <div className="grid w-full grid-cols-3 gap-1.5 p-1.5 md:gap-3 md:p-2.5">
-            {files.map((file, index) => (
+            {photos.map((file, index) => (
               <AttatchedPhoto
                 key={index}
-                src={URL.createObjectURL(file)}
+                src={file.url}
                 onDeleteClick={() => {
-                  setFiles(files.filter((f) => f !== file));
-                  URL.revokeObjectURL(URL.createObjectURL(file));
+                  setPhotos((prev) => [
+                    ...prev.slice(0, index),
+                    ...prev.slice(index + 1),
+                  ]);
+                  URL.revokeObjectURL(file.url);
                 }}
               />
             ))}
