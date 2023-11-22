@@ -34,7 +34,7 @@ interface NoticeBase {
   tags: Tag[];
   logName?: string;
   contents: Content[];
-  files: NoticeFile[] | null;
+  files?: NoticeFile[] | null;
   body: string;
 }
 
