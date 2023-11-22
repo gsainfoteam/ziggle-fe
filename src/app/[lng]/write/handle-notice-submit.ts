@@ -42,55 +42,56 @@ const handleNoticeSubmit = async ({
   const TITLE_MAX_LENGTH = 50;
   const BODY_MAX_LENGTH = 3000;
 
+  const warningSwal = WarningSwal(t('write.alerts.title'), t);
+
   if (!title) {
-    WarningSwal(t('write.alerts.title'), t);
+    warningSwal(t('write.alerts.title'));
     return;
   }
 
   if (noticeLanguage === 'both' && !enTitle) {
-    WarningSwal(t('write.alerts.enTitle'), t);
+    warningSwal(t('write.alerts.enTitle'));
     return;
   }
 
   if (title.length > TITLE_MAX_LENGTH) {
-    WarningSwal(
+    warningSwal(
       t('write.alerts.titleLengthLessThan', {
         titleMaxLength: TITLE_MAX_LENGTH,
       }),
-      t,
     );
     return;
   }
 
   if (deadline && deadline < new Date()) {
-    WarningSwal(t('write.alerts.deadline'), t);
+    warningSwal(t('write.alerts.deadline'));
     return;
   }
 
   switch (noticeLanguage) {
     case 'ko':
       if (!koreanBody) {
-        WarningSwal(t('write.alerts.body'), t);
+        warningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'en':
       if (!englishBody) {
-        WarningSwal(t('write.alerts.body'), t);
+        warningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'both':
       if (!koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.body'), t);
+        warningSwal(t('write.alerts.body'));
         return;
       }
       if (!koreanBody && englishBody) {
-        WarningSwal(t('write.alerts.koreanBody'), t);
+        warningSwal(t('write.alerts.koreanBody'));
         return;
       }
       if (koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.englishBody'), t);
+        warningSwal(t('write.alerts.englishBody'));
         return;
       }
       break;
@@ -99,7 +100,7 @@ const handleNoticeSubmit = async ({
   switch (noticeLanguage) {
     case 'ko':
       if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -107,14 +108,13 @@ const handleNoticeSubmit = async ({
               length: koreanBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
-          t,
         );
         return;
       }
       break;
     case 'en':
       if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -122,7 +122,6 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
-          t,
         );
         return;
       }
@@ -134,7 +133,7 @@ const handleNoticeSubmit = async ({
         englishBody &&
         englishBody.length > BODY_MAX_LENGTH
       ) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bothBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -146,11 +145,10 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
-          t,
         );
         return;
       } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.koreanBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -158,12 +156,11 @@ const handleNoticeSubmit = async ({
               length: koreanBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
-          t,
         );
 
         return;
       } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.englishBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -171,7 +168,6 @@ const handleNoticeSubmit = async ({
               length: englishBody.length,
               maxLength: BODY_MAX_LENGTH,
             }),
-          t,
         );
 
         return;

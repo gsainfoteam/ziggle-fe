@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { Content } from '@/api/notice/notice';
-import { T } from '@/app/i18next';
+import { PropsWithLng, T } from '@/app/i18next';
 import AddIcon from '@/assets/icons/add.svg';
 import getLocaleContents from '@/utils/getLocaleContents';
 
@@ -10,9 +10,12 @@ interface AdditionalNoticesProps {
   t: T;
 }
 
-const AdditionalNotices = async ({ contents, t }: AdditionalNoticesProps) => {
-  const language = t('lang');
-  const localeContents = getLocaleContents(contents, language);
+const AdditionalNotices = async ({
+  contents,
+  t,
+  lng,
+}: AdditionalNoticesProps & PropsWithLng) => {
+  const localeContents = getLocaleContents(contents, lng);
 
   return (
     <div className={'flex flex-col gap-4'}>

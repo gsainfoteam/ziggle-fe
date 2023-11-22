@@ -6,7 +6,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { DELETE_NOTICE } from '@/api/notice/notice';
-import { T } from '@/app/i18next';
+import { PropsWithT, T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import AddIcon from '@/assets/icons/add.svg';
@@ -36,7 +36,7 @@ const AuthorActions = ({
   const handleRemoveNotice = ({
     noticeId,
     t,
-  }: { noticeId: number } & { t: T }) => {
+  }: { noticeId: number } & PropsWithT) => {
     Swal.fire({
       text: t('zabo.authorActions.removeSure'),
       icon: 'warning',
@@ -48,9 +48,19 @@ const AuthorActions = ({
         deleteNotice(noticeId)
           .then(() => {
             router.push(`/${lng}`);
+            Swal.fire({
+              text: t('write.alerts.deleteSuccess'),
+              icon: 'success',
+              confirmButtonText: t('alertResponse.confirm'),
+            });
           })
           .catch((error) => {
             console.error(error);
+            Swal.fire({
+              text: t('write.alerts.deleteFail'),
+              icon: 'error',
+              confirmButtonText: t('alertResponse.confirm'),
+            });
           });
       }
     });

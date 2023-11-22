@@ -46,14 +46,16 @@ const AddAdditionalNotice = ({
 
   const { refresh } = useRouter();
 
+  const warningSwal = WarningSwal(t);
+
   const handleSubmit = async () => {
     if (!content) {
-      WarningSwal(t('write.alerts.body'), t);
+      warningSwal(t('write.alerts.body'), t);
       return;
     }
 
     if (supportEnglish && !englishContent) {
-      WarningSwal(t('write.alerts.englishBody'), t);
+      warningSwal(t('write.alerts.englishBody'), t);
       return;
     }
 

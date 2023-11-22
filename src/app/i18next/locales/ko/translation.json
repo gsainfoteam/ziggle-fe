@@ -235,6 +235,8 @@
       "submittingNotice": "공지를 작성 중입니다",
       "submitSuccess": "공지가 성공적으로 작성되었습니다",
       "submitFail": "공지 작성에 실패했습니다",
+      "deleteSuccess": "공지가 성공적으로 삭제되었습니다",
+      "deleteFail": "공지 삭제에 실패했습니다",
       "tagCreationFail": "태그 생성에 실패했습니다"
     }
   }

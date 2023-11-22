@@ -23,19 +23,22 @@ export const generateMetadata = async (
   {
     params: { id },
     searchParams,
-  }: { params: { id: string }; searchParams: { writeEn: string } },
+  }: { params: { id: string }; searchParams: { writeEn: string; lng: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
   const notice = await getNotice(Number.parseInt(id));
   const previousImages = (await parent).openGraph?.images ?? [];
+
+  const localeContents = getLocaleContents(notice.contents, searchParams.lng);
+
   return {
-    title: notice.contents[0].title,
-    description: notice.contents[0].body.slice(0, 100).replace(/\n/g, ' '),
+    title: localeContents[0].title,
+    description: localeContents[0].body.slice(0, 100).replace(/\n/g, ' '),
     keywords: notice.tags.map((tag) => tag.name),
     authors: [{ name: notice.author }],
     openGraph: {
-      title: notice.contents[0].title,
-      description: notice.contents[0].body.slice(0, 100).replace(/\n/g, ' '),
+      title: localeContents[0].title,
+      description: localeContents[0].body.slice(0, 100).replace(/\n/g, ' '),
       url: `https://ziggle.gistory.me/notice/${id}`,
       images: [...notice.imagesUrl, ...previousImages],
     },
@@ -93,7 +96,7 @@ const DetailedNoticePage = async ({
         <Content content={localContents[0].body} />
 
         <div className="h-10" />
-        <AddtionalNotices contents={localContents} t={t} />
+        <AddtionalNotices contents={localContents} t={t} lng={lng} />
 
         {user && user.id === notice.authorId && isAdditionalNoticeShow && (
           <>

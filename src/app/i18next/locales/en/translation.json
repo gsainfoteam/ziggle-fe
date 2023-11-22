@@ -238,6 +238,8 @@
       "submittingNotice": "Creating a notice...",
       "submitSuccess": "The notice was submitted successfully",
       "submitFail": "Failed to submit notice",
+      "deleteSuccess": "The notice was deleted successfully",
+      "deleteFail": "Failed to delete notice",
       "tagCreationFail": "Failed to create tag"
     }
   }

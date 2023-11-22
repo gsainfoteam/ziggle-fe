@@ -12,6 +12,7 @@ import sendLog from '@/api/log/send-log';
 import { ATTACH_INTERNATIONAL_NOTICE } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import ContentIcon from '@/assets/icons/content.svg';
@@ -35,7 +36,7 @@ const WriteEnglishNotice = ({
   noticeId,
   deadline,
   lng,
-}: WriteEnglishNoticeProps & { lng: Locale }) => {
+}: WriteEnglishNoticeProps & PropsWithLng) => {
   const { t } = useTranslation(lng);
 
   const [title, setTitle] = useState<string>('');
@@ -44,11 +45,13 @@ const WriteEnglishNotice = ({
 
   const { refresh } = useRouter();
 
+  const warningSwal = WarningSwal(t);
+
   const handleSubmit = async () => {
     const englishContent = englishEditorRef.current?.getContent();
 
     if (!englishContent) {
-      WarningSwal(t('write.alerts.body'), t);
+      warningSwal(t('write.alerts.body'));
       return;
     }
 

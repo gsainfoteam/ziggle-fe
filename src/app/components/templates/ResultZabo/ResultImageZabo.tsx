@@ -26,11 +26,9 @@ const ResultImageZabo = async ({
   id,
   lng,
 }: ResultImageZaboProps) => {
-  const { t, i18n } = await createTranslation(lng);
+  const { t } = await createTranslation(lng);
 
-  const language = i18n.language;
-
-  const localeContents = getLocaleContents(contents, language);
+  const localeContents = getLocaleContents(contents, lng);
 
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
