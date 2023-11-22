@@ -20,7 +20,7 @@ const UnderLinedText = ({ text, action }: UnderLinedTextProps) => {
   return (
     <form>
       <button
-        className="text-regular w-50 text-secondayText m-5 border-b border-gray-500"
+        className="text-regular w-50 m-5 border-b border-gray-500 text-secondaryText"
         formAction={action}
       >
         {text}
@@ -48,10 +48,10 @@ export default async function MypageProfile({
           </h3>
         </div>
         <div className="flex flex-col items-center">
-          <div className="text-secondayText mb-8 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl">
+          <div className="mb-8 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
             {id}
           </div>
-          <div className="text-secondayText mb-0 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl">
+          <div className="mb-0 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
             {email}
           </div>
         </div>

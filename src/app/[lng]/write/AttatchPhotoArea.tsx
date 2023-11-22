@@ -72,7 +72,7 @@ const AttatchPhotoArea = ({
       <label htmlFor="file-input" />
 
       <div
-        className="border-secondayText flex items-center justify-center border-2 border-dashed"
+        className="flex items-center justify-center border-2 border-dashed border-secondaryText"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
@@ -105,9 +105,9 @@ const AttatchPhotoArea = ({
           </div>
         ) : (
           <div className="flex flex-col items-center py-8 md:py-12">
-            <AddIcon className="fill-secondayText w-[45px] md:w-[90px]" />
+            <AddIcon className="w-[45px] fill-secondaryText md:w-[90px]" />
 
-            <div className="text-secondayText text-base font-bold md:text-2xl">
+            <div className="text-base font-bold text-secondaryText md:text-2xl">
               {t('write.dragToAddPhoto')}
             </div>
 
