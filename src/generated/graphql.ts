@@ -99,7 +99,7 @@ export type Notice = {
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
   deletedAt?: Maybe<Scalars['Date']['output']>;
-  files: Array<NoticeFile>;
+  files?: Maybe<Array<NoticeFile>>;
   id: Scalars['Int']['output'];
   imageUrl?: Maybe<Scalars['String']['output']>;
   tags: Array<Tag>;
