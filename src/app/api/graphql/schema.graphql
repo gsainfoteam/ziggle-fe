@@ -36,7 +36,7 @@ type Notice {
   tags: [Tag!]!
   imageUrl: String
   contents: [Content!]!
-  files: [NoticeFile!]!
+  files: [NoticeFile!]
 }
 
 type DetailedNotice {
@@ -52,7 +52,7 @@ type DetailedNotice {
   tags: [Tag!]!
   imagesUrl: [String!]!
   contents: [Content!]!
-  files: [NoticeFile!]!
+  files: [NoticeFile!]
   reminder: Boolean!
 }
 

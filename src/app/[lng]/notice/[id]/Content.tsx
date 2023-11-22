@@ -5,7 +5,6 @@ interface ContentProps {
 }
 
 const Content = ({ content }: ContentProps) => {
-  console.log(content);
   return (
     <div
       className={[

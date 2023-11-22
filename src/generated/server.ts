@@ -38,7 +38,7 @@ export type DetailedNotice = {
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
   deletedAt?: Maybe<Scalars['Date']['output']>;
-  files: Array<NoticeFile>;
+  files?: Maybe<Array<NoticeFile>>;
   id: Scalars['Int']['output'];
   imagesUrl: Array<Scalars['String']['output']>;
   reminder: Scalars['Boolean']['output'];
@@ -100,7 +100,7 @@ export type Notice = {
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
   deletedAt?: Maybe<Scalars['Date']['output']>;
-  files: Array<NoticeFile>;
+  files?: Maybe<Array<NoticeFile>>;
   id: Scalars['Int']['output'];
   imageUrl?: Maybe<Scalars['String']['output']>;
   tags: Array<Tag>;
@@ -283,7 +283,7 @@ export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends 
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  files?: Resolver<Array<ResolversTypes['NoticeFile']>, ParentType, ContextType>;
+  files?: Resolver<Maybe<Array<ResolversTypes['NoticeFile']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   imagesUrl?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   reminder?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
@@ -307,7 +307,7 @@ export type NoticeResolvers<ContextType = MyContext, ParentType extends Resolver
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  files?: Resolver<Array<ResolversTypes['NoticeFile']>, ParentType, ContextType>;
+  files?: Resolver<Maybe<Array<ResolversTypes['NoticeFile']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
