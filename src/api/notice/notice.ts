@@ -111,6 +111,7 @@ export const GET_NOTICES = gql(`
         views
         body
         currentDeadline
+        createdAt
         author
         imageUrl
         tags {
