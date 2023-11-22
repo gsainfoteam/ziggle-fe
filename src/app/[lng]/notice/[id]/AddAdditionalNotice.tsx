@@ -1,5 +1,9 @@
 'use client';
 
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+
 import { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -110,7 +114,7 @@ const AddAdditionalNotice = ({
         </p>
       </div>
       {originallyHasDeadline && (
-        <div className={'my-2 flex flex-nowrap items-center gap-[10px]'}>
+        <div className={'my-2 ml-8 flex flex-nowrap items-center gap-[10px]'}>
           <Checkbox
             checked={hasDeadline}
             onChange={(event) => {
@@ -131,35 +135,47 @@ const AddAdditionalNotice = ({
           )}
         </div>
       )}
-      <div className={'flex flex-col'}>
-        <textarea
-          className={
-            'mb-3 mt-1 w-full resize-none border-none text-xl outline-none dark:bg-transparent dark:text-white'
-          }
-          name={'searchQuery'}
-          placeholder={t('zabo.additionalNotices.additionalNoticePlaceholder')}
-          rows={3}
-          value={content}
-          onChange={(event) => {
-            setContent(event.target.value);
-          }}
-        />
-
-        {supportLanguage.includes('en') && (
+      <div className={'flex flex-col gap-2'}>
+        <div>
+          <div className="ml-8 text-lg font-bold">
+            {t('zabo.additionalNotices.koreanAdditionalNotice')}
+          </div>
           <textarea
             className={
-              'mb-3 mt-1 w-full resize-none border-none text-xl outline-none dark:bg-transparent dark:text-white'
+              'mb-3 ml-8 mt-1 w-full resize-none border-none text-base outline-none dark:bg-transparent dark:text-white'
             }
             name={'searchQuery'}
             placeholder={t(
-              'zabo.additionalNotices.enAdditionalNoticePlaceholder',
+              'zabo.additionalNotices.additionalNoticePlaceholder',
             )}
             rows={3}
-            value={englishContent}
+            value={content}
             onChange={(event) => {
-              setEnglishContent(event.target.value);
+              setContent(event.target.value);
             }}
           />
+        </div>
+
+        {supportLanguage.includes('en') && (
+          <div>
+            <div className="ml-8 text-lg font-bold">
+              {t('zabo.additionalNotices.englishAdditionalNotice')}
+            </div>
+            <textarea
+              className={
+                'mb-3 ml-8 mt-1 w-full resize-none border-none text-base outline-none dark:bg-transparent dark:text-white'
+              }
+              name={'searchQuery'}
+              placeholder={t(
+                'zabo.additionalNotices.enAdditionalNoticePlaceholder',
+              )}
+              rows={3}
+              value={englishContent}
+              onChange={(event) => {
+                setEnglishContent(event.target.value);
+              }}
+            />
+          </div>
         )}
       </div>
 
