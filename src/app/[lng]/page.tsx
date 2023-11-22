@@ -15,10 +15,10 @@ export default async function Home({
   const [deadline, hot, event, recruit, general, academic] = await Promise.all([
     getAllNotices({ orderBy: 'deadline' }),
     getAllNotices({ orderBy: 'hot' }),
-    getAllNotices({ tags: ['event'] }),
-    getAllNotices({ tags: ['recruit'] }),
-    getAllNotices({ tags: ['general'] }),
-    getAllNotices({ tags: ['academic'] }),
+    getAllNotices({ tags: ['event'], orderBy: 'recent' }),
+    getAllNotices({ tags: ['recruit'], orderBy: 'recent' }),
+    getAllNotices({ tags: ['general'], orderBy: 'recent' }),
+    getAllNotices({ tags: ['academic'], orderBy: 'recent' }),
   ]);
 
   return (
