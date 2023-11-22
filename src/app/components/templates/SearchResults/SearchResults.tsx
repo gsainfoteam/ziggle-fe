@@ -96,7 +96,6 @@ const SearchResults = async ({
       >
         <Results lng={lng} page={page} {...props} />
       </Suspense>
-
       <div className="h-8" />
       {pagination}
     </>
