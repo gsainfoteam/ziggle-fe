@@ -25,7 +25,7 @@ import TypeIcon from '@/assets/icons/type.svg';
 
 import AttatchPhotoArea from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
-import handleNoticeSubmit from './HandleNoticeSubmit';
+import handleNoticeSubmit from './handle-notice-submit';
 import TagInput, { Tag } from './TagInput';
 import TinyMCEEditor from './TinyMCEEditor';
 
