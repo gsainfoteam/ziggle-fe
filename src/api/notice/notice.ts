@@ -34,7 +34,7 @@ interface NoticeBase {
   tags: Tag[];
   logName?: string;
   contents: Content[];
-  files: NoticeFile[];
+  files?: NoticeFile[];
   body: string;
 }
 
@@ -105,13 +105,15 @@ export const getNotice = async (id: number) =>
 
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {
-    notices(offset: $offset, limit: $limit) {
+    notices(offset: $offset, limit: $limit, orderBy: RECENT) {
       list {
         id
         views
         body
         currentDeadline
         createdAt
+        updatedAt
+        deletedAt
         author
         imageUrl
         tags {

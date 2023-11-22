@@ -52,7 +52,7 @@ type DetailedNotice {
   tags: [Tag!]!
   imagesUrl: [String!]!
   contents: [Content!]!
-  files: [NoticeFile!]!
+  files: [NoticeFile!]
   reminder: Boolean!
 }
 

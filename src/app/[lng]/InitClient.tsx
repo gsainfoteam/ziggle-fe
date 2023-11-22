@@ -10,6 +10,9 @@ import { PropsWithLng } from '../i18next';
 
 const apolloCache = new InMemoryCache({
   typePolicies: {
+    Content: {
+      keyFields: false,
+    },
     Query: {
       fields: {
         notices: {
