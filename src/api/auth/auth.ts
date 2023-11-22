@@ -2,6 +2,7 @@
 
 import 'server-only';
 
+import { AxiosError } from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -31,7 +32,15 @@ interface UserResponse {
   student_id: string;
 }
 
-export const auth = async () => {
+interface User {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  studentId: string;
+}
+
+export const auth = async (): Promise<User | null> => {
   const cookieStore = cookies();
   const accessToken = cookieStore.get('access_token');
   if (!accessToken) return null;
