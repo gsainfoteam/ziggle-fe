@@ -84,11 +84,11 @@ export const getAllNotices = async (
     ...data,
     list: data.list.map(({ imageUrl, currentDeadline, ...notice }) => ({
       ...notice,
-      currentDeadline: currentDeadline || null,
-      imageUrl: imageUrl || null,
+      currentDeadline: currentDeadline ?? null,
+      imageUrl: imageUrl ?? null,
       contents: notice.contents.map(({ deadline, ...content }) => ({
         ...content,
-        deadline: deadline || null,
+        deadline: deadline ?? null,
       })),
     })),
   }));
