@@ -18,7 +18,6 @@ export const getAllNotices = async (
       ...data,
       list: data.list.map(({ imageUrl, ...notice }) => ({
         ...notice,
-        deadline: notice.deadline ? notice.deadline : null,
         imageUrl: imageUrl ? imageUrl : null,
       })),
     }));

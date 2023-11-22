@@ -1,24 +1,31 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+import getLocaleContents from '@/utils/getLocaleContents';
+
 import DDay from '../../molecules/DDay';
 import { TextZaboProps, ZaboOrigin } from './Zabo';
 
 const TextZabo = <Origin extends ZaboOrigin>({
-  title,
-  body,
+  contents,
   createdAt,
   views,
   author,
-  deadline: rawDeadline,
+  currentDeadline: rawDeadline,
   t,
   height,
   width,
-}: TextZaboProps<Origin>) => {
+  lng,
+}: TextZaboProps<Origin> & PropsWithLng) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
+  const localContents = getLocaleContents(contents, lng);
+  const title = localContents[0].title;
+
   const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;
 
   return (
@@ -55,7 +62,9 @@ const TextZabo = <Origin extends ZaboOrigin>({
         >
           {title}
         </div>
-        <div className="overflow-hidden text-lg font-medium">{body}</div>
+        <div className="overflow-hidden text-lg font-medium">
+          {localContents[0].body}
+        </div>
       </div>
       <div className="flex flex-col gap-2.5">
         <div className="flex text-sm font-medium text-secondaryText">

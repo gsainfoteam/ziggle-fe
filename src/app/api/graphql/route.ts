@@ -2,6 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import { NextRequest } from 'next/server';
 
+import { Locale } from '@/app/i18next/settings';
 import { Resolvers } from '@/generated/server';
 
 import NoticesAPI from './notices-api';
@@ -44,6 +45,26 @@ const resolvers: Resolvers = {
         { title, body, deadline, tags, images },
         accessToken!,
       ),
+    attachInternationalNotice: (
+      _,
+      { title, body, deadline, noticeId, contentId, lang },
+      { dataSources, accessToken },
+    ) =>
+      dataSources.noticesAPI.attachInternationalNotice(
+        { title, body, deadline, noticeId, contentId, lang: lang as Locale },
+        accessToken!,
+      ),
+    createAdditionalNotice: (
+      _,
+      { title, body, deadline, noticeId },
+      { dataSources, accessToken },
+    ) =>
+      dataSources.noticesAPI.createAdditionalNotice(
+        { title: title || undefined, body, deadline, noticeId },
+        accessToken!,
+      ),
+    deleteNotice: (_, { id }, { dataSources, accessToken }) =>
+      dataSources.noticesAPI.deleteNotice(id, accessToken!),
   },
 };
 

@@ -3,9 +3,13 @@ import Swal from 'sweetalert2';
 import { uploadImages } from '@/api/image/image';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { CREATE_NOTICE } from '@/api/notice/notice';
+import {
+  ATTACH_INTERNATIONAL_NOTICE,
+  CREATE_NOTICE,
+} from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
+import { WarningSwal } from '@/utils/swals';
 
 import { apolloClient } from '../InitClient';
 
@@ -13,6 +17,7 @@ type NoticeLanguage = 'ko' | 'en' | 'both';
 
 interface NoticeSubmitForm {
   title?: string;
+  enTitle?: string;
   deadline?: Date;
   noticeLanguage: NoticeLanguage;
   koreanBody?: string;
@@ -23,6 +28,7 @@ interface NoticeSubmitForm {
 
 const handleNoticeSubmit = async ({
   title,
+  enTitle,
   deadline,
   noticeLanguage,
   koreanBody,
@@ -36,22 +42,21 @@ const handleNoticeSubmit = async ({
   const TITLE_MAX_LENGTH = 50;
   const BODY_MAX_LENGTH = 3000;
 
-  const WarningSwal = (text: string) => {
-    Swal.fire({
-      text,
-      icon: 'warning',
-      confirmButtonText: t('write.alerts.confimationButtonText'),
-    });
-  };
+  const warningSwal = WarningSwal(t);
 
   if (!title) {
-    WarningSwal(t('write.alerts.body'));
+    warningSwal(t('write.alerts.title'));
+    return;
+  }
+
+  if (noticeLanguage === 'both' && !enTitle) {
+    warningSwal(t('write.alerts.enTitle'));
     return;
   }
 
   if (title.length > TITLE_MAX_LENGTH) {
-    WarningSwal(
-      t('write.alerts.bodyLengthLessThan', {
+    warningSwal(
+      t('write.alerts.titleLengthLessThan', {
         titleMaxLength: TITLE_MAX_LENGTH,
       }),
     );
@@ -59,34 +64,34 @@ const handleNoticeSubmit = async ({
   }
 
   if (deadline && deadline < new Date()) {
-    WarningSwal(t('write.alerts.deadline'));
+    warningSwal(t('write.alerts.deadline'));
     return;
   }
 
   switch (noticeLanguage) {
     case 'ko':
       if (!koreanBody) {
-        WarningSwal(t('write.alerts.body'));
+        warningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'en':
       if (!englishBody) {
-        WarningSwal(t('write.alerts.body'));
+        warningSwal(t('write.alerts.body'));
         return;
       }
       break;
     case 'both':
       if (!koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.body'));
+        warningSwal(t('write.alerts.body'));
         return;
       }
       if (!koreanBody && englishBody) {
-        WarningSwal(t('write.alerts.koreanBody'));
+        warningSwal(t('write.alerts.koreanBody'));
         return;
       }
       if (koreanBody && !englishBody) {
-        WarningSwal(t('write.alerts.englishBody'));
+        warningSwal(t('write.alerts.englishBody'));
         return;
       }
       break;
@@ -95,7 +100,7 @@ const handleNoticeSubmit = async ({
   switch (noticeLanguage) {
     case 'ko':
       if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -109,7 +114,7 @@ const handleNoticeSubmit = async ({
       break;
     case 'en':
       if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -128,7 +133,7 @@ const handleNoticeSubmit = async ({
         englishBody &&
         englishBody.length > BODY_MAX_LENGTH
       ) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.bothBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -143,7 +148,7 @@ const handleNoticeSubmit = async ({
         );
         return;
       } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.koreanBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -155,7 +160,7 @@ const handleNoticeSubmit = async ({
 
         return;
       } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-        WarningSwal(
+        warningSwal(
           t('write.alerts.englishBodyLengthLessThan', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
@@ -172,17 +177,6 @@ const handleNoticeSubmit = async ({
 
   const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
   if (!tagIds) return;
-
-  // need to remove log later
-  console.log(
-    title,
-    deadline,
-    noticeLanguage,
-    koreanBody,
-    englishBody,
-    tagIds,
-    images,
-  );
 
   Swal.fire({
     text: t('write.alerts.submittingNotice'),
@@ -202,15 +196,45 @@ const handleNoticeSubmit = async ({
     },
   });
 
-  const id = notice.data?.createNotice.id;
+  if (!notice.data?.createNotice) {
+    Swal.fire({
+      text: t('write.alerts.submitFail'),
+      icon: 'error',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+    return;
+  }
+
+  const { id, contents } = notice.data?.createNotice;
+
   if (!id) {
     Swal.fire({
       text: t('write.alerts.submitFail'),
       icon: 'error',
-      confirmButtonText: t('write.alerts.confimationButtonText'),
+      confirmButtonText: t('alertResponse.confirm'),
     });
     return;
   }
+
+  if (noticeLanguage === 'both') {
+    const englishNotice = await apolloClient.mutate({
+      mutation: ATTACH_INTERNATIONAL_NOTICE,
+      variables: {
+        lang: 'en',
+        title: enTitle || title,
+        deadline,
+        body: englishBody!,
+        noticeId: id,
+        contentId: contents[0].id,
+      },
+    });
+  }
+
+  Swal.fire({
+    text: t('write.alerts.submitSuccess'),
+    icon: 'success',
+    confirmButtonText: t('alertResponse.confirm'),
+  });
 
   return id;
 };
@@ -228,7 +252,7 @@ const handleTagSubmit = async (tags: string[], t: T) => {
         Swal.fire({
           text: t('write.alerts.tagCreationFail'),
           icon: 'error',
-          confirmButtonText: t('write.alerts.confimationButtonText'),
+          confirmButtonText: t('alertResponse.confirm'),
         });
         return;
       }

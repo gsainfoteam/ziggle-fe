@@ -53,7 +53,6 @@ export const GET = async (request: NextRequest) => {
     url.search = '';
     return NextResponse.redirect(url);
   } catch (e) {
-    console.log(e);
     return NextResponse.json({ error: 'Invalid code' }, { status: 400 });
   }
 };

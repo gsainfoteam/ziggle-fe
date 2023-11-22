@@ -44,6 +44,7 @@ export default function WritePage({
   const { push } = useRouter();
 
   const [title, setTitle] = useState('');
+  const [enTitle, setEnTitle] = useState('');
 
   const [hasDeadline, setHasDeadline] = useState(false);
   const [deadline, setDeadline] = useState<Date | null>(new Date());
@@ -81,6 +82,7 @@ export default function WritePage({
       deadline: hasDeadline ? deadline ?? undefined : undefined,
       noticeLanguage: isWriteKorean ? (isWriteEnglish ? 'both' : 'ko') : 'en',
       koreanBody,
+      enTitle,
       englishBody,
       tags: tags.map((tag) => tag.name),
       images: photos.map((image) => image.file),
@@ -229,13 +231,23 @@ export default function WritePage({
             <div className="mr-4 text-lg font-medium">
               {t('write.enterEnglishContent')}
             </div>
-            {isWriteKorean && (
-              <DeepLButton
-                t={t}
-                query={koreanEditorRef.current?.getContent()}
-              />
-            )}
+            {isWriteKorean && <DeepLButton t={t} editorRef={koreanEditorRef} />}
           </div>
+
+          <input
+            value={enTitle}
+            onChange={(e) => {
+              setEnTitle(e.target.value);
+            }}
+            className="content mb-4 mt-16 w-full p-0 text-3xl font-bold outline-none dark:bg-transparent"
+            type="text"
+            placeholder={t('write.writeTitle')}
+            onBlur={(e) => {
+              sendLog(LogEvents.noticeWritingPageTypeTitle, {
+                title: e.target.value,
+              });
+            }}
+          />
           <React.Suspense>
             <DynamicTinyMCEEditor editorRef={englishEditorRef} />
           </React.Suspense>

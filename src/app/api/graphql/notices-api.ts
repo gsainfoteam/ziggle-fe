@@ -6,6 +6,7 @@ import {
   Notices,
   NoticeSearchParams,
 } from '@/api/notice/notice';
+import { Locale } from '@/app/i18next/settings';
 
 export default class NoticesAPI extends RESTDataSource {
   override baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -44,5 +45,52 @@ export default class NoticesAPI extends RESTDataSource {
       body: data,
       headers: { Authorization: `Bearer ${token}` },
     });
+  }
+
+  async attachInternationalNotice(
+    data: {
+      title: string;
+      body: string;
+      deadline?: Date;
+      noticeId: number;
+      contentId: number;
+      lang: Locale;
+    },
+    token: string,
+  ) {
+    const { noticeId, contentId, ...body } = data;
+
+    return this.post<NoticeDetail>(`notice/${noticeId}/${contentId}/foreign`, {
+      body: body,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async createAdditionalNotice(
+    data: {
+      title?: string;
+      body: string;
+      deadline?: Date;
+      noticeId: number;
+    },
+    token: string,
+  ) {
+    const { noticeId, ...body } = data;
+
+    return this.post<NoticeDetail>(`notice/${noticeId}/additional`, {
+      body: body,
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async deleteNotice(id: number, token: string) {
+    try {
+      await this.delete(`notice/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }

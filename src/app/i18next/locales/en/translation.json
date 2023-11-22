@@ -1,4 +1,5 @@
 {
+  "lang": "en",
   "metadata": {
     "title": "Ziggle",
     "description": "All Notices in GIST at a glance"
@@ -8,6 +9,13 @@
     "write": "Write Notice",
     "query": "Search Notice",
     "login": "Login"
+  },
+  "alertResponse": {
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit"
   },
   "footer": {
     "infoteam": "GIST Student Council - Information Department",
@@ -74,7 +82,35 @@
     },
     "backToMain": "Go back to main page",
     "images": "Photos",
-    "howAboutThese": "🫧 How about these notices?"
+    "howAboutThese": "🫧 How about these notices?",
+
+    "additionalNotices": {
+      "title": "Additional Notices",
+      "deadlineChanged": "Deadline Changed",
+      "addAdditionalNotice": "Write an additional notice",
+      "changeDeadline": "Change Deadline",
+      "additionalNoticePlaceholder": "Write an additional notice here",
+      "enAdditionalNoticePlaceholder": "Write an additional notice in English here",
+      "cancel": "Cancel",
+      "submit": "Submit",
+      "alertToReminded": "Alert to those who have been reminded",
+      "alertToAll": "Alert to everyone"
+    },
+
+    "writeEnglishNotice": {
+      "title": "Write English Notice",
+      "writeTitle": "Write a title of English notice here"
+    },
+
+    "authorActions": {
+      "title": "Author settings",
+      "removeNotice": "Remove this notice",
+      "removeSure": "Are you sure you want to delete this notice?",
+      "writeEnglishNotice": "Write English notice",
+      "alreadyWroteEnglishNotice": "You've already written an English notice!",
+      "writeAdditionalNotice": "Write Additional Notice",
+      "writeAdditionalNoticeDescription": "Create an additional notice when you need to make a correction to an existing notice, or when you want to change a deadline."
+    }
   },
   "emptyNotices": "No content. =ㅅ=",
   "loading": "Loading! -ㅅ-",
@@ -187,8 +223,8 @@
     "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
 
     "alerts": {
-      "confimationButtonText": "Confirm",
       "title": "Please enter a title",
+      "enTitle": "Please enter an English title",
       "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters",
       "deadline": "Please set the deadline after the current time",
       "body": "Please enter the content",
@@ -202,6 +238,8 @@
       "submittingNotice": "Creating a notice...",
       "submitSuccess": "The notice was submitted successfully",
       "submitFail": "Failed to submit notice",
+      "deleteSuccess": "The notice was deleted successfully",
+      "deleteFail": "Failed to delete notice",
       "tagCreationFail": "Failed to create tag"
     }
   },

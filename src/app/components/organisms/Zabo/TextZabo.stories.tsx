@@ -14,11 +14,15 @@ export default {
 const Template: StoryFn<typeof Zabo> = (args) => {
   const { t } = useTranslation(fallbackLng);
   const lineClampLevel =
-    args.title.length > 40 ? 2 : args.title.length > 20 ? 1 : 0;
+    args.contents[0].title.length > 40
+      ? 2
+      : args.contents[0].title.length > 20
+        ? 1
+        : 0;
 
   return (
     <>
-      <div>length of title: {args.title.length}</div>
+      <div>length of title: {args.contents[0].title.length}</div>
       <br />
       <code className="whitespace-pre">
         {'const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;\n\n' +

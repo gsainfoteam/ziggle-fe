@@ -1,29 +1,11 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
+import { Notice } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import LazyCat from '@/assets/lazy-cat.svg';
-
-// interface Tag {
-//   id: number;
-//   name: string;
-// }
-
-interface NoticeBase {
-  id: number;
-  title: string;
-  //views: number;
-  //body: string;
-  //deadline: string | null;
-  createdAt: string;
-  //author: string;
-  //tags: Tag[];
-}
-
-interface Notice extends NoticeBase {
-  //imageUrl: string | null;
-}
+import getLocaleContents from '@/utils/getLocaleContents';
 
 interface MypageTableProps {
   title: string;
@@ -46,6 +28,7 @@ const MypageTable = async ({
   lng,
 }: PropsWithLng<MypageTableProps>) => {
   const { t } = await createTranslation(lng);
+
   return (
     <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
       <div className="w-full border-collapse border-spacing-0 overflow-hidden rounded-lg border border-white">
@@ -66,6 +49,8 @@ const MypageTable = async ({
         {articles.map((articleObj, index) => {
           const isLastRow = index === articles.length - 1;
           const underLine = isLastRow ? '' : 'border-b border-gray-300';
+          const localeContents = getLocaleContents(articleObj.contents, lng);
+
           return (
             <Link
               key={index}
@@ -74,7 +59,7 @@ const MypageTable = async ({
             >
               <div className="leading-1.5 pb-0  sm:pb-0">
                 <div className="text-regular m-3.5 text-text dark:text-white">
-                  {articleObj.title}
+                  {localeContents[0].title}
                 </div>
               </div>
               <div className="items-end justify-end">

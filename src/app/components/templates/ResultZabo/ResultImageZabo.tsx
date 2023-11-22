@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
+import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
@@ -13,11 +14,11 @@ import ZaboImage from '../../molecules/ZaboImage';
 import { ResultImageZaboProps } from './ResultZabo';
 
 const ResultImageZabo = async ({
-  title,
+  contents,
   createdAt: rawCreatedAt,
   views,
   author,
-  deadline: rawDeadline,
+  currentDeadline: rawDeadline,
   tags,
   searchQuery,
 
@@ -25,10 +26,13 @@ const ResultImageZabo = async ({
   id,
   lng,
 }: ResultImageZaboProps) => {
+  const { t } = await createTranslation(lng);
+
+  const localeContents = getLocaleContents(contents, lng);
+
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
-
-  const { t } = await createTranslation(lng);
+  const title = localeContents[0].title;
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>

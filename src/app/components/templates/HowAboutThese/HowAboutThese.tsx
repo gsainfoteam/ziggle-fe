@@ -63,7 +63,7 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
         >
           {notices.map((notice) => (
             <Link key={notice.id} href={`/${lng}/notice/${notice.id}`}>
-              <Zabo t={t} width={300} {...notice} />
+              <Zabo t={t} width={300} {...notice} lng={lng} />
             </Link>
           ))}
         </Masonry>
