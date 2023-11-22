@@ -111,9 +111,6 @@ export const GET_NOTICES = gql(`
         views
         body
         currentDeadline
-        createdAt
-        updatedAt
-        deletedAt
         author
         imageUrl
         tags {
@@ -127,14 +124,6 @@ export const GET_NOTICES = gql(`
           body
           deadline
           createdAt
-          noticeId
-        }
-        files {
-          uuid
-          name
-          createdAt
-          url
-          type
           noticeId
         }
       }
