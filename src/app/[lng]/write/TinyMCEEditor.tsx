@@ -1,16 +1,20 @@
 import { Editor } from '@tinymce/tinymce-react';
-import { forwardRef } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 
-const TinyMCEEditor = forwardRef<TinyMCEEditorRef, {}>((_, ref) => (
+const TinyMCEEditor = ({
+  editorRef,
+}: {
+  editorRef: ForwardedRef<TinyMCEEditorRef>;
+}) => (
   <Editor
     onInit={(_, editor) => {
-      if (ref && typeof ref === 'object') {
-        ref.current = editor;
-      }
+      if (!editorRef) return;
+      if (typeof editorRef === 'function') editorRef(editor);
+      else editorRef.current = editor;
     }}
     tinymceScriptSrc="/tinymce/tinymce.min.js"
     init={{
@@ -35,7 +39,6 @@ const TinyMCEEditor = forwardRef<TinyMCEEditorRef, {}>((_, ref) => (
       })
     }
   />
-));
-TinyMCEEditor.displayName = 'TinyMCEEditor';
+);
 
 export default TinyMCEEditor;

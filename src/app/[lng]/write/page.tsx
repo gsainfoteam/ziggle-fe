@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useRef, useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
+import { Editor } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
@@ -24,8 +25,9 @@ import TypeIcon from '@/assets/icons/type.svg';
 
 import AttatchPhotoArea from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
-import handleNoticeSubmit from './HandleNoticeSubmit';
+import handleNoticeSubmit from './handle-notice-submit';
 import TagInput, { Tag } from './TagInput';
+import TinyMCEEditor from './TinyMCEEditor';
 
 type NoticeType = 'recruit' | 'event' | 'general';
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
@@ -56,8 +58,8 @@ export default function WritePage({
 
   const [images, setImages] = useState<File[]>([]);
 
-  const koreanEditorRef = useRef<any>(null);
-  const englishEditorRef = useRef<any>(null);
+  const koreanEditorRef = useRef<Editor>(null);
+  const englishEditorRef = useRef<Editor>(null);
 
   const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isWriteEnglish) {
@@ -72,12 +74,8 @@ export default function WritePage({
   };
 
   const handleSubmit = async () => {
-    const koreanBody = koreanEditorRef.current
-      ? koreanEditorRef.current.getContent()
-      : undefined;
-    const englishBody = englishEditorRef.current
-      ? englishEditorRef.current.getContent()
-      : undefined;
+    const koreanBody = koreanEditorRef.current?.getContent();
+    const englishBody = englishEditorRef.current?.getContent();
 
     const noticeId = await handleNoticeSubmit({
       title,
@@ -222,7 +220,7 @@ export default function WritePage({
           </div>
 
           <React.Suspense>
-            <DynamicTinyMCEEditor ref={koreanEditorRef} />
+            <DynamicTinyMCEEditor editorRef={koreanEditorRef} />
           </React.Suspense>
         </div>
 
@@ -240,7 +238,7 @@ export default function WritePage({
             )}
           </div>
           <React.Suspense>
-            <DynamicTinyMCEEditor ref={englishEditorRef} />
+            <DynamicTinyMCEEditor editorRef={englishEditorRef} />
           </React.Suspense>
         </div>
 
