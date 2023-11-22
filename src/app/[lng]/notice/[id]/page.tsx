@@ -20,7 +20,10 @@ import Content from './Content';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
-  { params: { id } }: { params: { id: string } },
+  {
+    params: { id },
+    searchParams,
+  }: { params: { id: string }; searchParams: { writeEn: string } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
   const notice = await getNotice(Number.parseInt(id));
@@ -59,6 +62,9 @@ const DetailedNoticePage = async ({
   const isAdditionalNoticeShow = true;
   const isWriteEnglishNoticeShow = true;
 
+  const supportLanguage = notice.contents.map((content) => content.lang); // TODO: make this unique
+  const supportEnglish = supportLanguage.includes('en');
+
   return (
     <>
       <ZaboShowcase srcs={notice.imagesUrl} alt={title} lng={lng} />
@@ -69,7 +75,7 @@ const DetailedNoticePage = async ({
           <>
             <div className="h-5" />
             <AuthorActions
-              isEnglishNoticeExist={false}
+              isEnglishNoticeExist={supportEnglish}
               isAdditionalNoticeLimit={false}
               noticeId={Number(id)}
               lng={lng}
@@ -91,22 +97,29 @@ const DetailedNoticePage = async ({
 
         {user && user.id === notice.authorId && isAdditionalNoticeShow && (
           <>
-            <div className="h-10" />
+            <div className="h-10" id="addNotice" />
             <AddAdditionalNotice
               lng={lng}
               noticeId={Number(id)}
               originallyHasDeadline={notice.currentDeadline}
-              supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique
+              supportLanguage={supportLanguage}
             />
           </>
         )}
 
-        {user && user.id === notice.authorId && isWriteEnglishNoticeShow && (
-          <>
-            <div className="h-10" />
-            <WriteEnglishNotice noticeId={Number(id)} lng={lng} />
-          </>
-        )}
+        {user &&
+          user.id === notice.authorId &&
+          isWriteEnglishNoticeShow &&
+          !supportEnglish && (
+            <>
+              <div className="h-10" />
+              <WriteEnglishNotice
+                noticeId={Number(id)}
+                lng={lng}
+                deadline={notice.currentDeadline}
+              />
+            </>
+          )}
 
         {notice.imagesUrl.length > 0 && (
           <>

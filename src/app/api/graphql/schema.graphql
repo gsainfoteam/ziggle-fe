@@ -91,6 +91,7 @@ type Mutation {
     deadline: Date
     noticeId: Int!
     contentId: Int!
+    lang: String!
   ): DetailedNotice!
   createAdditionalNotice(
     title: String

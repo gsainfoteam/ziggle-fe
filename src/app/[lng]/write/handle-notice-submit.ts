@@ -9,6 +9,7 @@ import {
 } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
+import { WarningSwal } from '@/utils/swals';
 
 import { apolloClient } from '../InitClient';
 
@@ -16,6 +17,7 @@ type NoticeLanguage = 'ko' | 'en' | 'both';
 
 interface NoticeSubmitForm {
   title?: string;
+  enTitle?: string;
   deadline?: Date;
   noticeLanguage: NoticeLanguage;
   koreanBody?: string;
@@ -26,6 +28,7 @@ interface NoticeSubmitForm {
 
 const handleNoticeSubmit = async ({
   title,
+  enTitle,
   deadline,
   noticeLanguage,
   koreanBody,
@@ -39,16 +42,13 @@ const handleNoticeSubmit = async ({
   const TITLE_MAX_LENGTH = 50;
   const BODY_MAX_LENGTH = 3000;
 
-  const WarningSwal = (text: string) => {
-    Swal.fire({
-      text,
-      icon: 'warning',
-      confirmButtonText: t('alertResponse.confirm'),
-    });
-  };
-
   if (!title) {
     WarningSwal(t('write.alerts.title'));
+    return;
+  }
+
+  if (noticeLanguage === 'both' && !enTitle) {
+    WarningSwal(t('write.alerts.enTitle'));
     return;
   }
 
@@ -218,7 +218,8 @@ const handleNoticeSubmit = async ({
     const englishNotice = await apolloClient.mutate({
       mutation: ATTACH_INTERNATIONAL_NOTICE,
       variables: {
-        title,
+        lang: 'en',
+        title: enTitle || title,
         deadline,
         body: englishBody!,
         noticeId: id,
@@ -226,6 +227,12 @@ const handleNoticeSubmit = async ({
       },
     });
   }
+
+  Swal.fire({
+    text: t('write.alerts.submitSuccess'),
+    icon: 'success',
+    confirmButtonText: t('alertResponse.confirm'),
+  });
 
   return id;
 };

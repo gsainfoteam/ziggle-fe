@@ -161,8 +161,8 @@ export const CREATE_NOTICE = gql(`
 `);
 
 export const ATTACH_INTERNATIONAL_NOTICE = gql(`
-  mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!) {
-    attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId) {
+  mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!, $lang: String!) {
+    attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId, lang: $lang) {
       id
       contents {
         id
@@ -171,7 +171,6 @@ export const ATTACH_INTERNATIONAL_NOTICE = gql(`
         body
         deadline
         createdAt
-        noticeId
       }
     }
   }

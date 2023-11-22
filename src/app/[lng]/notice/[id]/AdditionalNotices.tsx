@@ -15,15 +15,15 @@ const AdditionalNotices = async ({ contents, t }: AdditionalNoticesProps) => {
   const localeContents = getLocaleContents(contents, language);
 
   return (
-    <>
+    <div className={'flex flex-col gap-4'}>
       {localeContents.map((content, index) => {
-        return index > 0 ? (
+        return index >= 0 ? (
           <div
-            key={content.id}
+            key={`${content.id}+${content.lang}`}
             className={'rounded-xl border-2 border-primary'}
           >
             <div className={'flex items-center gap-1'}>
-              <AddIcon className='fill-primary w-7'/>
+              <AddIcon className="w-7 fill-primary" />
               <p className={'text-lg font-bold text-primary'}>
                 {t('zabo.additionalNotices.title')}
               </p>
@@ -55,11 +55,13 @@ const AdditionalNotices = async ({ contents, t }: AdditionalNoticesProps) => {
                 </div>
               )}
 
-            <p className={'text-base'}>{content.body}</p>
+            <div className={'mb-3 ml-8 mt-1'}>
+              <p className={'text-base'}>{content.body}</p>
+            </div>
           </div>
         ) : null;
       })}
-    </>
+    </div>
   );
 };
 

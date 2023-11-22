@@ -90,6 +90,7 @@
       "addAdditionalNotice": "Write an additional notice",
       "changeDeadline": "Change Deadline",
       "additionalNoticePlaceholder": "Write an additional notice here",
+      "enAdditionalNoticePlaceholder": "Write an additional notice in English here",
       "cancel": "Cancel",
       "submit": "Submit",
       "alertToReminded": "Alert to those who have been reminded",
@@ -223,6 +224,7 @@
 
     "alerts": {
       "title": "Please enter a title",
+      "enTitle": "Please enter an English title",
       "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters",
       "deadline": "Please set the deadline after the current time",
       "body": "Please enter the content",

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
@@ -62,7 +63,7 @@ const AuthorActions = ({
     });
   };
 
-  const handleWriteEnglishNotice = async () => {}
+  const handleWriteEnglishNotice = async () => {};
 
   return (
     <>
@@ -106,21 +107,25 @@ const AuthorActions = ({
             </div>
 
             {!isEnglishNoticeExist && (
-              <div className="flex cursor-pointer items-center gap-2">
-                <LanguageIcon className="w-6 fill-primary" />
-                <div className="font-regular text-base text-primary">
-                  {t('zabo.authorActions.writeEnglishNotice')}
+              <Link href={'#writeEn'}>
+                <div className="flex cursor-pointer items-center gap-2">
+                  <LanguageIcon className="w-6 fill-primary" />
+                  <div className="font-regular text-base text-primary">
+                    {t('zabo.authorActions.writeEnglishNotice')}
+                  </div>
                 </div>
-              </div>
+              </Link>
             )}
 
             <div className="flex cursor-pointer flex-col">
-              <div className="flex items-center gap-2">
-                <AddIcon className="w-6 fill-primary" />
-                <div className="font-regular text-base text-primary">
-                  {t('zabo.authorActions.writeAdditionalNotice')}
+              <Link href="#addNotice">
+                <div className="flex items-center gap-2">
+                  <AddIcon className="w-6 fill-primary" />
+                  <div className="font-regular text-base text-primary">
+                    {t('zabo.authorActions.writeAdditionalNotice')}
+                  </div>
                 </div>
-              </div>
+              </Link>
 
               <div className="text-sm text-secondaryText">
                 {t('zabo.authorActions.writeAdditionalNoticeDescription')}

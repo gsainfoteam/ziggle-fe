@@ -1,17 +1,25 @@
 'use client';
 
 import { Dayjs } from 'dayjs';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
+import Swal from 'sweetalert2';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import {
+  ATTACH_INTERNATIONAL_NOTICE,
+  CREATE_ADDITIONAL_NOTICE,
+} from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddIcon from '@/assets/icons/add.svg';
+import { WarningSwal } from '@/utils/swals';
 
+import { apolloClient } from '../../InitClient';
 import AddNoticeRadio from './AddNoticeRadio';
 
 interface AddAddtionalNoticesProps {
@@ -34,9 +42,62 @@ const AddAdditionalNotice = ({
 
   const { t, i18n } = useTranslation(lng);
 
-  const handleSubmit = () => {};
+  const supportEnglish = supportLanguage.includes('en');
 
-  console.log(originallyHasDeadline);
+  const { refresh } = useRouter();
+
+  const handleSubmit = async () => {
+    if (!content) {
+      WarningSwal(t('write.alerts.body'));
+      return;
+    }
+
+    if (supportEnglish && !englishContent) {
+      WarningSwal(t('write.alerts.englishBody'));
+      return;
+    }
+
+    const notice = await apolloClient.mutate({
+      mutation: CREATE_ADDITIONAL_NOTICE,
+      variables: {
+        noticeId,
+        body: content,
+        deadline,
+      },
+    });
+
+    const contents = notice.data?.createAdditionalNotice.contents;
+    if (!contents) {
+      return;
+    }
+    const contentId = contents[contents.length - 1].id;
+
+    if (notice && contentId) {
+      const enNotice = await apolloClient.mutate({
+        mutation: ATTACH_INTERNATIONAL_NOTICE,
+        variables: {
+          title: '',
+          body: englishContent,
+          lang: 'en',
+          noticeId,
+          contentId,
+          deadline,
+        },
+      });
+
+      setContent('');
+      setEnglishContent('');
+
+      Swal.fire({
+        icon: 'success',
+        title: t('write.alerts.submitSuccess'),
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+      refresh();
+    }
+  };
 
   return (
     <div className={'rounded-xl border-2 border-primary p-4'}>
@@ -68,7 +129,7 @@ const AddAdditionalNotice = ({
           )}
         </div>
       )}
-      <div className={'flex'}>
+      <div className={'flex flex-col'}>
         <textarea
           className={
             'mb-3 mt-1 w-full resize-none border-none text-xl outline-none dark:bg-transparent dark:text-white'
@@ -84,10 +145,12 @@ const AddAdditionalNotice = ({
 
         {supportLanguage.includes('en') && (
           <textarea
-            className={'w-full border-none text-xl outline-none'}
+            className={
+              'mb-3 mt-1 w-full resize-none border-none text-xl outline-none dark:bg-transparent dark:text-white'
+            }
             name={'searchQuery'}
             placeholder={t(
-              'zabo.additionalNotices.additionalNoticePlaceholder',
+              'zabo.additionalNotices.enAdditionalNoticePlaceholder',
             )}
             rows={3}
             value={englishContent}
@@ -98,7 +161,7 @@ const AddAdditionalNotice = ({
         )}
       </div>
 
-      <AddNoticeRadio
+      {/* <AddNoticeRadio
         selected={alertOption}
         onChange={(event) => {
           setAlertOption(event.target.value);
@@ -107,7 +170,7 @@ const AddAdditionalNotice = ({
           });
         }}
         t={t}
-      />
+      /> */}
 
       <div className={'mt-6 flex justify-center gap-[10px]'}>
         <Button

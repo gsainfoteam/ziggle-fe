@@ -1,19 +1,27 @@
 'use client';
 
+import { Dayjs } from 'dayjs';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
-import { Editor as TinyMCEEditorRef } from 'tinymce';
+import Swal from 'sweetalert2';
+import { Editor, Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
+import { ATTACH_INTERNATIONAL_NOTICE } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import ContentIcon from '@/assets/icons/content.svg';
+import { WarningSwal } from '@/utils/swals';
+
+import { apolloClient } from '../../InitClient';
 
 interface WriteEnglishNoticeProps {
   noticeId: number;
+  deadline: string | Dayjs | null;
 }
 
 const DynamicTinyMCEEditor = dynamic(
@@ -25,18 +33,50 @@ const DynamicTinyMCEEditor = dynamic(
 
 const WriteEnglishNotice = ({
   noticeId,
+  deadline,
   lng,
 }: WriteEnglishNoticeProps & { lng: Locale }) => {
   const { t } = useTranslation(lng);
 
   const [title, setTitle] = useState<string>('');
 
-  const handleSubmit = () => {};
+  const englishEditorRef = useRef<Editor>(null);
 
-  const editorRef = useRef<TinyMCEEditorRef | null>(null);
+  const { refresh } = useRouter();
+
+  const handleSubmit = async () => {
+    const englishContent = englishEditorRef.current?.getContent();
+
+    if (!englishContent) {
+      WarningSwal(t('write.alerts.body'));
+      return;
+    }
+
+    await apolloClient.mutate({
+      mutation: ATTACH_INTERNATIONAL_NOTICE,
+      variables: {
+        contentId: 1,
+        noticeId,
+        title,
+        body: englishContent,
+        lang: 'en',
+        deadline,
+      },
+    });
+
+    Swal.fire({
+      text: t('write.alerts.submitSuccess'),
+      icon: 'success',
+      confirmButtonText: t('alertResponse.confirm'),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        refresh();
+      }
+    });
+  };
 
   return (
-    <div className={'rounded-xl border-2 border-primary p-4'}>
+    <div className={'rounded-xl border-2 border-primary p-4'} id={'writeEn'}>
       <div className={'flex items-center gap-1'}>
         <ContentIcon className="w-7 fill-primary" />
         <p className={'text-lg font-bold text-primary'}>
@@ -54,7 +94,7 @@ const WriteEnglishNotice = ({
         placeholder={t('zabo.writeEnglishNotice.writeTitle')}
       />
 
-      <DynamicTinyMCEEditor editorRef={editorRef} />
+      <DynamicTinyMCEEditor editorRef={englishEditorRef} />
 
       <div className={'mt-6 flex justify-center gap-[10px]'}>
         <Button

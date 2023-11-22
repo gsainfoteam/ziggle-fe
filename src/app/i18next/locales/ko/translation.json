@@ -87,6 +87,7 @@
       "addAdditionalNotice": "추가 공지 작성하기",
       "changeDeadline": "마감시간 변경하기",
       "additionalNoticePlaceholder": "여기에 추가 공지를 입력하세요",
+      "enAdditionalNoticePlaceholder": "여기에 영어 버전을 입력하세요",
       "cancel": "취소하기",
       "submit": "제출하기",
       "alertToReminded": "리마인드 설정한 사람들에게만 알림 보내기",
@@ -220,6 +221,7 @@
 
     "alerts": {
       "title": "제목을 입력해주세요",
+      "enTitle": "영어 제목을 입력해주세요",
       "titleLengthLessThan": "제목은 {{titleMaxLength}}자 이내로 입력해주세요",
       "deadline": "마감 시간은 현재 시간 이후로 설정해주세요",
       "body": "본문 내용을 입력해주세요",
