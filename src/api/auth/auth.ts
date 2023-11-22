@@ -2,7 +2,6 @@
 
 import 'server-only';
 
-import { AxiosError } from 'axios';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
