@@ -5,6 +5,8 @@ import '@/app/initDayjs';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import dynamic from 'next/dynamic';
 
+import { PropsWithLng } from '../i18next';
+
 const apolloCache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -38,9 +40,12 @@ export const apolloClient = new ApolloClient({
 
 const InstallApp = dynamic(() => import('./InstallApp'), { ssr: false });
 
-const InitClient = ({ children }: React.PropsWithChildren) => (
+const InitClient = ({
+  lng,
+  children,
+}: React.PropsWithChildren<PropsWithLng>) => (
   <ApolloProvider client={apolloClient}>
-    <InstallApp />
+    <InstallApp lng={lng} />
     {children}
   </ApolloProvider>
 );
