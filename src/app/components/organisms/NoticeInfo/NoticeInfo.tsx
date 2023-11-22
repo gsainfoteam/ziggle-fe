@@ -19,9 +19,9 @@ const NoticeInfo = ({
   views,
   tags = [],
   t,
+  lng,
 }: PropsWithT<NoticeInfoProps>) => {
-  const language = t('lang');
-  const localeContents = getLocaleContents(contents, language);
+  const localeContents = getLocaleContents(contents, lng);
 
   return (
     <div>

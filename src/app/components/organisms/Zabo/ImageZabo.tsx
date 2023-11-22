@@ -23,8 +23,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
 }: ImageZaboProps<Origin> & PropsWithLng) => {
   const { i18n } = useTranslation(lng);
 
-  const language = i18n.language;
-  const localContents = getLocaleContents(contents, language);
+  const localContents = getLocaleContents(contents, lng);
 
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const size = { width, height } as ZaboSize<Origin>;

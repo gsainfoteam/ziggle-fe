@@ -19,15 +19,11 @@ const TextZabo = <Origin extends ZaboOrigin>({
   width,
   lng,
 }: TextZaboProps<Origin> & PropsWithLng) => {
-  const { i18n } = useTranslation(lng);
-
-  const language = i18n.language;
-
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
-  const localContents = getLocaleContents(contents, language);
+  const localContents = getLocaleContents(contents, lng);
   const title = localContents[0].title;
 
   const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;

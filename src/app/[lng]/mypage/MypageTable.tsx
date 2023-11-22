@@ -27,8 +27,7 @@ const MypageTable = async ({
   link,
   lng,
 }: PropsWithLng<MypageTableProps>) => {
-  const { t, i18n } = await createTranslation(lng);
-  const language = i18n.language;
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
@@ -50,10 +49,7 @@ const MypageTable = async ({
         {articles.map((articleObj, index) => {
           const isLastRow = index === articles.length - 1;
           const underLine = isLastRow ? '' : 'border-b border-gray-300';
-          const localeContents = getLocaleContents(
-            articleObj.contents,
-            language,
-          );
+          const localeContents = getLocaleContents(articleObj.contents, lng);
 
           return (
             <Link

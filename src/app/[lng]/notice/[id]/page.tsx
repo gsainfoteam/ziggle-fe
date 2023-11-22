@@ -52,11 +52,10 @@ interface DetailedNoticePageProps {
 const DetailedNoticePage = async ({
   params: { id, lng },
 }: DetailedNoticePageProps) => {
-  const { t, i18n } = await createTranslation(lng, 'translation');
-  const language = i18n.language;
+  const { t } = await createTranslation(lng, 'translation');
   const notice = await getNotice(Number.parseInt(id));
 
-  const localContents = getLocaleContents(notice.contents, language);
+  const localContents = getLocaleContents(notice.contents, lng);
 
   const title = localContents[0].title;
 
