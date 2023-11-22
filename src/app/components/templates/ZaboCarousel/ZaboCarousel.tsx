@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -44,10 +44,22 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
   const carouselEl = useRef<HTMLDivElement>(null);
   const [carouselLeft, setCarouselLeft] = useState(0);
   const leftDisabled = carouselLeft === 0;
-  const rightDisabled = carouselEl.current
-    ? carouselLeft + 10 >
-      carouselEl.current.scrollWidth - carouselEl.current.clientWidth
-    : true;
+
+  // TODO: Delete commented code below
+  // const rightDisabled = carouselEl.current
+  //   ? carouselLeft + 10 >
+  //     carouselEl.current.scrollWidth - carouselEl.current.clientWidth
+  //   : true;
+
+  const [rightDisabled, setRightDisabled] = useState(false);
+  useEffect(() => {
+    if (carouselEl.current) {
+      const isRightDisabled =
+        carouselLeft + 10 >
+        carouselEl.current.scrollWidth - carouselEl.current.clientWidth;
+      setRightDisabled(isRightDisabled);
+    }
+  }, [carouselLeft]);
 
   const scroll = (amount: number) => {
     if (!carouselEl.current) return;
