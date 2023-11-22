@@ -54,7 +54,7 @@ const WriteEnglishNotice = ({
         placeholder={t('zabo.writeEnglishNotice.writeTitle')}
       />
 
-      <DynamicTinyMCEEditor forwardedRef={editorRef} />
+      <DynamicTinyMCEEditor editorRef={editorRef} />
 
       <div className={'mt-6 flex justify-center gap-[10px]'}>
         <Button

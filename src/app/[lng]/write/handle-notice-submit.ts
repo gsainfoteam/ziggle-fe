@@ -194,7 +194,16 @@ const handleNoticeSubmit = async ({
     },
   });
 
-  const id = notice.data?.createNotice.id;
+  if (!notice.data?.createNotice) {
+    Swal.fire({
+      text: t('write.alerts.submitFail'),
+      icon: 'error',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+    return;
+  }
+
+  const { id, contents } = notice.data?.createNotice;
 
   if (!id) {
     Swal.fire({
@@ -212,6 +221,8 @@ const handleNoticeSubmit = async ({
         title,
         deadline,
         body: englishBody!,
+        noticeId: id,
+        contentId: contents[0].id,
       },
     });
   }

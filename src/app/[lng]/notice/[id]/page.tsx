@@ -93,6 +93,7 @@ const DetailedNoticePage = async ({
           <>
             <div className="h-10" />
             <AddAdditionalNotice
+              lng={lng}
               noticeId={Number(id)}
               originallyHasDeadline={notice.currentDeadline}
               supportLanguage={notice.contents.map((content) => content.lang)} // TODO: make this unique

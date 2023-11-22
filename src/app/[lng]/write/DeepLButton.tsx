@@ -9,7 +9,7 @@ interface DeepLButtonProps {
   editorRef?: React.MutableRefObject<TinyMCEEditorRef | null>;
 }
 
-const DeepLButton = ({ editorRef, t }: DeepLButtonProps & { t: T }) => {
+const DeepLButton = ({ editorRef, t }: DeepLButtonProps & PropsWithT) => {
   const DEEPL_URL = 'https://www.deepl.com/translator#ko/en';
 
   return (

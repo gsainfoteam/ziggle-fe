@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
@@ -16,8 +17,9 @@ const TextZabo = <Origin extends ZaboOrigin>({
   t,
   height,
   width,
-}: TextZaboProps<Origin>) => {
-  const { i18n } = useTranslation();
+  lng,
+}: TextZaboProps<Origin> & PropsWithLng) => {
+  const { i18n } = useTranslation(lng);
 
   const language = i18n.language;
 

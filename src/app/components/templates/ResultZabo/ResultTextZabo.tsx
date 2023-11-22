@@ -29,7 +29,7 @@ const ResultTextZabo = async ({
 }: ResultZaboProps) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
 
-  const { t } = await createTranslation(lng);
+  const { t, i18n } = await createTranslation(lng);
   const language = i18n.language;
   const localeContents = getLocaleContents(contents, language);
 

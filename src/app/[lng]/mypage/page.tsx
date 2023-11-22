@@ -1,7 +1,7 @@
 import { auth } from '@/api/auth/auth';
+import { Notice } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
-import { Notice } from '@/generated/graphql';
 
 import MypageProfile from './MypageProfile';
 import MypageTable from './MypageTable';

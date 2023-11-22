@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
 import ZaboImage from '@/app/components/molecules/ZaboImage';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
@@ -18,8 +19,9 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   t,
   width,
   height,
-}: ImageZaboProps<Origin>) => {
-  const { i18n } = useTranslation();
+  lng,
+}: ImageZaboProps<Origin> & PropsWithLng) => {
+  const { i18n } = useTranslation(lng);
 
   const language = i18n.language;
   const localContents = getLocaleContents(contents, language);

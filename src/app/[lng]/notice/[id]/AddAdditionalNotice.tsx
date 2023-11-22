@@ -8,6 +8,7 @@ import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddIcon from '@/assets/icons/add.svg';
 
@@ -23,14 +24,15 @@ const AddAdditionalNotice = ({
   noticeId,
   supportLanguage,
   originallyHasDeadline,
-}: AddAddtionalNoticesProps) => {
+  lng,
+}: AddAddtionalNoticesProps & PropsWithLng) => {
   const [hasDeadline, setHasDeadline] = useState<boolean>(false);
   const [deadline, setDeadline] = useState<Date | null>(new Date());
   const [alertOption, setAlertOption] = useState<string>('all');
   const [content, setContent] = useState<string>('');
   const [englishContent, setEnglishContent] = useState<string>('');
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation(lng);
 
   const handleSubmit = () => {};
 

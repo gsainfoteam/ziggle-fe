@@ -19,8 +19,14 @@ const SCROLL_AMOUNT = 800;
 
 interface ZaboCarouselProps {
   notices: ((
-    | Omit<React.ComponentProps<typeof ImageZabo>, 'width' | 'height' | 't'>
-    | Omit<React.ComponentProps<typeof TextZabo>, 'width' | 'height' | 't'>
+    | Omit<
+        React.ComponentProps<typeof ImageZabo>,
+        'width' | 'height' | 't' | 'lng'
+      >
+    | Omit<
+        React.ComponentProps<typeof TextZabo>,
+        'width' | 'height' | 't' | 'lng'
+      >
   ) & { id: number })[];
   title: string;
   sectionHref?: string;
@@ -87,7 +93,7 @@ const ZaboCarousel = <Origin extends ZaboOrigin>({
             {notices.map((notice) => (
               <div key={notice.id} className="shrink-0">
                 <Link href={`/${lng}/notice/${notice.id}`}>
-                  <Zabo {...notice} {...size} t={t} />
+                  <Zabo {...notice} {...size} t={t} lng={lng} />
                 </Link>
               </div>
             ))}

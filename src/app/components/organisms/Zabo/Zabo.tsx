@@ -1,5 +1,5 @@
 import { Notice } from '@/api/notice/notice';
-import { PropsWithT } from '@/app/i18next';
+import { PropsWithLng, PropsWithT } from '@/app/i18next';
 
 import ImageZabo from './ImageZabo';
 import TextZabo from './TextZabo';
@@ -24,16 +24,16 @@ export type TextZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin>;
 
 const Zabo = <IsImage extends boolean>(
   props: IsImage extends true
-    ? ImageZaboProps<ZaboOrigin>
-    : TextZaboProps<ZaboOrigin>,
+    ? ImageZaboProps<ZaboOrigin> & PropsWithLng
+    : TextZaboProps<ZaboOrigin> & PropsWithLng,
 ) =>
   'imageUrl' in props && props.imageUrl && props.imageUrl.length > 0 ? (
     <ImageZabo
-      {...(props as ImageZaboProps<ZaboOrigin>)}
+      {...(props as ImageZaboProps<ZaboOrigin> & PropsWithLng)}
       imageUrl={props.imageUrl || ''}
     />
   ) : (
-    <TextZabo {...(props as TextZaboProps<ZaboOrigin>)} />
+    <TextZabo {...(props as TextZaboProps<ZaboOrigin> & PropsWithLng)} />
   );
 
 export default Zabo;

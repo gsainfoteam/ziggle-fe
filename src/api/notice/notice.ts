@@ -147,6 +147,15 @@ export const CREATE_NOTICE = gql(`
   mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
     createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {
       id
+      contents {
+        id
+        lang
+        title
+        body
+        deadline
+        createdAt
+        noticeId
+      }
     }
   }
 `);
@@ -155,6 +164,15 @@ export const ATTACH_INTERNATIONAL_NOTICE = gql(`
   mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!) {
     attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId) {
       id
+      contents {
+        id
+        lang
+        title
+        body
+        deadline
+        createdAt
+        noticeId
+      }
     }
   }
 `);
@@ -163,12 +181,21 @@ export const CREATE_ADDITIONAL_NOTICE = gql(`
   mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {
     createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
       id
+      contents {
+        id
+        lang
+        title
+        body
+        deadline
+        createdAt
+        noticeId
+      }
     }
   }
 `);
 
 export const DELETE_NOTICE = gql(`
   mutation DeleteNotice($id: Int!) {
-    deleteNotice(id: $id) {}
+    deleteNotice(id: $id)
   }
 `);
