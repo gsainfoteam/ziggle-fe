@@ -201,5 +201,10 @@
       "submitFail": "공지 작성에 실패했습니다",
       "tagCreationFail": "태그 생성에 실패했습니다"
     }
+  },
+  "installApp": {
+    "title": "모바일 앱을 설치해보세요!",
+    "text": "더욱 편리한 서비스를 이용하실 수 있습니다.",
+    "install": "설치하기"
   }
 }

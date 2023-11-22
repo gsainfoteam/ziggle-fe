@@ -44,7 +44,7 @@ export function useTranslation<
   const ret = useTranslationOrg(ns, { lng, ...options });
 
   useEffect(() => {
-    if (cookies[cookieName] === lng) return;
+    if (!lng || cookies[cookieName] === lng) return;
     setCookie(cookieName, lng, { path: '/' });
   }, [lng, cookies, setCookie]);
 

@@ -119,7 +119,7 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <InitClient>
+        <InitClient lng={lng}>
           <Navbar lng={lng} />
           <main className="flex-1">{children}</main>
           <div className="basis-80" />

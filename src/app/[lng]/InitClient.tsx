@@ -3,6 +3,10 @@
 import '@/app/initDayjs';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
+
+import { PropsWithLng } from '../i18next';
 
 const apolloCache = new InMemoryCache({
   typePolicies: {
@@ -35,8 +39,18 @@ export const apolloClient = new ApolloClient({
   cache: apolloCache,
 });
 
-const InitClient = ({ children }: React.PropsWithChildren) => (
-  <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
+const InstallApp = dynamic(() => import('./InstallApp'), { ssr: false });
+
+const InitClient = ({
+  lng,
+  children,
+}: React.PropsWithChildren<PropsWithLng>) => (
+  <ApolloProvider client={apolloClient}>
+    <Suspense>
+      <InstallApp lng={lng} />
+    </Suspense>
+    {children}
+  </ApolloProvider>
 );
 
 export default InitClient;

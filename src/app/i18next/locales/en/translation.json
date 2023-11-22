@@ -204,5 +204,10 @@
       "submitFail": "Failed to submit notice",
       "tagCreationFail": "Failed to create tag"
     }
+  },
+  "installApp": {
+    "title": "Install the mobile app!",
+    "text": "You can use more convenient service.",
+    "install": "Install"
   }
 }
