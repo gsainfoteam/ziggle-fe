@@ -89,6 +89,8 @@
       "deadlineChanged": "Deadline Changed",
       "addAdditionalNotice": "Write an additional notice",
       "changeDeadline": "Change Deadline",
+      "koreanAdditionalNotice": "Korean Additional Notice",
+      "englishAdditionalNotice": "English Additional Notice",
       "additionalNoticePlaceholder": "Write an additional notice here",
       "enAdditionalNoticePlaceholder": "Write an additional notice in English here",
       "cancel": "Cancel",

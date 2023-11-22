@@ -5,7 +5,6 @@ import { createServerContext } from 'react';
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/notice';
 import ImageCarousel from '@/app/components/organisms/ImageCarousel';
-import NoticeInfo from '@/app/components/organisms/NoticeInfo';
 import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
@@ -17,6 +16,7 @@ import AddAdditionalNotice from './AddAdditionalNotice';
 import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
+import NoticeInfo from './NoticeInfo';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
