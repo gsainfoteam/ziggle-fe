@@ -84,7 +84,7 @@ export default function WritePage({
       koreanBody,
       enTitle,
       englishBody,
-      tags: tags.map((tag) => tag.name),
+      tags: [selectedNoticeType, ...tags.map((tag) => tag.name)],
       images: photos.map((image) => image.file),
       t,
     });
