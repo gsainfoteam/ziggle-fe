@@ -77,7 +77,7 @@ const ShowcaseModal = ({
           alt={alt}
           width={0}
           height={0}
-          sizes="100vw"
+          sizes="50vw"
           className="max-h-[75vh] w-auto max-w-[70vw] grow object-contain"
         />
         <Button disabled={index === srcs.length - 1} onClick={right}>
@@ -92,10 +92,12 @@ const ShowcaseModal = ({
       <div className="flex gap-1 bg-text p-1">
         {srcs.map((src, index) => (
           <Image
+            priority={index === 0}
             key={src}
             src={src}
             alt={alt}
             width={50}
+            sizes="50vw"
             height={0}
             className={'pointer box-border h-auto border'}
             onClick={() => setIndex(index)}
