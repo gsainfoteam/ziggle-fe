@@ -8,9 +8,9 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 import { createTranslation } from '@/app/i18next';
 import getLocaleContents from '@/utils/getLocaleContents';
 
-import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
+import Tags from '../../organisms/Tags';
 import { ResultImageZaboProps } from './ResultZabo';
 
 const ResultImageZabo = async ({
@@ -76,17 +76,12 @@ const ResultImageZabo = async ({
                 )}
               </p>
             </div>
-            <div className={'my-0.5 flex flex-nowrap gap-2'}>
-              {tags.map((tag, index) => (
-                <Chip
-                  key={index}
-                  // font={Font.Regular}
-                  variant={tag.name === searchQuery ? 'contained' : undefined}
-                >
-                  {'#' + tag.name}
-                </Chip>
-              ))}
-            </div>
+            <Tags
+              lng={lng}
+              tags={tags}
+              className="my-0.5 flex-nowrap"
+              searchQuery={searchQuery}
+            />
           </div>
           <div className="flex gap-0.5">
             <div className="flex text-sm font-medium text-secondaryText">
