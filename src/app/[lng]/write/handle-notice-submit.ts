@@ -40,7 +40,7 @@ const handleNoticeSubmit = async ({
   sendLog(LogEvents.noticeWritingPageClickSubmit);
 
   const TITLE_MAX_LENGTH = 50;
-  const BODY_MAX_LENGTH = 3000;
+  const BODY_MAX_LENGTH = 20000;
 
   const warningSwal = WarningSwal(t);
 
