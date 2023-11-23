@@ -193,6 +193,7 @@ const handleNoticeSubmit = async ({
       deadline,
       body: koreanBody!,
       images: imageKeys,
+      tags: tagIds,
     },
   });
 
