@@ -12,6 +12,7 @@ import getLocaleContents from '@/utils/getLocaleContents';
 
 import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
+import Tags from '../../organisms/Tags';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = async ({
@@ -68,19 +69,10 @@ const ResultTextZabo = async ({
             {/* organization here (for futer update) */}
           </div>
 
-          <div className="my-0.5 flex gap-2">
-            {tags.map((tag, index) => (
-              <Chip
-                key={index}
-                variant={tag.name === searchQuery ? 'contained' : undefined}
-              >
-                {`#${tag.name}`}
-              </Chip>
-            ))}
-          </div>
+          <Tags tags={tags} className="my-0.5" searchQuery={searchQuery} />
 
           <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
-            {localeContents[0].body ?? t('zabo.noContent')}
+            {localeContents[0].body ?? t('zabo.noContent')}T
           </div>
 
           <div className="flex gap-0.5">

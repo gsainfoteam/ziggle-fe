@@ -6,6 +6,7 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 import { NoticeDetail, Tag } from '@/api/notice/notice';
 import Chip from '@/app/components/molecules/Chip';
 import DDay from '@/app/components/molecules/DDay';
+import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import { T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -42,7 +43,7 @@ const NoticeInfo = async ({
         t={t}
       />
       <div className="h-4" />
-      <Tags tags={tags} />
+      <Tags tags={tags} className="flex-wrap" />
     </div>
   );
 };
@@ -88,14 +89,6 @@ const Metadata = ({
         views {{ views }}
       </Trans>
     </div>
-  </div>
-);
-
-const Tags = ({ tags }: { tags: Tag[] }) => (
-  <div className="flex flex-wrap gap-2">
-    {tags.map((tag, i) => (
-      <Chip key={i} className="font-normal">{`#${tag.name}`}</Chip>
-    ))}
   </div>
 );
 
