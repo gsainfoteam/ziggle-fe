@@ -71,7 +71,7 @@ const DetailedNoticePage = async ({
     <>
       <ZaboShowcase srcs={notice.imagesUrl} alt={title} lng={lng} />
       <div className="content mx-auto mt-8 md:mt-12">
-        <Actions title={localContents[0].body} lng={lng} />
+        <Actions title={localContents[0].title} lng={lng} />
 
         {user && user.id === notice.authorId && (
           <>

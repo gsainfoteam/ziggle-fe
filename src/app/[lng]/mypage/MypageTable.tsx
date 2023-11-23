@@ -63,7 +63,7 @@ const MypageTable = async ({
                 </div>
               </div>
               <div className="items-end justify-end">
-                <div className="text-regular text-secondayText m-5">
+                <div className="text-regular m-5 text-secondaryText">
                   {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
                 </div>
               </div>
@@ -73,7 +73,7 @@ const MypageTable = async ({
         {articles.length === 0 && (
           <div className="p-30 bg-colorless rounded-bl-0 rounded-br-10 flex h-full flex-col items-center justify-center">
             <LazyCat className="w-50 h-50 p-5" />
-            <div className="text-regular text-secondayText m-5">
+            <div className="text-regular m-5 text-secondaryText">
               {t('mypage.noArticle')}
             </div>
           </div>

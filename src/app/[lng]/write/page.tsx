@@ -175,7 +175,7 @@ export default function WritePage({
             <div className="font-regular text-sm md:text-lg">
               {t(`write.noticeTypes.${noticeType}.description.content`)}
             </div>
-            <div className="font-regular text-secondayText text-sm md:text-lg">
+            <div className="font-regular text-sm text-secondaryText md:text-lg">
               {t(`write.noticeTypes.${noticeType}.description.example`)}
             </div>
           </div>
@@ -186,7 +186,7 @@ export default function WritePage({
           <div className="text-lg font-medium">{t('write.setupTags')}</div>
         </div>
 
-        <div className="font-regular text-secondayText mb-3 text-sm">
+        <div className="font-regular mb-3 text-sm text-secondaryText">
           {t('write.writeTagsDescription')}
         </div>
 
@@ -257,7 +257,7 @@ export default function WritePage({
           <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
           <div className="text-lg font-medium">{t('write.attatchPhoto')}</div>
         </div>
-        <div className="font-regular text-secondayText mb-3 text-sm">
+        <div className="font-regular mb-3 text-sm text-secondaryText">
           {t('write.photoDescription')}
         </div>
 
@@ -273,7 +273,7 @@ export default function WritePage({
           {t('write.submit')}
         </div>
       </Button>
-      <div className="font-regular text-secondayText max-w-[70%] text-center text-sm">
+      <div className="font-regular max-w-[70%] text-center text-sm text-secondaryText">
         {t('write.submitDescription')}
       </div>
     </main>

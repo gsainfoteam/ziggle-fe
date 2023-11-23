@@ -89,7 +89,7 @@ const ResultImageZabo = async ({
             </div>
           </div>
           <div className="flex gap-0.5">
-            <div className="text-secondayText flex text-sm font-medium">
+            <div className="flex text-sm font-medium text-secondaryText">
               <Trans t={t} i18nKey="zabo.dateView">
                 {{ date: dayjs(createdAt).format('L') }}
                 <strong className="font-bold"> · {{ views }}</strong>
