@@ -37,6 +37,7 @@ const SearchPage = async ({
             limit={ITEMS_PER_CALL}
             page={searchParams.page}
             tags={tags}
+            orderBy="recent"
           />
         ) : (
           <div className="flex w-full justify-center">
