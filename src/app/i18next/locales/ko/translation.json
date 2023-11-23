@@ -128,19 +128,19 @@
       "description": "지난 일주일 동안 조회수가 150이 넘은 공지들이 여기서 지글지글 끓고 있어요"
     },
     "event": {
-      "label": "🎈 행사",
+      "name": "행사",
       "description": "지스트는 오늘도 뜨겁습니다"
     },
     "recruit": {
-      "label": "🎯 모집",
+      "name": "모집",
       "description": "언제나 여러분께 열린 기회"
     },
     "general": {
-      "label": "🔔 일반",
+      "name": "일반",
       "description": "지스트인들이 해야 하는 일들"
     },
     "academic": {
-      "label": "📰 학사공지"
+      "name": "학사공지"
     },
     "written": {
       "label": "✍️ 내가 게시한 공지",

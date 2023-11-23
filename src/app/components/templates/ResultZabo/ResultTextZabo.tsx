@@ -4,13 +4,9 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
 import { createTranslation } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
-import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import Tags from '../../organisms/Tags';
 import { ResultZaboProps } from './ResultZabo';
@@ -69,7 +65,12 @@ const ResultTextZabo = async ({
             {/* organization here (for futer update) */}
           </div>
 
-          <Tags tags={tags} className="my-0.5" searchQuery={searchQuery} />
+          <Tags
+            tags={tags}
+            className="my-0.5"
+            searchQuery={searchQuery}
+            lng={lng}
+          />
 
           <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
             {localeContents[0].body ?? t('zabo.noContent')}T

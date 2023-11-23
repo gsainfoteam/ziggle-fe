@@ -131,19 +131,23 @@
       "description": "Notices with over 150 views in the past week have been sizzling here."
     },
     "event": {
-      "label": "🎈 Events",
+      "label": "🎈 $t(notices.event.name)",
+      "name": "Events",
       "description": "GIST is hot today."
     },
     "recruit": {
-      "label": "🎯 Recruiting",
+      "label": "🎯 $t(notices.recruit.name)",
+      "name": "Recruiting",
       "description": "Opportunities are always open to you"
     },
     "general": {
-      "label": "🔔 General",
+      "label": "🔔 $t(notices.general.name)",
+      "name": "General",
       "description": "GISTian Must-Dos"
     },
     "academic": {
-      "label": "📰 Academic Notices"
+      "label": "📰 $t(notices.academic.name)",
+      "name": "Academic Notices"
     },
     "written": {
       "label": "✍️ My Notices",

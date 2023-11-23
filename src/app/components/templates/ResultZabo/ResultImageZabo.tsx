@@ -8,7 +8,6 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 import { createTranslation } from '@/app/i18next';
 import getLocaleContents from '@/utils/getLocaleContents';
 
-import Chip from '../../molecules/Chip';
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
 import Tags from '../../organisms/Tags';
@@ -78,6 +77,7 @@ const ResultImageZabo = async ({
               </p>
             </div>
             <Tags
+              lng={lng}
               tags={tags}
               className="my-0.5 flex-nowrap"
               searchQuery={searchQuery}
