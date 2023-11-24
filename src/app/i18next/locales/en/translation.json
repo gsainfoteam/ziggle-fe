@@ -65,7 +65,7 @@
     "clickPoster": "Click on the poster to read more",
     "downloadAll": "Download All",
     "close": "Close",
-    "author": "Author <strong>{{author}}</strong>",
+    "author": "Author <strong>{{- author}}</strong>",
     "createdAt": "Created on {{createdAt}}",
     "views": "{{views}} views",
     "copyLink": {

@@ -41,11 +41,13 @@ const ResultTextZabo = async ({
         }
       >
         <div className="flex flex-col items-start">
-          <div className="mb-1.5 text-lg font-medium">
-            <Trans t={t} i18nKey="zabo.dueAt">
-              {{ dueAt: dayjs(deadline).format('LLL') }}
-            </Trans>
-          </div>
+          {deadline && (
+            <div className="mb-1.5 text-lg font-medium">
+              <Trans t={t} i18nKey="zabo.dueAt">
+                {{ dueAt: dayjs(deadline).format('LLL') }}
+              </Trans>
+            </div>
+          )}
           <div className="text-start text-3xl font-bold">
             {searchQuery ? (
               <HighlightedText query={searchQuery}>{title}</HighlightedText>

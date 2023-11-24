@@ -54,20 +54,23 @@ const Pagination = ({ pages, page }: PaginationProps) => {
         </Button>
       )}
       <div className="w-2 shrink-0" />
-      {[...Array(pages)].map((_, index) => (
-        <Link key={index} href={generateLink(index)}>
-          <Button
-            className={[
-              'h-7 w-7 shrink-0 rounded-lg font-medium md:h-8 md:w-8 md:text-xl',
-              index === page
-                ? 'bg-primary text-white'
-                : 'bg-white text-primary',
-            ].join(' ')}
-          >
-            {index + 1}
-          </Button>
-        </Link>
-      ))}
+      {[...Array(Math.min(pages, 9))]
+        .map((_, index) => index + Math.max(0, page - 4))
+        .filter((index) => index >= 0 && index < pages)
+        .map((index) => (
+          <Link key={index} href={generateLink(index)}>
+            <Button
+              className={[
+                'h-7 w-7 shrink-0 rounded-lg font-medium md:h-8 md:w-8 md:text-xl',
+                index === page
+                  ? 'bg-primary text-white'
+                  : 'bg-white text-primary',
+              ].join(' ')}
+            >
+              {index + 1}
+            </Button>
+          </Link>
+        ))}
       <div className="w-2 shrink-0" />
       {page + 1 !== pages ? (
         <Button animated>
