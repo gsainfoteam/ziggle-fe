@@ -51,11 +51,13 @@ const ResultImageZabo = async ({
           }}
         >
           <div className="align-start flex flex-col">
-            <p className={'text-sm font-medium md:text-xl'}>
-              <Trans t={t} i18nKey="zabo.dueAt">
-                {{ dueAt: dayjs(deadline).format('LLL') }}
-              </Trans>
-            </p>
+            {deadline && (
+              <p className={'text-sm font-medium md:text-xl'}>
+                <Trans t={t} i18nKey="zabo.dueAt">
+                  {{ dueAt: dayjs(deadline).format('LLL') }}
+                </Trans>
+              </p>
+            )}
             <p className="text-start text-xl font-bold md:text-3xl">
               {searchQuery ? (
                 <HighlightedText query={searchQuery}>{title}</HighlightedText>
