@@ -62,7 +62,7 @@
     "clickPoster": "포스터 클릭하여 자세히 보기",
     "downloadAll": "전체 다운로드하기",
     "close": "닫기",
-    "author": "글쓴이 <strong>{{author}}</strong>",
+    "author": "글쓴이 <strong>{{- author}}</strong>",
     "createdAt": "작성일 {{createdAt}}",
     "views": "조회수 {{views}}",
     "copyLink": {
