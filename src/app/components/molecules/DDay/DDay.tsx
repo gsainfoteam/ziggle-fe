@@ -16,7 +16,7 @@ const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => (
     ].join(' ')}
   >
     <div className="text-sm font-bold text-white md:text-lg">
-      {ddayFormatted(dayjs(deadline), t)}
+      {ddayFormatted(dayjs(deadline).tz(), t)}
     </div>
   </div>
 );

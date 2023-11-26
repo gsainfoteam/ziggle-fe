@@ -64,7 +64,7 @@ const MypageTable = async ({
               </div>
               <div className="items-end justify-end">
                 <div className="text-regular m-5 text-secondaryText">
-                  {dayjs(articleObj.createdAt).format('YYYY-MM-DD')}
+                  {dayjs(articleObj.createdAt).tz().format('YYYY-MM-DD')}
                 </div>
               </div>
             </Link>

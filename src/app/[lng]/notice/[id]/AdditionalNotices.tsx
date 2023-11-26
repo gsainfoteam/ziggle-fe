@@ -31,26 +31,29 @@ const AdditionalNotices = async ({
                 {t('zabo.additionalNotices.title')}
               </p>
               <p className="font-regular ml-2 text-base text-secondaryText">
-                {dayjs(content.createdAt).format('LLL')}
+                {dayjs(content.createdAt).tz().format('LLL')}
               </p>
             </div>
 
             <div className="ml-8">
               {index > 0 &&
-                dayjs(content.deadline).format('LLL') !==
-                  dayjs(localeContents[index - 1].deadline).format('LLL') && (
+                !dayjs(content.deadline).isSame(
+                  dayjs(localeContents[index - 1].deadline),
+                ) && (
                   <div className="flex items-center gap-3">
                     <p className={'text-base font-bold'}>
                       {t('zabo.additionalNotices.deadlineChanged')}
                     </p>
                     <p className={'text-base font-medium text-secondaryText'}>
-                      {dayjs(localeContents[index - 1].deadline).format('LLL')}
+                      {dayjs(localeContents[index - 1].deadline)
+                        .tz()
+                        .format('LLL')}
                     </p>
 
                     <p>▶</p>
 
                     <p className={'text-base font-medium'}>
-                      {dayjs(content.deadline).format('LLL')}
+                      {dayjs(content.deadline).tz().format('LLL')}
                     </p>
                   </div>
                 )}

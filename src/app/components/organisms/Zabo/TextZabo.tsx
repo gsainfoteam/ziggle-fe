@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
 import { PropsWithLng } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
@@ -66,7 +65,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
       <div className="flex flex-col gap-2.5">
         <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
-            {{ date: dayjs(createdAt).format('L') }}
+            {{ date: dayjs(createdAt).tz().format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>

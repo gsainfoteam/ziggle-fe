@@ -15,10 +15,10 @@ import { ResultImageZaboProps } from './ResultZabo';
 
 const ResultImageZabo = async ({
   contents,
-  createdAt: rawCreatedAt,
+  createdAt,
   views,
   author,
-  currentDeadline: rawDeadline,
+  currentDeadline,
   tags,
   searchQuery,
 
@@ -30,8 +30,6 @@ const ResultImageZabo = async ({
 
   const localeContents = getLocaleContents(contents, lng);
 
-  const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-  const createdAt = rawCreatedAt ? dayjs(rawCreatedAt) : undefined;
   const title = localeContents[0].title;
 
   return (
@@ -51,10 +49,10 @@ const ResultImageZabo = async ({
           }}
         >
           <div className="align-start flex flex-col">
-            {deadline && (
+            {currentDeadline && (
               <p className={'text-sm font-medium md:text-xl'}>
                 <Trans t={t} i18nKey="zabo.dueAt">
-                  {{ dueAt: dayjs(deadline).format('LLL') }}
+                  {{ dueAt: dayjs(currentDeadline).tz().format('LLL') }}
                 </Trans>
               </p>
             )}
@@ -88,7 +86,7 @@ const ResultImageZabo = async ({
           <div className="flex gap-0.5">
             <div className="flex text-sm font-medium text-secondaryText">
               <Trans t={t} i18nKey="zabo.dateView">
-                {{ date: dayjs(createdAt).format('L') }}
+                {{ date: dayjs(createdAt).tz().format('L') }}
                 <strong className="font-bold"> · {{ views }}</strong>
               </Trans>
             </div>

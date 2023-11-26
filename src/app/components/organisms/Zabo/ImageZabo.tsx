@@ -3,7 +3,6 @@ import { Trans } from 'react-i18next';
 
 import ZaboImage from '@/app/components/molecules/ZaboImage';
 import { PropsWithLng } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
@@ -21,8 +20,6 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   height,
   lng,
 }: ImageZaboProps<Origin> & PropsWithLng) => {
-  const { i18n } = useTranslation(lng);
-
   const localContents = getLocaleContents(contents, lng);
 
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
@@ -59,7 +56,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         </div>
         <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
-            {{ date: dayjs(createdAt).format('L') }}
+            {{ date: dayjs(createdAt).tz().format('L') }}
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>

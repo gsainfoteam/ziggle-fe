@@ -27,7 +27,7 @@ const NoticeInfo = async ({
     <div>
       {deadline && (
         <>
-          <Deadline deadline={dayjs(deadline)} t={t} />
+          <Deadline deadline={dayjs(deadline).tz()} t={t} />
           <div className="h-2" />
         </>
       )}
@@ -79,7 +79,7 @@ const Metadata = ({
     <div className="h-5 w-0.5 bg-text dark:bg-secondaryText md:h-7" />
     <div className="flex gap-4 font-normal text-secondaryText">
       <Trans t={t} i18nKey="zabo.createdAt">
-        createdAt {{ createdAt: createdAt.format('LLL') }}
+        createdAt {{ createdAt: createdAt.tz().format('LLL') }}
       </Trans>
       {' · '}
       <Trans t={t} i18nKey="zabo.views">
