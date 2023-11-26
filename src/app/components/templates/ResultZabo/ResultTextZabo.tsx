@@ -17,15 +17,13 @@ const ResultTextZabo = async ({
   createdAt,
   views,
   author,
-  currentDeadline: rawDeadline,
+  currentDeadline,
   tags,
   searchQuery,
 
   id,
   lng,
 }: ResultZaboProps) => {
-  const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
-
   const { t } = await createTranslation(lng);
   const localeContents = getLocaleContents(contents, lng);
 
@@ -41,10 +39,10 @@ const ResultTextZabo = async ({
         }
       >
         <div className="flex flex-col items-start">
-          {deadline && (
+          {currentDeadline && (
             <div className="mb-1.5 text-lg font-medium">
               <Trans t={t} i18nKey="zabo.dueAt">
-                {{ dueAt: dayjs(deadline).format('LLL') }}
+                {{ dueAt: dayjs(currentDeadline).tz().format('LLL') }}
               </Trans>
             </div>
           )}
@@ -81,7 +79,7 @@ const ResultTextZabo = async ({
           <div className="flex gap-0.5">
             <div className="flex text-sm font-medium text-secondaryText">
               <Trans t={t} i18nKey="zabo.dateView">
-                {{ date: dayjs(createdAt).format('L') }}
+                {{ date: dayjs(createdAt).tz().format('L') }}
                 <strong className="font-bold"> · {{ views }}</strong>
               </Trans>
             </div>
