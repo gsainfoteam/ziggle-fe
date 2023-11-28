@@ -6,21 +6,30 @@ import AddIcon from '@/assets/icons/add.svg';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 interface AdditionalNoticesProps {
-  contents: Content[];
+  mainContent: Content;
+  additionalContents: Content[];
   t: T;
 }
 
 const AdditionalNotices = async ({
-  contents,
+  mainContent,
+  additionalContents,
   t,
   lng,
 }: AdditionalNoticesProps & PropsWithLng) => {
-  const localeContents = getLocaleContents(contents, lng);
-
   return (
     <div className={'flex flex-col gap-4'}>
-      {localeContents.map((content, index) => {
-        return index > 0 ? (
+      {additionalContents.map((content, index) => {
+        const lastDeadline =
+          index > 0
+            ? additionalContents[index - 1].deadline
+            : mainContent.deadline;
+
+        const deadlineChanged = !dayjs(content.deadline).isSame(
+          dayjs(lastDeadline),
+        );
+
+        return (
           <div
             key={`${content.id}+${content.lang}`}
             className="flex flex-col gap-2.5 rounded-xl border-2 border-primary p-4"
@@ -36,34 +45,31 @@ const AdditionalNotices = async ({
             </div>
 
             <div className="ml-8">
-              {index > 0 &&
-                !dayjs(content.deadline).isSame(
-                  dayjs(localeContents[index - 1].deadline),
-                ) && (
-                  <div className="flex items-center gap-3">
-                    <p className={'text-base font-bold'}>
-                      {t('zabo.additionalNotices.deadlineChanged')}
-                    </p>
-                    <p className={'text-base font-medium text-secondaryText'}>
-                      {dayjs(localeContents[index - 1].deadline)
-                        .tz()
-                        .format('LLL')}
-                    </p>
+              {deadlineChanged && (
+                <div className="flex items-center gap-3">
+                  <p className={'text-base font-bold'}>
+                    {t('zabo.additionalNotices.deadlineChanged')}
+                  </p>
+                  <p className={'text-base font-medium text-secondaryText'}>
+                    {dayjs(lastDeadline).tz().isValid()
+                      ? dayjs(lastDeadline).tz().format('LLL')
+                      : t('zabo.additionalNotices.noDeadline')}
+                  </p>
 
-                    <p>▶</p>
+                  <p>▶</p>
 
-                    <p className={'text-base font-medium'}>
-                      {dayjs(content.deadline).tz().format('LLL')}
-                    </p>
-                  </div>
-                )}
+                  <p className={'text-base font-medium'}>
+                    {dayjs(content.deadline).tz().format('LLL')}
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className={'mb-3 ml-8 mt-1'}>
               <p className={'text-base'}>{content.body}</p>
             </div>
           </div>
-        ) : null;
+        );
       })}
     </div>
   );

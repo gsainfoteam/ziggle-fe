@@ -68,7 +68,7 @@ const AddAdditionalNotice = ({
       variables: {
         noticeId,
         body: content,
-        deadline,
+        deadline: hasDeadline ? deadline : originallyHasDeadline,
       },
     });
 
@@ -78,7 +78,7 @@ const AddAdditionalNotice = ({
     }
     const contentId = contents[contents.length - 1].id;
 
-    if (notice && contentId) {
+    if (notice && contentId && supportEnglish) {
       const enNotice = await apolloClient.mutate({
         mutation: ATTACH_INTERNATIONAL_NOTICE,
         variables: {
@@ -87,22 +87,22 @@ const AddAdditionalNotice = ({
           lang: 'en',
           noticeId,
           contentId,
-          deadline,
+          deadline: hasDeadline ? deadline : originallyHasDeadline,
         },
       });
-
-      setContent('');
-      setEnglishContent('');
-
-      Swal.fire({
-        icon: 'success',
-        title: t('write.alerts.submitSuccess'),
-        showConfirmButton: false,
-        timer: 1500,
-      });
-
-      refresh();
     }
+
+    setContent('');
+    setEnglishContent('');
+
+    Swal.fire({
+      icon: 'success',
+      title: t('write.alerts.submitSuccess'),
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    refresh();
   };
 
   return (

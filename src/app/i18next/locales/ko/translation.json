@@ -85,6 +85,7 @@
       "title": "추가 공지",
       "deadlineChanged": "마감시간 변경",
       "addAdditionalNotice": "추가 공지 작성하기",
+      "noDeadline": "마감시간 없음",
       "changeDeadline": "마감시간 변경하기",
       "koreanAdditionalNotice": "한국어 추가 공지",
       "englishAdditionalNotice": "영어 추가 공지",
