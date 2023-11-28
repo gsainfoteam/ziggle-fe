@@ -57,6 +57,13 @@ const DetailedNoticePage = async ({
 
   const localContents = getLocaleContents(notice.contents, lng);
 
+  const mainContent =
+    localContents.find((content) => content.id === 1) ?? localContents[0];
+
+  const additionalContents = localContents.filter(
+    (content) => content.id !== 1,
+  );
+
   const title = localContents[0].title;
 
   const user = await auth();
@@ -92,10 +99,15 @@ const DetailedNoticePage = async ({
           lng={lng}
         />
         <div className="h-5" />
-        <Content content={localContents[0].body} />
+        <Content content={mainContent?.body ?? ''} />
 
         <div className="h-10" />
-        <AddtionalNotices contents={localContents} t={t} lng={lng} />
+        <AddtionalNotices
+          additionalContents={additionalContents}
+          mainContent={mainContent}
+          t={t}
+          lng={lng}
+        />
 
         {user && user.id === notice.authorId && isAdditionalNoticeShow && (
           <>
