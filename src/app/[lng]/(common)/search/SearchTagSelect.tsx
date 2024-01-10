@@ -7,8 +7,8 @@ import { NoticeKind } from '@/api/notice/notice';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-import Button from '../../components/atoms/Button';
-import Chip from '../../components/molecules/Chip';
+import Button from '../../../components/atoms/Button';
+import Chip from '../../../components/molecules/Chip';
 
 const SearchTagSelect = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);

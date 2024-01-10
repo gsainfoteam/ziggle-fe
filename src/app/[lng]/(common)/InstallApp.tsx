@@ -4,9 +4,9 @@ import Swal from 'sweetalert2';
 import {
   appStoreLink,
   playStoreLink,
-} from '../components/templates/Footer/Footer';
-import { PropsWithLng } from '../i18next';
-import { useTranslation } from '../i18next/client';
+} from '../../components/templates/Footer/Footer';
+import { PropsWithLng } from '../../i18next';
+import { useTranslation } from '../../i18next/client';
 
 const InstallApp = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
@@ -20,10 +20,13 @@ const InstallApp = ({ lng }: PropsWithLng) => {
       title: t('installApp.title'),
       text: t('installApp.text'),
       icon: 'info',
-      confirmButtonText: t('installApp.install'),
+      confirmButtonText: t('installApp.open'),
+      cancelButtonText: t('installApp.cancel'),
+      showCancelButton: true,
+      allowOutsideClick: false,
     }).then((result) => {
       if (!result.isConfirmed) return;
-      window.open(isIos ? appStoreLink : playStoreLink);
+      window.open(window.location.origin + '/app');
     });
   }, [t]);
 

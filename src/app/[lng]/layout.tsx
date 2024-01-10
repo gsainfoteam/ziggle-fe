@@ -12,8 +12,6 @@ import Navbar from '@/app/components/templates/Navbar';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
-import InitClient from './InitClient';
-
 const inter = Inter({
   weight: ['400', '500', '700'],
   subsets: ['latin'],
@@ -119,13 +117,7 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <InitClient lng={lng}>
-          <Navbar lng={lng} />
-          <main className="flex-1">{children}</main>
-          <div className="basis-80" />
-          <Footer t={t} />
-          <ToastContainer className="w-64" />
-        </InitClient>
+        {children}
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 
-import { PropsWithLng } from '../i18next';
+import { PropsWithLng } from '../../i18next';
 
 const apolloCache = new InMemoryCache({
   typePolicies: {
@@ -42,7 +42,9 @@ export const apolloClient = new ApolloClient({
   cache: apolloCache,
 });
 
-const InstallApp = dynamic(() => import('./InstallApp'), { ssr: false });
+const InstallApp = dynamic(() => import('./InstallApp'), {
+  ssr: false,
+});
 
 const InitClient = ({
   lng,
