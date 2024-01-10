@@ -5,10 +5,7 @@ import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
-import { ToastContainer } from 'react-toastify';
 
-import Footer from '@/app/components/templates/Footer';
-import Navbar from '@/app/components/templates/Navbar';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
@@ -63,10 +60,6 @@ export const generateMetadata = async ({
       images: '/api/og',
     },
   };
-};
-
-export const viewport: Viewport = {
-  themeColor: '#eb6263',
 };
 
 export async function generateStaticParams() {

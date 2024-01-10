@@ -1,6 +1,7 @@
 import '@/app/globals.css';
 import '@/app/initDayjs';
 
+import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
@@ -8,6 +9,10 @@ import Navbar from '@/app/components/templates/Navbar';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import InitClient from './InitClient';
+
+export const viewport: Viewport = {
+  themeColor: '#eb6263',
+};
 
 export default async function Layout({
   children,
