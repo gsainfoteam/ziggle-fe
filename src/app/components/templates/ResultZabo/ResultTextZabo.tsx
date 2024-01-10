@@ -73,7 +73,7 @@ const ResultTextZabo = async ({
           />
 
           <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
-            {localeContents[0].body ?? t('zabo.noContent')}T
+            {localeContents[0].body ?? t('zabo.noContent')}
           </div>
 
           <div className="flex gap-0.5">
