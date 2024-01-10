@@ -42,15 +42,17 @@ export const apolloClient = new ApolloClient({
   cache: apolloCache,
 });
 
+// remove on next version
 const InstallApp = dynamic(() => import('./InstallApp'), { ssr: false });
 
-const InitClient = ({
-  lng,
-  children,
-}: React.PropsWithChildren<PropsWithLng>) => (
+const RedirectToShop = dynamic(() => import('./RedirectToShop'), {
+  ssr: false,
+});
+
+const InitClient = ({ children }: React.PropsWithChildren<PropsWithLng>) => (
   <ApolloProvider client={apolloClient}>
     <Suspense>
-      <InstallApp lng={lng} />
+      <RedirectToShop />
     </Suspense>
     {children}
   </ApolloProvider>

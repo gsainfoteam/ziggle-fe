@@ -8,6 +8,9 @@ import {
 import { PropsWithLng } from '../i18next';
 import { useTranslation } from '../i18next/client';
 
+/**
+ * @deprecated
+ */
 const InstallApp = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
