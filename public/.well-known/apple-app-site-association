@@ -10,12 +10,9 @@
             "comment": "Matches any URL whose fragment equals no_universal_links and instructs the system not to open it as a universal link"
           },
           {
-            "/": "/*/notices/*",
-            "comment": "notices"
-          },
-          {
-            "/": "/notices/*",
-            "comment": "notices"
+            "/": "/app",
+            "?": {"redirect": "*"},
+            "comment": "app redirect"
           }
         ]
       }
