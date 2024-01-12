@@ -18,16 +18,17 @@ const AppOpenPage = ({
   const userAgent = h.get('user-agent');
   const isAndroid = Boolean(userAgent?.match(/Android/i));
   const isIos = Boolean(userAgent?.match(/iPhone|iPad|iPod/i));
-  const host = h.get('host');
-  const protocol = h.get('x-forwarded-proto') || 'https';
-  const origin = `${protocol}://${host}`;
 
   if (searchParams.install === 'true') {
     if (isAndroid) redirect(playStoreLink);
     if (isIos) redirect(appStoreLink);
   }
   if (!isAndroid && !isIos) redirect(origin);
-  const url = new URL('https://ziggle.gistory.me/app');
+
+  const host = h.get('host');
+  const protocol = h.get('x-forwarded-proto') || 'https';
+  const url = new URL(`${protocol}://${host}`);
+  url.pathname = '/app';
   url.searchParams.set('redirect', searchParams.redirect);
   url.searchParams.set('install', 'true');
   redirect(url.toString());
