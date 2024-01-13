@@ -253,6 +253,7 @@
   "installApp": {
     "title": "Install the mobile app!",
     "text": "You can use more convenient service.",
-    "install": "Install"
+    "open": "Open App or Install App",
+    "cancel": "Never mind"
   }
 }

@@ -8,7 +8,7 @@ import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 
-import Button from '../../components/atoms/Button';
+import Button from '../../../components/atoms/Button';
 
 interface SearchBarProps {
   lng: Locale;

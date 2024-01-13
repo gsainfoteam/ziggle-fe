@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
-import {
-  appStoreLink,
-  playStoreLink,
-} from '../components/templates/Footer/Footer';
-import { PropsWithLng } from '../i18next';
-import { useTranslation } from '../i18next/client';
+import { languages } from '@/app/i18next/settings';
+
+import { PropsWithLng } from '../../i18next';
+import { useTranslation } from '../../i18next/client';
 
 const InstallApp = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
@@ -20,10 +18,22 @@ const InstallApp = ({ lng }: PropsWithLng) => {
       title: t('installApp.title'),
       text: t('installApp.text'),
       icon: 'info',
-      confirmButtonText: t('installApp.install'),
+      confirmButtonText: t('installApp.open'),
+      cancelButtonText: t('installApp.cancel'),
+      showCancelButton: true,
+      allowOutsideClick: false,
     }).then((result) => {
       if (!result.isConfirmed) return;
-      window.open(isIos ? appStoreLink : playStoreLink);
+      const link = new URL(window.location.origin);
+      link.pathname = '/app';
+      link.searchParams.set(
+        'redirect',
+        languages.reduce(
+          (prev, curr) => prev.replace(`/${curr}`, ''),
+          window.location.pathname,
+        ),
+      );
+      window.open(link);
     });
   }, [t]);
 

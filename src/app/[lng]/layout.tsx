@@ -5,14 +5,9 @@ import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
-import { ToastContainer } from 'react-toastify';
 
-import Footer from '@/app/components/templates/Footer';
-import Navbar from '@/app/components/templates/Navbar';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
-
-import InitClient from './InitClient';
 
 const inter = Inter({
   weight: ['400', '500', '700'],
@@ -67,10 +62,6 @@ export const generateMetadata = async ({
   };
 };
 
-export const viewport: Viewport = {
-  themeColor: '#eb6263',
-};
-
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
@@ -119,13 +110,7 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <InitClient lng={lng}>
-          <Navbar lng={lng} />
-          <main className="flex-1">{children}</main>
-          <div className="basis-80" />
-          <Footer t={t} />
-          <ToastContainer className="w-64" />
-        </InitClient>
+        {children}
       </body>
     </html>
   );

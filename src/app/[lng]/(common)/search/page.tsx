@@ -1,7 +1,7 @@
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import SearchResults from '../../components/templates/SearchResults';
+import SearchResults from '../../../components/templates/SearchResults';
 import SearchBar from './SearchBar';
 import SearchTagSelect from './SearchTagSelect';
 
