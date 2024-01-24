@@ -15,7 +15,7 @@ Default.args = {
   notices: [
     {
       id: 1,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -40,13 +40,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 2,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -71,13 +70,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 3,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -102,13 +100,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 4,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -133,13 +130,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 5,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -164,13 +160,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 6,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -195,13 +190,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 7,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -226,13 +220,12 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },
     {
       id: 8,
-      imageUrl: 'https://picsum.photos/200/300',
+      imagesUrl: ['https://picsum.photos/200/300'],
       contents: [
         {
           id: 1,
@@ -257,7 +250,6 @@ Default.args = {
       updatedAt: dayjs('2023-02-14T11:57:18.740Z'),
       views: 110,
       author: '이정우',
-      body: '',
       tags: [],
       files: [],
     },

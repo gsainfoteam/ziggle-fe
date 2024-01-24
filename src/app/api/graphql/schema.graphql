@@ -27,14 +27,13 @@ type NoticeFile {
 type Notice {
   id: Int!
   views: Int!
-  body: String!
   currentDeadline: Date
   createdAt: Date!
   updatedAt: Date!
   deletedAt: Date
   author: String!
   tags: [Tag!]!
-  imageUrl: String
+  imagesUrl: [String!]!
   contents: [Content!]!
   files: [NoticeFile!]
 }
@@ -42,7 +41,6 @@ type Notice {
 type DetailedNotice {
   id: Int!
   views: Int!
-  body: String!
   currentDeadline: Date
   createdAt: Date!
   updatedAt: Date!

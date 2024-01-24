@@ -15,17 +15,11 @@ export type ResultZaboProps = PropsWithLng<
   }
 >;
 
-export type ResultImageZaboProps = ResultZaboProps & {
-  imageUrl: string;
-};
-
-export type ResultTextZaboProps = ResultZaboProps;
-
 const ResultZabo = (props: ResultZaboProps) => {
-  return props.imageUrl ? (
-    <ResultImageZabo {...(props as ResultImageZaboProps)} />
+  return props.imagesUrl.length > 0 ? ( // image exists in zabo
+    <ResultImageZabo {...(props as ResultZaboProps)} />
   ) : (
-    <ResultTextZabo {...(props as ResultTextZaboProps)} />
+    <ResultTextZabo {...(props as ResultZaboProps)} />
   );
 };
 

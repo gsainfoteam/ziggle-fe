@@ -5,7 +5,7 @@ import { PropsWithLng } from '@/app/i18next';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
-import { TextZaboProps, ZaboOrigin } from './Zabo';
+import { ZaboOrigin, ZaboProps } from './Zabo';
 
 const TextZabo = <Origin extends ZaboOrigin>({
   contents,
@@ -17,7 +17,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
   height,
   width,
   lng,
-}: TextZaboProps<Origin> & PropsWithLng) => {
+}: ZaboProps<Origin> & PropsWithLng) => {
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
