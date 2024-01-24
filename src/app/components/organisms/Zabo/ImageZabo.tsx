@@ -6,10 +6,10 @@ import { PropsWithLng } from '@/app/i18next';
 import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
-import { ImageZaboProps, ZaboOrigin, ZaboSize } from './Zabo';
+import { ZaboOrigin, ZaboProps, ZaboSize } from './Zabo';
 
 const ImageZabo = <Origin extends ZaboOrigin>({
-  imageUrl,
+  imagesUrl,
   contents,
   createdAt,
   views,
@@ -19,7 +19,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   width,
   height,
   lng,
-}: ImageZaboProps<Origin> & PropsWithLng) => {
+}: ZaboProps<Origin> & PropsWithLng) => {
   const localContents = getLocaleContents(contents, lng);
 
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
@@ -37,7 +37,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         }
       >
         <ZaboImage
-          src={imageUrl}
+          src={imagesUrl[0]}
           alt={title}
           className="rounded border border-secondaryText object-cover"
           {...size}

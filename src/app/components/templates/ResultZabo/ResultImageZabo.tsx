@@ -11,7 +11,7 @@ import getLocaleContents from '@/utils/getLocaleContents';
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
 import Tags from '../../organisms/Tags';
-import { ResultImageZaboProps } from './ResultZabo';
+import { ResultZaboProps } from './ResultZabo';
 
 const ResultImageZabo = async ({
   contents,
@@ -21,11 +21,10 @@ const ResultImageZabo = async ({
   currentDeadline,
   tags,
   searchQuery,
-
-  imageUrl,
+  imagesUrl,
   id,
   lng,
-}: ResultImageZaboProps) => {
+}: ResultZaboProps) => {
   const { t } = await createTranslation(lng);
 
   const localeContents = getLocaleContents(contents, lng);
@@ -37,7 +36,7 @@ const ResultImageZabo = async ({
       <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden rounded border border-secondaryText">
         <ZaboImage
           width={230} // handle mobile
-          src={imageUrl}
+          src={imagesUrl[0]}
           alt={title}
           style={{ objectFit: 'cover', objectPosition: 'center' }}
         />

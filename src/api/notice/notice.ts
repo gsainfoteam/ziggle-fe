@@ -23,7 +23,7 @@ export interface NoticeSearchParams {
   my?: 'own' | 'reminders';
 }
 
-interface NoticeBase {
+export interface Notice {
   id: number;
   views: number;
   currentDeadline?: dayjs.Dayjs | string | null;
@@ -34,8 +34,8 @@ interface NoticeBase {
   tags: Tag[];
   logName?: string;
   contents: Content[];
+  imagesUrl: string[];
   files?: NoticeFile[] | null;
-  body: string;
 }
 
 export interface Content {
@@ -62,12 +62,7 @@ export interface Tag {
   name: string;
 }
 
-export interface Notice extends NoticeBase {
-  imageUrl: string | null;
-}
-
-export interface NoticeDetail extends NoticeBase {
-  imagesUrl: string[];
+export interface NoticeDetail extends Notice {
   reminder: boolean;
   authorId: string;
 }
@@ -82,10 +77,9 @@ export const getAllNotices = async (
 ) =>
   api.get<Notices>('/notice', { params }).then(({ data }) => ({
     ...data,
-    list: data.list.map(({ imageUrl, currentDeadline, ...notice }) => ({
+    list: data.list.map(({ currentDeadline, ...notice }) => ({
       ...notice,
       currentDeadline: currentDeadline ?? null,
-      imageUrl: imageUrl ?? null,
       contents: notice.contents.map(({ deadline, ...content }) => ({
         ...content,
         deadline: deadline ?? null,
@@ -109,13 +103,12 @@ export const GET_NOTICES = gql(`
       list {
         id
         views
-        body
         currentDeadline
         createdAt
         updatedAt
         deletedAt
         author
-        imageUrl
+        imagesUrl
         tags {
           id
           name

@@ -14,11 +14,5 @@ export const getAllNotices = async (
         Authorization: `Bearer ${cookieStore.get('access_token')?.value}`,
       },
     })
-    .then(({ data }) => ({
-      ...data,
-      list: data.list.map(({ imageUrl, ...notice }) => ({
-        ...notice,
-        imageUrl: imageUrl ? imageUrl : null,
-      })),
-    }));
+    .then((res) => res.data);
 };

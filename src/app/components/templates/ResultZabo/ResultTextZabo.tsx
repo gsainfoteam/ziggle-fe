@@ -13,7 +13,6 @@ import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = async ({
   contents,
-  body,
   createdAt,
   views,
   author,

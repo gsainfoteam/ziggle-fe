@@ -16,24 +16,16 @@ export type ZaboProps<Origin extends ZaboOrigin> = PropsWithT<
   Notice & ZaboSize<Origin>
 >;
 
-export type ImageZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin> & {
-  imageUrl: string;
-};
-
-export type TextZaboProps<Origin extends ZaboOrigin> = ZaboProps<Origin>;
-
 const Zabo = <IsImage extends boolean>(
-  props: IsImage extends true
-    ? ImageZaboProps<ZaboOrigin> & PropsWithLng
-    : TextZaboProps<ZaboOrigin> & PropsWithLng,
+  props: ZaboProps<ZaboOrigin> & PropsWithLng,
 ) =>
-  'imageUrl' in props && props.imageUrl && props.imageUrl.length > 0 ? (
+  props.imagesUrl.length > 0 ? (
     <ImageZabo
-      {...(props as ImageZaboProps<ZaboOrigin> & PropsWithLng)}
-      imageUrl={props.imageUrl || ''}
+      {...(props as ZaboProps<ZaboOrigin> & PropsWithLng)}
+      imagesUrl={props.imagesUrl}
     />
   ) : (
-    <TextZabo {...(props as TextZaboProps<ZaboOrigin> & PropsWithLng)} />
+    <TextZabo {...(props as ZaboProps<ZaboOrigin> & PropsWithLng)} />
   );
 
 export default Zabo;

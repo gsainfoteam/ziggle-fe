@@ -33,7 +33,7 @@ const Results = async ({
               event="search_result_click"
               properties={{
                 location: 'SearchPage',
-                isText: notice.imageUrl === null,
+                isText: notice.imagesUrl.length === 0,
               }}
               key={notice.id}
             >

@@ -20,14 +20,7 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
     variables: { offset: 0, limit: ITEMS_PER_CALL },
   });
 
-  const notices = useMemo(
-    () =>
-      data?.notices.list.map(({ imageUrl, ...notice }) => ({
-        ...notice,
-        imageUrl: imageUrl ?? null,
-      })) ?? [],
-    [data],
-  );
+  const notices = useMemo(() => data?.notices.list ?? [], [data]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

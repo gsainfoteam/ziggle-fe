@@ -33,7 +33,6 @@ export type DetailedNotice = {
   __typename?: 'DetailedNotice';
   author: Scalars['String']['output'];
   authorId: Scalars['String']['output'];
-  body: Scalars['String']['output'];
   contents: Array<Content>;
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
@@ -95,14 +94,13 @@ export type MutationDeleteNoticeArgs = {
 export type Notice = {
   __typename?: 'Notice';
   author: Scalars['String']['output'];
-  body: Scalars['String']['output'];
   contents: Array<Content>;
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
   deletedAt?: Maybe<Scalars['Date']['output']>;
   files?: Maybe<Array<NoticeFile>>;
   id: Scalars['Int']['output'];
-  imageUrl?: Maybe<Scalars['String']['output']>;
+  imagesUrl: Array<Scalars['String']['output']>;
   tags: Array<Tag>;
   updatedAt: Scalars['Date']['output'];
   views: Scalars['Int']['output'];
@@ -278,7 +276,6 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['DetailedNotice'] = ResolversParentTypes['DetailedNotice']> = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   authorId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contents?: Resolver<Array<ResolversTypes['Content']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
@@ -302,14 +299,13 @@ export type MutationResolvers<ContextType = MyContext, ParentType extends Resolv
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {
   author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contents?: Resolver<Array<ResolversTypes['Content']>, ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   deletedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   files?: Resolver<Maybe<Array<ResolversTypes['NoticeFile']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  imageUrl?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  imagesUrl?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
