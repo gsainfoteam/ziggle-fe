@@ -206,7 +206,7 @@ const handleNoticeSubmit = async ({
     return;
   }
 
-  const { id, contents } = notice.data?.createNotice;
+  const { id, additionalContents } = notice.data?.createNotice;
 
   if (!id) {
     Swal.fire({
@@ -226,7 +226,7 @@ const handleNoticeSubmit = async ({
         deadline,
         body: englishBody!,
         noticeId: id,
-        contentId: contents[0].id,
+        contentId: additionalContents[0].id,
       },
     });
   }

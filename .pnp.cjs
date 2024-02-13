@@ -75,6 +75,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["i18next", "npm:23.7.6"],\
             ["i18next-browser-languagedetector", "npm:7.2.0"],\
             ["i18next-resources-to-backend", "npm:1.2.0"],\
+            ["ignore-loader", "npm:0.1.2"],\
             ["isomorphic-dompurify", "npm:1.9.0"],\
             ["jsdom", "virtual:83b023ebdab1314ff947ce99f7ade4167acbe4884bade3517f8af451f59f14135954817a677debeda585604140e91ee5221d2475b34f0fef082a5f253dd488c2#npm:22.1.0"],\
             ["lottie-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0"],\
@@ -15314,6 +15315,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["ignore-loader", [\
+        ["npm:0.1.2", {\
+          "packageLocation": "./.yarn/cache/ignore-loader-npm-0.1.2-317e1d3ef1-26b5f81b24.zip/node_modules/ignore-loader/",\
+          "packageDependencies": [\
+            ["ignore-loader", "npm:0.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["image-size", [\
         ["npm:1.0.2", {\
           "packageLocation": "./.yarn/cache/image-size-npm-1.0.2-ed5424d843-01745fdb47.zip/node_modules/image-size/",\
@@ -23585,6 +23595,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["i18next", "npm:23.7.6"],\
             ["i18next-browser-languagedetector", "npm:7.2.0"],\
             ["i18next-resources-to-backend", "npm:1.2.0"],\
+            ["ignore-loader", "npm:0.1.2"],\
             ["isomorphic-dompurify", "npm:1.9.0"],\
             ["jsdom", "virtual:83b023ebdab1314ff947ce99f7ade4167acbe4884bade3517f8af451f59f14135954817a677debeda585604140e91ee5221d2475b34f0fef082a5f253dd488c2#npm:22.1.0"],\
             ["lottie-react", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.4.0"],\

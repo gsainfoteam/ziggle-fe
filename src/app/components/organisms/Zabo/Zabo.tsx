@@ -19,10 +19,10 @@ export type ZaboProps<Origin extends ZaboOrigin> = PropsWithT<
 const Zabo = <IsImage extends boolean>(
   props: ZaboProps<ZaboOrigin> & PropsWithLng,
 ) =>
-  props.imagesUrl.length > 0 ? (
+  props.imageUrls.length > 0 ? (
     <ImageZabo
       {...(props as ZaboProps<ZaboOrigin> & PropsWithLng)}
-      imagesUrl={props.imagesUrl}
+      imageUrls={props.imageUrls}
     />
   ) : (
     <TextZabo {...(props as ZaboProps<ZaboOrigin> & PropsWithLng)} />

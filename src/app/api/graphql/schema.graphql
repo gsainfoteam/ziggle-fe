@@ -1,57 +1,57 @@
 scalar Date
 
-type Tag {
-  id: Int!
-  name: String!
-}
-
 type Content {
   id: Int!
-  lang: String!
-  title: String!
-  body: String!
   deadline: Date
+  content: String!
+  lang: String!
   createdAt: Date!
-  noticeId: Int!
 }
 
-type NoticeFile {
-  uuid: String!
+type Reaction {
+  emoji: String!
+  count: Int!
+  isReacted: Boolean!
+}
+
+type Author {
   name: String!
-  createdAt: Date!
-  url: String!
-  type: String!
-  noticeId: Int!
+  uuid: String!
 }
 
 type Notice {
   id: Int!
-  views: Int!
+  title: String!
+  deadline: Date
   currentDeadline: Date
+  langs: [String!]!
+  content: String!
+  author: Author!
   createdAt: Date!
-  updatedAt: Date!
-  deletedAt: Date
-  author: String!
-  tags: [Tag!]!
-  imagesUrl: [String!]!
-  contents: [Content!]!
-  files: [NoticeFile!]
+  tags: [String!]!
+  views: Int!
+  imageUrls: [String!]!
+  documentUrls: [String!]!
+  isReminded: Boolean!
+  reactions: [Reaction!]!
 }
 
 type DetailedNotice {
   id: Int!
-  views: Int!
+  title: String!
+  deadline: Date
   currentDeadline: Date
+  langs: [String!]!
+  content: String!
+  author: Author!
   createdAt: Date!
-  updatedAt: Date!
-  deletedAt: Date
-  authorId: String!
-  author: String!
-  tags: [Tag!]!
-  imagesUrl: [String!]!
-  contents: [Content!]!
-  files: [NoticeFile!]
-  reminder: Boolean!
+  tags: [String!]!
+  views: Int!
+  imageUrls: [String!]!
+  documentUrls: [String!]!
+  isReminded: Boolean!
+  reactions: [Reaction!]!
+  additionalContents: [Content!]!
 }
 
 type Notices {

@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
+import { toast } from 'react-toastify';
 
-import { ADD_REACTION } from '@/api/notice/notice';
+import { ADD_REACTION, Notice, Reaction } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 
 import { apolloClient } from '../../InitClient';
@@ -12,42 +12,74 @@ import LoudlyCryingFace from './assets/loudly-crying-face.svg';
 import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
 
+const ReactionButton = ({
+  emoji,
+  count,
+  isReacted,
+  onClick,
+}: Reaction & { onClick: () => void }) => {
+  return (
+    <Button variant={isReacted ? 'contained' : 'outlined'} onClick={onClick}>
+      {emoji === '🔥' ? (
+        <Fire width={20} />
+      ) : emoji === '😭' ? (
+        <LoudlyCryingFace width={20} />
+      ) : emoji === '😧' ? (
+        <AnguishedFace width={20} />
+      ) : emoji === '🤔' ? (
+        <ThinkingFace width={20} />
+      ) : emoji === '😮' ? (
+        <SurprisedFace width={20} />
+      ) : null}
+
+      <p>{count}</p>
+    </Button>
+  );
+};
+
 interface ReactionsProps {
-  noticeId: number;
+  notice: Notice;
 }
 
-const Reactions = ({ noticeId }: ReactionsProps) => {
+const preReactionList = ['🔥', '😭', '😧', '🤔', '😮'];
+
+const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
   const handleEmojiClick = async (emoji: string) => {
-    const res = apolloClient.mutate({
-      mutation: ADD_REACTION,
-      variables: {
-        noticeId,
-        emoji,
-      },
-    });
+    try {
+      const res = await apolloClient.mutate({
+        mutation: ADD_REACTION,
+        variables: {
+          noticeId: id,
+          emoji,
+        },
+      });
+    } catch (e) {
+      toast.error('로그인이 필요합니다.');
+      console.log(e);
+    }
   };
 
   return (
     <div className={'flex gap-2'}>
-      <Button variant={'contained'} onClick={() => handleEmojiClick('🔥')}>
-        <Fire />
-      </Button>
+      {preReactionList
+        .map((emoji) => {
+          const reaction = reactions.find(
+            (reaction) => reaction.emoji === emoji,
+          );
 
-      <Button variant={'contained'}>
-        <LoudlyCryingFace width={20} />
-      </Button>
-
-      <Button variant={'contained'}>
-        <AnguishedFace width={20} />
-      </Button>
-
-      <Button variant={'contained'}>
-        <ThinkingFace width={20} />
-      </Button>
-
-      <Button variant={'contained'}>
-        <SurprisedFace width={20} />
-      </Button>
+          return {
+            emoji,
+            count: reaction?.count ?? 0,
+            isReacted: reaction?.isReacted ?? false,
+          };
+        })
+        .map((reaction) => (
+          <ReactionButton
+            key={reaction.emoji}
+            onClick={() => handleEmojiClick(reaction.emoji)}
+            {...reaction}
+          />
+        ))}
     </div>
   );
 };

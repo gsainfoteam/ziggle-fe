@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
@@ -14,29 +13,25 @@ import Tags from '../../organisms/Tags';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultImageZabo = async ({
-  contents,
+  title,
   createdAt,
   views,
   author,
   currentDeadline,
   tags,
   searchQuery,
-  imagesUrl,
+  imageUrls,
   id,
   lng,
 }: ResultZaboProps) => {
   const { t } = await createTranslation(lng);
-
-  const localeContents = getLocaleContents(contents, lng);
-
-  const title = localeContents[0].title;
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>
       <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden rounded border border-secondaryText">
         <ZaboImage
           width={230} // handle mobile
-          src={imagesUrl[0]}
+          src={imageUrls[0]}
           alt={title}
           style={{ objectFit: 'cover', objectPosition: 'center' }}
         />
@@ -68,7 +63,7 @@ const ResultImageZabo = async ({
               <p className="text-start text-sm font-bold md:text-lg">
                 {searchQuery ? (
                   <HighlightedText query={searchQuery}>
-                    {author}
+                    {author.name}
                   </HighlightedText>
                 ) : (
                   author

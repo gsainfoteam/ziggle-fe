@@ -7,13 +7,13 @@ import { NoticeDetail } from '@/api/notice/notice';
 import DDay from '@/app/components/molecules/DDay';
 import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
 const NoticeInfo = async ({
   currentDeadline: deadline,
-  contents,
+  title,
+  content,
   author,
   createdAt,
   views,
@@ -21,7 +21,6 @@ const NoticeInfo = async ({
   lng,
 }: PropsWithLng<NoticeInfoProps>) => {
   const { t } = await createTranslation(lng);
-  const localeContents = getLocaleContents(contents, lng);
 
   return (
     <div>
@@ -31,10 +30,10 @@ const NoticeInfo = async ({
           <div className="h-2" />
         </>
       )}
-      <Title title={localeContents[0].title} />
+      <Title title={title} />
       <div className="h-2" />
       <Metadata
-        author={author}
+        author={author.name}
         createdAt={dayjs(createdAt)}
         views={views}
         t={t}

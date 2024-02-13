@@ -9,6 +9,11 @@ export interface NoticePaginationParams {
   limit?: number;
 }
 
+export interface Tag {
+  id: number;
+  name: string;
+}
+
 export enum NoticeKind {
   RECRUIT = 'recruit',
   EVENT = 'event',
@@ -25,52 +30,40 @@ export interface NoticeSearchParams {
 
 export interface Notice {
   id: number;
-  views: number;
-  currentDeadline?: dayjs.Dayjs | string | null;
+  title: string;
+  deadline: dayjs.Dayjs | string | null;
+  currentDeadline: dayjs.Dayjs | string | null;
+  langs: string[];
+  content: string;
+  author: {
+    name: string;
+    uuid: string;
+  };
   createdAt: dayjs.Dayjs | string;
-  updatedAt: dayjs.Dayjs | string;
-  deletedAt?: dayjs.Dayjs | string | null;
-  author: string;
-  tags: Tag[];
-  logName?: string;
-  contents: Content[];
-  imagesUrl: string[];
-  files?: NoticeFile[] | null;
-  // reactions:
+  tags: string[];
+  views: number;
+  imageUrls: string[];
+  documentUrls: string[];
+  isReminded: boolean;
+  reactions: Reaction[];
 }
 
 export interface Reaction {
   emoji: string;
   count: number;
+  isReacted: boolean;
 }
 
 export interface Content {
   id: number;
-  lang: string; // TODO: enum graphql과의 호환성 문제로 임시로 string으로 사용
-  title: string;
-  body: string;
-  deadline?: dayjs.Dayjs | string | null;
-  createdAt: dayjs.Dayjs | string;
-  noticeId: number;
-}
-
-interface NoticeFile {
-  uuid: string;
-  name: string;
-  createdAt: dayjs.Dayjs | string;
-  url: string;
-  type: string; // TODO: enum
-  noticeId: number;
-}
-
-export interface Tag {
-  id: number;
-  name: string;
+  deadline: Date;
+  content: string;
+  lang: string;
+  createdAt: Date;
 }
 
 export interface NoticeDetail extends Notice {
-  reminder: boolean;
-  authorId: string;
+  additionalContents: Content[];
 }
 
 export interface Notices {
@@ -86,10 +79,6 @@ export const getAllNotices = async (
     list: data.list.map(({ currentDeadline, ...notice }) => ({
       ...notice,
       currentDeadline: currentDeadline ?? null,
-      contents: notice.contents.map(({ deadline, ...content }) => ({
-        ...content,
-        deadline: deadline ?? null,
-      })),
     })),
   }));
 
@@ -97,10 +86,6 @@ export const getNotice = async (id: number) =>
   api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({
     ...data,
     currentDeadline: data.currentDeadline || null,
-    contents: data.contents.map(({ deadline, ...content }) => ({
-      ...content,
-      deadline: deadline || null,
-    })),
   }));
 
 export const GET_NOTICES = gql(`
@@ -108,25 +93,25 @@ export const GET_NOTICES = gql(`
     notices(offset: $offset, limit: $limit, orderBy: RECENT) {
       list {
         id
-        views
+        title
+        deadline
         currentDeadline
-        createdAt
-        updatedAt
-        deletedAt
-        author
-        imagesUrl
-        tags {
-          id
+        langs
+        content
+        author {
           name
+          uuid
         }
-        contents {
-          id
-          lang
-          title
-          body
-          deadline
-          createdAt
-          noticeId
+        createdAt
+        tags
+        views
+        imageUrls
+        documentUrls
+        isReminded
+        reactions {
+          emoji
+          count
+          isReacted
         }
       }
       total
@@ -138,14 +123,12 @@ export const CREATE_NOTICE = gql(`
   mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
     createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {
       id
-      contents {
+      additionalContents {
         id
-        lang
-        title
-        body
         deadline
+        content
+        lang
         createdAt
-        noticeId
       }
     }
   }
@@ -155,14 +138,6 @@ export const ATTACH_INTERNATIONAL_NOTICE = gql(`
   mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!, $lang: String!) {
     attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId, lang: $lang) {
       id
-      contents {
-        id
-        lang
-        title
-        body
-        deadline
-        createdAt
-      }
     }
   }
 `);
@@ -171,14 +146,12 @@ export const CREATE_ADDITIONAL_NOTICE = gql(`
   mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {
     createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
       id
-      contents {
+      additionalContents {
         id
-        lang
-        title
-        body
         deadline
+        content
+        lang
         createdAt
-        noticeId
       }
     }
   }

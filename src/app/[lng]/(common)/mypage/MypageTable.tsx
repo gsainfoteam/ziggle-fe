@@ -5,7 +5,6 @@ import { Notice } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 import LazyCat from '@/assets/lazy-cat.svg';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 interface MypageTableProps {
   title: string;
@@ -49,7 +48,6 @@ const MypageTable = async ({
         {articles.map((articleObj, index) => {
           const isLastRow = index === articles.length - 1;
           const underLine = isLastRow ? '' : 'border-b border-gray-300';
-          const localeContents = getLocaleContents(articleObj.contents, lng);
 
           return (
             <Link
@@ -59,7 +57,7 @@ const MypageTable = async ({
             >
               <div className="leading-1.5 pb-0  sm:pb-0">
                 <div className="text-regular m-3.5 text-text dark:text-white">
-                  {localeContents[0].title}
+                  {articleObj.title}
                 </div>
               </div>
               <div className="items-end justify-end">

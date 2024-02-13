@@ -2,13 +2,13 @@ import dayjs from 'dayjs';
 import { Trans } from 'react-i18next';
 
 import { PropsWithLng } from '@/app/i18next';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
 import { ZaboOrigin, ZaboProps } from './Zabo';
 
 const TextZabo = <Origin extends ZaboOrigin>({
-  contents,
+  content,
+  title,
   createdAt,
   views,
   author,
@@ -22,8 +22,6 @@ const TextZabo = <Origin extends ZaboOrigin>({
   const origin = width ? 'width' : 'height';
   const antiOrigin = width ? 'height' : 'width';
   const originSize = (origin === 'width' ? width : height) ?? 0;
-  const localContents = getLocaleContents(contents, lng);
-  const title = localContents[0].title;
 
   const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;
 
@@ -59,7 +57,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
         {title}
       </div>
       <div className="shrink overflow-hidden text-lg font-medium">
-        {localContents[0].body}
+        {content}
       </div>
       <div className={'grow'} />
       <div className="flex flex-col gap-2.5">
@@ -69,7 +67,7 @@ const TextZabo = <Origin extends ZaboOrigin>({
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>
-        <div className="font-bold">{author}</div>
+        <div className="font-bold">{author.name}</div>
       </div>
     </div>
   );

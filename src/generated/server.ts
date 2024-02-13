@@ -18,31 +18,37 @@ export type Scalars = {
   Date: { input: any; output: any; }
 };
 
+export type Author = {
+  __typename?: 'Author';
+  name: Scalars['String']['output'];
+  uuid: Scalars['String']['output'];
+};
+
 export type Content = {
   __typename?: 'Content';
-  body: Scalars['String']['output'];
+  content: Scalars['String']['output'];
   createdAt: Scalars['Date']['output'];
   deadline?: Maybe<Scalars['Date']['output']>;
   id: Scalars['Int']['output'];
   lang: Scalars['String']['output'];
-  noticeId: Scalars['Int']['output'];
-  title: Scalars['String']['output'];
 };
 
 export type DetailedNotice = {
   __typename?: 'DetailedNotice';
-  author: Scalars['String']['output'];
-  authorId: Scalars['String']['output'];
-  contents: Array<Content>;
+  additionalContents: Array<Content>;
+  author: Author;
+  content: Scalars['String']['output'];
   createdAt: Scalars['Date']['output'];
   currentDeadline?: Maybe<Scalars['Date']['output']>;
-  deletedAt?: Maybe<Scalars['Date']['output']>;
-  files?: Maybe<Array<NoticeFile>>;
+  deadline?: Maybe<Scalars['Date']['output']>;
+  documentUrls: Array<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  imagesUrl: Array<Scalars['String']['output']>;
-  reminder: Scalars['Boolean']['output'];
-  tags: Array<Tag>;
-  updatedAt: Scalars['Date']['output'];
+  imageUrls: Array<Scalars['String']['output']>;
+  isReminded: Scalars['Boolean']['output'];
+  langs: Array<Scalars['String']['output']>;
+  reactions: Array<Reaction>;
+  tags: Array<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
 };
 
@@ -107,27 +113,20 @@ export type MutationDeleteReactionArgs = {
 
 export type Notice = {
   __typename?: 'Notice';
-  author: Scalars['String']['output'];
-  contents: Array<Content>;
+  author: Author;
+  content: Scalars['String']['output'];
   createdAt: Scalars['Date']['output'];
-  currentDeadline?: Maybe<Scalars['Date']['output']>;
-  deletedAt?: Maybe<Scalars['Date']['output']>;
-  files?: Maybe<Array<NoticeFile>>;
+  currentDeadline: Scalars['Date']['output'];
+  deadline: Scalars['Date']['output'];
+  documentUrls: Array<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
-  imagesUrl: Array<Scalars['String']['output']>;
-  tags: Array<Tag>;
-  updatedAt: Scalars['Date']['output'];
+  imageUrls: Array<Scalars['String']['output']>;
+  isReminded: Scalars['Boolean']['output'];
+  langs: Array<Scalars['String']['output']>;
+  reactions: Array<Reaction>;
+  tags: Array<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
   views: Scalars['Int']['output'];
-};
-
-export type NoticeFile = {
-  __typename?: 'NoticeFile';
-  createdAt: Scalars['Date']['output'];
-  name: Scalars['String']['output'];
-  noticeId: Scalars['Int']['output'];
-  type: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-  uuid: Scalars['String']['output'];
 };
 
 export type Notices = {
@@ -163,10 +162,11 @@ export type QueryNoticesArgs = {
   tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
-export type Tag = {
-  __typename?: 'Tag';
-  id: Scalars['Int']['output'];
-  name: Scalars['String']['output'];
+export type Reaction = {
+  __typename?: 'Reaction';
+  count: Scalars['Int']['output'];
+  emoji: Scalars['String']['output'];
+  isReacted: Scalars['Boolean']['output'];
 };
 
 
@@ -240,6 +240,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Author: ResolverTypeWrapper<Author>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Content: ResolverTypeWrapper<Content>;
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
@@ -248,16 +249,16 @@ export type ResolversTypes = {
   MineNotice: MineNotice;
   Mutation: ResolverTypeWrapper<{}>;
   Notice: ResolverTypeWrapper<Notice>;
-  NoticeFile: ResolverTypeWrapper<NoticeFile>;
   Notices: ResolverTypeWrapper<Notices>;
   OrderBy: OrderBy;
   Query: ResolverTypeWrapper<{}>;
+  Reaction: ResolverTypeWrapper<Reaction>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
-  Tag: ResolverTypeWrapper<Tag>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Author: Author;
   Boolean: Scalars['Boolean']['output'];
   Content: Content;
   Date: Scalars['Date']['output'];
@@ -265,21 +266,24 @@ export type ResolversParentTypes = {
   Int: Scalars['Int']['output'];
   Mutation: {};
   Notice: Notice;
-  NoticeFile: NoticeFile;
   Notices: Notices;
   Query: {};
+  Reaction: Reaction;
   String: Scalars['String']['output'];
-  Tag: Tag;
+};
+
+export type AuthorResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  uuid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ContentResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Content'] = ResolversParentTypes['Content']> = {
-  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   deadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   lang?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  noticeId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -288,18 +292,20 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['DetailedNotice'] = ResolversParentTypes['DetailedNotice']> = {
-  author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  authorId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  contents?: Resolver<Array<ResolversTypes['Content']>, ParentType, ContextType>;
+  additionalContents?: Resolver<Array<ResolversTypes['Content']>, ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  files?: Resolver<Maybe<Array<ResolversTypes['NoticeFile']>>, ParentType, ContextType>;
+  deadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  documentUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  imagesUrl?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  reminder?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
-  tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  imageUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  isReminded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  langs?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  reactions?: Resolver<Array<ResolversTypes['Reaction']>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -314,27 +320,20 @@ export type MutationResolvers<ContextType = MyContext, ParentType extends Resolv
 };
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {
-  author?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  contents?: Resolver<Array<ResolversTypes['Content']>, ParentType, ContextType>;
+  author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
+  content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  deletedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  files?: Resolver<Maybe<Array<ResolversTypes['NoticeFile']>>, ParentType, ContextType>;
+  currentDeadline?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  deadline?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  documentUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  imagesUrl?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  tags?: Resolver<Array<ResolversTypes['Tag']>, ParentType, ContextType>;
-  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  imageUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  isReminded?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  langs?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  reactions?: Resolver<Array<ResolversTypes['Reaction']>, ParentType, ContextType>;
+  tags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   views?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type NoticeFileResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['NoticeFile'] = ResolversParentTypes['NoticeFile']> = {
-  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  noticeId?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  uuid?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -349,21 +348,22 @@ export type QueryResolvers<ContextType = MyContext, ParentType extends Resolvers
   notices?: Resolver<ResolversTypes['Notices'], ParentType, ContextType, Partial<QueryNoticesArgs>>;
 };
 
-export type TagResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Tag'] = ResolversParentTypes['Tag']> = {
-  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+export type ReactionResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Reaction'] = ResolversParentTypes['Reaction']> = {
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  emoji?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  isReacted?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = MyContext> = {
+  Author?: AuthorResolvers<ContextType>;
   Content?: ContentResolvers<ContextType>;
   Date?: GraphQLScalarType;
   DetailedNotice?: DetailedNoticeResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Notice?: NoticeResolvers<ContextType>;
-  NoticeFile?: NoticeFileResolvers<ContextType>;
   Notices?: NoticesResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Tag?: TagResolvers<ContextType>;
+  Reaction?: ReactionResolvers<ContextType>;
 };
 

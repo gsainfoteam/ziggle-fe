@@ -5,14 +5,14 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import Tags from '../../organisms/Tags';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = async ({
-  contents,
+  content,
+  title,
   createdAt,
   views,
   author,
@@ -24,9 +24,6 @@ const ResultTextZabo = async ({
   lng,
 }: ResultZaboProps) => {
   const { t } = await createTranslation(lng);
-  const localeContents = getLocaleContents(contents, lng);
-
-  const title = localeContents[0].title;
 
   return (
     <Link className={'w-full'} href={`/${lng}/notice/` + id}>
@@ -56,7 +53,9 @@ const ResultTextZabo = async ({
           <div className="flex items-center gap-0.5">
             <div className="text-lg font-bold">
               {searchQuery ? (
-                <HighlightedText query={searchQuery}>{author}</HighlightedText>
+                <HighlightedText query={searchQuery}>
+                  {author.name}
+                </HighlightedText>
               ) : (
                 author
               )}
@@ -72,7 +71,7 @@ const ResultTextZabo = async ({
           />
 
           <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
-            {localeContents[0].body ?? t('zabo.noContent')}
+            {content ?? t('zabo.noContent')}
           </div>
 
           <div className="flex gap-0.5">
