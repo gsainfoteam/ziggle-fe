@@ -17,6 +17,7 @@ import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
 import NoticeInfo from './NoticeInfo';
+import Reactions from './Reactions';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
@@ -134,6 +135,8 @@ const DetailedNoticePage = async ({
               />
             </>
           )}
+
+        <Reactions />
 
         {notice.imagesUrl.length > 0 && (
           <>

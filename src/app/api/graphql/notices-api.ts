@@ -93,4 +93,17 @@ export default class NoticesAPI extends RESTDataSource {
       return false;
     }
   }
+
+  async addReaction(noticeId: number, emoji: string, token: string) {
+    return this.post(`notice/${noticeId}/reaction`, {
+      body: { emoji },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async deleteReaction(noticeId: number, emoji: string, token: string) {
+    return this.delete(`notice/${noticeId}/reaction/${emoji}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
 }

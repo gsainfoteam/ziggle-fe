@@ -53,10 +53,18 @@ export enum MineNotice {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addReaction: Scalars['Boolean']['output'];
   attachInternationalNotice: DetailedNotice;
   createAdditionalNotice: DetailedNotice;
   createNotice: DetailedNotice;
   deleteNotice: Scalars['Boolean']['output'];
+  deleteReaction: Scalars['Boolean']['output'];
+};
+
+
+export type MutationAddReactionArgs = {
+  emoji: Scalars['String']['input'];
+  noticeId: Scalars['Int']['input'];
 };
 
 
@@ -89,6 +97,12 @@ export type MutationCreateNoticeArgs = {
 
 export type MutationDeleteNoticeArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationDeleteReactionArgs = {
+  emoji: Scalars['String']['input'];
+  noticeId: Scalars['Int']['input'];
 };
 
 export type Notice = {
@@ -291,10 +305,12 @@ export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends 
 };
 
 export type MutationResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addReaction?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAddReactionArgs, 'emoji' | 'noticeId'>>;
   attachInternationalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationAttachInternationalNoticeArgs, 'body' | 'contentId' | 'lang' | 'noticeId' | 'title'>>;
   createAdditionalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateAdditionalNoticeArgs, 'body' | 'noticeId'>>;
   createNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateNoticeArgs, 'body' | 'title'>>;
   deleteNotice?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteNoticeArgs, 'id'>>;
+  deleteReaction?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteReactionArgs, 'emoji' | 'noticeId'>>;
 };
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {

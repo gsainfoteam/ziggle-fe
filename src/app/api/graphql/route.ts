@@ -65,6 +65,10 @@ const resolvers: Resolvers = {
       ),
     deleteNotice: (_, { id }, { dataSources, accessToken }) =>
       dataSources.noticesAPI.deleteNotice(id, accessToken!),
+    addReaction: (_, { noticeId, emoji }, { dataSources, accessToken }) =>
+      dataSources.noticesAPI.addReaction(noticeId, emoji, accessToken!),
+    deleteReaction: (_, { noticeId, emoji }, { dataSources, accessToken }) =>
+      dataSources.noticesAPI.deleteReaction(noticeId, emoji, accessToken!),
   },
 };
 

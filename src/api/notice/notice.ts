@@ -36,6 +36,12 @@ export interface Notice {
   contents: Content[];
   imagesUrl: string[];
   files?: NoticeFile[] | null;
+  // reactions:
+}
+
+export interface Reaction {
+  emoji: string;
+  count: number;
 }
 
 export interface Content {
@@ -181,5 +187,17 @@ export const CREATE_ADDITIONAL_NOTICE = gql(`
 export const DELETE_NOTICE = gql(`
   mutation DeleteNotice($id: Int!) {
     deleteNotice(id: $id)
+  }
+`);
+
+export const ADD_REACTION = gql(`
+  mutation AddReaction($noticeId: Int!, $emoji: String!) {
+    addReaction(noticeId: $noticeId, emoji: $emoji)
+  }
+`);
+
+export const DELETE_REACTION = gql(`
+  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {
+    deleteReaction(noticeId: $noticeId, emoji: $emoji)
   }
 `);

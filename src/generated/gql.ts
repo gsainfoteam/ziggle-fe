@@ -18,6 +18,8 @@ const documents = {
     "\n  mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!, $lang: String!) {\n    attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId, lang: $lang) {\n      id\n      contents {\n        id\n        lang\n        title\n        body\n        deadline\n        createdAt\n      }\n    }\n  }\n": types.AttachInternationalNoticeDocument,
     "\n  mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {\n    createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {\n      id\n      contents {\n        id\n        lang\n        title\n        body\n        deadline\n        createdAt\n        noticeId\n      }\n    }\n  }\n": types.CreateAdditionalNoticeDocument,
     "\n  mutation DeleteNotice($id: Int!) {\n    deleteNotice(id: $id)\n  }\n": types.DeleteNoticeDocument,
+    "\n  mutation AddReaction($noticeId: Int!, $emoji: String!) {\n    addReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n": types.AddReactionDocument,
+    "\n  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {\n    deleteReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n": types.DeleteReactionDocument,
 };
 
 /**
@@ -54,6 +56,14 @@ export function gql(source: "\n  mutation CreateAdditionalNotice($title: String,
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation DeleteNotice($id: Int!) {\n    deleteNotice(id: $id)\n  }\n"): (typeof documents)["\n  mutation DeleteNotice($id: Int!) {\n    deleteNotice(id: $id)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation AddReaction($noticeId: Int!, $emoji: String!) {\n    addReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n"): (typeof documents)["\n  mutation AddReaction($noticeId: Int!, $emoji: String!) {\n    addReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {\n    deleteReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n"): (typeof documents)["\n  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {\n    deleteReaction(noticeId: $noticeId, emoji: $emoji)\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
