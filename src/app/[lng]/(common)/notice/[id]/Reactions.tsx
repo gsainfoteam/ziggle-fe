@@ -23,7 +23,6 @@ import LoudlyCryingFace from './assets/loudly-crying-face.svg';
 import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
 
-const preReactionList = ['🔥', '😭', '😧', '🤔', '😮'];
 
 const emojis = {
   '🔥': <Fire width={20} fill={'#eb6263'} />,
