@@ -24,7 +24,7 @@ const articles1 = [
   body: '',
   deadline: '',
   id: 0,
-  imagesUrl: [],
+  imageUrls: [],
   tags: [],
   views: 0,
 }));
@@ -40,7 +40,7 @@ const articles2 = [
   body: '',
   deadline: '',
   id: 0,
-  imagesUrl: [],
+  imageUrls: [],
   tags: [],
   views: 0,
 }));

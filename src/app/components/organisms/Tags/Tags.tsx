@@ -1,4 +1,3 @@
-import { Tag } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
@@ -14,16 +13,16 @@ const Tags = async ({
   searchQuery,
   lng,
 }: PropsWithLng<{
-  tags: Tag[];
+  tags: string[];
   className?: string;
   searchQuery?: string;
 }>) => {
   const { t } = await createTranslation(lng);
   return (
     <div className={`flex gap-2 ${className ?? ''}`}>
-      {tags.map(({ id, name }, i) => (
+      {tags.map((name, i) => (
         <Chip
-          key={id}
+          key={name}
           className="font-normal"
           variant={name === searchQuery ? 'contained' : undefined}
         >{`#${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}</Chip>

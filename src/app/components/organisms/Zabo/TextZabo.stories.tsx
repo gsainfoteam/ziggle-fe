@@ -14,15 +14,11 @@ export default {
 const Template: StoryFn<typeof Zabo> = (args) => {
   const { t } = useTranslation(fallbackLng);
   const lineClampLevel =
-    args.contents[0].title.length > 40
-      ? 2
-      : args.contents[0].title.length > 20
-        ? 1
-        : 0;
+    args.title.length > 40 ? 2 : args.title.length > 20 ? 1 : 0;
 
   return (
     <>
-      <div>length of title: {args.contents[0].title.length}</div>
+      <div>length of title: {args.title.length}</div>
       <br />
       <code className="whitespace-pre">
         {'const lineClampLevel = title.length > 40 ? 2 : title.length > 20 ? 1 : 0;\n\n' +
@@ -82,7 +78,7 @@ const args = {
   content: '인포팀에서는 23년도 신규 부원을 모집합니다. 많은 지원 바랍니다.',
   createdAt: dayjs('2023-02-14T11:57:18.740Z'),
   views: 110,
-  author: '이정우',
+  author: { name: '인포팀', uuid: 'info' },
   deadline: dayjs().add(1, 'd'),
   // organization: "INFOTEAM",
 };

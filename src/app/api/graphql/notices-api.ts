@@ -15,7 +15,7 @@ export default class NoticesAPI extends RESTDataSource {
     offset,
     limit,
     tags = [],
-    ...params
+    ...params // attach auth token if needed
   }: NoticeSearchParams & NoticePaginationParams = {}) {
     return this.get<Notices>('notice', {
       params: {
@@ -27,8 +27,10 @@ export default class NoticesAPI extends RESTDataSource {
     });
   }
 
-  async getNotice(id: number) {
-    return this.get<NoticeDetail>(`notice/${id}`);
+  async getNotice(data: { id: number }, token: string) {
+    return this.get<NoticeDetail>(`notice/${data.id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
   async createNotice(
@@ -92,5 +94,19 @@ export default class NoticesAPI extends RESTDataSource {
     } catch (e) {
       return false;
     }
+  }
+
+  async addReaction(noticeId: number, emoji: string, token: string) {
+    return this.post(`notice/${noticeId}/reaction`, {
+      body: { emoji },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  }
+
+  async deleteReaction(noticeId: number, emoji: string, token: string) {
+    return this.delete(`notice/${noticeId}/reaction`, {
+      body: { emoji },
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 }

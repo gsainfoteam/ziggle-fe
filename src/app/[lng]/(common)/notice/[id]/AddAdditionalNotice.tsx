@@ -24,17 +24,16 @@ import AddIcon from '@/assets/icons/add.svg';
 import { WarningSwal } from '@/utils/swals';
 
 import { apolloClient } from '../../InitClient';
-import AddNoticeRadio from './AddNoticeRadio';
 
 interface AddAddtionalNoticesProps {
   noticeId: number;
   originallyHasDeadline: string | Dayjs | null;
-  supportLanguage: string[];
+  supportedLanguage: string[];
 }
 
 const AddAdditionalNotice = ({
   noticeId,
-  supportLanguage,
+  supportedLanguage,
   originallyHasDeadline,
   lng,
 }: AddAddtionalNoticesProps & PropsWithLng) => {
@@ -46,7 +45,7 @@ const AddAdditionalNotice = ({
 
   const { t } = useTranslation(lng);
 
-  const supportEnglish = supportLanguage.includes('en');
+  const supportEnglish = supportedLanguage.includes('en');
 
   const { refresh } = useRouter();
 
@@ -72,7 +71,7 @@ const AddAdditionalNotice = ({
       },
     });
 
-    const contents = notice.data?.createAdditionalNotice.contents;
+    const contents = notice.data?.createAdditionalNotice.additionalContents;
     if (!contents) {
       return;
     }
@@ -156,7 +155,7 @@ const AddAdditionalNotice = ({
           />
         </div>
 
-        {supportLanguage.includes('en') && (
+        {supportedLanguage.includes('en') && (
           <div>
             <div className="ml-8 text-lg font-bold">
               {t('zabo.additionalNotices.englishAdditionalNotice')}

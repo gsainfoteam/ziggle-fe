@@ -3,14 +3,13 @@ import { Trans } from 'react-i18next';
 
 import ZaboImage from '@/app/components/molecules/ZaboImage';
 import { PropsWithLng } from '@/app/i18next';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 import DDay from '../../molecules/DDay';
 import { ZaboOrigin, ZaboProps, ZaboSize } from './Zabo';
 
 const ImageZabo = <Origin extends ZaboOrigin>({
-  imagesUrl,
-  contents,
+  imageUrls,
+  title,
   createdAt,
   views,
   author,
@@ -20,12 +19,8 @@ const ImageZabo = <Origin extends ZaboOrigin>({
   height,
   lng,
 }: ZaboProps<Origin> & PropsWithLng) => {
-  const localContents = getLocaleContents(contents, lng);
-
   const deadline = rawDeadline ? dayjs(rawDeadline) : undefined;
   const size = { width, height } as ZaboSize<Origin>;
-
-  const title = localContents[0].title;
 
   return (
     <div className="group mt-4 flex w-min flex-col gap-3">
@@ -37,7 +32,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         }
       >
         <ZaboImage
-          src={imagesUrl[0]}
+          src={imageUrls[0]}
           alt={title}
           className="rounded border border-secondaryText object-cover"
           {...size}
@@ -60,7 +55,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>
-        <div className="font-bold">{author}</div>
+        <div className="font-bold">{author.name}</div>
       </div>
     </div>
   );

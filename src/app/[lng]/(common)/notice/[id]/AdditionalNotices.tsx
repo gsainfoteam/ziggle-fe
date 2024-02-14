@@ -1,18 +1,17 @@
 import dayjs from 'dayjs';
 
-import { Content } from '@/api/notice/notice';
+import { Content, NoticeDetail } from '@/api/notice/notice';
 import { PropsWithLng, T } from '@/app/i18next';
 import AddIcon from '@/assets/icons/add.svg';
-import getLocaleContents from '@/utils/getLocaleContents';
 
 interface AdditionalNoticesProps {
-  mainContent: Content;
+  notice: NoticeDetail;
   additionalContents: Content[];
   t: T;
 }
 
 const AdditionalNotices = async ({
-  mainContent,
+  notice,
   additionalContents,
   t,
   lng,
@@ -21,13 +20,11 @@ const AdditionalNotices = async ({
     <div className={'flex flex-col gap-4'}>
       {additionalContents.map((content, index) => {
         const lastDeadline =
-          index > 0
-            ? additionalContents[index - 1].deadline
-            : mainContent.deadline;
+          index > 0 ? additionalContents[index - 1].deadline : notice.deadline;
 
-        const deadlineChanged = !dayjs(content.deadline).isSame(
-          dayjs(lastDeadline),
-        );
+        const deadlineChanged =
+          content.deadline &&
+          !dayjs(content.deadline).isSame(dayjs(lastDeadline));
 
         return (
           <div
@@ -66,7 +63,7 @@ const AdditionalNotices = async ({
             </div>
 
             <div className={'mb-3 ml-8 mt-1'}>
-              <p className={'text-base'}>{content.body}</p>
+              <p className={'text-base'}>{content.content}</p>
             </div>
           </div>
         );
