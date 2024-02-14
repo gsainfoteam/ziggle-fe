@@ -66,7 +66,7 @@ const ResultImageZabo = async ({
                     {author.name}
                   </HighlightedText>
                 ) : (
-                  author
+                  author.name
                 )}
               </p>
             </div>

@@ -56,7 +56,14 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
         >
           {notices.map((notice) => (
             <Link key={notice.id} href={`/${lng}/notice/${notice.id}`}>
-              <Zabo t={t} width={300} {...notice} lng={lng} />
+              <Zabo
+                t={t}
+                width={300}
+                {...notice}
+                lng={lng}
+                deadline={notice.deadline ?? null}
+                currentDeadline={notice.currentDeadline ?? null} // I don't know why it infers the type 'deadline' as optional
+              />
             </Link>
           ))}
         </Masonry>

@@ -1,7 +1,7 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
 import { auth } from '@/api/auth/auth';
-import { getNotice } from '@/api/notice/notice';
+import { getNotice } from '@/api/notice/get-notice';
 import ImageCarousel from '@/app/components/organisms/ImageCarousel';
 import HowAboutThese from '@/app/components/templates/HowAboutThese';
 import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
@@ -121,7 +121,9 @@ const DetailedNoticePage = async ({
             </>
           )}
 
-        <Reactions notice={notice} />
+        <div className={'mt-6 flex justify-center'}>
+          <Reactions notice={notice} />
+        </div>
 
         {notice.imageUrls.length > 0 && (
           <>

@@ -22,9 +22,9 @@ const AdditionalNotices = async ({
         const lastDeadline =
           index > 0 ? additionalContents[index - 1].deadline : notice.deadline;
 
-        const deadlineChanged = !dayjs(content.deadline).isSame(
-          dayjs(lastDeadline),
-        );
+        const deadlineChanged =
+          content.deadline &&
+          !dayjs(content.deadline).isSame(dayjs(lastDeadline));
 
         return (
           <div

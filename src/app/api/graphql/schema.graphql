@@ -98,6 +98,6 @@ type Mutation {
     noticeId: Int!
   ): DetailedNotice!
   deleteNotice(id: Int!): Boolean!
-  addReaction(noticeId: Int!, emoji: String!): Boolean!
-  deleteReaction(noticeId: Int!, emoji: String!): Boolean!
+  addReaction(noticeId: Int!, emoji: String!): DetailedNotice!
+  deleteReaction(noticeId: Int!, emoji: String!): DetailedNotice!
 }

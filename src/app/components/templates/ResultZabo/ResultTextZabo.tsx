@@ -57,7 +57,7 @@ const ResultTextZabo = async ({
                   {author.name}
                 </HighlightedText>
               ) : (
-                author
+                author.name
               )}
             </div>
             {/* organization here (for futer update) */}

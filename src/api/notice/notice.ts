@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { cookies } from 'next/headers';
 
 import { gql } from '@/generated';
 
@@ -56,7 +57,7 @@ export interface Reaction {
 
 export interface Content {
   id: number;
-  deadline: Date;
+  deadline: Date | null;
   content: string;
   lang: string;
   createdAt: Date;
@@ -70,23 +71,6 @@ export interface Notices {
   list: Notice[];
   total: number;
 }
-
-export const getAllNotices = async (
-  params: NoticePaginationParams & NoticeSearchParams = {},
-) =>
-  api.get<Notices>('/notice', { params }).then(({ data }) => ({
-    ...data,
-    list: data.list.map(({ currentDeadline, ...notice }) => ({
-      ...notice,
-      currentDeadline: currentDeadline ?? null,
-    })),
-  }));
-
-export const getNotice = async (id: number) =>
-  api.get<NoticeDetail>(`/notice/${id}`).then(({ data }) => ({
-    ...data,
-    currentDeadline: data.currentDeadline || null,
-  }));
 
 export const GET_NOTICES = gql(`
   query GetNotices($offset: Int, $limit: Int) {
@@ -165,12 +149,56 @@ export const DELETE_NOTICE = gql(`
 
 export const ADD_REACTION = gql(`
   mutation AddReaction($noticeId: Int!, $emoji: String!) {
-    addReaction(noticeId: $noticeId, emoji: $emoji)
+    addReaction(noticeId: $noticeId, emoji: $emoji) {
+      id
+        title
+        deadline
+        currentDeadline
+        langs
+        content
+        author {
+          name
+          uuid
+        }
+        createdAt
+        tags
+        views
+        imageUrls
+        documentUrls
+        isReminded
+        reactions {
+          emoji
+          count
+          isReacted
+        }
+    }
   }
 `);
 
 export const DELETE_REACTION = gql(`
   mutation DeleteReaction($noticeId: Int!, $emoji: String!) {
-    deleteReaction(noticeId: $noticeId, emoji: $emoji)
+    deleteReaction(noticeId: $noticeId, emoji: $emoji) {
+      id
+        title
+        deadline
+        currentDeadline
+        langs
+        content
+        author {
+          name
+          uuid
+        }
+        createdAt
+        tags
+        views
+        imageUrls
+        documentUrls
+        isReminded
+        reactions {
+          emoji
+          count
+          isReacted
+        }
+    }
   }
 `);

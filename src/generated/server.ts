@@ -59,12 +59,12 @@ export enum MineNotice {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addReaction: Scalars['Boolean']['output'];
+  addReaction: DetailedNotice;
   attachInternationalNotice: DetailedNotice;
   createAdditionalNotice: DetailedNotice;
   createNotice: DetailedNotice;
   deleteNotice: Scalars['Boolean']['output'];
-  deleteReaction: Scalars['Boolean']['output'];
+  deleteReaction: DetailedNotice;
 };
 
 
@@ -116,8 +116,8 @@ export type Notice = {
   author: Author;
   content: Scalars['String']['output'];
   createdAt: Scalars['Date']['output'];
-  currentDeadline: Scalars['Date']['output'];
-  deadline: Scalars['Date']['output'];
+  currentDeadline?: Maybe<Scalars['Date']['output']>;
+  deadline?: Maybe<Scalars['Date']['output']>;
   documentUrls: Array<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   imageUrls: Array<Scalars['String']['output']>;
@@ -311,20 +311,20 @@ export type DetailedNoticeResolvers<ContextType = MyContext, ParentType extends 
 };
 
 export type MutationResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addReaction?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationAddReactionArgs, 'emoji' | 'noticeId'>>;
+  addReaction?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationAddReactionArgs, 'emoji' | 'noticeId'>>;
   attachInternationalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationAttachInternationalNoticeArgs, 'body' | 'contentId' | 'lang' | 'noticeId' | 'title'>>;
   createAdditionalNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateAdditionalNoticeArgs, 'body' | 'noticeId'>>;
   createNotice?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationCreateNoticeArgs, 'body' | 'title'>>;
   deleteNotice?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteNoticeArgs, 'id'>>;
-  deleteReaction?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteReactionArgs, 'emoji' | 'noticeId'>>;
+  deleteReaction?: Resolver<ResolversTypes['DetailedNotice'], ParentType, ContextType, RequireFields<MutationDeleteReactionArgs, 'emoji' | 'noticeId'>>;
 };
 
 export type NoticeResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Notice'] = ResolversParentTypes['Notice']> = {
   author?: Resolver<ResolversTypes['Author'], ParentType, ContextType>;
   content?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  currentDeadline?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  deadline?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  currentDeadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  deadline?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   documentUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   imageUrls?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;

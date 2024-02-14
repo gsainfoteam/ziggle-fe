@@ -32,8 +32,8 @@ const resolvers: Resolvers = {
         search: search ?? undefined,
         tags: tags ?? undefined,
       }),
-    notice: (_, { id }, { dataSources }) =>
-      dataSources.noticesAPI.getNotice(id),
+    notice: (_, { id }, { dataSources, accessToken }) =>
+      dataSources.noticesAPI.getNotice({ id }, accessToken!),
   },
   Mutation: {
     createNotice: (

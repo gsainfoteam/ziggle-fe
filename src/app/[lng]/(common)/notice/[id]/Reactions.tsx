@@ -1,9 +1,20 @@
 'use client';
 
+import { FetchResult } from '@apollo/client';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { ADD_REACTION, Notice, Reaction } from '@/api/notice/notice';
+import {
+  ADD_REACTION,
+  DELETE_REACTION,
+  Notice,
+  Reaction,
+} from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
+import {
+  AddReactionMutation,
+  DeleteReactionMutation,
+} from '@/generated/graphql';
 
 import { apolloClient } from '../../InitClient';
 import AnguishedFace from './assets/anguished-face.svg';
@@ -21,7 +32,7 @@ const ReactionButton = ({
   return (
     <Button variant={isReacted ? 'contained' : 'outlined'} onClick={onClick}>
       {emoji === '🔥' ? (
-        <Fire width={20} />
+        <Fire width={20} fill={'#eb6263'} />
       ) : emoji === '😭' ? (
         <LoudlyCryingFace width={20} />
       ) : emoji === '😧' ? (
@@ -44,18 +55,36 @@ interface ReactionsProps {
 const preReactionList = ['🔥', '😭', '😧', '🤔', '😮'];
 
 const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
-  const handleEmojiClick = async (emoji: string) => {
+  const [currentReactions, setCurrentReactions] =
+    useState<Reaction[]>(reactions);
+
+  const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
     try {
-      const res = await apolloClient.mutate({
-        mutation: ADD_REACTION,
-        variables: {
-          noticeId: id,
-          emoji,
-        },
-      });
+      const res = isReacted
+        ? await apolloClient.mutate({
+            mutation: DELETE_REACTION,
+            variables: {
+              noticeId: id,
+              emoji,
+            },
+          })
+        : await apolloClient.mutate({
+            mutation: ADD_REACTION,
+            variables: {
+              noticeId: id,
+              emoji,
+            },
+          });
+
+      setCurrentReactions(
+        isReacted
+          ? // @ts-ignore // ts cannot recognize the type of res.data though there is boolean flag
+            res.data?.deleteReaction.reactions
+          : // @ts-ignore
+            res.data?.addReaction.reactions,
+      );
     } catch (e) {
       toast.error('로그인이 필요합니다.');
-      console.log(e);
     }
   };
 
@@ -63,7 +92,7 @@ const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
     <div className={'flex gap-2'}>
       {preReactionList
         .map((emoji) => {
-          const reaction = reactions.find(
+          const reaction = currentReactions.find(
             (reaction) => reaction.emoji === emoji,
           );
 
@@ -76,8 +105,9 @@ const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
         .map((reaction) => (
           <ReactionButton
             key={reaction.emoji}
-            onClick={() => handleEmojiClick(reaction.emoji)}
+            onClick={() => handleEmojiClick(reaction.emoji, reaction.isReacted)}
             {...reaction}
+            isReacted={reaction.isReacted}
           />
         ))}
     </div>
