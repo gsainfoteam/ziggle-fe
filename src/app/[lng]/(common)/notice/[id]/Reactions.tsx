@@ -23,6 +23,16 @@ import LoudlyCryingFace from './assets/loudly-crying-face.svg';
 import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
 
+const preReactionList = ['🔥', '😭', '😧', '🤔', '😮'];
+
+const emojis = {
+  '🔥': <Fire width={20} fill={'#eb6263'} />,
+  '😭': <LoudlyCryingFace width={20} />,
+  '😧': <AnguishedFace width={20} />,
+  '🤔': <ThinkingFace width={20} />,
+  '😮': <SurprisedFace width={20} />,
+};
+
 const ReactionButton = ({
   emoji,
   count,
@@ -31,17 +41,7 @@ const ReactionButton = ({
 }: Reaction & { onClick: () => void }) => {
   return (
     <Button variant={isReacted ? 'contained' : 'outlined'} onClick={onClick}>
-      {emoji === '🔥' ? (
-        <Fire width={20} fill={'#eb6263'} />
-      ) : emoji === '😭' ? (
-        <LoudlyCryingFace width={20} />
-      ) : emoji === '😧' ? (
-        <AnguishedFace width={20} />
-      ) : emoji === '🤔' ? (
-        <ThinkingFace width={20} />
-      ) : emoji === '😮' ? (
-        <SurprisedFace width={20} />
-      ) : null}
+      {emojis[emoji as keyof typeof emojis] ?? <p>{emoji}</p>}
 
       <p>{count}</p>
     </Button>
@@ -52,45 +52,49 @@ interface ReactionsProps {
   notice: Notice;
 }
 
-const preReactionList = ['🔥', '😭', '😧', '🤔', '😮'];
-
 const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
   const [currentReactions, setCurrentReactions] =
     useState<Reaction[]>(reactions);
 
-  const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
+  const toggleReaction = async (emoji: string, isReacted: boolean) => {
     try {
-      const res = isReacted
-        ? await apolloClient.mutate({
-            mutation: DELETE_REACTION,
-            variables: {
-              noticeId: id,
-              emoji,
-            },
-          })
-        : await apolloClient.mutate({
-            mutation: ADD_REACTION,
-            variables: {
-              noticeId: id,
-              emoji,
-            },
-          });
+      if (isReacted) {
+        const res = await apolloClient.mutate({
+          mutation: DELETE_REACTION,
+          variables: {
+            noticeId: id,
+            emoji,
+          },
+        });
 
-      setCurrentReactions(
-        isReacted
-          ? // @ts-ignore // ts cannot recognize the type of res.data though there is boolean flag
-            res.data?.deleteReaction.reactions
-          : // @ts-ignore
-            res.data?.addReaction.reactions,
-      );
+        return res.data?.deleteReaction.reactions;
+      } else {
+        const res = await apolloClient.mutate({
+          mutation: ADD_REACTION,
+          variables: {
+            noticeId: id,
+            emoji,
+          },
+        });
+
+        return res.data?.addReaction.reactions;
+      }
     } catch (e) {
       toast.error('로그인이 필요합니다.');
     }
   };
 
+  const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
+    const reactions = await toggleReaction(emoji, isReacted);
+
+    if (reactions) {
+      setCurrentReactions(reactions);
+    }
+  };
+
   return (
     <div className={'flex gap-2'}>
-      {preReactionList
+      {Object.keys(emojis)
         .map((emoji) => {
           const reaction = currentReactions.find(
             (reaction) => reaction.emoji === emoji,
