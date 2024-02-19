@@ -175,14 +175,15 @@ const handleNoticeSubmit = async ({
       break;
   }
 
-  const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
-  if (!tagIds) return;
-
   Swal.fire({
     text: t('write.alerts.submittingNotice'),
     icon: 'info',
     showConfirmButton: false,
+    allowOutsideClick: false,
   });
+
+  const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
+  if (!tagIds) return;
 
   const imageKeys = await uploadImages(images);
 
