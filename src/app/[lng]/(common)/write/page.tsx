@@ -61,6 +61,8 @@ export default function WritePage({
   const koreanEditorRef = useRef<Editor>(null);
   const englishEditorRef = useRef<Editor>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleKoreanLanguageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (isWriteEnglish) {
       setIsWriteKorean(e.target.checked);
@@ -74,9 +76,11 @@ export default function WritePage({
   };
 
   const handleSubmit = async () => {
+    if (isLoading) return;
     const koreanBody = koreanEditorRef.current?.getContent();
     const englishBody = englishEditorRef.current?.getContent();
 
+    setIsLoading(true);
     const noticeId = await handleNoticeSubmit({
       title,
       deadline: hasDeadline ? deadline ?? undefined : undefined,
@@ -88,7 +92,10 @@ export default function WritePage({
       images: photos.map((image) => image.file),
       t,
     });
-    if (!noticeId) return;
+    if (!noticeId) {
+      setIsLoading(false);
+      return;
+    }
     push(`/${lng}/notice/${noticeId}`);
   };
 
@@ -268,6 +275,7 @@ export default function WritePage({
         variant="contained"
         className="mb-4 mt-[10rem]"
         onClick={handleSubmit}
+        disabled={isLoading}
       >
         <div className="mx-3 my-1 text-base font-bold md:text-xl">
           {t('write.submit')}
