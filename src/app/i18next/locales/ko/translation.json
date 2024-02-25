@@ -24,7 +24,8 @@
       {
         "title": "소개",
         "links": [
-          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" }
+          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" },
+          { "name": "버그 제보", "link": "https://cs.gistory.me/?service=Ziggle" }
         ]
       },
       {
