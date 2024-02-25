@@ -27,7 +27,8 @@
           {
             "name": "Introduce Infoteam",
             "link": "https://introduce.gistory.me"
-          }
+          },
+          { "name": "Bug Report", "link": "https://cs.gistory.me/?service=Ziggle" }
         ]
       },
       {
