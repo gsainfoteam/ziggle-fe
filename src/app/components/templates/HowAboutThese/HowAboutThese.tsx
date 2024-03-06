@@ -1,33 +1,23 @@
 'use client';
 
-import { useQuery } from '@apollo/client';
 import Link from 'next/link';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 
-import { GET_NOTICES } from '@/api/notice/notice';
+import { useNotices } from '@/api/notice/notice';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
 import Zabo from '../../organisms/Zabo';
 
-const ITEMS_PER_CALL = 10;
-
 const HowAboutThese = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
   const endEl = useRef<HTMLDivElement>(null);
-  const { data, loading, fetchMore } = useQuery(GET_NOTICES, {
-    variables: { offset: 0, limit: ITEMS_PER_CALL },
-  });
-
-  const notices = useMemo(() => data?.notices.list ?? [], [data]);
+  const { notices, fetchMore, isLoading } = useNotices();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) =>
-        entries[0].isIntersecting &&
-        notices.length &&
-        fetchMore({ variables: { offset: notices.length } }),
+      (entries) => entries[0].isIntersecting && fetchMore(),
       { threshold: 0.1 },
     );
 
@@ -40,7 +30,7 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
     };
   }, [notices, fetchMore]);
 
-  if (loading) return null;
+  if (isLoading) return null;
 
   return (
     <section className="flex flex-col gap-6">
@@ -54,7 +44,7 @@ const HowAboutThese = ({ lng }: PropsWithLng) => {
           gutter="16px"
           className="!place-content-start [&>*]:!grow-0 [&>*]:!basis-[fit-content]"
         >
-          {notices.map((notice) => (
+          {notices?.map((notice) => (
             <Link key={notice.id} href={`/${lng}/notice/${notice.id}`}>
               <Zabo
                 t={t}

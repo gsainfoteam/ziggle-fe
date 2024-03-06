@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { cookies } from 'next/headers';
+import useSWRInfinite from 'swr/infinite';
 
 import { gql } from '@/generated';
 
@@ -72,36 +73,19 @@ export interface Notices {
   total: number;
 }
 
-export const GET_NOTICES = gql(`
-  query GetNotices($offset: Int, $limit: Int) {
-    notices(offset: $offset, limit: $limit, orderBy: RECENT) {
-      list {
-        id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-      }
-      total
-    }
-  }
-`);
+export const useNotices = () => {
+  const { data, setSize, isLoading } = useSWRInfinite<Notices>(
+    (page) => `/notice?offset=${page * 10}`,
+  );
+  const fetchMore = () => {
+    setSize((data?.length ?? 0) + 1);
+  };
+  return {
+    notices: data?.flatMap((page) => page.list) ?? [],
+    fetchMore,
+    isLoading,
+  };
+};
 
 export const CREATE_NOTICE = gql(`
   mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
