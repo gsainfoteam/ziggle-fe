@@ -98,6 +98,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["server-only", "npm:0.0.1"],\
             ["storybook", "npm:7.5.3"],\
             ["sweetalert2", "npm:11.10.0"],\
+            ["swr", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.2.5"],\
             ["tailwind-scrollbar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.0.5"],\
             ["tailwindcss", "npm:3.3.5"],\
             ["tinymce", "npm:6.7.3"],\
@@ -21582,6 +21583,30 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["swr", [\
+        ["npm:2.2.5", {\
+          "packageLocation": "./.yarn/cache/swr-npm-2.2.5-3ab48a667d-c6e6a5bd25.zip/node_modules/swr/",\
+          "packageDependencies": [\
+            ["swr", "npm:2.2.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.2.5", {\
+          "packageLocation": "./.yarn/__virtual__/swr-virtual-2d60645bd1/0/cache/swr-npm-2.2.5-3ab48a667d-c6e6a5bd25.zip/node_modules/swr/",\
+          "packageDependencies": [\
+            ["swr", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.2.5"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["client-only", "npm:0.0.1"],\
+            ["react", "npm:18.2.0"],\
+            ["use-sync-external-store", "virtual:2d60645bd188cba3190a37534f4dc351f417608d343b2a1f94f6df27a0799b9fd6a7d8d76e2b964ba8fbfecf90d4970da5b8665787e5f303bfb003fb64a7fd1c#npm:1.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["symbol-observable", [\
         ["npm:4.0.0", {\
           "packageLocation": "./.yarn/cache/symbol-observable-npm-4.0.0-5c36594410-212c7edce6.zip/node_modules/symbol-observable/",\
@@ -22769,6 +22794,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["use-sync-external-store", [\
+        ["npm:1.2.0", {\
+          "packageLocation": "./.yarn/cache/use-sync-external-store-npm-1.2.0-44f75d2564-5c639e0f8d.zip/node_modules/use-sync-external-store/",\
+          "packageDependencies": [\
+            ["use-sync-external-store", "npm:1.2.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:2d60645bd188cba3190a37534f4dc351f417608d343b2a1f94f6df27a0799b9fd6a7d8d76e2b964ba8fbfecf90d4970da5b8665787e5f303bfb003fb64a7fd1c#npm:1.2.0", {\
+          "packageLocation": "./.yarn/__virtual__/use-sync-external-store-virtual-216d8bcef0/0/cache/use-sync-external-store-npm-1.2.0-44f75d2564-5c639e0f8d.zip/node_modules/use-sync-external-store/",\
+          "packageDependencies": [\
+            ["use-sync-external-store", "virtual:2d60645bd188cba3190a37534f4dc351f417608d343b2a1f94f6df27a0799b9fd6a7d8d76e2b964ba8fbfecf90d4970da5b8665787e5f303bfb003fb64a7fd1c#npm:1.2.0"],\
+            ["@types/react", "npm:18.2.37"],\
+            ["react", "npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["util", [\
         ["npm:0.12.5", {\
           "packageLocation": "./.yarn/cache/util-npm-0.12.5-3668276f26-705e51f0de.zip/node_modules/util/",\
@@ -23608,6 +23655,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["server-only", "npm:0.0.1"],\
             ["storybook", "npm:7.5.3"],\
             ["sweetalert2", "npm:11.10.0"],\
+            ["swr", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.2.5"],\
             ["tailwind-scrollbar", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:3.0.5"],\
             ["tailwindcss", "npm:3.3.5"],\
             ["tinymce", "npm:6.7.3"],\
