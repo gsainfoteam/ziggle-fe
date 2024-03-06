@@ -1,10 +1,8 @@
 import '../src/app/globals.css';
 
-import { ApolloProvider } from '@apollo/client';
 import type { Preview } from '@storybook/react';
 import React from 'react';
 
-import { apolloClient } from '../src/app/[lng]/InitClient';
 
 const preview: Preview = {
   parameters: {
@@ -18,9 +16,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ApolloProvider client={apolloClient}>
-        <Story />
-      </ApolloProvider>
+      <Story />
     ),
   ],
 };
