@@ -1,6 +1,3 @@
-import '@/app/globals.css';
-import '@/app/initDayjs';
-
 import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
@@ -8,6 +5,10 @@ import Script from 'next/script';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
+
+import '@/app/initDayjs';
+
+import '@/app/globals.css';
 
 const inter = Inter({
   weight: ['400', '500', '700'],
@@ -94,7 +95,7 @@ export default async function RootLayout({
             h.appendChild(c);
           })(document);
           smartlook("init", "ec3783dc608b665c4753eb3025ccf6674e73ab19", {
-            region: "eu",
+            region: "eu", 
           });
           smartlook("record", {
             forms: true,
