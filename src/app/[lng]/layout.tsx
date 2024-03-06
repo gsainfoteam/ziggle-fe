@@ -1,5 +1,5 @@
-import '@/app/globals.css';
 import '@/app/initDayjs';
+import '@/app/globals.css';
 
 import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';

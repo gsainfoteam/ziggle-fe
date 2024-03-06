@@ -4,7 +4,12 @@
   "rules": {
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
-    "prettier/prettier": "warn"
+    "prettier/prettier": [
+      "warn",
+      {
+        "endOfLine":"auto"
+      }
+    ]
   },
   "ignorePatterns": "src/generated"
 }
