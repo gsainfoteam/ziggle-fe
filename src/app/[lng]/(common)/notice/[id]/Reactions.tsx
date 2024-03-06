@@ -1,20 +1,15 @@
 'use client';
 
-import { FetchResult } from '@apollo/client';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import {
-  ADD_REACTION,
-  DELETE_REACTION,
+  addReaction,
+  deleteReaction,
   Notice,
   Reaction,
 } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
-import {
-  AddReactionMutation,
-  DeleteReactionMutation,
-} from '@/generated/graphql';
 
 import { apolloClient } from '../../InitClient';
 import AnguishedFace from './assets/anguished-face.svg';
@@ -22,7 +17,6 @@ import Fire from './assets/fire-outlined.svg';
 import LoudlyCryingFace from './assets/loudly-crying-face.svg';
 import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
-
 
 const emojis = {
   '🔥': <Fire width={20} fill={'#eb6263'} />,
@@ -58,25 +52,13 @@ const Reactions = ({ notice: { id, reactions } }: ReactionsProps) => {
   const toggleReaction = async (emoji: string, isReacted: boolean) => {
     try {
       if (isReacted) {
-        const res = await apolloClient.mutate({
-          mutation: DELETE_REACTION,
-          variables: {
-            noticeId: id,
-            emoji,
-          },
-        });
+        const res = await deleteReaction(id, emoji);
 
-        return res.data?.deleteReaction.reactions;
+        return res.reactions;
       } else {
-        const res = await apolloClient.mutate({
-          mutation: ADD_REACTION,
-          variables: {
-            noticeId: id,
-            emoji,
-          },
-        });
+        const res = await addReaction(id, emoji);
 
-        return res.data?.addReaction.reactions;
+        return res.reactions;
       }
     } catch (e) {
       toast.error('로그인이 필요합니다.');

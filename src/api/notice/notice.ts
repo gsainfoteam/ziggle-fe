@@ -1,8 +1,5 @@
 import dayjs from 'dayjs';
-import { cookies } from 'next/headers';
 import useSWRInfinite from 'swr/infinite';
-
-import { gql } from '@/generated';
 
 import api from '..';
 
@@ -150,58 +147,14 @@ export const createAdditionalNotice = ({
 export const deleteNotice = (id: number) =>
   api.delete(`/notice/${id}`).then(({ data }) => data);
 
-export const ADD_REACTION = gql(`
-  mutation AddReaction($noticeId: Int!, $emoji: String!) {
-    addReaction(noticeId: $noticeId, emoji: $emoji) {
-      id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-    }
-  }
-`);
+export const addReaction = (noticeId: number, emoji: string) =>
+  api
+    .post<NoticeDetail>(`/notice/${noticeId}/reaction`, {
+      emoji,
+    })
+    .then(({ data }) => data);
 
-export const DELETE_REACTION = gql(`
-  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {
-    deleteReaction(noticeId: $noticeId, emoji: $emoji) {
-      id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-    }
-  }
-`);
+export const deleteReaction = (noticeId: number, emoji: string) =>
+  api
+    .delete<NoticeDetail>(`/notice/${noticeId}/reaction`, { data: { emoji } })
+    .then(({ data }) => data);
