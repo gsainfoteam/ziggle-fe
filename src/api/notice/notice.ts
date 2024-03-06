@@ -134,20 +134,18 @@ export const attachInternalNotice = ({
     })
     .then(({ data }) => data);
 
-export const CREATE_ADDITIONAL_NOTICE = gql(`
-  mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {
-    createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
-      id
-      additionalContents {
-        id
-        deadline
-        content
-        lang
-        createdAt
-      }
-    }
-  }
-`);
+export const createAdditionalNotice = ({
+  noticeId,
+  body,
+  deadline,
+}: {
+  noticeId: number;
+  body: string;
+  deadline?: Date;
+}) =>
+  api
+    .post<NoticeDetail>(`notice/${noticeId}/additional`)
+    .then(({ data }) => data);
 
 export const DELETE_NOTICE = gql(`
   mutation DeleteNotice($id: Int!) {

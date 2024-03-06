@@ -4,7 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import DateTimePicker from 'react-datetime-picker';
@@ -13,8 +13,8 @@ import Swal from 'sweetalert2';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import {
-  ATTACH_INTERNATIONAL_NOTICE,
-  CREATE_ADDITIONAL_NOTICE,
+  attachInternalNotice,
+  createAdditionalNotice,
 } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
@@ -62,32 +62,30 @@ const AddAdditionalNotice = ({
       return;
     }
 
-    const notice = await apolloClient.mutate({
-      mutation: CREATE_ADDITIONAL_NOTICE,
-      variables: {
-        noticeId,
-        body: content,
-        deadline: hasDeadline ? deadline : originallyHasDeadline,
-      },
+    const notice = await createAdditionalNotice({
+      noticeId,
+      body: content,
+      deadline: hasDeadline
+        ? deadline ?? undefined
+        : dayjs(originallyHasDeadline).toDate(),
     });
 
-    const contents = notice.data?.createAdditionalNotice.additionalContents;
+    const contents = notice.additionalContents;
     if (!contents) {
       return;
     }
     const contentId = contents[contents.length - 1].id;
 
     if (notice && contentId && supportEnglish) {
-      const enNotice = await apolloClient.mutate({
-        mutation: ATTACH_INTERNATIONAL_NOTICE,
-        variables: {
-          title: '',
-          body: englishContent,
-          lang: 'en',
-          noticeId,
-          contentId,
-          deadline: hasDeadline ? deadline : originallyHasDeadline,
-        },
+      await attachInternalNotice({
+        title: '',
+        body: englishContent,
+        lang: 'en',
+        noticeId,
+        contentId,
+        deadline: hasDeadline
+          ? deadline ?? undefined
+          : dayjs(originallyHasDeadline).toDate(),
       });
     }
 
