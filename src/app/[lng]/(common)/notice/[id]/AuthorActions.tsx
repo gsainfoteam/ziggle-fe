@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
-import { DELETE_NOTICE } from '@/api/notice/notice';
+import { DELETE_NOTICE, deleteNotice } from '@/api/notice/notice';
 import { PropsWithT, T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
@@ -63,13 +63,6 @@ const AuthorActions = ({
             });
           });
       }
-    });
-  };
-
-  const deleteNotice = async (noticeId: number) => {
-    return await apolloClient.mutate({
-      mutation: DELETE_NOTICE,
-      variables: { id: noticeId },
     });
   };
 

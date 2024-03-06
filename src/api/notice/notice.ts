@@ -147,11 +147,8 @@ export const createAdditionalNotice = ({
     .post<NoticeDetail>(`notice/${noticeId}/additional`)
     .then(({ data }) => data);
 
-export const DELETE_NOTICE = gql(`
-  mutation DeleteNotice($id: Int!) {
-    deleteNotice(id: $id)
-  }
-`);
+export const deleteNotice = (id: number) =>
+  api.delete(`/notice/${id}`).then(({ data }) => data);
 
 export const ADD_REACTION = gql(`
   mutation AddReaction($noticeId: Int!, $emoji: String!) {
