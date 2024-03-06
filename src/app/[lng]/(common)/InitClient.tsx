@@ -5,6 +5,9 @@ import '@/app/initDayjs';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import { SWRConfig } from 'swr';
+
+import api from '@/api';
 
 import { PropsWithLng } from '../../i18next';
 
@@ -50,12 +53,16 @@ const InitClient = ({
   lng,
   children,
 }: React.PropsWithChildren<PropsWithLng>) => (
-  <ApolloProvider client={apolloClient}>
-    <Suspense>
-      <InstallApp lng={lng} />
-    </Suspense>
-    {children}
-  </ApolloProvider>
+  <SWRConfig
+    value={{ fetcher: (path) => api.get(path).then(({ data }) => data) }}
+  >
+    <ApolloProvider client={apolloClient}>
+      <Suspense>
+        <InstallApp lng={lng} />
+      </Suspense>
+      {children}
+    </ApolloProvider>
+  </SWRConfig>
 );
 
 export default InitClient;
