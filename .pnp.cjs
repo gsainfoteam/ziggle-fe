@@ -28,7 +28,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@as-integrations/next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.0.2"],\
             ["@storybook/addon-essentials", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/addon-interactions", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/addon-links", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
@@ -121,32 +120,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ampproject/remapping", "npm:2.2.1"],\
             ["@jridgewell/gen-mapping", "npm:0.3.3"],\
             ["@jridgewell/trace-mapping", "npm:0.3.20"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@as-integrations/next", [\
-        ["npm:2.0.2", {\
-          "packageLocation": "./.yarn/cache/@as-integrations-next-npm-2.0.2-14ef6870e4-f29d26aeb8.zip/node_modules/@as-integrations/next/",\
-          "packageDependencies": [\
-            ["@as-integrations/next", "npm:2.0.2"]\
-          ],\
-          "linkType": "SOFT"\
-        }],\
-        ["virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.0.2", {\
-          "packageLocation": "./.yarn/__virtual__/@as-integrations-next-virtual-23c421ba14/0/cache/@as-integrations-next-npm-2.0.2-14ef6870e4-f29d26aeb8.zip/node_modules/@as-integrations/next/",\
-          "packageDependencies": [\
-            ["@as-integrations/next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.0.2"],\
-            ["@apollo/server", null],\
-            ["@types/apollo__server", null],\
-            ["@types/next", null],\
-            ["next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:14.0.3"]\
-          ],\
-          "packagePeers": [\
-            "@apollo/server",\
-            "@types/apollo__server",\
-            "@types/next",\
-            "next"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -20227,7 +20200,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["ziggle-fe", "workspace:."],\
-            ["@as-integrations/next", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:2.0.2"],\
             ["@storybook/addon-essentials", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/addon-interactions", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\
             ["@storybook/addon-links", "virtual:87f60e1993a720750ca249cfb3b3cb49c78ef522f4777e0afa244d187678197cd7cf40543d5c4fff4efaea92efc9c1f391189683c0c2d8c070b9a281636b19a1#npm:7.5.3"],\

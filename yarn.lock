@@ -29,16 +29,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@as-integrations/next@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "@as-integrations/next@npm:2.0.2"
-  peerDependencies:
-    "@apollo/server": ^4.0.0
-    next: ^12.0.0 || ^13.0.0
-  checksum: f29d26aeb81ac58adb8f0653d4f9c4931305a15f9af973310d54aec662dec7bbd00d2d1551ec37f491b31551bb8a61de570a3e5656b38d3efc12d8a104e86454
-  languageName: node
-  linkType: hard
-
 "@aw-web-design/x-default-browser@npm:1.4.126":
   version: 1.4.126
   resolution: "@aw-web-design/x-default-browser@npm:1.4.126"
@@ -15724,7 +15714,6 @@ typescript@latest:
   version: 0.0.0-use.local
   resolution: "ziggle-fe@workspace:."
   dependencies:
-    "@as-integrations/next": ^2.0.2
     "@storybook/addon-essentials": ^7.4.5
     "@storybook/addon-interactions": ^7.4.5
     "@storybook/addon-links": ^7.4.5
