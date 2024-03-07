@@ -15,6 +15,9 @@ const config: Config = {
         secondaryText: '#959595',
         white: '#ffffff',
         deselected: '#d6d6d6',
+        greyDark: '#6e6e73',
+        greyBorder: '#d6d6d6',
+        greyLight: '#f5f5f7',
       },
       spacing: {
         pageSide: '10vw',
