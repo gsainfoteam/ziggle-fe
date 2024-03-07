@@ -11,7 +11,6 @@ import {
 } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 
-import { apolloClient } from '../../InitClient';
 import AnguishedFace from './assets/anguished-face.svg';
 import Fire from './assets/fire-outlined.svg';
 import LoudlyCryingFace from './assets/loudly-crying-face.svg';

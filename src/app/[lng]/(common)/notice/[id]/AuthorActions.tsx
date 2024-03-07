@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
-import { DELETE_NOTICE, deleteNotice } from '@/api/notice/notice';
+import { deleteNotice } from '@/api/notice/notice';
 import { PropsWithT, T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
@@ -13,8 +13,6 @@ import AddIcon from '@/assets/icons/add.svg';
 import ArrowIcon from '@/assets/icons/arrow-right.svg';
 import LanguageIcon from '@/assets/icons/language.svg';
 import RemoveIcon from '@/assets/icons/remove.svg';
-
-import { apolloClient } from '../../InitClient';
 
 interface WriterActionsProps {
   isEnglishNoticeExist: boolean;
