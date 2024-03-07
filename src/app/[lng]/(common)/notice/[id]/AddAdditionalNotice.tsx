@@ -23,8 +23,6 @@ import { useTranslation } from '@/app/i18next/client';
 import AddIcon from '@/assets/icons/add.svg';
 import { WarningSwal } from '@/utils/swals';
 
-import { apolloClient } from '../../InitClient';
-
 interface AddAddtionalNoticesProps {
   noticeId: number;
   originallyHasDeadline: string | Dayjs | null;
