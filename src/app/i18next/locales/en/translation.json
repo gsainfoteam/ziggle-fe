@@ -171,7 +171,7 @@
   },
   "searchPage": {
     "searchBar": {
-      "placeholder": "Search by announcement title or tag"
+      "placeholder": "Search"
     },
     "prompt": "Please enter a search term",
     "noResult": "There are no search results.",
