@@ -1,7 +1,5 @@
 import dayjs from 'dayjs';
-import { cookies } from 'next/headers';
-
-import { gql } from '@/generated';
+import useSWRInfinite from 'swr/infinite';
 
 import api from '..';
 
@@ -72,133 +70,91 @@ export interface Notices {
   total: number;
 }
 
-export const GET_NOTICES = gql(`
-  query GetNotices($offset: Int, $limit: Int) {
-    notices(offset: $offset, limit: $limit, orderBy: RECENT) {
-      list {
-        id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-      }
-      total
-    }
-  }
-`);
+export const useNotices = () => {
+  const { data, setSize, isLoading } = useSWRInfinite<Notices>(
+    (page) => `/notice?offset=${page * 10}`,
+  );
+  const fetchMore = () => {
+    setSize((data?.length ?? 0) + 1);
+  };
+  return {
+    notices: data?.flatMap((page) => page.list) ?? [],
+    fetchMore,
+    isLoading,
+  };
+};
 
-export const CREATE_NOTICE = gql(`
-  mutation CreateNotice($title: String!, $body: String!, $deadline: Date, $tags: [Int!], $images: [String!]) {
-    createNotice(title: $title, body: $body, deadline: $deadline, tags: $tags, images: $images) {
-      id
-      additionalContents {
-        id
-        deadline
-        content
-        lang
-        createdAt
-      }
-    }
-  }
-`);
+export const createNotice = ({
+  title,
+  deadline,
+  body,
+  images,
+  tags,
+}: {
+  title: string;
+  deadline?: Date;
+  body: string;
+  images: string[];
+  tags: number[];
+}) =>
+  api
+    .post<NoticeDetail>('/notice', {
+      title,
+      body,
+      deadline,
+      tags,
+      images,
+    })
+    .then(({ data }) => data);
 
-export const ATTACH_INTERNATIONAL_NOTICE = gql(`
-  mutation AttachInternationalNotice($title: String!, $body: String!, $deadline: Date, $noticeId: Int!, $contentId: Int!, $lang: String!) {
-    attachInternationalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId, contentId: $contentId, lang: $lang) {
-      id
-    }
-  }
-`);
+export const attachInternalNotice = ({
+  lang,
+  title,
+  deadline,
+  body,
+  noticeId,
+  contentId,
+}: {
+  lang: string;
+  title: string;
+  deadline?: Date;
+  body: string;
+  noticeId: number;
+  contentId: number;
+}) =>
+  api
+    .post<NoticeDetail>(`/notice/${noticeId}/${contentId}/foreign`, {
+      lang,
+      title,
+      deadline,
+      body,
+    })
+    .then(({ data }) => data);
 
-export const CREATE_ADDITIONAL_NOTICE = gql(`
-  mutation CreateAdditionalNotice($title: String, $body: String!, $deadline: Date, $noticeId: Int!) {
-    createAdditionalNotice(title: $title, body: $body, deadline: $deadline, noticeId: $noticeId) {
-      id
-      additionalContents {
-        id
-        deadline
-        content
-        lang
-        createdAt
-      }
-    }
-  }
-`);
+export const createAdditionalNotice = ({
+  noticeId,
+  body,
+  deadline,
+}: {
+  noticeId: number;
+  body: string;
+  deadline?: Date;
+}) =>
+  api
+    .post<NoticeDetail>(`notice/${noticeId}/additional`)
+    .then(({ data }) => data);
 
-export const DELETE_NOTICE = gql(`
-  mutation DeleteNotice($id: Int!) {
-    deleteNotice(id: $id)
-  }
-`);
+export const deleteNotice = (id: number) =>
+  api.delete(`/notice/${id}`).then(({ data }) => data);
 
-export const ADD_REACTION = gql(`
-  mutation AddReaction($noticeId: Int!, $emoji: String!) {
-    addReaction(noticeId: $noticeId, emoji: $emoji) {
-      id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-    }
-  }
-`);
+export const addReaction = (noticeId: number, emoji: string) =>
+  api
+    .post<NoticeDetail>(`/notice/${noticeId}/reaction`, {
+      emoji,
+    })
+    .then(({ data }) => data);
 
-export const DELETE_REACTION = gql(`
-  mutation DeleteReaction($noticeId: Int!, $emoji: String!) {
-    deleteReaction(noticeId: $noticeId, emoji: $emoji) {
-      id
-        title
-        deadline
-        currentDeadline
-        langs
-        content
-        author {
-          name
-          uuid
-        }
-        createdAt
-        tags
-        views
-        imageUrls
-        documentUrls
-        isReminded
-        reactions {
-          emoji
-          count
-          isReacted
-        }
-    }
-  }
-`);
+export const deleteReaction = (noticeId: number, emoji: string) =>
+  api
+    .delete<NoticeDetail>(`/notice/${noticeId}/reaction`, { data: { emoji } })
+    .then(({ data }) => data);

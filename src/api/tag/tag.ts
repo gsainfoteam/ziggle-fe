@@ -1,5 +1,4 @@
 import { Tag } from '@/app/[lng]/(common)/write/TagInput';
-import { gql } from '@/generated';
 
 import api from '../index';
 

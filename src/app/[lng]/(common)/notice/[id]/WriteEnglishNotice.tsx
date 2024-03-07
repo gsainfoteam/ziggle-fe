@@ -1,6 +1,6 @@
 'use client';
 
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
@@ -9,7 +9,7 @@ import { Editor, Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { ATTACH_INTERNATIONAL_NOTICE } from '@/api/notice/notice';
+import { attachInternalNotice } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { PropsWithLng } from '@/app/i18next';
@@ -17,8 +17,6 @@ import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import ContentIcon from '@/assets/icons/content.svg';
 import { WarningSwal } from '@/utils/swals';
-
-import { apolloClient } from '../../InitClient';
 
 interface WriteEnglishNoticeProps {
   noticeId: number;
@@ -55,16 +53,13 @@ const WriteEnglishNotice = ({
       return;
     }
 
-    await apolloClient.mutate({
-      mutation: ATTACH_INTERNATIONAL_NOTICE,
-      variables: {
-        contentId: 1,
-        noticeId,
-        title,
-        body: englishContent,
-        lang: 'en',
-        deadline,
-      },
+    await attachInternalNotice({
+      contentId: 1,
+      noticeId,
+      title,
+      body: englishContent,
+      lang: 'en',
+      deadline: dayjs(deadline).toDate(),
     });
 
     Swal.fire({

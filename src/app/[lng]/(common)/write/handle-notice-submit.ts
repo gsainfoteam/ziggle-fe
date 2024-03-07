@@ -3,15 +3,10 @@ import Swal from 'sweetalert2';
 import { uploadImages } from '@/api/image/image';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import {
-  ATTACH_INTERNATIONAL_NOTICE,
-  CREATE_NOTICE,
-} from '@/api/notice/notice';
+import { attachInternalNotice, createNotice } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
 import { WarningSwal } from '@/utils/swals';
-
-import { apolloClient } from '../InitClient';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 
@@ -187,18 +182,15 @@ const handleNoticeSubmit = async ({
 
   const imageKeys = await uploadImages(images);
 
-  const notice = await apolloClient.mutate({
-    mutation: CREATE_NOTICE,
-    variables: {
-      title,
-      deadline,
-      body: koreanBody!,
-      images: imageKeys,
-      tags: tagIds,
-    },
-  });
+  const notice = await createNotice({
+    title,
+    deadline,
+    body: koreanBody!,
+    images: imageKeys,
+    tags: tagIds,
+  }).catch(() => null);
 
-  if (!notice.data?.createNotice) {
+  if (!notice) {
     Swal.fire({
       text: t('write.alerts.submitFail'),
       icon: 'error',
@@ -207,7 +199,7 @@ const handleNoticeSubmit = async ({
     return;
   }
 
-  const { id, additionalContents } = notice.data?.createNotice;
+  const { id, additionalContents } = notice;
 
   if (!id) {
     Swal.fire({
@@ -219,16 +211,13 @@ const handleNoticeSubmit = async ({
   }
 
   if (noticeLanguage === 'both') {
-    const englishNotice = await apolloClient.mutate({
-      mutation: ATTACH_INTERNATIONAL_NOTICE,
-      variables: {
-        lang: 'en',
-        title: enTitle || title,
-        deadline,
-        body: englishBody!,
-        noticeId: id,
-        contentId: additionalContents[0].id,
-      },
+    await attachInternalNotice({
+      lang: 'en',
+      title: enTitle || title,
+      deadline,
+      body: englishBody!,
+      noticeId: id,
+      contentId: additionalContents[0].id,
     });
   }
 
