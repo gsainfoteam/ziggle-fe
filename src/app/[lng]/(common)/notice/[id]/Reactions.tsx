@@ -10,9 +10,9 @@ import {
   Reaction,
 } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
+import Fire from '@/assets/fire-outlined.svg';
 
 import AnguishedFace from './assets/anguished-face.svg';
-import Fire from './assets/fire-outlined.svg';
 import LoudlyCryingFace from './assets/loudly-crying-face.svg';
 import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';

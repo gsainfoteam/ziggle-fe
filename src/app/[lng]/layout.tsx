@@ -4,6 +4,7 @@ import '@/app/globals.css';
 import { dir } from 'i18next';
 import type { Metadata, Viewport } from 'next';
 import { Inter, Noto_Sans_KR } from 'next/font/google';
+import localFont from 'next/font/local';
 import Script from 'next/script';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
@@ -17,6 +18,10 @@ const inter = Inter({
 const notoSansKR = Noto_Sans_KR({
   weight: ['400', '500', '700'],
   preload: false,
+});
+
+const pretendard = localFont({
+  src: '../../assets/fonts/PretendardVariable.woff2',
 });
 
 export const generateMetadata = async ({
@@ -105,8 +110,8 @@ export default async function RootLayout({
       </Script>
       <body
         className={
-          `${lng === 'ko' ? notoSansKR.className : inter.className} ` +
-          'flex min-h-screen flex-col ' +
+          pretendard.className +
+          ' flex min-h-screen flex-col ' +
           'selection:bg-primary/20'
         }
       >

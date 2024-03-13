@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import ZaboCarousel from '.';
 
 export default {
-  title: 'temlates/ZaboCarousel',
+  title: 'templates/ZaboCarousel',
   component: ZaboCarousel,
 };
 

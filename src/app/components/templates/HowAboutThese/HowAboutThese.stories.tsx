@@ -3,7 +3,7 @@ import { fallbackLng } from '@/app/i18next/settings';
 import HowAboutThese from '.';
 
 export default {
-  title: 'temlates/HowAboutThese',
+  title: 'templates/HowAboutThese',
   component: HowAboutThese,
 };
 

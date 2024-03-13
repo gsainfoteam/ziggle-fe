@@ -51,7 +51,7 @@ const ImageZabo = <Origin extends ZaboOrigin>({
         </div>
         <div className="flex text-sm font-medium text-secondaryText">
           <Trans t={t} i18nKey="zabo.dateView">
-            {{ date: dayjs(createdAt).tz().format('L') }}
+            {/* {{ date: dayjs(createdAt).tz().format('L') }} */}
             <strong className="font-bold"> · {{ views }}</strong>
           </Trans>
         </div>
