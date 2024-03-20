@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
 
 import { Notice } from '@/api/notice/notice';
@@ -9,7 +8,6 @@ import DefaultProfile from '@/assets/default-profile.jpeg';
 import DDay from '../../molecules/DDay';
 import ZaboActions from './ZaboActions';
 import ZaboTags from './ZaboTags';
-dayjs.extend(relativeTime); // do not work within initClient
 
 export type ZaboOrigin = 'width' | 'height';
 
