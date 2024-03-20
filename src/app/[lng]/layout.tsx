@@ -10,16 +10,6 @@ import Script from 'next/script';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
-const inter = Inter({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-});
-
-const notoSansKR = Noto_Sans_KR({
-  weight: ['400', '500', '700'],
-  preload: false,
-});
-
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',
 });

@@ -2,6 +2,8 @@
 
 import '@/app/initDayjs';
 
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
@@ -9,6 +11,7 @@ import { SWRConfig } from 'swr';
 import api from '@/api';
 
 import { PropsWithLng } from '../../i18next';
+dayjs.extend(relativeTime);
 
 const InstallApp = dynamic(() => import('./InstallApp'), {
   ssr: false,
