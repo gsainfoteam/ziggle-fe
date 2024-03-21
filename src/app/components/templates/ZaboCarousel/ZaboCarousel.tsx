@@ -11,23 +11,15 @@ import LazyCat from '@/assets/lazy-cat.svg';
 
 import HorizontalScrollButton from '../../molecules/HorizontalScrollButton';
 import Zabo from '../../organisms/Zabo';
-import ImageZabo from '../../organisms/Zabo/ImageZabo';
-import TextZabo from '../../organisms/Zabo/TextZabo';
 import { ZaboOrigin, ZaboSize } from '../../organisms/Zabo/Zabo';
 
 const SCROLL_AMOUNT = 800;
 
 interface ZaboCarouselProps {
-  notices: ((
-    | Omit<
-        React.ComponentProps<typeof ImageZabo>,
-        'width' | 'height' | 't' | 'lng'
-      >
-    | Omit<
-        React.ComponentProps<typeof TextZabo>,
-        'width' | 'height' | 't' | 'lng'
-      >
-  ) & { id: number })[];
+  notices: (Omit<
+    React.ComponentProps<typeof Zabo>,
+    'width' | 'height' | 't' | 'lng'
+  > & { id: number })[];
   title: string;
   sectionHref?: string;
   containerClassName?: string;

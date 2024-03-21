@@ -1,7 +1,7 @@
 import SearchAnimation from '.';
 
 export default {
-  title: 'temlates/SearchAnimation',
+  title: 'templates/SearchAnimation',
   component: SearchAnimation,
 };
 

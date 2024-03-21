@@ -12,5 +12,8 @@
     "source.sortImports": "never",
     "source.organizeImports": "never"
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "cSpell.words": [
+    "Zabo"
+  ]
 }

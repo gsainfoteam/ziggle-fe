@@ -4,7 +4,7 @@ import { fallbackLng } from '@/app/i18next/settings';
 import Navbar from '.';
 
 export default {
-  title: 'temlates/Navbar',
+  title: 'templates/Navbar',
   component: Navbar,
 };
 
