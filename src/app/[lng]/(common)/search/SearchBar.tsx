@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
@@ -35,7 +35,6 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     const query = formData.get('searchQuery') as string;
     if (query) {
       params.set('query', query);
-      setIsExpanded(false);
     } else {
       params.delete('query');
     }
@@ -47,10 +46,21 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     setKeyword('');
   };
 
+  const searchFormRef = useRef<HTMLFormElement | null>(null);
+
+  const handleSearchIconClick = () => {
+    if (isExpanded && searchFormRef.current) {
+      searchFormRef.current.submit();
+    } else {
+      setIsExpanded(true);
+    }
+  };
+
   return (
     <div className="flex">
       <form
         action={search}
+        ref={searchFormRef}
         className={`flex ${
           isExpanded ? 'w-full' : 'w-fit'
         } flex-row-reverse justify-between overflow-clip rounded-[10px] border-red-50 bg-greyLight align-middle md:w-[600px] md:flex-row md:rounded-[30px] md:border-[1px]`}
@@ -78,7 +88,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
         <button
           type="submit"
           className="flex items-center justify-center border-l-0 border-l-greyBorder bg-greyLight p-0 px-[10px] md:border-l-[1px] md:pl-[20px] md:pr-[25px]"
-          onClick={toggleExpand}
+          onClick={handleSearchIconClick}
         >
           <SearchIcon className="h-[1.5rem] w-[1.5rem] stroke-greyDark" />
         </button>
