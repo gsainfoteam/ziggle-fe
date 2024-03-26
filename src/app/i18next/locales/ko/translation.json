@@ -164,7 +164,8 @@
   },
   "searchPage": {
     "searchBar": {
-      "placeholder": "공지 제목이나 태그로 검색"
+      "placeholder": "검색", 
+      "collapse": "취소"
     },
     "prompt": "검색어를 입력해주세요",
     "noResult": "검색 결과가 존재하지 않습니다.",
