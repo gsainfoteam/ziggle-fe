@@ -8,8 +8,6 @@ import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 
-import Button from '../../../components/atoms/Button';
-
 interface SearchBarProps {
   lng: Locale;
 }
@@ -17,7 +15,6 @@ interface SearchBarProps {
 // 검색 아이콘과 X 아이콘을 컴포넌트 내부에서 변경하도록 구현했습니다
 // Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
 export const SearchBar = ({ lng }: SearchBarProps) => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation(lng);
   const pathname = usePathname();
@@ -27,12 +24,10 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
-    setIsSubmitted(false);
   };
 
   const handleDeleteClick = () => {
     setKeyword('');
-    setIsSubmitted(false);
   };
 
   const search = (formData: FormData) => {
@@ -40,16 +35,16 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     const query = formData.get('searchQuery') as string;
     if (query) {
       params.set('query', query);
-      setIsSubmitted(true);
+      setIsExpanded(false);
     } else {
       params.delete('query');
-      setIsSubmitted(false);
     }
     replace(`${pathname}?${params.toString()}`);
   };
 
   const toggleExpand = () => {
     setIsExpanded((isExpanded) => !isExpanded);
+    setKeyword('');
   };
 
   return (
