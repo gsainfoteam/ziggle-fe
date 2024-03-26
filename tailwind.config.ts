@@ -9,12 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#eb6263',
+        primary: '#ff4500',
         secondary: '#ffeaea',
         text: '#252525',
         secondaryText: '#959595',
         white: '#ffffff',
         deselected: '#d6d6d6',
+        greyDark: '#6e6e73',
+        greyBorder: '#d6d6d6',
         greyLight: '#f5f5f7',
       },
       spacing: {
