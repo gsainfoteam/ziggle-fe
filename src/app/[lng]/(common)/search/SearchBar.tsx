@@ -33,7 +33,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
   const search = (formData: FormData) => {
     const params = new URLSearchParams(searchParams);
     const query = formData.get('searchQuery') as string;
-    if (query && query.length > 0) {
+    if (query) {
       params.set('query', query);
     } else {
       params.delete('query');
