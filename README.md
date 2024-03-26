@@ -5,9 +5,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 
 
-First, generate gql codes:
+First, install the dependencies:
 ```bash
-  yarn generate
+  yarn
 ```
 
 Then, run the development server:

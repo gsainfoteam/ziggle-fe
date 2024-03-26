@@ -1,4 +1,5 @@
 import { getAllNotices } from '@/api/notice/notice-server';
+import Zabo from '@/app/components/organisms/Zabo';
 
 import ZaboCarousel from '../../components/templates/ZaboCarousel';
 import { createTranslation, PropsWithLng } from '../../i18next';
@@ -23,6 +24,16 @@ export default async function Home({
 
   return (
     <main className="flex flex-col gap-16 md:py-12">
+      <div className={'flex flex-col px-32'}>
+        {...recruit.list.map((notice) => (
+          <>
+            <Zabo key={notice.id} {...notice} t={t} lng={lng} />
+
+            <div className={'bg-greyLight my-[30px] h-[1px]'} />
+          </>
+        ))}
+      </div>
+
       <ZaboCarousel
         notices={deadline.list}
         title={t('notices.deadline.label')}

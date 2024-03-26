@@ -4,7 +4,7 @@ import { fallbackLng } from '@/app/i18next/settings';
 import Footer from '.';
 
 export default {
-  title: 'temlates/Footer',
+  title: 'templates/Footer',
   component: Footer,
 };
 

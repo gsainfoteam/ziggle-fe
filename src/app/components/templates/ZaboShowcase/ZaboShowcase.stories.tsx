@@ -3,7 +3,7 @@ import { StoryFn } from '@storybook/react';
 import ZaboShowcase from '.';
 
 export default {
-  title: 'temlates/ZaboShowcase',
+  title: 'templates/ZaboShowcase',
   component: ZaboShowcase,
 };
 
