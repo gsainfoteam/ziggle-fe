@@ -51,7 +51,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
 
   const handleSearchIconClick = () => {
     if (isExpanded && searchFormRef.current) {
-      searchFormRef.current.submit();
+      searchFormRef.current.requestSubmit();
     } else {
       setIsExpanded(true);
       inputRef.current?.focus();
