@@ -15,7 +15,8 @@ import SearchBar from '../../molecules/searchBar/SearchBar';
 
 const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
-  const user = await auth();
+  let user = await auth();
+  // user = { ...user, name: '홍길동' };
   const nav = (
     <>
       <Analytics event={LogEvents.navBarClickAll}>
@@ -50,34 +51,16 @@ const Navbar = async ({ lng }: PropsWithLng) => {
         <Button className="flex h-[50px] w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden">
           <MenuIcon className="h-[24px] stroke-black md:hidden" />
         </Button>
-        <Button className="hidden h-[50px] items-center justify-center gap-[8px] md:flex">
+        <Link
+          href={user ? `${lng}/mypage` : `${lng}/login`}
+          className="hidden h-[50px] items-center justify-center gap-[8px] md:flex"
+        >
           <AccountIcon className="flex h-[24px]" />
           <div className="whitespace-nowrap align-middle font-medium text-primary">
-            로그인
+            {user ? user.name : '로그인'}
           </div>
-        </Button>
+        </Link>
       </div>
-      {/* <div className="flex items-center justify-between"> */}
-      {/* <nav className="hidden gap-x-8 text-lg font-bold md:flex">{nav}</nav> */}
-      {/* {user ? (
-          <Link
-            href={`/${lng}/mypage`}
-            className="flex items-center gap-x-1 font-bold"
-          >
-            {user.name}
-            <AccountIcon width="1.6rem" height="1.6rem" />
-          </Link>
-        ) : (
-          <Link
-            href={`/${lng}/login`}
-            className="flex items-center gap-x-1 font-bold"
-          >
-            {t('navbar.login')}
-            <AccountIcon width="1.6rem" height="1.6rem" />
-          </Link>
-        )} */}
-      {/* </div> */}
-      {/* <nav className="flex gap-x-8 text-sm font-bold md:hidden">{nav}</nav> */}
     </header>
   );
 };
