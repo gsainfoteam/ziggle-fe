@@ -45,21 +45,29 @@ const Navbar = async ({ lng }: PropsWithLng) => {
             <ZiggleCompactLogo className="h-[31px] md:hidden" />
           </Link>
         </Analytics>
-        <SearchBar lng={lng} />
+        <Analytics event={LogEvents.navBarClickSearch}>
+          <SearchBar lng={lng} />
+        </Analytics>
       </div>
       <div className="flex justify-end">
         <Button className="flex h-[50px] w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden">
           <MenuIcon className="h-[24px] stroke-black md:hidden" />
         </Button>
-        <Link
-          href={user ? `${lng}/mypage` : `${lng}/login`}
-          className="hidden h-[50px] items-center justify-center gap-[8px] md:flex"
+        <Analytics
+          event={
+            user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin
+          }
         >
-          <AccountIcon className="flex h-[24px]" />
-          <div className="whitespace-nowrap align-middle font-medium text-primary">
-            {user ? user.name : '로그인'}
-          </div>
-        </Link>
+          <Link
+            href={user ? `${lng}/mypage` : `${lng}/login`}
+            className="hidden h-[50px] items-center justify-center gap-[8px] md:flex"
+          >
+            <AccountIcon className="flex h-[24px]" />
+            <div className="whitespace-nowrap align-middle font-medium text-primary">
+              {user ? user.name : '로그인'}
+            </div>
+          </Link>
+        </Analytics>
       </div>
     </header>
   );
