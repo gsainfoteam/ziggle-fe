@@ -11,6 +11,7 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
 
 import Button from '../../atoms/Button';
+import SearchBar from '../../molecules/searchBar/SearchBar';
 
 const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
@@ -36,22 +37,24 @@ const Navbar = async ({ lng }: PropsWithLng) => {
 
   return (
     <header className="flex w-full items-center justify-between bg-white py-[8px] pl-[8px] pr-[5px] text-black md:px-[16px]">
-      <Analytics event={LogEvents.navBarClickLogo}>
-        <Link href={`/${lng}`}>
-          <ZiggleLogo className="hidden h-[31px] md:flex" />
-          <ZiggleCompactLogo className="h-[31px] md:hidden" />
-        </Link>
-      </Analytics>
-      <div className="flex flex-row">
-        <Button className="flex h-[50px] w-[50px] items-center justify-center">
-          <SearchIcon className="h-[24px] fill-black md:hidden" />
+      <div className="relative flex w-full items-center justify-between">
+        <Analytics event={LogEvents.navBarClickLogo}>
+          <Link href={`/${lng}`}>
+            <ZiggleLogo className="hidden h-[31px] md:flex" />
+            <ZiggleCompactLogo className="h-[31px] md:hidden" />
+          </Link>
+        </Analytics>
+        <SearchBar lng={lng} />
+      </div>
+      <div className="flex justify-end">
+        <Button className="flex h-[50px] w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden">
+          <MenuIcon className="h-[24px] stroke-black md:hidden" />
         </Button>
-        <Button className="flex h-[50px] w-[50px] items-center justify-center">
-          <MenuIcon className="h-[24px] md:hidden" />
-        </Button>
-        <Button className="flex h-[50px] items-center justify-center">
+        <Button className="hidden h-[50px] items-center justify-center gap-[8px] md:flex">
           <AccountIcon className="flex h-[24px]" />
-          <div className="font-medium text-primary">로그인</div>
+          <div className="whitespace-nowrap align-middle font-medium text-primary">
+            로그인
+          </div>
         </Button>
       </div>
       {/* <div className="flex items-center justify-between"> */}

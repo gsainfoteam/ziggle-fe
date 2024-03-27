@@ -1,64 +1,125 @@
-import React, { useState } from 'react';
+'use client';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useRef, useState } from 'react';
+
+import { useTranslation } from '@/app/i18next/client';
+import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 
-import Button from '../../atoms/Button';
-
-interface SearchProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  placeholder?: string;
+interface SearchBarProps {
+  lng: Locale;
 }
 
 // 검색 아이콘과 X 아이콘을 컴포넌트 내부에서 변경하도록 구현했습니다
 // Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
-
-const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
-  const [keyword, setKeyword] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    onSubmit(e);
-  };
+export const SearchBar = ({ lng }: SearchBarProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation(lng);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [keyword, setKeyword] = useState(searchParams.get('query') ?? '');
+  const { replace } = useRouter();
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
-    setIsSubmitted(false);
   };
 
   const handleDeleteClick = () => {
     setKeyword('');
-    setIsSubmitted(false);
+  };
+
+  const search = (formData: FormData) => {
+    const params = new URLSearchParams(searchParams);
+    const query = formData.get('searchQuery') as string;
+    if (query) {
+      params.set('query', query);
+    } else {
+      params.delete('query');
+    }
+    replace(`${pathname}?${params.toString()}`);
+  };
+
+  const toggleExpand = () => {
+    setIsExpanded((isExpanded) => !isExpanded);
+    setKeyword('');
+  };
+
+  const searchFormRef = useRef<HTMLFormElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSearchIconClick = () => {
+    if (isExpanded && searchFormRef.current) {
+      searchFormRef.current.submit();
+    } else {
+      setIsExpanded(true);
+      inputRef.current?.focus();
+    }
   };
 
   return (
-    <form
-      className={
-        'flex rounded-[5px] border-2 border-primary px-[4px] py-[8px] align-middle md:px-[10px] md:py-[8px]'
-      }
-      onSubmit={handleSubmit}
+    <div
+      className={`absolute flex ${
+        isExpanded ? 'w-full' : 'w-fit'
+      } right-0 justify-end md:static md:w-full md:justify-center`}
     >
-      <input
-        className={
-          'p-0.375 w-full text-lg text-primary md:w-96 md:p-0.5 md:text-xl'
-        }
-        name={'searchQuery'}
-        placeholder={placeholder}
-        value={keyword}
-        onChange={handleKeywordChange}
-      />
-      {isSubmitted ? (
-        <Button type={'button'} onClick={handleDeleteClick}>
-          <CloseIcon className={'mx-[6px] h-5 w-5 fill-primary'} />
-        </Button>
-      ) : (
-        <Button type={'submit'}>
-          <SearchIcon className={'h-8 w-8 fill-primary'} />
-        </Button>
-      )}
-    </form>
+      <div
+        className={`flex flex-grow justify-end bg-transparent md:w-fit md:justify-center md:px-[20px]`}
+      >
+        <form
+          action={search}
+          ref={searchFormRef}
+          className={`flex ${
+            isExpanded ? 'w-full' : 'w-fit'
+          } flex-row-reverse justify-between overflow-clip rounded-[10px] border-greyBorder bg-transparent align-middle md:w-full md:max-w-[700px] md:flex-row md:rounded-[30px] md:border-[1px] md:bg-greyLight`}
+        >
+          <div className="flex w-full justify-between">
+            <input
+              className={`${
+                isExpanded ? 'w-[100px]' : 'w-0'
+              } flex-1 bg-greyLight px-0 py-[10px] text-[1rem] text-text placeholder-greyDark outline-none transition-all md:bg-white md:px-[20px]`}
+              name="searchQuery"
+              placeholder={t('searchPage.searchBar.placeholder')}
+              value={keyword}
+              onChange={handleKeywordChange}
+              ref={inputRef}
+            />
+            {keyword.length > 0 && (
+              <button
+                type="button"
+                className="flex items-center justify-center bg-greyLight px-[10px] md:bg-white"
+                onClick={handleDeleteClick}
+              >
+                <CloseIcon className="h-[1.1rem] w-[1.1rem]" />
+              </button>
+            )}
+          </div>
+          <button
+            type="submit"
+            className={`${
+              isExpanded ? 'bg-greyLight' : 'bg-transparent'
+            } flex items-center justify-center border-l-0 border-l-greyBorder p-0 px-[10px] md:border-l-[1px] md:pl-[20px] md:pr-[25px]`}
+            onClick={handleSearchIconClick}
+          >
+            <SearchIcon
+              className={`h-[1.5rem] w-[1.5rem] ${
+                isExpanded ? 'stroke-greyDark' : 'stroke-black'
+              }`}
+            />
+          </button>
+        </form>
+        {isExpanded && (
+          <button
+            type="button"
+            className="flex items-center justify-center whitespace-nowrap px-[10px] text-primary md:hidden"
+            onClick={toggleExpand}
+          >
+            {t('searchPage.searchBar.collapse')}
+          </button>
+        )}
+      </div>
+    </div>
   );
 };
 

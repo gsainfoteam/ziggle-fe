@@ -18,6 +18,7 @@ const config: Config = {
         greyDark: '#6e6e73',
         greyBorder: '#d6d6d6',
         greyLight: '#f5f5f7',
+        black: '#252525',
       },
       spacing: {
         pageSide: '10vw',
