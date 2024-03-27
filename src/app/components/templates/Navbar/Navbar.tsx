@@ -17,36 +17,34 @@ const Navbar = async ({ lng }: PropsWithLng) => {
   let user = await auth();
 
   return (
-    <header className="flex w-full items-center justify-between bg-white py-[8px] pl-[8px] pr-[5px] text-black md:px-[16px]">
-      <div className="relative flex w-full items-center justify-between">
+    <header className="flex h-[50px] w-full items-center justify-between bg-white py-0 pl-[8px] pr-[5px] text-black md:px-[16px] md:py-[8px]">
+      <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
             <ZiggleLogo className="hidden h-[31px] md:flex" />
             <ZiggleCompactLogo className="h-[31px] md:hidden" />
           </Link>
         </Analytics>
-        <SearchBar lng={lng} />
+        <div className="flex h-full items-center md:w-full">
+          <SearchBar lng={lng} />
+          <Button className="flex h-full w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden md:h-full">
+            <MenuIcon className="h-[24px] stroke-black md:hidden" />
+          </Button>
+        </div>
       </div>
-      <div className="flex justify-end">
-        <Button className="flex h-[50px] w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden">
-          <MenuIcon className="h-[24px] stroke-black md:hidden" />
-        </Button>
-        <Analytics
-          event={
-            user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin
-          }
+      <Analytics
+        event={user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin}
+      >
+        <Link
+          href={user ? `${lng}/mypage` : `${lng}/login`}
+          className="hidden items-center justify-center gap-[8px] md:flex"
         >
-          <Link
-            href={user ? `${lng}/mypage` : `${lng}/login`}
-            className="hidden h-[50px] items-center justify-center gap-[8px] md:flex"
-          >
-            <AccountIcon className="flex h-[24px]" />
-            <div className="whitespace-nowrap align-middle font-medium text-primary">
-              {user ? user.name : t('navbar.login')}
-            </div>
-          </Link>
-        </Analytics>
-      </div>
+          <AccountIcon className="flex h-[24px]" />
+          <div className="whitespace-nowrap align-middle font-medium text-primary">
+            {user ? user.name : t('navbar.login')}
+          </div>
+        </Link>
+      </Analytics>
     </header>
   );
 };
