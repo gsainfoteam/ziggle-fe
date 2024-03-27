@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 
 import LogEvents from '@/api/log/log-events';
@@ -18,7 +18,6 @@ interface SearchBarProps {
 export const SearchBar = ({ lng }: SearchBarProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation(lng);
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const [keyword, setKeyword] = useState(searchParams.get('query') ?? '');
   const { replace } = useRouter();
@@ -39,7 +38,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     } else {
       params.delete('query');
     }
-    replace(`${pathname}?${params.toString()}`);
+    replace(`/search?${params.toString()}`);
   };
 
   const toggleExpand = () => {
