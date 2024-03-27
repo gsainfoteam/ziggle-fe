@@ -6,7 +6,6 @@ import Analytics from '@/app/components/atoms/Analytics';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 import MenuIcon from '@/assets/icons/menu.svg';
-import SearchIcon from '@/assets/icons/search.svg';
 import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
 
@@ -16,25 +15,6 @@ import SearchBar from '../../molecules/searchBar/SearchBar';
 const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
   let user = await auth();
-  // user = { ...user, name: '홍길동' };
-  const nav = (
-    <>
-      <Analytics event={LogEvents.navBarClickAll}>
-        <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
-      </Analytics>
-      {user && (
-        <Analytics event={LogEvents.navBarClickWrite}>
-          <Link href={`/${lng}/write`}>{t('navbar.write')}</Link>
-        </Analytics>
-      )}
-      <Analytics event={LogEvents.navBarClickSearch}>
-        <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
-          <SearchIcon className="w-5 md:w-7" />
-          {t('navbar.query')}
-        </Link>
-      </Analytics>
-    </>
-  );
 
   return (
     <header className="flex w-full items-center justify-between bg-white py-[8px] pl-[8px] pr-[5px] text-black md:px-[16px]">
@@ -45,9 +25,7 @@ const Navbar = async ({ lng }: PropsWithLng) => {
             <ZiggleCompactLogo className="h-[31px] md:hidden" />
           </Link>
         </Analytics>
-        <Analytics event={LogEvents.navBarClickSearch}>
-          <SearchBar lng={lng} />
-        </Analytics>
+        <SearchBar lng={lng} />
       </div>
       <div className="flex justify-end">
         <Button className="flex h-[50px] w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden">
@@ -64,7 +42,7 @@ const Navbar = async ({ lng }: PropsWithLng) => {
           >
             <AccountIcon className="flex h-[24px]" />
             <div className="whitespace-nowrap align-middle font-medium text-primary">
-              {user ? user.name : '로그인'}
+              {user ? user.name : t('navbar.login')}
             </div>
           </Link>
         </Analytics>
