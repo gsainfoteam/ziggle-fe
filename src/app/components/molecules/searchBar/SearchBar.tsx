@@ -3,17 +3,18 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useRef, useState } from 'react';
 
+import LogEvents from '@/api/log/log-events';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 
+import Analytics from '../../atoms/Analytics';
+
 interface SearchBarProps {
   lng: Locale;
 }
 
-// 검색 아이콘과 X 아이콘을 컴포넌트 내부에서 변경하도록 구현했습니다
-// Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
 export const SearchBar = ({ lng }: SearchBarProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation(lng);
@@ -58,6 +59,22 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     }
   };
 
+  const SearchButton = () => (
+    <button
+      type="submit"
+      className={`${
+        isExpanded ? 'bg-greyLight' : 'bg-transparent'
+      } flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-[10px] md:border-l-[1px] md:pl-[20px] md:pr-[25px]`}
+      onClick={handleSearchIconClick}
+    >
+      <SearchIcon
+        className={`h-[1.5rem] w-[1.5rem] ${
+          isExpanded ? 'stroke-greyDark' : 'stroke-black'
+        }`}
+      />
+    </button>
+  );
+
   return (
     <div
       className={`absolute flex ${
@@ -86,37 +103,44 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
               ref={inputRef}
             />
             {keyword.length > 0 && (
-              <button
-                type="button"
-                className="flex items-center justify-center bg-greyLight px-[10px] md:bg-white"
-                onClick={handleDeleteClick}
-              >
-                <CloseIcon className="h-[1.1rem] w-[1.1rem]" />
-              </button>
+              <Analytics event={LogEvents.searchPageClickCancel}>
+                <button
+                  type="button"
+                  className="flex h-full items-center justify-center bg-greyLight px-[10px] md:bg-white"
+                  onClick={handleDeleteClick}
+                >
+                  <CloseIcon className="h-[1.1rem] w-[1.1rem]" />
+                </button>
+              </Analytics>
             )}
           </div>
-          <button
-            type="submit"
-            className={`${
-              isExpanded ? 'bg-greyLight' : 'bg-transparent'
-            } flex items-center justify-center border-l-0 border-l-greyBorder p-0 px-[10px] md:border-l-[1px] md:pl-[20px] md:pr-[25px]`}
-            onClick={handleSearchIconClick}
-          >
-            <SearchIcon
-              className={`h-[1.5rem] w-[1.5rem] ${
-                isExpanded ? 'stroke-greyDark' : 'stroke-black'
-              }`}
-            />
-          </button>
+          <>
+            <div className="flex h-full md:hidden">
+              {isExpanded ? (
+                <Analytics event={LogEvents.searchPageSubmit}>
+                  <SearchButton />
+                </Analytics>
+              ) : (
+                <SearchButton />
+              )}
+            </div>
+            <div className="hidden h-full md:flex">
+              <Analytics event={LogEvents.searchPageSubmit}>
+                <SearchButton />
+              </Analytics>
+            </div>
+          </>
         </form>
         {isExpanded && (
-          <button
-            type="button"
-            className="flex items-center justify-center whitespace-nowrap px-[10px] text-primary md:hidden"
-            onClick={toggleExpand}
-          >
-            {t('searchPage.searchBar.collapse')}
-          </button>
+          <Analytics event={LogEvents.searchPageClickCancel}>
+            <button
+              type="button"
+              className="flex h-full items-center justify-center whitespace-nowrap px-[10px] text-primary md:hidden"
+              onClick={toggleExpand}
+            >
+              {t('searchPage.searchBar.collapse')}
+            </button>
+          </Analytics>
         )}
       </div>
     </div>
