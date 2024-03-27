@@ -21,8 +21,8 @@ const Navbar = async ({ lng }: PropsWithLng) => {
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
-            <ZiggleLogo className="hidden h-[31px] md:flex" />
-            <ZiggleCompactLogo className="h-[31px] md:hidden" />
+            <ZiggleLogo className="hidden h-[31px] overflow-visible md:flex" />
+            <ZiggleCompactLogo className="h-[31px] overflow-visible md:hidden" />
           </Link>
         </Analytics>
         <div className="flex h-full items-center md:w-full">
