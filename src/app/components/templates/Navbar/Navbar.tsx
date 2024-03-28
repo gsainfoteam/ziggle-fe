@@ -17,7 +17,7 @@ const Navbar = async ({ lng }: PropsWithLng) => {
   let user = await auth();
 
   return (
-    <header className="flex h-[50px] w-full items-center justify-between bg-white py-0 pl-[8px] pr-[5px] text-black md:px-[16px] md:py-[8px]">
+    <header className="flex h-[50px] w-full items-center justify-between bg-white py-0 pl-[8px] pr-[5px] text-text md:px-[16px] md:py-[8px]">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
@@ -28,7 +28,7 @@ const Navbar = async ({ lng }: PropsWithLng) => {
         <div className="flex h-full items-center md:w-full">
           <SearchBar lng={lng} />
           <Button className="flex h-full w-[50px] items-center justify-center overflow-clip rounded-[10px] md:hidden md:h-full">
-            <MenuIcon className="h-[24px] stroke-black md:hidden" />
+            <MenuIcon className="h-[24px] stroke-text md:hidden" />
           </Button>
         </div>
       </div>

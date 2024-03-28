@@ -68,7 +68,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     >
       <SearchIcon
         className={`h-[1.5rem] w-[1.5rem] ${
-          isExpanded ? 'stroke-greyDark' : 'stroke-black'
+          isExpanded ? 'stroke-greyDark' : 'stroke-text'
         } md:stroke-greyDark`}
       />
     </button>
