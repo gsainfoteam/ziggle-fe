@@ -14,7 +14,7 @@ import SearchBar from '../../molecules/searchBar/SearchBar';
 
 const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
-  let user = await auth();
+  const user = await auth();
 
   return (
     <header className="flex h-[50px] w-full items-center justify-between bg-white py-0 pl-[8px] pr-[5px] text-black md:px-[16px] md:py-[8px]">
