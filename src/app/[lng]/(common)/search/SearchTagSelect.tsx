@@ -41,7 +41,7 @@ const SearchTagSelect = ({ lng }: PropsWithLng) => {
       <input type="hidden" name="tags" value={selected} />
       {...Object.values(NoticeKind).map((kind) => (
         <Button key={kind} onClick={() => handleCheckboxChange(kind)}>
-          <Chip variant={selected.includes(kind) ? 'contained' : 'outlined'}>
+          <Chip variant={selected.includes(kind) ? 'selected' : 'deselected'}>
             {t(`notices.${kind}.label`)}
           </Chip>
         </Button>
