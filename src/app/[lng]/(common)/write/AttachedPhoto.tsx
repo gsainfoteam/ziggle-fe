@@ -9,7 +9,7 @@ interface ImagePreviewItemProps {
 
 const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
   return (
-    <div className="relative flex overflow-hidden rounded-md md:rounded-xl">
+    <div className="relative flex">
       <Image
         alt="preview image"
         src={src}
@@ -24,10 +24,10 @@ const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
           e.stopPropagation();
           onDeleteClick();
         }}
-        className="absolute right-1.5 top-1.5 rounded-md bg-primary p-1 md:right-2.5 md:top-2.5"
+        className="absolute right-[-8px] top-[-8px] rounded-full bg-greyDark p-1"
       >
         <div className="flex">
-          <CloseIcon className="h-2.5 w-2.5 fill-white md:h-4 md:w-4" />
+          <CloseIcon className="h-2.5 w-2.5 stroke-white md:h-4 md:w-4" />
         </div>
       </button>
     </div>

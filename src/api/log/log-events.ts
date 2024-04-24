@@ -30,6 +30,7 @@ const LogEvents = {
   // Notice Writing Page
   noticeWritingPageTypeTitle: 'notice_writing_page_type_title',
   noticeWritingPageCheckDeadline: 'notice_writing_page_check_deadline',
+  noticeWritingPageCheckEnglish: 'notice_writing_page_check_english',
   noticeWritingPageSetDeadline: 'notice_writing_page_set_deadline',
   noticeWritingPageSetType: 'notice_writing_page_set_type',
   noticeWritingPageTypeTag: 'notice_writing_page_type_tag',

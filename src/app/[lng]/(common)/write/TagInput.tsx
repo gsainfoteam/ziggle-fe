@@ -86,7 +86,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-1.5 rounded-lg border-2 border-solid border-primary p-3 md:p-2">
+      <div className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary p-1">
         {tags.map((tag) => (
           <TagChip
             key={tag.name}
@@ -101,7 +101,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('write.writeTags') : ''}
-          className="flex-grow bg-transparent p-1 text-sm outline-none md:p-2 md:text-base"
+          className="flex-grow bg-transparent p-1 outline-none md:p-2 md:text-base"
         />
       </div>
 

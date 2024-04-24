@@ -7,10 +7,18 @@ import DeepLLogo from '@/assets/logos/deepL.svg';
 interface DeepLButtonProps {
   query?: string;
   editorRef?: React.MutableRefObject<TinyMCEEditorRef | null>;
+  originalLanguage: 'korean' | 'english';
 }
 
-const DeepLButton = ({ editorRef, t }: PropsWithT<DeepLButtonProps>) => {
-  const DEEPL_URL = 'https://www.deepl.com/translator#ko/en';
+const DeepLButton = ({
+  editorRef,
+  originalLanguage,
+  t,
+}: PropsWithT<DeepLButtonProps>) => {
+  const DEEPL_URL =
+    originalLanguage === 'korean'
+      ? 'https://www.deepl.com/translator#ko/en'
+      : 'https://www.deepl.com/translator#en/ko';
 
   return (
     <Link

@@ -9,15 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#ff4500',
-        secondary: '#ffeaea',
-        text: '#252525',
-        secondaryText: '#959595',
-        white: '#ffffff',
-        deselected: '#d6d6d6',
-        greyDark: '#6e6e73',
-        greyBorder: '#d6d6d6',
-        greyLight: '#f5f5f7',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        text: 'var(--text)',
+        secondaryText: 'var(--secondaryText)',
+        white: 'var(--white)',
+        deselected: 'var(--deselected)',
+        grey: 'var(--grey)',
+        greyDark: 'var(--greyDark)',
+        greyBorder: 'var(--greyBorder)',
+        greyLight: 'var(--greyLight)',
       },
       spacing: {
         pageSide: '10vw',

@@ -1,27 +1,24 @@
 interface ChipProps {
-  variant?: 'outlined' | 'contained' | 'deselected';
+  variant?: 'selected' | 'deselected';
   className?: string;
 }
 
 const Chip = ({
-  variant = 'outlined',
+  variant = 'deselected',
   children,
   className,
 }: React.PropsWithChildren<ChipProps>) => (
-  <div className="font-medium md:text-lg">
-    <div
-      className={[
-        'flex h-6 w-max items-center rounded-lg border-2 border-primary px-3 md:h-8',
-        ...(variant === 'outlined' ? ['bg-transparent text-primary'] : []),
-        ...(variant === 'contained' ? ['bg-primary text-white'] : []),
-        ...(variant === 'deselected'
-          ? ['border-none bg-deselected text-secondaryText']
-          : []),
-        ...(className ? [className] : []),
-      ].join(' ')}
-    >
-      {children}
-    </div>
+  <div
+    className={[
+      'flex w-max items-center rounded-[5px] px-[10px] py-[5px] font-medium md:h-8 md:text-lg',
+      ...(variant === 'selected' ? ['bg-text stroke-white text-white'] : []),
+      ...(variant === 'deselected'
+        ? ['bg-greyLight stroke-text text-text']
+        : []),
+      ...(className ? [className] : []),
+    ].join(' ')}
+  >
+    {children}
   </div>
 );
 

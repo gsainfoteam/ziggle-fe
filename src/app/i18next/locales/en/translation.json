@@ -4,6 +4,9 @@
     "title": "Ziggle",
     "description": "All Notices in GIST at a glance"
   },
+  "common": {
+    "optional": "Optional"
+  },
   "navbar": {
     "all": "All Notices",
     "write": "Write Notice",
@@ -179,12 +182,17 @@
     "title": "♨ Ziggle Announcements"
   },
   "write": {
+    "koreanTitle": "Korean Title",
+    "englishTitle": "English Title",
     "writeTitle": "Enter a title here",
     "setupDeadline": "Set a deadline",
-    "noticeType": "Notice Type",
+    "writeEnglishNotice": "Write English Notice too",
+    "koreanNotice": "Korean Notice",
+    "englishNotice": "English Notice",
+    "noticeType": "Type",
     "noticeTypes": {
       "recruit": {
-        "label": "🎯 Recruiting",
+        "label": "Recruiting",
         "description": {
           "title": "🎯 You've selected a Recruiting notice!",
           "content": "If you're looking to recruit people to your club, group, or event, try creating a recruitment announcement.",
@@ -192,7 +200,7 @@
         }
       },
       "event": {
-        "label": "🎈 Events",
+        "label": "Events",
         "description": {
           "title": "🎈 You've selected an Event notice!",
           "content": "Feel free to promote your event in the event notice.",
@@ -200,7 +208,7 @@
         }
       },
       "general": {
-        "label": "🔔 General",
+        "label": "General",
         "description": {
           "title": "🔔 You've selected a General notice!",
           "content": "Notices that are not part of a recruitment or event notices.",
@@ -218,15 +226,15 @@
       "english": "English"
     },
 
-    "enterKoreanContent": "Enter Content - Korean",
+    "koreanContent": "Content - Korean",
+    "englishContent": "Content - English",
     "enterEnglishContent": "Enter Content - English",
     "translateWithDeepL": "Translate with DeepL",
 
-    "attatchPhoto": "Attach Photos",
+    "attachPhoto": "Attach Photos",
     "photoDescription": "The first of the attached photos is set as the representative photo.",
     "dragToAddPhoto": "Drag to add photos",
     "orAddFromPC": "...or browse files",
-    "addFromMyDevice": "Add from my device",
 
     "submit": "Submit Notice",
     "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
