@@ -4,31 +4,20 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { ChangeEvent, useRef, useState } from 'react';
-import DateTimePicker from 'react-datetime-picker';
+import React, { useRef, useState } from 'react';
 import { Editor } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import Button from '@/app/components/atoms/Button';
-import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
-import Chip from '@/app/components/molecules/Chip';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ClockIcon from '@/assets/icons/clock.svg';
-import ContentIcon from '@/assets/icons/content.svg';
-import EventIcon from '@/assets/icons/event.svg';
-import GeneralIcon from '@/assets/icons/general.svg';
 import GlobeIcon from '@/assets/icons/globe.svg';
-import LanguageIcon from '@/assets/icons/language.svg';
-import RecruitIcon from '@/assets/icons/recruit.svg';
 import TagIcon from '@/assets/icons/tag.svg';
-import TextIcon from '@/assets/icons/text.svg';
 import TypeIcon from '@/assets/icons/type.svg';
 
 import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
@@ -93,7 +82,7 @@ export default function WritePage({
 
   return (
     <main className="flex flex-col items-center md:py-12">
-      <div className="flex flex-col">
+      <div className="content flex max-w-[600px] flex-col">
         <div className={'mb-10 mt-10 flex items-center gap-2'}>
           <GlobeIcon
             className={

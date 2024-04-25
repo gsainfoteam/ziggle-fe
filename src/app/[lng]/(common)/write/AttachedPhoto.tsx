@@ -24,7 +24,7 @@ const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
           e.stopPropagation();
           onDeleteClick();
         }}
-        className="absolute right-[-8px] top-[-8px] rounded-full bg-greyDark p-1"
+        className="absolute -right-2 -top-2 rounded-full bg-greyDark p-1"
       >
         <div className="flex">
           <CloseIcon className="h-2.5 w-2.5 stroke-white md:h-4 md:w-4" />

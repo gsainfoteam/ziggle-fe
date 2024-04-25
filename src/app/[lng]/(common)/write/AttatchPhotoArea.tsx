@@ -1,10 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, SetStateAction, useRef } from 'react';
 
 import Button from '@/app/components/atoms/Button';
 import { PropsWithT } from '@/app/i18next';
 import AddPhotoGray from '@/assets/add-photo-gray.svg';
-import AddIcon from '@/assets/icons/add.svg';
-import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 
 import AttachedPhoto from './AttachedPhoto';
 
