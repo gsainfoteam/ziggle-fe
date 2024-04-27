@@ -21,7 +21,7 @@ const NoticeTypeSelector = ({
 }: PropsWithT<NoticeTypeSelectorProps>) => {
   return (
     <>
-      <div className="mb-3 flex gap-[10px]">
+      <div className="mb-5 flex gap-[10px]">
         {noticeTypes.map((noticeType) => (
           <div
             className="cursor-pointer"
@@ -60,15 +60,17 @@ const NoticeTypeSelector = ({
       {noticeTypes.map((noticeType) => (
         <div
           key={noticeType}
-          className={`${selectedNoticeType !== noticeType && 'hidden'}`}
+          className={`${selectedNoticeType !== noticeType && 'hidden'}
+            bg-greyLight rounded-[10px] p-6
+          `}
         >
-          <div className="text-base font-bold md:text-xl">
+          <div className="mb-2 text-base font-semibold md:text-xl">
             {t(`write.noticeTypes.${noticeType}.description.title`)}
           </div>
-          <div className="font-regular text-sm md:text-lg">
+          <div className="font-regular text-sm md:text-base">
             {t(`write.noticeTypes.${noticeType}.description.content`)}
           </div>
-          <div className="font-regular text-sm text-secondaryText md:text-lg">
+          <div className="font-regular text-sm text-secondaryText md:text-base">
             {t(`write.noticeTypes.${noticeType}.description.example`)}
           </div>
         </div>
