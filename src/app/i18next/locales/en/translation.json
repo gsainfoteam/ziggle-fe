@@ -194,7 +194,7 @@
       "recruit": {
         "label": "Recruiting",
         "description": {
-          "title": "🎯 You've selected a Recruiting notice!",
+          "title": "🎯 Recruiting notice",
           "content": "If you're looking to recruit people to your club, group, or event, try creating a recruitment announcement.",
           "example": "Ex) club recruitment, student association recruitment, Infinite Challenge team member recruitment, contests, competitions, etc."
         }
@@ -202,7 +202,7 @@
       "event": {
         "label": "Events",
         "description": {
-          "title": "🎈 You've selected an Event notice!",
+          "title": "🎈 Event notice",
           "content": "Feel free to promote your event in the event notice.",
           "example": "Ex) festivals, exhibitions, performances, seminars, lectures, workshops"
         }
@@ -210,7 +210,7 @@
       "general": {
         "label": "General",
         "description": {
-          "title": "🔔 You've selected a General notice!",
+          "title": "🔔 General notice",
           "content": "Notices that are not part of a recruitment or event notices.",
           "example": "Ex) GIST House notices, student association notices, notifications, etc."
         }
