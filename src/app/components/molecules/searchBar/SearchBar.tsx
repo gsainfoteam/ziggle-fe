@@ -63,11 +63,11 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
       type="submit"
       className={`${
         isExpanded ? 'bg-greyLight' : 'bg-white'
-      } flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-[10px] md:border-l-[1px] md:bg-greyLight md:pl-[20px] md:pr-[25px]`}
+      } flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-2 md:border-l-[1px] md:bg-greyLight md:pl-5 md:pr-6`}
       onClick={handleSearchIconClick}
     >
       <SearchIcon
-        className={`h-[1.5rem] w-[1.5rem] ${
+        className={`h-6 w-6 ${
           isExpanded ? 'stroke-greyDark' : 'stroke-text'
         } md:stroke-greyDark`}
       />
@@ -77,24 +77,24 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
   return (
     <div
       className={`flex ${
-        isExpanded ? 'absolute h-fit w-full' : 'static h-full w-[50px] '
+        isExpanded ? 'absolute h-fit w-full' : 'static h-full w-12'
       } right-0 justify-end transition-[width] md:static md:h-fit md:w-full md:justify-center`}
     >
       <div
-        className={`flex flex-grow justify-center bg-transparent md:w-fit md:justify-center md:px-[20px]`}
+        className={`flex flex-grow justify-center bg-transparent md:w-fit md:justify-center md:px-5`}
       >
         <form
           action={search}
           ref={searchFormRef}
           className={`flex ${
             isExpanded ? 'w-full' : 'w-fit'
-          } flex-row-reverse justify-between overflow-clip rounded-[10px] border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-[30px] md:border-[1px] md:bg-greyLight`}
+          } flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
         >
           <div className="flex w-full justify-between">
             <input
               className={`${
-                isExpanded ? 'w-[100px]' : 'w-0'
-              } flex-1 bg-greyLight px-0 py-[10px] text-[1rem] leading-4 text-text placeholder-greyDark outline-none transition-[width] md:bg-white md:px-[20px]`}
+                isExpanded ? 'w-96' : 'w-0'
+              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none transition-[width] md:bg-white md:px-5`}
               name="searchQuery"
               placeholder={t('searchPage.searchBar.placeholder')}
               value={keyword}
@@ -105,10 +105,10 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
               <Analytics event={LogEvents.searchPageClickCancel}>
                 <button
                   type="button"
-                  className="flex h-full items-center justify-center bg-greyLight px-[10px] md:bg-white"
+                  className="flex h-full items-center justify-center bg-greyLight px-2 md:bg-white"
                   onClick={handleDeleteClick}
                 >
-                  <CloseIcon className="h-[1.1rem] w-[1.1rem]" />
+                  <CloseIcon className="h-4 w-4" />
                 </button>
               </Analytics>
             )}
@@ -134,7 +134,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           <Analytics event={LogEvents.searchPageClickCancel}>
             <button
               type="button"
-              className="flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-[10px] text-primary md:hidden"
+              className="flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary md:hidden"
               onClick={toggleExpand}
             >
               {t('searchPage.searchBar.collapse')}
