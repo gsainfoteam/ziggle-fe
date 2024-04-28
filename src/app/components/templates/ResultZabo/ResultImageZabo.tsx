@@ -1,11 +1,15 @@
 'use server';
 import 'server-only';
 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
+import Fire from '@/assets/fire-outlined.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
+import Share from '@/assets/icons/share.svg';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboImage from '../../molecules/ZaboImage';
@@ -26,65 +30,54 @@ const ResultImageZabo = async ({
 }: ResultZaboProps) => {
   const { t } = await createTranslation(lng);
 
-  return (
-    <Link className={'w-full'} href={`/${lng}/notice/` + id}>
-      <div className="box-border flex w-full flex-nowrap items-stretch justify-start gap-5 overflow-hidden rounded border border-secondaryText">
-        <ZaboImage
-          width={230} // handle mobile
-          src={imageUrls[0]}
-          alt={title}
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-        <div
-          className="box-border flex flex-col justify-between"
-          style={{
-            boxSizing: 'border-box',
-            padding: '1rem 0',
-          }}
-        >
-          <div className="align-start flex flex-col">
-            {currentDeadline && (
-              <p className={'text-sm font-medium md:text-xl'}>
-                <Trans t={t} i18nKey="zabo.dueAt">
-                  {{ dueAt: dayjs(currentDeadline).tz().format('LLL') }}
-                </Trans>
-              </p>
-            )}
-            <p className="text-start text-xl font-bold md:text-3xl">
-              {searchQuery ? (
-                <HighlightedText query={searchQuery}>{title}</HighlightedText>
-              ) : (
-                title
-              )}
-            </p>
-            <div className={'h-1'} />
+  const isClosed = dayjs(currentDeadline).isBefore();
 
-            <div className={'gap-2'}>
-              <p className="text-start text-sm font-bold md:text-lg">
-                {searchQuery ? (
-                  <HighlightedText query={searchQuery}>
-                    {author.name}
-                  </HighlightedText>
-                ) : (
-                  author.name
-                )}
-              </p>
-            </div>
-            <Tags
-              lng={lng}
-              tags={tags}
-              className="my-0.5 flex-nowrap"
-              searchQuery={searchQuery}
-            />
-          </div>
-          <div className="flex gap-0.5">
-            <div className="flex text-sm font-medium text-secondaryText">
-              <Trans t={t} i18nKey="zabo.dateView">
-                {{ date: dayjs(createdAt).tz().format('L') }}
-                <strong className="font-bold"> · {{ views }}</strong>
-              </Trans>
+  return (
+    <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
+      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-lg bg-greyLight p-5 text-text">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <DefaultProfile className="h-9 w-9" />
+            <div className="flex items-center gap-1 font-medium">
+              <div className="text-lg">{author.name}</div>
+              <div className="text-base text-greyDark">·</div>
+              <div className="text-base text-greyDark">
+                {dayjs(createdAt).fromNow()}
+              </div>
             </div>
           </div>
+          <div
+            className={`h-fit rounded-md ${
+              isClosed ? 'bg-greyDark' : 'bg-primary'
+            } px-2 py-1 text-sm text-white`}
+          >
+            {isClosed
+              ? '기한 지남'
+              : dayjs(currentDeadline).fromNow(true) + ' 남음'}
+          </div>
+        </div>
+        <div className="flex text-xl font-semibold">{title}</div>
+        <div className="flex gap-2">
+          {imageUrls.slice(0, 7).map((url, i) => (
+            <div
+              key={i}
+              className="relative flex h-24 w-24 flex-shrink-0 overflow-hidden rounded-md bg-black bg-opacity-30"
+            >
+              <Image src={url} alt={title} width={100} height={100} />
+              {i == 6 && imageUrls.length > 7 && (
+                <div className="absolute flex h-full w-full items-center justify-center bg-black bg-opacity-30 text-3xl font-semibold text-white">
+                  +{imageUrls.length - 7}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <Fire className="h-9 w-9" />
+            <div className="font-semibold">9</div>
+          </div>
+          <Share className="h-6 w-6" />
         </div>
       </div>
     </Link>
