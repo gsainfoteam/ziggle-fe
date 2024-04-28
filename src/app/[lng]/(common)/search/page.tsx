@@ -1,5 +1,5 @@
-import { createTranslation, PropsWithLng } from '@/app/i18next';
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import SearchBar from '../../../components/molecules/searchBar/SearchBar';
 import SearchResults from '../../../components/templates/SearchResults';
@@ -22,13 +22,6 @@ const SearchPage = async ({
   return (
     <div className="content mx-auto">
       <div className="align-center flex flex-col">
-        <div className="flex justify-center">
-          <div className="search-bar-animation mb-10 mt-20 flex animate-none flex-col gap-3">
-            <SearchBar lng={lng} />
-            <SearchTagSelect lng={lng} />
-          </div>
-        </div>
-
         {search ? (
           <SearchResults
             logName="SearchPage"
