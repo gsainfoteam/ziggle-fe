@@ -187,8 +187,8 @@
     "writeTitle": "Enter a title here",
     "setupDeadline": "Set a deadline",
     "writeEnglishNotice": "Write English Notice too",
-    "koreanNotice": "Korean Notice",
-    "englishNotice": "English Notice",
+    "koreanNotice": "Korean",
+    "englishNotice": "English",
     "noticeType": "Type",
     "noticeTypes": {
       "recruit": {
