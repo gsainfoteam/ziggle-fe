@@ -1,64 +1,148 @@
-import React, { useState } from 'react';
+'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useRef, useState } from 'react';
+
+import LogEvents from '@/api/log/log-events';
+import { useTranslation } from '@/app/i18next/client';
+import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
 import SearchIcon from '@/assets/icons/search.svg';
 
-import Button from '../../atoms/Button';
+import Analytics from '../../atoms/Analytics';
 
-interface SearchProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  placeholder?: string;
+interface SearchBarProps {
+  lng: Locale;
 }
 
-// 검색 아이콘과 X 아이콘을 컴포넌트 내부에서 변경하도록 구현했습니다
-// Submit 될 시 검색 아이콘이 X 아이콘으로 바뀌며 그 이후에 다시 keyword가 수정될 경우 X 아이콘이 검색 아이콘으로 바뀝니다
-
-const SearchBar = ({ onSubmit, placeholder }: SearchProps) => {
-  const [keyword, setKeyword] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    onSubmit(e);
-  };
+export const SearchBar = ({ lng }: SearchBarProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useTranslation(lng);
+  const searchParams = useSearchParams();
+  const [keyword, setKeyword] = useState(searchParams.get('query') ?? '');
+  const { replace } = useRouter();
 
   const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
-    setIsSubmitted(false);
   };
 
   const handleDeleteClick = () => {
     setKeyword('');
-    setIsSubmitted(false);
   };
 
-  return (
-    <form
-      className={
-        'flex rounded-[5px] border-2 border-primary px-[4px] py-[8px] align-middle md:px-[10px] md:py-[8px]'
-      }
-      onSubmit={handleSubmit}
+  const search = (formData: FormData) => {
+    const params = new URLSearchParams(searchParams);
+    const query = formData.get('searchQuery') as string;
+    if (query) {
+      params.set('query', query);
+    } else {
+      params.delete('query');
+    }
+    replace(`/search?${params.toString()}`);
+  };
+
+  const toggleExpand = () => {
+    setIsExpanded((isExpanded) => !isExpanded);
+    setKeyword('');
+  };
+
+  const searchFormRef = useRef<HTMLFormElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSearchIconClick = () => {
+    if (isExpanded && searchFormRef.current) {
+      searchFormRef.current.requestSubmit();
+    } else {
+      setIsExpanded(true);
+      inputRef.current?.focus();
+    }
+  };
+
+  const SearchButton = () => (
+    <button
+      type="submit"
+      className={`${
+        isExpanded ? 'bg-greyLight' : 'bg-white'
+      } flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-2 md:border-l-[1px] md:bg-greyLight md:pl-5 md:pr-6`}
+      onClick={handleSearchIconClick}
     >
-      <input
-        className={
-          'p-0.375 w-full text-lg text-primary md:w-96 md:p-0.5 md:text-xl'
-        }
-        name={'searchQuery'}
-        placeholder={placeholder}
-        value={keyword}
-        onChange={handleKeywordChange}
+      <SearchIcon
+        className={`h-6 w-6 ${
+          isExpanded ? 'stroke-greyDark' : 'stroke-text'
+        } md:stroke-greyDark`}
       />
-      {isSubmitted ? (
-        <Button type={'button'} onClick={handleDeleteClick}>
-          <CloseIcon className={'mx-[6px] h-5 w-5 fill-primary'} />
-        </Button>
-      ) : (
-        <Button type={'submit'}>
-          <SearchIcon className={'h-8 w-8 fill-primary'} />
-        </Button>
-      )}
-    </form>
+    </button>
+  );
+
+  return (
+    <div
+      className={`flex ${
+        isExpanded ? 'absolute h-fit w-full' : 'static h-full w-12'
+      } right-0 justify-end transition-[width] md:static md:h-fit md:w-full md:justify-center`}
+    >
+      <div
+        className={`flex flex-grow justify-center bg-transparent md:w-fit md:justify-center md:px-5`}
+      >
+        <form
+          action={search}
+          ref={searchFormRef}
+          className={`flex ${
+            isExpanded ? 'w-full' : 'w-fit'
+          } flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
+        >
+          <div className="flex w-full justify-between">
+            <input
+              className={`${
+                isExpanded ? 'w-96' : 'w-0'
+              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none transition-[width] md:bg-white md:px-5`}
+              name="searchQuery"
+              placeholder={t('searchPage.searchBar.placeholder')}
+              value={keyword}
+              onChange={handleKeywordChange}
+              ref={inputRef}
+            />
+            {keyword.length > 0 && (
+              <Analytics event={LogEvents.searchPageClickCancel}>
+                <button
+                  type="button"
+                  className="flex h-full items-center justify-center bg-greyLight px-2 md:bg-white"
+                  onClick={handleDeleteClick}
+                >
+                  <CloseIcon className="h-4 w-4" />
+                </button>
+              </Analytics>
+            )}
+          </div>
+          <>
+            <div className="flex h-full md:hidden">
+              {isExpanded ? (
+                <Analytics event={LogEvents.searchPageSubmit}>
+                  <SearchButton />
+                </Analytics>
+              ) : (
+                <SearchButton />
+              )}
+            </div>
+            <div className="hidden h-full md:flex">
+              <Analytics event={LogEvents.searchPageSubmit}>
+                <SearchButton />
+              </Analytics>
+            </div>
+          </>
+        </form>
+        {isExpanded && (
+          <Analytics event={LogEvents.searchPageClickCancel}>
+            <button
+              type="button"
+              className="flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary md:hidden"
+              onClick={toggleExpand}
+            >
+              {t('searchPage.searchBar.collapse')}
+            </button>
+          </Analytics>
+        )}
+      </div>
+    </div>
   );
 };
 

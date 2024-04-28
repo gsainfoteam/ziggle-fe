@@ -5,68 +5,46 @@ import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
-import SearchIcon from '@/assets/icons/search.svg';
-import ZiggleEnglishLogo from '@/assets/logos/ziggle-en.svg';
-import ZiggleKoreanLogo from '@/assets/logos/ziggle-ko.svg';
+import MenuIcon from '@/assets/icons/menu.svg';
+import ZiggleLogo from '@/assets/logos/ziggle.svg';
+import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
 
-import LanguageSwitcher from './LanguageSwitcher';
+import Button from '../../atoms/Button';
+import SearchBar from '../../molecules/searchBar/SearchBar';
 
 const Navbar = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
   const user = await auth();
-  const nav = (
-    <>
-      <Analytics event={LogEvents.navBarClickAll}>
-        <Link href={`/${lng}/section/all`}>{t('navbar.all')}</Link>
-      </Analytics>
-      {user && (
-        <Analytics event={LogEvents.navBarClickWrite}>
-          <Link href={`/${lng}/write`}>{t('navbar.write')}</Link>
+
+  return (
+    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2">
+      <div className="relative flex h-full w-full items-center justify-between">
+        <Analytics event={LogEvents.navBarClickLogo}>
+          <Link href={`/${lng}`}>
+            <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
+            <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
+          </Link>
         </Analytics>
-      )}
-      <Analytics event={LogEvents.navBarClickSearch}>
-        <Link href={`/${lng}/search`} className="flex items-center gap-x-1">
-          <SearchIcon className="w-5 md:w-7" />
-          {t('navbar.query')}
+        <div className="flex h-full items-center md:w-full">
+          <SearchBar lng={lng} />
+          <Button className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full">
+            <MenuIcon className="h-6 stroke-text md:hidden" />
+          </Button>
+        </div>
+      </div>
+      <Analytics
+        event={user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin}
+      >
+        <Link
+          href={user ? `${lng}/mypage` : `${lng}/login`}
+          className="hidden items-center justify-center gap-2 md:flex"
+        >
+          <AccountIcon className="flex h-6" />
+          <div className="whitespace-nowrap align-middle font-medium text-primary">
+            {user ? user.name : t('navbar.login')}
+          </div>
         </Link>
       </Analytics>
-    </>
-  );
-  return (
-    <header className="bg-primary px-4 py-2 text-white md:py-0.5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-5">
-          <Analytics event={LogEvents.navBarClickLogo}>
-            <Link href={`/${lng}`}>
-              {lng === 'ko' ? (
-                <ZiggleKoreanLogo className="h-15 md:w-auto" />
-              ) : (
-                <ZiggleEnglishLogo className="h-15 md:w-auto" />
-              )}
-            </Link>
-          </Analytics>
-          <LanguageSwitcher lng={lng} />
-        </div>
-        <nav className="hidden gap-x-8 text-lg font-bold md:flex">{nav}</nav>
-        {user ? (
-          <Link
-            href={`/${lng}/mypage`}
-            className="flex items-center gap-x-1 font-bold"
-          >
-            {user.name}
-            <AccountIcon width="1.6rem" height="1.6rem" />
-          </Link>
-        ) : (
-          <Link
-            href={`/${lng}/login`}
-            className="flex items-center gap-x-1 font-bold"
-          >
-            {t('navbar.login')}
-            <AccountIcon width="1.6rem" height="1.6rem" />
-          </Link>
-        )}
-      </div>
-      <nav className="flex gap-x-8 text-sm font-bold md:hidden">{nav}</nav>
     </header>
   );
 };
