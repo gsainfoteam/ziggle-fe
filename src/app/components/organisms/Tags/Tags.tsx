@@ -24,7 +24,7 @@ const Tags = async ({
         <Chip
           key={name}
           className="font-normal"
-          variant={name === searchQuery ? 'contained' : undefined}
+          variant={name === searchQuery ? 'selected' : undefined}
         >{`#${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}</Chip>
       ))}
     </div>

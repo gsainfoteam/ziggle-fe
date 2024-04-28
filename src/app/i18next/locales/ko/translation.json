@@ -4,6 +4,9 @@
     "title": "지글",
     "description": "지스트의 모든 공지를 한눈에"
   },
+  "common": {
+    "optional": "선택"
+  },
   "navbar": {
     "all": "전체 공지",
     "write": "공지 작성",
@@ -172,36 +175,41 @@
     "title": "♨ 지글 공지"
   },
   "write": {
+    "koreanTitle": "한글 제목",
+    "englishTitle": "영어 제목",
     "writeTitle": "제목을 입력하세요",
-    "setupDeadline": "마감시간 설정하기",
-    "noticeType": "공지 분류",
+    "setupDeadline": "마감시간 설정",
+    "writeEnglishNotice": "영어 공지 작성",
+    "koreanNotice": "한글 공지",
+    "englishNotice": "영어 공지",
+    "noticeType": "분류",
     "noticeTypes": {
       "recruit": {
-        "label": "🎯 모집",
+        "label": "모집",
         "description": {
-          "title": "🎯 모집 공지를 선택하셨군요!",
+          "title": "🎯 모집 공지",
           "content": "동아리, 그룹이나 행사에 사람들을 모집하고 싶으시다면, 모집 공지를 작성해보세요.",
           "example": "예시) 동아리 신규부원 모집, 학생회 모집, 무한도전 팀원 구인, 공모전, 대회"
         }
       },
       "event": {
-        "label": "🎈 행사",
+        "label": "행사",
         "description": {
-          "title": "🎈 행사 공지를 선택하셨군요!",
+          "title": "🎈 행사 공지",
           "content": "여러분이 진행하시는 행사를 행사 공지에서 마음껏 홍보하세요.",
           "example": "예시) 축제, 전시회, 공연, 세미나, 강연, 워크숍"
         }
       },
       "general": {
-        "label": "🔔 일반",
+        "label": "일반",
         "description": {
-          "title": "🔔 일반 공지를 선택하셨군요!",
+          "title": "🔔 일반 공지",
           "content": "모집이나 행사 공지에 해당되지 않는 공지들입니다.",
           "example": "예시) 하우스 공지, 학생회 공지, 통보 등"
         }
       }
     },
-    "setupTags": "태그 설정하기",
+    "setupTags": "태그 설정",
     "writeTagsDescription": "띄어쓰기로 구분해주세요. #은 입력하지 않으셔도 됩니다.",
     "writeTags": "태그를 입력하세요.",
 
@@ -211,15 +219,15 @@
       "english": "영어"
     },
 
-    "enterKoreanContent": "본문 내용 입력하기 - 한국어",
+    "koreanContent": "한글 본문",
+    "englishContent": "영어 본문",
     "enterEnglishContent": "본문 내용 입력하기 - 영어",
     "translateWithDeepL": "DeepL로 번역하기",
 
-    "attatchPhoto": "사진 첨부하기",
+    "attachPhoto": "사진 첨부",
     "photoDescription": "첨부된 사진 중 첫 번째 사진이 대표 사진으로 설정됩니다.",
-    "dragToAddPhoto": "드래그해서 사진 추가",
-    "orAddFromPC": "또는 내 기기에서 선택",
-    "addFromMyDevice": "내 기기에서 사진 선택하기",
+    "dragToAddPhoto": "끌어서 사진 추가",
+    "orAddFromPC": "...또는 파일 선택",
 
     "submit": "공지 제출하기",
     "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
