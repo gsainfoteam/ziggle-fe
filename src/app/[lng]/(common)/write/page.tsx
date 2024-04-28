@@ -121,13 +121,15 @@ export default function WritePage({
           t={t}
         />
 
-        {hasEnglishContent && (
-          <LanguageTab
-            writingTab={writingTab}
-            setWritingTab={setWritingTab}
-            t={t}
-          />
-        )}
+        <div className="mt-10">
+          {hasEnglishContent && (
+            <LanguageTab
+              writingTab={writingTab}
+              setWritingTab={setWritingTab}
+              t={t}
+            />
+          )}
+        </div>
 
         {writingTab === 'korean' ? (
           <TitleAndContent
