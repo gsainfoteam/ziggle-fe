@@ -38,11 +38,6 @@ const NoticeInfo = async ({
 
       <Title title={title} />
 
-      <div className="flex flex-wrap gap-[7px]">
-        {tags.map((tag, i) => (
-          <Tag key={i} name={tag} />
-        ))}
-      </div>
       <Tags tags={tags} className="flex-wrap" lng={lng} />
     </div>
   );
