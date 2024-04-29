@@ -6,6 +6,7 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail } from '@/api/notice/notice';
 import DDay from '@/app/components/molecules/DDay';
+import Tag from '@/app/components/molecules/Tag';
 import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.jpeg';
@@ -37,6 +38,11 @@ const NoticeInfo = async ({
 
       <Title title={title} />
 
+      <div className="flex flex-wrap gap-[7px]">
+        {tags.map((tag, i) => (
+          <Tag key={i} name={tag} />
+        ))}
+      </div>
       <Tags tags={tags} className="flex-wrap" lng={lng} />
     </div>
   );
