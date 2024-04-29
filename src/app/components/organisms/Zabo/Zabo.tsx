@@ -40,7 +40,7 @@ const Zabo = (props: ZaboProps & PropsWithLng) => {
 
         <p className={'font-medium text-[#6E6E73]'}>{timeAgo}</p>
 
-        {deadline !== null ?? <DDay deadline={dayjs(deadline)} t={t} />}
+        {deadline !== null && <DDay deadline={dayjs(deadline)} t={t} />}
       </div>
 
       <p className={'mx-4 mb-[10px] text-xl font-semibold'}>{title}</p>

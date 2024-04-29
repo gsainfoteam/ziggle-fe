@@ -13,6 +13,7 @@ import AddAdditionalNotice from './AddAdditionalNotice';
 import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
+import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
 import Reactions from './Reactions';
 import WriteEnglishNotice from './WriteEnglishNotice';
@@ -62,11 +63,36 @@ const DetailedNoticePage = async ({
 
   return (
     <>
-      <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} />
+      {/* <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} /> */}
       <div className="content mx-auto mt-8 md:mt-12">
-        <Actions title={title} lng={lng} />
+        <div className="flex gap-5">
+          {notice.imageUrls.length > 0 && (
+            <ImageStack srcs={notice.imageUrls} alt={title} />
+          )}
 
-        {user && user.id === notice.author.uuid && (
+          <div className="max-w-[500px]">
+            <NoticeInfo
+              {...notice}
+              currentDeadline={notice.currentDeadline ?? null}
+              lng={lng}
+            />
+            <div className="h-5" />
+            <Content content={notice.content} />
+
+            <div className="h-10" />
+            <AddtionalNotices
+              additionalContents={notice.additionalContents}
+              notice={notice}
+              t={t}
+              lng={lng}
+            />
+          </div>
+        </div>
+
+        {/* <Actions title={title} lng={lng} /> */}
+
+        {/* temporarily disabled authorActions. should enable it later */}
+        {/* {user && user.id === notice.author.uuid && (
           <>
             <div className="h-5" />
             <AuthorActions
@@ -76,24 +102,9 @@ const DetailedNoticePage = async ({
               lng={lng}
             />
           </>
-        )}
+        )} */}
 
         <div className="h-4 md:h-5" />
-        <NoticeInfo
-          {...notice}
-          currentDeadline={notice.currentDeadline ?? null}
-          lng={lng}
-        />
-        <div className="h-5" />
-        <Content content={notice.content} />
-
-        <div className="h-10" />
-        <AddtionalNotices
-          additionalContents={notice.additionalContents}
-          notice={notice}
-          t={t}
-          lng={lng}
-        />
 
         {user && user.id === notice.author.uuid && isAdditionalNoticeShow && (
           <>
