@@ -7,6 +7,9 @@ const defaultTags = ['event', 'general', 'recruit', 'academic'] as const;
 const isDefaultTag = (tag: string): tag is (typeof defaultTags)[number] =>
   defaultTags.includes(tag as never);
 
+/**
+ * @deprecated This should be replaced with the map of `Chip` component. Chip and Tag is different.
+ */
 const Tags = async ({
   tags,
   className,
