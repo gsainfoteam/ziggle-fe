@@ -70,16 +70,17 @@ const DetailedNoticePage = async ({
             <ImageStack srcs={notice.imageUrls} alt={title} />
           )}
 
-          <div className="max-w-[500px]">
+          <div className="flex max-w-[500px] flex-col gap-[18px]">
             <NoticeInfo
               {...notice}
               currentDeadline={notice.currentDeadline ?? null}
               lng={lng}
             />
-            <div className="h-5" />
+
             <Content content={notice.content} />
 
-            <div className="h-10" />
+            <Reactions notice={notice} lng={lng} />
+
             <AddtionalNotices
               additionalContents={notice.additionalContents}
               notice={notice}
@@ -132,18 +133,14 @@ const DetailedNoticePage = async ({
             </>
           )}
 
-        <div className={'mt-6 flex justify-center'}>
-          <Reactions notice={notice} />
-        </div>
-
-        {notice.imageUrls.length > 0 && (
+        {/* {notice.imageUrls.length > 0 && (
           <>
             <div className="h-20" />
             <ImageCarousel srcs={notice.imageUrls} alt={title} lng={lng} />
           </>
-        )}
+        )} */}
         <div className="h-20" />
-        <HowAboutThese lng={lng} />
+        {/* <HowAboutThese lng={lng} /> */}
       </div>
     </>
   );
