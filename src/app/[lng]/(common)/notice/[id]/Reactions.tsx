@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Trans } from 'react-i18next';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
@@ -144,22 +145,66 @@ const Reactions = ({
           />
         ))}
 
-      <ActionButton isSelected={false} onClick={handleShare}>
-        <span className="stroke-text">
-          <LinkIcon width={26} />
-        </span>
+      <ShareButton title={title} lng={lng} />
 
-        <span className="text-base">링크 복사하기</span>
-      </ActionButton>
-
-      <ActionButton isSelected={false} onClick={handleShare}>
-        <span className="stroke-text stroke-[1.5]">
-          <ShareIcon width={26} />
-        </span>
-
-        <span className="text-base">공유하기</span>
-      </ActionButton>
+      <CopyLinkButton title={title} lng={lng} />
     </div>
+  );
+};
+
+interface ActionsProps {
+  title: string;
+  lng: Locale;
+}
+
+const ShareButton = ({ title, lng }: ActionsProps) => {
+  const { t } = useTranslation(lng);
+  const handleShare = () => {
+    if (!navigator.canShare) {
+      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
+    }
+    navigator.share({
+      title,
+      text: t('zabo.share.content', { title }),
+      url: window.location.href,
+    });
+  };
+
+  return (
+    <ActionButton isSelected={false} onClick={handleShare}>
+      <span className="stroke-text stroke-[1.5]">
+        <ShareIcon width={26} />
+      </span>
+
+      <span className="text-base">공유하기</span>
+    </ActionButton>
+  );
+};
+
+const CopyLinkButton = ({ title, lng }: ActionsProps) => {
+  const { t } = useTranslation(lng);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(
+      t('zabo.copyLink.content', { title, link: window.location.href }),
+    );
+
+    toast.success(
+      <div className="flex flex-col text-sm font-medium">
+        <Trans t={t} i18nKey="zabo.copyLink.success">
+          successed <div className="text-xs">share to friends</div>
+        </Trans>
+      </div>,
+    );
+  };
+
+  return (
+    <ActionButton isSelected={false} onClick={handleCopy}>
+      <span className="stroke-text">
+        <LinkIcon width={26} />
+      </span>
+
+      <span className="text-base">링크 복사하기</span>
+    </ActionButton>
   );
 };
 
