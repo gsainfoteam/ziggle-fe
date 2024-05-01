@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 
 import { Content, NoticeDetail } from '@/api/notice/notice';
 import { PropsWithLng, T } from '@/app/i18next';
-import AddIcon from '@/assets/icons/add.svg';
 
 interface AdditionalNoticesProps {
   notice: NoticeDetail;
@@ -14,7 +13,6 @@ const AdditionalNotices = async ({
   notice,
   additionalContents,
   t,
-  lng,
 }: AdditionalNoticesProps & PropsWithLng) => {
   return (
     <div className={'flex flex-col gap-[18px]'}>

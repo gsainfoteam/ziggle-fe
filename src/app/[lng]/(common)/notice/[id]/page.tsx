@@ -2,9 +2,6 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/get-notice';
-import ImageCarousel from '@/app/components/organisms/ImageCarousel';
-import HowAboutThese from '@/app/components/templates/HowAboutThese';
-import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
@@ -15,7 +12,6 @@ import AuthorActions from './AuthorActions';
 import Content from './Content';
 import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
-import Reactions from './Reactions';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
@@ -94,7 +90,7 @@ const DetailedNoticePage = async ({
 
             <Content content={notice.content} />
 
-            <Reactions notice={notice} lng={lng} />
+            <Actions notice={notice} lng={lng} />
 
             <AddtionalNotices
               additionalContents={notice.additionalContents}
@@ -104,8 +100,6 @@ const DetailedNoticePage = async ({
             />
           </div>
         </div>
-
-        {/* <Actions title={title} lng={lng} /> */}
 
         {/* temporarily disabled authorActions. should enable it later */}
         {/* {user && user.id === notice.author.uuid && (
@@ -148,14 +142,7 @@ const DetailedNoticePage = async ({
             </>
           )}
 
-        {/* {notice.imageUrls.length > 0 && (
-          <>
-            <div className="h-20" />
-            <ImageCarousel srcs={notice.imageUrls} alt={title} lng={lng} />
-          </>
-        )} */}
         <div className="h-20" />
-        {/* <HowAboutThese lng={lng} /> */}
       </div>
     </div>
   );
