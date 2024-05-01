@@ -75,9 +75,9 @@ const Metadata = ({
 
         <p className={'ml-2 text-lg font-medium'}>{author}</p>
 
-        <p className={'mx-[5px] font-bold text-[#6E6E73]'}>·</p>
+        <p className={'mx-[5px] font-bold text-greyDark'}>·</p>
 
-        <p className={'font-medium text-[#6E6E73]'}>{timeAgo}</p>
+        <p className={'font-medium text-greyDark'}>{timeAgo}</p>
       </div>
     </>
   );
