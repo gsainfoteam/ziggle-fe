@@ -27,14 +27,6 @@ import ThinkingFace from './assets/thinking-face.svg';
 const EMOJI_WIDTH = 30;
 
 const emojis = {
-  '🔥': <Fire width={EMOJI_WIDTH} />,
-  '😭': <LoudlyCryingFace width={EMOJI_WIDTH} />,
-  '😧': <AnguishedFace width={EMOJI_WIDTH} />,
-  '🤔': <ThinkingFace width={EMOJI_WIDTH} />,
-  '😮': <SurprisedFace width={EMOJI_WIDTH} />,
-};
-
-const emojis2 = {
   '🔥': Fire,
   '😭': LoudlyCryingFace,
   '😧': AnguishedFace,
@@ -71,36 +63,19 @@ const ReactionButton = ({
   isReacted,
   onClick,
 }: Reaction & { onClick: () => void }) => {
-  return (
-    <>
-      <ActionButton isSelected={!isReacted} onClick={onClick}>
-        <span>{emojis[emoji as keyof typeof emojis] ?? <p>{emoji}</p>}</span>
-
-        <span className="text-base">{count}</span>
-      </ActionButton>
-    </>
-  );
-};
-
-const ReactionButton2 = ({
-  emoji,
-  count,
-  isReacted,
-  onClick,
-}: Reaction & { onClick: () => void }) => {
-  const EmojiComponent = emojis2[emoji as keyof typeof emojis2];
+  const EmojiComponent = emojis[emoji as keyof typeof emojis];
 
   return (
     <>
-      <ActionButton isSelected={!isReacted} onClick={onClick}>
+      <ActionButton isSelected={isReacted} onClick={onClick}>
         <span>
           {EmojiComponent ? (
             emoji === '🔥' ? (
               <span
                 className={
-                  'stroke-1.5' +
+                  'stroke-2' +
                   ' ' +
-                  `${isReacted ? 'stroke-text' : 'stroke-white'}`
+                  `${isReacted ? 'stroke-white' : 'stroke-text'}`
                 }
               >
                 <EmojiComponent width={EMOJI_WIDTH} />
