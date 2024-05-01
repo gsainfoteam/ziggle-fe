@@ -75,6 +75,7 @@
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
     "dueAt": "마감시간 {{dueAt}}",
+    "timeLeft": "{{timeLeft} 남음}", 
     "noContent": "내용 없음",
     "share": {
       "action": "공유하기",

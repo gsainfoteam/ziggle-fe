@@ -78,6 +78,7 @@
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
     "dueAt": "Due at {{dueAt}}",
+    "timeLeft": "{{timeLeft}} left", 
     "noContent": "No Content",
     "share": {
       "action": "Share",

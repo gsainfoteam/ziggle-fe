@@ -5,83 +5,69 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
+import Fire from '@/assets/fire-outlined.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
+import Share from '@/assets/icons/share.svg';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import Tags from '../../organisms/Tags';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = async ({
-  content,
-  title,
-  createdAt,
-  views,
-  author,
-  currentDeadline,
-  tags,
-  searchQuery,
-
   id,
+  title,
+  currentDeadline,
+  author,
+  createdAt,
+  reactions,
   lng,
+  content,
 }: ResultZaboProps) => {
   const { t } = await createTranslation(lng);
+  dayjs.locale(lng);
+
+  const isClosed = dayjs(currentDeadline).isBefore();
 
   return (
-    <Link className={'w-full'} href={`/${lng}/notice/` + id}>
-      <div
-        className={
-          'flex flex-col justify-between gap-2.5 p-5 ' +
-          'box-border w-full cursor-pointer overflow-hidden rounded border border-secondaryText ' +
-          'bg-white dark:bg-neutral-900'
-        }
-      >
-        <div className="flex flex-col items-start">
-          {currentDeadline && (
-            <div className="mb-1.5 text-lg font-medium">
-              <Trans t={t} i18nKey="zabo.dueAt">
-                {{ dueAt: dayjs(currentDeadline).tz().format('LLL') }}
-              </Trans>
+    <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
+      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-lg bg-greyLight p-5 text-text">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <DefaultProfile className="h-9 w-9" />
+            <div className="flex items-center gap-1 font-medium">
+              <div className="text-lg">{author.name}</div>
+              <div className="text-base text-greyDark">·</div>
+              <div className="text-base text-greyDark">
+                {dayjs(createdAt).fromNow()}
+              </div>
             </div>
-          )}
-          <div className="text-start text-3xl font-bold">
-            {searchQuery ? (
-              <HighlightedText query={searchQuery}>{title}</HighlightedText>
-            ) : (
-              title
-            )}
           </div>
-
-          <div className="flex items-center gap-0.5">
-            <div className="text-lg font-bold">
-              {searchQuery ? (
-                <HighlightedText query={searchQuery}>
-                  {author.name}
-                </HighlightedText>
+          {currentDeadline && (
+            <div
+              className={`h-fit rounded-md ${
+                isClosed ? 'bg-greyDark' : 'bg-primary'
+              } px-2 py-1 text-sm text-white`}
+            >
+              {isClosed ? (
+                t('ddayPlus')
               ) : (
-                author.name
+                <Trans t={t} i18nKey={'zabo.timeLeft'}>
+                  {{ timeLeft: dayjs(currentDeadline).fromNow(true) }}
+                </Trans>
               )}
             </div>
-            {/* organization here (for futer update) */}
+          )}
+        </div>
+        <div className="flex text-xl font-semibold">{title}</div>
+        <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
+          {content ?? t('zabo.noContent')}
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1">
+            <Fire className="h-9 w-9" />
+            <div className="font-semibold">9</div>
           </div>
-
-          <Tags
-            tags={tags}
-            className="my-0.5"
-            searchQuery={searchQuery}
-            lng={lng}
-          />
-
-          <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
-            {content ?? t('zabo.noContent')}
-          </div>
-
-          <div className="flex gap-0.5">
-            <div className="flex text-sm font-medium text-secondaryText">
-              <Trans t={t} i18nKey="zabo.dateView">
-                {{ date: dayjs(createdAt).tz().format('L') }}
-                <strong className="font-bold"> · {{ views }}</strong>
-              </Trans>
-            </div>
-          </div>
+          <Share className="h-6 w-6" />
         </div>
       </div>
     </Link>
