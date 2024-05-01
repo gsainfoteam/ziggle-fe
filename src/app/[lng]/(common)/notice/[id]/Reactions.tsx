@@ -34,6 +34,14 @@ const emojis = {
   '😮': <SurprisedFace width={EMOJI_WIDTH} />,
 };
 
+const emojis2 = {
+  '🔥': Fire,
+  '😭': LoudlyCryingFace,
+  '😧': AnguishedFace,
+  '🤔': ThinkingFace,
+  '😮': SurprisedFace,
+};
+
 interface ActionButtonProps {
   isSelected: boolean;
   onClick: () => void;
@@ -65,9 +73,45 @@ const ReactionButton = ({
 }: Reaction & { onClick: () => void }) => {
   return (
     <>
-      <ActionButton isSelected={isReacted} onClick={onClick}>
+      <ActionButton isSelected={!isReacted} onClick={onClick}>
         <span>{emojis[emoji as keyof typeof emojis] ?? <p>{emoji}</p>}</span>
 
+        <span className="text-base">{count}</span>
+      </ActionButton>
+    </>
+  );
+};
+
+const ReactionButton2 = ({
+  emoji,
+  count,
+  isReacted,
+  onClick,
+}: Reaction & { onClick: () => void }) => {
+  const EmojiComponent = emojis2[emoji as keyof typeof emojis2];
+
+  return (
+    <>
+      <ActionButton isSelected={!isReacted} onClick={onClick}>
+        <span>
+          {EmojiComponent ? (
+            emoji === '🔥' ? (
+              <span
+                className={
+                  'stroke-1.5' +
+                  ' ' +
+                  `${isReacted ? 'stroke-text' : 'stroke-white'}`
+                }
+              >
+                <EmojiComponent width={EMOJI_WIDTH} />
+              </span>
+            ) : (
+              <EmojiComponent width={EMOJI_WIDTH} />
+            )
+          ) : (
+            <p>{emoji}</p>
+          )}
+        </span>
         <span className="text-base">{count}</span>
       </ActionButton>
     </>
