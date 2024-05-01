@@ -1,4 +1,11 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
+
+import { PropsWithLng } from '@/app/i18next';
+
+import ShowcaseModal from './ShowcaseModal';
 
 interface ImageStackProps {
   width?: number;
@@ -6,21 +13,51 @@ interface ImageStackProps {
   alt: string;
 }
 
-const ImageStack = ({ width, srcs, alt }: ImageStackProps) => {
+const ImageStack = ({
+  width,
+  srcs,
+  alt,
+  lng,
+}: ImageStackProps & PropsWithLng) => {
+  const [isShowcaseOpen, setIsShowcaseOpen] = useState(false);
+  const [initialIndex, setInitialIndex] = useState(0);
+
+  const onImageClick = (index: number) => {
+    setIsShowcaseOpen(() => {
+      setInitialIndex(index);
+      return true;
+    });
+  };
+
   return (
-    <div className="flex flex-col gap-[10px]">
-      {srcs.map((src, i) => (
-        <div key={src} className="relative">
-          <Image
-            src={src}
+    <>
+      <div className="flex flex-col gap-[10px]">
+        {srcs.map((src, i) => (
+          <div key={src} className="relative cursor-pointer">
+            <Image
+              src={src}
+              alt={alt}
+              width={width ?? 400}
+              height={300}
+              onClick={() => onImageClick(i)}
+              className="shrink-0 basis-48 rounded-[10px] border-2 border-greyBorder object-cover md:basis-80"
+            />
+          </div>
+        ))}
+      </div>
+
+      {isShowcaseOpen && (
+        <div className="hidden md:block">
+          <ShowcaseModal
+            srcs={srcs}
             alt={alt}
-            width={width ?? 400}
-            height={300}
-            className="shrink-0 basis-48 rounded-[10px] border-2 border-greyBorder object-cover md:basis-80"
+            lng={lng}
+            onHide={() => setIsShowcaseOpen(false)}
+            initialIndex={initialIndex}
           />
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 

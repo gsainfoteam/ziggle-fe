@@ -69,7 +69,7 @@ const DetailedNoticePage = async ({
           {/* DESKTOP VIEW IMAGESTACK */}
           <div className="hidden md:block">
             {notice.imageUrls.length > 0 && (
-              <ImageStack srcs={notice.imageUrls} alt={title} />
+              <ImageStack srcs={notice.imageUrls} alt={title} lng={lng} />
             )}
           </div>
 
@@ -83,7 +83,12 @@ const DetailedNoticePage = async ({
             {/* MOBILE VIEW IMAGESTACK */}
             <div className="md:hidden">
               {notice.imageUrls.length > 0 && (
-                <ImageStack width={900} srcs={notice.imageUrls} alt={title} />
+                <ImageStack
+                  width={900}
+                  srcs={notice.imageUrls}
+                  alt={title}
+                  lng={lng}
+                />
               )}
             </div>
 
