@@ -93,8 +93,8 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           <div className="flex w-full justify-between">
             <input
               className={`${
-                isExpanded ? 'w-96' : 'w-0'
-              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none transition-[width] md:bg-white md:px-5`}
+                isExpanded ? 'w-full' : 'w-0'
+              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none md:bg-white md:px-5`}
               name="searchQuery"
               placeholder={t('searchPage.searchBar.placeholder')}
               value={keyword}
