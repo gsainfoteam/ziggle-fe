@@ -62,20 +62,30 @@ const DetailedNoticePage = async ({
   const supportEnglish = notice.langs.includes('en');
 
   return (
-    <>
+    <div className="flex justify-center">
       {/* <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} /> */}
-      <div className="content mx-auto mt-8 md:mt-12">
+      <div className="content mt-8 md:mx-10 md:mt-12 md:w-[900px]">
         <div className="flex gap-5">
-          {notice.imageUrls.length > 0 && (
-            <ImageStack srcs={notice.imageUrls} alt={title} />
-          )}
+          {/* DESKTOP VIEW IMAGESTACK */}
+          <div className="hidden md:block">
+            {notice.imageUrls.length > 0 && (
+              <ImageStack srcs={notice.imageUrls} alt={title} />
+            )}
+          </div>
 
-          <div className="flex max-w-[500px] flex-col gap-[18px]">
+          <div className="flex flex-col gap-[18px] md:w-[60%]">
             <NoticeInfo
               {...notice}
               currentDeadline={notice.currentDeadline ?? null}
               lng={lng}
             />
+
+            {/* MOBILE VIEW IMAGESTACK */}
+            <div className="md:hidden">
+              {notice.imageUrls.length > 0 && (
+                <ImageStack width={900} srcs={notice.imageUrls} alt={title} />
+              )}
+            </div>
 
             <Content content={notice.content} />
 
@@ -142,7 +152,7 @@ const DetailedNoticePage = async ({
         <div className="h-20" />
         {/* <HowAboutThese lng={lng} /> */}
       </div>
-    </>
+    </div>
   );
 };
 
