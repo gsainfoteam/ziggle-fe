@@ -5,25 +5,33 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
+import Swal from 'sweetalert2';
 
+import Actions from '@/app/[lng]/(common)/notice/[id]/Actions';
 import { createTranslation } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+import { Locale } from '@/app/i18next/settings';
 import Fire from '@/assets/fire-outlined.svg';
 import DefaultProfile from '@/assets/icons/default-profile.svg';
-import Share from '@/assets/icons/share.svg';
+import ShareIcon from '@/assets/icons/share.svg';
 
+import Button from '../../atoms/Button';
 import HighlightedText from '../../molecules/HighlightedText';
+import ZaboActions from '../../organisms/Zabo/ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
 
-const ResultImageZabo = async ({
-  id,
-  title,
-  currentDeadline,
-  author,
-  createdAt,
-  imageUrls,
-  reactions,
-  lng,
-}: ResultZaboProps) => {
+const ResultImageZabo = async (props: ResultZaboProps) => {
+  const {
+    id,
+    title,
+    currentDeadline,
+    author,
+    createdAt,
+    imageUrls,
+    reactions,
+    lng,
+  } = props;
+
   const { t } = await createTranslation(lng);
   dayjs.locale(lng);
 
@@ -75,13 +83,7 @@ const ResultImageZabo = async ({
             </div>
           ))}
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <Fire className="h-9 w-9" />
-            <div className="font-semibold">9</div>
-          </div>
-          <Share className="h-6 w-6" />
-        </div>
+        <ZaboActions {...props} />
       </div>
     </Link>
   );

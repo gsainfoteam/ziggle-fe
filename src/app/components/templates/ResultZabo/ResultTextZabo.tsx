@@ -11,18 +11,21 @@ import Share from '@/assets/icons/share.svg';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import Tags from '../../organisms/Tags';
+import ZaboActions from '../../organisms/Zabo/ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
 
-const ResultTextZabo = async ({
-  id,
-  title,
-  currentDeadline,
-  author,
-  createdAt,
-  reactions,
-  lng,
-  content,
-}: ResultZaboProps) => {
+const ResultTextZabo = async (props: ResultZaboProps) => {
+  const {
+    id,
+    title,
+    currentDeadline,
+    author,
+    createdAt,
+    content,
+    reactions,
+    lng,
+  } = props;
+
   const { t } = await createTranslation(lng);
   dayjs.locale(lng);
 
@@ -62,13 +65,7 @@ const ResultTextZabo = async ({
         <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
           {content ?? t('zabo.noContent')}
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
-            <Fire className="h-9 w-9" />
-            <div className="font-semibold">9</div>
-          </div>
-          <Share className="h-6 w-6" />
-        </div>
+        <ZaboActions {...props} />
       </div>
     </Link>
   );

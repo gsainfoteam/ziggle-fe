@@ -173,7 +173,8 @@
     },
     "prompt": "검색어를 입력해주세요",
     "noResult": "검색 결과가 존재하지 않습니다.",
-    "title": "♨ 지글 공지"
+    "title": "♨ 지글 공지", 
+    "loginRequired": "로그인이 필요합니다"
   },
   "write": {
     "koreanTitle": "한글 제목",

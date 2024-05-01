@@ -180,7 +180,8 @@
     },
     "prompt": "Please enter a search term",
     "noResult": "There are no search results.",
-    "title": "♨ Ziggle Announcements"
+    "title": "♨ Ziggle Announcements", 
+    "loginRequired": "Login is required"
   },
   "write": {
     "koreanTitle": "Korean Title",

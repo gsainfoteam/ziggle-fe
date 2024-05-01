@@ -64,13 +64,13 @@ const Zabo = (props: ZaboProps & PropsWithLng) => {
         </div>
       )}
 
-      {hasImage && <ZaboActions notice={props} />}
+      {hasImage && <ZaboActions {...props} />}
 
       {hasImage && <ZaboTags notice={props} />}
 
       <div className={'mx-4 mt-[10px] line-clamp-3'}>{props.content}</div>
 
-      {!hasImage && <ZaboActions notice={props} />}
+      {!hasImage && <ZaboActions {...props} />}
     </div>
   );
 };
