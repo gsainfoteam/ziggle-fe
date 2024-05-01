@@ -19,6 +19,8 @@ const AdditionalNotices = async ({
   return (
     <div className={'flex flex-col gap-[18px]'}>
       {additionalContents.map((content, index) => {
+        const timeAgo = dayjs(content.createdAt).fromNow();
+
         const lastDeadline =
           index > 0 ? additionalContents[index - 1].deadline : notice.deadline;
 
@@ -32,13 +34,17 @@ const AdditionalNotices = async ({
               key={`${content.id}+${content.lang}`}
               className="flex flex-col gap-[10px] rounded-[10px] bg-greyLight px-5 py-[18px]"
             >
-              <div className="flex gap-[5px]">
+              <div className="flex items-center gap-[5px]">
                 <p className="text-lg font-semibold text-text">
                   {t('zabo.additionalNotices.title')}
                 </p>
-
-                <p className={'mx-[5px] font-bold text-greyDark'}>·</p>
+                <p className={'font-bold text-greyDark'}>·</p>
+                <p className={'font-medium text-greyDark'}>{timeAgo}</p>
               </div>
+
+              <p className="font-normal leading-[1.4] text-greyDark">
+                {content.content}
+              </p>
             </div>
             <div
               key={`${content.id}+${content.lang}`}
