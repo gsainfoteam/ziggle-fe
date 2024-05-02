@@ -20,7 +20,7 @@ const AdditionalNotices = async ({
         const timeAgo = dayjs(content.createdAt).fromNow();
 
         const lastDeadline =
-          index > 0 ? additionalContents[index - 1].deadline : notice.deadline;
+          additionalContents[index - 1]?.deadline ?? notice.deadline;
 
         const deadlineChanged =
           content.deadline &&
