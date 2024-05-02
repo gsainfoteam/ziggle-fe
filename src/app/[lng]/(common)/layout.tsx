@@ -12,7 +12,7 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import InitClient from './InitClient';
 
 export const viewport: Viewport = {
-  themeColor: '#eb6263',
+  themeColor: '#ff4500',
 };
 
 export default async function Layout({
@@ -29,17 +29,18 @@ export default async function Layout({
       <div>
         <Navbar lng={lng} />
 
-        <div className="flex flex-1 lg:flex-row">
-          <Sidebar lng={lng} />
+        <div className="flex md:flex-row">
+          <div className="ml-4 mt-6 hidden md:block">
+            <Sidebar lng={lng} />
+          </div>
 
-          <div className="flex-1 p-4">
+          <div className="flex-grow">
             <main>{children}</main>
-            <div className="basis-80" />
-            <Footer t={t} />
-            <ToastContainer className="w-64" />
           </div>
         </div>
+        <Footer t={t} />
       </div>
+      <ToastContainer className="w-64" />
     </InitClient>
   );
 }

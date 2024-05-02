@@ -13,28 +13,34 @@ export default async function Home({
 }) {
   const { t } = await createTranslation(lng);
 
-  const [deadline, hot, event, recruit, general, academic] = await Promise.all([
-    getAllNotices({ orderBy: 'deadline' }),
-    getAllNotices({ orderBy: 'hot' }),
-    getAllNotices({ tags: ['event'], orderBy: 'recent' }),
-    getAllNotices({ tags: ['recruit'], orderBy: 'recent' }),
-    getAllNotices({ tags: ['general'], orderBy: 'recent' }),
-    getAllNotices({ tags: ['academic'], orderBy: 'recent' }),
-  ]);
+  // const [deadline, hot, event, recruit, general, academic] = await Promise.all([
+  //   getAllNotices({ orderBy: 'deadline' }),
+  //   getAllNotices({ orderBy: 'hot' }),
+  //   getAllNotices({ tags: ['event'], orderBy: 'recent' }),
+  //   getAllNotices({ tags: ['recruit'], orderBy: 'recent' }),
+  //   getAllNotices({ tags: ['general'], orderBy: 'recent' }),
+  //   getAllNotices({ tags: ['academic'], orderBy: 'recent' }),
+  // ]);
+
+  const recentNotices = await getAllNotices({ orderBy: 'recent' });
 
   return (
     <main className="flex flex-col gap-16 md:py-12">
-      <div className={'flex flex-col px-32'}>
-        {...recruit.list.map((notice) => (
-          <>
-            <Zabo key={notice.id} {...notice} t={t} lng={lng} />
+      <div className="flex w-full">
+        <div className="grow-0 basis-[15%]" />
+        <div className="flex grow flex-col">
+          {...recentNotices.list.map((notice) => (
+            <>
+              <Zabo key={notice.id} {...notice} t={t} lng={lng} />
 
-            <div className={'bg-greyLight my-[30px] h-[1px]'} />
-          </>
-        ))}
+              <div className="my-[60px] h-[1px] bg-greyLight" />
+            </>
+          ))}
+        </div>
+        <div className="grow-0 basis-[20%]" />
       </div>
 
-      <ZaboCarousel
+      {/* <ZaboCarousel
         notices={deadline.list}
         title={t('notices.deadline.label')}
         height={300}
@@ -76,7 +82,7 @@ export default async function Home({
         height={300}
         sectionHref="https://www.gist.ac.kr/kr/html/sub05/050209.html"
         lng={lng}
-      />
+      /> */}
     </main>
   );
 }
