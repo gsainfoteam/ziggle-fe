@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { Notice } from '@/api/notice/notice';
 
 import Tag from '../../molecules/Tag';

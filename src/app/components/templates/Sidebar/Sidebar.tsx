@@ -19,6 +19,8 @@ import Home from '@/assets/icons/home.svg';
 import MessageAlert from '@/assets/icons/message-alert.svg';
 import OpenBook from '@/assets/icons/open-book.svg';
 
+const sidebar_object = [{}];
+
 const NavButton = ({
   title,
   icon,
@@ -28,7 +30,6 @@ const NavButton = ({
   icon: React.ReactNode;
   boldIcon: React.ReactNode;
 }) => {
-  // const router = useRouter();
   const pathname = usePathname();
 
   const currentIcon = pathname === '/bold' ? boldIcon : icon;
