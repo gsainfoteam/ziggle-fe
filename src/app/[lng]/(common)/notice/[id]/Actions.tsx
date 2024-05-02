@@ -11,8 +11,6 @@ import {
   Notice,
   Reaction,
 } from '@/api/notice/notice';
-import Button from '@/app/components/atoms/Button';
-import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import Fire from '@/assets/fire-outlined.svg';
@@ -26,12 +24,22 @@ import ThinkingFace from './assets/thinking-face.svg';
 
 const EMOJI_WIDTH = 30;
 
-const emojis = {
-  '🔥': Fire,
-  '😭': LoudlyCryingFace,
-  '😧': AnguishedFace,
-  '🤔': ThinkingFace,
-  '😮': SurprisedFace,
+enum EmojiString {
+  FIRE = '🔥',
+  CRYING = '😭',
+  ANGUISHED = '😧',
+  THINKING = '🤔',
+  SURPRISED = '😮',
+}
+
+const emojis: {
+  [key in EmojiString]: React.FC<React.SVGProps<SVGSVGElement>>;
+} = {
+  [EmojiString.FIRE]: Fire,
+  [EmojiString.CRYING]: LoudlyCryingFace,
+  [EmojiString.ANGUISHED]: AnguishedFace,
+  [EmojiString.THINKING]: ThinkingFace,
+  [EmojiString.SURPRISED]: SurprisedFace,
 };
 
 interface ActionButtonProps {
@@ -70,7 +78,7 @@ const ReactionButton = ({
       <ActionButton isSelected={isReacted} onClick={onClick}>
         <span>
           {EmojiComponent ? (
-            emoji === '🔥' ? (
+            emoji === EmojiString.FIRE ? (
               <span
                 className={
                   'stroke-2' +
@@ -98,10 +106,7 @@ interface ReactionsProps {
   lng: Locale;
 }
 
-const Reactions = ({
-  notice: { title, id, reactions },
-  lng,
-}: ReactionsProps) => {
+const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
   const [currentReactions, setCurrentReactions] =
     useState<Reaction[]>(reactions);
 
@@ -127,18 +132,6 @@ const Reactions = ({
     if (reactions) {
       setCurrentReactions(reactions);
     }
-  };
-
-  const { t } = useTranslation(lng);
-  const handleShare = () => {
-    if (!navigator.canShare) {
-      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
-    }
-    navigator.share({
-      title,
-      text: t('zabo.share.content', { title }),
-      url: window.location.href,
-    });
   };
 
   return (
@@ -195,7 +188,7 @@ const ShareButton = ({ title, lng }: ActionsProps) => {
         <ShareIcon width={26} />
       </span>
 
-      <span className="text-base">공유하기</span>
+      <span className="text-base">{t('zabo.share.action')}</span>
     </ActionButton>
   );
 };
@@ -222,9 +215,9 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
         <LinkIcon width={26} />
       </span>
 
-      <span className="text-base">링크 복사하기</span>
+      <span className="text-base">{t('zabo.copyLink.action')}</span>
     </ActionButton>
   );
 };
 
-export default Reactions;
+export default Actions;
