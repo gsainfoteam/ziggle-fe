@@ -27,8 +27,8 @@ export default async function Home({
   return (
     <main className="flex flex-col gap-16 md:py-12">
       <div className="flex w-full">
-        <div className="grow-0 basis-[15%]" />
-        <div className="flex grow flex-col">
+        <div className="hidden grow-0 basis-[20%] md:block" />
+        <div className="flex grow flex-col md:min-w-[500px]">
           {...recentNotices.list.map((notice) => (
             <>
               <Zabo key={notice.id} {...notice} t={t} lng={lng} />
@@ -37,7 +37,7 @@ export default async function Home({
             </>
           ))}
         </div>
-        <div className="grow-0 basis-[20%]" />
+        <div className="hidden grow-0 basis-[25%] md:block" />
       </div>
 
       {/* <ZaboCarousel
