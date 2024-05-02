@@ -10,7 +10,7 @@ const Chip = ({
 }: React.PropsWithChildren<ChipProps>) => (
   <div
     className={[
-      'flex w-max items-center rounded-[5px] px-[10px] py-[5px] font-medium md:h-8 md:text-lg',
+      'flex w-max items-center rounded-[5px] px-[10px] py-[5px] text-lg font-medium',
       ...(variant === 'selected' ? ['bg-text stroke-white text-white'] : []),
       ...(variant === 'deselected'
         ? ['bg-greyLight stroke-text text-text']

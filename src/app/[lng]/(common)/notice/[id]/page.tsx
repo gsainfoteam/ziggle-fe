@@ -2,9 +2,6 @@ import { Metadata, ResolvingMetadata } from 'next';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/get-notice';
-import ImageCarousel from '@/app/components/organisms/ImageCarousel';
-import HowAboutThese from '@/app/components/templates/HowAboutThese';
-import ZaboShowcase from '@/app/components/templates/ZaboShowcase';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
@@ -13,8 +10,8 @@ import AddAdditionalNotice from './AddAdditionalNotice';
 import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
+import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
-import Reactions from './Reactions';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
@@ -61,12 +58,51 @@ const DetailedNoticePage = async ({
   const supportEnglish = notice.langs.includes('en');
 
   return (
-    <>
-      <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} />
-      <div className="content mx-auto mt-8 md:mt-12">
-        <Actions title={title} lng={lng} />
+    <div className="flex justify-center">
+      {/* <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} /> */}
+      <div className="content mt-8 md:mx-10 md:mt-12 md:w-[900px]">
+        <div className="flex gap-5">
+          {/* DESKTOP VIEW IMAGESTACK */}
+          <div className="hidden md:block">
+            {notice.imageUrls.length > 0 && (
+              <ImageStack srcs={notice.imageUrls} alt={title} lng={lng} />
+            )}
+          </div>
 
-        {user && user.id === notice.author.uuid && (
+          <div className="flex flex-col gap-[18px] md:w-[60%]">
+            <NoticeInfo
+              {...notice}
+              currentDeadline={notice.currentDeadline ?? null}
+              lng={lng}
+            />
+
+            {/* MOBILE VIEW IMAGESTACK */}
+            <div className="md:hidden">
+              {notice.imageUrls.length > 0 && (
+                <ImageStack
+                  width={900}
+                  srcs={notice.imageUrls}
+                  alt={title}
+                  lng={lng}
+                />
+              )}
+            </div>
+
+            <Content content={notice.content} />
+
+            <Actions notice={notice} lng={lng} />
+
+            <AddtionalNotices
+              additionalContents={notice.additionalContents}
+              notice={notice}
+              t={t}
+              lng={lng}
+            />
+          </div>
+        </div>
+
+        {/* temporarily disabled authorActions. should enable it later */}
+        {/* {user && user.id === notice.author.uuid && (
           <>
             <div className="h-5" />
             <AuthorActions
@@ -76,24 +112,9 @@ const DetailedNoticePage = async ({
               lng={lng}
             />
           </>
-        )}
+        )} */}
 
         <div className="h-4 md:h-5" />
-        <NoticeInfo
-          {...notice}
-          currentDeadline={notice.currentDeadline ?? null}
-          lng={lng}
-        />
-        <div className="h-5" />
-        <Content content={notice.content} />
-
-        <div className="h-10" />
-        <AddtionalNotices
-          additionalContents={notice.additionalContents}
-          notice={notice}
-          t={t}
-          lng={lng}
-        />
 
         {user && user.id === notice.author.uuid && isAdditionalNoticeShow && (
           <>
@@ -121,20 +142,9 @@ const DetailedNoticePage = async ({
             </>
           )}
 
-        <div className={'mt-6 flex justify-center'}>
-          <Reactions notice={notice} />
-        </div>
-
-        {notice.imageUrls.length > 0 && (
-          <>
-            <div className="h-20" />
-            <ImageCarousel srcs={notice.imageUrls} alt={title} lng={lng} />
-          </>
-        )}
         <div className="h-20" />
-        <HowAboutThese lng={lng} />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -2,7 +2,6 @@ import dayjs from 'dayjs';
 
 import { Content, NoticeDetail } from '@/api/notice/notice';
 import { PropsWithLng, T } from '@/app/i18next';
-import AddIcon from '@/assets/icons/add.svg';
 
 interface AdditionalNoticesProps {
   notice: NoticeDetail;
@@ -14,13 +13,14 @@ const AdditionalNotices = async ({
   notice,
   additionalContents,
   t,
-  lng,
 }: AdditionalNoticesProps & PropsWithLng) => {
   return (
-    <div className={'flex flex-col gap-4'}>
+    <div className={'flex flex-col gap-[18px]'}>
       {additionalContents.map((content, index) => {
+        const timeAgo = dayjs(content.createdAt).fromNow();
+
         const lastDeadline =
-          index > 0 ? additionalContents[index - 1].deadline : notice.deadline;
+          additionalContents[index - 1]?.deadline ?? notice.deadline;
 
         const deadlineChanged =
           content.deadline &&
@@ -29,20 +29,18 @@ const AdditionalNotices = async ({
         return (
           <div
             key={`${content.id}+${content.lang}`}
-            className="flex flex-col gap-2.5 rounded-xl border-2 border-primary p-4"
+            className="flex flex-col gap-[10px] rounded-[10px] bg-greyLight px-5 py-[18px]"
           >
-            <div className="flex items-center gap-1">
-              <AddIcon className="w-7 fill-primary" />
-              <p className="text-lg font-bold text-primary">
+            <div className="flex items-center gap-[5px]">
+              <p className="text-lg font-semibold text-text">
                 {t('zabo.additionalNotices.title')}
               </p>
-              <p className="font-regular ml-2 text-base text-secondaryText">
-                {dayjs(content.createdAt).tz().format('LLL')}
-              </p>
+              <p className={'font-bold text-greyDark'}>·</p>
+              <p className={'font-medium text-greyDark'}>{timeAgo}</p>
             </div>
 
-            <div className="ml-8">
-              {deadlineChanged && (
+            {deadlineChanged && (
+              <div className="ml-8">
                 <div className="flex items-center gap-3">
                   <p className={'text-base font-bold'}>
                     {t('zabo.additionalNotices.deadlineChanged')}
@@ -59,12 +57,12 @@ const AdditionalNotices = async ({
                     {dayjs(content.deadline).tz().format('LLL')}
                   </p>
                 </div>
-              )}
-            </div>
+              </div>
+            )}
 
-            <div className={'mb-3 ml-8 mt-1'}>
-              <p className={'text-base'}>{content.content}</p>
-            </div>
+            <p className="font-normal leading-[1.4] text-greyDark">
+              {content.content}
+            </p>
           </div>
         );
       })}
