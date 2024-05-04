@@ -17,7 +17,6 @@ interface TagInputProps {
 const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
   const [keyword, setKeyword] = useState<string>('');
   const [searchedTags, setSearchedTags] = useState<Tag[]>([]);
-
   const [tempTagId, setTempTagId] = useState<number>(0);
 
   useEffect(() => {
@@ -33,26 +32,6 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
 
     fetchTags();
   }, [keyword]);
-
-  //   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     if (event.target.value.includes(' ')) {
-  //       const newTag = event.target.value.trim();
-  //       if (tags.find((tag) => tag.name === newTag)) {
-  //         setKeyword('');
-  //         return;
-  //       }
-
-  //       const existingTag = searchedTags?.find((tag) => tag.name === newTag);
-  //       if (existingTag) {
-  //         setTags([...tags, existingTag]);
-  //         setKeyword('');
-  //         return;
-  //       }
-  //       return;
-  //     }
-
-  //     setKeyword(event.target.value);
-  //   };
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = event.target.value;
@@ -144,7 +123,7 @@ const TagChip = ({
 
       <div onClick={onClick} className="cursor-pointer">
         <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
-          <CloseIcon className="h-1.5 w-1.5 fill-primary md:h-2 md:w-2" />
+          <CloseIcon className="h-2 w-2 fill-primary md:h-3 md:w-3" />
         </div>
       </div>
     </div>
