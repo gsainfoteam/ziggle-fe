@@ -16,12 +16,12 @@
   "sidebar": {
     "home": "Home",
     "urgent": "Near Deadline",
-    "zigglePick": "Ziggle-Pick",
+    "zigglepick": "Ziggle-Pick",
     "recruit": "Recruit",
     "event": "Events",
     "general": "General",
     "academic": "Academic",
-    "writeNotice": "Write Notice",
+    "write": "Write Notice",
     "groups": "Groups"
   },
   "alertResponse": {
