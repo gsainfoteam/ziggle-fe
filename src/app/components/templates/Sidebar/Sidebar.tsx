@@ -28,7 +28,9 @@ const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
     >
       {isSelected ? boldIcon : icon}
       <span
-        className={'ml-4' + ' ' + (isSelected ? 'font-bold' : 'font-normal')}
+        className={
+          'ml-4' + ' ' + (isSelected ? 'font-semibold' : 'font-normal')
+        }
       >
         {title}
       </span>

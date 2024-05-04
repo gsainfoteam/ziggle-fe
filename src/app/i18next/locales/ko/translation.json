@@ -16,12 +16,12 @@
   "sidebar": {
     "home": "홈",
     "urgent": "마감임박",
-    "zigglePick": "지글픽",
+    "zigglepick": "지글픽",
     "recruit": "모집",
     "event": "행사",
     "general": "일반",
     "academic": "학사",
-    "writeNotice": "공지 작성",
+    "write": "공지 작성",
     "groups": "그룹"
   },
   "alertResponse": {
