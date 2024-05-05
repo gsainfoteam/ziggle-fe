@@ -45,21 +45,23 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   return (
     <>
       {sidebarObject.map((group, i) => (
-        <ul key={i} className="flex flex-col gap-y-2">
-          {group.map((item, i) => (
-            <li key={i} className="flex flex-row">
-              <NavButton
-                icon={<item.icons.regular />}
-                boldIcon={<item.icons.bold />}
-                title={t(item.title)}
-                isSelected={path.startsWith(`/${lng}${item.path}`)}
-              />
-            </li>
-          ))}
+        <>
+          <ul key={i} className="flex flex-col gap-y-2">
+            {group.map((item, i) => (
+              <li key={i} className="flex flex-row">
+                <NavButton
+                  icon={<item.icons.regular />}
+                  boldIcon={<item.icons.bold />}
+                  title={t(item.title)}
+                  isSelected={path.startsWith(`/${lng}${item.path}`)}
+                />
+              </li>
+            ))}
+          </ul>
           {!(sidebarObject.length - 1 === i) && (
             <div className="my-[15px] h-[1px] bg-greyLight" />
           )}
-        </ul>
+        </>
       ))}
     </>
   );
