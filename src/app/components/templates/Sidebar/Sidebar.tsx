@@ -7,7 +7,7 @@ import React from 'react';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-import sidebar_object from './sidebar_object';
+import sidebarObject from './sidebarObject';
 
 interface NavButtonProps {
   title: string;
@@ -44,7 +44,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
 
   return (
     <>
-      {sidebar_object.map((group, i) => (
+      {sidebarObject.map((group, i) => (
         <ul key={i} className="flex flex-col gap-y-2">
           {group.map((item, i) => (
             <li key={i} className="flex flex-row">
@@ -56,7 +56,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
               />
             </li>
           ))}
-          {!(sidebar_object.length - 1 === i) && (
+          {!(sidebarObject.length - 1 === i) && (
             <div className="my-[15px] h-[1px] bg-greyLight" />
           )}
         </ul>

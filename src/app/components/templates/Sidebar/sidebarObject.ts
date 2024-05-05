@@ -1,4 +1,4 @@
-import { DefaultNamespace, ParseKeys, TFunction } from 'i18next';
+import { ParseKeys } from 'i18next';
 
 import Bell from '@/assets/icons/bell.svg';
 import BoldBell from '@/assets/icons/bold-bell.svg';
@@ -25,7 +25,7 @@ export interface SidebarObject {
   };
 }
 
-const sidebar_object: SidebarObject[][] = [
+const sidebarObject: SidebarObject[][] = [
   [
     {
       title: 'sidebar.home',
@@ -106,4 +106,4 @@ const sidebar_object: SidebarObject[][] = [
   ],
 ];
 
-export default sidebar_object;
+export default sidebarObject;
