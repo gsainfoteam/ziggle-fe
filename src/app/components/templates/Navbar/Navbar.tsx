@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useSWR from 'swr';
 
 import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AccountIcon from '@/assets/icons/account.svg';
 import MenuIcon from '@/assets/icons/menu.svg';
@@ -27,16 +28,8 @@ export interface User {
 
 const Navbar = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
-  const [user, setUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const user = await auth();
-      setUser(user);
-    };
-
-    fetchUser();
-  });
+  const { data: user } = useSWR<User | null>('user', auth);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -83,7 +76,11 @@ const Navbar = ({ lng }: PropsWithLng) => {
 
       {isSidebarOpen && (
         <div className="md:hidden">
-          <SidebarMobile lng={lng} onClose={handleSidebarClose} user={user} />
+          <SidebarMobile
+            lng={lng}
+            onClose={handleSidebarClose}
+            user={user ?? null}
+          />
         </div>
       )}
     </header>

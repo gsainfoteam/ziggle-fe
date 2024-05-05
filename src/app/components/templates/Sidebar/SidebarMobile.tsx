@@ -28,8 +28,15 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
 
   const handleClose = () => {
     setIsOpen(false);
-    setTimeout(onClose, 300);
   };
+
+  useEffect(() => {
+    if (isOpen) return;
+    const timer = setTimeout(onClose, 300);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isOpen]);
 
   return ReactDOM.createPortal(
     <div className="fixed w-screen">
