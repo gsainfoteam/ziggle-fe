@@ -13,6 +13,17 @@
     "query": "Search Notice",
     "login": "Login"
   },
+  "sidebar": {
+    "home": "Home",
+    "urgent": "Near Deadline",
+    "zigglepick": "Ziggle-Pick",
+    "recruit": "Recruit",
+    "event": "Events",
+    "general": "General",
+    "academic": "Academic",
+    "write": "Write Notice",
+    "groups": "Groups"
+  },
   "alertResponse": {
     "yes": "Yes",
     "no": "No",
