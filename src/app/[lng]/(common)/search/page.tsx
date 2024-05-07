@@ -1,9 +1,7 @@
 import SearchAnimation from '@/app/components/templates/SearchAnimation';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import SearchBar from '../../../components/molecules/searchBar/SearchBar';
 import SearchResults from '../../../components/templates/SearchResults';
-import SearchTagSelect from './SearchTagSelect';
 
 const ITEMS_PER_CALL = 10;
 
