@@ -5,12 +5,9 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
-import Fire from '@/assets/fire-outlined.svg';
 import DefaultProfile from '@/assets/icons/default-profile.svg';
-import Share from '@/assets/icons/share.svg';
 
 import HighlightedText from '../../molecules/HighlightedText';
-import Tags from '../../organisms/Tags';
 import ZaboActions from '../../organisms/Zabo/ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
 
@@ -22,8 +19,8 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
     author,
     createdAt,
     content,
-    reactions,
     lng,
+    searchQuery,
   } = props;
 
   const { t } = await createTranslation(lng);
@@ -33,14 +30,22 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
 
   return (
     <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
-      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-lg bg-greyLight p-5 text-text">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <DefaultProfile className="h-9 w-9" />
-            <div className="flex items-center gap-1 font-medium">
-              <div className="text-lg">{author.name}</div>
-              <div className="text-base text-greyDark">·</div>
-              <div className="text-base text-greyDark">
+      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text md:rounded-lg md:p-5">
+        <div className="flex items-center justify-between gap-4 md:justify-start">
+          <div className="flex items-center justify-center gap-2">
+            <DefaultProfile className="h-10 w-10 md:h-9 md:w-9" />
+            <div className="flex flex-col gap-0 font-medium md:flex-row md:items-center md:gap-1">
+              <div className="text-base md:text-lg">
+                {searchQuery ? (
+                  <HighlightedText query={searchQuery}>
+                    {author.name}
+                  </HighlightedText>
+                ) : (
+                  author.name
+                )}
+              </div>
+              <div className="hidden text-base text-greyDark md:flex">·</div>
+              <div className="text-xs font-normal text-greyDark md:text-base md:font-medium">
                 {dayjs(createdAt).fromNow()}
               </div>
             </div>
@@ -61,9 +66,21 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
             </div>
           )}
         </div>
-        <div className="flex text-xl font-semibold">{title}</div>
+        <div className="text-xl font-semibold">
+          {searchQuery ? (
+            <HighlightedText query={searchQuery}>{title}</HighlightedText>
+          ) : (
+            title
+          )}
+        </div>
         <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
-          {content ?? t('zabo.noContent')}
+          {searchQuery ? (
+            <HighlightedText query={searchQuery}>
+              {content ?? t('zabo.noContent')}
+            </HighlightedText>
+          ) : (
+            content ?? t('zabo.noContent')
+          )}
         </div>
         <ZaboActions {...props} />
       </div>

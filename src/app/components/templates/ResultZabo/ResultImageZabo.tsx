@@ -5,17 +5,10 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
-import Swal from 'sweetalert2';
 
-import Actions from '@/app/[lng]/(common)/notice/[id]/Actions';
 import { createTranslation } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
-import { Locale } from '@/app/i18next/settings';
-import Fire from '@/assets/fire-outlined.svg';
 import DefaultProfile from '@/assets/icons/default-profile.svg';
-import ShareIcon from '@/assets/icons/share.svg';
 
-import Button from '../../atoms/Button';
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboActions from '../../organisms/Zabo/ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
@@ -28,8 +21,8 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
     author,
     createdAt,
     imageUrls,
-    reactions,
     lng,
+    searchQuery,
   } = props;
 
   const { t } = await createTranslation(lng);
@@ -39,14 +32,22 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
 
   return (
     <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
-      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-lg bg-greyLight p-5 text-text">
+      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text md:rounded-lg md:p-5">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <DefaultProfile className="h-9 w-9" />
-            <div className="flex items-center gap-1 font-medium">
-              <div className="text-lg">{author.name}</div>
-              <div className="text-base text-greyDark">·</div>
-              <div className="text-base text-greyDark">
+            <DefaultProfile className="h-10 w-10 md:h-9 md:w-9" />
+            <div className="flex flex-col gap-0 font-medium md:flex-row md:items-center md:gap-1">
+              <div className="text-base md:text-lg">
+                {searchQuery ? (
+                  <HighlightedText query={searchQuery}>
+                    {author.name}
+                  </HighlightedText>
+                ) : (
+                  author.name
+                )}
+              </div>
+              <div className="hidden text-base text-greyDark md:flex">·</div>
+              <div className="text-xs font-normal text-greyDark md:text-base md:font-medium">
                 {dayjs(createdAt).fromNow()}
               </div>
             </div>
@@ -67,20 +68,23 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
             </div>
           )}
         </div>
-        <div className="flex text-xl font-semibold">{title}</div>
-        <div className="flex gap-2">
-          {imageUrls.slice(0, 7).map((url, i) => (
-            <div
-              key={i}
-              className="relative flex h-24 w-24 flex-shrink-0 overflow-hidden rounded-md bg-black bg-opacity-30"
-            >
-              <Image src={url} alt={title} width={100} height={100} />
-              {i == 6 && imageUrls.length > 7 && (
-                <div className="absolute flex h-full w-full items-center justify-center bg-black bg-opacity-30 text-3xl font-semibold text-white">
-                  +{imageUrls.length - 7}
-                </div>
-              )}
-            </div>
+        <div className="text-xl font-semibold">
+          {searchQuery ? (
+            <HighlightedText query={searchQuery}>{title}</HighlightedText>
+          ) : (
+            title
+          )}
+        </div>
+        <div className="scrollbar-thumb-rounded-full scrollbar-h-1 flex gap-2 overflow-x-scroll py-1 scrollbar scrollbar-thumb-greyBorder">
+          {imageUrls.map((url, i) => (
+            <Image
+              key={url}
+              src={url}
+              className="flex h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-black bg-opacity-30 md:rounded-md"
+              alt={`${title} ${i + 1}`}
+              width={100}
+              height={100}
+            />
           ))}
         </div>
         <ZaboActions {...props} />

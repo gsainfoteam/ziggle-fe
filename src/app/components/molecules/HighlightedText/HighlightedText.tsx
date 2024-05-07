@@ -20,7 +20,7 @@ const HighlightedText = ({ children, query }: GetHighlightedTextProps) => {
     <span key={index}>
       <span>{str}</span>
       {index !== result.length - 1 && (
-        <span className="bg-secondary">{match[index]}</span>
+        <span className="bg-primary text-white">{match[index]}</span>
       )}
     </span>
   ));
