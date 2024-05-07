@@ -33,7 +33,7 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
   return (
     <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
       <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text md:rounded-lg md:p-5">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-4 md:justify-start">
           <div className="flex items-center gap-2">
             <DefaultProfile className="h-10 w-10 md:h-9 md:w-9" />
             <div className="flex flex-col gap-0 font-medium md:flex-row md:items-center md:gap-1">
