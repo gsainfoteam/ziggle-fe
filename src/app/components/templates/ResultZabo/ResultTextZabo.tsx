@@ -73,7 +73,7 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
             title
           )}
         </div>
-        <div className="line-clamp-4 text-ellipsis text-start text-sm font-medium">
+        <div className="line-clamp-4 text-ellipsis text-start font-medium">
           {searchQuery ? (
             <HighlightedText query={searchQuery}>
               {content ?? t('zabo.noContent')}
