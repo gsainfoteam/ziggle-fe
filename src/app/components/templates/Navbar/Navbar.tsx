@@ -1,9 +1,14 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import useSWR from 'swr';
 
 import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 import AccountIcon from '@/assets/icons/account.svg';
 import MenuIcon from '@/assets/icons/menu.svg';
 import ZiggleLogo from '@/assets/logos/ziggle.svg';
@@ -11,10 +16,30 @@ import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
 
 import Button from '../../atoms/Button';
 import SearchBar from '../../molecules/searchBar/SearchBar';
+import SidebarMobile from '../Sidebar/SidebarMobile';
 
-const Navbar = async ({ lng }: PropsWithLng) => {
-  const { t } = await createTranslation(lng);
-  const user = await auth();
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  studentId: string;
+}
+
+const Navbar = ({ lng }: PropsWithLng) => {
+  const { t } = useTranslation(lng);
+
+  const { data: user } = useSWR<User | null>('user', auth);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const handleSidebarOpen = () => {
+    setIsSidebarOpen(true);
+  };
+
+  const handleSidebarClose = () => {
+    setIsSidebarOpen(false);
+  };
 
   return (
     <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2">
@@ -27,7 +52,10 @@ const Navbar = async ({ lng }: PropsWithLng) => {
         </Analytics>
         <div className="flex h-full items-center md:w-full">
           <SearchBar lng={lng} />
-          <Button className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full">
+          <Button
+            onClick={handleSidebarOpen}
+            className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
+          >
             <MenuIcon className="h-6 stroke-text md:hidden" />
           </Button>
         </div>
@@ -45,6 +73,16 @@ const Navbar = async ({ lng }: PropsWithLng) => {
           </div>
         </Link>
       </Analytics>
+
+      {isSidebarOpen && (
+        <div className="md:hidden">
+          <SidebarMobile
+            lng={lng}
+            onClose={handleSidebarClose}
+            user={user ?? null}
+          />
+        </div>
+      )}
     </header>
   );
 };

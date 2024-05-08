@@ -1,32 +1,197 @@
 'use client';
 
-import Link from 'next/link';
+import { useState } from 'react';
 import { Trans } from 'react-i18next';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
-import Button from '@/app/components/atoms/Button';
-import { PropsWithLng } from '@/app/i18next';
+import {
+  addReaction,
+  deleteReaction,
+  Notice,
+  Reaction,
+} from '@/api/notice/notice';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
-import ArrowLeftIcon from '@/assets/icons/arrow-left.svg';
+import Fire from '@/assets/fire-outlined.svg';
 import LinkIcon from '@/assets/icons/link.svg';
 import ShareIcon from '@/assets/icons/share.svg';
+
+import AnguishedFace from './assets/anguished-face.svg';
+import LoudlyCryingFace from './assets/loudly-crying-face.svg';
+import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
+import ThinkingFace from './assets/thinking-face.svg';
+
+const EMOJI_WIDTH = 30;
+
+enum EmojiString {
+  FIRE = '🔥',
+  CRYING = '😭',
+  ANGUISHED = '😧',
+  THINKING = '🤔',
+  SURPRISED = '😮',
+}
+
+const emojis: {
+  [key in EmojiString]: React.FC<React.SVGProps<SVGSVGElement>>;
+} = {
+  [EmojiString.FIRE]: Fire,
+  [EmojiString.CRYING]: LoudlyCryingFace,
+  [EmojiString.ANGUISHED]: AnguishedFace,
+  [EmojiString.THINKING]: ThinkingFace,
+  [EmojiString.SURPRISED]: SurprisedFace,
+};
+
+interface ActionButtonProps {
+  isSelected: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+const ActionButton = ({ isSelected, onClick, children }: ActionButtonProps) => {
+  return (
+    <button
+      className={
+        'flex h-10 items-center gap-[7px] rounded-full border-none px-[13px] py-[5px] outline-none' +
+        ' ' +
+        `${isSelected ? 'bg-text' : 'bg-greyLight'}` +
+        ' ' +
+        `${isSelected ? 'text-white' : 'text-text'}`
+      }
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+const ReactionButton = ({
+  emoji,
+  count,
+  isReacted,
+  onClick,
+}: Reaction & { onClick: () => void }) => {
+  const EmojiComponent = emojis[emoji as keyof typeof emojis];
+
+  return (
+    <>
+      <ActionButton isSelected={isReacted} onClick={onClick}>
+        <span>
+          {EmojiComponent ? (
+            emoji === EmojiString.FIRE ? (
+              <span
+                className={
+                  'stroke-2' +
+                  ' ' +
+                  `${isReacted ? 'stroke-white' : 'stroke-text'}`
+                }
+              >
+                <EmojiComponent width={EMOJI_WIDTH} />
+              </span>
+            ) : (
+              <EmojiComponent width={EMOJI_WIDTH} />
+            )
+          ) : (
+            <p>{emoji}</p>
+          )}
+        </span>
+        <span className="text-base">{count}</span>
+      </ActionButton>
+    </>
+  );
+};
+
+interface ReactionsProps {
+  notice: Notice;
+  lng: Locale;
+}
+
+const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
+  const [currentReactions, setCurrentReactions] =
+    useState<Reaction[]>(reactions);
+
+  const toggleReaction = async (emoji: string, isReacted: boolean) => {
+    try {
+      if (isReacted) {
+        const res = await deleteReaction(id, emoji);
+
+        return res.reactions;
+      } else {
+        const res = await addReaction(id, emoji);
+
+        return res.reactions;
+      }
+    } catch (e) {
+      toast.error('로그인이 필요합니다.');
+    }
+  };
+
+  const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
+    const reactions = await toggleReaction(emoji, isReacted);
+
+    if (reactions) {
+      setCurrentReactions(reactions);
+    }
+  };
+
+  return (
+    <div className={'flex w-full flex-wrap gap-x-2 gap-y-[10px] py-[10px]'}>
+      {Object.keys(emojis)
+        .map((emoji) => {
+          const reaction = currentReactions.find(
+            (reaction) => reaction.emoji === emoji,
+          );
+
+          return {
+            emoji,
+            count: reaction?.count ?? 0,
+            isReacted: reaction?.isReacted ?? false,
+          };
+        })
+        .map((reaction) => (
+          <ReactionButton
+            key={reaction.emoji}
+            onClick={() => handleEmojiClick(reaction.emoji, reaction.isReacted)}
+            {...reaction}
+            isReacted={reaction.isReacted}
+          />
+        ))}
+
+      <ShareButton title={title} lng={lng} />
+
+      <CopyLinkButton title={title} lng={lng} />
+    </div>
+  );
+};
 
 interface ActionsProps {
   title: string;
   lng: Locale;
 }
 
-const Actions = ({ title, lng }: ActionsProps) => (
-  <div className="flex justify-between">
-    <div className="flex gap-2">
-      <CopyLinkButton title={title} lng={lng} />
-      <ShareButton title={title} lng={lng} />
-    </div>
-    <BackToMainButton lng={lng} />
-  </div>
-);
+const ShareButton = ({ title, lng }: ActionsProps) => {
+  const { t } = useTranslation(lng);
+  const handleShare = () => {
+    if (!navigator.canShare) {
+      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
+    }
+    navigator.share({
+      title,
+      text: t('zabo.share.content', { title }),
+      url: window.location.href,
+    });
+  };
+
+  return (
+    <ActionButton isSelected={false} onClick={handleShare}>
+      <span className="stroke-text stroke-[1.5]">
+        <ShareIcon width={26} />
+      </span>
+
+      <span className="text-base">{t('zabo.share.action')}</span>
+    </ActionButton>
+  );
+};
 
 const CopyLinkButton = ({ title, lng }: ActionsProps) => {
   const { t } = useTranslation(lng);
@@ -45,58 +210,13 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
   };
 
   return (
-    <Button
-      animated
-      className="group flex items-center gap-1"
-      onClick={handleCopy}
-    >
-      <LinkIcon className="w-5 fill-secondaryText group-hover:fill-primary md:w-7" />
-      <div className="text-xs font-medium text-secondaryText group-hover:text-primary md:text-base">
-        {t('zabo.copyLink.action')}
-      </div>
-    </Button>
-  );
-};
+    <ActionButton isSelected={false} onClick={handleCopy}>
+      <span className="stroke-text">
+        <LinkIcon width={26} />
+      </span>
 
-const ShareButton = ({ title, lng }: ActionsProps) => {
-  const { t } = useTranslation(lng);
-  const handleShare = () => {
-    if (!navigator.canShare) {
-      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
-    }
-    navigator.share({
-      title,
-      text: t('zabo.share.content', { title }),
-      url: window.location.href,
-    });
-  };
-
-  return (
-    <Button
-      animated
-      className="group flex items-center gap-1"
-      onClick={handleShare}
-    >
-      <ShareIcon className="w-4 fill-secondaryText group-hover:fill-primary md:w-6" />
-      <div className="text-xs font-medium text-secondaryText group-hover:text-primary md:text-base">
-        {t('zabo.share.action')}
-      </div>
-    </Button>
-  );
-};
-
-const BackToMainButton = ({ lng }: PropsWithLng) => {
-  const { t } = useTranslation(lng);
-  return (
-    <Link href={`/${lng}`}>
-      <div className="group flex items-center gap-1 transition-[gap] hover:gap-4 md:gap-2">
-        <ArrowLeftIcon className="w-4 rotate-180 fill-secondaryText transition-colors group-hover:fill-primary md:w-6" />
-        <div className="text-sm font-medium text-secondaryText transition-colors group-hover:text-primary md:text-lg">
-          {t('zabo.backToMain')}
-        </div>
-        <div className="h-5 w-1 bg-secondaryText transition-colors group-hover:bg-primary md:h-8" />
-      </div>
-    </Link>
+      <span className="text-base">{t('zabo.copyLink.action')}</span>
+    </ActionButton>
   );
 };
 

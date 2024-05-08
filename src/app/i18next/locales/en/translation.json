@@ -13,6 +13,17 @@
     "query": "Search Notice",
     "login": "Login"
   },
+  "sidebar": {
+    "home": "Home",
+    "urgent": "Near Deadline",
+    "zigglepick": "Ziggle-Pick",
+    "recruit": "Recruit",
+    "event": "Events",
+    "general": "General",
+    "academic": "Academic",
+    "write": "Write Notice",
+    "groups": "Groups"
+  },
   "alertResponse": {
     "yes": "Yes",
     "no": "No",
@@ -77,7 +88,7 @@
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
-    "dueAt": "Due at {{dueAt}}",
+    "dueAt": "Due at",
     "noContent": "No Content",
     "share": {
       "action": "Share",
