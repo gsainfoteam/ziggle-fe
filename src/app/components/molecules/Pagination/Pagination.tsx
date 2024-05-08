@@ -43,14 +43,13 @@ const Pagination = ({ items, itemsPerPage, page }: PaginationProps) => {
 
   if (pages === 0) return null;
 
+  const startItem = page * itemsPerPage + 1;
+  const endItem = Math.min((page + 1) * itemsPerPage, items);
+
   return (
     <div className="flex items-center">
       <div className="flex gap-1 p-2">
-        <div className="text-xl font-semibold">
-          {`${page * itemsPerPage + 1}
-          ~
-          ${Math.min((page + 1) * itemsPerPage, items)}`}
-        </div>
+        <div className="text-xl font-semibold">{`${startItem}~${endItem}`}</div>
         <div className="text-xl">of</div>
         <div className="text-xl font-semibold">{items}</div>
       </div>
