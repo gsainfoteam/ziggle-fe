@@ -7,7 +7,7 @@ interface ImagePreviewItemProps {
   onDeleteClick: () => void;
 }
 
-const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
+const AttachedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
   return (
     <div className="relative flex">
       <Image
@@ -27,11 +27,11 @@ const AttatchedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
         className="absolute -right-2 -top-2 rounded-full bg-greyDark p-1"
       >
         <div className="flex">
-          <CloseIcon className="h-2.5 w-2.5 stroke-white md:h-4 md:w-4" />
+          <CloseIcon className="h-4 w-4 stroke-white md:h-4 md:w-4" />
         </div>
       </button>
     </div>
   );
 };
 
-export default AttatchedPhoto;
+export default AttachedPhoto;

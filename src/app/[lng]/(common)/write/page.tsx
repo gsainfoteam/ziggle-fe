@@ -177,7 +177,8 @@ export default function WritePage({
 
         <div className="mb-2 mt-10 flex gap-2">
           <TagIcon className="w-5 dark:fill-white md:w-6" />
-          <p className="text-lg font-medium">{t('write.setupTags')}</p>
+          <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
+          <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
 
         <p className="font-regular mb-3 text-sm text-secondaryText">
@@ -188,7 +189,8 @@ export default function WritePage({
 
         <div className="mb-1 mt-10 flex items-center gap-2">
           <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
-          <p className="text-lg font-medium">{t('write.attachPhoto')}</p>
+          <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
+          <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
         <p className="font-regular mb-3 text-sm text-secondaryText">
           {t('write.photoDescription')}
@@ -199,13 +201,11 @@ export default function WritePage({
 
       <Button
         variant="contained"
-        className="mb-4 mt-[10rem]"
+        className="mb-4 mt-[10rem] w-60 rounded-[10px] py-2"
         onClick={handleSubmit}
         disabled={isLoading}
       >
-        <p className="mx-3 my-1 text-base font-bold md:text-xl">
-          {t('write.submit')}
-        </p>
+        <p className="mx-3 my-1 text-base font-bold">{t('write.submit')}</p>
       </Button>
       <p className="font-regular max-w-[70%] text-center text-sm text-secondaryText">
         {t('write.submitDescription')}

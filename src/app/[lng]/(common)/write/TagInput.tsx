@@ -80,7 +80,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('write.writeTags') : ''}
-          className="flex-grow bg-transparent p-1 outline-none md:p-2 md:text-base"
+          className="flex-grow bg-transparent p-2 outline-none md:text-base"
         />
       </div>
 
@@ -114,7 +114,7 @@ const TagChip = ({
     <div
       className={
         'flex w-max items-center gap-2  bg-primary ' +
-        'md:rounded-2x h-6 rounded-2xl pl-1.5 pr-4 md:h-8 md:pl-2.5 md:pr-1'
+        'md:rounded-2x h-6 rounded-2xl pl-1.5 pr-1 md:h-8 md:pl-2.5 md:pr-1'
       }
     >
       <div className="text-sm font-medium text-white md:text-base">
@@ -123,7 +123,7 @@ const TagChip = ({
 
       <div onClick={onClick} className="cursor-pointer">
         <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
-          <CloseIcon className="h-2 w-2 fill-primary md:h-3 md:w-3" />
+          <CloseIcon className="h-3 w-3 fill-primary" />
         </div>
       </div>
     </div>

@@ -81,7 +81,7 @@ const AttachPhotoArea = ({
         onDragOver={handleDragOver}
       >
         {photos.length > 0 ? (
-          <div className="grid w-full grid-cols-3 gap-[15px] p-1.5 md:grid-cols-4 md:p-2.5">
+          <div className="grid w-full grid-cols-2 gap-[15px] p-1.5 md:grid-cols-3 md:p-2.5">
             {photos.map((file, index) => (
               <AttachedPhoto
                 key={index}

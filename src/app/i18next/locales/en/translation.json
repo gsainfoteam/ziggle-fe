@@ -237,7 +237,7 @@
     "orAddFromPC": "...or browse files",
 
     "submit": "Submit Notice",
-    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
+    "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
 
     "alerts": {
       "title": "Please enter a title",

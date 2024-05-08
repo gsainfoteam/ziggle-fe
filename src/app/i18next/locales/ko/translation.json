@@ -230,7 +230,7 @@
     "orAddFromPC": "...또는 파일 선택",
 
     "submit": "공지 제출하기",
-    "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
+    "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
 
     "alerts": {
       "title": "제목을 입력해주세요",
