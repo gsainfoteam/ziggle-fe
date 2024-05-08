@@ -19,7 +19,7 @@
   --background-rgb: theme(colors.white);
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: theme(colors.white);
     --background-rgb: theme(colors.neutral.900);
