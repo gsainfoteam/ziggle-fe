@@ -115,6 +115,7 @@ export default function WritePage({
           <TypeIcon className="w-5 dark:fill-white md:w-6" />
           <p className="font-medium">{t('write.noticeType')}</p>
         </div>
+
         <NoticeTypeSelector
           selectedNoticeType={selectedNoticeType}
           setNoticeType={setSelectedNoticeType}
