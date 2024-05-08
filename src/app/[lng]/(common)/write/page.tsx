@@ -5,7 +5,8 @@ import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import { useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
@@ -27,6 +28,8 @@ import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
 import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';
+
+const LOCAL_STORAGE_KEY = 'notice';
 
 export default function WritePage({
   params: { lng },
@@ -56,6 +59,57 @@ export default function WritePage({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const checkLocalStorage = async () => {
+      if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+        const { koreanTitle, englishTitle, koreanBody, englishBody } =
+          JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? '{}');
+
+        if (!koreanTitle && !englishTitle && !koreanBody && !englishBody)
+          return;
+
+        const confirm = await Swal.fire({
+          text: t('write.hasSavedNotice'),
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: t('alertResponse.yes'),
+          cancelButtonText: t('alertResponse.no'),
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        setKoreanTitle(koreanTitle);
+        setEnglishTitle(englishTitle);
+
+        if (koreanEditorRef.current) {
+          koreanEditorRef.current.setContent(koreanBody);
+        }
+        if (englishEditorRef.current) {
+          englishEditorRef.current.setContent(englishBody);
+        }
+      }
+    };
+    checkLocalStorage();
+  }, [t]);
+
+  // save content to local storage every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!koreanTitle && !englishTitle) return;
+
+      localStorage.setItem(
+        LOCAL_STORAGE_KEY,
+        JSON.stringify({
+          koreanTitle,
+          englishTitle,
+          koreanBody: koreanEditorRef.current?.getContent(),
+          englishBody: englishEditorRef.current?.getContent(),
+        }),
+      );
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [englishTitle, koreanTitle]);
+
   const handleSubmit = async () => {
     if (isLoading) return;
     const koreanBody = koreanEditorRef.current?.getContent();
@@ -83,6 +137,12 @@ export default function WritePage({
   return (
     <main className="flex flex-col items-center md:py-12">
       <div className="content flex max-w-[600px] flex-col">
+        <div className={'flex justify-end'}>
+          <p className={'text-sm text-primary'}>
+            {t('write.autoSaveDescription')}
+          </p>
+        </div>
+
         <div className={'mb-10 mt-10 flex items-center gap-2'}>
           <GlobeIcon
             className={
@@ -90,7 +150,6 @@ export default function WritePage({
               (hasEnglishContent ? 'stroke-text' : 'stroke-grey')
             }
           />
-
           <p
             className={
               'text-lg font-medium ' +
@@ -99,7 +158,6 @@ export default function WritePage({
           >
             {t('write.writeEnglishNotice')}
           </p>
-
           <Toggle
             isSwitched={hasEnglishContent}
             onSwitch={(e) => {
