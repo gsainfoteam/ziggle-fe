@@ -51,7 +51,7 @@ const Pagination = ({ items, itemsPerPage, page }: PaginationProps) => {
           ~
           ${Math.min((page + 1) * itemsPerPage, items)}`}
         </div>
-        <div className="text-xl">of</div> {/*TODO: Translate? */}
+        <div className="text-xl">of</div>
         <div className="text-xl font-semibold">{items}</div>
       </div>
       <div className="flex gap-1">
