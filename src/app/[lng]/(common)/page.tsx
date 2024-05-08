@@ -1,7 +1,6 @@
 import { getAllNotices } from '@/api/notice/notice-server';
 import Zabo from '@/app/components/organisms/Zabo';
 
-import ZaboCarousel from '../../components/templates/ZaboCarousel';
 import { createTranslation, PropsWithLng } from '../../i18next';
 
 export const dynamic = 'force-dynamic';

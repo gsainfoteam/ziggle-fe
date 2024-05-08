@@ -80,6 +80,9 @@ export default function WritePage({
 
         setKoreanTitle(koreanTitle);
         setEnglishTitle(englishTitle);
+        if (englishTitle) {
+          setHasEnglishContent(true);
+        }
 
         if (koreanEditorRef.current) {
           koreanEditorRef.current.setContent(koreanBody);
@@ -190,7 +193,12 @@ export default function WritePage({
           </div>
         )}
 
-        {writingTab === 'korean' ? (
+        <div
+          className={
+            'flex flex-col justify-stretch ' +
+            (writingTab !== 'korean' ? 'hidden' : '')
+          }
+        >
           <TitleAndContent
             editorRef={koreanEditorRef}
             title={koreanTitle}
@@ -198,7 +206,14 @@ export default function WritePage({
             language="korean"
             t={t}
           />
-        ) : (
+        </div>
+
+        <div
+          className={
+            'flex flex-col justify-stretch ' +
+            (writingTab === 'korean' ? 'hidden' : '')
+          }
+        >
           <TitleAndContent
             editorRef={englishEditorRef}
             title={englishTitle}
@@ -206,7 +221,7 @@ export default function WritePage({
             language="english"
             t={t}
           />
-        )}
+        </div>
 
         {hasEnglishContent && (
           <DeepLButton

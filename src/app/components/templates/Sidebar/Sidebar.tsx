@@ -14,12 +14,19 @@ interface NavButtonProps {
   icon: React.ReactNode;
   boldIcon: React.ReactNode;
   isSelected: boolean;
+  to: string;
 }
 
-const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
+const NavButton = ({
+  title,
+  icon,
+  boldIcon,
+  isSelected,
+  to,
+}: NavButtonProps) => {
   return (
     <Link
-      href="/"
+      href={to}
       className={
         'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none' +
         ' ' +
@@ -50,6 +57,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
             {group.map((item, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
+                  to={`/${lng}${item.path}`}
                   icon={<item.icons.regular />}
                   boldIcon={<item.icons.bold />}
                   title={t(item.title)}
