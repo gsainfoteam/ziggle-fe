@@ -69,7 +69,12 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
           handleEmojiClick(e, currentFire.emoji, currentFire.isReacted)
         }
       >
-        <Fire width={36} className="h-7 w-7 hover:fill-primary md:h-9 md:w-9" />
+        <Fire
+          width={36}
+          className={`h-7 w-7 hover:fill-primary md:h-9 md:w-9 ${
+            currentFire.isReacted && 'fill-primary'
+          }`}
+        />
       </Button>
       <p className={'font-semibold'}>{currentFire.count}</p>
     </div>
