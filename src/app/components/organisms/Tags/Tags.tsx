@@ -1,6 +1,7 @@
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import Chip from '../../molecules/Chip';
+import Tag from '../../molecules/Tag';
 
 const defaultTags = ['event', 'general', 'recruit', 'academic'] as const;
 
@@ -19,13 +20,12 @@ const Tags = async ({
 }>) => {
   const { t } = await createTranslation(lng);
   return (
-    <div className={`flex gap-2 ${className ?? ''}`}>
+    <div className={`flex gap-[7px] ${className ?? ''}`}>
       {tags.map((name, i) => (
-        <Chip
+        <Tag
           key={name}
-          className="font-normal"
-          variant={name === searchQuery ? 'selected' : undefined}
-        >{`#${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}</Chip>
+          name={`${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}
+        />
       ))}
     </div>
   );
