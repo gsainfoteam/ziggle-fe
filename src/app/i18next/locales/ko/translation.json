@@ -85,7 +85,8 @@
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
-    "dueAt": "마감기한",
+    "dueAt": "마감시간 {{dueAt}}",
+    "timeLeft": "{{timeLeft}} 남음", 
     "noContent": "내용 없음",
     "share": {
       "action": "공유하기",
@@ -183,7 +184,8 @@
     },
     "prompt": "검색어를 입력해주세요",
     "noResult": "검색 결과가 존재하지 않습니다.",
-    "title": "♨ 지글 공지"
+    "title": "♨ 지글 공지", 
+    "loginRequired": "로그인이 필요합니다"
   },
   "write": {
     "koreanTitle": "한글 제목",
