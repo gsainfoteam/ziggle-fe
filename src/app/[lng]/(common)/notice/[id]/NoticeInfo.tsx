@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { NoticeDetail } from '@/api/notice/notice';
 import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.jpeg';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
@@ -68,7 +68,7 @@ const Metadata = ({
   return (
     <>
       <div className={'flex items-center'}>
-        <Image src={DefaultProfile} alt={author} width={36} height={36} />
+        <DefaultProfile width={36} height={36} />
 
         <p className={'ml-2 text-lg font-medium'}>{author}</p>
 

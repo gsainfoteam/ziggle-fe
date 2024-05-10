@@ -21,9 +21,9 @@ const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
     <Link
       href="/"
       className={
-        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none' +
+        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey' +
         ' ' +
-        (isSelected ? 'bg-greyLight' : '')
+        (isSelected ? 'bg-greyLight dark:bg-dark_greyDark' : '')
       }
     >
       <span className="w-6">{isSelected ? boldIcon : icon}</span>
@@ -50,8 +50,12 @@ const Sidebar = ({ lng }: PropsWithLng) => {
             {group.map((item, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
-                  icon={<item.icons.regular />}
-                  boldIcon={<item.icons.bold />}
+                  icon={
+                    <item.icons.regular className="stroke-text dark:stroke-dark_white" />
+                  }
+                  boldIcon={
+                    <item.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-dark_white" />
+                  }
                   title={t(item.title)}
                   isSelected={path.startsWith(`/${lng}${item.path}`)}
                 />
@@ -59,7 +63,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
             ))}
           </ul>
           {!(sidebarObject.length - 1 === i) && (
-            <div className="my-[15px] h-[1px] bg-greyLight" />
+            <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
           )}
         </React.Fragment>
       ))}

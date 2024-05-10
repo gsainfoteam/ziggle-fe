@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { Notice } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.jpeg';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 import DDay from '../../molecules/DDay';
 import ZaboActions from './ZaboActions';
@@ -42,7 +42,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
   return (
     <div className={'flex flex-col text-text'}>
       <div className={'mx-3 my-[10px] flex items-center'}>
-        <Image src={DefaultProfile} alt={author.name} width={36} height={36} />
+        <DefaultProfile width={36} height={36} />
 
         <p className={'ml-2 text-lg font-medium'}>{author.name}</p>
 

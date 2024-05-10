@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import DefaultProfile from '@/assets/default-profile.jpeg';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 import { User } from '../Navbar/Navbar';
 import Sidebar from '.';
@@ -47,7 +47,7 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
         onClick={handleClose}
       />
       <div
-        className={`absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-[10px] transition-transform duration-300 scrollbar-none ${
+        className={`absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-[10px] transition-transform duration-300 scrollbar-none dark:bg-dark_dark ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -55,12 +55,7 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
           href={user ? `${lng}/mypage` : `${lng}/login`}
           className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
         >
-          <Image
-            src={DefaultProfile}
-            alt={user?.name ?? 'Login'}
-            width={36}
-            height={36}
-          />
+          <DefaultProfile width={36} />
 
           <p>{user?.name ?? t('navbar.login')}</p>
         </Link>

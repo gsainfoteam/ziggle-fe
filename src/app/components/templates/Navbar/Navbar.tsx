@@ -64,7 +64,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
             onClick={handleSidebarOpen}
             className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
           >
-            <MenuIcon className="dark:stroke-dark_white h-6 stroke-text md:hidden" />
+            <MenuIcon className="h-6 stroke-text dark:stroke-dark_white md:hidden" />
           </Button>
         </div>
       </div>
