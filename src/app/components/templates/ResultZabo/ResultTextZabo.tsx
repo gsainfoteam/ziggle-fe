@@ -54,7 +54,7 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
             <div
               className={`h-fit rounded-md ${
                 isClosed ? 'bg-greyDark' : 'bg-primary'
-              } px-2 py-1 text-sm text-white`}
+              } px-[10px] py-[3px] text-[14px] text-white`}
             >
               {isClosed ? (
                 t('ddayPlus')
