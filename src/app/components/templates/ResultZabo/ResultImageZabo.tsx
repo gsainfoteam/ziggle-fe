@@ -4,11 +4,11 @@ import 'server-only';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.svg';
 
+import DDay from '../../molecules/DDay';
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboActions from '../../organisms/Zabo/ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
@@ -53,19 +53,11 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
             </div>
           </div>
           {currentDeadline && (
-            <div
-              className={`h-fit rounded-md ${
-                isClosed ? 'bg-greyDark' : 'bg-primary'
-              } px-2 py-1 text-sm text-white`}
-            >
-              {isClosed ? (
-                t('ddayPlus')
-              ) : (
-                <Trans t={t} i18nKey={'zabo.timeLeft'}>
-                  {{ timeLeft: dayjs(currentDeadline).fromNow(true) }}
-                </Trans>
-              )}
-            </div>
+            <DDay
+              deadline={currentDeadline}
+              t={t}
+              className="text-xs md:text-sm"
+            />
           )}
         </div>
         <div className="text-xl font-semibold">

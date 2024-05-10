@@ -17,8 +17,8 @@ import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
 import Button from '../../atoms/Button';
-import SearchBar from './SearchBar';
 import SidebarMobile from '../Sidebar/SidebarMobile';
+import SearchBar from './SearchBar';
 
 export interface User {
   id: string;

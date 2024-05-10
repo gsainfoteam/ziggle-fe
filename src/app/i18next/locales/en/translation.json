@@ -88,7 +88,7 @@
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
-    "dueAt": "Due at <strong>{{dueAt}}</strong>",
+    "dueAt": "Due at {{dueAt}}",
     "timeLeft": "{{timeLeft}} left", 
     "noContent": "No Content",
     "share": {
