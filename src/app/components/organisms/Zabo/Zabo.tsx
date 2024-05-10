@@ -52,7 +52,9 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
 
         <p className={'font-medium text-greyDark dark:text-grey'}>{timeAgo}</p>
 
-        {deadline !== null && <DDay deadline={dayjs(deadline)} t={t} />}
+        {deadline !== null && (
+          <DDay className="ml-[15px]" deadline={dayjs(deadline)} t={t} />
+        )}
       </div>
 
       <p
