@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { createTranslation } from '@/app/i18next';
-import DefaultProfile from '@/assets/icons/default-profile.svg';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 import HighlightedText from '../../molecules/HighlightedText';
 import ZaboActions from '../../organisms/Zabo/ZaboActions';
