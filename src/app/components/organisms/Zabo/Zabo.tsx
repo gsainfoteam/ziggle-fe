@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 
 import { Notice } from '@/api/notice/notice';
-import { PropsWithLng, PropsWithT } from '@/app/i18next';
+import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.jpeg';
 
 import DDay from '../../molecules/DDay';
@@ -17,15 +17,25 @@ export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
     ? { height: number; width?: never }
     : never;
 
-export type ZaboProps = PropsWithT<Notice> & {
+export type ZaboProps = Notice & {
   width?: number;
   height?: number; // migration ongoing | remove after migration complete
 };
 
-const Zabo = (props: ZaboProps & PropsWithLng) => {
-  const { createdAt, author, deadline, reactions, t, title, imageUrls, tags } =
-    props;
+const Zabo = async (props: ZaboProps & PropsWithLng) => {
+  const {
+    createdAt,
+    author,
+    deadline,
+    reactions,
+    title,
+    imageUrls,
+    tags,
+    lng,
+  } = props;
   const timeAgo = dayjs(createdAt).fromNow();
+
+  const { t } = await createTranslation(lng);
 
   const hasImage = imageUrls.length > 0;
 

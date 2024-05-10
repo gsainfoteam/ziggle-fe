@@ -11,8 +11,6 @@ export default async function Home({
 }: {
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
-
   const recentNotices = await getAllNotices({ orderBy: 'recent' });
 
   return (
@@ -21,7 +19,7 @@ export default async function Home({
         <div className="flex w-full flex-col md:max-w-[800px]">
           {...recentNotices.list.map((notice) => (
             <>
-              <Zabo key={notice.id} {...notice} t={t} lng={lng} />
+              <Zabo key={notice.id} {...notice} lng={lng} />
 
               <div className="my-[60px] h-[1px] bg-greyLight" />
             </>
