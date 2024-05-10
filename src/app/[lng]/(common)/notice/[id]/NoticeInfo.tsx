@@ -1,7 +1,7 @@
 'use server';
 
 import dayjs from 'dayjs';
-import Image from 'next/image';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail } from '@/api/notice/notice';
 import Tags from '@/app/components/organisms/Tags';
@@ -21,6 +21,7 @@ const NoticeInfo = async ({
   lng,
 }: PropsWithLng<NoticeInfoProps>) => {
   const { t } = await createTranslation(lng);
+  dayjs.locale(lng);
 
   return (
     <div className="flex flex-col gap-[18px]">
@@ -43,8 +44,9 @@ const NoticeInfo = async ({
 const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
   return (
     <div className="flex w-fit gap-[10px] rounded-[5px] bg-primary px-[13px] py-1 text-lg text-white">
-      <span className="font-regular">{t('zabo.dueAt')}</span>
-      <span className="font-medium">{deadline.format('LLL')}</span>
+      <Trans t={t} i18nKey={'zabo.dueAt'}>
+        {{ dueAt: deadline.format('LLL') }}
+      </Trans>
     </div>
   );
 };

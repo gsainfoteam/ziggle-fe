@@ -44,16 +44,22 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
       <div className={'mx-3 my-[10px] flex items-center'}>
         <DefaultProfile width={36} height={36} />
 
-        <p className={'ml-2 text-lg font-medium'}>{author.name}</p>
+        <p className={'ml-2 text-lg font-medium dark:text-dark_white'}>
+          {author.name}
+        </p>
 
-        <p className={'mx-[5px] font-bold text-greyDark'}>·</p>
+        <p className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>·</p>
 
-        <p className={'font-medium text-greyDark'}>{timeAgo}</p>
+        <p className={'font-medium text-greyDark dark:text-grey'}>{timeAgo}</p>
 
         {deadline !== null && <DDay deadline={dayjs(deadline)} t={t} />}
       </div>
 
-      <p className={'mx-4 mb-[10px] text-xl font-semibold'}>{title}</p>
+      <p
+        className={'mx-4 mb-[10px] text-xl font-semibold dark:text-dark_white'}
+      >
+        {title}
+      </p>
 
       {!hasImage && <ZaboTags notice={props} />}
 
@@ -77,14 +83,16 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
       )}
 
       {hasImage && (
-        <div className="mx-2 mt-4">
+        <div className="mx-2 my-4">
           <ZaboActions {...props} />
         </div>
       )}
 
       {hasImage && <ZaboTags notice={props} />}
 
-      <div className={'mx-4 mt-[10px] line-clamp-3 text-lg'}>
+      <div
+        className={'mx-4 mt-[10px] line-clamp-3 text-lg dark:text-dark_white'}
+      >
         {props.content}
       </div>
 

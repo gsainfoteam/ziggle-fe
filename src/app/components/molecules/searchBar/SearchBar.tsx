@@ -61,17 +61,21 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
   const SearchButton = () => (
     <button
       type="submit"
-      className={`${
-        isExpanded
-          ? 'dark:bg-dark_greyDark bg-greyLight'
-          : 'dark:bg-dark_dark bg-white'
-      } dark:border-l-dark_greyBorder md:dark:bg-dark_greyDark flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-2 md:border-l-[1px] md:bg-greyLight  md:pl-5 md:pr-6`}
+      className={
+        `${
+          isExpanded
+            ? 'bg-greyLight dark:bg-dark_greyDark'
+            : 'bg-white dark:bg-dark_dark'
+        } flex h-full items-center justify-center p-0 px-2 md:pl-5 md:pr-6 ` +
+        `border-l-0 border-l-greyBorder dark:border-l-dark_greyBorder md:border-l-[1px] ` +
+        `md:bg-greyLight md:dark:bg-dark_greyDark`
+      }
       onClick={handleSearchIconClick}
     >
       <SearchIcon
         className={`h-6 w-6 ${
           isExpanded ? 'stroke-greyDark' : 'stroke-text'
-        } dark:stroke-dark_white md:dark:stroke-dark_white md:stroke-greyDark`}
+        } dark:stroke-dark_white md:stroke-greyDark md:dark:stroke-dark_white`}
       />
     </button>
   );
@@ -90,13 +94,13 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           ref={searchFormRef}
           className={`flex ${
             isExpanded ? 'w-full' : 'w-fit'
-          } dark:border-dark_greyBorder flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
+          } flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] dark:border-dark_greyBorder md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
         >
           <div className="flex w-full justify-between">
             <input
               className={`${
                 isExpanded ? 'w-full' : 'w-0'
-              } dark:bg-dark_greyDark md:dark:bg-dark_dark dark:text-dark_white flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none md:bg-white md:px-5`}
+              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none dark:bg-dark_greyDark dark:text-dark_white md:bg-white md:px-5 md:dark:bg-dark_dark`}
               name="searchQuery"
               placeholder={t('searchPage.searchBar.placeholder')}
               value={keyword}
@@ -107,10 +111,10 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
               <Analytics event={LogEvents.searchPageClickCancel}>
                 <button
                   type="button"
-                  className="md:dark:bg-dark_dark flex h-full items-center justify-center bg-greyLight px-2 md:bg-white"
+                  className="flex h-full items-center justify-center bg-greyLight px-2 dark:bg-dark_greyDark md:bg-white md:dark:bg-dark_dark"
                   onClick={handleDeleteClick}
                 >
-                  <CloseIcon className="dark:stroke-dark_white h-4 w-4 stroke-greyDark" />
+                  <CloseIcon className="h-4 w-4 stroke-greyDark dark:stroke-dark_white" />
                 </button>
               </Analytics>
             )}
@@ -136,7 +140,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           <Analytics event={LogEvents.searchPageClickCancel}>
             <button
               type="button"
-              className="dark:bg-dark_dark flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary md:hidden"
+              className="flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary dark:bg-dark_dark md:hidden"
               onClick={toggleExpand}
             >
               {t('searchPage.searchBar.collapse')}

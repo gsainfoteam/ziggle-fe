@@ -74,10 +74,15 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
         {currentFire.isReacted ? (
           <FireActivated width={36} className="duration-150 hover:scale-125" />
         ) : (
-          <Fire width={36} className="duration-150 hover:scale-125" />
+          <Fire
+            width={36}
+            className="stroke-text duration-150 hover:scale-125 dark:stroke-dark_white"
+          />
         )}
       </Button>
-      <p className={'font-semibold'}>{currentFire.count}</p>
+      <p className={'font-semibold dark:text-dark_white'}>
+        {currentFire.count}
+      </p>
     </div>
   );
 };
@@ -110,7 +115,7 @@ const ShareButton = ({ title, lng }: ShareButtonProps) => {
     >
       <ShareIcon
         width={26}
-        className="stroke-black stroke-2 duration-150 hover:scale-125"
+        className="stroke-text stroke-2 duration-150 hover:scale-125 dark:stroke-dark_white"
       />
     </Button>
   );

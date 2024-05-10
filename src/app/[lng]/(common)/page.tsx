@@ -21,7 +21,7 @@ export default async function Home({
             <>
               <Zabo key={notice.id} {...notice} lng={lng} />
 
-              <div className="my-[60px] h-[1px] bg-greyLight" />
+              <div className="my-[60px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
             </>
           ))}
         </div>
