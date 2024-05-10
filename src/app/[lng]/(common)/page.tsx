@@ -26,6 +26,7 @@ export default async function Home({
           ))}
         </div>
       </div>
+      <div className="h-[500px]" />
     </main>
   );
 }

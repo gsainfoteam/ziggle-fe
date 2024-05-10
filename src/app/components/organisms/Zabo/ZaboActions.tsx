@@ -72,15 +72,9 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
         }
       >
         {currentFire.isReacted ? (
-          <FireActivated
-            width={36}
-            className={`h-7 w-7 duration-150 hover:scale-125 md:h-9 md:w-9`}
-          />
+          <FireActivated width={36} className="duration-150 hover:scale-125" />
         ) : (
-          <Fire
-            width={36}
-            className={`h-7 w-7 duration-150 hover:scale-125 md:h-9 md:w-9`}
-          />
+          <Fire width={36} className="duration-150 hover:scale-125" />
         )}
       </Button>
       <p className={'font-semibold'}>{currentFire.count}</p>
