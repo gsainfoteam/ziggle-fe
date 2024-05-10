@@ -75,7 +75,7 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
             title
           )}
         </div>
-        <div className="scrollbar-thumb-rounded-full scrollbar-h-1 flex gap-2 overflow-x-scroll py-1 scrollbar scrollbar-thumb-greyBorder">
+        <div className="flex gap-2 overflow-x-scroll py-1 scrollbar scrollbar-thumb-greyBorder scrollbar-thumb-rounded-full scrollbar-h-1">
           {imageUrls.map((url, i) => (
             <Image
               key={url}

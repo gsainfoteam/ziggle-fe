@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import {
   addReaction,
   deleteReaction,
+  EmojiString,
   Notice,
   Reaction,
 } from '@/api/notice/notice';
@@ -23,14 +24,6 @@ import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
 
 const EMOJI_WIDTH = 30;
-
-enum EmojiString {
-  FIRE = '🔥',
-  CRYING = '😭',
-  ANGUISHED = '😧',
-  THINKING = '🤔',
-  SURPRISED = '😮',
-}
 
 const emojis: {
   [key in EmojiString]: React.FC<React.SVGProps<SVGSVGElement>>;

@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import {
   addReaction,
   deleteReaction,
+  EmojiString,
   Notice,
   Reaction,
 } from '@/api/notice/notice';
@@ -122,11 +123,15 @@ const ShareButton = ({ title, lng }: ShareButtonProps) => {
 };
 
 const ZaboActions = ({ id, title, reactions, lng }: ZaboActionsProps) => {
-  const fire = reactions.find(({ emoji }) => emoji === '🔥');
+  const fire = reactions.find(({ emoji }) => emoji === EmojiString.FIRE) ?? {
+    emoji: EmojiString.FIRE,
+    count: 0,
+    isReacted: false,
+  };
 
   return (
     <div className={'flex items-center justify-between'}>
-      {fire && <FireButton id={id} fire={fire} lng={lng} />}
+      <FireButton id={id} fire={fire} lng={lng} />
       <ShareButton title={title} lng={lng} />
     </div>
   );

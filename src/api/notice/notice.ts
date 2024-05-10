@@ -61,6 +61,14 @@ export interface Content {
   createdAt: Date;
 }
 
+export enum EmojiString {
+  FIRE = '🔥',
+  CRYING = '😭',
+  ANGUISHED = '😧',
+  THINKING = '🤔',
+  SURPRISED = '😮',
+}
+
 export interface NoticeDetail extends Notice {
   additionalContents: Content[];
 }
