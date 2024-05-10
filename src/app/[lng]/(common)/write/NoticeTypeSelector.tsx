@@ -61,7 +61,7 @@ const NoticeTypeSelector = ({
         <div
           key={noticeType}
           className={`${selectedNoticeType !== noticeType && 'hidden'}
-            bg-greyLight rounded-[10px] p-6
+            rounded-[10px] bg-greyLight p-6 dark:bg-dark_greyDark
           `}
         >
           <div className="mb-2 text-base font-semibold md:text-xl">
