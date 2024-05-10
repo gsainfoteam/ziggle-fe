@@ -62,14 +62,16 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     <button
       type="submit"
       className={`${
-        isExpanded ? 'bg-greyLight' : 'bg-white'
-      } flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-2 md:border-l-[1px] md:bg-greyLight md:pl-5 md:pr-6`}
+        isExpanded
+          ? 'dark:bg-dark_greyDark bg-greyLight'
+          : 'dark:bg-dark_dark bg-white'
+      } dark:border-l-dark_greyBorder md:dark:bg-dark_greyDark flex h-full items-center justify-center border-l-0 border-l-greyBorder p-0 px-2 md:border-l-[1px] md:bg-greyLight  md:pl-5 md:pr-6`}
       onClick={handleSearchIconClick}
     >
       <SearchIcon
         className={`h-6 w-6 ${
           isExpanded ? 'stroke-greyDark' : 'stroke-text'
-        } md:stroke-greyDark`}
+        } dark:stroke-dark_white md:dark:stroke-dark_white md:stroke-greyDark`}
       />
     </button>
   );
@@ -88,13 +90,13 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           ref={searchFormRef}
           className={`flex ${
             isExpanded ? 'w-full' : 'w-fit'
-          } flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
+          } dark:border-dark_greyBorder flex-row-reverse justify-between overflow-clip rounded-lg border-greyBorder bg-transparent align-middle transition-[width] md:w-full md:max-w-[700px] md:flex-row md:rounded-full md:border-[1px] md:bg-greyLight`}
         >
           <div className="flex w-full justify-between">
             <input
               className={`${
                 isExpanded ? 'w-full' : 'w-0'
-              } flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none md:bg-white md:px-5`}
+              } dark:bg-dark_greyDark md:dark:bg-dark_dark dark:text-dark_white flex-1 bg-greyLight px-0 py-2 text-base leading-4 text-text placeholder-greyDark outline-none md:bg-white md:px-5`}
               name="searchQuery"
               placeholder={t('searchPage.searchBar.placeholder')}
               value={keyword}
@@ -105,10 +107,10 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
               <Analytics event={LogEvents.searchPageClickCancel}>
                 <button
                   type="button"
-                  className="flex h-full items-center justify-center bg-greyLight px-2 md:bg-white"
+                  className="md:dark:bg-dark_dark flex h-full items-center justify-center bg-greyLight px-2 md:bg-white"
                   onClick={handleDeleteClick}
                 >
-                  <CloseIcon className="h-4 w-4" />
+                  <CloseIcon className="dark:stroke-dark_white h-4 w-4 stroke-greyDark" />
                 </button>
               </Analytics>
             )}
@@ -134,7 +136,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           <Analytics event={LogEvents.searchPageClickCancel}>
             <button
               type="button"
-              className="flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary md:hidden"
+              className="dark:bg-dark_dark flex h-full w-fit items-center justify-center overflow-hidden whitespace-nowrap bg-white px-2 text-primary md:hidden"
               onClick={toggleExpand}
             >
               {t('searchPage.searchBar.collapse')}

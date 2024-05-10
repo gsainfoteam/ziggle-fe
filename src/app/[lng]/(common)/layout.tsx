@@ -36,6 +36,8 @@ export default async function Layout({
 
           <div className="w-0 grow md:mx-5">{children}</div>
         </div>
+
+        <div className="h-[500px]" />
         <Footer t={t} />
       </div>
       <ToastContainer className="w-64" />

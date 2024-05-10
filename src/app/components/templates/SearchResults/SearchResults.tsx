@@ -98,8 +98,6 @@ const SearchResults = async ({
       </Suspense>
       <div className="h-4" />
       {pagination}
-
-      <div className="h-[500px]" />
     </>
   );
 };
