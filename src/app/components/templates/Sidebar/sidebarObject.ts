@@ -10,7 +10,7 @@ import BoldOpenBook from '@/assets/icons/bold-open-book.svg';
 import ColorFilter from '@/assets/icons/color-filter.svg';
 import Community from '@/assets/icons/community.svg';
 import EditPencil from '@/assets/icons/edit-pencil.svg';
-import FireFlame from '@/assets/icons/fire-flame.svg';
+import FireFlame from '@/assets/icons/fire.svg';
 import Flower from '@/assets/icons/flower.svg';
 import Home from '@/assets/icons/home.svg';
 import MessageAlert from '@/assets/icons/message-alert.svg';

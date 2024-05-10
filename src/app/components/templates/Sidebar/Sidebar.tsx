@@ -26,7 +26,7 @@ const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
         (isSelected ? 'bg-greyLight' : '')
       }
     >
-      {isSelected ? boldIcon : icon}
+      <span className="w-6">{isSelected ? boldIcon : icon}</span>
       <span
         className={
           'ml-4' + ' ' + (isSelected ? 'font-semibold' : 'font-normal')
@@ -45,8 +45,8 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   return (
     <>
       {sidebarObject.map((group, i) => (
-        <>
-          <ul key={i} className="flex flex-col gap-y-2">
+        <React.Fragment key={i}>
+          <ul className="flex flex-col gap-y-2">
             {group.map((item, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
@@ -61,7 +61,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
           {!(sidebarObject.length - 1 === i) && (
             <div className="my-[15px] h-[1px] bg-greyLight" />
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   );
