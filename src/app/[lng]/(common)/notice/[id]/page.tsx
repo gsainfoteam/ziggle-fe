@@ -1,23 +1,25 @@
+import dayjs from 'dayjs';
 import { Metadata, ResolvingMetadata } from 'next';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/get-notice';
+import Tags from '@/app/components/organisms/Tags';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 import Actions from './Actions';
 import AddAdditionalNotice from './AddAdditionalNotice';
 import AddtionalNotices from './AdditionalNotices';
 import AuthorActions from './AuthorActions';
 import Content from './Content';
+import Deadline from './Deadline';
 import ImageStack from './ImageStack';
-import NoticeInfo from './NoticeInfo';
 import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
   {
     params: { id },
-    searchParams,
   }: { params: { id: string }; searchParams: { writeEn: string; lng: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
@@ -47,15 +49,26 @@ const DetailedNoticePage = async ({
 }: DetailedNoticePageProps) => {
   const { t } = await createTranslation(lng, 'translation');
   const notice = await getNotice(Number.parseInt(id));
-
-  const title = notice.title;
+  const {
+    title,
+    langs,
+    imageUrls,
+    deadline,
+    author,
+    createdAt,
+    id: noticeId,
+    tags,
+    content,
+    additionalContents,
+    currentDeadline,
+  } = notice;
 
   const user = await auth();
 
   const isAdditionalNoticeShow = true;
   const isWriteEnglishNoticeShow = true;
 
-  const supportEnglish = notice.langs.includes('en');
+  const supportEnglish = langs.includes('en');
 
   return (
     <div className="flex justify-center">
@@ -64,32 +77,40 @@ const DetailedNoticePage = async ({
         <div className="flex gap-5">
           {/* DESKTOP VIEW IMAGESTACK */}
           <div className="hidden md:block">
-            {notice.imageUrls.length > 0 && (
-              <ImageStack srcs={notice.imageUrls} alt={title} lng={lng} />
+            {imageUrls.length > 0 && (
+              <ImageStack srcs={imageUrls} alt={title} lng={lng} />
             )}
           </div>
 
-          <div className="flex flex-col gap-[18px] md:w-[60%]">
-            <NoticeInfo
-              {...notice}
-              currentDeadline={notice.currentDeadline ?? null}
-              lng={lng}
-            />
+          <div className="flex flex-col gap-4 md:w-7/12">
+            {deadline && <Deadline deadline={dayjs(deadline)} lng={lng} />}
+            <div className={'flex items-center'}>
+              <DefaultProfile className="h-9 w-9" />
+              <p className={'ml-2 text-lg font-medium'}>{author.name}</p>
+              <p className={'mx-[5px] font-bold text-greyDark'}>·</p>
+              <p className={'font-medium text-greyDark'}>
+                {dayjs(createdAt).fromNow()} {/*TODO: Translate*/}
+              </p>
+            </div>
+            <AuthorActions noticeId={noticeId} lng={lng} />
+            <div className="text-2xl font-semibold ">{title}</div>
+            <Tags tags={tags} className="flex-wrap" lng={lng} />
+
             {/* MOBILE VIEW IMAGESTACK */}
             <div className="md:hidden">
-              {notice.imageUrls.length > 0 && (
+              {imageUrls.length > 0 && (
                 <ImageStack
                   width={900}
-                  srcs={notice.imageUrls}
+                  srcs={imageUrls}
                   alt={title}
                   lng={lng}
                 />
               )}
             </div>
-            <Content content={notice.content} />
+            <Content content={content} />
             <Actions notice={notice} lng={lng} />
             <AddtionalNotices
-              additionalContents={notice.additionalContents}
+              additionalContents={additionalContents}
               notice={notice}
               t={t}
               lng={lng}
@@ -97,35 +118,22 @@ const DetailedNoticePage = async ({
           </div>
         </div>
 
-        {/* temporarily disabled authorActions. should enable it later */}
-        {/* {user && user.id === notice.author.uuid && (
-          <>
-            <div className="h-5" />
-            <AuthorActions
-              isEnglishNoticeExist={supportEnglish}
-              isAdditionalNoticeLimit={false}
-              noticeId={Number(id)}
-              lng={lng}
-            />
-          </>
-        )} */}
-
         <div className="h-4 md:h-5" />
 
-        {user && user.id === notice.author.uuid && isAdditionalNoticeShow && (
+        {user && user.id === author.uuid && isAdditionalNoticeShow && (
           <>
             <div className="h-10" id="addNotice" />
             <AddAdditionalNotice
               lng={lng}
               noticeId={Number(id)}
-              originallyHasDeadline={notice.deadline}
-              supportedLanguage={notice.langs}
+              originallyHasDeadline={deadline}
+              supportedLanguage={langs}
             />
           </>
         )}
 
         {user &&
-          user.id === notice.author.uuid &&
+          user.id === author.uuid &&
           isWriteEnglishNoticeShow &&
           !supportEnglish && (
             <>
@@ -133,7 +141,7 @@ const DetailedNoticePage = async ({
               <WriteEnglishNotice
                 noticeId={Number(id)}
                 lng={lng}
-                deadline={notice.currentDeadline}
+                deadline={currentDeadline}
               />
             </>
           )}
