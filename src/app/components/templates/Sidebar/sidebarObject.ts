@@ -3,6 +3,7 @@ import { ParseKeys } from 'i18next';
 import Bell from '@/assets/icons/bell.svg';
 import BoldBell from '@/assets/icons/bold-bell.svg';
 import BoldCommunity from '@/assets/icons/bold-community.svg';
+import BoldFire from '@/assets/icons/bold-fire.svg';
 import BoldFlower from '@/assets/icons/bold-flower.svg';
 import BoldHome from '@/assets/icons/bold-home.svg';
 import BoldMessageAlert from '@/assets/icons/bold-message-alert.svg';
@@ -10,7 +11,7 @@ import BoldOpenBook from '@/assets/icons/bold-open-book.svg';
 import ColorFilter from '@/assets/icons/color-filter.svg';
 import Community from '@/assets/icons/community.svg';
 import EditPencil from '@/assets/icons/edit-pencil.svg';
-import FireFlame from '@/assets/icons/fire-flame.svg';
+import Fire from '@/assets/icons/fire.svg';
 import Flower from '@/assets/icons/flower.svg';
 import Home from '@/assets/icons/home.svg';
 import MessageAlert from '@/assets/icons/message-alert.svg';
@@ -47,8 +48,8 @@ const sidebarObject: SidebarObject[][] = [
       title: 'sidebar.zigglepick',
       path: '/zigglepick',
       icons: {
-        regular: FireFlame,
-        bold: BoldHome,
+        regular: Fire,
+        bold: BoldFire,
       },
     },
   ],

@@ -1,12 +1,12 @@
 'use server';
 
 import dayjs from 'dayjs';
-import Image from 'next/image';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { NoticeDetail } from '@/api/notice/notice';
 import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.jpeg';
+import DefaultProfile from '@/assets/default-profile.svg';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
@@ -43,8 +43,9 @@ const NoticeInfo = async ({
 const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
   return (
     <div className="flex w-fit gap-[10px] rounded-[5px] bg-primary px-[13px] py-1 text-lg text-white">
-      <span className="font-regular">{t('zabo.dueAt')}</span>
-      <span className="font-medium">{deadline.format('LLL')}</span>
+      <Trans t={t} i18nKey={'zabo.dueAt'}>
+        {{ dueAt: deadline.format('LLL') }}
+      </Trans>
     </div>
   );
 };
@@ -68,7 +69,7 @@ const Metadata = ({
   return (
     <>
       <div className={'flex items-center'}>
-        <Image src={DefaultProfile} alt={author} width={36} height={36} />
+        <DefaultProfile width={36} height={36} />
 
         <p className={'ml-2 text-lg font-medium'}>{author}</p>
 

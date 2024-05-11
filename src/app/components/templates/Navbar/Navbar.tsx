@@ -13,10 +13,12 @@ import AccountIcon from '@/assets/icons/account.svg';
 import MenuIcon from '@/assets/icons/menu.svg';
 import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
+import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg';
+import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
 import Button from '../../atoms/Button';
-import SearchBar from '../../molecules/searchBar/SearchBar';
 import SidebarMobile from '../Sidebar/SidebarMobile';
+import SearchBar from './SearchBar';
 
 export interface User {
   id: string;
@@ -42,12 +44,18 @@ const Navbar = ({ lng }: PropsWithLng) => {
   };
 
   return (
-    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2">
+    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text dark:bg-text md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
-            <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
-            <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
+            <div className="block dark:hidden">
+              <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
+              <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
+            </div>
+            <div className="hidden dark:block">
+              <ZiggleLogoDark className="hidden h-8 overflow-visible md:flex" />
+              <ZiggleCompactLogoDark className="h-8 overflow-visible md:hidden" />
+            </div>
           </Link>
         </Analytics>
         <div className="flex h-full items-center md:w-full">
@@ -56,7 +64,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
             onClick={handleSidebarOpen}
             className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
           >
-            <MenuIcon className="h-6 stroke-text md:hidden" />
+            <MenuIcon className="h-6 stroke-text dark:stroke-dark_white md:hidden" />
           </Button>
         </div>
       </div>

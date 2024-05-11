@@ -15,14 +15,14 @@
 }
 
 :root {
-  --foreground-rgb: theme(colors.black);
+  --foreground-rgb: theme(colors.text);
   --background-rgb: theme(colors.white);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: theme(colors.white);
-    --background-rgb: theme(colors.neutral.900);
+    --background-rgb: theme(colors.dark_dark);
   }
 }
 

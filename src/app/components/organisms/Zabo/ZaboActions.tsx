@@ -7,13 +7,15 @@ import Swal from 'sweetalert2';
 import {
   addReaction,
   deleteReaction,
+  EmojiString,
   Notice,
   Reaction,
 } from '@/api/notice/notice';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
-import Fire from '@/assets/fire-outlined.svg';
+import Fire from '@/assets/icons/fire.svg';
+import FireActivated from '@/assets/icons/fire-activated.svg';
 import ShareIcon from '@/assets/icons/share.svg';
 
 import Button from '../../atoms/Button';
@@ -69,14 +71,18 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
           handleEmojiClick(e, currentFire.emoji, currentFire.isReacted)
         }
       >
-        <Fire
-          width={36}
-          className={`h-7 w-7 hover:fill-primary md:h-9 md:w-9 ${
-            currentFire.isReacted && 'fill-primary'
-          }`}
-        />
+        {currentFire.isReacted ? (
+          <FireActivated width={36} className="duration-150 hover:scale-125" />
+        ) : (
+          <Fire
+            width={36}
+            className="stroke-text duration-150 hover:scale-125 dark:stroke-dark_white"
+          />
+        )}
       </Button>
-      <p className={'font-semibold'}>{currentFire.count}</p>
+      <p className={'font-semibold dark:text-dark_white'}>
+        {currentFire.count}
+      </p>
     </div>
   );
 };
@@ -107,17 +113,24 @@ const ShareButton = ({ title, lng }: ShareButtonProps) => {
       className="group flex items-center gap-1"
       onClick={handleShare}
     >
-      <ShareIcon width={24} className="hover:fill-primary" />
+      <ShareIcon
+        width={26}
+        className="stroke-text stroke-2 duration-150 hover:scale-125 dark:stroke-dark_white"
+      />
     </Button>
   );
 };
 
 const ZaboActions = ({ id, title, reactions, lng }: ZaboActionsProps) => {
-  const fire = reactions.find(({ emoji }) => emoji === '🔥');
+  const fire = reactions.find(({ emoji }) => emoji === EmojiString.FIRE) ?? {
+    emoji: EmojiString.FIRE,
+    count: 0,
+    isReacted: false,
+  };
 
   return (
     <div className={'flex items-center justify-between'}>
-      {fire && <FireButton id={id} fire={fire} lng={lng} />}
+      <FireButton id={id} fire={fire} lng={lng} />
       <ShareButton title={title} lng={lng} />
     </div>
   );

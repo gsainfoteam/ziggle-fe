@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import {
   addReaction,
   deleteReaction,
+  EmojiString,
   Notice,
   Reaction,
 } from '@/api/notice/notice';
@@ -23,14 +24,6 @@ import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
 import ThinkingFace from './assets/thinking-face.svg';
 
 const EMOJI_WIDTH = 30;
-
-enum EmojiString {
-  FIRE = '🔥',
-  CRYING = '😭',
-  ANGUISHED = '😧',
-  THINKING = '🤔',
-  SURPRISED = '😮',
-}
 
 const emojis: {
   [key in EmojiString]: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -54,9 +47,17 @@ const ActionButton = ({ isSelected, onClick, children }: ActionButtonProps) => {
       className={
         'flex h-10 items-center gap-[7px] rounded-full border-none px-[13px] py-[5px] outline-none' +
         ' ' +
-        `${isSelected ? 'bg-text' : 'bg-greyLight'}` +
+        `${
+          isSelected
+            ? 'bg-text dark:bg-dark_white'
+            : 'bg-greyLight dark:bg-dark_greyDark'
+        }` +
         ' ' +
-        `${isSelected ? 'text-white' : 'text-text'}`
+        `${
+          isSelected
+            ? 'text-white dark:text-dark_dark'
+            : 'text-text dark:text-dark_white'
+        }`
       }
       onClick={onClick}
     >
@@ -81,9 +82,12 @@ const ReactionButton = ({
             emoji === EmojiString.FIRE ? (
               <span
                 className={
-                  'stroke-2' +
-                  ' ' +
-                  `${isReacted ? 'stroke-white' : 'stroke-text'}`
+                  'stroke-2 ' +
+                  `${
+                    isReacted
+                      ? 'stroke-white dark:stroke-dark_dark'
+                      : 'stroke-text dark:stroke-dark_white'
+                  }`
                 }
               >
                 <EmojiComponent width={EMOJI_WIDTH} />
@@ -184,7 +188,7 @@ const ShareButton = ({ title, lng }: ActionsProps) => {
 
   return (
     <ActionButton isSelected={false} onClick={handleShare}>
-      <span className="stroke-text stroke-[1.5]">
+      <span className="stroke-text stroke-[1.5] dark:stroke-dark_white">
         <ShareIcon width={26} />
       </span>
 
@@ -211,7 +215,7 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
 
   return (
     <ActionButton isSelected={false} onClick={handleCopy}>
-      <span className="stroke-text">
+      <span className="stroke-text dark:stroke-dark_white">
         <LinkIcon width={26} />
       </span>
 

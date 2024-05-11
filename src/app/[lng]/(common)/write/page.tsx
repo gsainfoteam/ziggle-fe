@@ -87,14 +87,18 @@ export default function WritePage({
           <GlobeIcon
             className={
               'w-5 md:w-6 ' +
-              (hasEnglishContent ? 'stroke-text' : 'stroke-grey')
+              (hasEnglishContent
+                ? 'stroke-text dark:stroke-dark_white'
+                : 'stroke-grey dark:stroke-dark_grey')
             }
           />
 
           <p
             className={
-              'text-lg font-medium ' +
-              (hasEnglishContent ? 'text-text' : 'text-grey')
+              'mr-1 text-lg font-medium ' +
+              (hasEnglishContent
+                ? 'text-text dark:text-dark_white'
+                : 'text-grey dark:text-dark_grey')
             }
           >
             {t('write.writeEnglishNotice')}
@@ -112,7 +116,7 @@ export default function WritePage({
         </div>
 
         <div className="mb-3 flex gap-[6px]">
-          <TypeIcon className="w-5 dark:fill-white md:w-6" />
+          <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
           <p className="font-medium">{t('write.noticeType')}</p>
         </div>
         <NoticeTypeSelector
@@ -160,7 +164,9 @@ export default function WritePage({
         )}
 
         <div className={'mb-3 mt-10 flex items-center gap-2'}>
-          <ClockIcon className={'w-5 md:w-6'} />
+          <ClockIcon
+            className={'w-5 stroke-text dark:stroke-dark_white md:w-6'}
+          />
 
           <p className="text-lg font-medium">{t('write.setupDeadline')}</p>
 

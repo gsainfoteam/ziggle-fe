@@ -21,12 +21,12 @@ const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
     <Link
       href="/"
       className={
-        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none' +
+        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey' +
         ' ' +
-        (isSelected ? 'bg-greyLight' : '')
+        (isSelected ? 'bg-greyLight dark:bg-dark_greyDark' : '')
       }
     >
-      {isSelected ? boldIcon : icon}
+      <span className="w-6">{isSelected ? boldIcon : icon}</span>
       <span
         className={
           'ml-4' + ' ' + (isSelected ? 'font-semibold' : 'font-normal')
@@ -45,13 +45,17 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   return (
     <>
       {sidebarObject.map((group, i) => (
-        <>
-          <ul key={i} className="flex flex-col gap-y-2">
+        <React.Fragment key={i}>
+          <ul className="flex flex-col gap-y-2">
             {group.map((item, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
-                  icon={<item.icons.regular />}
-                  boldIcon={<item.icons.bold />}
+                  icon={
+                    <item.icons.regular className="stroke-text dark:stroke-dark_white" />
+                  }
+                  boldIcon={
+                    <item.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-dark_white" />
+                  }
                   title={t(item.title)}
                   isSelected={path.startsWith(`/${lng}${item.path}`)}
                 />
@@ -59,9 +63,9 @@ const Sidebar = ({ lng }: PropsWithLng) => {
             ))}
           </ul>
           {!(sidebarObject.length - 1 === i) && (
-            <div className="my-[15px] h-[1px] bg-greyLight" />
+            <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   );
