@@ -26,9 +26,6 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
   } = props;
 
   const { t } = await createTranslation(lng);
-  dayjs.locale(lng);
-
-  const isClosed = dayjs(currentDeadline).isBefore();
 
   return (
     <Link className="min-w-fit" href={`/${lng}/notice/` + id}>

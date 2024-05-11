@@ -21,7 +21,6 @@ const NoticeInfo = async ({
   lng,
 }: PropsWithLng<NoticeInfoProps>) => {
   const { t } = await createTranslation(lng);
-  dayjs.locale(lng);
 
   return (
     <div className="flex flex-col gap-[18px]">
