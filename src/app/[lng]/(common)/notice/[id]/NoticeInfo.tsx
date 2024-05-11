@@ -8,6 +8,8 @@ import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.jpeg';
 
+import AuthorActions from './AuthorActions';
+
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
 const NoticeInfo = async ({
@@ -32,7 +34,7 @@ const NoticeInfo = async ({
         views={views}
         t={t}
       />
-
+      <AuthorActions noticeId={197751} lng={'ko'} />
       <Title title={title} />
 
       <Tags tags={tags} className="flex-wrap" lng={lng} />

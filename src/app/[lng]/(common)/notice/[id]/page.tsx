@@ -75,7 +75,6 @@ const DetailedNoticePage = async ({
               currentDeadline={notice.currentDeadline ?? null}
               lng={lng}
             />
-
             {/* MOBILE VIEW IMAGESTACK */}
             <div className="md:hidden">
               {notice.imageUrls.length > 0 && (
@@ -87,11 +86,8 @@ const DetailedNoticePage = async ({
                 />
               )}
             </div>
-
             <Content content={notice.content} />
-
             <Actions notice={notice} lng={lng} />
-
             <AddtionalNotices
               additionalContents={notice.additionalContents}
               notice={notice}
