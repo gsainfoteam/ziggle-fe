@@ -4,8 +4,8 @@ import dayjs from 'dayjs';
 import LocalizedFormat from 'dayjs/plugin/localizedFormat';
 import { ReactHTMLElement } from 'react';
 
-import FastArrow from '@/app/assets/icons/fast-arrow-right.svg';
-import NavArrow from '@/app/assets/icons/nav-arrow-right.svg';
+import FastArrow from '@/assets/icons/fast-arrow-right.svg';
+import NavArrow from '@/assets/icons/nav-arrow-right.svg';
 
 dayjs.extend(LocalizedFormat);
 

@@ -14,8 +14,8 @@ interface DateTimePickerProps {
 
 // TODO : wrap calendar and time dial into a properly working hunk
 const DateTimePicker = ({ value, lng }: PropsWithLng<DateTimePickerProps>) => {
-  const displayCalendar = useRef(false);
-  const displayTimeDial = useRef(false);
+  const displayCalendar = useRef(true);
+  const displayTimeDial = useRef(true);
 
   const [day, setDay] = useState(dayjs()); //placeholder
 

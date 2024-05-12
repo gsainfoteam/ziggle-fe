@@ -35,7 +35,9 @@ const CalendarMonthlyView = ({ value, onChange }: CalendarMonthlyViewProps) => {
       it = it.date(it.date() + 1);
     }
     weeks.push(
-      <div className="flex h-[40px] max-w-full bg-transparent">{...week}</div>,
+      <div className="flex h-[40px] max-w-full bg-transparent">
+        {week.map((day) => day)}
+      </div>,
     );
 
     //escape after adding all weeks
@@ -47,9 +49,9 @@ const CalendarMonthlyView = ({ value, onChange }: CalendarMonthlyViewProps) => {
   return (
     <div className="flax max-w-full justify-stretch bg-transparent">
       <div className="flex h-[40px] max-w-full justify-stretch bg-transparent">
-        {...weekRow}
+        {weekRow.map((week) => week)}
       </div>
-      {...weeks}
+      {weeks.map((week) => week)}
     </div>
   );
 };
