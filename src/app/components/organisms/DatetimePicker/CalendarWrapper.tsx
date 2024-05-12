@@ -1,7 +1,9 @@
 'use client';
 
 import dayjs from 'dayjs';
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+import { PropsWithLng } from '@/app/i18next';
 
 import CalendarAnnualView from './calendar/CalendarAnnualView';
 import CalendarMonthlyView from './calendar/CalendarMonthlyView';

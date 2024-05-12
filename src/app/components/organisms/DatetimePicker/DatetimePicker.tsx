@@ -13,7 +13,7 @@ interface DateTimePickerProps {
 }
 
 // TODO : wrap calendar and time dial into a properly working hunk
-const DatetimePicker = ({ value, lng }: PropsWithLng<DateTimePickerProps>) => {
+const DateTimePicker = ({ value, lng }: PropsWithLng<DateTimePickerProps>) => {
   const displayCalendar = useRef(false);
   const displayTimeDial = useRef(false);
 
@@ -22,7 +22,6 @@ const DatetimePicker = ({ value, lng }: PropsWithLng<DateTimePickerProps>) => {
   const CalendarSpan = (c: boolean) =>
     c ? (
       <CalendarWrapper
-        day={day}
         onChange={/* TODO : add EventHandler*/ () => undefined}
         lng={lng}
       />
@@ -57,4 +56,4 @@ const DatetimePicker = ({ value, lng }: PropsWithLng<DateTimePickerProps>) => {
   );
 };
 
-export default DatetimePicker;
+export default DateTimePicker;
