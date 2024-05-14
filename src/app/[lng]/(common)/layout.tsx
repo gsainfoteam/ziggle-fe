@@ -29,13 +29,7 @@ export default async function Layout({
       <div>
         <Navbar lng={lng} />
 
-        <div className="flex md:flex-row">
-          <div className="ml-4 mt-6 hidden md:block">
-            <Sidebar lng={lng} />
-          </div>
-
-          <div className="w-0 grow md:mx-5">{children}</div>
-        </div>
+        <div className="flex md:flex-row">{children}</div>
 
         <div className="h-[500px]" />
         <Footer t={t} />
