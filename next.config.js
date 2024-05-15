@@ -43,6 +43,15 @@ const nextConfig = {
     );
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/:slug',
+        destination: '/:slug/home',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

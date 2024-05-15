@@ -5,7 +5,8 @@
     "description": "All Notices in GIST at a glance"
   },
   "common": {
-    "optional": "Optional"
+    "optional": "Optional", 
+    "sortByDeadline": "Sort by deadline"
   },
   "navbar": {
     "all": "All Notices",
@@ -172,6 +173,14 @@
     "reminded": {
       "label": "🔔 Reminded Notices",
       "description": "Here are the notices you've set reminders for."
+    }, 
+    "club" : {
+      "label": "Club Notices", 
+      "description": "Club notices"
+    }, 
+    "etc" : {
+      "label":"etc", 
+      "description": "etc"
     }
   },
   "mypage": {

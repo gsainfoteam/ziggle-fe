@@ -13,16 +13,18 @@ export interface Tag {
   name: string;
 }
 
-export enum NoticeKind {
-  RECRUIT = 'recruit',
-  EVENT = 'event',
-  NORMAL = 'general',
-  ACADEMIC = 'academic',
-}
+export const Category = {
+  academic: 'ACADEMIC',
+  recruit: 'RECRUIT',
+  event: 'EVENT',
+  club: 'CLUB',
+  etc: 'ETC',
+} as const;
 
 export interface NoticeSearchParams {
   search?: string;
   tags?: string[];
+  category?: (typeof Category)[keyof typeof Category];
   orderBy?: 'deadline' | 'hot' | 'recent';
   my?: 'own' | 'reminders';
 }

@@ -5,7 +5,8 @@
     "description": "지스트의 모든 공지를 한눈에"
   },
   "common": {
-    "optional": "선택"
+    "optional": "선택", 
+    "sortByDeadline": "마감시간 순으로 보기"
   },
   "navbar": {
     "all": "전체 공지",
@@ -165,6 +166,14 @@
     "reminded": {
       "label": "🔔 리마인더 설정한 공지",
       "description": "알림을 설정한 공지들을 모아서 보여드려요"
+    }, 
+    "club": {
+      "label": "동아리 공지", 
+      "description": "동아리 공지"
+    }, 
+    "etc": {
+      "label": "기타", 
+      "description": "기타"
     }
   },
   "mypage": {
