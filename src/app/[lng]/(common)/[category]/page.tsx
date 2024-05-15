@@ -1,12 +1,14 @@
 import { ParseKeys } from 'i18next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { getAllNotices } from '@/api/notice/notice-server';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import styles from '@/app/components/atoms/Toggle/toggle.module.css';
 import Pagination from '@/app/components/molecules/Pagination';
 import Zabo from '@/app/components/organisms/Zabo';
+import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
 import {
   SidebarObject,
   sidebarObject,
@@ -78,14 +80,19 @@ export default async function Home({
             )}
           </div>
         )}
-        <div className="flex w-full flex-col md:max-w-[800px]">
-          {...notices.list.map((notice) => (
-            <>
-              <Zabo key={notice.id} {...notice} lng={lng} />
-              <div className="my-[60px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
-            </>
-          ))}
-        </div>
+        <Suspense
+          key={JSON.stringify(page)}
+          fallback={<LoadingCatAnimation lng={lng} />}
+        >
+          <div className="flex w-full flex-col md:max-w-[800px]">
+            {...notices.list.map((notice) => (
+              <>
+                <Zabo key={notice.id} {...notice} lng={lng} />
+                <div className="my-[60px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
+              </>
+            ))}
+          </div>
+        </Suspense>
       </div>
       <Pagination page={page} items={notices.total} itemsPerPage={30} />
     </main>
