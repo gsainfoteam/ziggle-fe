@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getAllNotices } from '@/api/notice/notice-server';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import styles from '@/app/components/atoms/Toggle/toggle.module.css';
+import Pagination from '@/app/components/molecules/Pagination';
 import Zabo from '@/app/components/organisms/Zabo';
 import {
   SidebarObject,
@@ -22,11 +23,12 @@ export default async function Home({
   params: PropsWithLng & {
     category: HomePath;
   };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: { deadline: 'true' | 'false'; page: string };
 }) {
   const { t } = await createTranslation(lng);
 
   const sortByDeadline = searchParams?.deadline === 'true' ?? false;
+  const page = parseInt(searchParams?.page ?? '');
 
   const { noticeSearchParams, icons, title } =
     sidebarObject.flat(2).find(({ path }) => path === category) ??
@@ -35,7 +37,7 @@ export default async function Home({
     sortByDeadline
       ? { ...noticeSearchParams, orderBy: 'deadline' }
       : noticeSearchParams,
-  );
+  ).catch(() => ({ list: [], total: 0 }));
 
   return (
     <main className="flex w-full flex-col items-center gap-5">
@@ -78,6 +80,7 @@ export default async function Home({
           ))}
         </div>
       </div>
+      <Pagination page={page} items={notices.total} itemsPerPage={30} />
     </main>
   );
 }
