@@ -1,5 +1,6 @@
 import { ParseKeys } from 'i18next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 import { getAllNotices } from '@/api/notice/notice-server';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
@@ -30,6 +31,12 @@ export default async function Home({
   const sortByDeadline = searchParams?.deadline === 'true' ?? false;
   const page = parseInt(searchParams?.page ?? '');
 
+  const currentSidebarObject = sidebarObject
+    .flat(2)
+    .find(({ path }) => path === category);
+  if (!currentSidebarObject) {
+    redirect('home');
+  }
   const { noticeSearchParams, icons, title } =
     sidebarObject.flat(2).find(({ path }) => path === category) ??
     sidebarObject[0][0]; // default to first menu(home)
