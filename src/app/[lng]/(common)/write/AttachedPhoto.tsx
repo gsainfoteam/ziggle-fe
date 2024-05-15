@@ -16,7 +16,7 @@ const AttachedPhoto = ({ src, onDeleteClick }: ImagePreviewItemProps) => {
         width={0}
         height={0}
         sizes="30vw"
-        className="aspect-square h-auto w-full object-cover"
+        className="aspect-square h-auto w-full rounded-[4px] object-cover"
       />
 
       <button

@@ -65,7 +65,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary p-1">
+      <div className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary px-2 py-1">
         {tags.map((tag) => (
           <TagChip
             key={tag.name}

@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import { uploadImages } from '@/api/image/image';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { attachInternalNotice, createNotice } from '@/api/notice/notice';
+import { attachInternationalNotice, createNotice } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
 import { WarningSwal } from '@/utils/swals';
@@ -211,13 +211,13 @@ const handleNoticeSubmit = async ({
   }
 
   if (noticeLanguage === 'both') {
-    await attachInternalNotice({
+    await attachInternationalNotice({
       lang: 'en',
       title: enTitle || title,
       deadline,
       body: englishBody!,
       noticeId: id,
-      contentId: additionalContents[0].id,
+      contentId: 1,
     });
   }
 

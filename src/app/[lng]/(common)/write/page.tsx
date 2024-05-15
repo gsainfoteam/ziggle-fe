@@ -138,7 +138,7 @@ export default function WritePage({
   };
 
   return (
-    <main className="flex flex-col items-center md:py-12">
+    <main className="flex flex-col items-center py-12">
       <div className="content flex max-w-[600px] flex-col">
         <div className={'flex justify-end'}>
           <p className={'text-sm text-primary'}>

@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import {
-  attachInternalNotice,
+  attachInternationalNotice,
   createAdditionalNotice,
 } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
@@ -75,7 +75,7 @@ const AddAdditionalNotice = ({
     const contentId = contents[contents.length - 1].id;
 
     if (notice && contentId && supportEnglish) {
-      await attachInternalNotice({
+      await attachInternationalNotice({
         title: '',
         body: englishContent,
         lang: 'en',

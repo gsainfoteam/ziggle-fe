@@ -98,16 +98,24 @@ export const createNotice = ({
   tags: number[];
 }) =>
   api
-    .post<NoticeDetail>('/notice', {
-      title,
-      body,
-      deadline,
-      tags,
-      images,
-    })
+    .post<NoticeDetail>(
+      '/notice',
+      {
+        title,
+        body,
+        deadline,
+        tags,
+        images,
+      },
+      {
+        headers: {
+          Hello: 'World',
+        },
+      },
+    )
     .then(({ data }) => data);
 
-export const attachInternalNotice = ({
+export const attachInternationalNotice = ({
   lang,
   title,
   deadline,

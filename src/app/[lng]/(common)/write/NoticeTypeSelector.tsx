@@ -49,7 +49,7 @@ const NoticeTypeSelector = ({
                     return <GeneralIcon />;
                 }
               })()}
-              <p className="md:text-base">
+              <p className="text-base">
                 {t(`write.noticeTypes.${noticeType}.label`)}
               </p>
             </Chip>
@@ -61,7 +61,7 @@ const NoticeTypeSelector = ({
         <div
           key={noticeType}
           className={`${selectedNoticeType !== noticeType && 'hidden'}
-            bg-greyLight rounded-[10px] p-6
+            rounded-[10px] bg-greyLight p-6
           `}
         >
           <div className="mb-2 text-base font-semibold md:text-xl">

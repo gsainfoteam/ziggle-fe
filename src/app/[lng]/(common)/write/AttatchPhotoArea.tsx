@@ -97,7 +97,7 @@ const AttachPhotoArea = ({
             ))}
             <button
               className={
-                'flex aspect-square items-center justify-center bg-white'
+                'flex aspect-square items-center justify-center rounded-[4px] bg-white'
               }
               onClick={() => {
                 fileInputRef.current?.click();
