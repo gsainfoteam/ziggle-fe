@@ -64,7 +64,7 @@ export default async function Home({
                     checked={sortByDeadline}
                   />
                 </Link>
-                마감임박 순으로 보기
+                {t('common.sortByDeadline')}
               </div>
             )}
           </div>

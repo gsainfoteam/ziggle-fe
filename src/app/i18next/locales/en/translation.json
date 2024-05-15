@@ -5,7 +5,8 @@
     "description": "All Notices in GIST at a glance"
   },
   "common": {
-    "optional": "Optional"
+    "optional": "Optional", 
+    "sortByDeadline": "Sort by deadline"
   },
   "navbar": {
     "all": "All Notices",
