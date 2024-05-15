@@ -49,7 +49,7 @@ export default async function Home({
           <div className="flex w-full flex-row justify-between py-5 font-bold md:max-w-[800px]">
             <div className="flex items-center gap-2 text-4xl text-primary ">
               <icons.bold className="fill-primary stroke-text dark:stroke-none" />
-              {t(title)}
+              {t(title) as string}
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (
               <div
