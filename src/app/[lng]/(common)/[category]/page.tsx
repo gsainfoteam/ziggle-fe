@@ -15,6 +15,7 @@ import {
 } from '@/app/components/templates/Sidebar/sidebarObject';
 
 import { createTranslation, PropsWithLng } from '../../../i18next';
+import CategorizedNotices from './CategorizedNotices';
 import { HomePath } from './paths';
 
 export const dynamic = 'force-dynamic';
@@ -39,14 +40,7 @@ export default async function Home({
   if (!currentSidebarObject) {
     redirect('home');
   }
-  const { noticeSearchParams, icons, title } =
-    sidebarObject.flat(2).find(({ path }) => path === category) ??
-    sidebarObject[0][0]; // default to first menu(home)
-  const notices = await getAllNotices(
-    sortByDeadline
-      ? { ...noticeSearchParams, orderBy: 'deadline' }
-      : noticeSearchParams,
-  ).catch(() => ({ list: [], total: 0 }));
+  const { noticeSearchParams, icons, title } = currentSidebarObject;
 
   return (
     <main className="flex w-full flex-col items-center gap-5">
@@ -84,17 +78,14 @@ export default async function Home({
           key={JSON.stringify(page)}
           fallback={<LoadingCatAnimation lng={lng} />}
         >
-          <div className="flex w-full flex-col md:max-w-[800px]">
-            {...notices.list.map((notice) => (
-              <>
-                <Zabo key={notice.id} {...notice} lng={lng} />
-                <div className="my-[60px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
-              </>
-            ))}
-          </div>
+          <CategorizedNotices
+            sortByDeadline={sortByDeadline}
+            noticeSearchParams={noticeSearchParams}
+            lng={lng}
+            page={page}
+          />
         </Suspense>
       </div>
-      <Pagination page={page} items={notices.total} itemsPerPage={30} />
     </main>
   );
 }
