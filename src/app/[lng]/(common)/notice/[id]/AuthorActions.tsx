@@ -73,7 +73,7 @@ const AuthorActions = ({
           <div
             className={
               'w-full rounded-t-2xl border-2 border-b-[1px] border-solid border-secondaryText ' +
-              'cursor-pointer bg-secondary py-4 pl-6 pr-5 dark:bg-primary/10'
+              'dark:bg-primary/10 cursor-pointer bg-secondary py-4 pl-6 pr-5'
             }
             onClick={() => {
               setIsMenuOpen(false);
