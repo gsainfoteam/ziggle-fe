@@ -30,7 +30,7 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         id: vercel-deploy
-        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
+        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} | sed 's/https:\/\///')" >> $GITHUB_OUTPUT
       - name: alias to staging
         run: vercel alias set ${{ steps.vercel-deploy.outputs.url }} stg.ziggle.gistory.me --token=${{ secrets.VERCEL_TOKEN }}
       - name: Update GitHub Deployment Status (success)
