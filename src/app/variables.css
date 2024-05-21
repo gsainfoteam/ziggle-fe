@@ -1,6 +1,6 @@
 :root {
   --primary: #ff4500;
-  --secondary: #FFF4F0;
+  --secondary: #fff4f0;
   --text: #252525;
   --secondaryText: #959595;
   --white: #ffffff;
@@ -11,9 +11,9 @@
   --greyLight: #f5f5f7;
 
   --dark_dark: #252525;
-  --dark_greyDark: #3B3B3B;
-  --dark_greyBorder: #5D5D5D;
+  --dark_greyDark: #3b3b3b;
+  --dark_greyBorder: #5d5d5d;
   --dark_grey: #919191;
   --dark_white: #ffffff;
-  --dark_secondary: #432B22;
+  --dark_secondary: #432b22;
 }

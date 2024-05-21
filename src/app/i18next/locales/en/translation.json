@@ -5,7 +5,7 @@
     "description": "All Notices in GIST at a glance"
   },
   "common": {
-    "optional": "Optional", 
+    "optional": "Optional",
     "sortByDeadline": "Sort by deadline"
   },
   "navbar": {
@@ -43,7 +43,10 @@
             "name": "Introduce Infoteam",
             "link": "https://introduce.gistory.me"
           },
-          { "name": "Bug Report", "link": "https://cs.gistory.me/?service=Ziggle" }
+          {
+            "name": "Bug Report",
+            "link": "https://cs.gistory.me/?service=Ziggle"
+          }
         ]
       },
       {
@@ -90,7 +93,7 @@
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
     "dueAt": "Due at {{dueAt}}",
-    "timeLeft": "{{timeLeft}} left", 
+    "timeLeft": "{{timeLeft}} left",
     "noContent": "No Content",
     "share": {
       "action": "Share",
@@ -173,13 +176,13 @@
     "reminded": {
       "label": "🔔 Reminded Notices",
       "description": "Here are the notices you've set reminders for."
-    }, 
-    "club" : {
-      "label": "Club Notices", 
+    },
+    "club": {
+      "label": "Club Notices",
       "description": "Club notices"
-    }, 
-    "etc" : {
-      "label":"etc", 
+    },
+    "etc": {
+      "label": "etc",
       "description": "etc"
     }
   },
@@ -187,19 +190,19 @@
     "info": "INFO",
     "myNotice": "List of My Notices",
     "remindNotice": "List of Rminded Notices",
-    "totalList":"view all",
-    "logout":"logout",
-    "quit":"withdrawal",
-    "noArticle":"No article has been saved yet. =ㅅ="
+    "totalList": "view all",
+    "logout": "logout",
+    "quit": "withdrawal",
+    "noArticle": "No article has been saved yet. =ㅅ="
   },
   "searchPage": {
     "searchBar": {
-      "placeholder": "Search", 
+      "placeholder": "Search",
       "collapse": "Cancel"
     },
     "prompt": "Please enter a search term",
     "noResult": "There are no search results.",
-    "title": "♨ Ziggle Announcements", 
+    "title": "♨ Ziggle Announcements",
     "loginRequired": "Login is required"
   },
   "write": {

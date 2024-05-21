@@ -29,7 +29,7 @@ const MypageTable = async ({
   const { t } = await createTranslation(lng);
 
   return (
-    <div className="w-[550px] rounded-lg bg-white shadow-md dark:bg-text xl:w-[600px]">
+    <div className="w-[550px] rounded-lg bg-white shadow-md xl:w-[600px] dark:bg-text">
       <div className="w-full border-collapse border-spacing-0 overflow-hidden rounded-lg border border-white">
         <div className="m-0 flex w-full border-collapse border-spacing-0 flex-row bg-primary">
           <div className="rounded-tl-10 w-3/4">
