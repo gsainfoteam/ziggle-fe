@@ -13,16 +13,18 @@ export interface Tag {
   name: string;
 }
 
-export enum NoticeKind {
-  RECRUIT = 'recruit',
-  EVENT = 'event',
-  NORMAL = 'general',
-  ACADEMIC = 'academic',
-}
+export const Category = {
+  academic: 'ACADEMIC',
+  recruit: 'RECRUIT',
+  event: 'EVENT',
+  club: 'CLUB',
+  etc: 'ETC',
+} as const;
 
 export interface NoticeSearchParams {
   search?: string;
   tags?: string[];
+  category?: (typeof Category)[keyof typeof Category];
   orderBy?: 'deadline' | 'hot' | 'recent';
   my?: 'own' | 'reminders';
 }
@@ -105,17 +107,21 @@ export const createNotice = ({
   images: string[];
   tags: number[];
 }) =>
-  api
-    .post<NoticeDetail>('/notice', {
+  fetch('/api/notice', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       title,
-      body,
       deadline,
-      tags,
+      body,
       images,
-    })
-    .then(({ data }) => data);
+      tags,
+    }),
+  }).then((res) => res.json());
 
-export const attachInternalNotice = ({
+export const attachInternationalNotice = ({
   lang,
   title,
   deadline,
@@ -130,14 +136,18 @@ export const attachInternalNotice = ({
   noticeId: number;
   contentId: number;
 }) =>
-  api
-    .post<NoticeDetail>(`/notice/${noticeId}/${contentId}/foreign`, {
+  fetch(`/api/notice/${noticeId}/${contentId}/foreign`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
       lang,
       title,
       deadline,
       body,
-    })
-    .then(({ data }) => data);
+    }),
+  }).then((res) => res.json());
 
 export const createAdditionalNotice = ({
   noticeId,
@@ -148,9 +158,16 @@ export const createAdditionalNotice = ({
   body: string;
   deadline?: Date;
 }) =>
-  api
-    .post<NoticeDetail>(`notice/${noticeId}/additional`)
-    .then(({ data }) => data);
+  fetch(`/api/notice/${noticeId}/additional`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      body,
+      deadline,
+    }),
+  }).then((res) => res.json());
 
 export const deleteNotice = (id: number) =>
   api.delete(`/notice/${id}`).then(({ data }) => data);

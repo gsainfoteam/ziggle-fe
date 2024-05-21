@@ -1,9 +1,7 @@
-import { getAllNotices } from '@/api/notice/notice-server';
-import Zabo from '@/app/components/organisms/Zabo';
-
-import { PropsWithLng } from '../../../i18next';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
+import { PropsWithLng } from '@/app/i18next';
 
 export default async function Home({
   params: { lng },

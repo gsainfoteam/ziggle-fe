@@ -13,6 +13,9 @@ import sendLog from '@/api/log/send-log';
 import { PropsWithT } from '@/app/i18next';
 import ContentIcon from '@/assets/icons/content.svg';
 import TextIcon from '@/assets/icons/text.svg';
+import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
+
+import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
 
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
@@ -32,10 +35,36 @@ const TitleAndContent = ({
   t,
   language,
 }: PropsWithT<TitleAndContentProps>) => {
+  const handleEditorChange = (event: TinyMCEEditorChangeEvent) => {
+    // Even though the event is "onChange", it is actually "onBlur"
+    const { koreanTitle, englishTitle, koreanBody, englishBody } = JSON.parse(
+      localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY) || '{}',
+    );
+
+    localStorage.setItem(
+      NOTICE_LOCAL_STORAGE_KEY,
+      JSON.stringify(
+        language === 'korean'
+          ? {
+              koreanTitle: title,
+              englishTitle,
+              koreanBody: event.target.getContent(),
+              englishBody: englishBody,
+            }
+          : {
+              koreanTitle,
+              englishTitle: title,
+              koreanBody: koreanBody,
+              englishBody: event.target.getContent(),
+            },
+      ),
+    );
+  };
+
   return (
     <>
       <div className="mb-[10px] mt-10 flex gap-[6px]">
-        <TextIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+        <TextIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
         <p className="font-medium">
           {language === 'korean'
             ? t('write.koreanTitle')
@@ -59,7 +88,7 @@ const TitleAndContent = ({
       />
 
       <div className="mb-3 mt-10 flex items-center gap-2">
-        <ContentIcon className="w-5 dark:fill-white md:w-6" />
+        <ContentIcon className="w-5 md:w-6 dark:fill-white" />
         <p className="font-medium">
           {language === 'korean'
             ? t('write.koreanContent')
@@ -68,7 +97,10 @@ const TitleAndContent = ({
       </div>
 
       <React.Suspense>
-        <DynamicTinyMCEEditor editorRef={editorRef} />
+        <DynamicTinyMCEEditor
+          editorRef={editorRef}
+          onChange={handleEditorChange}
+        />
       </React.Suspense>
     </>
   );

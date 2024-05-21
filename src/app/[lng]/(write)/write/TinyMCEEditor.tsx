@@ -1,14 +1,27 @@
 import { Editor } from '@tinymce/tinymce-react';
-import { ForwardedRef } from 'react';
+import { ChangeEvent, EventHandler, ForwardedRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 
+export interface TinyMCEEditorChangeEvent {
+  readonly type: string;
+  readonly target: any;
+  readonly isDefaultPrevented: () => boolean;
+  readonly preventDefault: () => void;
+  readonly isPropagationStopped: () => boolean;
+  readonly stopPropagation: () => void;
+  readonly isImmediatePropagationStopped: () => boolean;
+  readonly stopImmediatePropagation: () => void;
+}
+
 const TinyMCEEditor = ({
   editorRef,
+  onChange,
 }: {
   editorRef: ForwardedRef<TinyMCEEditorRef>;
+  onChange?: (event: TinyMCEEditorChangeEvent) => void;
 }) => (
   <Editor
     onInit={(_, editor) => {
@@ -16,6 +29,7 @@ const TinyMCEEditor = ({
       if (typeof editorRef === 'function') editorRef(editor);
       else editorRef.current = editor;
     }}
+    onChange={onChange}
     tinymceScriptSrc="/tinymce/tinymce.min.js"
     init={{
       skin: window.matchMedia('(prefers-color-scheme: dark)').matches

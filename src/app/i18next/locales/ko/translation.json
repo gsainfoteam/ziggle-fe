@@ -5,7 +5,8 @@
     "description": "지스트의 모든 공지를 한눈에"
   },
   "common": {
-    "optional": "선택"
+    "optional": "선택",
+    "sortByDeadline": "마감시간 순으로 보기"
   },
   "navbar": {
     "all": "전체 공지",
@@ -44,7 +45,10 @@
         "title": "소개",
         "links": [
           { "name": "인포팀 소개", "link": "https://introduce.gistory.me" },
-          { "name": "버그 제보", "link": "https://cs.gistory.me/?service=Ziggle" }
+          {
+            "name": "버그 제보",
+            "link": "https://cs.gistory.me/?service=Ziggle"
+          }
         ]
       },
       {
@@ -91,7 +95,7 @@
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
     "dueAt": "마감시간 {{dueAt}}",
-    "timeLeft": "{{timeLeft}} 남음", 
+    "timeLeft": "{{timeLeft}} 남음",
     "noContent": "내용 없음",
     "share": {
       "action": "공유하기",
@@ -170,25 +174,33 @@
     "reminded": {
       "label": "🔔 리마인더 설정한 공지",
       "description": "알림을 설정한 공지들을 모아서 보여드려요"
+    },
+    "club": {
+      "label": "동아리 공지",
+      "description": "동아리 공지"
+    },
+    "etc": {
+      "label": "기타",
+      "description": "기타"
     }
   },
   "mypage": {
     "info": "정보",
     "myNotice": "내가 게시한 공지 목록",
     "remindNotice": "리마인드 설정한 게시물 목록",
-    "totalList":"전체보기",
-    "logout":"로그아웃",
-    "quit":"회원탈퇴",
-    "noArticle":"아직 저장된 글이 없습니다. =ㅅ="
+    "totalList": "전체보기",
+    "logout": "로그아웃",
+    "quit": "회원탈퇴",
+    "noArticle": "아직 저장된 글이 없습니다. =ㅅ="
   },
   "searchPage": {
     "searchBar": {
-      "placeholder": "검색", 
+      "placeholder": "검색",
       "collapse": "취소"
     },
     "prompt": "검색어를 입력해주세요",
     "noResult": "검색 결과가 존재하지 않습니다.",
-    "title": "♨ 지글 공지", 
+    "title": "♨ 지글 공지",
     "loginRequired": "로그인이 필요합니다"
   },
   "write": {
@@ -247,7 +259,10 @@
     "orAddFromPC": "...또는 파일 선택",
 
     "submit": "공지 제출하기",
-    "submitDescription": "공지 제출 시 수정이 불가합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
+    "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
+
+    "hasSavedNotice": "저장된 공지가 있습니다. 이어서 작성하시겠습니까?", 
+    "autoSaveDescription": "초안은 3초마다 컴퓨터에 자동 저장됩니다.",
 
     "alerts": {
       "title": "제목을 입력해주세요",

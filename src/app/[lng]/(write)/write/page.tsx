@@ -5,7 +5,8 @@ import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import { useRouter } from 'next/navigation';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
@@ -19,6 +20,7 @@ import ClockIcon from '@/assets/icons/clock.svg';
 import GlobeIcon from '@/assets/icons/globe.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
+import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
 import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
@@ -56,6 +58,42 @@ export default function WritePage({
 
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    const checkLocalStorage = async () => {
+      if (localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY)) {
+        const { koreanTitle, englishTitle, koreanBody, englishBody } =
+          JSON.parse(localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY) ?? '{}');
+
+        if (!koreanTitle && !englishTitle && !koreanBody && !englishBody)
+          return;
+
+        const confirm = await Swal.fire({
+          text: t('write.hasSavedNotice'),
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: t('alertResponse.yes'),
+          cancelButtonText: t('alertResponse.no'),
+        });
+
+        if (!confirm.isConfirmed) return;
+
+        setKoreanTitle(koreanTitle);
+        setEnglishTitle(englishTitle);
+        if (englishTitle) {
+          setHasEnglishContent(true);
+        }
+
+        if (koreanEditorRef.current) {
+          koreanEditorRef.current.setContent(koreanBody);
+        }
+        if (englishEditorRef.current) {
+          englishEditorRef.current.setContent(englishBody);
+        }
+      }
+    };
+    checkLocalStorage();
+  }, [t]);
+
   const handleSubmit = async () => {
     if (isLoading) return;
     const koreanBody = koreanEditorRef.current?.getContent();
@@ -81,8 +119,14 @@ export default function WritePage({
   };
 
   return (
-    <main className="flex flex-col items-center md:py-12">
+    <main className="flex flex-col items-center py-12">
       <div className="content flex max-w-[600px] flex-col">
+        <div className={'flex justify-end'}>
+          <p className={'text-sm text-primary'}>
+            {t('write.autoSaveDescription')}
+          </p>
+        </div>
+
         <div className={'mb-10 mt-10 flex items-center gap-2'}>
           <GlobeIcon
             className={
@@ -92,7 +136,6 @@ export default function WritePage({
                 : 'stroke-grey dark:stroke-dark_grey')
             }
           />
-
           <p
             className={
               'mr-1 text-lg font-medium ' +
@@ -103,7 +146,6 @@ export default function WritePage({
           >
             {t('write.writeEnglishNotice')}
           </p>
-
           <Toggle
             isSwitched={hasEnglishContent}
             onSwitch={(e) => {
@@ -116,9 +158,10 @@ export default function WritePage({
         </div>
 
         <div className="mb-3 flex gap-[6px]">
-          <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+          <TypeIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
           <p className="font-medium">{t('write.noticeType')}</p>
         </div>
+
         <NoticeTypeSelector
           selectedNoticeType={selectedNoticeType}
           setNoticeType={setSelectedNoticeType}
@@ -135,7 +178,12 @@ export default function WritePage({
           </div>
         )}
 
-        {writingTab === 'korean' ? (
+        <div
+          className={
+            'flex flex-col justify-stretch ' +
+            (writingTab !== 'korean' ? 'hidden' : '')
+          }
+        >
           <TitleAndContent
             editorRef={koreanEditorRef}
             title={koreanTitle}
@@ -143,7 +191,14 @@ export default function WritePage({
             language="korean"
             t={t}
           />
-        ) : (
+        </div>
+
+        <div
+          className={
+            'flex flex-col justify-stretch ' +
+            (writingTab === 'korean' ? 'hidden' : '')
+          }
+        >
           <TitleAndContent
             editorRef={englishEditorRef}
             title={englishTitle}
@@ -151,7 +206,7 @@ export default function WritePage({
             language="english"
             t={t}
           />
-        )}
+        </div>
 
         {hasEnglishContent && (
           <DeepLButton
@@ -165,7 +220,7 @@ export default function WritePage({
 
         <div className={'mb-3 mt-10 flex items-center gap-2'}>
           <ClockIcon
-            className={'w-5 stroke-text dark:stroke-dark_white md:w-6'}
+            className={'w-5 stroke-text md:w-6 dark:stroke-dark_white'}
           />
 
           <p className="text-lg font-medium">{t('write.setupDeadline')}</p>
@@ -183,7 +238,8 @@ export default function WritePage({
 
         <div className="mb-2 mt-10 flex gap-2">
           <TagIcon className="w-5 dark:fill-white md:w-6" />
-          <p className="text-lg font-medium">{t('write.setupTags')}</p>
+          <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
+          <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
 
         <p className="font-regular mb-3 text-sm text-secondaryText">
@@ -194,7 +250,8 @@ export default function WritePage({
 
         <div className="mb-1 mt-10 flex items-center gap-2">
           <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
-          <p className="text-lg font-medium">{t('write.attachPhoto')}</p>
+          <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
+          <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
         <p className="font-regular mb-3 text-sm text-secondaryText">
           {t('write.photoDescription')}
@@ -205,13 +262,11 @@ export default function WritePage({
 
       <Button
         variant="contained"
-        className="mb-4 mt-[10rem]"
+        className="mb-4 mt-[10rem] w-60 rounded-[10px] py-2"
         onClick={handleSubmit}
         disabled={isLoading}
       >
-        <p className="mx-3 my-1 text-base font-bold md:text-xl">
-          {t('write.submit')}
-        </p>
+        <p className="mx-3 my-1 text-base font-bold">{t('write.submit')}</p>
       </Button>
       <p className="font-regular max-w-[70%] text-center text-sm text-secondaryText">
         {t('write.submitDescription')}

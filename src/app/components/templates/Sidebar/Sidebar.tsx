@@ -7,19 +7,26 @@ import React from 'react';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-import sidebarObject from './sidebarObject';
+import { sidebarObject } from './sidebarObject';
 
 interface NavButtonProps {
   title: string;
   icon: React.ReactNode;
   boldIcon: React.ReactNode;
   isSelected: boolean;
+  to: string;
 }
 
-const NavButton = ({ title, icon, boldIcon, isSelected }: NavButtonProps) => {
+const NavButton = ({
+  title,
+  icon,
+  boldIcon,
+  isSelected,
+  to,
+}: NavButtonProps) => {
   return (
     <Link
-      href="/"
+      href={to}
       className={
         'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey' +
         ' ' +
@@ -47,17 +54,18 @@ const Sidebar = ({ lng }: PropsWithLng) => {
       {sidebarObject.map((group, i) => (
         <React.Fragment key={i}>
           <ul className="flex flex-col gap-y-2">
-            {group.map((item, i) => (
+            {group.map((menu, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
                   icon={
-                    <item.icons.regular className="stroke-text dark:stroke-dark_white" />
+                    <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
                   }
                   boldIcon={
-                    <item.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-dark_white" />
+                    <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
                   }
-                  title={t(item.title)}
-                  isSelected={path.startsWith(`/${lng}${item.path}`)}
+                  title={t(menu.title)}
+                  isSelected={path.startsWith(`/${lng}/${menu.path}`)}
+                  to={`/${lng}/${menu.path}`}
                 />
               </li>
             ))}
