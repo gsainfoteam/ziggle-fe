@@ -237,7 +237,7 @@ export default function WritePage({
         </div>
 
         <div className="mb-2 mt-10 flex gap-2">
-          <TagIcon className="w-5 dark:fill-white md:w-6" />
+          <TagIcon className="w-5 md:w-6 dark:fill-white" />
           <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
           <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
@@ -249,7 +249,7 @@ export default function WritePage({
         <TagInput tags={tags} setTags={setTags} t={t} />
 
         <div className="mb-1 mt-10 flex items-center gap-2">
-          <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
+          <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
           <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
           <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
         </div>
