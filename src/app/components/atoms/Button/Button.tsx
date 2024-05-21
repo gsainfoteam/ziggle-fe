@@ -1,4 +1,4 @@
-type ButtonVariant = 'outlined' | 'contained';
+type ButtonVariant = 'outlined' | 'contained' | 'disabled';
 
 interface ButtonProps {
   variant?: ButtonVariant;
@@ -16,7 +16,7 @@ const Button = ({
 >) => (
   <button
     className={[
-      'transition',
+      'font-semibold transition',
       ...(variant ? ['rounded px-2.5 py-1 md:px-5 md:py-2.5'] : []),
       ...(variant === 'outlined'
         ? ['border border-primary text-primary hover:bg-secondary']
@@ -24,10 +24,12 @@ const Button = ({
       ...(variant === 'contained'
         ? ['bg-primary text-white hover:brightness-90']
         : []),
+      ...(variant === 'disabled' ? ['bg-greylight text-grey '] : []),
       ...(animated ? ['active:scale-95'] : []),
       ...(className ? [className] : []),
     ].join(' ')}
     {...props}
+    disabled={variant === 'disabled'}
   >
     {children}
   </button>

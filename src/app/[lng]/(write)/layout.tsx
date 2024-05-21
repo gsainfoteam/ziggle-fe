@@ -6,10 +6,10 @@ import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
-import Sidebar from '@/app/components/templates/Sidebar';
+import NavbarWrite from '@/app/components/templates/NavbarWrite';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import InitClient from './InitClient';
+import InitClient from '../(common)/InitClient';
 
 export const viewport: Viewport = {
   themeColor: '#ff4500',
@@ -27,9 +27,11 @@ export default async function Layout({
   return (
     <InitClient lng={lng}>
       <div>
-        <Navbar lng={lng} />
+        <NavbarWrite lng={lng} />
 
-        <div className="flex md:flex-row">{children}</div>
+        <div className="flex md:flex-row">
+          <div className="w-0 grow md:mx-5">{children}</div>
+        </div>
 
         <div className="h-[500px]" />
         <Footer t={t} />

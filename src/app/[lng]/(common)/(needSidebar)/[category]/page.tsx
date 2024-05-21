@@ -14,7 +14,7 @@ import {
   sidebarObject,
 } from '@/app/components/templates/Sidebar/sidebarObject';
 
-import { createTranslation, PropsWithLng } from '../../../i18next';
+import { createTranslation, PropsWithLng } from '../../../../i18next';
 import CategorizedNotices from './CategorizedNotices';
 import { HomePath } from './paths';
 
@@ -48,7 +48,7 @@ export default async function Home({
         {category !== 'home' && (
           <div className="flex w-full flex-row justify-between py-5 font-bold md:max-w-[800px]">
             <div className="flex items-center gap-2 text-4xl text-primary ">
-              <icons.bold className="fill-primary stroke-text dark:stroke-none" />
+              <icons.bold className="fill-primary stroke-white dark:stroke-dark_dark" />
               {t(title) as string}
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (

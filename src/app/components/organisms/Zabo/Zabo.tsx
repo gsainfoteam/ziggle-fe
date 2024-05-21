@@ -42,8 +42,12 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
   const hasImage = imageUrls.length > 0;
 
   return (
-    <Link href={`/notice/${id}`}>
-      <div className={'flex flex-col text-text'}>
+    <Link href={`/${lng}/notice/${id}`}>
+      <div
+        className={
+          'flex flex-col rounded-[10px] py-[10px] text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
+        }
+      >
         <div className={'mx-3 my-[10px] flex items-center'}>
           <DefaultProfile width={36} height={36} />
 
