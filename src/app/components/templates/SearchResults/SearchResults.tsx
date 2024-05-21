@@ -81,7 +81,8 @@ const SearchResults = async ({
   const pagination = (
     <div className="flex justify-center">
       <Pagination
-        pages={Math.ceil(data.total / props.limit)}
+        items={data.total}
+        itemsPerPage={props.limit}
         page={pageAsNumber}
       />
     </div>
@@ -89,14 +90,13 @@ const SearchResults = async ({
 
   return (
     <>
-      {pagination}
       <Suspense
         key={JSON.stringify(page)}
         fallback={<LoadingCatAnimation lng={lng} />}
       >
         <Results lng={lng} page={page} {...props} />
       </Suspense>
-      <div className="h-8" />
+      <div className="h-4" />
       {pagination}
     </>
   );

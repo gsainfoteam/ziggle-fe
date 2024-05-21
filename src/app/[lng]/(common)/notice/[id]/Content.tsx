@@ -15,6 +15,7 @@ const Content = ({ content }: ContentProps) => {
         '[&_h3]:text-xl',
         '[&_a]:text-secondaryText [&_a]:underline',
         '[&_strong]:font-semibold',
+        'break-all',
       ].join(' ')}
       dangerouslySetInnerHTML={{ __html: sanitize(content) }}
     />

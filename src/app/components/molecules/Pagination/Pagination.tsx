@@ -9,16 +9,17 @@ import {
 } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
-import ArrowRightFilledIcon from '@/assets/icons/arrow-right-filled.svg';
+import ArrowRightIcon from '@/assets/icons/arrow-right.svg';
 
 import Button from '../../atoms/Button';
 
 interface PaginationProps {
-  pages: number;
+  items: number;
+  itemsPerPage: number;
   page: number;
 }
 
-const Pagination = ({ pages, page }: PaginationProps) => {
+const Pagination = ({ items, itemsPerPage, page }: PaginationProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -32,6 +33,8 @@ const Pagination = ({ pages, page }: PaginationProps) => {
     [pathname, searchParams],
   );
 
+  const pages = Math.ceil(items / itemsPerPage);
+
   useEffect(() => {
     if (page < 0 || Number.isNaN(page)) replace(generateLink(0));
 
@@ -40,49 +43,40 @@ const Pagination = ({ pages, page }: PaginationProps) => {
 
   if (pages === 0) return null;
 
+  const startItem = page * itemsPerPage + 1;
+  const endItem = Math.min((page + 1) * itemsPerPage, items);
+
   return (
-    <div className="flex items-center gap-2 md:gap-2.5">
-      {page !== 0 ? (
-        <Button animated>
-          <Link href={generateLink(page - 1)}>
-            <ArrowRightFilledIcon className="w-7 rotate-180 fill-primary md:w-8" />
-          </Link>
-        </Button>
-      ) : (
-        <Button disabled>
-          <ArrowRightFilledIcon className="w-7 rotate-180 md:w-8" />
-        </Button>
-      )}
-      <div className="w-2 shrink-0" />
-      {[...Array(Math.min(pages, 9))]
-        .map((_, index) => index + Math.max(0, page - 4))
-        .filter((index) => index >= 0 && index < pages)
-        .map((index) => (
-          <Link key={index} href={generateLink(index)}>
-            <Button
-              className={[
-                'h-7 w-7 shrink-0 rounded-lg font-medium md:h-8 md:w-8 md:text-xl',
-                index === page
-                  ? 'bg-primary text-white'
-                  : 'bg-white text-primary',
-              ].join(' ')}
-            >
-              {index + 1}
-            </Button>
-          </Link>
-        ))}
-      <div className="w-2 shrink-0" />
-      {page + 1 !== pages ? (
-        <Button animated>
-          <Link href={generateLink(page + 1)}>
-            <ArrowRightFilledIcon className="w-7 fill-primary md:w-8" />
-          </Link>
-        </Button>
-      ) : (
-        <Button disabled>
-          <ArrowRightFilledIcon className="w-7 md:w-8" />
-        </Button>
-      )}
+    <div className="flex items-center">
+      <div className="flex gap-1 p-2">
+        <div className="text-xl font-semibold">{`${startItem}~${endItem}`}</div>
+        <div className="text-xl">of</div>
+        <div className="text-xl font-semibold">{items}</div>
+      </div>
+      <div className="flex gap-1">
+        {page !== 0 ? (
+          <Button animated>
+            <Link href={generateLink(page - 1)}>
+              <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-text dark:stroke-dark_white md:w-7" />
+            </Link>
+          </Button>
+        ) : (
+          <Button disabled>
+            <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-grey dark:stroke-dark_grey md:w-7" />
+          </Button>
+        )}
+        {page + 1 !== pages ? (
+          <Button animated>
+            <Link href={generateLink(page + 1)}>
+              <ArrowRightIcon className="w-6 fill-none stroke-text dark:stroke-dark_white md:w-7" />
+            </Link>
+          </Button>
+        ) : (
+          <Button disabled>
+            <ArrowRightIcon className="w-6 fill-none stroke-grey dark:stroke-dark_grey md:w-7" />
+          </Button>
+        )}
+      </div>
     </div>
   );
 };

@@ -19,6 +19,13 @@ const config: Config = {
         greyDark: 'var(--greyDark)',
         greyBorder: 'var(--greyBorder)',
         greyLight: 'var(--greyLight)',
+
+        dark_dark: 'var(--dark_dark)',
+        dark_greyDark: 'var(--dark_greyDark)',
+        dark_greyBorder: 'var(--dark_greyBorder)',
+        dark_grey: 'var(--dark_grey)',
+        dark_white: 'var(--dark_white)',
+        dark_secondary: 'var(--dark_secondary)',
       },
       spacing: {
         pageSide: '20vw',
@@ -32,6 +39,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };
 export default config;

@@ -64,7 +64,7 @@ const TitleAndContent = ({
   return (
     <>
       <div className="mb-[10px] mt-10 flex gap-[6px]">
-        <TextIcon className="w-5 stroke-text dark:fill-white md:w-6" />
+        <TextIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
         <p className="font-medium">
           {language === 'korean'
             ? t('write.koreanTitle')
@@ -84,7 +84,7 @@ const TitleAndContent = ({
             title: e.target.value,
           });
         }}
-        className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary px-4 py-[10px]"
+        className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary bg-transparent px-4 py-[10px]"
       />
 
       <div className="mb-3 mt-10 flex items-center gap-2">

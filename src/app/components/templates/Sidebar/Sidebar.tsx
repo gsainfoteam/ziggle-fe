@@ -7,7 +7,7 @@ import React from 'react';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-import sidebarObject from './sidebarObject';
+import { sidebarObject } from './sidebarObject';
 
 interface NavButtonProps {
   title: string;
@@ -28,12 +28,12 @@ const NavButton = ({
     <Link
       href={to}
       className={
-        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none' +
+        'flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey' +
         ' ' +
-        (isSelected ? 'bg-greyLight' : '')
+        (isSelected ? 'bg-greyLight dark:bg-dark_greyDark' : '')
       }
     >
-      {isSelected ? boldIcon : icon}
+      <span className="w-6">{isSelected ? boldIcon : icon}</span>
       <span
         className={
           'ml-4' + ' ' + (isSelected ? 'font-semibold' : 'font-normal')
@@ -52,24 +52,28 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   return (
     <>
       {sidebarObject.map((group, i) => (
-        <>
-          <ul key={i} className="flex flex-col gap-y-2">
-            {group.map((item, i) => (
+        <React.Fragment key={i}>
+          <ul className="flex flex-col gap-y-2">
+            {group.map((menu, i) => (
               <li key={i} className="flex flex-row">
                 <NavButton
-                  to={`/${lng}${item.path}`}
-                  icon={<item.icons.regular />}
-                  boldIcon={<item.icons.bold />}
-                  title={t(item.title)}
-                  isSelected={path.startsWith(`/${lng}${item.path}`)}
+                  icon={
+                    <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
+                  }
+                  boldIcon={
+                    <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
+                  }
+                  title={t(menu.title)}
+                  isSelected={path.startsWith(`/${lng}/${menu.path}`)}
+                  to={menu.path}
                 />
               </li>
             ))}
           </ul>
           {!(sidebarObject.length - 1 === i) && (
-            <div className="my-[15px] h-[1px] bg-greyLight" />
+            <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
           )}
-        </>
+        </React.Fragment>
       ))}
     </>
   );

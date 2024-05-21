@@ -10,4 +10,4 @@ export default {
 export const Default: StoryFn<typeof Pagination> = (args) => {
   return <Pagination {...args} />;
 };
-Default.args = { pages: 30, page: 0 };
+Default.args = { items: 35, itemsPerPage: 10, page: 0 };

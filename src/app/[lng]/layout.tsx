@@ -1,6 +1,7 @@
 import '@/app/initDayjs';
 import '@/app/globals.css';
 
+import dayjs from 'dayjs';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
@@ -67,7 +68,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
+  dayjs.locale(lng);
 
   return (
     <html lang={lng} dir={dir(lng)}>

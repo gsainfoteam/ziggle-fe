@@ -1,25 +1,34 @@
 import dayjs from 'dayjs';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { PropsWithT, T } from '@/app/i18next';
 
 interface DDayProps {
-  deadline: dayjs.Dayjs;
+  deadline: dayjs.Dayjs | string;
   className?: string;
 }
 
-const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => (
-  <div
-    className={[
-      'grid w-fit place-items-center ' +
-        'rounded border border-white bg-primary/90 px-2 py-0.5',
-      ...(className ? [className] : []),
-    ].join(' ')}
-  >
-    <div className="text-sm font-bold text-white md:text-lg">
-      {ddayFormatted(dayjs(deadline).tz(), t)}
+const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => {
+  const isClosed = dayjs(deadline).isBefore();
+
+  return (
+    <div
+      className={
+        `h-fit rounded-md ${
+          isClosed ? 'bg-greyDark' : 'bg-primary'
+        } px-[10px] py-[3px] text-[14px] text-white ` + className
+      }
+    >
+      {isClosed ? (
+        t('ddayPlus')
+      ) : (
+        <Trans t={t} i18nKey={'zabo.timeLeft'}>
+          {{ timeLeft: dayjs(deadline).fromNow(true) }}
+        </Trans>
+      )}
     </div>
-  </div>
-);
+  );
+};
 
 const ddayFormatted = (deadline: dayjs.Dayjs, t: T) => {
   const daysLeft = deadline.diff(dayjs(), 'day', true);

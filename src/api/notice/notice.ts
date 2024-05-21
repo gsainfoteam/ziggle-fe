@@ -13,16 +13,18 @@ export interface Tag {
   name: string;
 }
 
-export enum NoticeKind {
-  RECRUIT = 'recruit',
-  EVENT = 'event',
-  NORMAL = 'general',
-  ACADEMIC = 'academic',
-}
+export const Category = {
+  academic: 'ACADEMIC',
+  recruit: 'RECRUIT',
+  event: 'EVENT',
+  club: 'CLUB',
+  etc: 'ETC',
+} as const;
 
 export interface NoticeSearchParams {
   search?: string;
   tags?: string[];
+  category?: (typeof Category)[keyof typeof Category];
   orderBy?: 'deadline' | 'hot' | 'recent';
   my?: 'own' | 'reminders';
 }
@@ -59,6 +61,14 @@ export interface Content {
   content: string;
   lang: string;
   createdAt: Date;
+}
+
+export enum EmojiString {
+  FIRE = '🔥',
+  CRYING = '😭',
+  ANGUISHED = '😧',
+  THINKING = '🤔',
+  SURPRISED = '😮',
 }
 
 export interface NoticeDetail extends Notice {

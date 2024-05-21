@@ -7,7 +7,6 @@ import { ToastContainer } from 'react-toastify';
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
 import Sidebar from '@/app/components/templates/Sidebar';
-import SidebarMobile from '@/app/components/templates/Sidebar/SidebarMobile';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import InitClient from './InitClient';
@@ -37,6 +36,8 @@ export default async function Layout({
 
           <div className="w-0 grow md:mx-5">{children}</div>
         </div>
+
+        <div className="h-[500px]" />
         <Footer t={t} />
       </div>
       <ToastContainer className="w-64" />
