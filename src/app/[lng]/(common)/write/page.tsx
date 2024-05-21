@@ -20,6 +20,7 @@ import ClockIcon from '@/assets/icons/clock.svg';
 import GlobeIcon from '@/assets/icons/globe.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
+import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
 import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
@@ -28,8 +29,6 @@ import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
 import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';
-
-const LOCAL_STORAGE_KEY = 'notice';
 
 export default function WritePage({
   params: { lng },
@@ -61,9 +60,9 @@ export default function WritePage({
 
   useEffect(() => {
     const checkLocalStorage = async () => {
-      if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+      if (localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY)) {
         const { koreanTitle, englishTitle, koreanBody, englishBody } =
-          JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? '{}');
+          JSON.parse(localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY) ?? '{}');
 
         if (!koreanTitle && !englishTitle && !koreanBody && !englishBody)
           return;
@@ -94,24 +93,6 @@ export default function WritePage({
     };
     checkLocalStorage();
   }, [t]);
-
-  // save content to local storage every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!koreanTitle && !englishTitle) return;
-
-      localStorage.setItem(
-        LOCAL_STORAGE_KEY,
-        JSON.stringify({
-          koreanTitle,
-          englishTitle,
-          koreanBody: koreanEditorRef.current?.getContent(),
-          englishBody: englishEditorRef.current?.getContent(),
-        }),
-      );
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [englishTitle, koreanTitle]);
 
   const handleSubmit = async () => {
     if (isLoading) return;
