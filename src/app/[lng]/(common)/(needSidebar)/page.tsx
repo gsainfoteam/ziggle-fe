@@ -1,6 +1,5 @@
-export const dynamic = 'force-dynamic';
-import { getAllNotices } from '@/api/notice/notice-server';
-import Zabo from '@/app/components/organisms/Zabo';
+import { redirect } from 'next/navigation';
+
 import { PropsWithLng } from '@/app/i18next';
 
 export default async function Home({
@@ -8,21 +7,5 @@ export default async function Home({
 }: {
   params: PropsWithLng;
 }) {
-  const recentNotices = await getAllNotices({ orderBy: 'recent' });
-
-  return (
-    <main className="flex w-full flex-col gap-16 md:py-12">
-      <div className="flex w-full justify-center">
-        <div className="flex w-full flex-col md:max-w-[800px]">
-          {...recentNotices.list.map((notice) => (
-            <>
-              <Zabo key={notice.id} {...notice} lng={lng} />
-
-              <div className="my-[30px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
-            </>
-          ))}
-        </div>
-      </div>
-    </main>
-  );
+  redirect(`/${lng}/home`);
 }
