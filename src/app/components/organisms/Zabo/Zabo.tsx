@@ -25,7 +25,6 @@ export type ZaboProps = Notice & {
 
 const Zabo = async (props: ZaboProps & PropsWithLng) => {
   const {
-    id,
     createdAt,
     author,
     deadline,
