@@ -39,7 +39,12 @@ const DateTimePicker = ({ dateTime, setDateTime }: DateTimePickerProps) => {
 
   return (
     <div className="flex">
-      <DatePicker value={date} onChange={setDate} />
+      <DatePicker
+        value={date}
+        onChange={setDate}
+        locale={'en'}
+        format="y-MM-dd"
+      />
       <TimePicker time={time} setTime={setTime} />
     </div>
   );
