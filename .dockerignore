@@ -4,7 +4,11 @@ npm-debug.log
 README.md
 .next
 .git
-.pnp.cjs
-.pnp.loader.mjs
-.yarn/install-state.gz
-.yarn/unplugged
+node_modules
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
