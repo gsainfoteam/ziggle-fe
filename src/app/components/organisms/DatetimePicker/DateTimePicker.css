@@ -4,19 +4,21 @@
 
 .react-date-picker__inputGroup {
   background-color: #FF4500;
-  border-radius: 5px;
+  border-radius: 6px 0 0 6px;
   border: none;
   display: flex;
   justify-content: center;
-  padding: 0.25rem 0.5rem;
+  align-items: center;
+  padding: 0.25rem 0 0.25rem 0.5rem;
   font-size: 1rem;
   font-weight: 600;
+  line-height: normal;
 }
 
 .react-date-picker__inputGroup__input:focus {
     background-color: #ffffffb0;
     color: #FF4500;
-    border-radius: 5px;
+    border-radius: 6px;
     outline: none;
 }
 
@@ -28,13 +30,14 @@
 
 .react-date-picker__calendar .react-calendar {
    border: 1px solid #FF4500;
-   border-radius: 5px;
+   border-radius: 6px;
    padding: 0.5rem 1rem;
    color: #252525;
+   margin-top: 15px;
 }
 
 .react-calendar button {
-    border-radius: 5px;
+    border-radius: 6px;
     &:hover:focus{
         background-color: #F5F5F7;
     }  
@@ -46,7 +49,7 @@
 }
 
 .react-calendar__navigation button {
-  border-radius: 5px;
+  border-radius: 6px;
   &:hover {
     background-color: #F5F5F7;
   }
