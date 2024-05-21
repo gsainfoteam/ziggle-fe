@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import useSWR from 'swr';
 
 import { auth } from '@/api/auth/auth';
@@ -59,7 +59,9 @@ const Navbar = ({ lng }: PropsWithLng) => {
           </Link>
         </Analytics>
         <div className="flex h-full items-center md:w-full">
-          <SearchBar lng={lng} />
+          <Suspense>
+            <SearchBar lng={lng} />
+          </Suspense>
           <Button
             onClick={handleSidebarOpen}
             className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
