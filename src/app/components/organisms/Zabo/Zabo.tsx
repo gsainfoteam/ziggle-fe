@@ -70,7 +70,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           {title}
         </p>
 
-        {!hasImage && <ZaboTags notice={props} />}
+        {!hasImage && <ZaboTags notice={props} lng={lng} />}
 
         {hasImage && (
           <div className={'flex justify-center'}>
@@ -99,7 +99,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           </div>
         )}
 
-        {hasImage && <ZaboTags notice={props} />}
+        {hasImage && <ZaboTags notice={props} lng={lng} />}
 
         <div
           className={'mx-4 mt-[10px] line-clamp-3 text-lg dark:text-dark_white'}

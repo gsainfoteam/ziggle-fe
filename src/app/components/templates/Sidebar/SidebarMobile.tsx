@@ -36,7 +36,7 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   return ReactDOM.createPortal(
     <div className="fixed w-screen">

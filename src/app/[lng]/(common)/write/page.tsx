@@ -116,7 +116,7 @@ export default function WritePage({
         </div>
 
         <div className="mb-3 flex gap-[6px]">
-          <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+          <TypeIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
           <p className="font-medium">{t('write.noticeType')}</p>
         </div>
         <NoticeTypeSelector
@@ -165,7 +165,7 @@ export default function WritePage({
 
         <div className={'mb-3 mt-10 flex items-center gap-2'}>
           <ClockIcon
-            className={'w-5 stroke-text dark:stroke-dark_white md:w-6'}
+            className={'w-5 stroke-text md:w-6 dark:stroke-dark_white'}
           />
 
           <p className="text-lg font-medium">{t('write.setupDeadline')}</p>
@@ -182,7 +182,7 @@ export default function WritePage({
         </div>
 
         <div className="mb-2 mt-10 flex gap-2">
-          <TagIcon className="w-5 dark:fill-white md:w-6" />
+          <TagIcon className="w-5 md:w-6 dark:fill-white" />
           <p className="text-lg font-medium">{t('write.setupTags')}</p>
         </div>
 
@@ -193,7 +193,7 @@ export default function WritePage({
         <TagInput tags={tags} setTags={setTags} t={t} />
 
         <div className="mb-1 mt-10 flex items-center gap-2">
-          <AddPhotoIcon className="w-5 dark:fill-white md:w-6" />
+          <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
           <p className="text-lg font-medium">{t('write.attachPhoto')}</p>
         </div>
         <p className="font-regular mb-3 text-sm text-secondaryText">
