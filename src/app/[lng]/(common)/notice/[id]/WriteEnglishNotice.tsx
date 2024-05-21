@@ -9,7 +9,7 @@ import { Editor, Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import { attachInternalNotice } from '@/api/notice/notice';
+import { attachInternationalNotice } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
 import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { PropsWithLng } from '@/app/i18next';
@@ -53,7 +53,7 @@ const WriteEnglishNotice = ({
       return;
     }
 
-    await attachInternalNotice({
+    await attachInternationalNotice({
       contentId: 1,
       noticeId,
       title,

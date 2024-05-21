@@ -17,7 +17,6 @@ interface TagInputProps {
 const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
   const [keyword, setKeyword] = useState<string>('');
   const [searchedTags, setSearchedTags] = useState<Tag[]>([]);
-
   const [tempTagId, setTempTagId] = useState<number>(0);
 
   useEffect(() => {
@@ -33,26 +32,6 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
 
     fetchTags();
   }, [keyword]);
-
-  //   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //     if (event.target.value.includes(' ')) {
-  //       const newTag = event.target.value.trim();
-  //       if (tags.find((tag) => tag.name === newTag)) {
-  //         setKeyword('');
-  //         return;
-  //       }
-
-  //       const existingTag = searchedTags?.find((tag) => tag.name === newTag);
-  //       if (existingTag) {
-  //         setTags([...tags, existingTag]);
-  //         setKeyword('');
-  //         return;
-  //       }
-  //       return;
-  //     }
-
-  //     setKeyword(event.target.value);
-  //   };
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = event.target.value;
@@ -86,7 +65,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
 
   return (
     <div className="flex flex-col">
-      <div className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary p-1">
+      <div className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary px-2 py-1">
         {tags.map((tag) => (
           <TagChip
             key={tag.name}
@@ -101,7 +80,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('write.writeTags') : ''}
-          className="flex-grow bg-transparent p-1 outline-none md:p-2 md:text-base"
+          className="flex-grow bg-transparent p-2 outline-none md:text-base"
         />
       </div>
 
@@ -135,7 +114,7 @@ const TagChip = ({
     <div
       className={
         'flex w-max items-center gap-2  bg-primary ' +
-        'md:rounded-2x h-6 rounded-2xl pl-1.5 pr-4 md:h-8 md:pl-2.5 md:pr-1'
+        'md:rounded-2x h-6 rounded-2xl pl-1.5 pr-1 md:h-8 md:pl-2.5 md:pr-1'
       }
     >
       <div className="text-sm font-medium text-white md:text-base">
@@ -144,7 +123,7 @@ const TagChip = ({
 
       <div onClick={onClick} className="cursor-pointer">
         <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
-          <CloseIcon className="h-1.5 w-1.5 fill-primary md:h-2 md:w-2" />
+          <CloseIcon className="h-3 w-3 fill-primary" />
         </div>
       </div>
     </div>

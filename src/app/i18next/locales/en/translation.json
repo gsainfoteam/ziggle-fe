@@ -261,7 +261,10 @@
     "orAddFromPC": "...or browse files",
 
     "submit": "Submit Notice",
-    "submitDescription": "You can't edit your notice after submission.\n Please double-check your content before submitting.",
+    "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
+
+    "hasSavedNotice": "You have saved notices. Would you like to continue writing?",
+    "autoSaveDescription": "Drafts are saved to your computer every 3s",
 
     "alerts": {
       "title": "Please enter a title",

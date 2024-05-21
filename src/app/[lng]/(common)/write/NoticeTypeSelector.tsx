@@ -49,7 +49,7 @@ const NoticeTypeSelector = ({
                     return <GeneralIcon />;
                 }
               })()}
-              <p className="md:text-base">
+              <p className="text-base">
                 {t(`write.noticeTypes.${noticeType}.label`)}
               </p>
             </Chip>
