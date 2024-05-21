@@ -65,7 +65,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
                   }
                   title={t(menu.title)}
                   isSelected={path.startsWith(`/${lng}/${menu.path}`)}
-                  to={menu.path}
+                  to={`/${lng}/${menu.path}`}
                 />
               </li>
             ))}

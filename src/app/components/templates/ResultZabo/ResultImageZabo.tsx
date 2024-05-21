@@ -29,12 +29,12 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
 
   return (
     <Link className="min-w-fit" href={`/${lng}/notice/` + id}>
-      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text dark:bg-dark_greyDark md:rounded-lg md:p-5">
+      <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text md:rounded-lg md:p-5 dark:bg-dark_greyDark">
         <div className="flex items-center justify-between gap-4 md:justify-start">
           <div className="flex items-center gap-2">
             <DefaultProfile className="h-10 w-10 md:h-9 md:w-9" />
             <div className="flex flex-col gap-0 font-medium md:flex-row md:items-center md:gap-1">
-              <div className="text-base dark:text-dark_white md:text-lg">
+              <div className="text-base md:text-lg dark:text-dark_white">
                 {searchQuery ? (
                   <HighlightedText query={searchQuery}>
                     {author.name}
@@ -43,10 +43,10 @@ const ResultImageZabo = async (props: ResultZaboProps) => {
                   author.name
                 )}
               </div>
-              <div className="hidden text-base text-greyDark dark:text-dark_grey md:flex">
+              <div className="hidden text-base text-greyDark md:flex dark:text-dark_grey">
                 ·
               </div>
-              <div className="text-xs font-normal text-greyDark dark:text-dark_grey md:text-base md:font-medium">
+              <div className="text-xs font-normal text-greyDark md:text-base md:font-medium dark:text-dark_grey">
                 {dayjs(createdAt).fromNow()}
               </div>
             </div>

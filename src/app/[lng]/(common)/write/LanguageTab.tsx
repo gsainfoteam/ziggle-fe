@@ -44,7 +44,7 @@ const LanguageTab = ({
           {t('write.englishNotice')}
         </p>
       </button>
-      <div className={'border-grey border-b-[3px]'}></div>
+      <div className={'border-b-[3px] border-grey'}></div>
     </div>
   );
 };

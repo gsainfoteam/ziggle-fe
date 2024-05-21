@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { NoticeSearchParams } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
 import Pagination from '@/app/components/molecules/Pagination';
@@ -31,10 +33,10 @@ const CategorizedNotices = async ({
         <>
           <div className="flex w-full flex-col md:max-w-[800px]">
             {...notices.list.map((notice) => (
-              <>
+              <React.Fragment key={notice.id}>
                 <Zabo key={notice.id} {...notice} lng={lng} />
                 <div className="my-[60px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
-              </>
+              </React.Fragment>
             ))}
           </div>
           <Pagination page={page} items={notices.total} itemsPerPage={30} />

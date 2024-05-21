@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import useSWR from 'swr';
 
 import { auth } from '@/api/auth/auth';
@@ -44,7 +44,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
   };
 
   return (
-    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text dark:bg-text md:px-4 md:py-2">
+    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2 dark:bg-text">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
@@ -59,12 +59,14 @@ const Navbar = ({ lng }: PropsWithLng) => {
           </Link>
         </Analytics>
         <div className="flex h-full items-center md:w-full">
-          <SearchBar lng={lng} />
+          <Suspense>
+            <SearchBar lng={lng} />
+          </Suspense>
           <Button
             onClick={handleSidebarOpen}
             className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
           >
-            <MenuIcon className="h-6 stroke-text dark:stroke-dark_white md:hidden" />
+            <MenuIcon className="h-6 stroke-text md:hidden dark:stroke-dark_white" />
           </Button>
         </div>
       </div>

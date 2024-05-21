@@ -57,23 +57,23 @@ const Pagination = ({ items, itemsPerPage, page }: PaginationProps) => {
         {page !== 0 ? (
           <Button animated>
             <Link href={generateLink(page - 1)}>
-              <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-text dark:stroke-dark_white md:w-7" />
+              <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-text md:w-7 dark:stroke-dark_white" />
             </Link>
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-grey dark:stroke-dark_grey md:w-7" />
+            <ArrowRightIcon className="w-6 rotate-180 fill-none stroke-grey md:w-7 dark:stroke-dark_grey" />
           </Button>
         )}
         {page + 1 !== pages ? (
           <Button animated>
             <Link href={generateLink(page + 1)}>
-              <ArrowRightIcon className="w-6 fill-none stroke-text dark:stroke-dark_white md:w-7" />
+              <ArrowRightIcon className="w-6 fill-none stroke-text md:w-7 dark:stroke-dark_white" />
             </Link>
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="w-6 fill-none stroke-grey dark:stroke-dark_grey md:w-7" />
+            <ArrowRightIcon className="w-6 fill-none stroke-grey md:w-7 dark:stroke-dark_grey" />
           </Button>
         )}
       </div>

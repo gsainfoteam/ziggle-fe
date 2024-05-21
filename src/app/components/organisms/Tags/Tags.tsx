@@ -1,6 +1,5 @@
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import Chip from '../../molecules/Chip';
 import Tag from '../../molecules/Tag';
 
 const defaultTags = ['event', 'general', 'recruit', 'academic'] as const;
@@ -24,6 +23,7 @@ const Tags = async ({
       {tags.map((name, i) => (
         <Tag
           key={name}
+          lng={lng}
           name={`${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}
         />
       ))}

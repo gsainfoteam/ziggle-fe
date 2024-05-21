@@ -158,7 +158,7 @@ export default function WritePage({
         </div>
 
         <div className="mb-3 flex gap-[6px]">
-          <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+          <TypeIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
           <p className="font-medium">{t('write.noticeType')}</p>
         </div>
 
@@ -220,7 +220,7 @@ export default function WritePage({
 
         <div className={'mb-3 mt-10 flex items-center gap-2'}>
           <ClockIcon
-            className={'w-5 stroke-text dark:stroke-dark_white md:w-6'}
+            className={'w-5 stroke-text md:w-6 dark:stroke-dark_white'}
           />
 
           <p className="text-lg font-medium">{t('write.setupDeadline')}</p>

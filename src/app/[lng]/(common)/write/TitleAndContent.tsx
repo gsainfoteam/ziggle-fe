@@ -64,7 +64,7 @@ const TitleAndContent = ({
   return (
     <>
       <div className="mb-[10px] mt-10 flex gap-[6px]">
-        <TextIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+        <TextIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
         <p className="font-medium">
           {language === 'korean'
             ? t('write.koreanTitle')
@@ -88,7 +88,7 @@ const TitleAndContent = ({
       />
 
       <div className="mb-3 mt-10 flex items-center gap-2">
-        <ContentIcon className="w-5 dark:fill-white md:w-6" />
+        <ContentIcon className="w-5 md:w-6 dark:fill-white" />
         <p className="font-medium">
           {language === 'korean'
             ? t('write.koreanContent')
