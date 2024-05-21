@@ -13,6 +13,11 @@
     "query": "Search Notice",
     "login": "Login"
   },
+  "navbarWrite": {
+    "edit": "Edit",
+    "goBack": "Go back",
+    "submit": "Submit"
+  },
   "sidebar": {
     "home": "Home",
     "urgent": "Near Deadline",

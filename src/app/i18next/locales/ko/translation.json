@@ -13,6 +13,11 @@
     "query": "공지 검색",
     "login": "로그인"
   },
+  "navbarWrite": {
+    "edit": "수정",
+    "goBack": "돌아가기",
+    "submit": "제출"
+  },
   "sidebar": {
     "home": "홈",
     "urgent": "마감임박",

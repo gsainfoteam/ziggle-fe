@@ -1,4 +1,4 @@
-import { Tag } from '@/app/[lng]/(common)/(common)/write/TagInput';
+import { Tag } from '@/app/[lng]/(write)/write/TagInput';
 
 import api from '../index';
 
