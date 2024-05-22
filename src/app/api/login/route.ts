@@ -49,7 +49,8 @@ export const GET = async (request: NextRequest) => {
       expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30 * 6),
     });
     const url = request.nextUrl.clone();
-    url.host = request.headers.get('host')?.split(':')[0] ?? url.host;
+    url.host = request.headers.get('host')!.split(':')[0];
+    url.port = '';
     url.pathname = '/';
     url.search = '';
     return NextResponse.redirect(url);
