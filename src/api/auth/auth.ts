@@ -24,11 +24,10 @@ export const getToken = (code: string) =>
     });
 
 interface UserResponse {
-  user_uuid: string;
-  user_email_id: string;
-  user_name: string;
-  user_phone_number: string;
-  student_id: string;
+  uuid: string;
+  email: string;
+  name: string;
+  studentNumber: string;
 }
 
 export const auth = async () => {
@@ -39,14 +38,8 @@ export const auth = async () => {
     const { data: user } = await api.get<UserResponse>('/user/info', {
       headers: { Authorization: `Bearer ${accessToken.value}` },
     });
-    return {
-      id: user.user_uuid,
-      email: user.user_email_id,
-      name: user.user_name,
-      phone: user.user_phone_number,
-      studentId: user.student_id,
-    };
-  } catch {
+    return user;
+  } catch (e) {
     return null;
   }
 };

@@ -122,8 +122,8 @@
     },
 
     "authorActions": {
-      "title": "작성자 설정",
-      "removeNotice": "이 공지 삭제하기",
+      "edit": "수정 / 영어공지 작성",
+      "remove": "삭제",
       "removeSure": "정말로 이 공지를 삭제하시겠습니까?",
       "writeEnglishNotice": "영어 공지 작성하기",
       "alreadyWroteEnglishNotice": "영어 공지를 작성하셨습니다!",
@@ -203,6 +203,7 @@
     "englishTitle": "영어 제목",
     "writeTitle": "제목을 입력하세요",
     "setupDeadline": "마감시간 설정",
+    "changeDeadline": "마감시간 변경",
     "writeEnglishNotice": "영어 공지 작성",
     "koreanNotice": "한글 공지",
     "englishNotice": "영어 공지",
@@ -256,8 +257,13 @@
     "submit": "공지 제출하기",
     "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
 
-    "hasSavedNotice": "저장된 공지가 있습니다. 이어서 작성하시겠습니까?", 
-    "autoSaveDescription": "초안은 3초마다 컴퓨터에 자동 저장됩니다.",
+    "hasSavedNotice": "저장된 공지가 있습니다. 이어서 작성하시겠습니까?",
+    "autoSaveDescription": "초안은 컴퓨터에 자동 저장됩니다.",
+
+    "editDescription": "원본에 작성된 공지는 15분 내에만 수정하실 수 있습니다. 다만, 영어 공지는 언제나 추가로 작성 가능합니다.",
+    "editDisabled": "원문 수정이 비활성화되었군요! 👇 추가 공지를 이용해보는건 어떠신가요?",
+    "editableTimer": "수정 불가능까지 남은 시간",
+    "uneditable": "수정 가능한 기한이 지났습니다.",
 
     "alerts": {
       "title": "제목을 입력해주세요",
@@ -272,6 +278,7 @@
       "englishBodyLengthLessThan": "영어 본문을 {{bodyMaxLength}}자 이내로 입력해주세요",
       "bothBodyLengthLessThan": "한국어와 영어 본문 모두 {{bodyMaxLength}}자 이내로 입력해주세요",
       "numberOfCharacter": "({{length}}/{{maxLength}} 자)",
+      "needKoreanAdditionalNotice": "한국어 추가 공지를 입력해주세요",
       "submittingNotice": "공지를 작성 중입니다",
       "submitSuccess": "공지가 성공적으로 작성되었습니다",
       "submitFail": "공지 작성에 실패했습니다",

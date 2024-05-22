@@ -4,7 +4,7 @@ import api from '..';
 import { NoticePaginationParams, Notices, NoticeSearchParams } from './notice';
 
 export const getAllNotices = async (
-  params: NoticePaginationParams & NoticeSearchParams = {},
+  params: NoticePaginationParams & NoticeSearchParams,
 ) => {
   const cookieStore = cookies();
   return api

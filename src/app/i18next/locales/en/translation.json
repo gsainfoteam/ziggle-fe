@@ -60,7 +60,10 @@
             "name": "Privacy Policy",
             "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
           },
-          { "name": "FAQ", "link": "mailto:ziggle@gistory.me" }
+          {
+            "name": "FAQ",
+            "link": "mailto:ziggle@gistory.me"
+          }
         ]
       },
       {
@@ -74,7 +77,10 @@
             "name": "GIST Homepage",
             "link": "https://www.gist.ac.kr/kr/main.html"
           },
-          { "name": "Gijol", "link": "https://gijol.im" }
+          {
+            "name": "Gijol",
+            "link": "https://gijol.im"
+          }
         ]
       }
     ]
@@ -125,8 +131,8 @@
     },
 
     "authorActions": {
-      "title": "Author settings",
-      "removeNotice": "Remove this notice",
+      "edit": "Edit / Add English Version",
+      "remove": "Remove",
       "removeSure": "Are you sure you want to delete this notice?",
       "writeEnglishNotice": "Write English notice",
       "alreadyWroteEnglishNotice": "You've already written an English notice!",
@@ -210,6 +216,7 @@
     "englishTitle": "English Title",
     "writeTitle": "Enter a title here",
     "setupDeadline": "Set a deadline",
+    "changeDeadline": "Change deadline",
     "writeEnglishNotice": "Write English Notice too",
     "koreanNotice": "Korean",
     "englishNotice": "English",
@@ -264,7 +271,13 @@
     "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
 
     "hasSavedNotice": "You have saved notices. Would you like to continue writing?",
-    "autoSaveDescription": "Drafts are saved to your computer every 3s",
+    "autoSaveDescription": "Drafts are saved to your computer",
+
+    "editDescription": "You only have 15 minutes to edit the original notice. However, you can always write an English version.",
+    "editDisabled": "Editing original notice is disabled! 👇 Why not try an additional announcement?",
+    "editableTimer": "Uneditable after",
+    "uneditable": "The editable deadline has passed.",
+    "contentUneditable": "It's past due and can't be edited.",
 
     "alerts": {
       "title": "Please enter a title",
@@ -279,6 +292,7 @@
       "englishBodyLengthLessThan": "Please enter English body content within {{bodyMaxLength}} characters",
       "bothBodyLengthLessThan": "Please enter both Korean and English content within {{bodyMaxLength}} characters",
       "numberOfCharacter": "({{length}}/{{maxLength}} characters)",
+      "needKoreanAdditionalNotice": "Please write a Korean additional notice",
       "submittingNotice": "Creating a notice...",
       "submitSuccess": "The notice was submitted successfully",
       "submitFail": "Failed to submit notice",

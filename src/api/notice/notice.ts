@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import useSWRInfinite from 'swr/infinite';
 
 import api from '..';
+import { Locale } from '@/app/i18next/settings';
 
 export interface NoticePaginationParams {
   offset?: number;
@@ -22,6 +23,7 @@ export const Category = {
 } as const;
 
 export interface NoticeSearchParams {
+  lang?: Locale;
   search?: string;
   tags?: string[];
   category?: (typeof Category)[keyof typeof Category];
@@ -121,6 +123,28 @@ export const createNotice = ({
     }),
   }).then((res) => res.json());
 
+export const updateNotice = ({
+  noticeId,
+  content,
+  deadline,
+  lng,
+}: {
+  noticeId: number;
+  content: string;
+  deadline?: Date;
+  lng: 'ko' | 'en';
+}) =>
+  fetch(`/notice/${noticeId}?lang=${lng}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      deadline,
+      content,
+    }),
+  }).then((res) => res.json());
+
 export const attachInternationalNotice = ({
   lang,
   title,
@@ -164,13 +188,16 @@ export const createAdditionalNotice = ({
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
+      title: 'title',
       body,
       deadline,
     }),
   }).then((res) => res.json());
 
 export const deleteNotice = (id: number) =>
-  api.delete(`/notice/${id}`).then(({ data }) => data);
+  fetch(`/api/notice/${id}`, {
+    method: 'DELETE',
+  });
 
 export const addReaction = (noticeId: number, emoji: string) =>
   api
