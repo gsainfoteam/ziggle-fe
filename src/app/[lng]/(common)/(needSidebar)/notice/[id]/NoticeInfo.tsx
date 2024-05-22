@@ -1,14 +1,14 @@
 'use server';
 
-import dayjs from 'dayjs';
-import { Trans } from 'react-i18next/TransWithoutContext';
+import dayjs from "dayjs";
+import { Trans } from "react-i18next/TransWithoutContext";
 
-import { NoticeDetail } from '@/api/notice/notice';
-import Tags from '@/app/components/organisms/Tags';
-import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.svg';
-import AuthorActions from '@/app/[lng]/(common)/notice/[id]/AuthorActions';
-import { auth } from '@/api/auth/auth';
+import { NoticeDetail } from "@/api/notice/notice";
+import Tags from "@/app/components/organisms/Tags";
+import { createTranslation, PropsWithLng, PropsWithT } from "@/app/i18next";
+import DefaultProfile from "@/assets/default-profile.svg";
+import { auth } from "@/api/auth/auth";
+import AuthorActions from "@/app/[lng]/(common)/(needSidebar)/notice/[id]/AuthorActions";
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 

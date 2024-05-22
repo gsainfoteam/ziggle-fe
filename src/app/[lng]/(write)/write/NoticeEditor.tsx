@@ -36,9 +36,9 @@ import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';
 import { calculateTimeRemaining } from '@/utils/utils';
 import dayjs from 'dayjs';
-import AddAdditionalNotice from '@/app/[lng]/(common)/notice/[id]/AddAdditionalNotice';
-import handleNoticeEdit from '@/app/[lng]/(common)/write/handle-notice-edit';
 import { WarningSwal } from '@/utils/swals';
+import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
+import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
 
 const NoticeEditor = ({
   params: { lng },

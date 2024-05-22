@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       deployments: write
+    environment: preview
     outputs:
       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       ECR_REPOSITORY: ziggle-backend
@@ -41,6 +42,10 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: setup environment
+        run: |
+          echo "${{ vars.ENV }}" >> .env.local
 
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v2

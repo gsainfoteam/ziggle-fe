@@ -8,8 +8,8 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import NoticeEditor from './NoticeEditor';
 import { NoticeDetail } from '@/api/notice/notice';
 import * as process from 'node:process';
-import EditableTimer from '@/app/[lng]/(common)/write/EditableTimer';
 import dayjs from 'dayjs';
+import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 
 const WritePage = async ({
   params: { lng },
