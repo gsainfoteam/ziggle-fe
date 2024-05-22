@@ -185,13 +185,17 @@
     }
   },
   "mypage": {
-    "info": "정보",
+    "info": "계정 정보",
+    "name": "이름",
+    "email": "이메일",
+    "id": "학번",
     "myNotice": "내가 게시한 공지 목록",
     "remindNotice": "리마인드 설정한 게시물 목록",
     "totalList": "전체보기",
     "logout": "로그아웃",
     "quit": "회원탈퇴",
-    "noArticle": "아직 저장된 글이 없습니다. =ㅅ="
+    "switchLanguage": "언어 설정을 영어로 변경",
+    "feedback": "피드백 및 버그 제보"
   },
   "searchPage": {
     "searchBar": {

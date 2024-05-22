@@ -19,12 +19,23 @@ const CategorizedNotices = async ({
   lng,
   page,
 }: PropsWithLng<CategorizedNoticesProps>) => {
+  const ITEMS_PER_PAGE = 10;
+
   const { t } = await createTranslation(lng);
 
   const notices = await getAllNotices(
     sortByDeadline
-      ? { ...noticeSearchParams, orderBy: 'deadline' }
-      : noticeSearchParams,
+      ? {
+          ...noticeSearchParams,
+          orderBy: 'deadline',
+          offset: page * ITEMS_PER_PAGE,
+          limit: ITEMS_PER_PAGE,
+        }
+      : {
+          ...noticeSearchParams,
+          offset: page * ITEMS_PER_PAGE,
+          limit: ITEMS_PER_PAGE,
+        },
   ).catch(() => ({ list: [], total: 0 }));
 
   return (
@@ -39,13 +50,17 @@ const CategorizedNotices = async ({
               </React.Fragment>
             ))}
           </div>
-          <Pagination page={page} items={notices.total} itemsPerPage={30} />
+          <Pagination
+            page={page}
+            items={notices.total}
+            itemsPerPage={ITEMS_PER_PAGE}
+          />
         </>
       ) : (
         <div className="flex w-full justify-center">
           <div className="align-center flex flex-col justify-center">
             <div className="h-[100px]" />
-            <div style={{ height: '10px', margin: '0 auto' }}></div>
+            <div className="my-auto h-[10px]" />
 
             <SearchNoResult />
 
