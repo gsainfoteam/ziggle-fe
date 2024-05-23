@@ -1,27 +1,26 @@
 'use client';
 
-import Link from 'next/link';
-import useSWR from 'swr';
+import Link from "next/link";
+import useSWR from "swr";
 
-import { auth } from '@/api/auth/auth';
-import LogEvents from '@/api/log/log-events';
-import Analytics from '@/app/components/atoms/Analytics';
-import { PropsWithLng } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
-import AccountIcon from '@/assets/icons/account.svg';
-import ZiggleLogo from '@/assets/logos/ziggle.svg';
-import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
-import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg';
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
+import { auth } from "@/api/auth/auth";
+import LogEvents from "@/api/log/log-events";
+import Analytics from "@/app/components/atoms/Analytics";
+import { PropsWithLng } from "@/app/i18next";
+import { useTranslation } from "@/app/i18next/client";
+import AccountIcon from "@/assets/icons/account.svg";
+import ZiggleLogo from "@/assets/logos/ziggle.svg";
+import ZiggleCompactLogo from "@/assets/logos/ziggle-compact.svg";
+import ZiggleCompactLogoDark from "@/assets/logos/ziggle-compact-dark.svg";
+import ZiggleLogoDark from "@/assets/logos/ziggle-dark.svg";
 
-import Button from '../../atoms/Button';
+import Button from "../../atoms/Button";
 
 export interface User {
-  id: string;
+  uuid: string;
   email: string;
   name: string;
-  phone: string;
-  studentId: string;
+  studentNumber: string;
 }
 
 const Navbar = ({ lng }: PropsWithLng) => {

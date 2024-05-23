@@ -1,18 +1,13 @@
 import { Metadata, ResolvingMetadata } from 'next';
-
-import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/get-notice';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';
-import AddAdditionalNotice from './AddAdditionalNotice';
 import AddtionalNotices from './AdditionalNotices';
-import AuthorActions from './AuthorActions';
 import Content from './Content';
 import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
-import WriteEnglishNotice from './WriteEnglishNotice';
 
 export const generateMetadata = async (
   {
@@ -21,7 +16,7 @@ export const generateMetadata = async (
   }: { params: { id: string }; searchParams: { writeEn: string; lng: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const notice = await getNotice(Number.parseInt(id));
+  const notice = await getNotice(Number.parseInt(id), searchParams.lng);
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
@@ -46,21 +41,13 @@ const DetailedNoticePage = async ({
   params: { id, lng },
 }: DetailedNoticePageProps) => {
   const { t } = await createTranslation(lng, 'translation');
-  const notice = await getNotice(Number.parseInt(id));
+  const notice = await getNotice(Number.parseInt(id), lng);
 
   const title = notice.title;
 
-  const user = await auth();
-
-  const isAdditionalNoticeShow = true;
-  const isWriteEnglishNoticeShow = true;
-
-  const supportEnglish = notice.langs.includes('en');
-
   return (
     <div className="flex justify-center">
-      {/* <ZaboShowcase srcs={notice.imageUrls} alt={title} lng={lng} /> */}
-      <div className="content mt-8 md:mx-10 md:mt-12 md:w-[900px]">
+      <div className="content mt-8 md:mt-12 md:w-[900px] md:min-w-[600px]">
         <div className="flex gap-5">
           {/* DESKTOP VIEW IMAGESTACK */}
           <div className="hidden md:block">
@@ -100,49 +87,6 @@ const DetailedNoticePage = async ({
             />
           </div>
         </div>
-
-        {/* temporarily disabled authorActions. should enable it later */}
-        {/* {user && user.id === notice.author.uuid && (
-          <>
-            <div className="h-5" />
-            <AuthorActions
-              isEnglishNoticeExist={supportEnglish}
-              isAdditionalNoticeLimit={false}
-              noticeId={Number(id)}
-              lng={lng}
-            />
-          </>
-        )} */}
-
-        <div className="h-4 md:h-5" />
-
-        {user && user.id === notice.author.uuid && isAdditionalNoticeShow && (
-          <>
-            <div className="h-10" id="addNotice" />
-            <AddAdditionalNotice
-              lng={lng}
-              noticeId={Number(id)}
-              originallyHasDeadline={notice.deadline}
-              supportedLanguage={notice.langs}
-            />
-          </>
-        )}
-
-        {user &&
-          user.id === notice.author.uuid &&
-          isWriteEnglishNoticeShow &&
-          !supportEnglish && (
-            <>
-              <div className="h-10" />
-              <WriteEnglishNotice
-                noticeId={Number(id)}
-                lng={lng}
-                deadline={notice.currentDeadline}
-              />
-            </>
-          )}
-
-        <div className="h-20" />
       </div>
     </div>
   );

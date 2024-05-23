@@ -13,10 +13,11 @@ export default async function MyPage({
 }) {
   const { t } = await createTranslation(lng);
   const userData = await auth();
-  const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
-    .list;
+  const remindedNotice: Notice[] = (
+    await getAllNotices({ my: 'reminders', lang: lng })
+  ).list;
   const ownNotice: Notice[] = (
-    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent' })
+    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
   ).list;
   return (
     <>
@@ -25,9 +26,8 @@ export default async function MyPage({
           <MypageProfile
             lng={lng}
             name={userData?.name ?? ''}
-            id={userData?.studentId ?? ''}
+            id={userData?.studentNumber ?? ''}
             email={userData?.email ?? ''}
-            phone={userData?.phone ?? ''}
           />
         </div>
         <div className="my-5 flex flex-col items-center justify-center">

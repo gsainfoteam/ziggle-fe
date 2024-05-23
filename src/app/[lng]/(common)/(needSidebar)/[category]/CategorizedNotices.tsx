@@ -23,8 +23,8 @@ const CategorizedNotices = async ({
 
   const notices = await getAllNotices(
     sortByDeadline
-      ? { ...noticeSearchParams, orderBy: 'deadline' }
-      : noticeSearchParams,
+      ? { ...noticeSearchParams, orderBy: 'deadline', lang: lng }
+      : { ...noticeSearchParams, lang: lng },
   ).catch(() => ({ list: [], total: 0 }));
 
   return (

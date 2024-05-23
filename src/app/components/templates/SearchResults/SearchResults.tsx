@@ -19,6 +19,7 @@ const Results = async ({
   const { t } = await createTranslation(lng);
   const data = await getAllNotices({
     ...props,
+    lang: lng,
     offset: pageAsNumber * props.limit,
   }).catch(() => ({ list: [], total: 0 }));
 
@@ -75,6 +76,7 @@ const SearchResults = async ({
 
   const data = await getAllNotices({
     ...props,
+    lang: lng,
     limit: 0,
   }).catch(() => ({ list: [], total: 0 }));
 

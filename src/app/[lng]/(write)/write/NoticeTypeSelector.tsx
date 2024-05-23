@@ -12,12 +12,14 @@ const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 interface NoticeTypeSelectorProps {
   selectedNoticeType: NoticeType;
   setNoticeType: (noticeType: NoticeType) => void;
+  disabled?: boolean;
 }
 
 const NoticeTypeSelector = ({
   selectedNoticeType,
   setNoticeType,
   t,
+  disabled,
 }: PropsWithT<NoticeTypeSelectorProps>) => {
   return (
     <>
@@ -27,6 +29,7 @@ const NoticeTypeSelector = ({
             className="cursor-pointer"
             key={noticeType}
             onClick={() => {
+              if (disabled) return;
               setNoticeType(noticeType);
               sendLog(LogEvents.noticeWritingPageSetType, {
                 type: noticeType,
@@ -37,6 +40,7 @@ const NoticeTypeSelector = ({
               variant={
                 selectedNoticeType === noticeType ? 'selected' : 'deselected'
               }
+              disabled={disabled}
               className={'gap-[5px]'}
             >
               {(() => {

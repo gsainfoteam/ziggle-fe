@@ -7,10 +7,13 @@ import { NoticeDetail } from '@/api/notice/notice';
 import Tags from '@/app/components/organisms/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.svg';
+import { auth } from '@/api/auth/auth';
+import AuthorActions from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AuthorActions';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
 const NoticeInfo = async ({
+  id,
   currentDeadline: deadline,
   title,
   content,
@@ -21,6 +24,7 @@ const NoticeInfo = async ({
   lng,
 }: PropsWithLng<NoticeInfoProps>) => {
   const { t } = await createTranslation(lng);
+  const user = await auth();
 
   return (
     <div className="flex flex-col gap-[18px]">
@@ -32,6 +36,10 @@ const NoticeInfo = async ({
         views={views}
         t={t}
       />
+
+      {user && user.uuid === author.uuid && (
+        <AuthorActions noticeId={id} lng={lng} />
+      )}
 
       <Title title={title} />
 

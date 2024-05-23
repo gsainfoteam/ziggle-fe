@@ -5,7 +5,6 @@ import AccountIcon from '@/assets/icons/account.svg';
 interface MypageProfileProps {
   name?: string;
   id?: string;
-  phone?: string;
   email?: string;
   logout?: string;
   quit?: string;
@@ -32,7 +31,6 @@ const UnderLinedText = ({ text, action }: UnderLinedTextProps) => {
 export default async function MypageProfile({
   name,
   id,
-  phone,
   email,
   lng,
 }: PropsWithLng<MypageProfileProps>) {

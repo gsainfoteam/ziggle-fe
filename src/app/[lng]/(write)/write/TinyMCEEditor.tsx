@@ -1,5 +1,5 @@
 import { Editor } from '@tinymce/tinymce-react';
-import { ChangeEvent, EventHandler, ForwardedRef } from 'react';
+import { ForwardedRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
 import LogEvents from '@/api/log/log-events';
@@ -19,11 +19,14 @@ export interface TinyMCEEditorChangeEvent {
 const TinyMCEEditor = ({
   editorRef,
   onChange,
+  disabled,
 }: {
   editorRef: ForwardedRef<TinyMCEEditorRef>;
   onChange?: (event: TinyMCEEditorChangeEvent) => void;
+  disabled?: boolean;
 }) => (
   <Editor
+    disabled={disabled}
     onInit={(_, editor) => {
       if (!editorRef) return;
       if (typeof editorRef === 'function') editorRef(editor);

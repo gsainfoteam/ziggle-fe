@@ -21,11 +21,10 @@ import SidebarMobile from '../Sidebar/SidebarMobile';
 import SearchBar from './SearchBar';
 
 export interface User {
-  id: string;
+  uuid: string;
   email: string;
   name: string;
-  phone: string;
-  studentId: string;
+  studentNumber: string;
 }
 
 const Navbar = ({ lng }: PropsWithLng) => {

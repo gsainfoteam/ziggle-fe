@@ -26,6 +26,7 @@ interface TitleAndContentProps {
   title: string;
   setTitle: (title: string) => void;
   language: 'korean' | 'english';
+  disabled?: boolean;
 }
 
 const TitleAndContent = ({
@@ -34,6 +35,7 @@ const TitleAndContent = ({
   setTitle,
   t,
   language,
+  disabled,
 }: PropsWithT<TitleAndContentProps>) => {
   const handleEditorChange = (event: TinyMCEEditorChangeEvent) => {
     // Even though the event is "onChange", it is actually "onBlur"
@@ -73,6 +75,7 @@ const TitleAndContent = ({
       </div>
 
       <input
+        disabled={disabled}
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
@@ -84,7 +87,10 @@ const TitleAndContent = ({
             title: e.target.value,
           });
         }}
-        className="flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid border-primary bg-transparent px-4 py-[10px]"
+        className={
+          'flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
+          (disabled ? 'border-grey text-greyDark' : 'border-primary text-text')
+        }
       />
 
       <div className="mb-3 mt-10 flex items-center gap-2">
@@ -98,6 +104,7 @@ const TitleAndContent = ({
 
       <React.Suspense>
         <DynamicTinyMCEEditor
+          disabled={disabled}
           editorRef={editorRef}
           onChange={handleEditorChange}
         />
