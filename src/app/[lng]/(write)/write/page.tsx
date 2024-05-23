@@ -8,7 +8,6 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import NoticeEditor from './NoticeEditor';
 import { NoticeDetail } from '@/api/notice/notice';
 import * as process from 'node:process';
-import dayjs from 'dayjs';
 import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 
 const WritePage = async ({
@@ -38,7 +37,7 @@ const WritePage = async ({
     <main className="flex flex-col items-center py-12">
       <div className="content flex max-w-[600px] flex-col">
         {notice?.createdAt && (
-          <EditableTimer createdAt={dayjs(notice.createdAt)} lng={lng} />
+          <EditableTimer createdAt={notice.createdAt} lng={lng} />
         )}
         <p
           className={

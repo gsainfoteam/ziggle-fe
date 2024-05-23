@@ -4,10 +4,10 @@ import { Dayjs } from 'dayjs';
 import { PropsWithLng } from '@/app/i18next';
 import { useEffect, useState } from 'react';
 import { useTranslation } from '@/app/i18next/client';
-import { calculateTimeRemaining } from '@/utils/utils';
+import { calculateRemainingTime } from '@/utils/utils';
 
 interface EditableTimerProps {
-  createdAt: Dayjs;
+  createdAt: Dayjs | string;
 }
 
 const EditableTimer = ({
@@ -17,12 +17,12 @@ const EditableTimer = ({
   const { t } = useTranslation(lng);
 
   const [timeRemaining, setTimeRemaining] = useState(
-    calculateTimeRemaining(createdAt),
+    calculateRemainingTime(createdAt),
   );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining(createdAt));
+      setTimeRemaining(calculateRemainingTime(createdAt));
     }, 1000);
 
     return () => clearInterval(interval);

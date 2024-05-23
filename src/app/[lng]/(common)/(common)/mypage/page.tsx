@@ -26,7 +26,7 @@ export default async function MyPage({
           <MypageProfile
             lng={lng}
             name={userData?.name ?? ''}
-            id={userData?.uuid ?? ''}
+            id={userData?.studentNumber ?? ''}
             email={userData?.email ?? ''}
           />
         </div>

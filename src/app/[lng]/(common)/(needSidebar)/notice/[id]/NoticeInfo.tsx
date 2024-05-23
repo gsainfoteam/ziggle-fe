@@ -1,14 +1,14 @@
 'use server';
 
-import dayjs from "dayjs";
-import { Trans } from "react-i18next/TransWithoutContext";
+import dayjs from 'dayjs';
+import { Trans } from 'react-i18next/TransWithoutContext';
 
-import { NoticeDetail } from "@/api/notice/notice";
-import Tags from "@/app/components/organisms/Tags";
-import { createTranslation, PropsWithLng, PropsWithT } from "@/app/i18next";
-import DefaultProfile from "@/assets/default-profile.svg";
-import { auth } from "@/api/auth/auth";
-import AuthorActions from "@/app/[lng]/(common)/(needSidebar)/notice/[id]/AuthorActions";
+import { NoticeDetail } from '@/api/notice/notice';
+import Tags from '@/app/components/organisms/Tags';
+import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
+import DefaultProfile from '@/assets/default-profile.svg';
+import { auth } from '@/api/auth/auth';
+import AuthorActions from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AuthorActions';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 
@@ -38,7 +38,7 @@ const NoticeInfo = async ({
       />
 
       {user && user.uuid === author.uuid && (
-        <AuthorActions noticeId={Number(id)} lng={lng} />
+        <AuthorActions noticeId={id} lng={lng} />
       )}
 
       <Title title={title} />

@@ -12,8 +12,6 @@ export async function POST(
 
   const body = await request.json();
 
-  console.log(body);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}notice/${noticeId}/additional`,
     {

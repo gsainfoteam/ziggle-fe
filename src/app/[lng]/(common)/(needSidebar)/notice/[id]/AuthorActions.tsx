@@ -35,7 +35,6 @@ const AuthorActions = ({
       if (result.isConfirmed) {
         deleteNotice(noticeId)
           .then((e) => {
-            console.log(e);
             router.push(`/home`);
             Swal.fire({
               text: t('write.alerts.deleteSuccess'),
