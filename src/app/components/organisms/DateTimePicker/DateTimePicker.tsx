@@ -28,7 +28,7 @@ const DateTimePicker = ({ dateTime, setDateTime }: DateTimePickerProps) => {
     });
   };
 
-  const time = dateTime.format('hh:mm');
+  const time = dateTime.format('HH:mm');
   const setTime = (value: string) => {
     setDateTime((currentDateTime) => {
       const hour = parseInt(value.substring(0, 2));
