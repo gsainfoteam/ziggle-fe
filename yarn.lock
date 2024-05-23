@@ -14427,17 +14427,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinymce@npm:^6.0.0 || ^5.5.1":
+"tinymce@npm:^6.0.0 || ^5.5.1, tinymce@npm:^6.8.3":
   version: 6.8.3
   resolution: "tinymce@npm:6.8.3"
   checksum: 10c0/92c1e70e9ed00efae66853f38e18e6720c27535a7617181971ed846a6e659da53ef2bf6e0871ea5e9f529eaed73fe8f2cbcf24f43ead336ef3d5100adb8e0b6a
-  languageName: node
-  linkType: hard
-
-"tinymce@npm:^6.7.3":
-  version: 6.7.3
-  resolution: "tinymce@npm:6.7.3"
-  checksum: 10c0/80690a5ba844c2b5704062cc9bb4a4aa4bfe15b7d33ca34679119bc9534cf2905d0ce8aed8674306210bbb1abfb36f0b66ae5b2cbe22f9fe98002b6207c08c9b
   languageName: node
   linkType: hard
 
@@ -15626,7 +15619,7 @@ __metadata:
     swr: "npm:^2.2.5"
     tailwind-scrollbar: "npm:^3.0.5"
     tailwindcss: "npm:^3.4.1"
-    tinymce: "npm:^6.7.3"
+    tinymce: "npm:^6.8.3"
     typescript: "npm:^5"
     webpack: "npm:^5.88.2"
   languageName: unknown
