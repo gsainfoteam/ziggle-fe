@@ -1,18 +1,18 @@
-"use client"
+'use client';
 
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const LoginPage = async () => {
   const router = useRouter();
-  const { status } = useSession();  
+  const { status } = useSession();
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      void signIn("idp");
-    } else if (status === "authenticated") {
-      void router.push("/");
+    if (status === 'unauthenticated') {
+      void signIn('idp');
+    } else if (status === 'authenticated') {
+      void router.push('/');
     }
   }, [status]);
 
