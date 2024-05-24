@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { auth } from '@/api/auth/auth';
+
 export async function DELETE(
   request: NextRequest,
   {
@@ -10,8 +12,8 @@ export async function DELETE(
     };
   },
 ) {
-  const accessToken = request.cookies.get('access_token');
-  if (!accessToken) {
+  const session = await auth();
+  if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -20,7 +22,7 @@ export async function DELETE(
     {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${accessToken.value}`,
+        Authorization: `Bearer ${session.accessToken}`,
         'Content-Type': 'application/json',
       },
     },

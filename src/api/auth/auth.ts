@@ -1,8 +1,8 @@
-import { AuthOptions, getServerSession } from 'next-auth';
+import { getServerSession, NextAuthOptions } from 'next-auth';
 import { OAuthConfig } from 'next-auth/providers/oauth';
 
 export const auth = async () => {
-  return getServerSession(authOptions);
+  return getServerSession(config);
 };
 
 import api from '..';
@@ -14,7 +14,7 @@ export interface User {
   studentNumber: string;
 }
 
-export const authOptions: AuthOptions = {
+export const config = {
   callbacks: {
     session: async ({ session, token }) => {
       if (token && session.user) {
@@ -76,4 +76,4 @@ export const authOptions: AuthOptions = {
       phoneNumber: string;
     }>,
   ],
-};
+} satisfies NextAuthOptions;
