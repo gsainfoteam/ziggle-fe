@@ -46,7 +46,7 @@ jobs:
       - name: setup environment
         run: |
           echo "${{ vars.ENV }}" >> .env.local
-          echo "${{ secrets.NEXTAUTH_SECRET }}" >> .env.local
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.local
 
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v2
