@@ -15,12 +15,16 @@ export const authOptions: AuthOptions = {
     session: async ({ session, token }) => {
       if (token && session.user) {
         session.user.studentNumber = token.studentNumber;
+        session.accessToken = token.accessToken;
       }
       return session;
     },
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, account }) => {
       if (user) {
         token.studentNumber = user.studentNumber;
+      }
+      if (account?.access_token) {
+        token.accessToken = account.access_token;
       }
       return token;
     },
