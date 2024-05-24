@@ -1,4 +1,5 @@
-import { AuthOptions, DefaultSession } from 'next-auth';
+import { AuthOptions } from 'next-auth';
+import { OAuthConfig } from 'next-auth/providers/oauth';
 
 import api from '..';
 
@@ -9,13 +10,30 @@ export interface User {
   studentNumber: string;
 }
 
-declare module 'next-auth' {
-  interface Session {
-    user: User & DefaultSession['user'];
-  }
-}
-
 export const authOptions: AuthOptions = {
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (token && session.user) {
+        session.user.studentNumber = token.studentNumber;
+      }
+      return session;
+    },
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.studentNumber = user.studentNumber;
+      }
+      return token;
+    },
+    signIn: async ({ account }) => {
+      await api.get<User>('/user/info', {
+        headers: { Authorization: `Bearer ${account?.access_token}` },
+      });
+      return true;
+    },
+  },
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
     {
       id: 'idp',
@@ -33,15 +51,21 @@ export const authOptions: AuthOptions = {
       idToken: true,
       checks: ['state'],
       client: { id_token_signed_response_alg: 'ES256' },
-      profile: async (profile, token) => {
-        const { data: user } = await api.get<User>('/user/info', {
-          headers: { Authorization: `Bearer ${token.access_token}` },
-        });
+      profile: async (profile) => {
         return {
-          id: user.uuid,
-          ...user,
+          id: profile.uuid,
+          studentNumber: profile.studentId,
+          email: profile.email,
+          name: profile.name,
+          uuid: profile.uuid,
         };
       },
-    },
+    } as OAuthConfig<{
+      uuid: string;
+      email: string;
+      name: string;
+      studentId: string;
+      phoneNumber: string;
+    }>,
   ],
 };
