@@ -8,7 +8,7 @@ declare module '*.svg' {
 declare module 'next-auth' {
   interface User extends ZiggleUser {}
   interface Session {
-    user: User;
+    user: ZiggleUser;
   }
 }
 
