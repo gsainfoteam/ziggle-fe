@@ -1,5 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
 import * as process from 'node:process';
+
+import { NextRequest, NextResponse } from 'next/server';
+
+import { auth } from '@/api/auth/auth';
 import { NoticeDetail } from '@/api/notice/notice';
 
 export async function GET(
@@ -38,8 +41,8 @@ export async function GET(
 }
 
 export async function POST(request: NextRequest) {
-  const accessToken = request.cookies.get('access_token');
-  if (!accessToken) {
+  const session = await auth();
+  if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -50,7 +53,7 @@ export async function POST(request: NextRequest) {
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${accessToken.value}`,
+        Authorization: `Bearer ${session.accessToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),

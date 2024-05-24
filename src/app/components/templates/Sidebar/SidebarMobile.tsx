@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+import { User } from '@/api/auth/auth';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import DefaultProfile from '@/assets/default-profile.svg';
 
-import { User } from '../Navbar/Navbar';
 import Sidebar from '.';
 
 interface SidebarProps {

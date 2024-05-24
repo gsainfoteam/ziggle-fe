@@ -1,10 +1,11 @@
 import { Metadata, ResolvingMetadata } from 'next';
+
 import { getNotice } from '@/api/notice/get-notice';
 import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';
-import AddtionalNotices from './AdditionalNotices';
+import AdditionalNotices from './AdditionalNotices';
 import Content from './Content';
 import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
@@ -79,7 +80,7 @@ const DetailedNoticePage = async ({
 
             <Actions notice={notice} lng={lng} />
 
-            <AddtionalNotices
+            <AdditionalNotices
               additionalContents={notice.additionalContents}
               notice={notice}
               t={t}
