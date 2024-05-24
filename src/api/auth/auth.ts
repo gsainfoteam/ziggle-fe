@@ -24,10 +24,6 @@ export const getToken = (code: string) =>
       return { accessToken: data.access_token, refreshToken };
     });
 
-export const withdraw = async () => {
-  redirect(process.env.NEXT_PUBLIC_IDP_BASE_URL!);
-};
-
 export const auth = async () => {
   return getServerSession(authOptions);
 };

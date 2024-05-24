@@ -30,12 +30,7 @@ export default async function MyPage({
     <>
       <div className="h-1500 xl:h-1000 mt-10 flex w-full flex-col items-center justify-center gap-20 xl:flex-row">
         <div className="relative m-10 flex flex-col">
-          <MypageProfile
-            lng={lng}
-            name={user.name}
-            id={user.studentNumber}
-            email={user.email}
-          />
+          <MypageProfile lng={lng} />
         </div>
         <div className="my-5 flex flex-col items-center justify-center">
           <div className="xl:p-50 mb-10 p-0">

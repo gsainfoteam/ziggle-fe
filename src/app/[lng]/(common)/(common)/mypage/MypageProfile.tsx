@@ -1,42 +1,18 @@
-import { signOut } from 'next-auth/react';
-
-import { withdraw } from '@/api/auth/auth';
+import { auth } from '@/api/auth/auth';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 
-interface MypageProfileProps {
-  name?: string;
-  id?: string;
-  email?: string;
-  logout?: string;
-  quit?: string;
-}
+import { Logout, Withdraw } from './ClientButtons';
 
-interface UnderLinedTextProps {
-  text: string;
-  action?: () => void;
-}
-
-const UnderLinedText = ({ text, action }: UnderLinedTextProps) => {
-  return (
-    <form>
-      <button
-        className="text-regular w-50 m-5 border-b border-gray-500 text-secondaryText"
-        formAction={action}
-      >
-        {text}
-      </button>
-    </form>
-  );
-};
-
-export default async function MypageProfile({
-  name,
-  id,
-  email,
-  lng,
-}: PropsWithLng<MypageProfileProps>) {
+export default async function MypageProfile({ lng }: PropsWithLng) {
   const { t } = await createTranslation(lng);
+  const session = await auth();
+  if (!session) return null;
+
+  const {
+    user: { name, studentNumber, email },
+  } = session;
+
   return (
     <div>
       <div className="flex flex-col items-center">
@@ -49,21 +25,15 @@ export default async function MypageProfile({
         </div>
         <div className="flex flex-col items-center">
           <div className="mb-8 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
-            {id}
+            {studentNumber}
           </div>
           <div className="mb-0 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
             {email}
           </div>
         </div>
         <div className="flex flex-row items-center">
-          <UnderLinedText
-            text={t('mypage.logout')}
-            action={signOut}
-          ></UnderLinedText>
-          <UnderLinedText
-            text={t('mypage.quit')}
-            action={withdraw}
-          ></UnderLinedText>
+          <Logout lng={lng} />
+          <Withdraw lng={lng} />
         </div>
       </div>
     </div>
