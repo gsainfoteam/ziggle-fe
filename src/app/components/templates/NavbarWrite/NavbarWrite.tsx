@@ -1,35 +1,26 @@
 'use client';
 
-import Link from "next/link";
-import useSWR from "swr";
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
-import { auth } from "@/api/auth/auth";
-import LogEvents from "@/api/log/log-events";
-import Analytics from "@/app/components/atoms/Analytics";
-import { PropsWithLng } from "@/app/i18next";
-import { useTranslation } from "@/app/i18next/client";
-import AccountIcon from "@/assets/icons/account.svg";
-import ZiggleLogo from "@/assets/logos/ziggle.svg";
-import ZiggleCompactLogo from "@/assets/logos/ziggle-compact.svg";
-import ZiggleCompactLogoDark from "@/assets/logos/ziggle-compact-dark.svg";
-import ZiggleLogoDark from "@/assets/logos/ziggle-dark.svg";
+import LogEvents from '@/api/log/log-events';
+import Analytics from '@/app/components/atoms/Analytics';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+import AccountIcon from '@/assets/icons/account.svg';
+import ZiggleLogo from '@/assets/logos/ziggle.svg';
+import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg';
+import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg';
+import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
-import Button from "../../atoms/Button";
-
-export interface User {
-  uuid: string;
-  email: string;
-  name: string;
-  studentNumber: string;
-}
+import Button from '../../atoms/Button';
 
 const Navbar = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
-
-  const { data: user } = useSWR<User | null>('user', auth);
+  const { data: user } = useSession();
 
   return (
-    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text dark:bg-text md:px-4 md:py-2">
+    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2 dark:bg-text">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>
@@ -58,7 +49,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
         >
           <AccountIcon className="flex h-6" />
           <div className="whitespace-nowrap align-middle font-medium text-primary">
-            {user ? user.name : t('navbar.login')}
+            {user?.user.name ?? t('navbar.login')}
           </div>
         </Link>
       </Analytics>

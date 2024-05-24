@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation';
+
 import { auth } from '@/api/auth/auth';
 import { Notice } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
@@ -19,15 +21,20 @@ export default async function MyPage({
   const ownNotice: Notice[] = (
     await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
   ).list;
+
+  if (!userData) return redirect(`/${lng}/login`);
+
+  const { user } = userData;
+
   return (
     <>
       <div className="h-1500 xl:h-1000 mt-10 flex w-full flex-col items-center justify-center gap-20 xl:flex-row">
         <div className="relative m-10 flex flex-col">
           <MypageProfile
             lng={lng}
-            name={userData?.name ?? ''}
-            id={userData?.studentNumber ?? ''}
-            email={userData?.email ?? ''}
+            name={user.name}
+            id={user.studentNumber}
+            email={user.email}
           />
         </div>
         <div className="my-5 flex flex-col items-center justify-center">
