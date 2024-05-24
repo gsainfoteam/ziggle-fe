@@ -73,7 +73,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
         event={user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin}
       >
         <Link
-          href={user ? `/mypage` : `/login`}
+          href={user ? `/${lng}/mypage` : `/${lng}/login`}
           className="hidden items-center justify-center gap-2 md:flex"
         >
           <AccountIcon className="flex h-6" />
