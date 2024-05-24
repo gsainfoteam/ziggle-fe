@@ -1,4 +1,6 @@
-import { logout, withdraw } from '@/api/auth/auth';
+import { signOut } from 'next-auth/react';
+
+import { withdraw } from '@/api/auth/auth';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AccountIcon from '@/assets/icons/account.svg';
 
@@ -56,7 +58,7 @@ export default async function MypageProfile({
         <div className="flex flex-row items-center">
           <UnderLinedText
             text={t('mypage.logout')}
-            action={logout}
+            action={signOut}
           ></UnderLinedText>
           <UnderLinedText
             text={t('mypage.quit')}
