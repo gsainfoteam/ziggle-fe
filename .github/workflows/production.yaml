@@ -9,10 +9,15 @@ on:
       - released
 
 jobs:
-  preview-deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       deployments: write
+    environment: production
+    outputs:
+      ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      ECR_REPOSITORY: ziggle-frontend
+      IMAGE_TAG: prod${{ github.run_number }}
     steps:
       - uses: actions/checkout@v3
       - uses: chrnorm/deployment-action@v2
@@ -22,15 +27,41 @@ jobs:
           token: '${{ github.token }}'
           environment-url: https://ziggle.gistory.me
           environment: production
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        id: vercel-deploy
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+          mask-aws-account-id: no
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: setup environment
+        run: |
+          echo "${{ vars.ENV }}" >> .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+          echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
+
+      - name: Build, tag, and push image to Amazon ECR
+        uses: docker/build-push-action@v2
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ziggle-frontend
+          IMAGE_TAG: prod${{ github.run_number }} # Use run number as image tag
+        with:
+          context: .
+          push: true
+          tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
       - name: Update GitHub Deployment Status (success)
         if: success()
         uses: chrnorm/deployment-status@v2
@@ -45,3 +76,32 @@ jobs:
           token: '${{ github.token }}'
           state: 'failure'
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+  deploy:
+    name: Update Git Repository
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          repository: gsainfoteam/icarus-gitops
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          fetch-depth: 0
+
+      - name: Update Kubernetes Manifest
+        env:
+          ECR_REGISTRY: ${{ needs.build.outputs.ECR_REGISTRY }}
+          ECR_REPOSITORY: ${{ needs.build.outputs.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ needs.build.outputs.IMAGE_TAG }}
+        run: |
+          sed -i "s|image:.*|image: $ECR_REGISTRY\/$ECR_REPOSITORY:$IMAGE_TAG|g" infoteam/service/ziggle/next.prod.yaml
+
+      - name: Commit and Push
+        env:
+          ECR_REPOSITORY: ${{ needs.build.outputs.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ needs.build.outputs.IMAGE_TAG }}
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+          git commit -am "Update image $ECR_REPOSITORY:$IMAGE_TAG"
+          git push -u origin master
