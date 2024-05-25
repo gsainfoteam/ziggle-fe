@@ -1,11 +1,12 @@
 import { getServerSession, NextAuthOptions } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import { OAuthConfig } from 'next-auth/providers/oauth';
+
+import api from '..';
 
 export const auth = async () => {
   return getServerSession(config);
 };
-
-import api from '..';
 
 export interface User {
   uuid: string;
@@ -27,10 +28,16 @@ export const config = {
       if (user) {
         token.studentNumber = user.studentNumber;
       }
-      if (account?.access_token) {
-        token.accessToken = account.access_token;
+      if (account) {
+        token.accessToken = account.access_token!;
+        token.accessTokenExpires = Date.now() + account.expires_in * 1000;
+        token.refreshToken = account.refresh_token!;
       }
-      return token;
+
+      if (Date.now() < token.accessTokenExpires) {
+        return token;
+      }
+      return refreshAccessToken(token);
     },
     signIn: async ({ account }) => {
       await api.get<User>('/user/info', {
@@ -77,3 +84,21 @@ export const config = {
     }>,
   ],
 } satisfies NextAuthOptions;
+
+const refreshAccessToken = async (token: JWT) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}user/refresh`,
+    {
+      method: 'POST',
+      headers: { Cookie: `refresh_token=${token.refreshToken}` },
+    },
+  );
+  const data = await response.json();
+  if (!response.ok) throw data;
+  return {
+    ...token,
+    accessToken: data.access_token,
+    accessTokenExpires: Date.now() + data.expires_in * 1000,
+    refreshToken: data.refresh_token,
+  };
+};

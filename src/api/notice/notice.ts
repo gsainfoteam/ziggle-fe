@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import useSWRInfinite from 'swr/infinite';
 
-import api from '..';
 import { Locale } from '@/app/i18next/settings';
 
 export interface NoticePaginationParams {
@@ -200,13 +199,13 @@ export const deleteNotice = (id: number) =>
   });
 
 export const addReaction = (noticeId: number, emoji: string) =>
-  api
-    .post<NoticeDetail>(`/notice/${noticeId}/reaction`, {
-      emoji,
-    })
-    .then(({ data }) => data);
+  fetch(`/api/bff/notice/${noticeId}/reaction`, {
+    method: 'POST',
+    body: JSON.stringify({ emoji }),
+  }).then<NoticeDetail>((res) => res.json());
 
 export const deleteReaction = (noticeId: number, emoji: string) =>
-  api
-    .delete<NoticeDetail>(`/notice/${noticeId}/reaction`, { data: { emoji } })
-    .then(({ data }) => data);
+  fetch(`/api/bff/notice/${noticeId}/reaction`, {
+    method: 'DELETE',
+    body: JSON.stringify({ emoji }),
+  }).then<NoticeDetail>((res) => res.json());
