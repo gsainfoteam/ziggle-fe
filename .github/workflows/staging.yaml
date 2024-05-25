@@ -16,7 +16,7 @@ jobs:
       ECR_REPOSITORY: ziggle-frontend
       IMAGE_TAG: dev${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment
         id: deployment
@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: gsainfoteam/icarus-gitops
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
