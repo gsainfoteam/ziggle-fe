@@ -1,6 +1,6 @@
 import { ParseKeys } from 'i18next';
 
-import { Category, NoticeSearchParams } from '@/api/notice/notice';
+import { NoticeSearchParams } from '@/api/notice/notice';
 import { HomePath } from '@/app/[lng]/(common)/(needSidebar)/[category]/paths';
 import Bell from '@/assets/icons/bell.svg';
 import BoldBell from '@/assets/icons/bold-bell.svg';
@@ -121,13 +121,14 @@ export const sidebarObject: SidebarObject[][] = [
         bold: EditPencil,
       },
     },
-    {
-      title: 'sidebar.groups',
-      path: 'group',
-      icons: {
-        regular: ColorFilter,
-        bold: ColorFilter,
-      },
-    },
+    // TODO: Add group page
+    // {
+    //   title: 'sidebar.groups',
+    //   path: 'group',
+    //   icons: {
+    //     regular: ColorFilter,
+    //     bold: ColorFilter,
+    //   },
+    // },
   ],
 ];
