@@ -52,7 +52,7 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
         }`}
       >
         <Link
-          href={user ? `${lng}/mypage` : `${lng}/login`}
+          href={user ? `/${lng}/mypage` : `/${lng}/login`}
           className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
         >
           <DefaultProfile width={36} />
