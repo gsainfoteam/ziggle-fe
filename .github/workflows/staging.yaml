@@ -1,7 +1,4 @@
 name: Staging Deploy
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
@@ -26,7 +23,7 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: https://stg.ziggle.gistory.me
-          environment: production
+          environment: preview
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -47,6 +44,7 @@ jobs:
         run: |
           echo "${{ vars.ENV }}" >> .env.production
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+          echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
 
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v2
