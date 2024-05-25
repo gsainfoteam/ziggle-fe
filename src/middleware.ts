@@ -37,34 +37,6 @@ export async function middleware(req: NextRequest) {
     if (lngInReferer) response.cookies.set(cookieName, lngInReferer);
   }
 
-  const accessToken = req.cookies.get('access_token');
-  const refreshToken = req.cookies.get('refresh_token');
-  if (
-    refreshToken?.value &&
-    (!accessToken?.value ||
-      (await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}user/info`, {
-        headers: { Authorization: `Bearer ${accessToken?.value}` },
-      }).then((res) => res.status !== 200)))
-  ) {
-    const response = NextResponse.redirect(req.url);
-    const newAccessToken = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}user/refresh`,
-      {
-        method: 'POST',
-        headers: { Cookie: `refresh_token=${refreshToken.value}` },
-      },
-    )
-      .then((res) => res.json())
-      .then((data) => data.access_token);
-    if (!newAccessToken) {
-      response.cookies.delete('refresh_token');
-      response.cookies.delete('access_token');
-      return null;
-    }
-    response.cookies.set('access_token', newAccessToken);
-    return response;
-  }
-
   return response;
 }
 

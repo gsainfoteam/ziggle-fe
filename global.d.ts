@@ -11,11 +11,16 @@ declare module 'next-auth' {
     user: ZiggleUser;
     accessToken: string;
   }
+  interface Account {
+    expires_in: number;
+  }
 }
 
 declare module 'next-auth/jwt' {
   interface JWT {
     studentNumber: string;
     accessToken: string;
+    accessTokenExpires: number;
+    refreshToken: string;
   }
 }
