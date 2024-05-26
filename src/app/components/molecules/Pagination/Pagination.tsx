@@ -1,12 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  redirect,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect } from 'react';
 
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg';

@@ -13,6 +13,8 @@ interface CategorizedNoticesProps {
   page: number;
 }
 
+const ITEMS_PER_PAGE = 30;
+
 const CategorizedNotices = async ({
   sortByDeadline,
   noticeSearchParams,
@@ -21,11 +23,13 @@ const CategorizedNotices = async ({
 }: PropsWithLng<CategorizedNoticesProps>) => {
   const { t } = await createTranslation(lng);
 
-  const notices = await getAllNotices(
-    sortByDeadline
-      ? { ...noticeSearchParams, orderBy: 'deadline', lang: lng }
-      : { ...noticeSearchParams, lang: lng },
-  ).catch(() => ({ list: [], total: 0 }));
+  const notices = await getAllNotices({
+    ...noticeSearchParams,
+    offset: page * ITEMS_PER_PAGE,
+    limit: ITEMS_PER_PAGE,
+    lang: lng,
+    ...(sortByDeadline ? { orderBy: 'deadline' } : {}),
+  });
 
   return (
     <>
@@ -39,7 +43,11 @@ const CategorizedNotices = async ({
               </React.Fragment>
             ))}
           </div>
-          <Pagination page={page} items={notices.total} itemsPerPage={30} />
+          <Pagination
+            page={page}
+            items={notices.total}
+            itemsPerPage={ITEMS_PER_PAGE}
+          />
         </>
       ) : (
         <div className="flex w-full justify-center">
