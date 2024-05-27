@@ -23,7 +23,7 @@ export default async function MyPage({
     .list;
 
   const ownNotice: Notice[] = (
-    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent' })
+    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
   ).list;
 
   return (

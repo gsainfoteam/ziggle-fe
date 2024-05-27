@@ -1,7 +1,4 @@
 name: Staging Deploy
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
@@ -16,17 +13,17 @@ jobs:
     environment: preview
     outputs:
       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      ECR_REPOSITORY: ziggle-backend
+      ECR_REPOSITORY: ziggle-frontend
       IMAGE_TAG: dev${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment
         id: deployment
         with:
           token: '${{ github.token }}'
           environment-url: https://stg.ziggle.gistory.me
-          environment: production
+          environment: preview
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -45,13 +42,15 @@ jobs:
 
       - name: setup environment
         run: |
-          echo "${{ vars.ENV }}" >> .env.local
+          echo "${{ vars.ENV }}" >> .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+          echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
 
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v2
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ziggle-backend
+          ECR_REPOSITORY: ziggle-frontend
           IMAGE_TAG: dev${{ github.run_number }} # Use run number as image tag
         with:
           context: .
@@ -80,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: gsainfoteam/icarus-gitops
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}

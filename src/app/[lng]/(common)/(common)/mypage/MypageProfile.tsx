@@ -4,7 +4,7 @@ import { ParseKeys } from 'i18next';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { logout, withdraw } from '@/api/auth/auth';
+// import { logout, withdraw } from '@/api/auth/auth';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 

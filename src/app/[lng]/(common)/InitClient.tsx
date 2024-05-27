@@ -3,6 +3,7 @@
 import '@/app/initDayjs';
 
 import dynamic from 'next/dynamic';
+import { SessionProvider } from 'next-auth/react';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
@@ -14,17 +15,26 @@ const InstallApp = dynamic(() => import('./InstallApp'), {
   ssr: false,
 });
 
+interface InitClientProps {
+  emptyLayout?: boolean;
+}
+
 const InitClient = ({
   lng,
   children,
-}: React.PropsWithChildren<PropsWithLng>) => (
+  emptyLayout = false,
+}: React.PropsWithChildren<PropsWithLng & InitClientProps>) => (
   <SWRConfig
     value={{ fetcher: (path) => api.get(path).then(({ data }) => data) }}
   >
-    <Suspense>
-      <InstallApp lng={lng} />
-    </Suspense>
-    {children}
+    <SessionProvider>
+      {!emptyLayout && (
+        <Suspense>
+          <InstallApp lng={lng} />
+        </Suspense>
+      )}
+      {children}
+    </SessionProvider>
   </SWRConfig>
 );
 

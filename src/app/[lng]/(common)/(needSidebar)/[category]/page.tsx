@@ -1,18 +1,10 @@
-import { ParseKeys } from 'i18next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { getAllNotices } from '@/api/notice/notice-server';
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import styles from '@/app/components/atoms/Toggle/toggle.module.css';
-import Pagination from '@/app/components/molecules/Pagination';
-import Zabo from '@/app/components/organisms/Zabo';
 import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
-import {
-  SidebarObject,
-  sidebarObject,
-} from '@/app/components/templates/Sidebar/sidebarObject';
+import { sidebarObject } from '@/app/components/templates/Sidebar/sidebarObject';
 
 import { createTranslation, PropsWithLng } from '../../../../i18next';
 import CategorizedNotices from './CategorizedNotices';
@@ -33,6 +25,10 @@ export default async function Home({
 
   const sortByDeadline = searchParams?.deadline === 'true' ?? false;
   const page = parseInt(searchParams?.page ?? '');
+
+  if (Number.isNaN(page) || page < 0) {
+    redirect(`/${lng}/${category}?page=0`);
+  }
 
   const currentSidebarObject = sidebarObject
     .flat(2)

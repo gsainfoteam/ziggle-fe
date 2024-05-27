@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { auth } from '@/api/auth/auth';
+
 export async function POST(
   request: NextRequest,
   {
@@ -12,8 +14,8 @@ export async function POST(
   },
 ) {
   const { noticeId, contentId } = params;
-  const accessToken = request.cookies.get('access_token');
-  if (!accessToken) {
+  const session = await auth();
+  if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -24,7 +26,7 @@ export async function POST(
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${accessToken.value}`,
+        Authorization: `Bearer ${session.accessToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),

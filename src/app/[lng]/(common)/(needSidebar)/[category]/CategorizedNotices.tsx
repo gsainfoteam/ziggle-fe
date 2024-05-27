@@ -13,6 +13,8 @@ interface CategorizedNoticesProps {
   page: number;
 }
 
+const ITEMS_PER_PAGE = 30;
+
 const CategorizedNotices = async ({
   sortByDeadline,
   noticeSearchParams,
@@ -23,20 +25,13 @@ const CategorizedNotices = async ({
 
   const { t } = await createTranslation(lng);
 
-  const notices = await getAllNotices(
-    sortByDeadline
-      ? {
-          ...noticeSearchParams,
-          orderBy: 'deadline',
-          offset: page * ITEMS_PER_PAGE,
-          limit: ITEMS_PER_PAGE,
-        }
-      : {
-          ...noticeSearchParams,
-          offset: page * ITEMS_PER_PAGE,
-          limit: ITEMS_PER_PAGE,
-        },
-  ).catch(() => ({ list: [], total: 0 }));
+  const notices = await getAllNotices({
+    ...noticeSearchParams,
+    offset: page * ITEMS_PER_PAGE,
+    limit: ITEMS_PER_PAGE,
+    lang: lng,
+    ...(sortByDeadline ? { orderBy: 'deadline' } : {}),
+  });
 
   return (
     <>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { Suspense, useState } from 'react';
 import useSWR from 'swr';
 
@@ -20,18 +21,10 @@ import Button from '../../atoms/Button';
 import SidebarMobile from '../Sidebar/SidebarMobile';
 import SearchBar from './SearchBar';
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  phone: string;
-  studentId: string;
-}
-
 const Navbar = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
-  const { data: user } = useSWR<User | null>('user', auth);
+  const { data: user } = useSession();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -74,12 +67,12 @@ const Navbar = ({ lng }: PropsWithLng) => {
         event={user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin}
       >
         <Link
-          href={user ? `/mypage` : `/login`}
+          href={user ? `/${lng}/mypage` : `/${lng}/login`}
           className="hidden items-center justify-center gap-2 md:flex"
         >
           <AccountIcon className="flex h-6" />
           <div className="whitespace-nowrap align-middle font-medium text-primary">
-            {user ? user.name : t('navbar.login')}
+            {user?.user?.name ?? t('navbar.login')}
           </div>
         </Link>
       </Analytics>
@@ -89,7 +82,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
           <SidebarMobile
             lng={lng}
             onClose={handleSidebarClose}
-            user={user ?? null}
+            user={user?.user ?? null}
           />
         </div>
       )}
