@@ -27,16 +27,9 @@ export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
     window.open(process.env.NEXT_PUBLIC_IDP_BASE_URL);
   };
 
-  // const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
-  //   .list;
-
-  // const ownNotice: Notice[] = (
-  //   await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
-  // ).list;
-
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="m-4 flex flex-col gap-5">
+      <div className="flex min-w-full flex-col gap-5 p-4 md:min-w-[500px]">
         <MypageProfile
           lng={lng}
           name={sessionData?.user.name}

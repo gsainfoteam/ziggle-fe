@@ -14,7 +14,7 @@ const Toggle = ({ isSwitched, onSwitch }: ToggleProps) => {
         role="switch"
         type="checkbox"
         className={styles.checkbox}
-        checked={isSwitched}
+        defaultChecked={isSwitched}
         onChange={onSwitch}
       />
     </label>

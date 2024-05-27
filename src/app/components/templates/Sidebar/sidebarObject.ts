@@ -19,7 +19,7 @@ import Home from '@/assets/icons/home.svg';
 import MessageAlert from '@/assets/icons/message-alert.svg';
 import OpenBook from '@/assets/icons/open-book.svg';
 
-type MenuPath = HomePath | 'write' | 'group';
+type MenuPath = HomePath | 'write' | 'group' | 'own' | 'reminded';
 export interface SidebarObject {
   title: ParseKeys;
   path: MenuPath;
@@ -28,6 +28,7 @@ export interface SidebarObject {
     bold: React.FC<React.SVGProps<SVGSVGElement>>;
   };
   noticeSearchParams?: NoticeSearchParams;
+  needAuth?: boolean;
 }
 
 export const sidebarObject: SidebarObject[][] = [
@@ -119,6 +120,30 @@ export const sidebarObject: SidebarObject[][] = [
       icons: {
         regular: EditPencil,
         bold: EditPencil,
+      },
+    },
+    {
+      title: 'mypage.myNotice',
+      path: 'own',
+      icons: {
+        regular: EditPencil,
+        bold: EditPencil,
+      },
+      needAuth: true,
+      noticeSearchParams: {
+        my: 'own',
+      },
+    },
+    {
+      title: 'mypage.remindNotice',
+      path: 'reminded',
+      icons: {
+        regular: Bell,
+        bold: BoldBell,
+      },
+      needAuth: true,
+      noticeSearchParams: {
+        my: 'reminders',
       },
     },
     // TODO: Add group page

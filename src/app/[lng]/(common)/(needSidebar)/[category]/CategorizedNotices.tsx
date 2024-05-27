@@ -21,8 +21,6 @@ const CategorizedNotices = async ({
   lng,
   page,
 }: PropsWithLng<CategorizedNoticesProps>) => {
-  const ITEMS_PER_PAGE = 10;
-
   const { t } = await createTranslation(lng);
 
   const notices = await getAllNotices({

@@ -50,14 +50,14 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
   return (
     <div className="flex flex-col justify-between gap-4">
       <div className="flex justify-between gap-4">
-        <Link href="" className="flex-1">
+        <Link href={`/${lng}/own?page=0`} className="flex-1">
           <MypageButton
             align="left"
             icon={<PencilIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.myNotice')}
           />
         </Link>
-        <Link href="" className="flex-1">
+        <Link href={`/${lng}/reminded?page=0`} className="flex-1">
           <MypageButton
             align="left"
             icon={<BellIcon className={ICON_CLASSNAME} />}
