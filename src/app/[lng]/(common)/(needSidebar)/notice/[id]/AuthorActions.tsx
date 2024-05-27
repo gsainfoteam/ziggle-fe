@@ -1,15 +1,15 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
-import EditPencilIcon from '@/assets/icons/edit-pencil.svg';
-import RemoveIcon from '@/assets/icons/remove.svg';
 
 import { deleteNotice } from '@/api/notice/notice';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
-import Link from 'next/link';
+import EditPencilIcon from '@/assets/icons/edit-pencil.svg';
+import RemoveIcon from '@/assets/icons/remove.svg';
 
 interface WriterActionsProps {
   noticeId: number;
@@ -60,7 +60,9 @@ const AuthorActions = ({
         href={`/write?noticeId=${noticeId}`}
         className={'flex items-center gap-[10px]'}
       >
-        <EditPencilIcon className={'w-5 stroke-greyDark'} />
+        <EditPencilIcon
+          className={'w-5 stroke-greyDark dark:stroke-dark_white'}
+        />
         <p className={'text-greyDark'}>{t('zabo.authorActions.edit')}</p>
       </Link>
 
@@ -68,7 +70,7 @@ const AuthorActions = ({
         className={'flex items-center gap-[10px]'}
         onClick={handleRemoveNotice}
       >
-        <RemoveIcon className={'w-5 stroke-greyDark'} />
+        <RemoveIcon className={'w-5 stroke-greyDark dark:stroke-dark_white'} />
         <p className={'text-greyDark'}>{t('zabo.authorActions.remove')}</p>
       </button>
     </div>
