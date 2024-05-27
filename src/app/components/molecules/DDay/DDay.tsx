@@ -16,7 +16,7 @@ const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => {
       className={
         `h-fit rounded-md ${
           isClosed ? 'bg-greyDark' : 'bg-primary'
-        } px-[10px] py-[3px] text-[14px] text-white dark:text-text` + className
+        } px-[10px] py-[3px] text-[14px] text-white dark:text-text ` + className
       }
     >
       {isClosed ? (
