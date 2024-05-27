@@ -2,13 +2,17 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
+import * as process from 'node:process';
+
+import { redirect } from 'next/navigation';
 import React from 'react';
+
+import { auth } from '@/api/auth/auth';
+import { NoticeDetail } from '@/api/notice/notice';
+import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import NoticeEditor from './NoticeEditor';
-import { NoticeDetail } from '@/api/notice/notice';
-import * as process from 'node:process';
-import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 
 const WritePage = async ({
   params: { lng },
@@ -21,7 +25,9 @@ const WritePage = async ({
 }) => {
   const { t } = await createTranslation(lng);
 
-  const isEdit = !!searchParams?.noticeId;
+  const userData = await auth();
+  if (!userData) redirect(`/${lng}/login`);
+
   const notice:
     | (NoticeDetail & {
         enTitle?: string;
@@ -32,6 +38,10 @@ const WritePage = async ({
         `http://localhost:${process.env.PORT}/api/notice/${searchParams.noticeId}/full`,
       ).then((res) => res.json())
     : undefined;
+
+  const isEdit = !!searchParams?.noticeId;
+  const isAuthor = userData.user.uuid === notice?.author.uuid;
+  if (isEdit && !isAuthor) redirect(`/${lng}`);
 
   return (
     <main className="flex flex-col items-center py-12">
