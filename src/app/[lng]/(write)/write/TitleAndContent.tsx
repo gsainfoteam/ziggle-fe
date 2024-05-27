@@ -24,61 +24,35 @@ const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
 interface TitleAndContentProps {
   editorRef: React.MutableRefObject<Editor | null>;
   title: string;
-  setTitle: (title: string) => void;
-  language: 'korean' | 'english';
+  onChangeTitle: (title: string) => void;
+  onChangeContent: (event: TinyMCEEditorChangeEvent) => void;
+  titleLabel: string;
+  contentLabel: string;
   disabled?: boolean;
 }
 
 const TitleAndContent = ({
   editorRef,
   title,
-  setTitle,
+  titleLabel,
+  contentLabel,
+  onChangeTitle,
+  onChangeContent,
   t,
-  language,
   disabled,
 }: PropsWithT<TitleAndContentProps>) => {
-  const handleEditorChange = (event: TinyMCEEditorChangeEvent) => {
-    // Even though the event is "onChange", it is actually "onBlur"
-    const { koreanTitle, englishTitle, koreanBody, englishBody } = JSON.parse(
-      localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY) || '{}',
-    );
-
-    localStorage.setItem(
-      NOTICE_LOCAL_STORAGE_KEY,
-      JSON.stringify(
-        language === 'korean'
-          ? {
-              koreanTitle: title,
-              englishTitle,
-              koreanBody: event.target.getContent(),
-              englishBody: englishBody,
-            }
-          : {
-              koreanTitle,
-              englishTitle: title,
-              koreanBody: koreanBody,
-              englishBody: event.target.getContent(),
-            },
-      ),
-    );
-  };
-
   return (
     <>
       <div className="mb-[10px] mt-10 flex gap-[6px]">
         <TextIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
-        <p className="font-medium">
-          {language === 'korean'
-            ? t('write.koreanTitle')
-            : t('write.englishTitle')}
-        </p>
+        <p className="font-medium">{titleLabel}</p>
       </div>
 
       <input
         disabled={disabled}
         value={title}
         onChange={(e) => {
-          setTitle(e.target.value);
+          onChangeTitle(e.target.value);
         }}
         type="text"
         placeholder={t('write.writeTitle')}
@@ -95,18 +69,14 @@ const TitleAndContent = ({
 
       <div className="mb-3 mt-10 flex items-center gap-2">
         <ContentIcon className="w-5 md:w-6 dark:fill-white" />
-        <p className="font-medium">
-          {language === 'korean'
-            ? t('write.koreanContent')
-            : t('write.englishContent')}
-        </p>
+        <p className="font-medium">{contentLabel}</p>
       </div>
 
       <React.Suspense>
         <DynamicTinyMCEEditor
           disabled={disabled}
           editorRef={editorRef}
-          onChange={handleEditorChange}
+          onChange={onChangeContent}
         />
       </React.Suspense>
     </>
