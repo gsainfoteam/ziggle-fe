@@ -17,12 +17,6 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
-      - uses: chrnorm/deployment-action@v2
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: '${{ github.token }}'
-          environment: preview
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Install dependencies
@@ -34,14 +28,6 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         id: vercel-deploy
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
-      - name: Update GitHub Deployment Status (success)
-        if: success()
-        uses: chrnorm/deployment-status@v2
-        with:
-          token: '${{ github.token }}'
-          environment-url: ${{ steps.vercel-deploy.outputs.url }}
-          state: 'success'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
       - name: Find Pull Request
         if: success()
         uses: juliangruber/find-pull-request-action@v1
@@ -59,10 +45,3 @@ jobs:
               repo: context.repo.repo,
               body: 'Preview URL: ' + '${{ steps.vercel-deploy.outputs.url }}'
             })
-      - name: Update GitHub Deployment Status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@v2
-        with:
-          token: '${{ github.token }}'
-          state: 'failure'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
