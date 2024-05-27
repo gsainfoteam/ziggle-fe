@@ -15,6 +15,13 @@ import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
 import Button from '../../atoms/Button';
 
+export interface User {
+  uuid: string;
+  email: string;
+  name: string;
+  studentNumber: string;
+}
+
 const Navbar = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
   const { data: user } = useSession();

@@ -68,15 +68,15 @@ const NoticeTypeSelector = ({
             rounded-[10px] bg-greyLight p-6 dark:bg-dark_greyDark
           `}
         >
-          <div className="mb-2 text-base font-semibold md:text-xl">
+          <p className="mb-2 text-base font-semibold text-text md:text-xl">
             {t(`write.noticeTypes.${noticeType}.description.title`)}
-          </div>
-          <div className="font-regular text-sm md:text-base">
+          </p>
+          <p className="font-regular text-sm text-text md:text-base">
             {t(`write.noticeTypes.${noticeType}.description.content`)}
-          </div>
-          <div className="font-regular text-sm text-secondaryText md:text-base">
+          </p>
+          <p className="font-regular text-sm text-secondaryText md:text-base">
             {t(`write.noticeTypes.${noticeType}.description.example`)}
-          </div>
+          </p>
         </div>
       ))}
     </>
