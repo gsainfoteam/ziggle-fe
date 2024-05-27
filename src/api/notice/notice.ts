@@ -202,10 +202,16 @@ export const addReaction = (noticeId: number, emoji: string) =>
   fetch(`/api/bff/notice/${noticeId}/reaction`, {
     method: 'POST',
     body: JSON.stringify({ emoji }),
-  }).then<NoticeDetail>((res) => res.json());
+  }).then<NoticeDetail>((res) => {
+    if (!res.ok) throw `failed with status: ${res.status}`;
+    return res.json();
+  });
 
 export const deleteReaction = (noticeId: number, emoji: string) =>
   fetch(`/api/bff/notice/${noticeId}/reaction`, {
     method: 'DELETE',
     body: JSON.stringify({ emoji }),
-  }).then<NoticeDetail>((res) => res.json());
+  }).then<NoticeDetail>((res) => {
+    if (!res.ok) throw `failed with status: ${res.status}`;
+    return res.json();
+  });
