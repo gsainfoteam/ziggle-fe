@@ -26,7 +26,7 @@ const WritePage = async ({
   const { t } = await createTranslation(lng);
 
   const userData = await auth();
-  // if (!userData) redirect(`/${lng}/login`);
+  if (!userData) redirect(`/${lng}/login`);
 
   const notice:
     | (NoticeDetail & {
@@ -41,7 +41,7 @@ const WritePage = async ({
   if (!notice) notFound();
 
   const isEdit = !!searchParams?.noticeId;
-  const isAuthor = userData?.user.uuid === notice?.author.uuid;
+  const isAuthor = userData.user.uuid === notice?.author.uuid;
   if (isEdit && !isAuthor) redirect(`/${lng}/notice/${notice.id}`);
 
   return (
