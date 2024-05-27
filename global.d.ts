@@ -18,6 +18,7 @@ declare module 'next-auth' {
 
 declare module 'next-auth/jwt' {
   interface JWT {
+    uuid: string;
     studentNumber: string;
     accessToken: string;
     accessTokenExpires: number;

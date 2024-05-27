@@ -20,6 +20,7 @@ export const config = {
     session: async ({ session, token }) => {
       if (token && session.user) {
         session.user.studentNumber = token.studentNumber;
+        session.user.uuid = token.uuid;
         session.accessToken = token.accessToken;
       }
       return session;
@@ -27,6 +28,7 @@ export const config = {
     jwt: async ({ token, user, account }) => {
       if (user) {
         token.studentNumber = user.studentNumber;
+        token.uuid = user.uuid;
       }
       if (account) {
         token.accessToken = account.access_token!;
