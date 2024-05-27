@@ -1,7 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import React from 'react';
 
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 import BellIcon from '@/assets/icons/bell.svg';
 import PencilIcon from '@/assets/icons/edit-pencil.svg';
 import FlagIcon from '@/assets/icons/white-flag.svg';
@@ -11,6 +14,7 @@ interface MypageButtonType {
   icon: React.ReactNode;
   buttonText: string;
   align: 'left' | 'right';
+  onClick?: () => void;
 }
 
 const MypageButton = ({ icon, buttonText, align }: MypageButtonType) => {
@@ -36,24 +40,26 @@ const MypageButton = ({ icon, buttonText, align }: MypageButtonType) => {
   );
 };
 
-const MypageButtons = async ({ lng }: PropsWithLng) => {
-  const { t } = await createTranslation(lng);
+const MypageButtons = ({ lng }: PropsWithLng) => {
+  const { t } = useTranslation(lng);
 
   const ICON_CLASSNAME = 'w-10 stroke-text dark:stroke-dark_white';
+
+  const CS_PAGE_URL = 'https://cs.gistory.me/?service=Ziggle';
 
   return (
     <div className="flex flex-col justify-between gap-4">
       <div className="flex justify-between gap-4">
         <Link href="" className="flex-1">
           <MypageButton
-            align={'left'}
+            align="left"
             icon={<PencilIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.myNotice')}
           />
         </Link>
         <Link href="" className="flex-1">
           <MypageButton
-            align={'left'}
+            align="left"
             icon={<BellIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.remindNotice')}
           />
@@ -63,7 +69,7 @@ const MypageButtons = async ({ lng }: PropsWithLng) => {
       <div className="h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
 
       <div className="flex justify-between gap-4">
-        <Link href="" className="flex-1">
+        <Link href={CS_PAGE_URL} className="flex-1">
           <MypageButton
             align="right"
             icon={<FlagIcon className={ICON_CLASSNAME} />}

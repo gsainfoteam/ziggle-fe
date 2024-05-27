@@ -1,59 +1,65 @@
-import Link from 'next/link';
+'use client';
 
-import { auth } from '@/api/auth/auth';
-import { Notice } from '@/api/notice/notice';
-import { getAllNotices } from '@/api/notice/notice-server';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
+
+import Button from '@/app/components/atoms/Button';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 
 import ChangeLanguageBox from './ChangeLanguageBox';
 import MypageBox from './MypageBox';
 import MypageButtons from './MypageButton';
 import MypageProfile from './MypageProfile';
 
-export default async function MyPage({
-  params: { lng },
-}: {
-  params: PropsWithLng;
-}) {
-  const { t } = await createTranslation(lng);
+export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
+  const { t } = useTranslation(lng);
 
-  const userData = await auth();
+  const { data: sessionData } = useSession();
 
-  const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
-    .list;
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
 
-  const ownNotice: Notice[] = (
-    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
-  ).list;
+  const handleWithdrawal = () => {
+    window.open(process.env.NEXT_PUBLIC_IDP_BASE_URL);
+  };
+
+  // const remindedNotice: Notice[] = (await getAllNotices({ my: 'reminders' }))
+  //   .list;
+
+  // const ownNotice: Notice[] = (
+  //   await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
+  // ).list;
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="m-10 flex min-w-[550px] flex-col gap-5">
         <MypageProfile
           lng={lng}
-          name={userData?.name}
-          id={userData?.studentId}
-          email={userData?.email}
+          name={sessionData?.user.name}
+          id={sessionData?.user.studentNumber}
+          email={sessionData?.user.email}
         />
         <MypageButtons lng={lng} />
         <div className="flex flex-col gap-3">
           <ChangeLanguageBox lng={lng} />
 
-          <Link href="">
+          <Button onClick={handleSignOut}>
             <MypageBox>
               <div className="flex self-stretch text-greyDark dark:text-dark_white">
                 {t('mypage.logout')}
               </div>
             </MypageBox>
-          </Link>
+          </Button>
 
-          <Link href="">
+          <Button onClick={handleWithdrawal}>
             <MypageBox>
               <div className="flex self-stretch text-greyDark dark:text-dark_white">
                 {t('mypage.quit')}
               </div>
             </MypageBox>
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

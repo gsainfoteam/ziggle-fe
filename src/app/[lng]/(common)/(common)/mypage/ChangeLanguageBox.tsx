@@ -11,6 +11,7 @@ import MypageBox from './MypageBox';
 const ChangeLanguageBox = ({ lng }: PropsWithLng) => {
   const pathname = usePathname();
   const { push } = useRouter();
+
   const switchLanguage = () => {
     push(
       `/${lng === 'en' ? 'ko' : 'en'}/${pathname

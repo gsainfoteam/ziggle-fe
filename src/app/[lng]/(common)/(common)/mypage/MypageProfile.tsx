@@ -1,10 +1,7 @@
 'use client';
 
 import { ParseKeys } from 'i18next';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
-// import { logout, withdraw } from '@/api/auth/auth';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -25,14 +22,6 @@ export default function MypageProfile({
   lng,
 }: PropsWithLng<MypageProfileProps>) {
   const { t } = useTranslation(lng);
-
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   if (name === undefined || id === undefined || email === undefined) {
-  //     router.push(`/${lng}/home?page=0`);
-  //   }
-  // });
 
   const MYPAGE_FIELDS: {
     field: string | undefined;
