@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 
@@ -19,6 +19,10 @@ export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
 
   const { data: sessionData } = useSession();
 
+  if (!sessionData) {
+    redirect('/');
+  }
+
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' });
   };
@@ -32,9 +36,9 @@ export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
       <div className="flex min-w-full flex-col gap-5 p-4 md:min-w-[500px]">
         <MypageProfile
           lng={lng}
-          name={sessionData?.user.name}
-          id={sessionData?.user.studentNumber}
-          email={sessionData?.user.email}
+          name={sessionData.user.name}
+          id={sessionData.user.studentNumber}
+          email={sessionData.user.email}
         />
 
         <MypageButtons lng={lng} />
