@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { PropsWithLng } from '@/app/i18next';
 
 interface TagProps {
@@ -8,14 +6,13 @@ interface TagProps {
 
 const Tag = ({ lng, name }: PropsWithLng<TagProps>) => {
   return (
-    <Link
-      href={`${lng}/section/${name}`}
+    <div
       className={
         'rounded-[5px] bg-secondary px-[10px] py-[5px] text-lg text-primary dark:bg-dark_secondary'
       }
     >
       #{name}
-    </Link>
+    </div>
   );
 };
 
