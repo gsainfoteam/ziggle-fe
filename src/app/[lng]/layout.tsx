@@ -56,8 +56,9 @@ export const generateMetadata = async ({
     icons: [
       {
         rel: 'icon',
-        type: 'image/x-icon',
-        url: '/favicon.ico',
+        type: 'image/png',
+        url: '/logo.png',
+        sizes: '1024x1024',
       },
     ],
   };
