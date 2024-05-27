@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 import Button from '@/app/components/atoms/Button';
 import { PropsWithLng } from '@/app/i18next';
@@ -34,14 +36,16 @@ export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="m-10 flex min-w-[550px] flex-col gap-5">
+      <div className="m-4 flex flex-col gap-5">
         <MypageProfile
           lng={lng}
           name={sessionData?.user.name}
           id={sessionData?.user.studentNumber}
           email={sessionData?.user.email}
         />
+
         <MypageButtons lng={lng} />
+
         <div className="flex flex-col gap-3">
           <ChangeLanguageBox lng={lng} />
 

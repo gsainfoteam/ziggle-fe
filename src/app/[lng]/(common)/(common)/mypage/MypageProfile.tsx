@@ -47,7 +47,7 @@ export default function MypageProfile({
         {t('mypage.info')}
       </div>
       {MYPAGE_FIELDS.map((field, idx) => (
-        <div key={idx} className="flex w-full justify-between gap-4">
+        <div key={idx} className="flex w-full flex-wrap justify-between gap-4">
           <div className="m-0 text-xl font-medium text-text dark:text-dark_white">
             {t(field.i18nKey)}
           </div>
