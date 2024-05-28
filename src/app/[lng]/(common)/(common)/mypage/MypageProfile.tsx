@@ -1,41 +1,61 @@
-import { auth } from '@/api/auth/auth';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
-import AccountIcon from '@/assets/icons/account.svg';
+'use client';
 
-import { Logout, Withdraw } from './ClientButtons';
+import { ParseKeys } from 'i18next';
 
-export default async function MypageProfile({ lng }: PropsWithLng) {
-  const { t } = await createTranslation(lng);
-  const session = await auth();
-  if (!session) return null;
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 
-  const {
-    user: { name, studentNumber, email },
-  } = session;
+import MypageBox from './MypageBox';
+
+interface MypageProfileProps {
+  name?: string;
+  id?: string;
+  email?: string;
+  logout?: string;
+  quit?: string;
+}
+
+export default function MypageProfile({
+  name,
+  id,
+  email,
+  lng,
+}: PropsWithLng<MypageProfileProps>) {
+  const { t } = useTranslation(lng);
+
+  const MYPAGE_FIELDS: {
+    field: string | undefined;
+    i18nKey: ParseKeys;
+  }[] = [
+    {
+      field: name,
+      i18nKey: 'mypage.name',
+    },
+    {
+      field: id,
+      i18nKey: 'mypage.id',
+    },
+    {
+      field: email,
+      i18nKey: 'mypage.email',
+    },
+  ];
 
   return (
-    <div>
-      <div className="flex flex-col items-center">
-        <div className="m-10 text-4xl font-medium">INFO</div>
-        <div className="flex flex-col items-center">
-          <AccountIcon className="w-48 fill-gray-400" />
-          <h3 className="md:text-2.8xl flex items-center justify-center p-10 text-3xl font-bold">
-            {name}
-          </h3>
-        </div>
-        <div className="flex flex-col items-center">
-          <div className="mb-8 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
-            {studentNumber}
-          </div>
-          <div className="mb-0 h-8 w-full border-b border-gray-300 pb-10 pl-2 pr-10 text-xl text-secondaryText">
-            {email}
-          </div>
-        </div>
-        <div className="flex flex-row items-center">
-          <Logout lng={lng} />
-          <Withdraw lng={lng} />
-        </div>
+    <MypageBox>
+      <div className="m-0 self-stretch text-left text-2xl font-semibold text-text dark:text-dark_white">
+        {t('mypage.info')}
       </div>
-    </div>
+      {MYPAGE_FIELDS.map((field, idx) => (
+        <div key={idx} className="flex w-full flex-wrap justify-between gap-4">
+          <div className="m-0 text-xl font-medium text-text dark:text-dark_white">
+            {t(field.i18nKey)}
+          </div>
+          <div className="m-0 text-xl font-normal text-greyDark dark:text-dark_grey">
+            {field.field}
+          </div>
+        </div>
+      ))}
+    </MypageBox>
   );
 }

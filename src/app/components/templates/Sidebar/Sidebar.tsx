@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
@@ -49,26 +50,30 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
   const path = usePathname();
 
+  const { data: userData } = useSession();
+
   return (
     <>
       {sidebarObject.map((group, i) => (
         <React.Fragment key={i}>
           <ul className="flex flex-col gap-y-2">
-            {group.map((menu, i) => (
-              <li key={i} className="flex flex-row">
-                <NavButton
-                  icon={
-                    <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
-                  }
-                  boldIcon={
-                    <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
-                  }
-                  title={t(menu.title)}
-                  isSelected={path.startsWith(`/${lng}/${menu.path}`)}
-                  to={`/${lng}/${menu.path}`}
-                />
-              </li>
-            ))}
+            {group
+              .filter((menu) => (!userData ? !menu.needAuth : menu))
+              .map((menu, i) => (
+                <li key={i} className="flex flex-row">
+                  <NavButton
+                    icon={
+                      <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
+                    }
+                    boldIcon={
+                      <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
+                    }
+                    title={t(menu.title)}
+                    isSelected={path.startsWith(`/${lng}/${menu.path}`)}
+                    to={`/${lng}/${menu.path}`}
+                  />
+                </li>
+              ))}
           </ul>
           {!(sidebarObject.length - 1 === i) && (
             <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />

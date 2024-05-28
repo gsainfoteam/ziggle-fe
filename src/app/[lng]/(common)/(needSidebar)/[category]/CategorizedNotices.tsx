@@ -53,7 +53,7 @@ const CategorizedNotices = async ({
         <div className="flex w-full justify-center">
           <div className="align-center flex flex-col justify-center">
             <div className="h-[100px]" />
-            <div style={{ height: '10px', margin: '0 auto' }}></div>
+            <div className="mx-auto h-[10px]" />
 
             <SearchNoResult />
 

@@ -58,7 +58,9 @@ export default async function Home({
                 }`}
               >
                 <Link
-                  href={`${category}?page=0${sortByDeadline ? '' : '&deadline=true'}`}
+                  href={`${category}?page=0${
+                    sortByDeadline ? '' : '&deadline=true'
+                  }`}
                   className="flex rounded-full"
                 >
                   <input
