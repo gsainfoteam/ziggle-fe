@@ -4,9 +4,9 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
@@ -21,6 +21,7 @@ import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/
 import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
 import Button from '@/app/components/atoms/Button';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
+import DateTimePicker from '@/app/components/organisms/DateTimePicker';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
@@ -39,7 +40,6 @@ import handleNoticeSubmit from './handle-notice-submit';
 import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
 import TagInput, { Tag } from './TagInput';
-import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
 import TitleAndContent from './TitleAndContent';
 
 interface NoticeEditorProps {
@@ -67,7 +67,7 @@ const NoticeEditor = ({
   const [englishTitle, setEnglishTitle] = useState('');
 
   const [hasDeadline, setHasDeadline] = useState(false);
-  const [deadline, setDeadline] = useState<Date | null>(new Date());
+  const [deadline, setDeadline] = useState<Dayjs>(dayjs());
   const [selectedNoticeType, setSelectedNoticeType] =
     useState<NoticeType>('recruit');
 
@@ -156,7 +156,7 @@ const NoticeEditor = ({
       trySetKrContent();
       trySetEnContent();
 
-      notice.deadline && setDeadline(dayjs(notice.deadline).toDate());
+      notice.deadline && setDeadline(dayjs(notice.deadline));
     };
 
     isEditMode ? fetchExistingNotice() : checkLocalStorage();
@@ -183,7 +183,7 @@ const NoticeEditor = ({
     setIsLoading(true);
     const noticeId = await handleNoticeSubmit({
       title: koreanTitle,
-      deadline: hasDeadline ? deadline ?? undefined : undefined,
+      deadline: hasDeadline ? deadline.toDate() ?? undefined : undefined,
       noticeLanguage: hasEnglishContent ? 'both' : 'ko',
       koreanBody,
       enTitle: englishTitle,
@@ -237,7 +237,7 @@ const NoticeEditor = ({
           koreanBody,
           englishBody,
           noticeLanguage: editedLangs.length === 1 ? editedLangs[0] : 'both',
-          deadline: hasDeadline && deadline ? deadline : undefined,
+          deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
           t,
         });
 
@@ -255,7 +255,7 @@ const NoticeEditor = ({
       const englishNotice = await attachInternationalNotice({
         lang: 'en',
         title: englishTitle,
-        deadline: hasDeadline && deadline ? deadline : undefined,
+        deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
         body: englishBody,
         noticeId: notice.id,
         contentId: 1,
@@ -266,7 +266,7 @@ const NoticeEditor = ({
       ? await createAdditionalNotice({
           noticeId: notice.id,
           body: additionalKoreanBody,
-          deadline: hasDeadline && deadline ? deadline : undefined,
+          deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
         })
       : undefined;
 
@@ -283,7 +283,7 @@ const NoticeEditor = ({
               lang: 'en',
               noticeId: notice.id,
               contentId,
-              deadline: hasDeadline && deadline ? deadline : undefined,
+              deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
             })
           : undefined;
     }
@@ -463,6 +463,12 @@ const NoticeEditor = ({
             });
           }}
         />
+
+        <div className={'w-1'} />
+
+        {hasDeadline && (
+          <DateTimePicker dateTime={deadline} setDateTime={setDeadline} />
+        )}
       </div>
 
       {!isEditMode && (

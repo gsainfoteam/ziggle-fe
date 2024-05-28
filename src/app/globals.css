@@ -14,21 +14,10 @@
   }
 }
 
-:root {
-  --foreground-rgb: theme(colors.text);
-  --background-rgb: theme(colors.white);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: theme(colors.white);
-    --background-rgb: theme(colors.dark_dark);
-  }
-}
 
 body {
-  color: var(--foreground-rgb);
-  background: var(--background-rgb);
+  color: var(--text);
+  background: var(--white);
 }
 
 @keyframes fadeInWithGoUp {

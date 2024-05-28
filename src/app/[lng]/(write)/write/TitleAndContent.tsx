@@ -63,7 +63,9 @@ const TitleAndContent = ({
         }}
         className={
           'flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
-          (disabled ? 'border-grey text-greyDark' : 'border-primary text-text')
+          (disabled
+            ? 'border-grey text-greyDark dark:text-dark_greyDark'
+            : 'border-primary text-text dark:text-dark_white')
         }
       />
 

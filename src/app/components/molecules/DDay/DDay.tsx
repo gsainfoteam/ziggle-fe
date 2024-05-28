@@ -12,11 +12,11 @@ const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => {
   const isClosed = dayjs(deadline).isBefore();
 
   return (
-    <div
+    <p
       className={
         `h-fit rounded-md ${
           isClosed ? 'bg-greyDark' : 'bg-primary'
-        } px-[10px] py-[3px] text-[14px] text-white ` + className
+        } px-[10px] py-[3px] text-[14px] text-white dark:text-text ` + className
       }
     >
       {isClosed ? (
@@ -26,16 +26,8 @@ const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => {
           {{ timeLeft: dayjs(deadline).fromNow(true) }}
         </Trans>
       )}
-    </div>
+    </p>
   );
-};
-
-const ddayFormatted = (deadline: dayjs.Dayjs, t: T) => {
-  const daysLeft = deadline.diff(dayjs(), 'day', true);
-
-  if (daysLeft < 0) return t('ddayPlus');
-  if (daysLeft < 1) return 'D - Day';
-  return `D - ${Math.floor(daysLeft)}`;
 };
 
 export default DDay;
