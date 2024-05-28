@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from 'dayjs';
 
 export const isServer = typeof window === 'undefined';
 export const calculateRemainingTime = (createdAt: Dayjs | string) => {

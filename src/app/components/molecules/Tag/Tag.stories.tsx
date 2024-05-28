@@ -1,7 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import { fallbackLng } from '@/app/i18next/settings';
-
 import Tag from '.';
 
 export default {
@@ -10,6 +8,6 @@ export default {
 } as Meta<typeof Tag>;
 
 export const Default: StoryFn<typeof Tag> = (args) => {
-  return <Tag {...args} lng={fallbackLng} />;
+  return <Tag {...args} />;
 };
 Default.args = { name: 'tag' };
