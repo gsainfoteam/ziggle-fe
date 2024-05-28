@@ -34,6 +34,7 @@ import { calculateRemainingTime } from '@/utils/utils';
 
 import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
 import DeepLButton from './DeepLButton';
+import EditableTimer from './EditableTimer';
 import handleNoticeSubmit from './handle-notice-submit';
 import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
@@ -41,24 +42,22 @@ import TagInput, { Tag } from './TagInput';
 import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
 import TitleAndContent from './TitleAndContent';
 
-const NoticeEditor = ({
-  params: { lng },
-  searchParams,
-  notice,
-}: {
+interface NoticeEditorProps {
   params: PropsWithLng;
-  searchParams?: {
-    noticeId?: string;
-  };
   notice?: NoticeDetail & {
     enTitle?: string;
     enContent?: string;
   };
-}) => {
+  isEditMode: boolean;
+}
+
+const NoticeEditor = ({
+  params: { lng },
+  notice,
+  isEditMode,
+}: NoticeEditorProps) => {
   const { t } = useTranslation(lng);
   const { push } = useRouter();
-
-  const isEditMode = searchParams?.noticeId !== undefined;
   const isEditable = (() => {
     const remain = calculateRemainingTime(dayjs(notice?.createdAt));
     return remain.minutes > 0 && remain.seconds > 0;
@@ -301,6 +300,21 @@ const NoticeEditor = ({
 
   return (
     <>
+      {isEditMode && (
+        <>
+          {notice?.createdAt && (
+            <EditableTimer createdAt={notice.createdAt} lng={lng} />
+          )}
+          <p
+            className={
+              'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
+            }
+          >
+            {t('write.editDescription')}
+          </p>
+        </>
+      )}
+
       {!isEditMode && (
         <div className={'flex justify-end'}>
           <p className={'text-sm text-primary'}>
