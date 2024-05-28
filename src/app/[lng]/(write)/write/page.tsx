@@ -41,13 +41,15 @@ const WritePage = async ({
         {notice?.createdAt && (
           <EditableTimer createdAt={notice.createdAt} lng={lng} />
         )}
-        <p
-          className={
-            'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
-          }
-        >
-          {t('write.editDescription')}
-        </p>
+        {isEdit && (
+          <p
+            className={
+              'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
+            }
+          >
+            {t('write.editDescription')}
+          </p>
+        )}
 
         <NoticeEditor
           params={{ lng }}
