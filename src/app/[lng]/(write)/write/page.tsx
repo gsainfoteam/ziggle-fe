@@ -37,11 +37,10 @@ const WritePage = async ({
         `http://localhost:${process.env.PORT}/api/notice/${searchParams.noticeId}/full`,
       ).then((res) => (res.ok ? res.json() : undefined))
     : undefined;
-  if (!notice) notFound();
+  if (searchParams?.noticeId && !notice) notFound();
 
-  const isEdit = !!searchParams?.noticeId;
   const isAuthor = userData.user.uuid === notice?.author.uuid;
-  if (isEdit && !isAuthor) redirect(`/${lng}/notice/${notice.id}`);
+  if (notice && !isAuthor) redirect(`/${lng}/notice/${notice.id}`);
 
   return (
     <main className="flex flex-col items-center py-12">
