@@ -5,11 +5,9 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import * as process from 'node:process';
 
 import { notFound, redirect } from 'next/navigation';
-import React from 'react';
 
 import { auth } from '@/api/auth/auth';
 import { NoticeDetail } from '@/api/notice/notice';
-import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import NoticeEditor from './NoticeEditor';
@@ -28,6 +26,7 @@ const WritePage = async ({
   const userData = await auth();
   if (!userData) redirect(`/${lng}/login`);
 
+  const isEditMode = !!searchParams?.noticeId;
   const notice:
     | (NoticeDetail & {
         enTitle?: string;
@@ -47,21 +46,10 @@ const WritePage = async ({
   return (
     <main className="flex flex-col items-center py-12">
       <div className="content flex max-w-[600px] flex-col">
-        {notice?.createdAt && (
-          <EditableTimer createdAt={notice.createdAt} lng={lng} />
-        )}
-        <p
-          className={
-            'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
-          }
-        >
-          {t('write.editDescription')}
-        </p>
-
         <NoticeEditor
           params={{ lng }}
-          searchParams={searchParams}
           notice={notice}
+          isEditMode={isEditMode}
         />
       </div>
     </main>

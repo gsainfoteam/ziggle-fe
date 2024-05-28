@@ -198,13 +198,17 @@
     }
   },
   "mypage": {
-    "info": "INFO",
-    "myNotice": "List of My Notices",
-    "remindNotice": "List of Rminded Notices",
+    "info": "Account Info",
+    "name": "Name",
+    "email": "Email",
+    "id": "Student ID",
+    "myNotice": "My Notices",
+    "remindNotice": "Reminded Notices",
     "totalList": "view all",
-    "logout": "logout",
-    "quit": "withdrawal",
-    "noArticle": "No article has been saved yet. =ㅅ="
+    "logout": "Log Out",
+    "quit": "Withdrawal",
+    "switchLanguage": "Enable English",
+    "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
     "searchBar": {

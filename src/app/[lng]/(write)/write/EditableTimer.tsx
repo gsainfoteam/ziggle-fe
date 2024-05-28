@@ -1,8 +1,9 @@
 'use client';
 
 import { Dayjs } from 'dayjs';
-import { PropsWithLng } from '@/app/i18next';
 import { useEffect, useState } from 'react';
+
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { calculateRemainingTime } from '@/utils/utils';
 

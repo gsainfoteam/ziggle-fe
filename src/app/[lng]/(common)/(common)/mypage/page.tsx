@@ -1,56 +1,68 @@
-import { redirect } from 'next/navigation';
+'use client';
 
-import { auth } from '@/api/auth/auth';
-import { Notice } from '@/api/notice/notice';
-import { getAllNotices } from '@/api/notice/notice-server';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import Link from 'next/link';
+import { redirect, useRouter } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
+import Button from '@/app/components/atoms/Button';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+
+import ChangeLanguageBox from './ChangeLanguageBox';
+import MypageBox from './MypageBox';
+import MypageButtons from './MypageButton';
 import MypageProfile from './MypageProfile';
-import MypageTable from './MypageTable';
 
-export default async function MyPage({
-  params: { lng },
-}: {
-  params: PropsWithLng;
-}) {
-  const { t } = await createTranslation(lng);
-  const userData = await auth();
-  const remindedNotice: Notice[] = (
-    await getAllNotices({ my: 'reminders', lang: lng })
-  ).list;
-  const ownNotice: Notice[] = (
-    await getAllNotices({ my: 'own', limit: 5, orderBy: 'recent', lang: lng })
-  ).list;
+export default function MyPage({ params: { lng } }: { params: PropsWithLng }) {
+  const { t } = useTranslation(lng);
 
-  if (!userData) return redirect(`/${lng}/login`);
+  const { data: sessionData } = useSession();
 
-  const { user } = userData;
+  if (!sessionData) {
+    redirect('/');
+  }
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' });
+  };
+
+  const handleWithdrawal = () => {
+    window.open(process.env.NEXT_PUBLIC_IDP_BASE_URL);
+  };
 
   return (
-    <>
-      <div className="h-1500 xl:h-1000 mt-10 flex w-full flex-col items-center justify-center gap-20 xl:flex-row">
-        <div className="relative m-10 flex flex-col">
-          <MypageProfile lng={lng} />
-        </div>
-        <div className="my-5 flex flex-col items-center justify-center">
-          <div className="xl:p-50 mb-10 p-0">
-            <MypageTable
-              lng={lng}
-              title={t('mypage.myNotice')}
-              articles={ownNotice}
-              link={`/${lng}/section/written`}
-            />
-          </div>
-          <div className="xl:p-50 p-0">
-            <MypageTable
-              lng={lng}
-              title={t('mypage.remindNotice')}
-              articles={remindedNotice}
-              link={`/${lng}/section/reminded`}
-            />
-          </div>
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex min-w-full flex-col gap-5 p-4 md:min-w-[500px]">
+        <MypageProfile
+          lng={lng}
+          name={sessionData.user.name}
+          id={sessionData.user.studentNumber}
+          email={sessionData.user.email}
+        />
+
+        <MypageButtons lng={lng} />
+
+        <div className="flex flex-col gap-3">
+          <ChangeLanguageBox lng={lng} />
+
+          <Button onClick={handleSignOut}>
+            <MypageBox>
+              <div className="flex self-stretch text-greyDark dark:text-dark_white">
+                {t('mypage.logout')}
+              </div>
+            </MypageBox>
+          </Button>
+
+          <Button onClick={handleWithdrawal}>
+            <MypageBox>
+              <div className="flex self-stretch text-greyDark dark:text-dark_white">
+                {t('mypage.quit')}
+              </div>
+            </MypageBox>
+          </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

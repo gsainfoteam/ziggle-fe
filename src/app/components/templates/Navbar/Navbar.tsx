@@ -3,9 +3,7 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { Suspense, useState } from 'react';
-import useSWR from 'swr';
 
-import { auth } from '@/api/auth/auth';
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/atoms/Analytics';
 import { PropsWithLng } from '@/app/i18next';
