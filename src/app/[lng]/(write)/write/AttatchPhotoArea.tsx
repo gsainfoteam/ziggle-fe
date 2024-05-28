@@ -103,10 +103,7 @@ const AttachPhotoArea = ({
                 fileInputRef.current?.click();
               }}
             >
-              <AddPhotoGray
-                className="fill-white dark:fill-black"
-                width={'40px'}
-              />
+              <AddPhotoGray className="fill-white" width={'40px'} />
             </button>
           </div>
         ) : (
