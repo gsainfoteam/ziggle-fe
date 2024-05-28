@@ -53,6 +53,14 @@ export const generateMetadata = async ({
       type: 'website',
       images: '/api/og',
     },
+    icons: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        url: '/logo.png',
+        sizes: '1024x1024',
+      },
+    ],
   };
 };
 

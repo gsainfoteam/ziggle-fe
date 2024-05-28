@@ -1,40 +1,45 @@
 'use client';
 
-import "react-calendar/dist/Calendar.css";
-import "react-clock/dist/Clock.css";
-import "react-datetime-picker/dist/DateTimePicker.css";
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
-import Swal from "sweetalert2";
-import { Editor } from "tinymce";
+import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import Swal from 'sweetalert2';
+import { Editor } from 'tinymce';
 
-import LogEvents from "@/api/log/log-events";
-import sendLog from "@/api/log/send-log";
-import { attachInternationalNotice, createAdditionalNotice, NoticeDetail } from "@/api/notice/notice";
-import Button from "@/app/components/atoms/Button";
-import Toggle from "@/app/components/atoms/Toggle/Toggle";
-import { PropsWithLng } from "@/app/i18next";
-import { useTranslation } from "@/app/i18next/client";
-import AddPhotoIcon from "@/assets/icons/add-photo.svg";
-import ClockIcon from "@/assets/icons/clock.svg";
-import GlobeIcon from "@/assets/icons/globe.svg";
-import TagIcon from "@/assets/icons/tag.svg";
-import TypeIcon from "@/assets/icons/type.svg";
-import { NOTICE_LOCAL_STORAGE_KEY } from "@/utils/constants";
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
+import {
+  attachInternationalNotice,
+  createAdditionalNotice,
+  NoticeDetail,
+} from '@/api/notice/notice';
+import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
+import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
+import Button from '@/app/components/atoms/Button';
+import Toggle from '@/app/components/atoms/Toggle/Toggle';
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+import AddPhotoIcon from '@/assets/icons/add-photo.svg';
+import ClockIcon from '@/assets/icons/clock.svg';
+import GlobeIcon from '@/assets/icons/globe.svg';
+import TagIcon from '@/assets/icons/tag.svg';
+import TypeIcon from '@/assets/icons/type.svg';
+import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
+import { WarningSwal } from '@/utils/swals';
+import { calculateRemainingTime } from '@/utils/utils';
 
-import AttachPhotoArea, { FileWithUrl } from "./AttatchPhotoArea";
-import DeepLButton from "./DeepLButton";
-import handleNoticeSubmit from "./handle-notice-submit";
-import LanguageTab from "./LanguageTab";
-import NoticeTypeSelector, { NoticeType } from "./NoticeTypeSelector";
-import TagInput, { Tag } from "./TagInput";
-import TitleAndContent from "./TitleAndContent";
-import { calculateRemainingTime } from "@/utils/utils";
-import dayjs from "dayjs";
-import { WarningSwal } from "@/utils/swals";
-import handleNoticeEdit from "@/app/[lng]/(write)/write/handle-notice-edit";
-import AddAdditionalNotice from "@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice";
+import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
+import DeepLButton from './DeepLButton';
+import handleNoticeSubmit from './handle-notice-submit';
+import LanguageTab from './LanguageTab';
+import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
+import TagInput, { Tag } from './TagInput';
+import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
+import TitleAndContent from './TitleAndContent';
 
 const NoticeEditor = ({
   params: { lng },
@@ -156,7 +161,20 @@ const NoticeEditor = ({
     };
 
     isEditMode ? fetchExistingNotice() : checkLocalStorage();
-  }, [isEditMode]);
+  }, [isEditMode, notice, t]);
+
+  const handleChange = async () => {
+    if (isLoading) return;
+    localStorage.setItem(
+      NOTICE_LOCAL_STORAGE_KEY,
+      JSON.stringify({
+        koreanTitle,
+        englishTitle,
+        koreanBody: koreanEditorRef.current?.getContent(),
+        englishBody: englishEditorRef.current?.getContent(),
+      }),
+    );
+  };
 
   const handleSubmit = async () => {
     if (isLoading) return;
@@ -352,8 +370,10 @@ const NoticeEditor = ({
         <TitleAndContent
           editorRef={koreanEditorRef}
           title={koreanTitle}
-          setTitle={setKoreanTitle}
-          language="korean"
+          onChangeTitle={setKoreanTitle}
+          onChangeContent={handleChange}
+          titleLabel={t('write.koreanTitle')}
+          contentLabel={t('write.koreanContent')}
           t={t}
           disabled={isEditMode && !isEditable}
         />
@@ -368,8 +388,10 @@ const NoticeEditor = ({
         <TitleAndContent
           editorRef={englishEditorRef}
           title={englishTitle}
-          setTitle={setEnglishTitle}
-          language="english"
+          onChangeTitle={setEnglishTitle}
+          onChangeContent={handleChange}
+          titleLabel={t('write.englishTitle')}
+          contentLabel={t('write.englishContent')}
           t={t}
           disabled={!!(isEditMode && !isEditable && notice?.title)}
         />

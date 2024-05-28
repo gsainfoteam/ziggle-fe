@@ -27,7 +27,9 @@ export default async function Home({
   const page = parseInt(searchParams?.page ?? '');
 
   if (Number.isNaN(page) || page < 0) {
-    redirect(`/${lng}/${category}?page=0`);
+    redirect(
+      `/${lng}/${category}?page=0${sortByDeadline ? '&deadline=true' : ''}`,
+    );
   }
 
   const currentSidebarObject = sidebarObject
@@ -56,7 +58,7 @@ export default async function Home({
                 }`}
               >
                 <Link
-                  href={`${category}?page=${page}${
+                  href={`${category}?page=0${
                     sortByDeadline ? '' : '&deadline=true'
                   }`}
                   className="flex rounded-full"
@@ -65,6 +67,7 @@ export default async function Home({
                     className={styles.checkbox}
                     type="checkbox"
                     checked={sortByDeadline}
+                    readOnly
                   />
                 </Link>
                 {t('common.sortByDeadline')}
