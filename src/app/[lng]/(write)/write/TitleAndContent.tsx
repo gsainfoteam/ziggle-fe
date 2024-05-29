@@ -44,7 +44,7 @@ const TitleAndContent = ({
   return (
     <>
       <div className="mb-[10px] mt-10 flex gap-[6px]">
-        <TextIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
+        <TextIcon className="w-5 stroke-text md:w-6" />
         <p className="font-medium">{titleLabel}</p>
       </div>
 
@@ -70,7 +70,7 @@ const TitleAndContent = ({
       />
 
       <div className="mb-3 mt-10 flex items-center gap-2">
-        <ContentIcon className="w-5 md:w-6 dark:fill-white" />
+        <ContentIcon className="w-5 stroke-text md:w-6" />
         <p className="font-medium">{contentLabel}</p>
       </div>
 

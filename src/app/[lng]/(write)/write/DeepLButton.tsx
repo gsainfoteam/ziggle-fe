@@ -21,12 +21,17 @@ const DeepLButton = ({
       : 'https://www.deepl.com/translator#en/ko';
 
   return (
-    <Link
-      href={`${DEEPL_URL}/${editorRef?.current?.getContent({
-        format: 'text',
-      })}`}
+    <button
       className="rounded-md bg-[#042B48] px-4 py-2"
-      target={'_blank'}
+      onClick={(e) => {
+        e.preventDefault();
+        window.open(
+          `${DEEPL_URL}/${editorRef?.current?.getContent({
+            format: 'text',
+          })}`,
+          '_blank',
+        );
+      }}
     >
       <div className="flex gap-2">
         <DeepLLogo />
@@ -34,7 +39,7 @@ const DeepLButton = ({
           {t('write.translateWithDeepL')}
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 

@@ -46,17 +46,11 @@ export default async function Home({
         {category !== 'home' && (
           <div className="flex w-full flex-row justify-between py-5 font-bold md:max-w-[800px]">
             <div className="flex items-center gap-2 text-4xl text-primary ">
-              <icons.bold className="fill-primary stroke-white dark:stroke-dark_dark" />
+              <icons.bold className="w-10 fill-primary stroke-white dark:stroke-dark_dark" />
               {t(title) as string}
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (
-              <div
-                className={`flex items-center gap-3 text-lg font-medium ${
-                  sortByDeadline
-                    ? 'text-primary'
-                    : 'text-greyDark dark:text-greyLight'
-                }`}
-              >
+              <div className={`flex items-center gap-3`}>
                 <Link
                   href={`${category}?page=0${
                     sortByDeadline ? '' : '&deadline=true'
@@ -70,7 +64,14 @@ export default async function Home({
                     readOnly
                   />
                 </Link>
-                {t('common.sortByDeadline')}
+
+                <p
+                  className={`text-lg font-medium ${
+                    sortByDeadline ? 'text-primary' : 'text-greyDark'
+                  }`}
+                >
+                  {t('common.sortByDeadline')}
+                </p>
               </div>
             )}
           </div>
