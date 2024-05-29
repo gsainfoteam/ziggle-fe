@@ -110,9 +110,10 @@
 
 자세한 json 파일 작성법은 i18next 문서를 참고해주세요.
 
-Server Component에서는 `createTranslation`을, Client Component에서는 `useTranslation`을
-사용해야 합니다. 서버와 클라이언트에서 동일한 번역을 사용하기 위해서 파라미터로
-받은 `lng`를 각 함수의 인수로 넘겨주어야 합니다.
+Server Component에서는 `const {t} = await createTranslation()`을,
+Client Component에서는 `const {t} = useTranslation`을 사용해야 합니다.
+서버와 클라이언트에서 동일한 번역을 사용하기 위해서 파라미터로 받은 `lng`를
+각 함수의 인수로 넘겨주어야 합니다.
 
 #### auth
 
