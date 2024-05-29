@@ -16,9 +16,7 @@ const router = async (
   const newReq = new Request(`${base}${path}?${search}`, request);
   newReq.headers.set('Authorization', `Bearer ${session?.accessToken}`);
   const res = await fetch(newReq);
-  const json = await res.json();
-
-  return NextResponse.json(json, res);
+  return new NextResponse(res.body, res);
 };
 
 export {
