@@ -114,6 +114,22 @@ Server Component에서는 `createTranslation`을, Client Component에서는 `use
 사용해야 합니다. 서버와 클라이언트에서 동일한 번역을 사용하기 위해서 파라미터로
 받은 `lng`를 각 함수의 인수로 넘겨주어야 합니다.
 
+#### auth
+
+지글은 NextAuth를 사용하여 인증을 처리하고 있습니다.
+`src/api/auth` 디렉토리에 NextAuth의 설정 파일이 있습니다.
+
+별도로 설정 값을 바꿀 필요는 없이 token refresh, access token 등의 정보가 모두
+세션에 담겨 있습니다.
+
+- `session.user.studentNumber`
+- `session.user.uuid`
+- `session.accessToken`
+
+Server Component에서는 `const session = await auth()`로 인증정보를 가져올 수 있고,
+Client Component에서는 `const { data: session } = useSession()`으로 인증정보를
+가져올 수 있습니다.
+
 ## .env
 
 기본적으로 제공되는 `.env` 파일은 localhost:3000으로 개발 서버를 열 때
@@ -122,6 +138,9 @@ Server Component에서는 `createTranslation`을, Client Component에서는 `use
 이외에 두가지 환경변수가 추가로 필요합니다
 - `NEXTAUTH_SECRET`
 - `IDP_CLIENT_SECRET`
+
+이 두가지 환경변수를 `.env.local` 파일에 작성하시면 버전 관리에 tracking
+되지 않고 편하게 사용하실 수 있습니다.
 
 `NEXTAUTH_SECRET`는 `openssl rand -base64 128`과 같은 명령어로 생성한 랜덤한
 문자열이면 되고, `IDP_CLIENT_SECRET`은 infisical에서 `ziggle2023` client의
