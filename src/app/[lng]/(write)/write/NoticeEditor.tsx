@@ -495,9 +495,7 @@ const NoticeEditor = ({
       )}
 
       <div className={'mb-3 mt-10 flex items-center gap-2'}>
-        <ClockIcon
-          className={'w-5 stroke-text md:w-6 dark:stroke-dark_white'}
-        />
+        <ClockIcon className={'w-5 stroke-text md:w-6'} />
 
         <p className="text-lg font-medium">
           {t(isEditMode ? 'write.changeDeadline' : 'write.setupDeadline')}
@@ -523,7 +521,7 @@ const NoticeEditor = ({
       {!isEditMode && (
         <>
           <div className="mb-2 mt-10 flex gap-2">
-            <TagIcon className="w-5 md:w-6 dark:fill-white" />
+            <TagIcon className="w-5 fill-text md:w-6" />
             <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
             <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
           </div>
@@ -535,7 +533,7 @@ const NoticeEditor = ({
           <TagInput tags={tags} setTags={setTags} t={t} />
 
           <div className="mb-1 mt-10 flex items-center gap-2">
-            <AddPhotoIcon className="w-5 md:w-6 dark:fill-white" />
+            <AddPhotoIcon className="w-5 stroke-text md:w-6" />
             <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
             <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
           </div>
