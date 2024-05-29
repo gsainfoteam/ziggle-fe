@@ -181,7 +181,15 @@ const handleNoticeSubmit = async ({
   const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
   if (!tagIds) return;
 
-  const imageKeys = await uploadImages(images);
+  const imageKeys = await uploadImages(images).catch(() => null);
+  if (!imageKeys) {
+    Swal.fire({
+      text: t('write.alerts.submitFail'),
+      icon: 'error',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+    return;
+  }
 
   const notice = await createNotice({
     title,

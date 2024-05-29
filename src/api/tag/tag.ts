@@ -1,6 +1,6 @@
 import { Tag } from '@/app/[lng]/(write)/write/TagInput';
 
-import api from '../index';
+import api from '..';
 
 export const getAllTags = async () =>
   api.get<Tag[]>('/tag').then(({ data }) => data);

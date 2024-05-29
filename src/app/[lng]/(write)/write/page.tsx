@@ -8,6 +8,7 @@ import { notFound, redirect } from 'next/navigation';
 import Swal from 'sweetalert2';
 
 import { auth } from '@/api/auth/auth';
+import { getNotice } from '@/api/notice/get-notice';
 import { NoticeDetail } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
@@ -28,19 +29,13 @@ const WritePage = async ({
   if (!userData) redirect(`/${lng}/login`);
 
   const isEditMode = !!searchParams?.noticeId;
-  const notice:
-    | (NoticeDetail & {
-        enTitle?: string;
-        enContent?: string;
-      })
-    | undefined = searchParams?.noticeId
-    ? await fetch(`/api/notice/${searchParams.noticeId}/full`)
-        .then((res) => (res.ok ? res.json() : undefined))
-        .catch(
-          // redirect to 404 if notice is not found
-          () => {},
-        )
-    : undefined;
+  const notice = searchParams?.noticeId
+    ? await getNotice(Number.parseInt(searchParams.noticeId), 'ko')
+    : null;
+  const englishNotice =
+    searchParams?.noticeId && notice?.langs.includes('en')
+      ? await getNotice(Number.parseInt(searchParams.noticeId), 'en')
+      : null;
   if (searchParams?.noticeId && !notice) notFound();
 
   const isAuthor = userData.user.uuid === notice?.author.uuid;
@@ -51,7 +46,15 @@ const WritePage = async ({
       <div className="content flex max-w-[600px] flex-col">
         <NoticeEditor
           params={{ lng }}
-          notice={notice}
+          notice={
+            notice
+              ? {
+                  ...notice,
+                  enTitle: englishNotice?.title,
+                  enContent: englishNotice?.content,
+                }
+              : undefined
+          }
           isEditMode={isEditMode}
         />
       </div>
