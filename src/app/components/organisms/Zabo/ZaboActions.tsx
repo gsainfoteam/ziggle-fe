@@ -52,7 +52,7 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
 
     try {
       const reactions = await toggleReaction(emoji, isReacted);
-      const fireReaction = reactions?.find(({ emoji }) => emoji === '🔥');
+      const fireReaction = reactions.find(({ emoji }) => emoji === '🔥');
 
       setCurrentFire(
         fireReaction ?? { count: 0, emoji: '🔥', isReacted: false },
