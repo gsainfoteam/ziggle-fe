@@ -116,17 +116,17 @@ export const createNotice = ({
 
 export const updateNotice = ({
   noticeId,
-  content,
+  body,
   deadline,
   lng,
 }: {
   noticeId: number;
-  content: string;
+  body: string;
   deadline?: Date;
   lng: 'ko' | 'en';
 }) =>
   api
-    .post(`/notice/${noticeId}?lang=${lng}`, { deadline, content })
+    .patch(`/notice/${noticeId}?lang=${lng}`, { deadline, body })
     .then((res) => res.data);
 
 export const attachInternationalNotice = ({
