@@ -34,16 +34,12 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
   const [currentFire, setCurrentFire] = useState<Reaction>(fire);
 
   const toggleReaction = async (emoji: string, isReacted: boolean) => {
-    try {
-      if (isReacted) {
-        const res = await deleteReaction(id, emoji);
-        return res.reactions;
-      } else {
-        const res = await addReaction(id, emoji);
-        return res.reactions;
-      }
-    } catch (e) {
-      toast.error(t('searchPage.loginRequired'));
+    if (isReacted) {
+      const res = await deleteReaction(id, emoji);
+      return res.reactions;
+    } else {
+      const res = await addReaction(id, emoji);
+      return res.reactions;
     }
   };
 
@@ -54,11 +50,15 @@ const FireButton = ({ id, fire, lng }: FireButtonProps) => {
   ) => {
     e.preventDefault();
 
-    const reactions = await toggleReaction(emoji, isReacted);
-    const fireReaction = reactions?.find(({ emoji }) => emoji === '🔥');
+    try {
+      const reactions = await toggleReaction(emoji, isReacted);
+      const fireReaction = reactions?.find(({ emoji }) => emoji === '🔥');
 
-    if (fireReaction) {
-      setCurrentFire(fireReaction);
+      setCurrentFire(
+        fireReaction ?? { count: 0, emoji: '🔥', isReacted: false },
+      );
+    } catch (e) {
+      toast.error(t('searchPage.loginRequired'));
     }
   };
 
