@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       deployments: write
-    environment: preview
+    environment: staging
     outputs:
       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       ECR_REPOSITORY: ziggle-frontend
@@ -23,7 +23,7 @@ jobs:
         with:
           token: '${{ github.token }}'
           environment-url: https://stg.ziggle.gistory.me
-          environment: preview
+          environment: staging
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
