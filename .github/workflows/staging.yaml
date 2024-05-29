@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       deployments: write
-    environment: staging
+    environment:
+      name: staging
+      url: https://stg.ziggle.gistory.me
     outputs:
       ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
       ECR_REPOSITORY: ziggle-frontend
