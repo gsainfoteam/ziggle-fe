@@ -34,13 +34,12 @@ const WritePage = async ({
         enContent?: string;
       })
     | undefined = searchParams?.noticeId
-    ? await fetch(
-        `http://localhost:${process.env.PORT}/api/notice/${searchParams.noticeId}/full`,
-      )
+    ? await fetch(`/api/notice/${searchParams.noticeId}/full`)
         .then((res) => (res.ok ? res.json() : undefined))
-        .catch
-        // redirect to 404 if notice is not found
-        ()
+        .catch(
+          // redirect to 404 if notice is not found
+          () => {},
+        )
     : undefined;
   if (searchParams?.noticeId && !notice) notFound();
 
