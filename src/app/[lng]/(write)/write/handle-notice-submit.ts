@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 import { uploadImages } from '@/api/image/image';
@@ -211,14 +212,30 @@ const handleNoticeSubmit = async ({
   }
 
   if (noticeLanguage === 'both') {
-    await attachInternationalNotice({
+    const noticeWithInternational = await attachInternationalNotice({
       lang: 'en',
       title: enTitle || title,
       deadline,
       body: englishBody!,
       noticeId: id,
       contentId: 1,
-    });
+    }).catch(() => null);
+
+    if (!noticeWithInternational) {
+      Swal.fire({
+        text: t('write.alerts.attachInternationalFail'),
+        icon: 'error',
+        confirmButtonText: t('alertResponse.confirm'),
+        showDenyButton: true,
+        denyButtonText: t('write.alerts.copyEnglishContent'),
+      }).then((result) => {
+        if (result.isDenied) {
+          navigator.clipboard.writeText(englishBody!);
+          toast.success(t('write.alerts.copySuccess'));
+        }
+      });
+      return;
+    }
   }
 
   Swal.fire({

@@ -307,7 +307,15 @@
       "submitFail": "Failed to submit notice",
       "deleteSuccess": "The notice was deleted successfully",
       "deleteFail": "Failed to delete notice",
-      "tagCreationFail": "Failed to create tag"
+      "tagCreationFail": "Failed to create tag",
+      "fetchNoticeFail": "Failed to fetch notice information",
+      "attachInternationalFail": "Failed to post English version. Please try posting it again.",
+      "copyEnglishContent": "Copy English content",
+      "copySuccess": "The content has been copied! Paste it in the editor -> Tools -> Source code",
+      "attachAdditionalNoticeFail": "Failed to post additional notice. Please try posting it again.",
+      "copyAdditionalNotice": "Copy additional notice",
+      "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
+      "copyInternationalAdditionalNotice": "Copy En. add. notice"
     }
   },
   "installApp": {

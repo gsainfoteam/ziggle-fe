@@ -27,7 +27,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
   const { data: user } = useSession();
 
   return (
-    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2 dark:bg-text">
+    <header className="flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
           <Link href={`/${lng}`}>

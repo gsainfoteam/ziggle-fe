@@ -30,7 +30,7 @@ const DeepLButton = ({
     >
       <div className="flex gap-2">
         <DeepLLogo />
-        <div className="font-medium text-white">
+        <div className="dark:text-dark font-medium text-text">
           {t('write.translateWithDeepL')}
         </div>
       </div>

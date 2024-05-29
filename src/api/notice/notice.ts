@@ -107,7 +107,7 @@ export const createNotice = ({
   body: string;
   images: string[];
   tags: number[];
-}) =>
+}): Promise<NoticeDetail> =>
   fetch('/api/notice', {
     method: 'POST',
     headers: {
@@ -120,7 +120,11 @@ export const createNotice = ({
       images,
       tags,
     }),
-  }).then((res) => res.json());
+  }).then((res) => {
+    const response = res.json();
+    if (!res.ok) throw response;
+    return response;
+  });
 
 export const updateNotice = ({
   noticeId,
@@ -142,7 +146,11 @@ export const updateNotice = ({
       deadline,
       content,
     }),
-  }).then((res) => res.json());
+  }).then((res) => {
+    const response = res.json();
+    if (!res.ok) throw response;
+    return response;
+  });
 
 export const attachInternationalNotice = ({
   lang,
@@ -170,7 +178,11 @@ export const attachInternationalNotice = ({
       deadline,
       body,
     }),
-  }).then((res) => res.json());
+  }).then((res) => {
+    const response = res.json();
+    if (!res.ok) throw response;
+    return response;
+  });
 
 export const createAdditionalNotice = ({
   noticeId,
@@ -191,7 +203,11 @@ export const createAdditionalNotice = ({
       body,
       deadline,
     }),
-  }).then((res) => res.json());
+  }).then((res) => {
+    const response = res.json();
+    if (!res.ok) throw response;
+    return response;
+  });
 
 export const deleteNotice = (id: number) =>
   fetch(`/api/notice/${id}`, {
