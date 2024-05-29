@@ -1,44 +1,150 @@
+# Ziggle Frontend
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+엄청난 역사를 지닌 지글 프론트엔드 레포지토리를 방문해주신 여러분, 환영합니다
 
-## Getting Started
+## Project Structure
 
-
-
-First, install the dependencies:
-```bash
-  yarn
+```
+.
+├── public
+│   ├── .well-known: 앱 링크를 위한 파일
+│   └── tinymce: wysiwyg editor
+└── src
+    ├── api: 앱 내부에서 호출하는 api. fetch를 통해 호출
+    │   ├── auth
+    │   ├── image
+    │   ├── log
+    │   ├── notice
+    │   └── tag
+    ├── app
+    │   ├── [lng]: 지글의 모든 화면은 이 디렉토리 밑에 있습니다
+    │   │   ├── (common)
+    │   │   │   ├── (common)
+    │   │   │   │   ├── mypage
+    │   │   │   │   ├── search
+    │   │   │   │   └── section
+    │   │   │   │       └── [type]
+    │   │   │   └── (needSidebar)
+    │   │   │       ├── [category]
+    │   │   │       └── notice
+    │   │   │           └── [id]
+    │   │   │               └── assets
+    │   │   ├── (empty): 레이아웃이 비어있는 화면
+    │   │   │   ├── app: /[lng]/app - 앱 설치 페이지 리다이렉션
+    │   │   │   └── login: /[lng]/login - 로그인 페이지 리다이렉션
+    │   │   └── (write): 사이드바가 없고, 상단바가 있는 글쓰기 화면
+    │   │       └── write: /[lng]/write
+    │   ├── api
+    │   │   ├── auth: nextauth를 사용하여 인증을 처리
+    │   │   │   └── [...nextauth]
+    │   │   ├── bff: ziggle-backend와 통신하는 api. proxy 역할
+    │   │   │   └── [...ziggle]
+    │   │   ├── notice: 직접 ziggle-backend와 통신하는 api (deprecated)
+    │   │   │   └── [noticeId]
+    │   │   │       ├── [contentId]
+    │   │   │       │   └── foreign
+    │   │   │       ├── additional
+    │   │   │       └── full
+    │   │   └── og: open graph image를 생성하는 api
+    │   ├── components: 모든 컴포넌트는 이 디렉토리 밑에 있습니다
+    │   │   ├── atoms: 가장 작은 단위의 컴포넌트
+    │   │   │   ├── Analytics
+    │   │   │   ├── Button
+    │   │   │   ├── Checkbox
+    │   │   │   ├── ExternalLink
+    │   │   │   └── Toggle
+    │   │   ├── molecules: atom을 조합한 컴포넌트
+    │   │   │   ├── Chip
+    │   │   │   ├── DDay
+    │   │   │   ├── HighlightedText
+    │   │   │   ├── HorizontalScrollButton
+    │   │   │   ├── Pagination
+    │   │   │   ├── Tag
+    │   │   │   └── ZaboImage
+    │   │   ├── organisms: molecule을 조합한 컴포넌트
+    │   │   │   ├── DateTimePicker
+    │   │   │   ├── ImageCarousel
+    │   │   │   ├── Tags
+    │   │   │   └── Zabo
+    │   │   └── templates: organism을 조합한 컴포넌트
+    │   │       ├── Footer
+    │   │       ├── LoadingCatAnimation
+    │   │       ├── Navbar
+    │   │       ├── NavbarWrite
+    │   │       ├── ResultZabo
+    │   │       ├── SearchAnimation
+    │   │       ├── SearchResults
+    │   │       ├── Sidebar
+    │   │       └── ZaboShowcase
+    │   └── i18next: 다국어 지원을 위한 설정
+    │       └── locales
+    │           ├── en
+    │           └── ko
+    ├── assets: 이미지, 폰트, 아이콘 등의 정적 파일
+    │   ├── animations: lottie 애니메이션
+    │   ├── fonts
+    │   ├── icons
+    │   └── logos
+    ├── mock: 개발 환경(storybook)에서 사용하는 mock 데이터
+    └── utils: 유틸성 파일
 ```
 
-Then, run the development server:
+### 몇가지 알아두면 좋은 점
+
+#### Next.js
+
+지글은 Next.js의 app directory 구조를 따르고 있습니다.
+이 때문에 각 컴포넌트(페이지)는 Client Component와 Server Component로
+나눠지게 됩니다
+
+각각은 [각자의 특성](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns)을 가지고 있습니다.
+
+- Client Component: 클라이언트에서 hydrate되는 컴포넌트
+- Server Component: 서버에서 렌더링되는 컴포넌트 (hydration이 필요 없음)
+
+#### i18next
+
+지글은 다국어 지원을 위해서 i18next를 사용하고 있습니다.
+`src/app/i18next/locales` 디렉토리에 각 언어별 폴더로 json 파일을 만들어서
+다국어를 지원하고 있습니다.
+
+자세한 json 파일 작성법은 i18next 문서를 참고해주세요.
+
+Server Component에서는 `createTranslation`을, Client Component에서는 `useTranslation`을
+사용해야 합니다. 서버와 클라이언트에서 동일한 번역을 사용하기 위해서 파라미터로
+받은 `lng`를 각 함수의 인수로 넘겨주어야 합니다.
+
+## .env
+
+기본적으로 제공되는 `.env` 파일은 localhost:3000으로 개발 서버를 열 때
+사용 가능한 파일입니다.
+
+이외에 두가지 환경변수가 추가로 필요합니다
+- `NEXTAUTH_SECRET`
+- `IDP_CLIENT_SECRET`
+
+`NEXTAUTH_SECRET`는 `openssl rand -base64 128`과 같은 명령어로 생성한 랜덤한
+문자열이면 되고, `IDP_CLIENT_SECRET`은 infisical에서 `ziggle2023` client의
+secret값을 받아오실 수 있습니다.
+
+## Install & Run
+
+<details>
+  <summary>yarn berry를 사용하고 있습니다</summary>
+  - zero-install X
+  - node-modules linker
+  - `.yarnrc.yml` 파일 참고
+</details>
 
 ```bash
-npm run dev
-# or
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Misc
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+해당 프로젝트는 `.gitattributes` 파일에서 eol 설정을 `lf`로 하고 있습니다.
+만약에 이미지 파일과 같은 바이너리 파일을 추가하는 경우에는, 해당 파일에 대해서
+`*.png binary`와 같은 설정을 해주셔야 의도치 않은 결과를 막을 수 있습니다.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
