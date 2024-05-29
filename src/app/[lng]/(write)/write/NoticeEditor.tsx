@@ -7,6 +7,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
@@ -259,7 +260,23 @@ const NoticeEditor = ({
         body: englishBody,
         noticeId: notice.id,
         contentId: 1,
-      });
+      }).catch(() => null);
+
+      if (!englishNotice) {
+        Swal.fire({
+          text: t('write.alerts.attachInternationalFail'),
+          icon: 'error',
+          confirmButtonText: t('alertResponse.confirm'),
+          showDenyButton: true,
+          denyButtonText: t('write.alerts.copyEnglishContent'),
+        }).then((result) => {
+          if (result.isDenied) {
+            navigator.clipboard.writeText(englishBody!);
+            toast.success(t('write.alerts.copySuccess'));
+          }
+        });
+        return;
+      }
     }
 
     const additionalKoreanNotice = additionalKoreanBody
@@ -267,8 +284,24 @@ const NoticeEditor = ({
           noticeId: notice.id,
           body: additionalKoreanBody,
           deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
-        })
+        }).catch(() => null)
       : undefined;
+
+    if (additionalKoreanNotice === null) {
+      Swal.fire({
+        text: t('write.alerts.attachAdditionalNoticeFail'),
+        icon: 'error',
+        confirmButtonText: t('alertResponse.confirm'),
+        showDenyButton: true,
+        denyButtonText: t('write.alerts.copyAdditionalNotice'),
+      }).then((result) => {
+        if (result.isDenied) {
+          navigator.clipboard.writeText(additionalKoreanBody!);
+          toast.success(t('write.alerts.copySuccess'));
+        }
+      });
+      return;
+    }
 
     const contents = additionalKoreanNotice?.additionalContents;
 
@@ -284,8 +317,24 @@ const NoticeEditor = ({
               noticeId: notice.id,
               contentId,
               deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
-            })
+            }).catch(() => null)
           : undefined;
+
+      if (additionalEnglishNotice === null) {
+        Swal.fire({
+          text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
+          icon: 'error',
+          confirmButtonText: t('alertResponse.confirm'),
+          showDenyButton: true,
+          denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
+        }).then((result) => {
+          if (result.isDenied) {
+            navigator.clipboard.writeText(additionalEnglishBody!);
+            toast.success(t('write.alerts.copySuccess'));
+          }
+        });
+        return;
+      }
     }
 
     Swal.fire({

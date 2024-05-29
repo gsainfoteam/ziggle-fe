@@ -5,6 +5,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import * as process from 'node:process';
 
 import { notFound, redirect } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 import { auth } from '@/api/auth/auth';
 import { NoticeDetail } from '@/api/notice/notice';
@@ -35,7 +36,11 @@ const WritePage = async ({
     | undefined = searchParams?.noticeId
     ? await fetch(
         `http://localhost:${process.env.PORT}/api/notice/${searchParams.noticeId}/full`,
-      ).then((res) => (res.ok ? res.json() : undefined))
+      )
+        .then((res) => (res.ok ? res.json() : undefined))
+        .catch
+        // redirect to 404 if notice is not found
+        ()
     : undefined;
   if (searchParams?.noticeId && !notice) notFound();
 

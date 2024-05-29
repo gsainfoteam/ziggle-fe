@@ -293,7 +293,15 @@
       "submitFail": "공지 작성에 실패했습니다",
       "deleteSuccess": "공지가 성공적으로 삭제되었습니다",
       "deleteFail": "공지 삭제에 실패했습니다",
-      "tagCreationFail": "태그 생성에 실패했습니다"
+      "tagCreationFail": "태그 생성에 실패했습니다",
+      "fetchNoticeFail": "공지를 불러오는데 실패했습니다",
+      "attachInternationalFail": "영어 버전 작성에 실패했습니다. 다시 시도해주세요",
+      "copyEnglishContent": "영어 본문 복사",
+      "copySuccess": "복사 완료. 에디터의 Tools -> Source code에 붙여넣으세요.",
+      "attachAdditionalNoticeFail": "추가 공지 작성에 실패했습니다",
+      "copyAdditionalNotice": "추가 공지 복사",
+      "attachInternationalAdditionalNoticeFail": "영어 추가 공지 작성에 실패했습니다",
+      "copyInternationalAdditionalNotice": "영어 추가 공지 복사"
     }
   },
   "installApp": {
