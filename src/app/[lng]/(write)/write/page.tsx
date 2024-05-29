@@ -4,10 +4,10 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import * as process from 'node:process';
 
-import React from 'react';
+import { notFound, redirect } from 'next/navigation';
 
+import { auth } from '@/api/auth/auth';
 import { NoticeDetail } from '@/api/notice/notice';
-import EditableTimer from '@/app/[lng]/(write)/write/EditableTimer';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import NoticeEditor from './NoticeEditor';
@@ -23,6 +23,9 @@ const WritePage = async ({
 }) => {
   const { t } = await createTranslation(lng);
 
+  const userData = await auth();
+  if (!userData) redirect(`/${lng}/login`);
+
   const isEditMode = !!searchParams?.noticeId;
   const notice:
     | (NoticeDetail & {
@@ -32,8 +35,12 @@ const WritePage = async ({
     | undefined = searchParams?.noticeId
     ? await fetch(
         `http://localhost:${process.env.PORT}/api/notice/${searchParams.noticeId}/full`,
-      ).then((res) => res.json())
+      ).then((res) => (res.ok ? res.json() : undefined))
     : undefined;
+  if (searchParams?.noticeId && !notice) notFound();
+
+  const isAuthor = userData.user.uuid === notice?.author.uuid;
+  if (notice && !isAuthor) redirect(`/${lng}/notice/${notice.id}`);
 
   return (
     <main className="flex flex-col items-center py-12">
