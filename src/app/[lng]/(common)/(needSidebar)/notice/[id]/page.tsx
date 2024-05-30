@@ -43,20 +43,31 @@ interface DetailedNoticePageProps {
 const DetailedNoticePage = async ({
   params: { id, lng },
 }: DetailedNoticePageProps) => {
-  const { t } = await createTranslation(lng, 'translation');
   const notice = await getNotice(Number.parseInt(id), lng).catch(() => null);
   if (!notice) return notFound();
 
   const title = notice.title;
 
+  const additionalContents = Object.values(
+    notice.additionalContents.reduce<
+      Record<number, (typeof notice.additionalContents)[number]>
+    >(
+      (prev, curr) => ({
+        ...prev,
+        [curr.id]: prev[curr.id]?.lang === lng ? prev[curr.id] : curr,
+      }),
+      {},
+    ),
+  );
+
   return (
     <div className="flex justify-center">
       <div className="content mt-8 md:mt-12 md:w-[900px] md:min-w-[600px]">
         <div className="flex gap-5">
-          {/* DESKTOP VIEW IMAGESTACK */}
+          {/* DESKTOP VIEW IMAGE STACK */}
           <div className="hidden md:block">
             {notice.imageUrls.length > 0 && (
-              <ImageStack srcs={notice.imageUrls} alt={title} lng={lng} />
+              <ImageStack sources={notice.imageUrls} alt={title} lng={lng} />
             )}
           </div>
 
@@ -67,12 +78,12 @@ const DetailedNoticePage = async ({
               lng={lng}
             />
 
-            {/* MOBILE VIEW IMAGESTACK */}
+            {/* MOBILE VIEW IMAGE STACK */}
             <div className="md:hidden">
               {notice.imageUrls.length > 0 && (
                 <ImageStack
                   width={900}
-                  srcs={notice.imageUrls}
+                  sources={notice.imageUrls}
                   alt={title}
                   lng={lng}
                 />
@@ -84,9 +95,8 @@ const DetailedNoticePage = async ({
             <Actions notice={notice} lng={lng} />
 
             <AdditionalNotices
-              additionalContents={notice.additionalContents}
+              additionalContents={additionalContents}
               notice={notice}
-              t={t}
               lng={lng}
             />
           </div>

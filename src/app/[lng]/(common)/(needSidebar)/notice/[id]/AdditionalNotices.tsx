@@ -1,19 +1,19 @@
 import dayjs from 'dayjs';
 
 import { Content, NoticeDetail } from '@/api/notice/notice';
-import { PropsWithLng, T } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 interface AdditionalNoticesProps {
   notice: NoticeDetail;
   additionalContents: Content[];
-  t: T;
 }
 
 const AdditionalNotices = async ({
   notice,
   additionalContents,
-  t,
-}: AdditionalNoticesProps & PropsWithLng) => {
+  lng,
+}: PropsWithLng<AdditionalNoticesProps>) => {
+  const { t } = await createTranslation(lng);
   return (
     <div className={'flex flex-col gap-[18px]'}>
       {additionalContents.map((content, index) => {

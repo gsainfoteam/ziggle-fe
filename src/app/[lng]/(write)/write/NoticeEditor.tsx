@@ -34,7 +34,7 @@ import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 import { WarningSwal } from '@/utils/swals';
 import { calculateRemainingTime } from '@/utils/utils';
 
-import AttachPhotoArea, { FileWithUrl } from './AttatchPhotoArea';
+import AttachPhotoArea, { FileWithUrl } from './AttachPhotoArea';
 import DeepLButton from './DeepLButton';
 import EditableTimer from './EditableTimer';
 import handleNoticeSubmit from './handle-notice-submit';
@@ -487,7 +487,7 @@ const NoticeEditor = ({
         <AddAdditionalNotice
           noticeId={notice.id}
           originallyHasDeadline={notice.deadline}
-          supportedLanguage={['ko', 'en']}
+          supportedLanguage={hasEnglishContent ? ['ko', 'en'] : ['ko']}
           koreanRef={additionalKoreanRef}
           englishRef={additionalEnglishRef}
           lng={lng}
