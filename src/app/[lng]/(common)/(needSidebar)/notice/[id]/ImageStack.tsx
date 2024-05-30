@@ -9,13 +9,13 @@ import ShowcaseModal from './ShowcaseModal';
 
 interface ImageStackProps {
   width?: number;
-  srcs: string[];
+  sources: string[];
   alt: string;
 }
 
 const ImageStack = ({
   width,
-  srcs,
+  sources,
   alt,
   lng,
 }: ImageStackProps & PropsWithLng) => {
@@ -32,7 +32,7 @@ const ImageStack = ({
   return (
     <>
       <div className="flex flex-col gap-[10px]">
-        {srcs.map((src, i) => (
+        {sources.map((src, i) => (
           <div key={src} className="relative cursor-pointer">
             <Image
               src={src}
@@ -49,7 +49,7 @@ const ImageStack = ({
       {isShowcaseOpen && (
         <div className="hidden md:block">
           <ShowcaseModal
-            srcs={srcs}
+            srcs={sources}
             alt={alt}
             lng={lng}
             onHide={() => setIsShowcaseOpen(false)}
