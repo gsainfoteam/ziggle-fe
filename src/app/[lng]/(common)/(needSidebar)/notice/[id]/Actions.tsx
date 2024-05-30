@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Trans } from 'react-i18next';
 import { toast } from 'react-toastify';
@@ -111,6 +112,7 @@ interface ReactionsProps {
 }
 
 const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
+  const router = useRouter();
   const [currentReactions, setCurrentReactions] =
     useState<Reaction[]>(reactions);
 
@@ -135,6 +137,7 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
 
     if (reactions) {
       setCurrentReactions(reactions);
+      router.refresh();
     }
   };
 
