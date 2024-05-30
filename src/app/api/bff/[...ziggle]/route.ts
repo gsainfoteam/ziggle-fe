@@ -13,17 +13,10 @@ const router = async (
   const path = context.params.ziggle.join('/');
   const search = url.searchParams;
   const session = await auth();
-  const res = await fetch(`${base}${path}${search}`, {
-    method: request.method,
-    headers: {
-      Authorization: `Bearer ${session?.accessToken}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(await request.json()),
-  });
-  const json = await res.json();
-
-  return NextResponse.json(json, res);
+  const newReq = new Request(`${base}${path}?${search}`, request);
+  newReq.headers.set('Authorization', `Bearer ${session?.accessToken}`);
+  const res = await fetch(newReq);
+  return new NextResponse(res.body, res);
 };
 
 export {

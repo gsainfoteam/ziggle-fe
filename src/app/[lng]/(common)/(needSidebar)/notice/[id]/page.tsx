@@ -1,4 +1,5 @@
 import { Metadata, ResolvingMetadata } from 'next';
+import { notFound } from 'next/navigation';
 
 import { getNotice } from '@/api/notice/get-notice';
 import { createTranslation } from '@/app/i18next';
@@ -13,11 +14,12 @@ import NoticeInfo from './NoticeInfo';
 export const generateMetadata = async (
   {
     params: { id },
-    searchParams,
-  }: { params: { id: string }; searchParams: { writeEn: string; lng: Locale } },
+    searchParams: { lng },
+  }: { params: { id: string }; searchParams: { lng: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const notice = await getNotice(Number.parseInt(id), searchParams.lng);
+  const notice = await getNotice(Number.parseInt(id), lng).catch(() => null);
+  if (!notice) return {};
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
@@ -42,7 +44,8 @@ const DetailedNoticePage = async ({
   params: { id, lng },
 }: DetailedNoticePageProps) => {
   const { t } = await createTranslation(lng, 'translation');
-  const notice = await getNotice(Number.parseInt(id), lng);
+  const notice = await getNotice(Number.parseInt(id), lng).catch(() => null);
+  if (!notice) return notFound();
 
   const title = notice.title;
 

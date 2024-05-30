@@ -151,7 +151,7 @@ const handleNoticeEdit = async ({
       ? await updateNotice({
           noticeId,
           deadline,
-          content: koreanBody!,
+          body: koreanBody!,
           lng: 'ko',
         }).catch(() => null)
       : undefined;
@@ -161,7 +161,7 @@ const handleNoticeEdit = async ({
       ? await updateNotice({
           noticeId,
           deadline,
-          content: englishBody!,
+          body: englishBody!,
           lng: 'en',
         }).catch(() => null)
       : undefined;

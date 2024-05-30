@@ -77,6 +77,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
       noticeSearchParams: {
         category: 'RECRUIT',
+        orderBy: 'recent',
       },
     },
     {
@@ -88,6 +89,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
       noticeSearchParams: {
         category: 'EVENT',
+        orderBy: 'recent',
       },
     },
     {
@@ -99,6 +101,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
       noticeSearchParams: {
         category: 'ETC',
+        orderBy: 'recent',
       },
     },
     {
@@ -110,6 +113,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
       noticeSearchParams: {
         category: 'ACADEMIC',
+        orderBy: 'recent',
       },
     },
   ],
@@ -132,6 +136,7 @@ export const sidebarObject: SidebarObject[][] = [
       needAuth: true,
       noticeSearchParams: {
         my: 'own',
+        orderBy: 'recent',
       },
     },
     {
@@ -144,6 +149,7 @@ export const sidebarObject: SidebarObject[][] = [
       needAuth: true,
       noticeSearchParams: {
         my: 'reminders',
+        orderBy: 'recent',
       },
     },
     // TODO: Add group page
