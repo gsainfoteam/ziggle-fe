@@ -175,7 +175,7 @@ export const addReaction = (noticeId: number, emoji: string) =>
 
 export const deleteReaction = (noticeId: number, emoji: string) =>
   api
-    .delete<NoticeDetail>(`/api/bff/notice/${noticeId}/reaction`, {
+    .delete<NoticeDetail>(`/notice/${noticeId}/reaction`, {
       data: { emoji },
     })
     .then((res) => res.data);
