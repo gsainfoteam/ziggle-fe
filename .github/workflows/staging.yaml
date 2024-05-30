@@ -19,13 +19,6 @@ jobs:
       IMAGE_TAG: dev${{ github.run_number }}
     steps:
       - uses: actions/checkout@v4
-      - uses: chrnorm/deployment-action@v2
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: '${{ github.token }}'
-          environment-url: https://stg.ziggle.gistory.me
-          environment: staging
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -60,21 +53,6 @@ jobs:
           tags: ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
-      - name: Update GitHub Deployment Status (success)
-        if: success()
-        uses: chrnorm/deployment-status@v2
-        with:
-          token: '${{ github.token }}'
-          state: 'success'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
-      - name: Update GitHub Deployment Status (failure)
-        if: failure()
-        uses: chrnorm/deployment-status@v2
-        with:
-          token: '${{ github.token }}'
-          state: 'failure'
-          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
   deploy:
     name: Update Git Repository
     needs: build
