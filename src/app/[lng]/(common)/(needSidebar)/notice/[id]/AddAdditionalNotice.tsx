@@ -6,11 +6,12 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import { Dayjs } from 'dayjs';
 import { RefObject, useState } from 'react';
+
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddIcon from '@/assets/icons/add.svg';
 
-interface AddAddtionalNoticesProps {
+interface AddAdditionalNoticesProps {
   noticeId: number;
   originallyHasDeadline: string | Dayjs | null;
   supportedLanguage: string[];
@@ -25,7 +26,7 @@ const AddAdditionalNotice = ({
   supportedLanguage,
   originallyHasDeadline,
   lng,
-}: AddAddtionalNoticesProps & PropsWithLng) => {
+}: AddAdditionalNoticesProps & PropsWithLng) => {
   const [content, setContent] = useState<string>('');
   const [englishContent, setEnglishContent] = useState<string>('');
 
