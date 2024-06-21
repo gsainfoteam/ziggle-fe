@@ -13,7 +13,7 @@ const Footer = ({ t }: PropsWithT) => {
   return (
     <footer
       className={
-        'bg-primary text-white ' +
+        'bg-primary text-white dark:text-dark_white ' +
         'box-content min-h-[300px] px-pageSide py-8 sm:py-16 ' +
         'flex flex-col gap-x-24 gap-y-12 ' +
         'xl:flex-row'

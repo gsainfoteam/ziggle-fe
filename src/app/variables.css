@@ -23,7 +23,7 @@
     --text: var(--dark_white);
     --white: var(--dark_dark);
     --greyLight: var(--dark_greyDark);
-    --greyDark: var(--dark_grey)
+    --greyDark: var(--dark_grey);
     --secondary: var(--dark_secondary);
   }
 }

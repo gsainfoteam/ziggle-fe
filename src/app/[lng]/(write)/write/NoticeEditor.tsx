@@ -207,6 +207,7 @@ const NoticeEditor = ({
     }
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
+
     push(`/${lng}/notice/${noticeId}`);
   };
 
@@ -492,14 +493,17 @@ const NoticeEditor = ({
         )}
 
       {isEditMode && notice && (
-        <AddAdditionalNotice
-          noticeId={notice.id}
-          originallyHasDeadline={notice.deadline}
-          supportedLanguage={hasEnglishContent ? ['ko', 'en'] : ['ko']}
-          koreanRef={additionalKoreanRef}
-          englishRef={additionalEnglishRef}
-          lng={lng}
-        />
+        <>
+          <div className="h-10" />
+          <AddAdditionalNotice
+            noticeId={notice.id}
+            originallyHasDeadline={notice.deadline}
+            supportedLanguage={hasEnglishContent ? ['ko', 'en'] : ['ko']}
+            koreanRef={additionalKoreanRef}
+            englishRef={additionalEnglishRef}
+            lng={lng}
+          />
+        </>
       )}
 
       <div className={'mb-3 mt-10 flex items-center gap-2'}>

@@ -50,7 +50,7 @@ const NoticeInfo = async ({
 
 const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
   return (
-    <div className="flex w-fit gap-[10px] rounded-[5px] bg-primary px-[13px] py-1 text-lg text-white">
+    <div className="flex w-fit gap-[10px] rounded-[5px] bg-primary px-[13px] py-1 text-lg text-white dark:text-dark_white">
       <Trans t={t} i18nKey={'zabo.dueAt'}>
         {{ dueAt: deadline.format('LLL') }}
       </Trans>
