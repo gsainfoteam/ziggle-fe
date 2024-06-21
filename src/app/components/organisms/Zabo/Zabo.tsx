@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Notice } from '@/api/notice/notice';
-import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.svg';
 
 import DDay from '../../molecules/DDay';
@@ -48,7 +48,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           'flex flex-col rounded-[10px] py-[10px] text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
         }
       >
-        <div className={'mx-3 my-[10px] flex items-center'}>
+        <div className={'mx-3 my-[10px] flex flex-wrap items-center gap-y-3'}>
           <DefaultProfile width={36} height={36} />
 
           <p className={'ml-2 text-lg font-medium dark:text-dark_white'}>
@@ -62,7 +62,10 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           </p>
 
           {deadline !== null && (
-            <DDay className="ml-[15px]" deadline={dayjs(deadline)} t={t} />
+            <>
+              <div className="w-[15px]" />
+              <DDay deadline={dayjs(deadline)} t={t} />
+            </>
           )}
         </div>
 
