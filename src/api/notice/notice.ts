@@ -103,15 +103,17 @@ export const createNotice = ({
   body,
   images,
   tags,
+  category,
 }: {
   title: string;
   deadline?: Date;
   body: string;
   images: string[];
   tags: number[];
+  category: (typeof Category)[keyof typeof Category];
 }): Promise<NoticeDetail> =>
   api
-    .post('/notice', { title, deadline, body, images, tags })
+    .post('/notice', { title, deadline, body, images, tags, category })
     .then((res) => res.data);
 
 export const updateNotice = ({

@@ -5,6 +5,7 @@ import { uploadImages } from '@/api/image/image';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 import { attachInternationalNotice, createNotice } from '@/api/notice/notice';
+import { Category } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
 import { T } from '@/app/i18next';
 import { WarningSwal } from '@/utils/swals';
@@ -20,6 +21,7 @@ interface NoticeSubmitForm {
   englishBody?: string;
   tags: string[];
   images: File[];
+  category: (typeof Category)[keyof typeof Category];
 }
 
 const handleNoticeSubmit = async ({
@@ -31,6 +33,7 @@ const handleNoticeSubmit = async ({
   englishBody,
   tags,
   images,
+  category,
   t,
 }: NoticeSubmitForm & { t: T }) => {
   sendLog(LogEvents.noticeWritingPageClickSubmit);
@@ -197,6 +200,7 @@ const handleNoticeSubmit = async ({
     body: koreanBody!,
     images: imageKeys,
     tags: tagIds,
+    category,
   }).catch(() => null);
 
   if (!notice) {

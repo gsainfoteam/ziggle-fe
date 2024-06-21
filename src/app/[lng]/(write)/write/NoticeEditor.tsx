@@ -18,6 +18,7 @@ import {
   createAdditionalNotice,
   NoticeDetail,
 } from '@/api/notice/notice';
+import { Category } from '@/api/notice/notice';
 import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
 import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
 import Button from '@/app/components/atoms/Button';
@@ -51,6 +52,12 @@ interface NoticeEditorProps {
   };
   isEditMode: boolean;
 }
+
+const NoticeTypeCatgoryMapper = {
+  recruit: Category.recruit,
+  event: Category.event,
+  general: Category.etc,
+};
 
 const NoticeEditor = ({
   params: { lng },
@@ -189,8 +196,9 @@ const NoticeEditor = ({
       koreanBody,
       enTitle: englishTitle,
       englishBody,
-      tags: [selectedNoticeType, ...tags.map((tag) => tag.name)],
+      tags: [...tags.map((tag) => tag.name)],
       images: photos.map((image) => image.file),
+      category: NoticeTypeCatgoryMapper[selectedNoticeType],
       t,
     });
     if (!noticeId) {
