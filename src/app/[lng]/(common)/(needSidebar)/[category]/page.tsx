@@ -44,7 +44,7 @@ export default async function Home({
     <main className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center">
         {category !== 'home' && (
-          <div className="flex w-full flex-row justify-between py-5 font-bold md:max-w-[800px]">
+          <div className="flex w-full flex-row flex-wrap justify-between gap-[14px] px-[18px] py-5 font-bold md:max-w-[800px]">
             <div className="flex items-center gap-2 text-4xl text-primary ">
               <icons.bold className="w-10 fill-primary stroke-white dark:stroke-dark_dark" />
               {t(title) as string}
