@@ -53,15 +53,10 @@ interface NoticeEditorProps {
   isEditMode: boolean;
 }
 
-const NoticeTypeCatgoryMapper = (noticeType: NoticeType) => {
-  switch (noticeType) {
-    case 'recruit':
-      return Category.recruit;
-    case 'event':
-      return Category.event;
-    case 'general':
-      return Category.etc;
-  }
+const NoticeTypeCatgoryMapper = {
+  recruit: Category.recruit,
+  event: Category.event,
+  general: Category.etc,
 };
 
 const NoticeEditor = ({
@@ -203,7 +198,7 @@ const NoticeEditor = ({
       englishBody,
       tags: [...tags.map((tag) => tag.name)],
       images: photos.map((image) => image.file),
-      category: NoticeTypeCatgoryMapper(selectedNoticeType),
+      category: NoticeTypeCatgoryMapper[selectedNoticeType],
       t,
     });
     if (!noticeId) {
