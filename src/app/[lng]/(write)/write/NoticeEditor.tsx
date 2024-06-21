@@ -199,6 +199,7 @@ const NoticeEditor = ({
     }
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
+
     push(`/${lng}/notice/${noticeId}`);
   };
 

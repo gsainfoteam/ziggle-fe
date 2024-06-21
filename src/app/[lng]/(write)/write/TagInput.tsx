@@ -84,21 +84,23 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
         />
       </div>
 
-      <div className="relative flex">
-        <div className="absolute left-2.5 top-[-4px] z-10 flex w-[calc(100%-20px)] flex-col bg-white">
-          {searchedTags.slice(0, 5).map((tag) => (
-            <div
-              className="p-2.5 [&:hover]:bg-secondary"
-              key={tag.id}
-              onClick={() => handleTagOptionClick(tag)}
-            >
-              <div className="font-regular text-left text-sm text-black">
-                {tag.name}
+      {searchedTags.length !== 0 && (
+        <div className="relative flex">
+          <div className="absolute left-2.5 top-[-4px] z-10 flex w-[calc(100%-20px)] flex-col border-2 border-greyBorder bg-white">
+            {searchedTags.slice(0, 5).map((tag) => (
+              <div
+                className="p-2.5 [&:hover]:bg-secondary"
+                key={tag.id}
+                onClick={() => handleTagOptionClick(tag)}
+              >
+                <div className="font-regular text-left text-sm text-text">
+                  {tag.name}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
