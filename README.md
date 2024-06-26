@@ -74,8 +74,7 @@
     │   │       ├── ResultZabo
     │   │       ├── SearchAnimation
     │   │       ├── SearchResults
-    │   │       ├── Sidebar
-    │   │       └── ZaboShowcase
+    │   │       └── Sidebar
     │   └── i18next: 다국어 지원을 위한 설정
     │       └── locales
     │           ├── en
