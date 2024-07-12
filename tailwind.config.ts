@@ -40,5 +40,6 @@ const config: Config = {
     },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
+  darkMode: 'class',
 };
 export default config;

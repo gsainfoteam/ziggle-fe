@@ -208,6 +208,7 @@
     "logout": "Log Out",
     "quit": "Withdrawal",
     "switchLanguage": "Enable English",
+    "switchDarkMode": "Enable Dark Mode",
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {

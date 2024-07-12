@@ -6,6 +6,7 @@ import Button from '@/app/components/atoms/Button';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
+import ChangeDarkModeBox from './ChangeDarkModeBox';
 import ChangeLanguageBox from './ChangeLanguageBox';
 import MypageBox from './MypageBox';
 
@@ -23,6 +24,8 @@ export default function MypageActions({ lng }: PropsWithLng) {
   return (
     <div className="flex flex-col gap-3">
       <ChangeLanguageBox lng={lng} />
+
+      <ChangeDarkModeBox lng={lng} />
 
       <Button onClick={handleSignOut}>
         <MypageBox>
