@@ -7,7 +7,7 @@ import { SessionProvider } from 'next-auth/react';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
-import api from '@/api';
+import { ziggleApi } from '@/api';
 
 import { PropsWithLng } from '../../i18next';
 
@@ -25,7 +25,7 @@ const InitClient = ({
   emptyLayout = false,
 }: React.PropsWithChildren<PropsWithLng & InitClientProps>) => (
   <SWRConfig
-    value={{ fetcher: (path) => api.get(path).then(({ data }) => data) }}
+    value={{ fetcher: (path) => ziggleApi.get(path).then(({ data }) => data) }}
   >
     <SessionProvider>
       {!emptyLayout && (
