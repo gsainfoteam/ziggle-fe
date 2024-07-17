@@ -367,5 +367,6 @@
     "text": "You can use more convenient service.",
     "open": "Open App or Install App",
     "cancel": "Never mind"
-  }
+  },
+  "error": "Frontend Error Occured"
 }

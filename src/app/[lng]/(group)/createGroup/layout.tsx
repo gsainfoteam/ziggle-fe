@@ -11,8 +11,8 @@ export default async function Layout({
 
   return (
     <main className="flex flex-col items-center py-10">
-      <div className="content flex max-w-[600px] flex-col items-center">
-        <h1></h1>
+      <div className="content flex max-w-[600px] flex-col">
+        <h1 className="text-4xl font-bold">{t('createGroup.createGroup')}</h1>
         {children}
       </div>
     </main>
