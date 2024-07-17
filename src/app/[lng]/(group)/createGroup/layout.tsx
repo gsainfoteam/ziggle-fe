@@ -41,6 +41,9 @@ export default function Layout({
         <div className="mt-[14px] w-full">
           <StatusBar maxStep={3} currentStep={step.step} />
         </div>
+      </div>
+
+      <div className="content flex max-w-[800px] flex-col items-center">
         {children}
       </div>
     </main>
