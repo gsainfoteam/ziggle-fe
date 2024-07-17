@@ -37,6 +37,15 @@ const config: Config = {
         8: '8',
         10: '10',
       },
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        slideUp: 'slideUp 0.3s',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],

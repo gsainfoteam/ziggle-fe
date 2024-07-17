@@ -1,6 +1,9 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { useOverlay } from '@toss/use-overlay';
 
+import useModal from '@/utils/useModal';
+
+import Button from '../../atoms/Button';
 import Modal from './Modal';
 
 export default {
@@ -9,20 +12,26 @@ export default {
 } as Meta<typeof Modal>;
 
 const Template: StoryFn<typeof Modal> = (args) => {
-  const overlay = useOverlay();
+  const modal = useModal();
 
   return (
-    <Modal {...args}>
-      <Modal.Title>Modal Title</Modal.Title>
-      <Modal.ButtonContainer>
-        <Modal.Button variant={'outlined'} onClick={() => {}}>
-          Cancel
-        </Modal.Button>
-        <Modal.Button variant={'contained'} onClick={() => {}}>
-          Confirm
-        </Modal.Button>
-      </Modal.ButtonContainer>
-    </Modal>
+    <Button
+      onClick={() =>
+        modal.open(
+          <Modal {...args}>
+            <Modal.Title>Modal Title</Modal.Title>
+            <Modal.ButtonContainer>
+              <Modal.Button variant={'outlined'}>Cancel</Modal.Button>
+              <Modal.Button variant={'contained'} onClick={() => {}}>
+                Confirm
+              </Modal.Button>
+            </Modal.ButtonContainer>
+          </Modal>,
+        )
+      }
+    >
+      <p>Show modal</p>
+    </Button>
   );
 };
 

@@ -2,6 +2,7 @@
 
 import '@/app/initDayjs';
 
+import { OverlayProvider } from '@toss/use-overlay';
 import dynamic from 'next/dynamic';
 import { SessionProvider } from 'next-auth/react';
 import { Suspense } from 'react';
@@ -28,12 +29,14 @@ const InitClient = ({
     value={{ fetcher: (path) => api.get(path).then(({ data }) => data) }}
   >
     <SessionProvider>
-      {!emptyLayout && (
-        <Suspense>
-          <InstallApp lng={lng} />
-        </Suspense>
-      )}
-      {children}
+      <OverlayProvider>
+        {!emptyLayout && (
+          <Suspense>
+            <InstallApp lng={lng} />
+          </Suspense>
+        )}
+        {children}
+      </OverlayProvider>
     </SessionProvider>
   </SWRConfig>
 );

@@ -7,7 +7,6 @@ import { default as ButtonAtom } from '../../atoms/Button';
 interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
-  width: React.CSSProperties['width'];
   title?: string;
   text?: string;
   hasXButton?: boolean;
@@ -20,32 +19,32 @@ const ModalContext = createContext<{
 }>({});
 
 /** A compound component made of Title, ButtonContainer, MajorButton, MinorButton, and Icon */
-const Modal = ({
-  children,
-  onClose,
-  width,
-  title,
-  text,
-  hasXButton,
-}: ModalProps) => {
+const Modal = ({ children, onClose, title, text, hasXButton }: ModalProps) => {
   return (
     <ModalContext.Provider value={{ onClose, title, text }}>
       <div
         className={
-          'relative box-content flex flex-col rounded-[20px] bg-white p-[25px] ' +
-          `bg-[${width}]`
+          'fixed inset-0 z-50 flex items-end justify-center bg-[rgba(0,0,0,0.1)] md:items-center'
         }
+        onClick={onClose}
       >
-        {title && <Title>{title}</Title>}
-        {text && <p className={'text-lg text-text'}>{text}</p>}
+        <div
+          className={
+            'animate-slideUp relative box-content flex w-full flex-col rounded-t-[20px] bg-white p-[25px] md:w-[400px] md:rounded-[20px]'
+          }
+          onClick={(e) => e.stopPropagation()}
+        >
+          {title && <Title>{title}</Title>}
+          {text && <p className={'text-lg text-text'}>{text}</p>}
 
-        {children}
+          {children}
 
-        {hasXButton && (
-          <Button onClick={onClose} className={'absolute right-4 top-4'}>
-            <CloseIcon className={'w-8'} />
-          </Button>
-        )}
+          {hasXButton && (
+            <Button onClick={onClose} className={'absolute right-4 top-4'}>
+              <CloseIcon className={'w-8'} />
+            </Button>
+          )}
+        </div>
       </div>
     </ModalContext.Provider>
   );
