@@ -45,7 +45,10 @@ export const useColorTheme = (): [
   return [theme, updateTheme];
 };
 
-const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
+const ChangeDarkModeBox = ({
+  lng,
+  defaultTheme,
+}: PropsWithLng<{ defaultTheme: ColorTheme }>) => {
   const { t } = useTranslation(lng);
 
   const [theme, setTheme] = useColorTheme();
@@ -56,15 +59,13 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
         <div className="flex text-greyDark dark:text-dark_white">
           {t('mypage.switchDarkMode')}
         </div>
-        {theme && (
-          <Toggle
-            isSwitched={theme === 'dark'}
-            onSwitch={() => {
-              setTheme(theme === 'dark' ? 'light' : 'dark');
-              window.location.reload();
-            }}
-          />
-        )}
+        <Toggle
+          isSwitched={(theme ?? defaultTheme) === 'dark'}
+          onSwitch={() => {
+            setTheme(theme === 'dark' ? 'light' : 'dark');
+            window.location.reload();
+          }}
+        />
       </div>
     </MypageBox>
   );
