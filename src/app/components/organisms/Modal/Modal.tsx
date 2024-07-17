@@ -30,7 +30,7 @@ const Modal = ({ children, onClose, title, text, hasXButton }: ModalProps) => {
       >
         <div
           className={
-            'animate-slideUp relative box-content flex w-full flex-col rounded-t-[20px] bg-white p-[25px] md:w-[400px] md:rounded-[20px]'
+            'animate-slideUp relative box-content flex w-full flex-col rounded-t-[20px] bg-white p-[25px] md:w-[400px] md:animate-none md:rounded-[20px]'
           }
           onClick={(e) => e.stopPropagation()}
         >
