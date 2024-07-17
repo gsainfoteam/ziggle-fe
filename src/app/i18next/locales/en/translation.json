@@ -326,6 +326,42 @@
     "manageGroup": "Manage Group",
     "leaveGroup": "Leave Group"
   },
+  "createGroup": {
+    "createGroup": "Create Group",
+    "previous": "Prev",
+    "next": "Next",
+    "skip": "Skip",
+    "goBack": "Go back",
+    "enter": "Enter",
+    "name": {
+      "step": "Step 1",
+      "stepName": "Setup Group Profile",
+      "enterGroupName": "Enter Group Name",
+      "groupName": "Group Name",
+      "placeholder": "인포팀 (Infoteam)",
+      "exceptions": {
+        "groupNameAlreadyExist": "The group name already exists."
+      }
+    },
+    "members": {
+      "step": "Step 2",
+      "stepName": "Group Member Invitation",
+      "inviteGroupMembers": "Invite Group Members",
+      "placeholder": "Enter members' email"
+    },
+    "complete": {
+      "step": "Step 3",
+      "stepName": "Creation Complete!",
+      "title": "{{groupName}} group has been created!",
+      "description": "You can now write a notice under the group name."
+    },
+    "cancelAlert": {
+      "title": "Are you sure cancelling the creation?",
+      "description": "The process will be lost.",
+      "no": "No",
+      "yes": "Yes"
+    }
+  },
   "installApp": {
     "title": "Install the mobile app!",
     "text": "You can use more convenient service.",
