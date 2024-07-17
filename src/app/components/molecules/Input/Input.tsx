@@ -6,18 +6,26 @@ interface InputProps extends ComponentProps<'input'> {
   buttonValue?: string;
   onButtonClick?: () => void;
   title?: string;
+  errorText?: string;
 }
 
 const Input = forwardRef(
   (
-    { width, buttonValue, onButtonClick, title, ...rest }: InputProps,
+    {
+      width,
+      buttonValue,
+      onButtonClick,
+      title,
+      errorText,
+      ...rest
+    }: InputProps,
     ref?: React.ForwardedRef<HTMLInputElement> | undefined,
   ) => {
     return (
       <div style={{ width }}>
         {title && <h6 className="mb-[10px] text-base font-medium">{title}</h6>}
 
-        <div className="flex h-[48px] w-full gap-[10px]">
+        <div className="relative flex h-[48px] w-full gap-[10px]">
           <input
             ref={ref}
             {...rest}
@@ -31,6 +39,15 @@ const Input = forwardRef(
             <Button variant="contained" onClick={onButtonClick}>
               {buttonValue}
             </Button>
+          )}
+
+          {errorText && (
+            <p
+              style={{ width }}
+              className="absolute top-[58px] text-sm text-primary"
+            >
+              {errorText}
+            </p>
           )}
         </div>
       </div>
