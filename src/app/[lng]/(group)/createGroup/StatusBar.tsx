@@ -3,7 +3,7 @@ interface StatusBarProps {
   currentStep: number;
 }
 
-const StatusBar = async ({ maxStep, currentStep }: StatusBarProps) => {
+const StatusBar = ({ maxStep, currentStep }: StatusBarProps) => {
   if (currentStep > maxStep) {
     throw new Error('currentStep is bigger than maxStep');
   }
@@ -14,17 +14,17 @@ const StatusBar = async ({ maxStep, currentStep }: StatusBarProps) => {
     throw new Error('maxStep cannot be lower than 1');
   }
 
-  const repetition = new Array(maxStep);
+  const repetition = Array.from({ length: maxStep }, (x, i) => i + 1);
 
   return (
     <div className="flex h-[5px] w-full justify-between gap-[5px]">
-      {repetition.map((bar, index) => (
+      {repetition.map((bar) => (
         <div
-          key={index}
+          key={bar}
           className={[
             'grow',
             'h-full',
-            index + 1 === currentStep ? 'bg-primary' : 'bg-greyLight',
+            bar === currentStep ? 'bg-primary' : 'bg-greyLight',
           ].join(' ')}
         ></div>
       ))}

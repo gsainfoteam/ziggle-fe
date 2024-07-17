@@ -1,18 +1,46 @@
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+'use client';
 
-export default async function Layout({
+import { usePathname } from 'next/navigation';
+
+import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
+
+import StatusBar from './StatusBar';
+import stepGetter from './stepGetter';
+
+export default function Layout({
   children,
   params: { lng },
 }: {
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
+  const { t } = useTranslation(lng);
+
+  const pathname = usePathname();
+  const stepParam = pathname.split('/').pop();
+  const step = stepGetter(stepParam, { t });
 
   return (
     <main className="flex flex-col items-center py-10">
-      <div className="content flex max-w-[600px] flex-col">
-        <h1 className="text-4xl font-bold">{t('createGroup.createGroup')}</h1>
+      <div className="content flex max-w-[800px] flex-col">
+        <h1 className="mb-[25px] text-4xl font-bold">
+          {t('createGroup.createGroup')}
+        </h1>
+
+        <div className="flex items-center gap-[10px]">
+          <div className="text-lg font-bold text-primary">
+            {step.stepTranslation}
+          </div>
+          <div className="h-[1px] w-[40px] bg-greyDark" />
+          <div className="text-lg font-medium text-greyDark">
+            {step.stepNameTranslation}
+          </div>
+        </div>
+
+        <div className="mt-[14px] w-full">
+          <StatusBar maxStep={3} currentStep={step.step} />
+        </div>
         {children}
       </div>
     </main>
