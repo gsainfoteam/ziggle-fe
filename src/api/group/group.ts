@@ -1,6 +1,6 @@
 import { vaporApi } from '..';
 
-class groupInfo {
+export class groupInfo {
   name!: string;
   description!: string;
   createdAt!: Date;
