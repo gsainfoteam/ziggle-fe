@@ -42,9 +42,19 @@ const config: Config = {
           '0%': { transform: 'translateY(100%)' },
           '100%': { transform: 'translateY(0)' },
         },
+        slideDown: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
       },
       animation: {
         slideUp: 'slideUp 0.3s',
+        slideDown: 'slideDown 0.3s forwards',
+        fadeOut: 'fadeOut 0.3s forwards',
       },
     },
   },

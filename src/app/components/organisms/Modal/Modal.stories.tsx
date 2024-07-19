@@ -21,7 +21,9 @@ const Template: StoryFn<typeof Modal> = (args) => {
           <Modal {...args}>
             <Modal.Title>Modal Title</Modal.Title>
             <Modal.ButtonContainer>
-              <Modal.Button variant={'outlined'}>Cancel</Modal.Button>
+              <Modal.Button variant={'outlined'} isClose>
+                Cancel
+              </Modal.Button>
               <Modal.Button variant={'contained'} onClick={() => {}}>
                 Confirm
               </Modal.Button>
