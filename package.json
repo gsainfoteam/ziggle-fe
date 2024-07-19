@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tinymce/tinymce-react": "^4.3.0",
+    "@toss/use-overlay": "^1.4.0",
     "@vercel/og": "^0.5.17",
     "accept-language": "^3.0.18",
     "axios": "^1.5.1",

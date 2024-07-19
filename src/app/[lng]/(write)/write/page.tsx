@@ -2,14 +2,10 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import * as process from 'node:process';
-
 import { notFound, redirect } from 'next/navigation';
-import Swal from 'sweetalert2';
 
 import { auth } from '@/api/auth/auth';
 import { getNotice } from '@/api/notice/get-notice';
-import { NoticeDetail } from '@/api/notice/notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import NoticeEditor from './NoticeEditor';

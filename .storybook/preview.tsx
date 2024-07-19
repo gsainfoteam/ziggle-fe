@@ -2,6 +2,7 @@ import '../src/app/globals.css';
 
 import type { Preview } from '@storybook/react';
 import React from 'react';
+import { OverlayProvider } from '@toss/use-overlay';
 
 const preview: Preview = {
   parameters: {
@@ -15,7 +16,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <Story />
+      <OverlayProvider>
+        <Story />
+      </OverlayProvider>
     ),
   ],
 };
