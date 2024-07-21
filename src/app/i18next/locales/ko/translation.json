@@ -324,7 +324,7 @@
       "stepName": "그룹 프로필 설정",
       "enterGroupName": "그룹명 입력",
       "groupName": "그룹명",
-      "placeholder": "인포팀 (Infoteam)",
+      "placeholder": "예시) 인포팀 (Infoteam)",
       "exceptions": {
         "groupNameAlreadyExist": "이미 존재하는 그룹명입니다."
       }
@@ -338,7 +338,7 @@
     "complete": {
       "step": "3단계",
       "stepName": "생성 완료",
-      "title": "{{groupName}} 그룹 생성이 완료되었습니다!",
+      "title": "\"{{groupName}}\" 그룹 생성이 완료되었습니다!",
       "description": "이제 그룹 명의로 공지를 작성하실 수 있습니다."
     },
     "cancelAlert": {
@@ -353,5 +353,6 @@
     "text": "더욱 편리한 서비스를 이용하실 수 있습니다.",
     "open": "지글 앱을 열거나 설치하기",
     "cancel": "괜찮아요"
-  }
+  },
+  "error": "프론트엔드 에러 발생"
 }

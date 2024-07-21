@@ -23,6 +23,7 @@ const stepGetter = (
   };
 
   switch (stepParam) {
+    case 'createGroup':
     case 'name':
       step = {
         step: 1,

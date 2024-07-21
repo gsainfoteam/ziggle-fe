@@ -30,13 +30,18 @@ const Input = forwardRef(
             ref={ref}
             {...rest}
             className={[
-              'rounded-[10px] border-[1.5px] border-solid border-primary py-1 pl-4 pr-[10px]',
+              'grow rounded-[10px] border-[1.5px] border-solid border-primary py-1 pl-4 pr-[10px]',
               rest.className,
             ].join(' ')}
           />
 
           {buttonValue && (
-            <Button variant="contained" onClick={onButtonClick}>
+            <Button
+              variant="contained"
+              onClick={onButtonClick}
+              isBig
+              className="px-[20px]"
+            >
               {buttonValue}
             </Button>
           )}

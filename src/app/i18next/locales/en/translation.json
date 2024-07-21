@@ -338,7 +338,7 @@
       "stepName": "Setup Group Profile",
       "enterGroupName": "Enter Group Name",
       "groupName": "Group Name",
-      "placeholder": "인포팀 (Infoteam)",
+      "placeholder": "ex) 인포팀 (Infoteam)",
       "exceptions": {
         "groupNameAlreadyExist": "The group name already exists."
       }
@@ -352,7 +352,7 @@
     "complete": {
       "step": "Step 3",
       "stepName": "Creation Complete!",
-      "title": "{{groupName}} group has been created!",
+      "title": "\"{{groupName}}\" group has been created!",
       "description": "You can now write a notice under the group name."
     },
     "cancelAlert": {
