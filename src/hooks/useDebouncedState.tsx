@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 
-function useDebouncedState<T>(initialValue: T, delay = 500) {
-  const [value, setValue] = useState(initialValue);
-  const [debouncedValue, setDebouncedValue] = useState(initialValue);
+function useDebouncedState<T>(
+  initialValue: T,
+  delay = 500,
+): [T, (value: T) => void, T] {
+  const [value, setValue] = useState<T>(initialValue);
+  const [debouncedValue, setDebouncedValue] = useState<T>(initialValue);
 
   useEffect(() => {
     const handler = setTimeout(() => {

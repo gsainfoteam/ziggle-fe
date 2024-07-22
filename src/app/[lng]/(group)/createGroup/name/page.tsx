@@ -1,6 +1,7 @@
 import Button from '@/app/components/atoms/Button';
 import Input from '@/app/components/molecules/Input';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
+import useDebouncedState from '@/hooks/useDebouncedState';
 
 const CreateGroupSequenceName = async ({
   params: { lng },
@@ -8,6 +9,10 @@ const CreateGroupSequenceName = async ({
   params: PropsWithLng;
 }) => {
   const { t } = await createTranslation(lng);
+
+  const [debouncedGroupName, setGroupName, groupName] =
+    useDebouncedState<string>('');
+
   return (
     <>
       <section
@@ -25,6 +30,9 @@ const CreateGroupSequenceName = async ({
           width="100%"
           className="w-full"
           title={t('createGroup.name.groupName')}
+          onChange={(e) => {
+            setGroupName(e.target.value);
+          }}
         />
       </section>
       <Button
