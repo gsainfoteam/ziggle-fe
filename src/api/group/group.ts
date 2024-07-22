@@ -1,3 +1,5 @@
+import { UUID } from 'crypto';
+
 import { vaporApi } from '..';
 
 export class groupInfo {
@@ -12,4 +14,24 @@ export const getGroupContainMe = async (
   return vaporApi
     .get('/group', { params: { type: query } })
     .then(({ data }) => data);
+};
+
+export interface GetGroupByNameResponse {
+  name: string;
+  description: string;
+  createdAt: Date;
+  presidentUuid: string;
+}
+
+export const getGroupByName = async (
+  groupName: string,
+): Promise<GetGroupByNameResponse | null> => {
+  return vaporApi
+    .get(`/group/${groupName}`)
+    .then(({ data }) => data)
+    .catch((err) => {
+      if (err.response && err.response.status === 404) {
+        return null;
+      }
+    });
 };
