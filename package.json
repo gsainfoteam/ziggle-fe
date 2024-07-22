@@ -17,6 +17,7 @@
     "axios": "^1.5.1",
     "copy-webpack-plugin": "^11.0.0",
     "dayjs": "^1.11.10",
+    "framer-motion": "^11.3.8",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-resources-to-backend": "^1.1.4",
