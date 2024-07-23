@@ -412,7 +412,7 @@ const NoticeEditor = ({
       </div>
 
       <div className="mb-3 flex gap-[6px]">
-        <TypeIcon className="w-5 stroke-text md:w-6 dark:stroke-dark_white" />
+        <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
         <p className="font-medium">{t('write.noticeType')}</p>
       </div>
 

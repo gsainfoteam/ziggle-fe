@@ -14,7 +14,7 @@ export default async function MyPage({
 }) {
   const session = await auth();
 
-  if (!session) redirect('/');
+  if (!session) redirect(`/${lng}/login`);
 
   return (
     <div className="flex flex-col items-center justify-center">
