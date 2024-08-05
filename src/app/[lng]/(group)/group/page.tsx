@@ -20,7 +20,28 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
   const userData = await auth();
   if (!userData) redirect(`/${lng}/login`);
 
-  const groupList = await getGroupContainMe('included');
+  // const groupList = await getGroupContainMe('included');
+
+  const exampleData = [
+    {
+      name: '테스트용 그룹',
+      description: '그룹 설명',
+      createdAt: new Date(),
+      leaderName: 'XXX',
+      memberCount: 21,
+      isAdmin: true,
+    },
+    {
+      name: '다음 그룹',
+      description: '다음 그룹 설명',
+      createdAt: new Date(),
+      leaderName: 'XXX',
+      memberCount: 33,
+      isAdmin: false,
+    },
+  ];
+
+  const emptyExampleData = [];
 
   return (
     <main className="flex flex-col items-center py-10">
@@ -28,10 +49,10 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
         <div className="title mb-10 w-full text-4xl font-bold text-text">
           {t('group.mainTitle')}
         </div>
-        {groupList.length === 0 ? (
+        {exampleData.length === 0 ? (
           <NotInGroup params={{ lng }} />
         ) : (
-          groupList.map((group) => {
+          exampleData.map((group) => {
             return (
               <GroupList
                 params={{ lng }}

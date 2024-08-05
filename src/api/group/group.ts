@@ -4,6 +4,9 @@ export class groupInfo {
   name!: string;
   description!: string;
   createdAt!: Date;
+  leaderName!: string;
+  memberCount!: number;
+  isAdmin!: boolean;
 }
 
 export const getGroupContainMe = async (
