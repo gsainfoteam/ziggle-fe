@@ -3,7 +3,7 @@ import useSWRInfinite from 'swr/infinite';
 
 import { Locale } from '@/app/i18next/settings';
 
-import api from '..';
+import { ziggleApi } from '..';
 
 export interface NoticePaginationParams {
   offset?: number;
@@ -112,7 +112,7 @@ export const createNotice = ({
   tags: number[];
   category: (typeof Category)[keyof typeof Category];
 }): Promise<NoticeDetail> =>
-  api
+  ziggleApi
     .post('/notice', { title, deadline, body, images, tags, category })
     .then((res) => res.data);
 
@@ -127,7 +127,7 @@ export const updateNotice = ({
   deadline?: Date;
   lng: 'ko' | 'en';
 }) =>
-  api
+  ziggleApi
     .patch(`/notice/${noticeId}?lang=${lng}`, { deadline, body })
     .then((res) => res.data);
 
@@ -146,7 +146,7 @@ export const attachInternationalNotice = ({
   noticeId: number;
   contentId: number;
 }) =>
-  api
+  ziggleApi
     .post(`/notice/${noticeId}/${contentId}/foreign`, {
       lang,
       title,
@@ -164,19 +164,19 @@ export const createAdditionalNotice = ({
   body: string;
   deadline?: Date;
 }) =>
-  api
+  ziggleApi
     .post(`/notice/${noticeId}/additional`, { title: 'title', body, deadline })
     .then((res) => res.data);
 
-export const deleteNotice = (id: number) => api.delete(`/notice/${id}`);
+export const deleteNotice = (id: number) => ziggleApi.delete(`/notice/${id}`);
 
 export const addReaction = (noticeId: number, emoji: string) =>
-  api
+  ziggleApi
     .post<NoticeDetail>(`/notice/${noticeId}/reaction`, { emoji })
     .then((res) => res.data);
 
 export const deleteReaction = (noticeId: number, emoji: string) =>
-  api
+  ziggleApi
     .delete<NoticeDetail>(`/notice/${noticeId}/reaction`, {
       data: { emoji },
     })

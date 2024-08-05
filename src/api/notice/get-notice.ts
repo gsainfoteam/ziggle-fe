@@ -1,8 +1,8 @@
-import api from '..';
+import { ziggleApi } from '..';
 import { NoticeDetail } from './notice';
 
 export const getNotice = async (id: number, lang: 'ko' | 'en') => {
-  return api
+  return ziggleApi
     .get<NoticeDetail>(`/notice/${id}?lang=${lang}`)
     .then(({ data }) => ({
       ...data,

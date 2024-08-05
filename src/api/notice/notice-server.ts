@@ -1,8 +1,8 @@
-import api from '..';
+import { ziggleApi } from '..';
 import { NoticePaginationParams, Notices, NoticeSearchParams } from './notice';
 
 export const getAllNotices = async (
   params: NoticePaginationParams & NoticeSearchParams,
 ) => {
-  return api.get<Notices>('/notice', { params }).then((res) => res.data);
+  return ziggleApi.get<Notices>('/notice', { params }).then((res) => res.data);
 };

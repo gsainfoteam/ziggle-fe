@@ -1,15 +1,15 @@
 import { Tag } from '@/app/[lng]/(write)/write/TagInput';
 
-import api from '..';
+import { ziggleApi } from '..';
 
 export const getAllTags = async () =>
-  api.get<Tag[]>('/tag').then(({ data }) => data);
+  ziggleApi.get<Tag[]>('/tag').then(({ data }) => data);
 
 export const searchTags = async (query: string) =>
-  api.get<Tag[]>(`/tag?search=${query}`).then(({ data }) => data);
+  ziggleApi.get<Tag[]>(`/tag?search=${query}`).then(({ data }) => data);
 
 export const getOneTag = async (name: string) =>
-  api
+  ziggleApi
     .get<Tag>(`/tag?name=${name}`)
     .then(({ data }) => {
       if (!data) return null;
@@ -21,4 +21,4 @@ export const getOneTag = async (name: string) =>
     });
 
 export const createTag = async (name: string) =>
-  api.post<Tag>('/tag', { name }).then(({ data }) => data);
+  ziggleApi.post<Tag>('/tag', { name }).then(({ data }) => data);
