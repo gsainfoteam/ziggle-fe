@@ -343,14 +343,8 @@
         "groupNameAlreadyExist": "The group name already exists."
       }
     },
-    "members": {
-      "step": "Step 2",
-      "stepName": "Group Member Invitation",
-      "inviteGroupMembers": "Invite Group Members",
-      "placeholder": "Enter members' email"
-    },
     "complete": {
-      "step": "Step 3",
+      "step": "Step 2",
       "stepName": "Creation Complete!",
       "title": "\"{{groupName}}\" group has been created!",
       "description": "You can now write a notice under the group name."

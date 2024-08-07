@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
 import StatusBar from './StatusBar';
@@ -39,7 +39,7 @@ export default function Layout({
         </div>
 
         <div className="mt-[14px] w-full">
-          <StatusBar maxStep={3} currentStep={step.step} />
+          <StatusBar maxStep={2} currentStep={step.step} />
         </div>
       </div>
 

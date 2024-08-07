@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 function useDebouncedState<T>(
   initialValue: T,
-  delay = 500,
+  delay = 200,
 ): [T, (value: T) => void, T] {
   const [value, setValue] = useState<T>(initialValue);
   const [debouncedValue, setDebouncedValue] = useState<T>(initialValue);

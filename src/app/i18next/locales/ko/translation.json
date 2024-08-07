@@ -329,14 +329,8 @@
         "groupNameAlreadyExist": "이미 존재하는 그룹명입니다."
       }
     },
-    "members": {
-      "step": "2단계",
-      "stepName": "멤버 초대",
-      "inviteGroupMembers": "그룹 멤버 초대",
-      "placeholder": "멤버 이메일 입력"
-    },
     "complete": {
-      "step": "3단계",
+      "step": "2단계",
       "stepName": "생성 완료",
       "title": "\"{{groupName}}\" 그룹 생성이 완료되었습니다!",
       "description": "이제 그룹 명의로 공지를 작성하실 수 있습니다."

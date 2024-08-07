@@ -31,19 +31,13 @@ const stepGetter = (
         stepNameTranslation: t('createGroup.name.stepName'),
       };
       break;
-    case 'members':
-      step = {
-        step: 2,
-        stepTranslation: t('createGroup.members.step'),
-        stepNameTranslation: t('createGroup.members.stepName'),
-      };
-      break;
     case 'complete':
       step = {
-        step: 3,
+        step: 2,
         stepTranslation: t('createGroup.complete.step'),
         stepNameTranslation: t('createGroup.complete.stepName'),
       };
+      break;
   }
 
   if (
