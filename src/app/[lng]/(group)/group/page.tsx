@@ -7,7 +7,7 @@ import * as process from 'node:process';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/api/auth/auth';
-import { getGroupContainMe } from '@/api/group/group';
+import { getGroupContainingMe } from '@/api/group/group';
 import Button from '@/app/components/atoms/Button';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 

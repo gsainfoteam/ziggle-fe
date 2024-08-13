@@ -9,7 +9,7 @@ export interface groupInfo {
   isAdmin: boolean;
 }
 
-export const getGroupContainMe = async (
+export const getGroupContainingMe = async (
   query: 'all' | 'included',
 ): Promise<groupInfo[]> => {
   return vaporApi
