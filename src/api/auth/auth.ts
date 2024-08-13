@@ -2,7 +2,7 @@ import { getServerSession, NextAuthOptions } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import { OAuthConfig } from 'next-auth/providers/oauth';
 
-import api from '..';
+import { ziggleApi } from '..';
 
 export const auth = async () => {
   return getServerSession(config);
@@ -42,7 +42,7 @@ export const config = {
       return refreshAccessToken(token);
     },
     signIn: async ({ account }) => {
-      await api.get<User>('/user/info', {
+      await ziggleApi.get<User>('/user/info', {
         headers: { Authorization: `Bearer ${account?.access_token}` },
       });
       return true;
