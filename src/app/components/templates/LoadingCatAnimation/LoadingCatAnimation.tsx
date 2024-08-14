@@ -4,7 +4,7 @@ import Lottie from 'lottie-react';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import CatBounceAnimation from '@/assets/animations/cat-bounce.json';
+import LoadingAnimation from '@/assets/animations/loading.json';
 
 const LoadingCatAnimation = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
@@ -12,8 +12,9 @@ const LoadingCatAnimation = ({ lng }: PropsWithLng) => {
   return (
     <div className="flex flex-col items-center">
       <div className="h-12" />
-      <Lottie animationData={CatBounceAnimation} loop className="w-40" />
-      <div className="text-2xl font-medium text-secondaryText">
+      <Lottie animationData={LoadingAnimation} loop className="w-20" />
+      <div className="h-4" />
+      <div className="text-lg font-medium text-secondaryText">
         {t('loading')}
       </div>
     </div>

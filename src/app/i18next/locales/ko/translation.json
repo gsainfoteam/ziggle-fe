@@ -137,7 +137,7 @@
     }
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
-  "loading": "로딩 중입니다! -ㅅ-",
+  "loading": "로딩 중...",
   "ddayPlus": "기한 지남",
   "notices": {
     "all": {
