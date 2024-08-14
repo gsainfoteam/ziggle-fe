@@ -38,12 +38,12 @@ const CreateGroupSequenceMembers = ({
             variants={ITEM_VARIANT}
             className="mb-[20px] text-2xl font-bold md:text-[28px]"
           >
-            {t('createGroup.members.inviteGroupMembers')}
+            {/* {t('createGroup.members.inviteGroupMembers')} */}
           </motion.h2>
 
           <motion.div variants={ITEM_VARIANT}>
             <Input
-              placeholder={t('createGroup.members.placeholder')}
+              // placeholder={t('createGroup.members.placeholder')}
               width="100%"
               buttonValue={t('createGroup.enter')}
             />

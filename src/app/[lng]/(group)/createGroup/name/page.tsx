@@ -29,49 +29,51 @@ const CreateGroupSequenceName = ({
     setIsExiting(true);
 
     setTimeout(() => {
-      router.push(`/${lng}/createGroup/members`);
-    }, 400);
+      router.push(`/${lng}/createGroup/complete`);
+    }, 600);
   };
 
   return (
     <>
-      <AnimatePresence>
-        {!isExiting && (
-          <motion.section
-            variants={CONTAINER_VARIANT}
-            animate="visible"
-            exit="out"
-            className={[
-              'md:flex md:h-[500px] md:w-[400px] md:flex-col md:justify-center md:p-0',
-              'w-full py-[60px]',
-            ].join(' ')}
-          >
-            <motion.h2
-              variants={ITEM_VARIANT}
-              className="mb-[20px] text-2xl font-bold md:text-[28px]"
+      <div className="w-full md:flex md:h-[500px] md:flex-col md:items-center">
+        <AnimatePresence>
+          {!isExiting && (
+            <motion.section
+              variants={CONTAINER_VARIANT}
+              animate="visible"
+              exit="out"
+              className={[
+                'md:flex md:h-[500px] md:w-[400px] md:flex-col md:justify-center md:p-0',
+                'w-full py-[60px]',
+              ].join(' ')}
             >
-              {t('createGroup.name.enterGroupName')}
-            </motion.h2>
+              <motion.h2
+                variants={ITEM_VARIANT}
+                className="mb-[20px] text-2xl font-bold md:text-[28px]"
+              >
+                {t('createGroup.name.enterGroupName')}
+              </motion.h2>
 
-            <motion.div variants={ITEM_VARIANT}>
-              <Input
-                placeholder={t('createGroup.name.placeholder')}
-                width="100%"
-                className="w-full"
-                title={t('createGroup.name.groupName')}
-                onChange={(e) => {
-                  setGroupName(e.target.value);
-                }}
-                errorText={
-                  isGroupNameExists
-                    ? t('createGroup.name.exceptions.groupNameAlreadyExist')
-                    : undefined
-                }
-              />
-            </motion.div>
-          </motion.section>
-        )}
-      </AnimatePresence>
+              <motion.div variants={ITEM_VARIANT}>
+                <Input
+                  placeholder={t('createGroup.name.placeholder')}
+                  width="100%"
+                  className="w-full"
+                  title={t('createGroup.name.groupName')}
+                  onChange={(e) => {
+                    setGroupName(e.target.value);
+                  }}
+                  errorText={
+                    isGroupNameExists
+                      ? t('createGroup.name.exceptions.groupNameAlreadyExist')
+                      : undefined
+                  }
+                />
+              </motion.div>
+            </motion.section>
+          )}
+        </AnimatePresence>
+      </div>
       <Button
         variant={isNextButtonValid ? 'contained' : 'disabled'}
         className="w-full py-[15px] text-[18px] md:w-[240px]"
