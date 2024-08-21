@@ -2,16 +2,15 @@ import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
-import * as process from 'node:process';
-
+import dayjs from 'dayjs';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/api/auth/auth';
-import { getGroupContainingMe } from '@/api/group/group';
+import { getGroupContainingMe, GroupInfo } from '@/api/group/group';
 import Button from '@/app/components/atoms/Button';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import GroupList from './GroupList';
+import GroupItem from './GroupItem';
 import NotInGroup from './NotInGroup';
 
 const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
@@ -22,22 +21,34 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
 
   // const groupList = await getGroupContainMe('included');
 
-  const exampleData = [
+  const exampleData: GroupInfo[] = [
     {
+      uuid: '1',
       name: '테스트용 그룹',
       description: '그룹 설명',
-      createdAt: new Date(),
-      leaderName: 'XXX',
-      memberCount: 21,
-      isAdmin: true,
+      createdAt: dayjs(new Date()),
+      count: 10,
+      presidentUuid: '1',
+      president: {
+        uuid: '1',
+        name: '테스트용',
+        email: '',
+        createdAt: dayjs(new Date()),
+      },
     },
     {
+      uuid: '2',
       name: '다음 그룹',
       description: '다음 그룹 설명',
-      createdAt: new Date(),
-      leaderName: 'XXX',
-      memberCount: 33,
-      isAdmin: false,
+      createdAt: dayjs(new Date()),
+      count: 10,
+      presidentUuid: '2',
+      president: {
+        uuid: '2',
+        name: '다음',
+        email: '',
+        createdAt: dayjs(new Date()),
+      },
     },
   ];
 
@@ -45,7 +56,7 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
 
   return (
     <main className="flex flex-col items-center py-10">
-      <div className="content flex max-w-[600px] flex-col items-center">
+      <div className="content flex max-w-[600px] flex-col items-center gap-[10px]">
         <div className="title mb-10 w-full text-4xl font-bold text-text">
           {t('group.mainTitle')}
         </div>
@@ -54,7 +65,7 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
         ) : (
           exampleData.map((group) => {
             return (
-              <GroupList
+              <GroupItem
                 params={{ lng }}
                 key={group.name}
                 groupParams={{ group }}
