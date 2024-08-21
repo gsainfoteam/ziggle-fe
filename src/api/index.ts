@@ -18,7 +18,7 @@ ziggleApi.interceptors.request.use(async (config) => {
 vaporApi.interceptors.request.use(async (config) => {
   if (typeof window !== 'undefined') return config;
 
-  config.baseURL = process.env.VAPOR_URL!;
+  config.baseURL = process.env.NEXT_VAPOR_API_URL!;
   const session = await auth();
   if (!session) return config;
   config.headers.Authorization = `Bearer ${session.accessToken}`;

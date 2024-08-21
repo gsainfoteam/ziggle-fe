@@ -21,12 +21,10 @@ export interface InviteCode {
   code: string;
 }
 
-export const getGroupContainingMe = async (
-  query: 'all' | 'included',
-): Promise<GroupInfo[]> => {
+export const getGroupContainingMe = async (): Promise<GroupInfo[]> => {
   return vaporApi
-    .get<GroupInfo[]>('/group', { params: { type: query } })
-    .then(({ data }) => data);
+    .get<{ list: GroupInfo[] }>('/group')
+    .then(({ data }) => data.list);
 };
 
 export const getGroup = async (uuid: string): Promise<GroupInfo> => {

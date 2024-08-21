@@ -9,7 +9,7 @@ const router = async (
   },
 ) => {
   const url = new URL(request.url);
-  const base = process.env.VAPOR_URL;
+  const base = process.env.NEXT_VAPOR_API_URL;
   const path = context.params.ziggle.join('/');
   const search = url.searchParams;
   const session = await auth();

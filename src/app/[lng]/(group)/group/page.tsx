@@ -19,7 +19,9 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
   const userData = await auth();
   if (!userData) redirect(`/${lng}/login`);
 
-  // const groupList = await getGroupContainMe('included');
+  const groupList = await getGroupContainingMe();
+
+  console.log(groupList);
 
   const exampleData: GroupInfo[] = [
     {
@@ -60,10 +62,10 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
         <div className="title mb-10 w-full text-4xl font-bold text-text">
           {t('group.mainTitle')}
         </div>
-        {exampleData.length === 0 ? (
+        {groupList.length === 0 ? (
           <NotInGroup params={{ lng }} />
         ) : (
-          exampleData.map((group) => {
+          groupList.map((group) => {
             return (
               <GroupItem
                 params={{ lng }}
