@@ -54,8 +54,6 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
     },
   ];
 
-  const emptyExampleData = [];
-
   return (
     <main className="flex flex-col items-center py-10">
       <div className="content flex max-w-[600px] flex-col items-center gap-[10px]">

@@ -2,13 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { GroupInfo } from '@/api/group/group';
-import Button from '@/app/components/atoms/Button';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import ArrowRight from '@/assets/icons/arrow-right.svg';
 import Crown from '@/assets/icons/crown.svg';
 import GroupProfileDefault from '@/assets/icons/group-profile-default.webp';
-import UserCircle from '@/assets/icons/user-circle.svg';
-import UserCrown from '@/assets/icons/user-crown.svg';
 
 const GroupItem = async ({
   params: { lng },
@@ -19,8 +16,6 @@ const GroupItem = async ({
     group: GroupInfo;
   };
 }) => {
-  const { t } = await createTranslation(lng);
-
   const group = groupParams.group;
 
   return (
