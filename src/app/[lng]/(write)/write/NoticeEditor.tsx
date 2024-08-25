@@ -24,6 +24,7 @@ import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
 import Button from '@/app/components/atoms/Button';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import DateTimePicker from '@/app/components/organisms/DateTimePicker';
+import Tabs from '@/app/components/organisms/Tab/Tab';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
@@ -425,10 +426,13 @@ const NoticeEditor = ({
 
       {hasEnglishContent && (
         <div className="mt-10">
-          <LanguageTab
-            writingTab={writingTab}
-            setWritingTab={setWritingTab}
-            t={t}
+          <Tabs
+            tabs={[
+              { key: 'korean', label: t('write.koreanNotice') },
+              { key: 'english', label: t('write.englishNotice') },
+            ]}
+            activeTab={writingTab}
+            setActiveTab={setWritingTab as (key: string) => void}
           />
         </div>
       )}

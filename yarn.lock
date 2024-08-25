@@ -14302,6 +14302,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tailwind-merge@npm:^2.5.2":
+  version: 2.5.2
+  resolution: "tailwind-merge@npm:2.5.2"
+  checksum: 10c0/e43a9a468f7ba4ed5b4a399558d96d6270a3d8131dca111cccc803e71cc23885060d18d721f312a24fff0a75c567dbb30b2a87c18aba25eb4255df197d8170ab
+  languageName: node
+  linkType: hard
+
 "tailwind-scrollbar@npm:^3.0.5":
   version: 3.1.0
   resolution: "tailwind-scrollbar@npm:3.1.0"
@@ -15766,6 +15773,7 @@ __metadata:
     storybook: "npm:^8.1.2"
     sweetalert2: "npm:^11.7.31"
     swr: "npm:^2.2.5"
+    tailwind-merge: "npm:^2.5.2"
     tailwind-scrollbar: "npm:^3.0.5"
     tailwindcss: "npm:^3.4.1"
     tinymce: "npm:^6.8.3"

@@ -14,7 +14,7 @@ export interface GroupInfo {
     email: string;
     createdAt: dayjs.Dayjs | string;
   };
-  count: number;
+  memberCount: number;
 }
 
 export interface InviteCode {
@@ -28,6 +28,7 @@ export const getGroupContainingMe = async (): Promise<GroupInfo[]> => {
 };
 
 export const getGroup = async (uuid: string): Promise<GroupInfo> => {
+  console.log('uuid', uuid);
   return vaporApi.get<GroupInfo>(`/group/${uuid}`).then(({ data }) => data);
 };
 

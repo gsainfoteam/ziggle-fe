@@ -8,8 +8,6 @@ export default async function Layout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
-
   return (
     <>
       <div className="ml-4 mt-6 hidden md:block">

@@ -325,7 +325,15 @@
     "mainDescription": "If you want to join a specific group, please contact the group administrator.",
     "createGroup": "Create Group",
     "manageGroup": "Manage Group",
-    "leaveGroup": "Leave Group"
+    "leaveGroup": "Leave Group",
+    "favorite": "Favorite",
+    "memberCount": "{{count}} members",
+    "noticeCount": "{{count}} notices",
+    "tabs": {
+      "intro": "Intro",
+      "notices": "Notices",
+      "members": "Members"
+    }
   },
   "installApp": {
     "title": "Install the mobile app!",

@@ -20,7 +20,7 @@ const GroupItem = async ({
 
   return (
     <div className="w-full rounded-[15px] bg-greyLight p-5">
-      <div className="flex items-center">
+      <Link href={`/group/${group.uuid}`} className={'flex items-center'}>
         <Image
           src={GroupProfileDefault}
           alt="group-default-profile"
@@ -32,16 +32,12 @@ const GroupItem = async ({
           {group.name}
         </p>
 
-        {group.president && (
-          <Crown className="ml-1 inline stroke-text" />
-        )}
+        {group.president && <Crown className="ml-1 inline stroke-text" />}
 
         <div className="flex-grow" />
 
-        <Link href={`/group/${group.uuid}`}>
-          <ArrowRight className="h-[30px] stroke-text" />
-        </Link>
-      </div>
+        <ArrowRight className="h-[30px] stroke-text" />
+      </Link>
     </div>
   );
 };
