@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { vaporApi } from '..';
+import { thirdPartyApi, vaporApi } from '..';
 
 export interface GroupInfo {
   uuid: string;
@@ -28,7 +28,6 @@ export const getGroupContainingMe = async (): Promise<GroupInfo[]> => {
 };
 
 export const getGroup = async (uuid: string): Promise<GroupInfo> => {
-  console.log('uuid', uuid);
   return vaporApi.get<GroupInfo>(`/group/${uuid}`).then(({ data }) => data);
 };
 
@@ -36,4 +35,13 @@ export const generateInviteCode = async (uuid: string): Promise<InviteCode> => {
   return vaporApi
     .get<InviteCode>(`/group/${uuid}/invite`)
     .then(({ data }) => data);
+};
+
+export const getGroupNotion = async (id: string): Promise<any> => {
+  // ExtendedRecordMap is not exported from 'notion-client'
+  const data = await thirdPartyApi.get(`/notion/${id}`).then(({ data }) => data);
+
+  console.log(data);
+
+  return data;
 };
