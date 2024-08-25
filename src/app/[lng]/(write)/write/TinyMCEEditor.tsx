@@ -49,6 +49,9 @@ const TinyMCEEditor = ({
         'bold italic backcolor | alignleft aligncenter ' +
         'alignright alignjustify | bullist numlist outdent indent | ' +
         'removeformat | link',
+      link_target_list: [
+        { title: 'New page', value: '_blank', selected: true },
+      ],
     }}
     onBlur={(event) =>
       sendLog(LogEvents.noticeWritingPageTypeContent, {
