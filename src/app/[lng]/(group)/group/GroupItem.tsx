@@ -32,10 +32,8 @@ const GroupItem = async ({
           {group.name}
         </p>
 
-        {group.president ? (
+        {group.president && (
           <Crown className="ml-1 inline stroke-text" />
-        ) : (
-          <></>
         )}
 
         <div className="flex-grow" />
