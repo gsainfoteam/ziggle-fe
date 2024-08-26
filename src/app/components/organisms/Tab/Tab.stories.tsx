@@ -18,5 +18,4 @@ Default.args = {
   ],
   activeTab: 'tab1',
   setActiveTab: () => {},
-  renderContent: () => <div>Content</div>,
 };

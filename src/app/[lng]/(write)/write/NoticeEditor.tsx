@@ -40,7 +40,6 @@ import AttachPhotoArea, { FileWithUrl } from './AttachPhotoArea';
 import DeepLButton from './DeepLButton';
 import EditableTimer from './EditableTimer';
 import handleNoticeSubmit from './handle-notice-submit';
-import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
 import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';

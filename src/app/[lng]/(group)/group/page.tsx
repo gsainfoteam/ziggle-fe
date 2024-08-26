@@ -29,7 +29,7 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
       name: '테스트용 그룹',
       description: '그룹 설명',
       createdAt: dayjs(new Date()),
-      count: 10,
+      memberCount: 10,
       presidentUuid: '1',
       president: {
         uuid: '1',
@@ -43,7 +43,7 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
       name: '다음 그룹',
       description: '다음 그룹 설명',
       createdAt: dayjs(new Date()),
-      count: 10,
+      memberCount: 10,
       presidentUuid: '2',
       president: {
         uuid: '2',
