@@ -21,39 +21,6 @@ const GroupMainPage = async ({ params: { lng } }: { params: PropsWithLng }) => {
 
   const groupList = await getGroupContainingMe();
 
-  console.log(groupList);
-
-  const exampleData: GroupInfo[] = [
-    {
-      uuid: '1',
-      name: '테스트용 그룹',
-      description: '그룹 설명',
-      createdAt: dayjs(new Date()),
-      memberCount: 10,
-      presidentUuid: '1',
-      president: {
-        uuid: '1',
-        name: '테스트용',
-        email: '',
-        createdAt: dayjs(new Date()),
-      },
-    },
-    {
-      uuid: '2',
-      name: '다음 그룹',
-      description: '다음 그룹 설명',
-      createdAt: dayjs(new Date()),
-      memberCount: 10,
-      presidentUuid: '2',
-      president: {
-        uuid: '2',
-        name: '다음',
-        email: '',
-        createdAt: dayjs(new Date()),
-      },
-    },
-  ];
-
   return (
     <main className="flex flex-col items-center py-10">
       <div className="content flex max-w-[600px] flex-col items-center gap-[10px]">

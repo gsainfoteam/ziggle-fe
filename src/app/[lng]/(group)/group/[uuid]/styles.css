@@ -1,0 +1,9 @@
+/* overwriting the default notion styles */
+
+:root {
+  --notion-max-width: 800px;
+}
+
+.notion-page {
+  padding: 0;
+}
