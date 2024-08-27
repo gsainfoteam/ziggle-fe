@@ -1,7 +1,7 @@
+import { Editor } from '@tinymce/tinymce-react';
 import { ForwardedRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
-import { Editor } from '@tinymce/tinymce-react';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 
@@ -19,7 +19,7 @@ export interface TinyMCEEditorChangeEvent {
 interface TinyMCEEditorProps {
   value: string;
   onChange: (newValue: string) => void;
-  editorRef: ForwardedRef<TinyMCEEditorRef | null>
+  editorRef?: ForwardedRef<TinyMCEEditorRef | null>;
   initialValue?: string;
   disabled?: boolean;
 }
@@ -27,7 +27,7 @@ interface TinyMCEEditorProps {
 const TinyMCEEditor = ({
   value,
   onChange,
-  editorRef, 
+  editorRef,
   initialValue,
   disabled,
 }: TinyMCEEditorProps) => {
@@ -35,10 +35,10 @@ const TinyMCEEditor = ({
     <Editor
       disabled={disabled}
       onInit={(_, editor) => {
-      if (!editorRef) return;
-      if (typeof editorRef === 'function') editorRef(editor);
-      else editorRef.current = editor;
-    }}
+        if (!editorRef) return;
+        if (typeof editorRef === 'function') editorRef(editor);
+        else editorRef.current = editor;
+      }}
       initialValue={initialValue}
       value={value}
       onEditorChange={(newValue, _) => onChange(newValue)}
