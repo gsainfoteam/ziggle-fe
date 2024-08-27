@@ -1,7 +1,7 @@
-import { Editor } from '@tinymce/tinymce-react';
 import { ForwardedRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
+import { Editor } from '@tinymce/tinymce-react';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 
@@ -16,46 +16,59 @@ export interface TinyMCEEditorChangeEvent {
   readonly stopImmediatePropagation: () => void;
 }
 
-const TinyMCEEditor = ({
-  editorRef,
-  onChange,
-  disabled,
-}: {
-  editorRef: ForwardedRef<TinyMCEEditorRef>;
-  onChange?: (event: TinyMCEEditorChangeEvent) => void;
+interface TinyMCEEditorProps {
+  value: string;
+  onChange: (newValue: string) => void;
+  loadInitialContent?: () => Promise<string>;
+  editorRef: ForwardedRef<TinyMCEEditorRef | null>
+  initialValue?: string;
   disabled?: boolean;
-}) => (
-  <Editor
-    disabled={disabled}
-    onInit={(_, editor) => {
+}
+
+const TinyMCEEditor = ({
+  value,
+  onChange,
+  loadInitialContent,
+  editorRef, 
+  initialValue,
+  disabled,
+}: TinyMCEEditorProps) => {
+
+  return (
+    <Editor
+      disabled={disabled}
+      onInit={(_, editor) => {
       if (!editorRef) return;
       if (typeof editorRef === 'function') editorRef(editor);
       else editorRef.current = editor;
     }}
-    onChange={onChange}
-    tinymceScriptSrc="/tinymce/tinymce.min.js"
-    init={{
-      skin: window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'oxide-dark'
-        : 'oxide',
-      content_css: window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'default',
-      promotion: false,
-      plugins: ['link', 'image', 'code', 'autolink'],
-      linkchecker_service_url: '/linkchecker',
-      toolbar:
-        'undo redo | formatselect | ' +
-        'bold italic backcolor | alignleft aligncenter ' +
-        'alignright alignjustify | bullist numlist outdent indent | ' +
-        'removeformat | link',
-    }}
-    onBlur={(event) =>
-      sendLog(LogEvents.noticeWritingPageTypeContent, {
-        content: event.target.getContent(),
-      })
-    }
-  />
-);
+      initialValue={initialValue}
+      value={value}
+      onEditorChange={(newValue, _) => onChange(newValue)}
+      tinymceScriptSrc="/tinymce/tinymce.min.js"
+      init={{
+        skin: window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'oxide-dark'
+          : 'oxide',
+        content_css: window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'default',
+        promotion: false,
+        plugins: ['link', 'image', 'code', 'autolink'],
+        linkchecker_service_url: '/linkchecker',
+        toolbar:
+          'undo redo | formatselect | ' +
+          'bold italic backcolor | alignleft aligncenter ' +
+          'alignright alignjustify | bullist numlist outdent indent | ' +
+          'removeformat | link',
+      }}
+      onBlur={(event) =>
+        sendLog(LogEvents.noticeWritingPageTypeContent, {
+          content: event.target.getContent(),
+        })
+      }
+    />
+  );
+};
 
 export default TinyMCEEditor;

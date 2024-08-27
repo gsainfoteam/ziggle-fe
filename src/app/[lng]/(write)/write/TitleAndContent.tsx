@@ -1,43 +1,42 @@
 'use client';
 
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
 import dynamic from 'next/dynamic';
 import React from 'react';
 import { Editor } from 'tinymce';
 
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
 import { PropsWithT } from '@/app/i18next';
 import ContentIcon from '@/assets/icons/content.svg';
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
 import TextIcon from '@/assets/icons/text.svg';
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
-import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
 
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
 });
 
 interface TitleAndContentProps {
-  editorRef: React.MutableRefObject<Editor | null>;
   title: string;
-  onChangeTitle: (title: string) => void;
-  onChangeContent: (event: TinyMCEEditorChangeEvent) => void;
   titleLabel: string;
+  onChangeTitle: (newTitle: string) => void;
+  content: string;
   contentLabel: string;
+  onChangeContent: (newContent: string) => void;
+  editorRef: React.MutableRefObject<Editor | null>
   disabled?: boolean;
 }
 
 const TitleAndContent = ({
-  editorRef,
   title,
   titleLabel,
-  contentLabel,
   onChangeTitle,
+  content,
+  contentLabel,
   onChangeContent,
+  editorRef, 
   t,
   disabled,
 }: PropsWithT<TitleAndContentProps>) => {
@@ -77,8 +76,9 @@ const TitleAndContent = ({
       <React.Suspense>
         <DynamicTinyMCEEditor
           disabled={disabled}
-          editorRef={editorRef}
+          value={content}
           onChange={onChangeContent}
+          editorRef={editorRef}
         />
       </React.Suspense>
     </>

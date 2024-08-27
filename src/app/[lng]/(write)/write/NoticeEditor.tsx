@@ -1,39 +1,43 @@
 'use client';
 
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
-import dayjs, { Dayjs } from 'dayjs';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import Swal from 'sweetalert2';
-import { Editor } from 'tinymce';
-
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
 import {
   attachInternationalNotice,
   createAdditionalNotice,
   NoticeDetail,
 } from '@/api/notice/notice';
+import {
+  Draft,
+  EditorAction,
+  EditorState,
+  initialEditorState,
+  retrieveDraftFromLocalStorage,
+} from './actions';
+import dayjs, { Dayjs } from 'dayjs';
+import { useRouter } from 'next/navigation';
+import { emit } from 'process';
+import { RefObject, useEffect, useReducer, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
+import { Editor } from 'tinymce';
+
 import { Category } from '@/api/notice/notice';
-import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
-import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
-import Button from '@/app/components/atoms/Button';
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
-import DateTimePicker from '@/app/components/organisms/DateTimePicker';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import AddPhotoIcon from '@/assets/icons/add-photo.svg';
-import ClockIcon from '@/assets/icons/clock.svg';
-import GlobeIcon from '@/assets/icons/globe.svg';
-import TagIcon from '@/assets/icons/tag.svg';
-import TypeIcon from '@/assets/icons/type.svg';
 import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 import { WarningSwal } from '@/utils/swals';
 import { calculateRemainingTime } from '@/utils/utils';
+import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
+import AddPhotoIcon from '@/assets/icons/add-photo.svg';
+import Button from '@/app/components/atoms/Button';
+import ClockIcon from '@/assets/icons/clock.svg';
+import DateTimePicker from '@/app/components/organisms/DateTimePicker';
+import GlobeIcon from '@/assets/icons/globe.svg';
+import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
+import TagIcon from '@/assets/icons/tag.svg';
+import Toggle from '@/app/components/atoms/Toggle/Toggle';
+import TypeIcon from '@/assets/icons/type.svg';
 
 import AttachPhotoArea, { FileWithUrl } from './AttachPhotoArea';
 import DeepLButton from './DeepLButton';
@@ -43,6 +47,10 @@ import LanguageTab from './LanguageTab';
 import NoticeTypeSelector, { NoticeType } from './NoticeTypeSelector';
 import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';
+
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
 
 interface NoticeEditorProps {
   params: PropsWithLng;
@@ -66,143 +74,192 @@ const NoticeEditor = ({
 }: NoticeEditorProps) => {
   const { t } = useTranslation(lng);
   const { push } = useRouter();
-  const isEditable = (() => {
+
+  const reducer = (state: EditorState, action: EditorAction) => {
+    switch (action.type) {
+      case 'TOGGLE_ENGLISH_VERSION': 
+        return {
+          ...state,
+          english: state.english ? undefined : {
+            title: "", 
+            content: "", 
+            additionalContent: undefined, 
+          }
+        };
+      case 'SET_NOTICE_TYPE':
+        return { ...state, noticeType: action.selectedNoticeType };
+      case "SET_WRITING_TAB": {
+        if (action.selectedWritingTab === "english" && !state.english) {
+          throw new Error(
+            "Invalid action: cannot set writing tab to english when englishVersion is not enabled. "
+          )
+        }
+        return { ...state, writingTab: action.selectedWritingTab}
+      }
+      case 'SET_KOREAN_TITLE': 
+        return { ...state, korean: {...state.korean, title: action.koreanTitle} };
+      case 'SET_KOREAN_CONTENT':
+        return { ...state, korean: {...state.korean, content: action.koreanContent} };
+      case 'SET_ENGLISH_TITLE': {
+        if (!state.english) {
+          throw new Error(
+            'Invalid action: cannot set english title when englishVesion is not enabled. ',
+          );
+        }
+        return { ...state, english: {...state.english, title: action.englishTitle}};
+      }
+      case 'SET_ENGLISH_CONTENT': {
+        if (!state.english) {
+          throw new Error(
+            'Invalid action: cannot set english content when englishVesion is not enabled. ',
+          );
+        }
+        return { ...state, english: {...state.english, content: action.englishContent} };
+      }
+      case 'TOGGLE_DEADLINE':
+        return {
+          ...state,
+          deadline: state.deadline ? undefined : dayjs(),
+        };
+      case 'SET_DEADLINE':
+        return {
+          ...state,
+          deadline: action.deadline,
+        };
+      case 'SET_TAGS':
+        return { ...state, tags: action.tags };
+      case 'SET_PHOTOS':
+        return { ...state, photos: action.photos };
+      case "SET_ADDITIONAL_KOREAN_CONTENT": 
+        return { ...state, korean: {...state.korean, additionalContent: action.additionalKoreanContent}}
+      case "SET_ADDITIONAL_ENGLISH_CONTENT": {
+        if (!state.english) {
+          throw new Error(
+            'Invalid action: cannot set english additional content when englishVesion is not enabled. ',
+          );
+        }
+        return {...state, english: {...state.english, additionalContent: action.additionalEnglishContent}}
+      }
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(reducer, initialEditorState);
+
+  const hasTimedOut = (() => {
     const remain = calculateRemainingTime(dayjs(notice?.createdAt));
-    return remain.minutes > 0 && remain.seconds > 0;
+    return remain.minutes <= 0 || remain.seconds <= 0;
   })();
 
-  const [koreanTitle, setKoreanTitle] = useState('');
-  const [englishTitle, setEnglishTitle] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [hasDeadline, setHasDeadline] = useState(false);
-  const [deadline, setDeadline] = useState<Dayjs>(dayjs());
-  const [selectedNoticeType, setSelectedNoticeType] =
-    useState<NoticeType>('recruit');
+  const koreanContentEditorRef = useRef<Editor | null>(null)
+  const englishContentEditorRef = useRef<Editor | null>(null);
 
-  const [tags, setTags] = useState<Tag[]>([]);
-
-  const [hasEnglishContent, setHasEnglishContent] = useState(false);
-  const [writingTab, setWritingTab] = useState<'korean' | 'english'>('korean');
-
-  const [photos, setPhotos] = useState<FileWithUrl[]>([]);
-
-  const koreanEditorRef = useRef<Editor>(null);
-  const englishEditorRef = useRef<Editor>(null);
-
-  const additionalKoreanRef = useRef<HTMLTextAreaElement>(null);
-  const additionalEnglishRef = useRef<HTMLTextAreaElement>(null);
-
-  const [isLoading, setIsLoading] = useState(false);
+  
 
   useEffect(() => {
-    const checkLocalStorage = async () => {
-      if (localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY)) {
-        const { koreanTitle, englishTitle, koreanBody, englishBody } =
-          JSON.parse(localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY) ?? '{}');
+    const loadDraft = async () => {
+      const draft = retrieveDraftFromLocalStorage();
+      if (!draft) return "";
 
-        if (!koreanTitle && !englishTitle && !koreanBody && !englishBody)
-          return;
+      console.log("load")
+      console.log(draft)
 
-        const confirm = await Swal.fire({
-          text: t('write.hasSavedNotice'),
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonText: t('alertResponse.yes'),
-          cancelButtonText: t('alertResponse.no'),
-        });
+      setIsLoading(true)
 
-        if (!confirm.isConfirmed) return;
+      const { isConfirmed } = await Swal.fire({
+        text: t('write.hasSavedNotice'),
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: t('alertResponse.yes'),
+        cancelButtonText: t('alertResponse.no'),
+      });
+      if (!isConfirmed) {
+        setIsLoading(false)
+        return
+      };
 
-        setKoreanTitle(koreanTitle);
-        setEnglishTitle(englishTitle);
-        if (englishTitle) {
-          setHasEnglishContent(true);
-        }
+      dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: draft.korean.title });
+      console.log("laskjdlfj")
+      dispatch({ type: 'SET_KOREAN_CONTENT', koreanContent: draft.korean.content});
+      if (!draft.english) return
+      dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle: draft.english.title });
+      dispatch({type: 'SET_ENGLISH_CONTENT', englishContent: draft.english.content });
 
-        if (koreanEditorRef.current) {
-          koreanEditorRef.current.setContent(koreanBody);
-        }
-
-        if (englishEditorRef.current) {
-          englishEditorRef.current.setContent(englishBody);
-        }
-      }
+      setIsLoading(false)
     };
 
-    const fetchExistingNotice = async () => {
-      console.log(notice);
-
+    const loadExistingNotice = () => {
       if (!notice) return;
 
-      setKoreanTitle(notice.title);
-      if (notice.enTitle) {
-        setHasEnglishContent(true);
-        setEnglishTitle(notice.enTitle);
-      }
+      const {
+        title: koreanTitle,
+        content: koreanContent,
+        enTitle: englishTitle,
+        enContent: englishContent,
+        currentDeadline: deadline,
+      } = notice;
 
-      console.log(koreanEditorRef.current);
-
-      function trySetKrContent() {
-        // 원래는 koreanEditorRef.current 에 바로 setContent를 하려 했지만, tinyMCE의 로딩이 굉장히 느려서 notice가 도착하는 시점에는 null입니다.
-        // 그래서 tinyMCE onInit에서 content를 설정하려 했는데 작동하지 않았습니다.
-        // 그래서 이렇게 임시로 했습니다.
-        if (koreanEditorRef.current && notice?.content) {
-          koreanEditorRef.current.setContent(notice.content);
-        } else {
-          setTimeout(trySetKrContent, 1000); // Retry after 1 second
-        }
-      }
-
-      function trySetEnContent() {
-        if (englishEditorRef.current && notice?.enContent) {
-          englishEditorRef.current.setContent(notice.enContent);
-        } else {
-          setTimeout(trySetEnContent, 1000); // Retry after 1 second
-        }
-      }
-
-      trySetKrContent();
-      trySetEnContent();
-
-      notice.deadline && setDeadline(dayjs(notice.deadline));
+      dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle });
+      dispatch({ type: 'SET_KOREAN_CONTENT', koreanContent });
+      dispatch({ type: "SET_ADDITIONAL_KOREAN_CONTENT", additionalKoreanContent: ""})
+      if (englishTitle === undefined || englishContent === undefined) return
+      dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle });
+      dispatch({ type: 'SET_ENGLISH_CONTENT', englishContent });
+      dispatch({ type: "SET_ADDITIONAL_ENGLISH_CONTENT", additionalEnglishContent: ""})
+      dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
     };
 
-    isEditMode ? fetchExistingNotice() : checkLocalStorage();
+    isEditMode ? loadExistingNotice() : loadDraft();
   }, [isEditMode, notice, t]);
 
-  const handleChange = async () => {
+  const saveDraft = async () => {
     if (isLoading) return;
-    localStorage.setItem(
-      NOTICE_LOCAL_STORAGE_KEY,
-      JSON.stringify({
-        koreanTitle,
-        englishTitle,
-        koreanBody: koreanEditorRef.current?.getContent(),
-        englishBody: englishEditorRef.current?.getContent(),
-      }),
-    );
+
+    const draft: Draft = {
+      korean: {
+        ...state.korean
+      }, 
+      english: state.english ? {
+        ...state.english
+      } : undefined, 
+      deadline: state.deadline
+    };
+    console.log("save")
+    console.log(draft)
+
+    localStorage.setItem(NOTICE_LOCAL_STORAGE_KEY, JSON.stringify(draft));
   };
+
+  useEffect(() => {
+    if (!isEditMode && !isLoading) saveDraft();
+  }, [isEditMode, state.korean, state.english, state.deadline])
 
   const handleSubmit = async () => {
     if (isLoading) return;
-    const koreanBody = koreanEditorRef.current?.getContent();
-    const englishBody = englishEditorRef.current?.getContent();
 
     setIsLoading(true);
     const noticeId = await handleNoticeSubmit({
-      title: koreanTitle,
-      deadline: hasDeadline ? deadline.toDate() ?? undefined : undefined,
-      noticeLanguage: hasEnglishContent ? 'both' : 'ko',
-      koreanBody,
-      enTitle: englishTitle,
-      englishBody,
-      tags: [...tags.map((tag) => tag.name)],
-      images: photos.map((image) => image.file),
-      category: NoticeTypeCatgoryMapper[selectedNoticeType],
+      title: state.korean.title,
+      deadline: state.deadline ? state.deadline.toDate() ?? undefined : undefined,
+      noticeLanguage: state.english ? 'both' : 'ko',
+      koreanBody: state.korean.title,
+      enTitle: state.english?.title,
+      englishBody: state.english?.content,
+      tags: [...state.tags.map(({name}) => name)],
+      images: state.photos.map(({file}) => file),
+      category: NoticeTypeCatgoryMapper[state.noticeType],
       t,
     });
     if (!noticeId) {
       setIsLoading(false);
+      Swal.fire({
+        text: t('write.alerts.submitFail'),
+        icon: 'error',
+        confirmButtonText: t('alertResponse.confirm'),
+      });
       return;
     }
 
@@ -213,13 +270,9 @@ const NoticeEditor = ({
 
   const handleModify = async () => {
     if (isLoading || !notice) return;
-    const koreanBody = koreanEditorRef.current?.getContent();
-    const englishBody = englishEditorRef.current?.getContent();
-    const additionalKoreanBody = additionalKoreanRef.current?.value;
-    const additionalEnglishBody = additionalEnglishRef.current?.value;
-    const warningSwal = WarningSwal(t);
 
-    if (!additionalKoreanBody && additionalEnglishBody) {
+    const warningSwal = WarningSwal(t);
+    if (!state.korean.additionalContent && state.english?.additionalContent) {
       warningSwal(t('write.alerts.needKoreanAdditionalNotice'));
       return;
     }
@@ -227,46 +280,43 @@ const NoticeEditor = ({
     setIsLoading(true);
 
     Swal.fire({
-      text: t('write.alerts.submittingNotice'),
+      text: t('write.alerts.modifyingNotice'),
       icon: 'info',
       showConfirmButton: false,
       allowOutsideClick: false,
     });
 
-    if (isEditable) {
+    if (!hasTimedOut) {
       const editedLangs: ('ko' | 'en')[] = [];
-      if (koreanBody !== notice.content) {
-        editedLangs.push('ko');
-      }
-      if (notice.enContent && englishBody !== notice.enContent) {
-        editedLangs.push('en');
-      }
+      if (state.korean.content !== notice.content) editedLangs.push("ko")
+      if (notice.enContent && state.english?.content !== notice.enContent) editedLangs.push("en")  
+      
       if (editedLangs.length) {
         const updatedNoticeId = await handleNoticeEdit({
           noticeId: notice.id,
-          koreanBody,
-          englishBody,
+          koreanBody: state.korean.content,
+          englishBody: state.english?.content,
           noticeLanguage: editedLangs.length === 1 ? editedLangs[0] : 'both',
-          deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
+          deadline: state.deadline ? state.deadline.toDate() : undefined,
           t,
         });
 
         if (!updatedNoticeId) {
           Swal.fire({
-            text: t('write.alerts.submitFail'),
+            text: t('write.alerts.modificationFail'),
             icon: 'error',
             confirmButtonText: t('alertResponse.confirm'),
           });
         }
       }
-    }
+    } 
 
-    if (notice.enContent === undefined && englishBody) {
+    if (notice.enContent === undefined && state.english) {
       const englishNotice = await attachInternationalNotice({
         lang: 'en',
-        title: englishTitle,
-        deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
-        body: englishBody,
+        title: state.english.title,
+        deadline: state.deadline ? state.deadline.toDate() : undefined,
+        body: state.english.content,
         noticeId: notice.id,
         contentId: 1,
       }).catch(() => null);
@@ -280,7 +330,7 @@ const NoticeEditor = ({
           denyButtonText: t('write.alerts.copyEnglishContent'),
         }).then((result) => {
           if (result.isDenied) {
-            navigator.clipboard.writeText(englishBody!);
+            navigator.clipboard.writeText(state.english?.content!);
             toast.success(t('write.alerts.copySuccess'));
           }
         });
@@ -288,66 +338,62 @@ const NoticeEditor = ({
       }
     }
 
-    const additionalKoreanNotice = additionalKoreanBody
-      ? await createAdditionalNotice({
-          noticeId: notice.id,
-          body: additionalKoreanBody,
-          deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
-        }).catch(() => null)
-      : undefined;
+    if (state.korean.additionalContent) {
+      const additionalKoreanNotice = await createAdditionalNotice({
+        noticeId: notice.id,
+        body: state.korean.additionalContent,
+        deadline: state.deadline ? state.deadline.toDate() : undefined,
+      }).catch(() => null)
 
-    if (additionalKoreanNotice === null) {
-      Swal.fire({
-        text: t('write.alerts.attachAdditionalNoticeFail'),
-        icon: 'error',
-        confirmButtonText: t('alertResponse.confirm'),
-        showDenyButton: true,
-        denyButtonText: t('write.alerts.copyAdditionalNotice'),
-      }).then((result) => {
-        if (result.isDenied) {
-          navigator.clipboard.writeText(additionalKoreanBody!);
-          toast.success(t('write.alerts.copySuccess'));
-        }
-      });
-      return;
-    }
-
-    const contents = additionalKoreanNotice?.additionalContents;
-
-    if (contents) {
-      const contentId = contents[contents.length - 1].id;
-
-      const additionalEnglishNotice =
-        additionalKoreanNotice && additionalEnglishBody
-          ? await attachInternationalNotice({
-              title: '',
-              body: additionalEnglishBody,
-              lang: 'en',
-              noticeId: notice.id,
-              contentId,
-              deadline: hasDeadline && deadline ? deadline.toDate() : undefined,
-            }).catch(() => null)
-          : undefined;
-
-      if (additionalEnglishNotice === null) {
+      if (additionalKoreanNotice === null) {
         Swal.fire({
-          text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
+          text: t('write.alerts.attachAdditionalNoticeFail'),
           icon: 'error',
           confirmButtonText: t('alertResponse.confirm'),
           showDenyButton: true,
-          denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
+          denyButtonText: t('write.alerts.copyAdditionalNotice'),
         }).then((result) => {
           if (result.isDenied) {
-            navigator.clipboard.writeText(additionalEnglishBody!);
+            navigator.clipboard.writeText(state.korean.additionalContent!);
             toast.success(t('write.alerts.copySuccess'));
           }
         });
-        return;
+        return
+      }
+
+      const contents = additionalKoreanNotice?.additionalContents
+      const contentId = contents?.pop().id // TODO: Might not be an array
+
+      if (contentId && state.english?.additionalContent) {
+        const additionalEnglishNotice = await attachInternationalNotice({
+          title: '',
+          body: state.english.additionalContent,
+          lang: 'en',
+          noticeId: notice.id,
+          contentId,
+          deadline: state.deadline ? state.deadline.toDate() : undefined,
+        }).catch(() => null)
+
+        if (additionalEnglishNotice === null) {
+          Swal.fire({
+            text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
+            icon: 'error',
+            confirmButtonText: t('alertResponse.confirm'),
+            showDenyButton: true,
+            denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
+          }).then((result) => {
+            if (result.isDenied) {
+              navigator.clipboard.writeText(state?.english?.additionalContent!);
+              toast.success(t('write.alerts.copySuccess'));
+            }
+          });
+          return;
+        }
       }
     }
-
+    
     Swal.fire({
-      text: t('write.alerts.submitSuccess'),
+      text: t('write.alerts.modificationSuccess'),
       icon: 'success',
       confirmButtonText: t('alertResponse.confirm'),
     });
@@ -355,7 +401,7 @@ const NoticeEditor = ({
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
     push(`/${lng}/notice/${notice.id}`);
   };
-
+  
   return (
     <>
       {isEditMode && (
@@ -385,7 +431,7 @@ const NoticeEditor = ({
         <GlobeIcon
           className={
             'w-5 md:w-6 ' +
-            (hasEnglishContent
+            (state.english
               ? 'stroke-text dark:stroke-dark_white'
               : 'stroke-grey dark:stroke-dark_grey')
           }
@@ -393,7 +439,7 @@ const NoticeEditor = ({
         <p
           className={
             'mr-1 text-lg font-medium ' +
-            (hasEnglishContent
+            (state.english
               ? 'text-text dark:text-dark_white'
               : 'text-grey dark:text-dark_grey')
           }
@@ -401,11 +447,11 @@ const NoticeEditor = ({
           {t('write.writeEnglishNotice')}
         </p>
         <Toggle
-          isSwitched={hasEnglishContent}
-          onSwitch={(e) => {
-            setHasEnglishContent(e.target.checked);
+          isSwitched={!!state.english}
+          onSwitch={() => {
+            dispatch({type: "TOGGLE_ENGLISH_VERSION"})
             sendLog(LogEvents.noticeWritingPageCheckEnglish, {
-              hasEnglishContent: e.target.checked,
+              hasEnglishContent: !!state.english,
             });
           }}
         />
@@ -417,72 +463,83 @@ const NoticeEditor = ({
       </div>
 
       <NoticeTypeSelector
-        selectedNoticeType={selectedNoticeType}
-        setNoticeType={setSelectedNoticeType}
+        selectedNoticeType={state.noticeType}
+        setNoticeType={(selectedNoticeType) => dispatch({type: "SET_NOTICE_TYPE", selectedNoticeType})}
         t={t}
         disabled={isEditMode}
       />
 
-      {hasEnglishContent && (
+      {state.english && (
         <div className="mt-10">
           <LanguageTab
-            writingTab={writingTab}
-            setWritingTab={setWritingTab}
+            writingTab={state.writingTab}
+            setWritingTab={(selectedWritingTab) => dispatch({type: "SET_WRITING_TAB", selectedWritingTab})}
             t={t}
           />
         </div>
       )}
 
-      <div
+      {state.writingTab === "korean" && <div
         className={
           'flex flex-col justify-stretch ' +
-          (writingTab !== 'korean' ? 'hidden' : '')
+          (state.writingTab !== 'korean' ? 'hidden' : '')
         }
       >
         <TitleAndContent
-          editorRef={koreanEditorRef}
-          title={koreanTitle}
-          onChangeTitle={setKoreanTitle}
-          onChangeContent={handleChange}
+          title={state.korean.title}
           titleLabel={t('write.koreanTitle')}
+          onChangeTitle={(newTitle: string) =>
+            dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: newTitle })
+          }
+          content={state.korean.content}
+          onChangeContent={(newContent: string) =>
+            dispatch({ type: 'SET_KOREAN_CONTENT', koreanContent: newContent })
+          }
           contentLabel={t('write.koreanContent')}
+          editorRef={koreanContentEditorRef}
           t={t}
-          disabled={isEditMode && !isEditable}
+          disabled={isEditMode && hasTimedOut}
         />
-      </div>
+      </div>}
 
-      <div
-        className={
-          'flex flex-col justify-stretch ' +
-          (writingTab === 'korean' ? 'hidden' : '')
-        }
-      >
-        <TitleAndContent
-          editorRef={englishEditorRef}
-          title={englishTitle}
-          onChangeTitle={setEnglishTitle}
-          onChangeContent={handleChange}
-          titleLabel={t('write.englishTitle')}
-          contentLabel={t('write.englishContent')}
-          t={t}
-          disabled={!!(isEditMode && !isEditable && notice?.title)}
-        />
-      </div>
+      {
+        state.writingTab === "english" && state.english && 
+          <div className={'flex flex-col justify-stretch'}>
+            <TitleAndContent
+              title={state.english.title}
+              titleLabel={t('write.englishTitle')}
+              onChangeTitle={(newTitle: string) =>
+                dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle: newTitle })
+              }
+              content={state.english.content}
+              contentLabel={t('write.englishContent')}
+              onChangeContent={(newContent: string) =>
+                dispatch({
+                  type: 'SET_ENGLISH_CONTENT',
+                  englishContent: newContent,
+                })
+              }
+              editorRef={englishContentEditorRef}
+              t={t}
+              disabled={(isEditMode && notice?.enTitle && hasTimedOut) || !state.english}
+            />
+        </div>
+      }
 
-      {hasEnglishContent && (
+      {state.english && (
         <DeepLButton
           t={t}
           editorRef={
-            writingTab === 'korean' ? koreanEditorRef : englishEditorRef
+            state.writingTab === 'korean' ? koreanContentEditorRef : englishContentEditorRef
           }
-          originalLanguage={writingTab === 'korean' ? 'korean' : 'english'}
+          originalLanguage={state.writingTab}
         />
       )}
 
       {/* 수정 모드이면서 (한국어 탭 && 수정 불가능) 또는 (영어 탭 && 수정 불가능 && 영어 공지 있음) */}
       {isEditMode &&
-        ((writingTab === 'korean' && !isEditable) ||
-          (writingTab === 'english' && !isEditable && notice?.enTitle)) && (
+        ((state.writingTab === 'korean' && hasTimedOut) ||
+          (state.writingTab === 'english' && hasTimedOut && notice?.enTitle)) && (
           <p
             className={
               'my-10 rounded-[10px] bg-greyLight px-[20px] py-[15px] text-center text-lg text-greyDark'
@@ -492,15 +549,16 @@ const NoticeEditor = ({
           </p>
         )}
 
-      {isEditMode && notice && (
+      {isEditMode && notice && (state.korean.additionalContent !== undefined) && (
         <>
           <div className="h-10" />
           <AddAdditionalNotice
             noticeId={notice.id}
             originallyHasDeadline={notice.deadline}
-            supportedLanguage={hasEnglishContent ? ['ko', 'en'] : ['ko']}
-            koreanRef={additionalKoreanRef}
-            englishRef={additionalEnglishRef}
+            koreanContent={state.korean.additionalContent}
+            englishContent={state.english?.additionalContent}
+            onKoreanContentChange={(value: string) => dispatch({type: "SET_ADDITIONAL_KOREAN_CONTENT", additionalKoreanContent: value})}
+            onEnglishContentChange={(value: string) => dispatch({type: "SET_ADDITIONAL_ENGLISH_CONTENT", additionalEnglishContent: value})}
             lng={lng}
           />
         </>
@@ -514,9 +572,9 @@ const NoticeEditor = ({
         </p>
 
         <Toggle
-          isSwitched={hasDeadline}
+          isSwitched={!!state.deadline}
           onSwitch={(e) => {
-            setHasDeadline(e.target.checked);
+            dispatch({type: "TOGGLE_DEADLINE"})
             sendLog(LogEvents.noticeWritingPageCheckDeadline, {
               hasDeadline: e.target.checked,
             });
@@ -525,8 +583,8 @@ const NoticeEditor = ({
 
         <div className={'w-1'} />
 
-        {hasDeadline && (
-          <DateTimePicker dateTime={deadline} setDateTime={setDeadline} />
+        {state.deadline && (
+          <DateTimePicker dateTime={state.deadline} onChange={(dateTime: Dayjs) => dispatch({type: "SET_DEADLINE", deadline: dateTime})} />
         )}
       </div>
 
@@ -542,7 +600,7 @@ const NoticeEditor = ({
             {t('write.writeTagsDescription')}
           </p>
 
-          <TagInput tags={tags} setTags={setTags} t={t} />
+          <TagInput tags={state.tags} setTags={(tags: Tag[]) => dispatch({type: "SET_TAGS", tags})} t={t} />
 
           <div className="mb-1 mt-10 flex items-center gap-2">
             <AddPhotoIcon className="w-5 stroke-text md:w-6" />
@@ -553,7 +611,7 @@ const NoticeEditor = ({
             {t('write.photoDescription')}
           </p>
 
-          <AttachPhotoArea t={t} photos={photos} setPhotos={setPhotos} />
+          <AttachPhotoArea t={t} photos={state.photos} setPhotos={(photos: FileWithUrl[]) => dispatch({type: "SET_PHOTOS", photos})} />
         </>
       )}
 

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 
-import Button from '@/app/components/atoms/Button';
 import { PropsWithT } from '@/app/i18next';
 import AddPhotoGray from '@/assets/add-photo-gray.svg';
+import Button from '@/app/components/atoms/Button';
 
 import AttachedPhoto from './AttachedPhoto';
 
@@ -13,7 +13,7 @@ export interface FileWithUrl {
 
 interface AttachPhotoAreaProps {
   photos: FileWithUrl[];
-  setPhotos: Dispatch<SetStateAction<FileWithUrl[]>>;
+  setPhotos: (photos: FileWithUrl[]) => void;
 }
 
 const AttachPhotoArea = ({
@@ -26,14 +26,13 @@ const AttachPhotoArea = ({
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const droppedFiles = Array.from(event.dataTransfer.files);
-
-    setPhotos((prev) => [
-      ...prev,
+    setPhotos([
+      ...photos,
       ...droppedFiles.map((file) => ({
         file,
         url: URL.createObjectURL(file),
       })),
-    ]);
+    ])
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
@@ -44,8 +43,8 @@ const AttachPhotoArea = ({
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedFiles = Array.from(event.target.files || []);
-    setPhotos((prev) => [
-      ...prev,
+    setPhotos([
+      ...photos,
       ...selectedFiles.map((file) => ({
         file,
         url: URL.createObjectURL(file),
@@ -87,9 +86,9 @@ const AttachPhotoArea = ({
                 key={index}
                 src={file.url}
                 onDeleteClick={() => {
-                  setPhotos((prev) => [
-                    ...prev.slice(0, index),
-                    ...prev.slice(index + 1),
+                  setPhotos([
+                    ...photos.slice(0, index),
+                    ...photos.slice(index + 1),
                   ]);
                   URL.revokeObjectURL(file.url);
                 }}
