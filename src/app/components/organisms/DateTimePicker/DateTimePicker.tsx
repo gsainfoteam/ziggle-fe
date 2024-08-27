@@ -1,19 +1,19 @@
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import './DateTimePicker.css';
+
 import { Dayjs } from 'dayjs';
 import React, { Dispatch } from 'react';
 import DatePicker from 'react-date-picker';
 
 import TimePicker from './TimePicker';
 
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import './DateTimePicker.css';
-
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 interface DateTimePickerProps {
   dateTime: Dayjs;
-  onChange: (dateTime: Dayjs) => void
+  onChange: (dateTime: Dayjs) => void;
 }
 
 const DateTimePicker = ({ dateTime, onChange }: DateTimePickerProps) => {
