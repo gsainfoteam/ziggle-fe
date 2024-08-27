@@ -16,6 +16,65 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
+  loading: () => <div className='flex flex-col w-full h-80 rounded-[10px] bg-greyLight dark:bg-dark_greyDark animate-pulse'>
+        <div className='flex w-full h-10 p-2 gap-1'>
+          <div className='flex w-10 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          <div className='flex w-14 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          <div className='flex w-12 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          <div className='flex w-14 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          <div className='flex w-10 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          <div className='flex w-12 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+        </div>
+        <div className='flex w-full h-12 p-2 justify-between border-b-[1px] border-b-greyDark dark:border-b-dark_grey'>
+          <div className='flex gap-2'>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex gap-2'>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex gap-2'>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex gap-2'>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex gap-2'>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
+          </div>
+        </div>
+        <div className='flex flex-col p-4 gap-4'>
+          <div className='flex w-full h-4 gap-4'>
+            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex w-full h-4 gap-4 ml-8'>
+            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+          </div>
+          <div className='flex w-full h-4 gap-4 ml-4'>
+            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
+          </div>
+        </div>
+      </div>
 });
 
 interface TitleAndContentProps {
@@ -73,14 +132,12 @@ const TitleAndContent = ({
         <p className="font-medium">{contentLabel}</p>
       </div>
 
-      <React.Suspense>
-        <DynamicTinyMCEEditor
-          disabled={disabled}
-          value={content}
-          onChange={onChangeContent}
-          editorRef={editorRef}
-        />
-      </React.Suspense>
+      <DynamicTinyMCEEditor
+        disabled={disabled}
+        value={content}
+        onChange={onChangeContent}
+        editorRef={editorRef}
+      />
     </>
   );
 };

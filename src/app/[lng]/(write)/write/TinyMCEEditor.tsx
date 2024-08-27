@@ -19,7 +19,6 @@ export interface TinyMCEEditorChangeEvent {
 interface TinyMCEEditorProps {
   value: string;
   onChange: (newValue: string) => void;
-  loadInitialContent?: () => Promise<string>;
   editorRef: ForwardedRef<TinyMCEEditorRef | null>
   initialValue?: string;
   disabled?: boolean;
@@ -28,12 +27,10 @@ interface TinyMCEEditorProps {
 const TinyMCEEditor = ({
   value,
   onChange,
-  loadInitialContent,
   editorRef, 
   initialValue,
   disabled,
 }: TinyMCEEditorProps) => {
-
   return (
     <Editor
       disabled={disabled}
