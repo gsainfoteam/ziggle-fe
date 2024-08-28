@@ -41,9 +41,6 @@ const Pagination = ({ items, itemsPerPage, page }: PaginationProps) => {
   const startItem = page * itemsPerPage + 1;
   const endItem = Math.min((page + 1) * itemsPerPage, items);
 
-  console.log('page', page);
-  console.log('pages', pages);
-
   return (
     <div className="flex items-center">
       <div className="flex gap-1 p-2">

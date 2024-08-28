@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { thirdPartyApi, vaporApi } from '..';
+import { vaporApi } from '..';
 
 export interface GroupInfo {
   uuid: string;

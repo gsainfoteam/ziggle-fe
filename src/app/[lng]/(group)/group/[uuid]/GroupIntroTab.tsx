@@ -7,11 +7,6 @@ import 'katex/dist/katex.min.css';
 import './styles.css';
 
 import { NotionAPI } from 'notion-client';
-import { ExtendedRecordMap } from 'notion-types';
-import { NotionRenderer } from 'react-notion-x';
-import useSWR from 'swr';
-
-import { getGroupNotion } from '@/api/group/group';
 
 import NotionWrapper from './NotionWrapper';
 
