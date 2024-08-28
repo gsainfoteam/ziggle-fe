@@ -4,7 +4,6 @@ import { auth } from './auth/auth';
 
 const ziggleApi = axios.create({ baseURL: '/api/bff' });
 const vaporApi = axios.create({ baseURL: '/api/vapor-bff' });
-const thirdPartyApi = axios.create({ baseURL: '/api/third-party-bff' });
 
 ziggleApi.interceptors.request.use(async (config) => {
   if (typeof window !== 'undefined') return config;
@@ -26,4 +25,4 @@ vaporApi.interceptors.request.use(async (config) => {
   return config;
 });
 
-export { thirdPartyApi, vaporApi, ziggleApi };
+export { vaporApi, ziggleApi };

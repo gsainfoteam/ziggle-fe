@@ -36,12 +36,3 @@ export const generateInviteCode = async (uuid: string): Promise<InviteCode> => {
     .get<InviteCode>(`/group/${uuid}/invite`)
     .then(({ data }) => data);
 };
-
-export const getGroupNotion = async (id: string): Promise<any> => {
-  // ExtendedRecordMap is not exported from 'notion-client'
-  const data = await thirdPartyApi.get(`/notion/${id}`).then(({ data }) => data);
-
-  console.log(data);
-
-  return data;
-};
