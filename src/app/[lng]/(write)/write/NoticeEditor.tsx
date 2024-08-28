@@ -24,7 +24,7 @@ import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
 import Button from '@/app/components/atoms/Button';
 import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import DateTimePicker from '@/app/components/organisms/DateTimePicker';
-import Tabs from '@/app/components/organisms/Tab/Tab';
+import Tabs from '@/app/components/organisms/Tabs/Tabs';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';

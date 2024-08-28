@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 
-import Tab from './Tab';
+import Tab from './Tabs';
 
 export default {
   title: 'app/components/organisms/Tab/Tab',

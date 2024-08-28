@@ -6,17 +6,24 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import GroupProfileDefault from '@/assets/icons/group-profile-default.webp';
 
 import GroupDetailTabs from './GroupDetailTabs';
+import GroupIntroTab from './GroupIntroTab';
+import GroupMembersTab from './GroupMembersTab';
+import GroupNoticesTab from './GroupNoticesTab';
 
 interface GroupDetailPageProps {
   params: PropsWithLng<{ uuid: string }>;
+  searchParams?: { tab: string; page: string };
 }
 
 const GroupDetailPage = async ({
   params: { uuid, lng },
+  searchParams,
 }: GroupDetailPageProps) => {
   const group = await getGroup(uuid);
 
   const { t } = await createTranslation(lng);
+
+  const tab = searchParams?.tab ?? 'info';
 
   return (
     <main className={'flex flex-col items-center'}>
@@ -59,7 +66,17 @@ const GroupDetailPage = async ({
           {group.description}
         </p>
 
-        <GroupDetailTabs lng={lng} />
+        <GroupDetailTabs
+          activeTab={tab}
+          lng={lng}
+          searchParams={searchParams}
+        />
+
+        {tab === 'info' && <GroupIntroTab />}
+        {tab === 'notice' && (
+          <GroupNoticesTab lng={lng} searchParams={searchParams} />
+        )}
+        {tab === 'member' && <GroupMembersTab />}
       </div>
     </main>
   );

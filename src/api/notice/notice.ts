@@ -83,20 +83,6 @@ export interface Notices {
   total: number;
 }
 
-export const useNotices = () => {
-  const { data, setSize, isLoading } = useSWRInfinite<Notices>(
-    (page) => `/notice?offset=${page * 10}`,
-  );
-  const fetchMore = () => {
-    setSize((data?.length ?? 0) + 1);
-  };
-  return {
-    notices: data?.flatMap((page) => page.list) ?? [],
-    fetchMore,
-    isLoading,
-  };
-};
-
 export const createNotice = ({
   title,
   deadline,

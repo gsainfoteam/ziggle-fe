@@ -1,35 +1,47 @@
 'use client';
 
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-import Tabs from '@/app/components/organisms/Tab/Tab';
-import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
+import Tabs from '@/app/components/organisms/Tabs/Tabs';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-import GroupIntroTab from './GroupIntroTab';
-import GroupMembersTab from './GroupMembersTab';
-import GroupNoticesTab from './GroupNoticesTab';
+interface GroupDetailTabsProps {
+  activeTab: string;
+  searchParams?: { tab: string };
+}
 
-interface GroupDetailTabsProps {}
-
-const GroupDetailTabs = ({ lng }: PropsWithLng<GroupDetailTabsProps>) => {
+const GroupDetailTabs = ({
+  activeTab,
+  lng,
+  searchParams,
+}: PropsWithLng<GroupDetailTabsProps>) => {
   const { t } = useTranslation(lng);
+  const pathname = usePathname();
+
+  const generateLinks = (tab: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('tab', tab);
+    return `${pathname}?${params.toString()}`;
+  };
 
   const tabs = [
-    { key: 'info', label: t('group.tabs.intro') },
-    { key: 'notice', label: t('group.tabs.notices') },
-    { key: 'member', label: t('group.tabs.members') },
+    { key: 'info', label: t('group.tabs.intro'), link: generateLinks('info') },
+    {
+      key: 'notice',
+      label: t('group.tabs.notices'),
+      link: generateLinks('notice'),
+    },
+    {
+      key: 'member',
+      label: t('group.tabs.members'),
+      link: generateLinks('member'),
+    },
   ] as const;
-
-  const [activeTab, setActiveTab] =
-    useState<(typeof tabs)[number]['key']>('info');
 
   return (
     <>
-      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'info' && <GroupIntroTab />}
-      {activeTab === 'notice' && <GroupNoticesTab />}
-      {activeTab === 'member' && <GroupMembersTab />}
+      <Tabs.SSR tabs={tabs} activeTab={activeTab} />
     </>
   );
 };

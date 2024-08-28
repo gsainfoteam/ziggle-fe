@@ -1,5 +1,3 @@
-'use client';
-
 // core styles shared by all of react-notion-x (required)
 import 'react-notion-x/src/styles.css';
 // used for code syntax highlighting (optional)
@@ -8,22 +6,33 @@ import 'prismjs/themes/prism-tomorrow.css';
 import 'katex/dist/katex.min.css';
 import './styles.css';
 
+import { NotionAPI } from 'notion-client';
+import { ExtendedRecordMap } from 'notion-types';
 import { NotionRenderer } from 'react-notion-x';
 import useSWR from 'swr';
 
 import { getGroupNotion } from '@/api/group/group';
 
+import NotionWrapper from './NotionWrapper';
+
 interface GroupIntroTabProps {}
 
-const GroupIntroTab = ({}: GroupIntroTabProps) => {
-  const { data, isLoading } = useSWR(
-    '2024-GIST-Developers-Night-1292632ae49843a79fb3e554c6a926c1', // example page id
-    getGroupNotion,
+const GroupIntroTab = async ({}: GroupIntroTabProps) => {
+  const notion = new NotionAPI();
+
+  const recordMap = await notion.getPage(
+    '2024-GIST-Developers-Night-1292632ae49843a79fb3e554c6a926c1',
   );
+
+  console.log('recordMap', recordMap);
+
+  if (recordMap === null) {
+    return <div>Notion page not found</div>;
+  }
 
   return (
     <div className={'mt-5'}>
-      {data && <NotionRenderer recordMap={data} fullPage={false} />}
+      <NotionWrapper recordMap={recordMap} />
     </div>
   );
 };
