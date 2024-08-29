@@ -1,80 +1,24 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import React from 'react';
-import { Editor } from 'tinymce';
-
-import { PropsWithT } from '@/app/i18next';
-import ContentIcon from '@/assets/icons/content.svg';
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
-import TextIcon from '@/assets/icons/text.svg';
-
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 
+import dynamic from 'next/dynamic';
+import React from 'react';
+import { Editor } from 'tinymce';
+
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
+import { PropsWithT } from '@/app/i18next';
+import ContentIcon from '@/assets/icons/content.svg';
+import TextIcon from '@/assets/icons/text.svg';
+
+import TinyMCEEditorSkeleton from './TinyMCEEditorSkeleton';
+
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
-  loading: () => <div className='flex flex-col w-full h-80 rounded-[10px] bg-greyLight dark:bg-dark_greyDark animate-pulse'>
-        <div className='flex w-full h-10 p-2 gap-1'>
-          <div className='flex w-10 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          <div className='flex w-14 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          <div className='flex w-12 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          <div className='flex w-14 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          <div className='flex w-10 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          <div className='flex w-12 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-        </div>
-        <div className='flex w-full h-12 p-2 justify-between border-b-[1px] border-b-greyDark dark:border-b-dark_grey'>
-          <div className='flex gap-2'>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex gap-2'>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex gap-2'>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex gap-2'>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex gap-2'>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded bg-greyDark dark:bg-dark_grey'/>
-          </div>
-        </div>
-        <div className='flex flex-col p-4 gap-4'>
-          <div className='flex w-full h-4 gap-4'>
-            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex w-full h-4 gap-4 ml-8'>
-            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-          </div>
-          <div className='flex w-full h-4 gap-4 ml-4'>
-            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-8 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-6 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-12 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-            <div className='flex w-16 h-full rounded-full bg-greyDark dark:bg-dark_grey'/>
-          </div>
-        </div>
-      </div>
+  loading: TinyMCEEditorSkeleton,
 });
 
 interface TitleAndContentProps {
@@ -84,7 +28,7 @@ interface TitleAndContentProps {
   content: string;
   contentLabel: string;
   onChangeContent: (newContent: string) => void;
-  editorRef: React.MutableRefObject<Editor | null>
+  editorRef: React.MutableRefObject<Editor | null>;
   disabled?: boolean;
 }
 
@@ -95,7 +39,7 @@ const TitleAndContent = ({
   content,
   contentLabel,
   onChangeContent,
-  editorRef, 
+  editorRef,
   t,
   disabled,
 }: PropsWithT<TitleAndContentProps>) => {
