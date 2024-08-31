@@ -1,15 +1,15 @@
 import Sidebar from '@/app/components/templates/Sidebar';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
+
+interface LayoutProps {
+  children: React.ReactNode;
+  params: PropsWithLng;
+}
 
 export default async function Layout({
   children,
   params: { lng },
-}: {
-  children: React.ReactNode;
-  params: PropsWithLng;
-}) {
-  const { t } = await createTranslation(lng);
-
+}: LayoutProps) {
   return (
     <>
       <div className="ml-4 mt-6 hidden md:block">

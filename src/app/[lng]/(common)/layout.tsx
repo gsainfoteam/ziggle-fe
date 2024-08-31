@@ -6,12 +6,13 @@ import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/templates/Footer';
 import Navbar from '@/app/components/templates/Navbar';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
 
+import { primary } from '../../const';
 import InitClient from './InitClient';
 
 export const viewport: Viewport = {
-  themeColor: '#ff4500',
+  themeColor: primary,
 };
 
 export default async function Layout({
@@ -21,17 +22,12 @@ export default async function Layout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
-
   return (
     <InitClient lng={lng}>
       <div>
         <Navbar lng={lng} />
-
-        <div className="flex md:flex-row">{children}</div>
-
-        <div className="h-[500px]" />
-        <Footer t={t} />
+        <div className="mb-96 flex">{children}</div>
+        <Footer lng={lng} />
       </div>
       <ToastContainer className="w-64" />
     </InitClient>

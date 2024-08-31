@@ -1,5 +1,5 @@
 import ExternalLink from '@/app/components/atoms/ExternalLink';
-import { PropsWithT } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
@@ -9,16 +9,11 @@ export const playStoreLink =
   'https://play.google.com/store/apps/details?id=me.gistory.ziggle';
 export const appStoreLink = 'https://apps.apple.com/kr/app/ziggle/id6451740697';
 
-const Footer = ({ t }: PropsWithT) => {
+const Footer = async ({ lng }: PropsWithLng) => {
+  const { t } = await createTranslation(lng);
+
   return (
-    <footer
-      className={
-        'bg-primary text-white dark:text-dark_white ' +
-        'box-content min-h-[300px] px-pageSide py-8 sm:py-16 ' +
-        'flex flex-col gap-x-24 gap-y-12 ' +
-        'xl:flex-row'
-      }
-    >
+    <footer className="box-content flex min-h-[300px] flex-col gap-x-24 gap-y-12 bg-primary px-pageSide py-8 text-white dark:text-dark_white sm:py-16 xl:flex-row">
       <div className="flex flex-col justify-between gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">

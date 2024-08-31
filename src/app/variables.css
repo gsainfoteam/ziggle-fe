@@ -1,5 +1,5 @@
 :root {
-  --primary: #ff4500;
+  --primary: #ff4500; /* Should be same as primary at ./const.ts */
   --secondary: #fff4f0;
   --text: #252525;
   --secondaryText: #959595;
