@@ -27,7 +27,7 @@ const NoticeInfo = async ({
   const session = await auth();
 
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-col gap-[18px]" id={'notice-info'}>
       {deadline && <Deadline deadline={dayjs(deadline).tz()} t={t} />}
 
       <Metadata
@@ -76,7 +76,7 @@ const Metadata = ({
 
   return (
     <>
-      <div className={'flex items-center'}>
+      <div className={'flex items-center'} id={'notice-title'}>
         <DefaultProfile width={36} height={36} />
 
         <p className={'ml-2 text-lg font-medium'}>{author}</p>
