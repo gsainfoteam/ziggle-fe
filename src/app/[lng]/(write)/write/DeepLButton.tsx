@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
 import { PropsWithT } from '@/app/i18next';

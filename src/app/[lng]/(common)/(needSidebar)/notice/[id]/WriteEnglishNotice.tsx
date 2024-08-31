@@ -5,16 +5,12 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import Swal from 'sweetalert2';
-import { Editor, Editor as TinyMCEEditorRef } from 'tinymce';
+import { Editor } from 'tinymce';
 
-import LogEvents from '@/api/log/log-events';
-import sendLog from '@/api/log/send-log';
 import { attachInternationalNotice } from '@/api/notice/notice';
 import Button from '@/app/components/atoms/Button';
-import Checkbox from '@/app/components/atoms/Checkbox/Checkbox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import { Locale } from '@/app/i18next/settings';
 import ContentIcon from '@/assets/icons/content.svg';
 import { WarningSwal } from '@/utils/swals';
 

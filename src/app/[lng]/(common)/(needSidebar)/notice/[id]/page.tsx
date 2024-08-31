@@ -2,7 +2,6 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { getNotice } from '@/api/notice/get-notice';
-import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';

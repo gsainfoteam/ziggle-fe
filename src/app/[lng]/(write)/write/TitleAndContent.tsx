@@ -13,7 +13,6 @@ import sendLog from '@/api/log/send-log';
 import { PropsWithT } from '@/app/i18next';
 import ContentIcon from '@/assets/icons/content.svg';
 import TextIcon from '@/assets/icons/text.svg';
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
 import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
 

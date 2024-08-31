@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-import { PropsWithT, T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 
 import RadioDeselected from './assets/radio-deselected.svg';
 import RadioSelected from './assets/radio-selected.svg';

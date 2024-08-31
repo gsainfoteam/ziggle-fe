@@ -1,5 +1,4 @@
 import { createTranslation, PropsWithLng } from '@/app/i18next';
-import { useTranslation } from '@/app/i18next/client';
 import BonFire from '@/assets/logos/bonfire.svg';
 
 const NotInGroup = async ({ params: { lng } }: { params: PropsWithLng }) => {

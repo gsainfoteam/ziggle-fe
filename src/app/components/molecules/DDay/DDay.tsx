@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import { PropsWithT, T } from '@/app/i18next';
+import { PropsWithT } from '@/app/i18next';
 
 interface DDayProps {
   deadline: dayjs.Dayjs | string;
