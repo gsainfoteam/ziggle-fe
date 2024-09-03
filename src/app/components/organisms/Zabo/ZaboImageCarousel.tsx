@@ -57,16 +57,18 @@ const ZaboImageCarousel = ({
           maxHeight: imageSize,
           overscrollBehaviorX: 'contain',
         }}
-        className="relative flex w-fit overflow-y-hidden overflow-x-scroll scrollbar-none"
+        className="relative flex w-fit max-w-full overflow-y-hidden overflow-x-scroll scrollbar-none"
       >
         {imageUrls.map((url, i) => (
           <Image
             style={{
               scrollSnapAlign: 'start',
+              minWidth: imageSize, 
+              minHeight: imageSize
             }}
             key={url}
             src={url}
-            alt={`${title}: image ${i}`}
+            alt={`${title}: image ${i + 1}`}
             width={imageSize}
             height={imageSize}
             className={'block rounded-md border border-gray-300 object-cover'}
