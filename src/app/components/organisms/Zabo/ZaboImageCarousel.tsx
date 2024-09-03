@@ -8,6 +8,7 @@ interface ZaboImageCarouselProps {
   title: string;
   imageSize?: number;
   gap?: number;
+  maxControls?: number;
 }
 
 const ZaboImageCarousel = ({
@@ -15,6 +16,7 @@ const ZaboImageCarousel = ({
   title,
   imageSize = 200,
   gap = 8,
+  maxControls = 6,
 }: ZaboImageCarouselProps) => {
   const imagesContainerRef = useRef<HTMLDivElement | null>(null);
   const [indicesInView, setIndicesInView] = useState<{
@@ -30,17 +32,21 @@ const ZaboImageCarousel = ({
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     setIndicesInView({
       first: Math.floor((e.currentTarget.scrollLeft + gap) / (imageSize + gap)),
-      last: Math.floor(
-        e.currentTarget.scrollLeft / (imageSize + gap) +
-          (e.currentTarget.clientWidth + gap) / (imageSize + gap),
-      ),
+      last:
+        Math.floor(e.currentTarget.scrollLeft / (imageSize + gap)) +
+        Math.floor(
+          (e.currentTarget.clientWidth + gap + imageSize) / (imageSize + gap),
+        ) - 1,
     });
   };
 
+  console.log(indicesInView);
+
   const isOverflowing = indicesInView.last < imageUrls.length;
+  const thereAreMoreImagesthanMax = maxControls < imageUrls.length;
 
   return (
-    <div className="flex w-full flex-col items-center gap-2">
+    <div className="flex w-full flex-col items-center gap-2 group">
       <div
         ref={imagesContainerRef}
         onScroll={handleScroll}
@@ -67,16 +73,26 @@ const ZaboImageCarousel = ({
           />
         ))}
       </div>
-      {isOverflowing && (
-        <div className="flex h-4 w-fit items-center justify-center gap-1 rounded-full px-2 py-1 backdrop-blur-lg backdrop-invert-[30%]">
+      {indicesInView.last <= imageUrls.length && (
+        <div className="group-hover:opacity-100 opacity-0 flex h-4 w-fit items-center justify-center rounded-full px-2 py-1 backdrop-blur-lg backdrop-invert-[30%] transition-opacity duration-500">
           {imageUrls.map((url, i) => (
             <div
               key={url}
               className={`
-              flex h-2 w-2 rounded-full bg-dark_white
+              flex rounded-full bg-dark_white
+              ${
+                i < indicesInView.first - 2 || indicesInView.first + maxControls - 1 < i
+                  ? 'mx-0 h-0 w-0'
+                  : 'mx-1 h-2 w-2' +
+                    (i == indicesInView.first + maxControls - 2 || i == indicesInView.first - 1
+                      ? ' scale-75'
+                      : i == indicesInView.first + maxControls - 1 || i == indicesInView.first - 2
+                        ? ' scale-50'
+                        : '')
+              }
               ${
                 (i < indicesInView.first || indicesInView.last < i) &&
-                'scale-75 opacity-30'
+                ' opacity-30'
               }
               transition-all duration-500
             `}
