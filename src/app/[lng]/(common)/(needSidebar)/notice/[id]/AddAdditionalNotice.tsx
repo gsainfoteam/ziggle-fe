@@ -1,36 +1,34 @@
 'use client';
 
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
 import { Dayjs } from 'dayjs';
-import { RefObject, useState } from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddIcon from '@/assets/icons/add.svg';
 
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+
 interface AddAdditionalNoticesProps {
   noticeId: number;
   originallyHasDeadline: string | Dayjs | null;
-  supportedLanguage: string[];
-  koreanRef: RefObject<HTMLTextAreaElement>;
-  englishRef: RefObject<HTMLTextAreaElement>;
+  koreanContent: string;
+  englishContent?: string;
+  onKoreanContentChange: (value: string) => void;
+  onEnglishContentChange?: (value: string) => void;
 }
 
 const AddAdditionalNotice = ({
-  koreanRef,
-  englishRef,
-  noticeId,
-  supportedLanguage,
-  originallyHasDeadline,
+  koreanContent, 
+  englishContent, 
+  onKoreanContentChange, 
+  onEnglishContentChange, 
   lng,
 }: AddAdditionalNoticesProps & PropsWithLng) => {
-  const [content, setContent] = useState<string>('');
-  const [englishContent, setEnglishContent] = useState<string>('');
-
   const { t } = useTranslation(lng);
+
+  const isEnglishSupported = englishContent !== undefined && onEnglishContentChange !== undefined
 
   return (
     <div className={'flex flex-col'}>
@@ -44,22 +42,21 @@ const AddAdditionalNotice = ({
 
       <textarea
         className={
-          'mb-3 mt-1 grow resize-none rounded-[10px] border border-solid border-primary p-4 text-base dark:bg-transparent dark:text-white'
+          'mb-3 mt-1 grow resize-none rounded-[10px] border border-solid border-primary p-4 text-base bg-transparent dark:text-white'
         }
         name={'searchQuery'}
         placeholder={t('zabo.additionalNotices.additionalNoticePlaceholder')}
         rows={3}
-        value={content}
+        value={koreanContent}
         onChange={(event) => {
-          setContent(event.target.value);
+          onKoreanContentChange(event.target.value);
         }}
-        ref={koreanRef}
       />
 
-      {supportedLanguage.includes('en') && (
+      {isEnglishSupported && (
         <textarea
           className={
-            'mb-3 mt-1 grow resize-none rounded-[10px] border border-solid border-primary p-4 text-base dark:bg-transparent dark:text-white'
+            'mb-3 mt-1 grow resize-none rounded-[10px] border border-solid border-primary p-4 text-base bg-transparent dark:text-white'
           }
           name={'searchQuery'}
           placeholder={t(
@@ -68,9 +65,8 @@ const AddAdditionalNotice = ({
           rows={3}
           value={englishContent}
           onChange={(event) => {
-            setEnglishContent(event.target.value);
+            onEnglishContentChange(event.target.value);
           }}
-          ref={englishRef}
         />
       )}
     </div>

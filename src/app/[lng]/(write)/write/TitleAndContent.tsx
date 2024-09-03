@@ -13,31 +13,33 @@ import sendLog from '@/api/log/send-log';
 import { PropsWithT } from '@/app/i18next';
 import ContentIcon from '@/assets/icons/content.svg';
 import TextIcon from '@/assets/icons/text.svg';
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
-import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
+import TinyMCEEditorSkeleton from './TinyMCEEditorSkeleton';
 
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
+  loading: TinyMCEEditorSkeleton,
 });
 
 interface TitleAndContentProps {
-  editorRef: React.MutableRefObject<Editor | null>;
   title: string;
-  onChangeTitle: (title: string) => void;
-  onChangeContent: (event: TinyMCEEditorChangeEvent) => void;
   titleLabel: string;
+  onChangeTitle: (newTitle: string) => void;
+  content: string;
   contentLabel: string;
+  onChangeContent: (newContent: string) => void;
+  editorRef: React.MutableRefObject<Editor | null>;
   disabled?: boolean;
 }
 
 const TitleAndContent = ({
-  editorRef,
   title,
   titleLabel,
-  contentLabel,
   onChangeTitle,
+  content,
+  contentLabel,
   onChangeContent,
+  editorRef,
   t,
   disabled,
 }: PropsWithT<TitleAndContentProps>) => {
@@ -74,13 +76,12 @@ const TitleAndContent = ({
         <p className="font-medium">{contentLabel}</p>
       </div>
 
-      <React.Suspense>
-        <DynamicTinyMCEEditor
-          disabled={disabled}
-          editorRef={editorRef}
-          onChange={onChangeContent}
-        />
-      </React.Suspense>
+      <DynamicTinyMCEEditor
+        disabled={disabled}
+        value={content}
+        onChange={onChangeContent}
+        editorRef={editorRef}
+      />
     </>
   );
 };
