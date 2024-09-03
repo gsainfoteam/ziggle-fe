@@ -37,9 +37,7 @@ const ZaboImageCarousel = ({
     });
   };
 
-  const isOverflowing =
-    (imagesContainerRef.current?.scrollWidth ?? 0) >
-    (imagesContainerRef.current?.clientWidth ?? 0);
+  const isOverflowing = indicesInView.last < imageUrls.length;
 
   return (
     <div className="flex w-full flex-col items-center gap-2">
@@ -51,7 +49,7 @@ const ZaboImageCarousel = ({
           scrollSnapType: 'x mandatory',
           gap: gap,
           maxHeight: imageSize,
-          overscrollBehaviorX: 'none',
+          overscrollBehaviorX: 'contain',
         }}
         className="relative flex w-fit overflow-y-hidden overflow-x-scroll scrollbar-none"
       >
