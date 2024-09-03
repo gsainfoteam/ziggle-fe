@@ -40,11 +40,6 @@ const ZaboImageCarousel = ({
     });
   };
 
-  console.log(indicesInView);
-
-  const isOverflowing = indicesInView.last < imageUrls.length;
-  const thereAreMoreImagesthanMax = maxControls < imageUrls.length;
-
   return (
     <div className="flex w-full flex-col items-center gap-2 group">
       <div
