@@ -10,16 +10,14 @@ interface ToggleProps {
 
 const Toggle = ({ isSwitched, defaultIsSwitched, onSwitch }: ToggleProps) => {
   return (
-    <label className={styles.wrapper}>
-      <input
-        role="switch"
-        type="checkbox"
-        className={styles.checkbox}
-        checked={isSwitched}
-        defaultChecked={defaultIsSwitched}
-        onChange={onSwitch}
-      />
-    </label>
+    <input
+      role="switch"
+      type="checkbox"
+      className={styles.checkbox}
+      checked={isSwitched}
+      defaultChecked={defaultIsSwitched}
+      onChange={onSwitch}
+    />
   );
 };
 

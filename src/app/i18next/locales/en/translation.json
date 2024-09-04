@@ -259,7 +259,7 @@
     },
     "setupTags": "Set Tags",
     "writeTagsDescription": "Separate them with a space; you don't need to type #.",
-    "writeTags": "Enter tags.",
+    "writeTags": "Enter tags",
 
     "setupLanguage": "Additional Languages",
     "languages": {

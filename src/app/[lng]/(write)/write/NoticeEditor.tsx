@@ -381,7 +381,7 @@ const NoticeEditor = ({
         </div>
       )}
 
-      <div className={'mb-10 mt-10 flex items-center gap-2'}>
+      <label className={'mb-10 mt-10 flex items-center gap-2'}>
         <GlobeIcon
           className={
             'w-5 md:w-6 ' +
@@ -409,7 +409,7 @@ const NoticeEditor = ({
             });
           }}
         />
-      </div>
+      </label>
 
       <div className="mb-3 flex gap-[6px]">
         <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />

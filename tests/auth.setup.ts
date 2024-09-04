@@ -1,12 +1,15 @@
-import { expect, test } from '@playwright/test';
+import { expect, test as setup } from '@playwright/test';
+
+const authFile = 'playwright/.auth/user.json';
+
 import dotenv from 'dotenv';
 
 dotenv.config({
   path: '.env.local',
 });
 
-test('login with IdP', async ({ page }) => {
-  await page.goto('localhost:3000/en');
+setup('authenticate', async ({ page }) => {
+  await page.goto('http://localhost:3000/en');
 
   await page.click('text=Login');
 
@@ -21,5 +24,5 @@ test('login with IdP', async ({ page }) => {
 
   await page.waitForURL(/localhost:3000/);
 
-  await expect(page).toHaveURL(/localhost:3000/);
+  await page.context().storageState({ path: authFile });
 });

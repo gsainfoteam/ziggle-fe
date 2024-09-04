@@ -1,8 +1,3 @@
-.wrapper {
-  display: inline-flex;
-  cursor: pointer;
-}
-
 .checkbox {
   appearance: none;
   position: relative;
