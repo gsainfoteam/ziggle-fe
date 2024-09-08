@@ -71,7 +71,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
 
         <p
           className={
-            'mx-4 mb-[10px] text-xl font-semibold dark:text-dark_white'
+            'mx-4 mb-[10px] line-clamp-3 text-xl font-semibold dark:text-dark_white'
           }
         >
           {title}
