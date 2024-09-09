@@ -39,15 +39,13 @@ const WriteEnglishNotice = ({
 
   const [title, setTitle] = useState<string>('');
 
-  const englishEditorRef = useRef<Editor>(null);
+  const [englishContent, setEnglishContent] = useState<string>('');
 
   const { refresh } = useRouter();
 
   const warningSwal = WarningSwal(t);
 
   const handleSubmit = async () => {
-    const englishContent = englishEditorRef.current?.getContent();
-
     if (!englishContent) {
       warningSwal(t('write.alerts.body'));
       return;
@@ -92,7 +90,10 @@ const WriteEnglishNotice = ({
         placeholder={t('zabo.writeEnglishNotice.writeTitle')}
       />
 
-      <DynamicTinyMCEEditor editorRef={englishEditorRef} />
+      <DynamicTinyMCEEditor
+        value={englishContent}
+        onChange={(newValue) => setEnglishContent(newValue)}
+      />
 
       <div className={'mt-6 flex justify-center gap-[10px]'}>
         <Button
