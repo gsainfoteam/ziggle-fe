@@ -90,7 +90,8 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
                   src={url}
                   alt={title}
                   width={200}
-                  height={200}
+                  height={350}
+                  style={{ width: '200px', height: 'auto', maxHeight: '350px' }}
                   className={
                     'rounded-[5px] border border-gray-300 object-cover'
                   }
