@@ -7,7 +7,9 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.svg';
 
 import DDay from '../../molecules/DDay';
+import ZaboImage from '../../molecules/ZaboImage';
 import ZaboActions from './ZaboActions';
+import ZaboImageCarousel from './ZaboImageCarousel';
 import ZaboTags from './ZaboTags';
 
 export type ZaboOrigin = 'width' | 'height';
@@ -79,27 +81,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
 
         {!hasImage && <ZaboTags notice={props} />}
 
-        {hasImage && (
-          <div className={'flex justify-center'}>
-            {/* // 아래 div에 바로 justify-center를 적용하면, 1번 2번 이미지가 잘려서
-          보임 */}
-            <div className={'flex flex-nowrap gap-[10px] overflow-x-scroll'}>
-              {imageUrls.map((url) => (
-                <Image
-                  key={url}
-                  src={url}
-                  alt={title}
-                  width={200}
-                  height={350}
-                  style={{ width: '200px', height: 'auto', maxHeight: '350px' }}
-                  className={
-                    'rounded-[5px] border border-gray-300 object-cover'
-                  }
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        {hasImage && <ZaboImageCarousel imageUrls={imageUrls} title={title} />}
 
         {hasImage && (
           <div className="mx-2 my-4">
