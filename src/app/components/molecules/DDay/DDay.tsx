@@ -1,15 +1,17 @@
 import dayjs from 'dayjs';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
-import { PropsWithT } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 interface DDayProps {
   deadline: dayjs.Dayjs | string;
   className?: string;
 }
 
-const DDay = ({ deadline, t, className }: PropsWithT<DDayProps>) => {
+const DDay = async ({ deadline, lng, className }: PropsWithLng<DDayProps>) => {
   const isClosed = dayjs(deadline).isBefore();
+
+  const { t } = await createTranslation(lng);
 
   return (
     <p

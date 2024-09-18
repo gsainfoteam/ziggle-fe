@@ -1,7 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { useTranslation } from '@/app/i18next/client';
 import { fallbackLng } from '@/app/i18next/settings';
 
 import DDay from '.';
@@ -12,8 +11,7 @@ export default {
 } as Meta<typeof DDay>;
 
 const Template: StoryFn<typeof DDay> = (args) => {
-  const { t } = useTranslation(fallbackLng);
-  return <DDay {...args} t={t} />;
+  return <DDay {...args} lng={fallbackLng} />;
 };
 
 export const Today = Template.bind({});

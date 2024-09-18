@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
+import Toggle from '@/app/components/atoms/Toggle/Toggle';
 
 import MypageBox from './MypageBox';
 
@@ -20,13 +20,11 @@ export const useColorTheme = (): [
   const [theme, setTheme] = useState<ColorTheme>();
 
   useEffect(() => {
-    // First, try to get the theme from cookies
     const cookieTheme = cookies.theme as ColorTheme | undefined;
 
     if (cookieTheme) {
       setTheme(cookieTheme);
     } else {
-      // If no cookie is set, check for system preference
       const prefersDarkMode =
         window.matchMedia &&
         window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -34,7 +32,6 @@ export const useColorTheme = (): [
       setTheme(systemTheme);
       setCookie('theme', systemTheme, { path: '/' });
     }
-    // console.log(theme, cookies.theme);
   }, [theme, cookies.theme, setCookie]);
 
   const updateTheme = (newTheme: ColorTheme) => {
