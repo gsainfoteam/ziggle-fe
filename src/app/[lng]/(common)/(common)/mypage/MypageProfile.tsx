@@ -46,13 +46,16 @@ export default function MypageProfile({
       <div className="m-0 self-stretch text-left text-2xl font-semibold text-text dark:text-dark_white">
         {t('mypage.info')}
       </div>
-      {MYPAGE_FIELDS.map((field, idx) => (
-        <div key={idx} className="flex w-full flex-wrap justify-between gap-4">
+      {MYPAGE_FIELDS.map(({ field, i18nKey }) => (
+        <div
+          key={field}
+          className="flex w-full flex-wrap justify-between gap-4"
+        >
           <div className="m-0 text-xl font-medium text-text dark:text-dark_white">
-            {t(field.i18nKey)}
+            {t(i18nKey)}
           </div>
           <div className="m-0 text-xl font-normal text-greyDark dark:text-dark_grey">
-            {field.field}
+            {field}
           </div>
         </div>
       ))}

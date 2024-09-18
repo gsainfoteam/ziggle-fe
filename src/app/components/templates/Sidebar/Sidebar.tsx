@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import React from 'react';
+import { Fragment } from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -55,7 +55,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   return (
     <>
       {sidebarObject.map((group, i) => (
-        <React.Fragment key={i}>
+        <Fragment key={i}>
           <ul className="flex flex-col gap-y-2">
             {group
               .filter((menu) => (!userData ? !menu.needAuth : menu))
@@ -78,7 +78,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
           {!(sidebarObject.length - 1 === i) && (
             <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
           )}
-        </React.Fragment>
+        </Fragment>
       ))}
     </>
   );
