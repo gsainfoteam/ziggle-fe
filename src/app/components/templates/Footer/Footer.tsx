@@ -13,7 +13,7 @@ const Footer = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
 
   return (
-    <footer className="box-content flex min-h-[300px] flex-col gap-x-24 gap-y-12 bg-primary px-pageSide py-8 text-white dark:text-dark_white sm:py-16 xl:flex-row">
+    <footer className="mt-8 box-content flex flex-col gap-x-24 gap-y-12 bg-primary px-pageSide py-12 text-white dark:text-dark_white sm:py-16 xl:flex-row">
       <div className="flex flex-col justify-between gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
