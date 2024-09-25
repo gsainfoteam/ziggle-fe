@@ -5,7 +5,7 @@ import { getAllNotices } from '@/api/notice/notice-server';
 import Pagination from '@/app/components/shared/Pagination';
 import Zabo from '@/app/components/shared/Zabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
-import SearchNoResult from '@/assets/search-no-result.svg';
+import SearchNoResult from '@/assets/icons/search-no-result.svg';
 
 interface CategorizedNoticesProps {
   sortByDeadline: boolean;

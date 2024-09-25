@@ -8,7 +8,7 @@ import { NoticeDetail } from '@/api/notice/notice';
 import AuthorActions from '@/app/[lng]/(with-page-layout)/(with-sidebar-layout)/notice/[id]/AuthorActions';
 import Tags from '@/app/components/shared/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
 
 interface NoticeInfoProps extends Omit<NoticeDetail, 'body'> {}
 

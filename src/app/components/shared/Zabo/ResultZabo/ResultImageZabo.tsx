@@ -5,9 +5,9 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import DefaultProfile from '@/assets/default-profile.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
 
-import ZaboActions from '../Zabo/ZaboActions';
+import ZaboActions from '../ZaboActions';
 import DDay from '../DDay';
 import HighlightedText from '../HighlightedText';
 import { ResultZaboProps } from './ResultZabo';

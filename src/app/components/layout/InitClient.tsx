@@ -1,6 +1,6 @@
 'use client';
 
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 
 import { OverlayProvider } from '@toss/use-overlay';
 import dynamic from 'next/dynamic';

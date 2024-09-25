@@ -14,6 +14,7 @@ const AdditionalNotices = async ({
   lng,
 }: PropsWithLng<AdditionalNoticesProps>) => {
   const { t } = await createTranslation(lng);
+
   return (
     <div className={'flex flex-col gap-[18px]'}>
       {additionalContents.map((content, index) => {

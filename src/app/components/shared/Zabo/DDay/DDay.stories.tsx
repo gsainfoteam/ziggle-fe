@@ -1,4 +1,4 @@
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 
 import { Meta, StoryFn } from '@storybook/react';
 import dayjs from 'dayjs';

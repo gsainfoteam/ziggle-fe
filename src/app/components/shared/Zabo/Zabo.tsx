@@ -4,9 +4,9 @@ import Link from 'next/link';
 
 import { Notice } from '@/api/notice/notice';
 import { PropsWithLng } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
 
-import DDay from '../DDay';
+import DDay from './DDay';
 import ZaboActions from './ZaboActions';
 import ZaboTags from './ZaboTags';
 

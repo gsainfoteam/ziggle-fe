@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import { calculateRemainingTime } from '@/utils/utils';
+import { calculateRemainingTime } from '@/app/[lng]/write/calculateRemainingTime';
 
 interface EditableTimerProps {
   createdAt: Dayjs | string;

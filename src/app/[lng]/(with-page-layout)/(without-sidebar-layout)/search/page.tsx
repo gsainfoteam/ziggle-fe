@@ -1,6 +1,7 @@
-import SearchAnimation from '@/app/components/shared/SearchAnimation';
-import SearchResults from '@/app/components/shared/SearchResults';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
+
+import SearchAnimation from './SearchAnimation';
+import SearchResults from './SearchResults';
 
 const ITEMS_PER_CALL = 10;
 

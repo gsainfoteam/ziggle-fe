@@ -4,11 +4,11 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { createTranslation } from '@/app/i18next';
-import DefaultProfile from '@/assets/default-profile.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
 
 import DDay from '../DDay';
 import HighlightedText from '../HighlightedText';
-import ZaboActions from '../Zabo/ZaboActions';
+import ZaboActions from '../ZaboActions';
 import { ResultZaboProps } from './ResultZabo';
 
 const ResultTextZabo = async (props: ResultZaboProps) => {

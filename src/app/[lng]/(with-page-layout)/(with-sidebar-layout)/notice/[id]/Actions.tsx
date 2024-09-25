@@ -16,13 +16,12 @@ import {
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import Fire from '@/assets/fire-outlined.svg';
+import AnguishedFace from '@/assets/icons/anguished-face.svg';
 import LinkIcon from '@/assets/icons/link.svg';
+import LoudlyCryingFace from '@/assets/icons/loudly-crying-face.svg';
 import ShareIcon from '@/assets/icons/share.svg';
-
-import AnguishedFace from './assets/anguished-face.svg';
-import LoudlyCryingFace from './assets/loudly-crying-face.svg';
-import SurprisedFace from './assets/surprised-face-with-open-mouth.svg';
-import ThinkingFace from './assets/thinking-face.svg';
+import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg';
+import ThinkingFace from '@/assets/icons/thinking-face.svg';
 
 const EMOJI_WIDTH = 30;
 

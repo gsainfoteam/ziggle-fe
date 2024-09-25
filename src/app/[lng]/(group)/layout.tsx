@@ -1,14 +1,13 @@
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/layout/Footer';
+import InitClient from '@/app/components/layout/InitClient';
 import NavbarWrite from '@/app/components/layout/NavbarWrite';
 import { PropsWithLng } from '@/app/i18next';
-
-import InitClient from '../(common)/InitClient';
 
 export const viewport: Viewport = {
   themeColor: '#ff4500',
@@ -30,7 +29,6 @@ export default async function Layout({
           <div className="w-0 grow md:mx-5">{children}</div>
         </div>
 
-        <div className="h-[500px]" />
         <Footer lng={lng} />
       </div>
       <ToastContainer className="w-64" />

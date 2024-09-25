@@ -4,7 +4,9 @@ import Swal from 'sweetalert2';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import { languages } from '@/app/i18next/settings';
-import { IS_MOBILE_INSTALL_APP_ALERT_DISMISSED } from '@/utils/constants';
+
+export const IS_MOBILE_INSTALL_APP_ALERT_DISMISSED =
+  'IS_MOBILE_INSTALL_APP_ALERT_DISMISSED';
 
 const InstallApp = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);

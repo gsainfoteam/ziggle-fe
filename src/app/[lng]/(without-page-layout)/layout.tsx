@@ -1,5 +1,5 @@
 import { PropsWithLng } from '@/app/i18next';
-import InitClient from '@/utils/InitClient';
+import InitClient from '@/app/components/layout/InitClient';
 
 export default async function Layout({
   children,

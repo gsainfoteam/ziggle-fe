@@ -18,7 +18,7 @@ const ImageStack = ({
   sources,
   alt,
   lng,
-}: ImageStackProps & PropsWithLng) => {
+}: PropsWithLng<ImageStackProps>) => {
   const [isShowcaseOpen, setIsShowcaseOpen] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
 

@@ -1,6 +1,6 @@
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import Tag from '../Tag';
+import Tag from './Tag';
 
 const defaultTags = ['event', 'general', 'recruit', 'academic'] as const;
 

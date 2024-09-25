@@ -1,6 +1,6 @@
 import { Notice } from '@/api/notice/notice';
 
-import Tag from '../Tag';
+import Tag from '../Tags/Tag';
 
 interface ZaboTagsProps {
   notice: Notice;

@@ -22,9 +22,7 @@ interface AddAdditionalNoticesProps {
 const AddAdditionalNotice = ({
   koreanRef,
   englishRef,
-  noticeId,
   supportedLanguage,
-  originallyHasDeadline,
   lng,
 }: AddAdditionalNoticesProps & PropsWithLng) => {
   const [content, setContent] = useState<string>('');
@@ -35,7 +33,7 @@ const AddAdditionalNotice = ({
   return (
     <div className={'flex flex-col'}>
       <div className={'mb-2 flex items-center gap-3'}>
-        <AddIcon className={'w-5 stroke-text md:w-6 dark:stroke-dark_white'} />
+        <AddIcon className={'w-5 stroke-text dark:stroke-dark_white md:w-6'} />
 
         <p className="text-lg font-medium">
           {t('zabo.additionalNotices.title')}

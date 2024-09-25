@@ -19,10 +19,11 @@ import {
   NoticeDetail,
 } from '@/api/notice/notice';
 import { Category } from '@/api/notice/notice';
-import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
+import { calculateRemainingTime } from '@/app/[lng]/write/calculateRemainingTime';
+import DateTimePicker from '@/app/[lng]/write/DateTimePicker';
 import handleNoticeEdit from '@/app/[lng]/write/handle-notice-edit';
+import { WarningSwal } from '@/app/[lng]/write/swals';
 import Button from '@/app/components/shared/Button';
-import DateTimePicker from '@/app/components/shared/DateTimePicker';
 import Toggle from '@/app/components/shared/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -31,10 +32,8 @@ import ClockIcon from '@/assets/icons/clock.svg';
 import GlobeIcon from '@/assets/icons/globe.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
-import { WarningSwal } from '@/utils/swals';
-import { calculateRemainingTime } from '@/utils/utils';
 
+import AddAdditionalNotice from '../(with-page-layout)/(with-sidebar-layout)/notice/[id]/AddAdditionalNotice';
 import AttachPhotoArea, { FileWithUrl } from './AttachPhotoArea';
 import DeepLButton from './DeepLButton';
 import EditableTimer from './EditableTimer';
@@ -52,6 +51,8 @@ interface NoticeEditorProps {
   };
   isEditMode: boolean;
 }
+
+export const NOTICE_LOCAL_STORAGE_KEY = 'notice';
 
 const NoticeTypeCatgoryMapper = {
   recruit: Category.recruit,

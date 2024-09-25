@@ -6,8 +6,8 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { deleteNotice } from '@/api/notice/notice';
+import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import { Locale } from '@/app/i18next/settings';
 import EditPencilIcon from '@/assets/icons/edit-pencil.svg';
 import RemoveIcon from '@/assets/icons/remove.svg';
 
@@ -15,12 +15,7 @@ interface WriterActionsProps {
   noticeId: number;
 }
 
-const AuthorActions = ({
-  noticeId,
-  lng,
-}: WriterActionsProps & { lng: Locale }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-
+const AuthorActions = ({ noticeId, lng }: PropsWithLng<WriterActionsProps>) => {
   const { t } = useTranslation(lng);
   const router = useRouter();
 

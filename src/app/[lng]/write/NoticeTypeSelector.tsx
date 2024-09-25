@@ -1,6 +1,6 @@
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import Chip from '@/app/components/non-shared/Chip';
+import Chip from '@/app/[lng]/write/Chip';
 import { PropsWithT } from '@/app/i18next';
 import EventIcon from '@/assets/icons/event.svg';
 import GeneralIcon from '@/assets/icons/general.svg';

@@ -1,4 +1,4 @@
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import dayjs from 'dayjs';

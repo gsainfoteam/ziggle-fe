@@ -1,18 +1,16 @@
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/layout/Footer';
+import InitClient from '@/app/components/layout/InitClient';
 import Navbar from '@/app/components/layout/Navbar';
 import { PropsWithLng } from '@/app/i18next';
-import InitClient from '@/utils/InitClient';
-
-import { primary } from '../../const';
 
 export const viewport: Viewport = {
-  themeColor: primary,
+  themeColor: '#ff4500',
 };
 
 export default async function Layout({

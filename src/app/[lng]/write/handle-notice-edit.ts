@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 import { updateNotice } from '@/api/notice/notice';
 import { T } from '@/app/i18next';
-import { WarningSwal } from '@/utils/swals';
+import { WarningSwal } from '@/app/[lng]/write/swals';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 

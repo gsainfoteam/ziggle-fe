@@ -1,4 +1,4 @@
-import '@/app/initDayjs';
+import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import type { Viewport } from 'next';
@@ -8,7 +8,7 @@ import Footer from '@/app/components/layout/Footer';
 import NavbarWrite from '@/app/components/layout/NavbarWrite';
 import { PropsWithLng } from '@/app/i18next';
 
-import InitClient from '../../../utils/InitClient';
+import InitClient from '../../components/layout/InitClient';
 
 export const viewport: Viewport = {
   themeColor: '#ff4500',
