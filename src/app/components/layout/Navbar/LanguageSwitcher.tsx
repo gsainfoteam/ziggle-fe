@@ -3,8 +3,8 @@
 import { usePathname, useRouter } from 'next/navigation';
 
 import { PropsWithLng } from '@/app/i18next';
-import LocaleToggleButtonEnglish from '@/assets/locale-btn-en.svg';
-import LocaleToggleButtonKorean from '@/assets/locale-btn-ko.svg';
+import LocaleToggleButtonEnglish from '@/assets/icons/locale-btn-en.svg';
+import LocaleToggleButtonKorean from '@/assets/icons/locale-btn-ko.svg';
 
 import Button from '../../shared/Button';
 

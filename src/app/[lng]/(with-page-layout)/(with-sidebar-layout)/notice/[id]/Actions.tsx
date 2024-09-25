@@ -15,8 +15,8 @@ import {
 } from '@/api/notice/notice';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
-import Fire from '@/assets/fire-outlined.svg';
 import AnguishedFace from '@/assets/icons/anguished-face.svg';
+import Fire from '@/assets/icons/fire-outlined.svg';
 import LinkIcon from '@/assets/icons/link.svg';
 import LoudlyCryingFace from '@/assets/icons/loudly-crying-face.svg';
 import ShareIcon from '@/assets/icons/share.svg';

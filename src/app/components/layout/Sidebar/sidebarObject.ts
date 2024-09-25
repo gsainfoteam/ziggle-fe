@@ -1,7 +1,7 @@
 import { ParseKeys } from 'i18next';
 
 import { NoticeSearchParams } from '@/api/notice/notice';
-import { HomePath } from '@/app/[lng]/(common)/(needSidebar)/[category]/paths';
+import { HomePath } from '@/app/[lng]/(with-page-layout)/(with-sidebar-layout)/[category]/paths';
 import Bell from '@/assets/icons/bell.svg';
 import BoldBell from '@/assets/icons/bold-bell.svg';
 import BoldCommunity from '@/assets/icons/bold-community.svg';
