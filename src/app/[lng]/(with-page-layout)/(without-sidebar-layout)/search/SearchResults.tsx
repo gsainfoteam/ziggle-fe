@@ -2,12 +2,11 @@ import { ComponentProps, Suspense } from 'react';
 
 import { getAllNotices } from '@/api/notice/notice-server';
 import Analytics from '@/app/components/shared/Analytics';
+import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import Pagination from '@/app/components/shared/Pagination';
 import ResultZabo from '@/app/components/shared/Zabo/ResultZabo/ResultZabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import SearchNoResult from '@/assets/icons/search-no-result.svg';
-
-import LoadingCatAnimation from '../../../../components/shared/LoadingCatAnimation';
 
 const Results = async ({
   lng,

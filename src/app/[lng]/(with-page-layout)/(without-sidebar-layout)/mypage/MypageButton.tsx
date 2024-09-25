@@ -10,6 +10,7 @@ import PencilIcon from '@/assets/icons/edit-pencil.svg';
 import FlagIcon from '@/assets/icons/white-flag.svg';
 
 import MypageBox from './MypageBox';
+
 interface MypageButtonType {
   icon: React.ReactNode;
   buttonText: string;

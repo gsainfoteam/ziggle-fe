@@ -7,8 +7,8 @@ import sendLog from '@/api/log/send-log';
 import { attachInternationalNotice, createNotice } from '@/api/notice/notice';
 import { Category } from '@/api/notice/notice';
 import { createTag, getOneTag } from '@/api/tag/tag';
-import { T } from '@/app/i18next';
 import { WarningSwal } from '@/app/[lng]/write/swals';
+import { T } from '@/app/i18next';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 

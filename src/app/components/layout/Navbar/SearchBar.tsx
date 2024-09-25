@@ -29,7 +29,7 @@ const SearchButton = ({
         ? 'bg-white dark:bg-dark_dark'
         : 'bg-greyLight dark:bg-dark_greyDark',
       'flex h-full items-center justify-center p-0 px-2 md:pl-5 md:pr-6',
-      'border-l-0 border-l-greyBorder md:border-l-[1px] dark:border-l-dark_greyBorder',
+      'border-l-0 border-l-greyBorder dark:border-l-dark_greyBorder md:border-l-[1px]',
       'md:bg-greyLight md:dark:bg-dark_greyDark',
     ].join(' ')}
     onClick={onClick}
@@ -38,7 +38,7 @@ const SearchButton = ({
       className={[
         'h-6 w-6',
         isToggle ? 'stroke-text' : 'stroke-greyDark',
-        'md:stroke-greyDark dark:stroke-dark_white md:dark:stroke-dark_white',
+        'dark:stroke-dark_white md:stroke-greyDark md:dark:stroke-dark_white',
       ].join(' ')}
     />
   </button>
@@ -84,7 +84,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
           'flex flex-row-reverse justify-between md:flex-row',
           'overflow-clip',
           'rounded-lg border-greyBorder',
-          'md:rounded-full md:border-[1px] md:bg-greyLight dark:border-dark_greyBorder',
+          'dark:border-dark_greyBorder md:rounded-full md:border-[1px] md:bg-greyLight',
           'bg-transparent',
         ].join(' ')}
       >
@@ -99,7 +99,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
               'flex-1 px-0 py-2 md:px-5',
               'text-base leading-4',
               'text-text placeholder-greyDark',
-              'md:bg-white dark:bg-dark_greyDark dark:text-dark_white md:dark:bg-dark_dark',
+              'dark:bg-dark_greyDark dark:text-dark_white md:bg-white md:dark:bg-dark_dark',
               'outline-none',
             ].join(' ')}
             name="searchQuery"
@@ -112,7 +112,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
             <Analytics event={LogEvents.searchPageClickCancel}>
               <button
                 type="button"
-                className="flex h-full items-center justify-center bg-greyLight px-2 md:bg-white dark:bg-dark_greyDark md:dark:bg-dark_dark"
+                className="flex h-full items-center justify-center bg-greyLight px-2 dark:bg-dark_greyDark md:bg-white md:dark:bg-dark_dark"
                 onClick={() => setKeyword('')}
               >
                 <CloseIcon className="h-4 w-4 stroke-greyDark dark:stroke-dark_white" />

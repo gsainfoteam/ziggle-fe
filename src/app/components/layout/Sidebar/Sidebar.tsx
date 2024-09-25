@@ -1,8 +1,8 @@
 'use client';
 
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import { PropsWithLng } from '@/app/i18next';
