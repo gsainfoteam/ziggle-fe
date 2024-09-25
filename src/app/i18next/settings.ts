@@ -1,4 +1,5 @@
 import type { Namespace } from 'i18next';
+
 export const fallbackLng = 'en';
 export const languages = [fallbackLng, 'ko'] as const;
 export type Locale = (typeof languages)[number];
