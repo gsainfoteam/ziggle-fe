@@ -22,7 +22,7 @@ const AppOpenPage = ({
     if (isAndroid) redirect(playStoreLink);
     if (isIos) redirect(appStoreLink);
   }
-  if (!isAndroid && !isIos) redirect(origin);
+  if (!isAndroid && !isIos) redirect(origin); // TODO: undefined variable: origin
 
   const url = new URL('https://ziggle.gistory.me/app');
   url.searchParams.set('redirect', searchParams.redirect);

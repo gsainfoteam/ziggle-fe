@@ -1,15 +1,15 @@
+import '@/app/initDayjs';
+import '@/app/globals.css';
+
 import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
-import { PropsWithLng } from '@/app/i18next';
 import Footer from '@/app/components/layout/Footer';
 import Navbar from '@/app/components/layout/Navbar';
+import { PropsWithLng } from '@/app/i18next';
+import InitClient from '@/utils/InitClient';
 
-import '@/app/initDayjs';
 import { primary } from '../../const';
-import InitClient from './InitClient';
-
-import '@/app/globals.css';
 
 export const viewport: Viewport = {
   themeColor: primary,

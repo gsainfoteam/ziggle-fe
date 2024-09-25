@@ -5,7 +5,7 @@ import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { auth } from '@/api/auth/auth';
 import { NoticeDetail } from '@/api/notice/notice';
-import AuthorActions from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AuthorActions';
+import AuthorActions from '@/app/[lng]/(with-page-layout)/(with-sidebar-layout)/notice/[id]/AuthorActions';
 import Tags from '@/app/components/shared/Tags';
 import { createTranslation, PropsWithLng, PropsWithT } from '@/app/i18next';
 import DefaultProfile from '@/assets/default-profile.svg';

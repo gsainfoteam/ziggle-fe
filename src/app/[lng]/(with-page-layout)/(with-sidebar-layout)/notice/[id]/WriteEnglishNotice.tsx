@@ -20,7 +20,7 @@ interface WriteEnglishNoticeProps {
 }
 
 const DynamicTinyMCEEditor = dynamic(
-  () => import('../../../../(write)/write/TinyMCEEditor'),
+  () => import('../../../../write/TinyMCEEditor'),
   {
     ssr: false,
   },

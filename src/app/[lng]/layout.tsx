@@ -11,7 +11,7 @@ import Script from 'next/script';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
-import { type ColorThemeCookie } from './(common)/(common)/mypage/ChangeDarkModeBox';
+import { type ColorThemeCookie } from './(with-page-layout)/(without-sidebar-layout)/mypage/ChangeDarkModeBox';
 
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',

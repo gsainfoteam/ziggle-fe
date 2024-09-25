@@ -11,13 +11,13 @@ interface CategorizedNoticesProps {
   sortByDeadline: boolean;
   noticeSearchParams?: NoticeSearchParams;
   page: number;
+  itemsPerPage?: number;
 }
-
-const ITEMS_PER_PAGE = 30;
 
 const CategorizedNotices = async ({
   sortByDeadline,
   noticeSearchParams,
+  itemsPerPage = 30,
   lng,
   page,
 }: PropsWithLng<CategorizedNoticesProps>) => {
@@ -25,8 +25,8 @@ const CategorizedNotices = async ({
 
   const notices = await getAllNotices({
     ...noticeSearchParams,
-    offset: page * ITEMS_PER_PAGE,
-    limit: ITEMS_PER_PAGE,
+    offset: page * itemsPerPage,
+    limit: itemsPerPage,
     lang: lng,
     ...(sortByDeadline ? { orderBy: 'deadline' } : {}),
   });
@@ -46,7 +46,7 @@ const CategorizedNotices = async ({
           <Pagination
             page={page}
             items={notices.total}
-            itemsPerPage={ITEMS_PER_PAGE}
+            itemsPerPage={itemsPerPage}
           />
         </>
       ) : (

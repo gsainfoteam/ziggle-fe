@@ -20,7 +20,7 @@ import {
 } from '@/api/notice/notice';
 import { Category } from '@/api/notice/notice';
 import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
-import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
+import handleNoticeEdit from '@/app/[lng]/write/handle-notice-edit';
 import Button from '@/app/components/shared/Button';
 import DateTimePicker from '@/app/components/shared/DateTimePicker';
 import Toggle from '@/app/components/shared/Toggle/Toggle';

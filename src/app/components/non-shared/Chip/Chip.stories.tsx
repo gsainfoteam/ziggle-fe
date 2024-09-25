@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import Chip from '.';
 
 export default {
-  title: 'Chip',
+  title: 'non-shared/Chip',
   component: Chip,
   argTypes: {
     variant: {
