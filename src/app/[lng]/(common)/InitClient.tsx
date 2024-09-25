@@ -9,8 +9,7 @@ import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
 import { ziggleApi } from '@/api';
-
-import { PropsWithLng } from '../../i18next';
+import { PropsWithLng } from '@/app/i18next';
 
 const InstallApp = dynamic(() => import('./InstallApp'), {
   ssr: false,

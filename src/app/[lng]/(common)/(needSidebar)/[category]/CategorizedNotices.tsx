@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NoticeSearchParams } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
-import Pagination from '@/app/components/molecules/Pagination';
+import Pagination from '@/app/components/shared/Pagination';
 import Zabo from '@/app/components/shared/Zabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import SearchNoResult from '@/assets/search-no-result.svg';

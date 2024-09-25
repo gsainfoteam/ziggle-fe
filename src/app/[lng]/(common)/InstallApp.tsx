@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
+import { PropsWithLng } from '@/app/i18next';
+import { useTranslation } from '@/app/i18next/client';
 import { languages } from '@/app/i18next/settings';
 import { IS_MOBILE_INSTALL_APP_ALERT_DISMISSED } from '@/utils/constants';
-
-import { PropsWithLng } from '../../i18next';
-import { useTranslation } from '../../i18next/client';
 
 const InstallApp = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);

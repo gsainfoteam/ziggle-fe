@@ -3,7 +3,7 @@ import { Meta, StoryFn } from '@storybook/react';
 import ImageCarousel from '.';
 
 export default {
-  title: 'organisms/ImageCarousel',
+  title: 'shared/ImageCarousel',
   component: ImageCarousel,
 } as Meta<typeof ImageCarousel>;
 

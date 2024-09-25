@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
-import styles from '@/app/components/shared/Toggle/toggle.module.css';
-import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import { sidebarObject } from '@/app/components/layout/Sidebar/sidebarObject';
+import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
+import styles from '@/app/components/shared/Toggle/toggle.module.css';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 
-import { createTranslation, PropsWithLng } from '../../../../i18next';
 import CategorizedNotices from './CategorizedNotices';
 import { HomePath } from './paths';
 
