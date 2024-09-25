@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 
-import Button from '@/app/components/atoms/Button';
+import Button from '@/app/components/shared/Button';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import CloseIcon from '@/assets/icons/close.svg';

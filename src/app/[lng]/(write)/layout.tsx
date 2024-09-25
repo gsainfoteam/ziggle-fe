@@ -4,8 +4,8 @@ import '@/app/globals.css';
 import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
-import Footer from '@/app/components/templates/Footer';
-import NavbarWrite from '@/app/components/templates/NavbarWrite';
+import Footer from '@/app/components/layout/Footer';
+import NavbarWrite from '@/app/components/layout/NavbarWrite';
 import { PropsWithLng } from '@/app/i18next';
 
 import InitClient from '../(common)/InitClient';

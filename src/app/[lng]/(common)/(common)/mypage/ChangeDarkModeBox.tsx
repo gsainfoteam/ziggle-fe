@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
+import Toggle from '@/app/components/shared/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
 
 import MypageBox from './MypageBox';
 

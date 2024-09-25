@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import {
   appStoreLink,
   playStoreLink,
-} from '@/app/components/templates/Footer/Footer';
+} from '@/app/components/layout/Footer/Footer';
 
 const AppOpenPage = ({
   searchParams,

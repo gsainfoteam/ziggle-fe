@@ -2,7 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 
-import Button from '@/app/components/atoms/Button';
+import Button from '@/app/components/shared/Button';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 

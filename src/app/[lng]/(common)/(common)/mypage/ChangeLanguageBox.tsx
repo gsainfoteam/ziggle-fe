@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
+import Toggle from '@/app/components/shared/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 

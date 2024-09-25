@@ -1,4 +1,4 @@
-import Sidebar from '@/app/components/templates/Sidebar';
+import Sidebar from '@/app/components/layout/Sidebar';
 import { PropsWithLng } from '@/app/i18next';
 
 interface LayoutProps {

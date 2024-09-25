@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation';
 
 import { auth } from '@/api/auth/auth';
 import { getGroupContainingMe, GroupInfo } from '@/api/group/group';
-import Button from '@/app/components/atoms/Button';
+import Button from '@/app/components/shared/Button';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import GroupItem from './GroupItem';

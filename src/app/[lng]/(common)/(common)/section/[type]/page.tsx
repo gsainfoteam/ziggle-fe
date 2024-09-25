@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import SearchResults from '@/app/components/templates/SearchResults';
+import SearchResults from '@/app/components/shared/SearchResults';
 import { PropsWithLng } from '@/app/i18next';
 
 export const dynamic = 'force-dynamic';

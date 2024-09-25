@@ -2,9 +2,9 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
-import styles from '@/app/components/atoms/Toggle/toggle.module.css';
-import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
-import { sidebarObject } from '@/app/components/templates/Sidebar/sidebarObject';
+import styles from '@/app/components/shared/Toggle/toggle.module.css';
+import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
+import { sidebarObject } from '@/app/components/layout/Sidebar/sidebarObject';
 
 import { createTranslation, PropsWithLng } from '../../../../i18next';
 import CategorizedNotices from './CategorizedNotices';
@@ -64,6 +64,7 @@ export default async function CategoryPage({
                     checked={sortByDeadline}
                     readOnly
                   />
+                  {/* TODO: Investigate Toggle */}
                 </Link>
 
                 <p

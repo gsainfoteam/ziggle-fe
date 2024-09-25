@@ -1,4 +1,4 @@
-import LoadingCatAnimation from '@/app/components/templates/LoadingCatAnimation';
+import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import { PropsWithLng } from '@/app/i18next';
 
 const Loading = ({ lng }: PropsWithLng) => (

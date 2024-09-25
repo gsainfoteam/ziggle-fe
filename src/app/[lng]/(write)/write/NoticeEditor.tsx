@@ -21,9 +21,9 @@ import {
 import { Category } from '@/api/notice/notice';
 import AddAdditionalNotice from '@/app/[lng]/(common)/(needSidebar)/notice/[id]/AddAdditionalNotice';
 import handleNoticeEdit from '@/app/[lng]/(write)/write/handle-notice-edit';
-import Button from '@/app/components/atoms/Button';
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
-import DateTimePicker from '@/app/components/organisms/DateTimePicker';
+import Button from '@/app/components/shared/Button';
+import DateTimePicker from '@/app/components/shared/DateTimePicker';
+import Toggle from '@/app/components/shared/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';

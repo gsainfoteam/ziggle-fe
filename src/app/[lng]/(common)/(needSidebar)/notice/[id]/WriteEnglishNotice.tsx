@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
 import { attachInternationalNotice } from '@/api/notice/notice';
-import Button from '@/app/components/atoms/Button';
+import Button from '@/app/components/shared/Button';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import ContentIcon from '@/assets/icons/content.svg';

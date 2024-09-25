@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useRef } from 'react';
 
-import Button from '@/app/components/atoms/Button';
+import Button from '@/app/components/shared/Button';
 import { PropsWithT } from '@/app/i18next';
 import AddPhotoGray from '@/assets/add-photo-gray.svg';
 
