@@ -46,35 +46,20 @@
     │   │   │       ├── additional
     │   │   │       └── full
     │   │   └── og: open graph image를 생성하는 api
-    │   ├── components: 모든 컴포넌트는 이 디렉토리 밑에 있습니다
-    │   │   ├── atoms: 가장 작은 단위의 컴포넌트
-    │   │   │   ├── Analytics
-    │   │   │   ├── Button
-    │   │   │   ├── Checkbox
-    │   │   │   ├── ExternalLink
-    │   │   │   └── Toggle
-    │   │   ├── molecules: atom을 조합한 컴포넌트
-    │   │   │   ├── Chip
-    │   │   │   ├── DDay
-    │   │   │   ├── HighlightedText
-    │   │   │   ├── HorizontalScrollButton
-    │   │   │   ├── Pagination
-    │   │   │   ├── Tag
-    │   │   │   └── ZaboImage
-    │   │   ├── organisms: molecule을 조합한 컴포넌트
-    │   │   │   ├── DateTimePicker
-    │   │   │   ├── ImageCarousel
-    │   │   │   ├── Tags
-    │   │   │   └── Zabo
-    │   │   └── templates: organism을 조합한 컴포넌트
-    │   │       ├── Footer
+    │   ├── components: 여러 곳에서 공통적으로 쓰이는 컴포넌트는 이 디렉토리 밑에 있습니다
+    │   │   ├── layout: 레이아웃에 쓰이는 컴포넌트
+    │   │   │   ├── Footer
+    │   │   │   ├── Navbar
+    │   │   │   ├── NavbarWrite
+    │   │   │   └── Sidebar
+    │   │   └── shared: 레이아웃에 쓰이지 않고 공통적으로 쓰이는 컴포넌트
+    │   │       ├── Analytics
+    │   │       ├── Button
     │   │       ├── LoadingCatAnimation
-    │   │       ├── Navbar
-    │   │       ├── NavbarWrite
-    │   │       ├── ResultZabo
-    │   │       ├── SearchAnimation
-    │   │       ├── SearchResults
-    │   │       └── Sidebar
+    │   │       ├── Pagination
+    │   │       ├── Tags
+    │   │       ├── Toggle
+    │   │       └── Zabo
     │   └── i18next: 다국어 지원을 위한 설정
     │       └── locales
     │           ├── en
@@ -84,8 +69,7 @@
     │   ├── fonts
     │   ├── icons
     │   └── logos
-    ├── mock: 개발 환경(storybook)에서 사용하는 mock 데이터
-    └── utils: 유틸성 파일
+    └── mock: 개발 환경(storybook)에서 사용하는 mock 데이터
 ```
 
 ### 몇가지 알아두면 좋은 점
