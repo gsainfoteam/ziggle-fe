@@ -17,7 +17,7 @@ export default async function MyPage({
   if (!session) redirect(`/${lng}/login`);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
       <div className="flex min-w-full flex-col gap-5 p-4 md:min-w-[500px]">
         <MypageProfile
           lng={lng}
