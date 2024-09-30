@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Notice } from '@/api/notice/notice';
