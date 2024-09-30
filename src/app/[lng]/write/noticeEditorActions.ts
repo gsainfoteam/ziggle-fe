@@ -96,7 +96,7 @@ export const editorStateReducer = (
     case 'SET_ENGLISH_TITLE': {
       if (!state.english) {
         throw new Error(
-          'Invalid action: cannot set english title when englishVesion is not enabled. ',
+          'Invalid action: cannot set english title when englishVersion is not enabled. ',
         );
       }
       return {
@@ -107,7 +107,7 @@ export const editorStateReducer = (
     case 'SET_ENGLISH_CONTENT': {
       if (!state.english) {
         throw new Error(
-          'Invalid action: cannot set english content when englishVesion is not enabled. ',
+          'Invalid action: cannot set english content when englishVersion is not enabled. ',
         );
       }
       return {
@@ -140,7 +140,7 @@ export const editorStateReducer = (
     case 'SET_ADDITIONAL_ENGLISH_CONTENT': {
       if (!state.english) {
         throw new Error(
-          'Invalid action: cannot set english additional content when englishVesion is not enabled. ',
+          'Invalid action: cannot set english additional content when englishVersion is not enabled. ',
         );
       }
       return {
