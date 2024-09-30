@@ -1,4 +1,4 @@
-import styles from './segmented.module.css';
+import React from 'react';
 
 interface SegmentedOption<T> {
   value: T;
@@ -17,12 +17,20 @@ const Segmented = <T extends string>({
   onChange,
 }: SegmentedProps<T>) => {
   return (
-    <div className={styles.segmented}>
+    <div className="inline-flex cursor-pointer overflow-hidden rounded-lg bg-[var(--grey)]">
       {options.map(({ value, label }) => {
         return (
           <button
             key={value}
-            className={value === selected ? styles.selected : ''}
+            className={`flex-1 cursor-pointer appearance-none whitespace-nowrap border-none bg-none px-2.5 py-1.5 text-center transition-colors duration-150 ${
+              value === selected
+                ? 'bg-[var(--primary)] text-white hover:bg-[var(--primary)]'
+                : 'hover:bg-[var(--greyBorder)]'
+            } ${
+              value !== options[options.length - 1].value
+                ? 'border-r border-[var(--greyBorder)]'
+                : ''
+            }`}
             onClick={() => onChange(value)}
           >
             {label ?? value}
