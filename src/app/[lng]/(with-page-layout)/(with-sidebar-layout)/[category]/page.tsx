@@ -64,7 +64,6 @@ export default async function CategoryPage({
                     checked={sortByDeadline}
                     readOnly
                   />
-                  {/* TODO: Investigate Toggle */}
                 </Link>
 
                 <p
