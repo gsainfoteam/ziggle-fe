@@ -1,68 +1,81 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 
-import Toggle from '@/app/components/atoms/Toggle/Toggle';
+import Segmented from '@/app/components/atoms/Segmented/Segmented';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
+import { useLocalStorage } from '@/utils/useLocalStorage';
 
 import MypageBox from './MypageBox';
 
 export type ColorTheme = 'light' | 'dark';
+type ColorThemeOptions = ColorTheme | 'system';
 export type ColorThemeCookie = { name: 'theme'; value: ColorTheme };
 
 export const useColorTheme = (): [
-  ColorTheme | undefined,
-  (newTheme: ColorTheme) => void,
+  ColorThemeOptions,
+  (newTheme: ColorThemeOptions) => void,
 ] => {
-  const [cookies, setCookie] = useCookies(['theme']);
-  const [theme, setTheme] = useState<ColorTheme>();
+  const [_, setCookie] = useCookies(['theme']);
+  const [themeOption, setThemeOption] = useLocalStorage<ColorThemeOptions>(
+    'theme',
+    'system',
+  );
+  const theme: ColorTheme = useMemo(() => {
+    if (themeOption === 'system') {
+      const prefersDarkMode = window.matchMedia?.(
+        '(prefers-color-scheme: dark)',
+      ).matches;
+
+      return prefersDarkMode ? 'dark' : 'light';
+    } else {
+      return themeOption;
+    }
+  }, [themeOption]);
 
   useEffect(() => {
-    // First, try to get the theme from cookies
-    const cookieTheme = cookies.theme as ColorTheme | undefined;
-
-    if (cookieTheme) {
-      setTheme(cookieTheme);
+    setCookie('theme', theme, { path: '/' });
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
     } else {
-      // If no cookie is set, check for system preference
-      const prefersDarkMode =
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme: ColorTheme = prefersDarkMode ? 'dark' : 'light';
-      setTheme(systemTheme);
-      setCookie('theme', systemTheme, { path: '/' });
+      document.documentElement.classList.remove('dark');
     }
-    // console.log(theme, cookies.theme);
-  }, [theme, cookies.theme, setCookie]);
+  }, [theme, setCookie]);
 
-  const updateTheme = (newTheme: ColorTheme) => {
-    setTheme(newTheme);
-    setCookie('theme', newTheme, { path: '/' });
-  };
-
-  return [theme, updateTheme];
+  return [themeOption, setThemeOption];
 };
 
-const ChangeDarkModeBox = ({
-  lng,
-  defaultTheme,
-}: PropsWithLng<{ defaultTheme: ColorTheme }>) => {
+const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
-  const [theme, setTheme] = useColorTheme();
+  const [themeOption, setThemeOption] = useColorTheme();
 
   return (
     <MypageBox>
       <div className="flex justify-between self-stretch">
         <div className="flex text-greyDark dark:text-dark_white">
-          {t('mypage.switchDarkMode')}
+          {t('mypage.darkModeSettings')}
         </div>
-        <Toggle
-          isSwitched={(theme ?? defaultTheme) === 'dark'}
-          onSwitch={() => {
-            setTheme(theme === 'dark' ? 'light' : 'dark');
+        <Segmented
+          options={[
+            {
+              label: t('mypage.darkModeOptions.light'),
+              value: 'light',
+            },
+            {
+              label: t('mypage.darkModeOptions.dark'),
+              value: 'dark',
+            },
+            {
+              label: t('mypage.darkModeOptions.system'),
+              value: 'system',
+            },
+          ]}
+          value={themeOption}
+          onChange={(v) => {
+            setThemeOption(v);
             window.location.reload();
           }}
         />

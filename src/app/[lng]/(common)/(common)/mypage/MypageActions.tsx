@@ -13,7 +13,7 @@ export default function MypageActions({ lng }: PropsWithLng) {
   return (
     <div className="flex flex-col gap-3">
       <ChangeLanguageBox lng={lng} />
-      <ChangeDarkModeBox lng={lng} defaultTheme={theme?.value ?? 'light'} />
+      <ChangeDarkModeBox lng={lng} />
       <ClientActions lng={lng} />
     </div>
   );
