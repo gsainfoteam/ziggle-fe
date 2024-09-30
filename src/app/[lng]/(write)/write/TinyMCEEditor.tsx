@@ -16,9 +16,19 @@ export interface TinyMCEEditorChangeEvent {
   readonly stopImmediatePropagation: () => void;
 }
 
+interface TinyMCEEditorProps {
+  value: string;
+  onChange: (newValue: string) => void;
+  editorRef?: ForwardedRef<TinyMCEEditorRef | null>;
+  initialValue?: string;
+  disabled?: boolean;
+}
+
 const TinyMCEEditor = ({
-  editorRef,
+  value,
   onChange,
+  editorRef,
+  initialValue,
   disabled,
 }: {
   editorRef: ForwardedRef<TinyMCEEditorRef>;

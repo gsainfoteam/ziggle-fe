@@ -1,9 +1,9 @@
-import { PropsWithLng } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import BonFire from '@/assets/logos/bonfire.svg';
 
-const NotInGroup = ({ params: { lng } }: { params: PropsWithLng }) => {
-  const { t } = useTranslation(lng);
+const NotInGroup = async ({ params: { lng } }: { params: PropsWithLng }) => {
+  const { t } = await createTranslation(lng);
 
   return (
     <div className="flex flex-col items-center ">

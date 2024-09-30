@@ -13,31 +13,34 @@ import sendLog from '@/api/log/send-log';
 import { PropsWithT } from '@/app/i18next';
 import ContentIcon from '@/assets/icons/content.svg';
 import TextIcon from '@/assets/icons/text.svg';
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
 
-import { TinyMCEEditorChangeEvent } from './TinyMCEEditor';
+import { BODY_MAX_LENGTH, TITLE_MAX_LENGTH } from './handle-notice-submit';
+import TinyMCEEditorSkeleton from './TinyMCEEditorSkeleton';
 
 const DynamicTinyMCEEditor = dynamic(() => import('./TinyMCEEditor'), {
   ssr: false,
+  loading: TinyMCEEditorSkeleton,
 });
 
 interface TitleAndContentProps {
-  editorRef: React.MutableRefObject<Editor | null>;
   title: string;
-  onChangeTitle: (title: string) => void;
-  onChangeContent: (event: TinyMCEEditorChangeEvent) => void;
   titleLabel: string;
+  onChangeTitle: (newTitle: string) => void;
+  content: string;
   contentLabel: string;
+  onChangeContent: (newContent: string) => void;
+  editorRef: React.MutableRefObject<Editor | null>;
   disabled?: boolean;
 }
 
 const TitleAndContent = ({
-  editorRef,
   title,
   titleLabel,
-  contentLabel,
   onChangeTitle,
+  content,
+  contentLabel,
   onChangeContent,
+  editorRef,
   t,
   disabled,
 }: PropsWithT<TitleAndContentProps>) => {
@@ -62,25 +65,46 @@ const TitleAndContent = ({
           });
         }}
         className={
-          'flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
+          'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
           (disabled
             ? 'border-grey text-greyDark dark:text-dark_greyDark'
             : 'border-primary text-text dark:text-dark_white')
         }
       />
+      {title.length > TITLE_MAX_LENGTH && (
+        <div className="font-regular my-1 text-sm text-secondaryText md:text-base">
+          {'⚠️ '}
+          {t('write.alerts.titleLengthLessThan', {
+            titleMaxLength: TITLE_MAX_LENGTH,
+          })}
+        </div>
+      )}
 
       <div className="mb-3 mt-10 flex items-center gap-2">
         <ContentIcon className="w-5 stroke-text md:w-6" />
         <p className="font-medium">{contentLabel}</p>
       </div>
 
-      <React.Suspense>
-        <DynamicTinyMCEEditor
-          disabled={disabled}
-          editorRef={editorRef}
-          onChange={onChangeContent}
-        />
-      </React.Suspense>
+      <DynamicTinyMCEEditor
+        disabled={disabled}
+        value={content}
+        onChange={onChangeContent}
+        editorRef={editorRef}
+      />
+
+      {content.length > BODY_MAX_LENGTH && (
+        <div className="font-regular my-1 text-sm text-secondaryText md:text-base">
+          {'⚠️ '}
+          {t('write.alerts.bodyLengthLessThan', {
+            bodyMaxLength: BODY_MAX_LENGTH,
+          }) +
+            ' ' +
+            t('write.alerts.numberOfCharacter', {
+              length: content.length,
+              maxLength: BODY_MAX_LENGTH,
+            })}
+        </div>
+      )}
     </>
   );
 };
