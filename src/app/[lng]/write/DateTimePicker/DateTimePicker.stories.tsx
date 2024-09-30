@@ -12,7 +12,12 @@ export default {
 const Template: StoryFn<typeof DateTimePicker> = () => {
   const [dateTime, setDateTime] = useState<Dayjs>(dayjs());
 
-  return <DateTimePicker dateTime={dateTime} setDateTime={setDateTime} />;
+  return (
+    <DateTimePicker
+      dateTime={dateTime}
+      onChange={(dateTime) => setDateTime(dateTime)}
+    />
+  );
 };
 
 const args = {};

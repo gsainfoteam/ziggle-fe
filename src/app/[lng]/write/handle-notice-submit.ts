@@ -24,6 +24,9 @@ interface NoticeSubmitForm {
   category: (typeof Category)[keyof typeof Category];
 }
 
+export const TITLE_MAX_LENGTH = 50;
+export const BODY_MAX_LENGTH = 20000;
+
 const handleNoticeSubmit = async ({
   title,
   enTitle,
@@ -37,9 +40,6 @@ const handleNoticeSubmit = async ({
   t,
 }: NoticeSubmitForm & { t: T }) => {
   sendLog(LogEvents.noticeWritingPageClickSubmit);
-
-  const TITLE_MAX_LENGTH = 50;
-  const BODY_MAX_LENGTH = 20000;
 
   const warningSwal = WarningSwal(t);
 

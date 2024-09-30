@@ -59,7 +59,9 @@ const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
 };
 
 const Title = ({ title }: { title: string }) => (
-  <div className="text-[25px] font-semibold leading-[30px]">{title}</div>
+  <div className="line-clamp-3 text-[25px] font-semibold leading-[30px]">
+    {title}
+  </div>
 );
 
 const Metadata = ({
