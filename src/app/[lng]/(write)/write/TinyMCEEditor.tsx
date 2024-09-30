@@ -30,11 +30,7 @@ const TinyMCEEditor = ({
   editorRef,
   initialValue,
   disabled,
-}: {
-  editorRef: ForwardedRef<TinyMCEEditorRef>;
-  onChange?: (event: TinyMCEEditorChangeEvent) => void;
-  disabled?: boolean;
-}) => (
+}: TinyMCEEditorProps) => (
   <Editor
     disabled={disabled}
     onInit={(_, editor) => {
@@ -42,7 +38,9 @@ const TinyMCEEditor = ({
       if (typeof editorRef === 'function') editorRef(editor);
       else editorRef.current = editor;
     }}
-    onChange={onChange}
+    initialValue={initialValue}
+    value={value}
+    onEditorChange={(newValue, _) => onChange(newValue)}
     tinymceScriptSrc="/tinymce/tinymce.min.js"
     init={{
       skin: window.matchMedia('(prefers-color-scheme: dark)').matches
