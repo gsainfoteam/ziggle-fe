@@ -1,8 +1,7 @@
 import dayjs, { Dayjs } from 'dayjs';
 
-import { NOTICE_LOCAL_STORAGE_KEY } from '@/utils/constants';
-
 import { FileWithUrl } from './AttachPhotoArea';
+import { NOTICE_LOCAL_STORAGE_KEY } from './NoticeEditor';
 import { NoticeType } from './NoticeTypeSelector';
 import { Tag } from './TagInput';
 
