@@ -6,8 +6,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
-import { emit } from 'process';
-import { RefObject, useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
@@ -91,7 +90,10 @@ const NoticeEditor = ({
   useEffect(() => {
     const loadDraft = async () => {
       const draft = retrieveDraftFromLocalStorage();
-      if (!draft) return;
+      if (!draft) {
+        setIsLoading(false);
+        return;
+      }
 
       setIsLoading(true);
 
@@ -150,6 +152,7 @@ const NoticeEditor = ({
         additionalEnglishContent: '',
       });
       dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
+      setIsLoading(false);
     };
 
     isEditMode ? loadExistingNotice() : loadDraft();
@@ -187,7 +190,7 @@ const NoticeEditor = ({
         ? state.deadline.toDate() ?? undefined
         : undefined,
       noticeLanguage: state.english ? 'both' : 'ko',
-      koreanBody: state.korean.title,
+      koreanBody: state.korean.content,
       enTitle: state.english?.title,
       englishBody: state.english?.content,
       tags: [...state.tags.map(({ name }) => name)],
@@ -265,6 +268,7 @@ const NoticeEditor = ({
       }).catch(() => null);
 
       if (!englishNotice) {
+        setIsLoading(false);
         Swal.fire({
           text: t('write.alerts.attachInternationalFail'),
           icon: 'error',
@@ -289,6 +293,7 @@ const NoticeEditor = ({
       }).catch(() => null);
 
       if (additionalKoreanNotice === null) {
+        setIsLoading(false);
         Swal.fire({
           text: t('write.alerts.attachAdditionalNoticeFail'),
           icon: 'error',
@@ -321,6 +326,7 @@ const NoticeEditor = ({
         }).catch(() => null);
 
         if (additionalEnglishNotice === null) {
+          setIsLoading(false);
           Swal.fire({
             text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
             icon: 'error',
