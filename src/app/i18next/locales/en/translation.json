@@ -208,7 +208,12 @@
     "logout": "Log Out",
     "quit": "Withdrawal",
     "switchLanguage": "Enable English",
-    "switchDarkMode": "Enable Dark Mode",
+    "darkModeSettings": "Dark Mode Settings",
+    "darkModeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
