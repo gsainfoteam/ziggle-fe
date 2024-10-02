@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 import Segmented from '@/app/components/atoms/Segmented/Segmented';
@@ -14,26 +14,35 @@ export type ColorTheme = 'light' | 'dark';
 type ColorThemeOptions = ColorTheme | 'system';
 export type ColorThemeCookie = { name: 'theme'; value: ColorTheme };
 
-export const useColorTheme = (): [
-  ColorThemeOptions,
-  (newTheme: ColorThemeOptions) => void,
-] => {
+export const useColorTheme = (): {
+  themeOption: ColorThemeOptions;
+  setThemeOption: (newTheme: ColorThemeOptions) => void;
+  determinedTheme: ColorTheme;
+  handleSystemThemeChange: () => void;
+} => {
   const [_, setCookie] = useCookies(['theme']);
   const [themeOption, setThemeOption] = useLocalStorage<ColorThemeOptions>(
     'theme',
     'system',
   );
+  const [triggerRevalidation, setTriggerRevalidation] = useState(0);
   const theme: ColorTheme = useMemo(() => {
     if (themeOption === 'system') {
       const prefersDarkMode = window.matchMedia?.(
         '(prefers-color-scheme: dark)',
       ).matches;
+      console.log('prefersDarkMode', prefersDarkMode);
 
       return prefersDarkMode ? 'dark' : 'light';
     } else {
       return themeOption;
     }
-  }, [themeOption]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [themeOption, triggerRevalidation]);
+
+  const handleSystemThemeChange = useCallback(() => {
+    setTriggerRevalidation((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     setCookie('theme', theme, { path: '/' });
@@ -44,13 +53,18 @@ export const useColorTheme = (): [
     }
   }, [theme, setCookie]);
 
-  return [themeOption, setThemeOption];
+  return {
+    themeOption,
+    setThemeOption,
+    determinedTheme: theme,
+    handleSystemThemeChange,
+  };
 };
 
 const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
-  const [themeOption, setThemeOption] = useColorTheme();
+  const { themeOption, setThemeOption } = useColorTheme();
 
   return (
     <MypageBox>
@@ -75,8 +89,11 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
           ]}
           value={themeOption}
           onChange={(v) => {
-            setThemeOption(v);
-            window.location.reload();
+            const prev = themeOption;
+            if (prev !== v) {
+              setThemeOption(v);
+              window.location.reload();
+            }
           }}
         />
       </div>
