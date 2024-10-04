@@ -1,7 +1,7 @@
+import { Editor } from '@tinymce/tinymce-react';
 import { ForwardedRef } from 'react';
 import { Editor as TinyMCEEditorRef } from 'tinymce';
 
-import { Editor } from '@tinymce/tinymce-react';
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
 
