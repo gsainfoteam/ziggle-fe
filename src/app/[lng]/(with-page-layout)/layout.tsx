@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/layout/Footer';
 import InitClient from '@/app/components/layout/InitClient';
-import NavbarWrite from '@/app/components/layout/NavbarWrite';
+import Navbar from '@/app/components/layout/Navbar';
 import { PropsWithLng } from '@/app/i18next';
 
 export const viewport: Viewport = {
@@ -23,12 +23,8 @@ export default async function Layout({
   return (
     <InitClient lng={lng}>
       <div>
-        <NavbarWrite lng={lng} />
-
-        <div className="flex md:flex-row">
-          <div className="w-0 grow md:mx-5">{children}</div>
-        </div>
-
+        <Navbar lng={lng} />
+        <div className="mb-96 flex">{children}</div>
         <Footer lng={lng} />
       </div>
       <ToastContainer className="w-64" />

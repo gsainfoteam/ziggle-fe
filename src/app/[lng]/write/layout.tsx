@@ -5,9 +5,10 @@ import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/layout/Footer';
-import InitClient from '@/app/components/layout/InitClient';
 import NavbarWrite from '@/app/components/layout/NavbarWrite';
 import { PropsWithLng } from '@/app/i18next';
+
+import InitClient from '../../components/layout/InitClient';
 
 export const viewport: Viewport = {
   themeColor: '#ff4500',

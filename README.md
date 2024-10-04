@@ -18,18 +18,17 @@
     │   └── tag
     ├── app
     │   ├── [lng]: 지글의 모든 화면은 이 디렉토리 밑에 있습니다
-    │   │   ├── (common)
-    │   │   │   ├── (common)
-    │   │   │   │   ├── mypage
-    │   │   │   │   ├── search
-    │   │   │   │   └── section
-    │   │   │   │       └── [type]
-    │   │   │   └── (needSidebar)
-    │   │   │       ├── [category]
-    │   │   │       └── notice
-    │   │   │           └── [id]
-    │   │   │               └── assets
-    │   │   ├── (empty): 레이아웃이 비어있는 화면
+    │   │   ├── (group): ziggle groups 관련 (분리 후 제거 예정)
+    │   │   │   └── group    
+    │   │   ├── (with-page-layout): Header, Footer, Toast Layout이 있는 페이지들
+    │   │   │   ├── (with-sidebar-layout): Sidebar가 있는 페이지들
+    │   │   │   │   ├── [category]
+    │   │   │   │   └── notice
+    │   │   │   │       └── [id] 
+    │   │   │   └── (without-sidebar-layout): Sidebar가 없는 페이지들
+    │   │   │       ├── mypage
+    │   │   │       └── search
+    │   │   ├── (without-page-layout): Header, Footer, Toast Layout이 없는 페이지들
     │   │   │   ├── app: /[lng]/app - 앱 설치 페이지 리다이렉션
     │   │   │   └── login: /[lng]/login - 로그인 페이지 리다이렉션
     │   │   └── (write): 사이드바가 없고, 상단바가 있는 글쓰기 화면
@@ -45,36 +44,25 @@
     │   │   │       │   └── foreign
     │   │   │       ├── additional
     │   │   │       └── full
-    │   │   └── og: open graph image를 생성하는 api
-    │   ├── components: 모든 컴포넌트는 이 디렉토리 밑에 있습니다
-    │   │   ├── atoms: 가장 작은 단위의 컴포넌트
-    │   │   │   ├── Analytics
-    │   │   │   ├── Button
-    │   │   │   ├── Checkbox
-    │   │   │   ├── ExternalLink
-    │   │   │   └── Toggle
-    │   │   ├── molecules: atom을 조합한 컴포넌트
-    │   │   │   ├── Chip
-    │   │   │   ├── DDay
-    │   │   │   ├── HighlightedText
-    │   │   │   ├── HorizontalScrollButton
-    │   │   │   ├── Pagination
-    │   │   │   ├── Tag
-    │   │   │   └── ZaboImage
-    │   │   ├── organisms: molecule을 조합한 컴포넌트
-    │   │   │   ├── DateTimePicker
-    │   │   │   ├── ImageCarousel
-    │   │   │   ├── Tags
-    │   │   │   └── Zabo
-    │   │   └── templates: organism을 조합한 컴포넌트
-    │   │       ├── Footer
+    │   │   ├── og: open graph image를 생성하는 api
+    │   │   ├── vapor-bff
+    │   │   │   └── [...ziggle]
+    │   │   └── ziggle
+    │   │       └── [...proxy]
+    │   ├── components: 여러 곳에서 공통적으로 쓰이는 컴포넌트
+    │   │   ├── layout: 레이아웃에 쓰이는 컴포넌트
+    │   │   │   ├── Footer
+    │   │   │   ├── Navbar
+    │   │   │   ├── NavbarWrite
+    │   │   │   └── Sidebar
+    │   │   └── shared: 레이아웃에 쓰이지 않고 공통적으로 쓰이는 컴포넌트
+    │   │       ├── Analytics
+    │   │       ├── Button
     │   │       ├── LoadingCatAnimation
-    │   │       ├── Navbar
-    │   │       ├── NavbarWrite
-    │   │       ├── ResultZabo
-    │   │       ├── SearchAnimation
-    │   │       ├── SearchResults
-    │   │       └── Sidebar
+    │   │       ├── Pagination
+    │   │       ├── Tags
+    │   │       ├── Toggle
+    │   │       └── Zabo
     │   └── i18next: 다국어 지원을 위한 설정
     │       └── locales
     │           ├── en
@@ -84,8 +72,7 @@
     │   ├── fonts
     │   ├── icons
     │   └── logos
-    ├── mock: 개발 환경(storybook)에서 사용하는 mock 데이터
-    └── utils: 유틸성 파일
+    └── mock: 개발 환경(storybook)에서 사용하는 mock 데이터
 ```
 
 ### 몇가지 알아두면 좋은 점
