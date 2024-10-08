@@ -6,6 +6,8 @@ import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 
+import CSLink from '../../shared/CSLink/CSLink';
+
 export const playStoreLink =
   'https://play.google.com/store/apps/details?id=me.gistory.ziggle';
 export const appStoreLink = 'https://apps.apple.com/kr/app/ziggle/id6451740697';
@@ -47,11 +49,15 @@ const Footer = async ({ lng }: PropsWithLng) => {
             <div key={title} className="flex w-32 flex-col gap-2 md:gap-6">
               <div className="text-sm font-bold">{title}</div>
               <div className="flex flex-col gap-2">
-                {links.map(({ link, name }) => (
-                  <ExternalLink key={name} href={link}>
-                    {name}
-                  </ExternalLink>
-                ))}
+                {links.map(({ link, name }) =>
+                  name === 'Bug Report' ? (
+                    <CSLink key={name}>{name}</CSLink>
+                  ) : (
+                    <ExternalLink key={name} href={link}>
+                      {name}
+                    </ExternalLink>
+                  ),
+                )}
               </div>
             </div>
           ),
