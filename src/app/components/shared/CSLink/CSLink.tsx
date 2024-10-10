@@ -13,7 +13,7 @@ const CSLink = async ({ children, className }: CSLinkProps) => {
   return (
     <Link
       href={`https://cs.gistory.me/?service=Ziggle${
-        session && `&email=${session.user.email}`
+        session ? `&email=${session.user.email}` : ''
       }`}
       className={className}
     >
