@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { createTranslation, PropsWithLng, T } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
