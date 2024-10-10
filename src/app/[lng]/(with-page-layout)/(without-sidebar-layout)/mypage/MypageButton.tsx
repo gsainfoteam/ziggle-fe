@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import React from 'react';
 
+import CSLink from '@/app/components/shared/CSLink/CSLink';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import BellIcon from '@/assets/icons/bell.svg';
@@ -46,8 +47,6 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
 
   const ICON_CLASSNAME = 'w-10 stroke-text dark:stroke-dark_white';
 
-  const CS_PAGE_URL = 'https://cs.gistory.me/?service=Ziggle';
-
   return (
     <div className="flex flex-col justify-between gap-4">
       <div className="flex justify-between gap-4">
@@ -70,13 +69,13 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
       <div className="h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
 
       <div className="flex justify-between gap-4">
-        <Link href={CS_PAGE_URL} className="flex-1">
+        <CSLink className="flex-1">
           <MypageButton
             align="right"
             icon={<FlagIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.feedback')}
           />
-        </Link>
+        </CSLink>
       </div>
     </div>
   );
