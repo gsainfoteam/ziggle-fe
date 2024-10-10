@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { createTranslation, PropsWithLng, T } from '@/app/i18next';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
@@ -15,6 +15,12 @@ export const appStoreLink = 'https://apps.apple.com/kr/app/ziggle/id6451740697';
 const ExternalLink = ({ ...props }: React.ComponentProps<typeof Link>) => (
   <Link {...props} target="_blank" rel="noopener noreferrer" />
 );
+
+interface FooterLink {
+  name: string;
+  link: string;
+  key?: string;
+}
 
 const Footer = async ({ lng }: PropsWithLng) => {
   const { t } = await createTranslation(lng);
@@ -44,24 +50,24 @@ const Footer = async ({ lng }: PropsWithLng) => {
         <div className="text-xs sm:text-base">{t('footer.copyright')}</div>
       </div>
       <div className="flex flex-col gap-x-24 gap-y-12 md:flex-row">
-        {t('footer.sections', { returnObjects: true }).map(
-          ({ title, links }) => (
-            <div key={title} className="flex w-32 flex-col gap-2 md:gap-6">
-              <div className="text-sm font-bold">{title}</div>
-              <div className="flex flex-col gap-2">
-                {links.map(({ link, name }) =>
-                  name === 'Bug Report' ? (
-                    <CSLink key={name}>{name}</CSLink>
-                  ) : (
-                    <ExternalLink key={name} href={link}>
-                      {name}
-                    </ExternalLink>
-                  ),
-                )}
-              </div>
+        {t('footer.sections', {
+          returnObjects: true,
+        }).map(({ title, links }) => (
+          <div key={title} className="flex w-32 flex-col gap-2 md:gap-6">
+            <div className="text-sm font-bold">{title}</div>
+            <div className="flex flex-col gap-2">
+              {links.map(({ link, name, key }: FooterLink) =>
+                key === 'bugReport' ? (
+                  <CSLink key={name}>{name}</CSLink>
+                ) : (
+                  <ExternalLink key={name} href={link}>
+                    {name}
+                  </ExternalLink>
+                ),
+              )}
             </div>
-          ),
-        )}
+          </div>
+        ))}
       </div>
     </footer>
   );
