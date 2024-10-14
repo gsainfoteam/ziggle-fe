@@ -69,13 +69,13 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
       <div className="h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
 
       <div className="flex justify-between gap-4">
-        <CSLink className="flex-1">
+        {/* <CSLink className="flex-1">
           <MypageButton
             align="right"
             icon={<FlagIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.feedback')}
           />
-        </CSLink>
+        </CSLink> */}
       </div>
     </div>
   );
