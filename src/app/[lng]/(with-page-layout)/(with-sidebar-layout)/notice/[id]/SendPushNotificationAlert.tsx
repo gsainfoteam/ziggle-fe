@@ -25,10 +25,7 @@ const SendPushNotificationAlert = ({
   const { data: user } = useSession();
   const isMyNotice = user?.user.uuid === author.uuid;
 
-  const [timeRemaining, setTimeRemaining] = useState({
-    minutes: 0,
-    seconds: 0,
-  });
+  const [timeRemaining, setTimeRemaining] = useState(calculateRemainingTime(createdAt));
 
   useEffect(() => {
     const interval = setInterval(() => {
