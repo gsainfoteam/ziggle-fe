@@ -43,14 +43,14 @@ const SendPushNotificationAlert = ({
   if (!(isMyNotice && isEditable)) return null;
 
   return (
-    <div className="inline-flex h-[55px] items-start justify-start gap-1.5 rounded-[15px] bg-[#fff4f0] px-5 py-[15px] font-normal text-primary">
-      {t('zabo.sentPushNotificationAlert.title')}{' '}
-      <div
+    <div className="inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] bg-[#fff4f0] px-5 py-[15px] font-normal text-primary">
+      <span>{t('zabo.sentPushNotificationAlert.title')} </span>
+      <span
         className="cursor-pointer font-bold underline"
         onClick={handleSendPushNotification}
       >
         {t('zabo.sentPushNotificationAlert.action')}
-      </div>
+      </span>
     </div>
   );
 };
