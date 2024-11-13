@@ -33,6 +33,7 @@ const EditableTimer = ({
 
   return (
     <p
+      suppressHydrationWarning
       className={
         'rounded-[15px] px-5 py-[15px] text-center text-lg ' +
         (isEditable
