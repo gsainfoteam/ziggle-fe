@@ -68,7 +68,8 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
 
       <div className="h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
 
-      <div className="flex justify-between gap-4">
+      {/* TODO: uncomment and handle error(async in client component) */}
+      {/* <div className="flex justify-between gap-4">
         <CSLink className="flex-1">
           <MypageButton
             align="right"
@@ -76,7 +77,7 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
             buttonText={t('mypage.feedback')}
           />
         </CSLink>
-      </div>
+      </div> */}
     </div>
   );
 };

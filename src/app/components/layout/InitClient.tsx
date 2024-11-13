@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
 import { ziggleApi } from '@/api';
+import { ThemeProvider } from '@/app/hooks/useTheme';
 import { PropsWithLng } from '@/app/i18next';
 
 const InstallApp = dynamic(() => import('./InstallApp'), {
@@ -29,12 +30,14 @@ const InitClient = ({
   >
     <SessionProvider>
       <OverlayProvider>
-        {!emptyLayout && (
-          <Suspense>
-            <InstallApp lng={lng} />
-          </Suspense>
-        )}
-        {children}
+        <ThemeProvider>
+          {!emptyLayout && (
+            <Suspense>
+              <InstallApp lng={lng} />
+            </Suspense>
+          )}
+          {children}
+        </ThemeProvider>
       </OverlayProvider>
     </SessionProvider>
   </SWRConfig>
