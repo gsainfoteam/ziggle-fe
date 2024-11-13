@@ -2,19 +2,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ComponentProps, Suspense } from 'react';
 
-import { GroupInfo } from '@/api/group/group';
 import { serachGroupsWithName } from '@/api/group/search-groups-with-name';
 import { getAllNotices } from '@/api/notice/notice-server';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
 import Analytics from '@/app/components/shared/Analytics';
-import DefaultProfile from '@/assets/icons/default-profile.svg';
-import HighlightedText from '@/app/components/shared/Zabo/HighlightedText';
 import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import Pagination from '@/app/components/shared/Pagination';
+import HighlightedText from '@/app/components/shared/Zabo/HighlightedText';
 import ResultZabo from '@/app/components/shared/Zabo/ResultZabo/ResultZabo';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import RightArrowIcon from '@/assets/icons/arrow-right.svg';
-import SearchNoResult from '@/assets/icons/search-no-result.svg';
 import VerifiedBadge from '@/assets/icons/badge-check.svg';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
+import SearchNoResult from '@/assets/icons/search-no-result.svg';
 
 const Results = async ({
   lng,
@@ -60,7 +59,7 @@ const Results = async ({
                   </div>
                   <div className="w-full">
                     <div className="text-sm font-normal text-greyDark dark:text-dark_greyDark">
-                      Group
+                      {t('zabo.group.group')}
                     </div>
                     <div className="flex items-center gap-1 text-2xl font-semibold text-text">
                       <HighlightedText query={props.search ?? ''}>
@@ -70,7 +69,7 @@ const Results = async ({
                         <>
                           <VerifiedBadge className="peer relative aspect-square md:h-6 md:w-6" />
                           <div className="text-sm font-normal text-greyDark opacity-0 transition-opacity peer-hover:opacity-100 dark:text-dark_greyDark">
-                            Official account verifed by ziggle team
+                            {t('zabo.group.verifiedDescription')}
                           </div>
                         </>
                       )}
