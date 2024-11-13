@@ -1,12 +1,20 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import { ComponentProps, Suspense } from 'react';
 
+import { GroupInfo } from '@/api/group/group';
+import { serachGroupsWithName } from '@/api/group/search-groups-with-name';
 import { getAllNotices } from '@/api/notice/notice-server';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import Analytics from '@/app/components/shared/Analytics';
+import DefaultProfile from '@/assets/icons/default-profile.svg';
+import HighlightedText from '@/app/components/shared/Zabo/HighlightedText';
 import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import Pagination from '@/app/components/shared/Pagination';
 import ResultZabo from '@/app/components/shared/Zabo/ResultZabo/ResultZabo';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import RightArrowIcon from '@/assets/icons/arrow-right.svg';
 import SearchNoResult from '@/assets/icons/search-no-result.svg';
+import VerifiedBadge from '@/assets/icons/badge-check.svg';
 
 const Results = async ({
   lng,
@@ -16,33 +24,77 @@ const Results = async ({
 }: ComponentProps<typeof SearchResults>) => {
   const pageAsNumber = Number.parseInt(page as string);
   const { t } = await createTranslation(lng);
-  const data = await getAllNotices({
+  const notices = await getAllNotices({
     ...props,
     lang: lng,
     offset: pageAsNumber * props.limit,
   }).catch(() => ({ list: [], total: 0 }));
 
+  const groups = props.search
+    ? await serachGroupsWithName(props.search, lng).catch(() => [])
+    : [];
+
   return (
     <>
-      {data?.list.length !== 0 && (
-        <div className="flex flex-col flex-nowrap gap-[10px]">
-          <div className="h-8" />
-
-          {data.list.map((notice) => (
-            <Analytics
-              event="search_result_click"
-              properties={{
-                location: 'SearchPage',
-                isText: notice.imageUrls.length === 0,
-              }}
-              key={notice.id}
+      <div className="flex flex-col flex-nowrap gap-[10px]">
+        <div className="h-8" />
+        {groups.length !== 0 &&
+          groups.map(({ uuid, name, verified, profileImageUrl }) => (
+            <Link
+              key={uuid}
+              className="min-w-fit"
+              href={`${process.env.NEXT_PUBLIC_GROUPS_API_URL}detail/${uuid}?tab=notice`}
             >
-              <ResultZabo {...notice} searchQuery={props.search} lng={lng} />
-            </Analytics>
+              <div className="flex w-full flex-col gap-2 overflow-hidden rounded-2xl bg-greyLight p-4 text-text dark:bg-dark_greyDark md:rounded-lg md:p-5">
+                <div className="flex items-center justify-between gap-4 md:justify-start">
+                  <div className="flex items-center justify-center gap-2">
+                    {profileImageUrl ? (
+                      <Image
+                        src={profileImageUrl}
+                        alt={`group ${name} profile image`}
+                        className="aspect-square md:h-24 md:w-24"
+                      />
+                    ) : (
+                      <DefaultProfile className="aspect-square md:h-24 md:w-24" />
+                    )}
+                  </div>
+                  <div className="w-full">
+                    <div className="text-sm font-normal text-greyDark dark:text-dark_greyDark">
+                      Group
+                    </div>
+                    <div className="flex items-center gap-1 text-2xl font-semibold text-text">
+                      <HighlightedText query={props.search ?? ''}>
+                        {name}
+                      </HighlightedText>
+                      {verified && (
+                        <>
+                          <VerifiedBadge className="peer relative aspect-square md:h-6 md:w-6" />
+                          <div className="text-sm font-normal text-greyDark opacity-0 transition-opacity peer-hover:opacity-100 dark:text-dark_greyDark">
+                            Official account verifed by ziggle team
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <RightArrowIcon className="fill-none stroke-grey dark:stroke-dark_grey md:w-9" />
+                </div>
+              </div>
+            </Link>
           ))}
-        </div>
-      )}
-      {props.search && data.list.length === 0 && (
+        {notices.list.map((notice) => (
+          <Analytics
+            event="search_result_click"
+            properties={{
+              location: 'SearchPage',
+              isText: notice.imageUrls.length === 0,
+            }}
+            key={notice.id}
+          >
+            <ResultZabo {...notice} searchQuery={props.search} lng={lng} />
+          </Analytics>
+        ))}
+      </div>
+      {props.search && notices.list.length === 0 && (
         <div className="flex w-full justify-center">
           <div className="align-center flex flex-col justify-center">
             <div className="h-[100px]" />
