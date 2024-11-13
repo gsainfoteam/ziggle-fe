@@ -31,7 +31,6 @@ export const useColorTheme = (): {
       const prefersDarkMode = window.matchMedia?.(
         '(prefers-color-scheme: dark)',
       ).matches;
-      console.log('prefersDarkMode', prefersDarkMode);
 
       return prefersDarkMode ? 'dark' : 'light';
     } else {
