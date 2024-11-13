@@ -1,3 +1,5 @@
+import { Locale } from '@/app/i18next/settings';
+
 import { ziggleApi } from '..';
 
 export interface GroupInfo {
@@ -7,8 +9,8 @@ export interface GroupInfo {
   profileImageUrl: object;
 }
 
-export const serachGroupsWithName = async (groupName: string) => {
+export const serachGroupsWithName = async (groupName: string, lang: Locale) => {
   return await ziggleApi
-    .get<GroupInfo>(`/groups/search?name=${groupName}`)
+    .get<GroupInfo[]>(`/groups/search?name=${groupName}&lang=${lang}`)
     .then(({ data }) => data);
 };
