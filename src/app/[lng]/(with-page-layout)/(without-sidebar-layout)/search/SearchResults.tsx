@@ -54,28 +54,28 @@ const Results = async ({
                         className="aspect-square md:h-24 md:w-24"
                       />
                     ) : (
-                      <DefaultProfile className="aspect-square md:h-24 md:w-24" />
+                      <DefaultProfile className="aspect-square h-14 w-14 md:h-24 md:w-24" />
                     )}
                   </div>
                   <div className="w-full">
                     <div className="text-sm font-normal text-greyDark dark:text-dark_greyDark">
                       {t('zabo.group.group')}
                     </div>
-                    <div className="flex items-center gap-1 text-2xl font-semibold text-text">
+                    <div className="flex items-center gap-1 break-words text-2xl font-semibold text-text">
                       <HighlightedText query={props.search ?? ''}>
                         {name}
                       </HighlightedText>
                       {verified && (
                         <>
-                          <VerifiedBadge className="peer relative aspect-square md:h-6 md:w-6" />
-                          <div className="text-sm font-normal text-greyDark opacity-0 transition-opacity peer-hover:opacity-100 dark:text-dark_greyDark">
+                          <VerifiedBadge className="peer aspect-square h-6 w-6" />
+                          <div className="hidden text-sm font-normal text-greyDark opacity-0 transition-opacity peer-hover:opacity-100 dark:text-dark_greyDark md:flex">
                             {t('zabo.group.verifiedDescription')}
                           </div>
                         </>
                       )}
                     </div>
                   </div>
-                  <RightArrowIcon className="fill-none stroke-grey dark:stroke-dark_grey md:w-9" />
+                  <RightArrowIcon className="w-6 fill-none stroke-grey dark:stroke-dark_grey md:w-9" />
                 </div>
               </div>
             </Link>
