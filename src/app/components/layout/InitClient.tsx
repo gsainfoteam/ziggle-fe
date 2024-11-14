@@ -5,6 +5,7 @@ import '@/app/components/layout/initDayjs';
 import { OverlayProvider } from '@toss/use-overlay';
 import dynamic from 'next/dynamic';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
@@ -34,7 +35,9 @@ const InitClient = ({
             <InstallApp lng={lng} />
           </Suspense>
         )}
-        {children}
+        <ThemeProvider enableSystem defaultTheme="system">
+          {children}
+        </ThemeProvider>
       </OverlayProvider>
     </SessionProvider>
   </SWRConfig>
