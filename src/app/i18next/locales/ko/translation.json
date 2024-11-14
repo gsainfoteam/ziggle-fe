@@ -311,7 +311,10 @@
       "copyAdditionalNotice": "추가 공지 복사",
       "attachInternationalAdditionalNoticeFail": "영어 추가 공지 작성에 실패했습니다",
       "copyInternationalAdditionalNotice": "영어 추가 공지 복사",
-      "pushWillDelayedNotice": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요."
+      "pushWillDelayedNotice": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요.",
+      "sendPushNotice": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
+      "sendingAlarmNotice":"알림 보내는 중...", 
+      "sendPushNoticeFail": "알림 전송에 실패했습니다"
     }
   },
   "group": {

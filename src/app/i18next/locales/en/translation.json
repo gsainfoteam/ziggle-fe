@@ -325,7 +325,10 @@
       "copyAdditionalNotice": "Copy additional notice",
       "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
       "copyInternationalAdditionalNotice": "Copy En. add. notice",
-      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page."
+      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
+      "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
+      "sendingAlarmNotice":"Sending notifications...", 
+      "sendPushNoticeFail": "Failed to send push notification"
     }
   },
   "group": {
