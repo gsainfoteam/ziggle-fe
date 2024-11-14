@@ -35,11 +35,7 @@ const InitClient = ({
             <InstallApp lng={lng} />
           </Suspense>
         )}
-        <ThemeProvider
-          disableTransitionOnChange
-          enableSystem
-          defaultTheme="system"
-        >
+        <ThemeProvider enableSystem defaultTheme="system">
           {children}
         </ThemeProvider>
       </OverlayProvider>
