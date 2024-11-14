@@ -183,6 +183,12 @@ const NoticeEditor = ({
   const handleSubmit = async () => {
     if (isLoading) return;
 
+    await Swal.fire({
+      text: t('write.alerts.pushWillDelayedNotice'),
+      icon: 'info',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+
     setIsLoading(true);
     const noticeId = await handleNoticeSubmit({
       title: state.korean.title,

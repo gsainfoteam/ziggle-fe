@@ -58,7 +58,8 @@ const Footer = async ({ lng }: PropsWithLng) => {
             <div className="flex flex-col gap-2">
               {links.map(({ link, name, key }: FooterLink) =>
                 key === 'bugReport' ? (
-                  <CSLink key={name}>{name}</CSLink>
+                  // <CSLink key={name}>{name}</CSLink>
+                  <></>
                 ) : (
                   <ExternalLink key={name} href={link}>
                     {name}
