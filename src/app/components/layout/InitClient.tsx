@@ -5,11 +5,11 @@ import '@/app/components/layout/initDayjs';
 import { OverlayProvider } from '@toss/use-overlay';
 import dynamic from 'next/dynamic';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
 import { ziggleApi } from '@/api';
-import { ThemeProvider } from '@/app/hooks/useTheme';
 import { PropsWithLng } from '@/app/i18next';
 
 const InstallApp = dynamic(() => import('./InstallApp'), {
@@ -30,12 +30,16 @@ const InitClient = ({
   >
     <SessionProvider>
       <OverlayProvider>
-        <ThemeProvider>
-          {!emptyLayout && (
-            <Suspense>
-              <InstallApp lng={lng} />
-            </Suspense>
-          )}
+        {!emptyLayout && (
+          <Suspense>
+            <InstallApp lng={lng} />
+          </Suspense>
+        )}
+        <ThemeProvider
+          disableTransitionOnChange
+          enableSystem
+          defaultTheme="system"
+        >
           {children}
         </ThemeProvider>
       </OverlayProvider>

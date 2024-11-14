@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
+import { useTheme } from 'next-themes';
 
 import Segmented from '@/app/components/shared/Segmented';
-import useTheme from '@/app/hooks/useTheme';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -13,7 +11,7 @@ import MypageBox from './MypageBox';
 const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
-  const { settings, updateSettings } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   return (
     <MypageBox>
@@ -36,8 +34,8 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
               value: 'system',
             },
           ]}
-          value={settings}
-          onChange={updateSettings}
+          value={theme ?? 'system'}
+          onChange={(newTheme) => setTheme(newTheme)}
         />
       </div>
     </MypageBox>

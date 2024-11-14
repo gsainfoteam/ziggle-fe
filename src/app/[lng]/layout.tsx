@@ -5,13 +5,10 @@ import dayjs from 'dayjs';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { cookies } from 'next/headers';
 import Script from 'next/script';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
-
-import { type ColorThemeCookie } from './(with-page-layout)/(without-sidebar-layout)/mypage/ChangeDarkModeBox';
 
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',
@@ -80,11 +77,8 @@ export default async function RootLayout({
 }) {
   dayjs.locale(lng);
 
-  const cookieStore = cookies();
-  const theme = cookieStore.get('theme') as ColorThemeCookie | undefined;
-
   return (
-    <html lang={lng} dir={dir(lng)} data-theme={theme?.value ?? 'dark'}>
+    <html lang={lng} dir={dir(lng)} suppressHydrationWarning>
       <Script id="smartlook-api">
         {`
           window.smartlook ||
