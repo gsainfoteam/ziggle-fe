@@ -143,6 +143,10 @@
       "alreadyWroteEnglishNotice": "You've already written an English notice!",
       "writeAdditionalNotice": "Write Additional Notice",
       "writeAdditionalNoticeDescription": "Create an additional notice when you need to make a correction to an existing notice, or when you want to change a deadline."
+    }, 
+    "group": {
+      "group": "Group", 
+      "verifiedDescription": "Official account verified by ziggle team"
     }
   },
   "emptyNotices": "No content. =ㅅ=",
