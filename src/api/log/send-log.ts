@@ -22,6 +22,9 @@ export const analytics = Object.entries(LogEvents).reduce(
 const sendLog = (
   event: (typeof LogEvents)[keyof typeof LogEvents],
   properties?: object,
-) => window.smartlook('track', event, properties);
+) => {
+  window.smartlook('track', event, properties);
+  // TODO: add ga too
+};
 
 export default sendLog;

@@ -2,30 +2,35 @@ const LogEvents = {
   screenView: 'screen_view',
 
   // Nav Bar
-  navBarClickLogo: 'nav_bar_click_logo',
-  navBarClickAll: 'nav_bar_click_all',
-  navBarClickWrite: 'nav_bar_click_write',
-  navBarClickSearch: 'nav_bar_click_search',
-  navBarClickLogin: 'nav_bar_click_login',
-  navBarClickMyPage: 'nav_bar_click_my_page',
+  navBarClickLogo: 'navbar_click_logo',
+  navBarClickLogin: 'navbar_click_login',
+  navBarClickMyPage: 'navbar_click_my_page',
+  // only for mobile
+  navBarClickMenu: 'navbar_click_menu',
+
+  // Search Page
+  searchSubmit: 'search_submit',
+  searchClickSearch: 'search_click_search',
+  searchChangeKeyword: 'search_change_keyword',
+  searchClickClear: 'search_click_clear',
+  // only for mobile
+  searchClickExpand: 'search_click_expand',
+  searchClickCancel: 'search_click_cancel',
 
   // Footer
   footerClickGithub: 'footer_click_github',
   footerClickPlayStore: 'footer_click_play_store',
   footerClickAppStore: 'footer_click_app_store',
   footerClickInfo: 'footer_click_info',
+  footerClickBugReport: 'footer_click_bug_report',
   footerClickServiceTerms: 'footer_click_service_terms',
   footerClickPrivacyPolicy: 'footer_click_privacy_policy',
   footerClickContact: 'footer_click_contact',
+  footerClickHouse: 'footer_click_house',
   footerClickGist: 'footer_click_gist',
   footerClickGijol: 'footer_click_gijol',
 
   // Home Page
-
-  // Search Page
-  searchPageSubmit: 'search_page_submit',
-  searchPageTypeChange: 'search_page_type_change',
-  searchPageClickCancel: 'search_page_click_cancel',
 
   // Notice Writing Page
   noticeWritingPageTypeTitle: 'notice_writing_page_type_title',

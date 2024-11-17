@@ -44,10 +44,11 @@
       {
         "title": "소개",
         "links": [
-          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" },
+          { "name": "인포팀 소개", "link": "https://introduce.gistory.me", "key": "introduce" },
           {
             "name": "버그 제보",
-            "link": "https://cs.gistory.me/?service=Ziggle"
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "key": "bugReport"
           }
         ]
       },
@@ -56,13 +57,17 @@
         "links": [
           {
             "name": "서비스이용약관",
-            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257"
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "key": "serviceTerms"
           },
           {
             "name": "개인정보처리방침",
-            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "key": "privacyPolicy"
           },
-          { "name": "문의", "link": "mailto:ziggle@gistory.me" }
+          { "name": "문의", "link": "mailto:ziggle@gistory.me",
+            "key": "contact"
+        }
         ]
       },
       {
@@ -70,13 +75,17 @@
         "links": [
           {
             "name": "지스트 하우스",
-            "link": "https://sites.google.com/view/gisthouse/home"
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "key": "house"
           },
           {
             "name": "GIST 홈페이지",
-            "link": "https://www.gist.ac.kr/kr/main.html"
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "key": "gist"
           },
-          { "name": "지졸", "link": "https://gijol.im" }
+          { "name": "지졸", "link": "https://gijol.im",
+            "key": "gijol"
+          }
         ]
       }
     ]

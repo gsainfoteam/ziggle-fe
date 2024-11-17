@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 
 import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import CloseIcon from '@/assets/icons/close.svg';
@@ -58,6 +59,10 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
     const query = formData.get('searchQuery') as string;
     if (query) params.set('query', query);
     else params.delete('query');
+
+    sendLog(LogEvents.searchSubmit, {
+      query,
+    });
     replace(`/search?${params.toString()}`);
   };
 
@@ -109,7 +114,7 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
             ref={inputRef}
           />
           {keyword.length > 0 && (
-            <Analytics event={LogEvents.searchPageClickCancel}>
+            <Analytics event={LogEvents.searchClickClear}>
               <button
                 type="button"
                 className="flex h-full items-center justify-center bg-greyLight px-2 dark:bg-dark_greyDark md:bg-white md:dark:bg-dark_dark"
@@ -123,22 +128,24 @@ export const SearchBar = ({ lng }: SearchBarProps) => {
         <>
           <div className="flex h-full md:hidden">
             {isExpanded ? (
-              <Analytics event={LogEvents.searchPageSubmit}>
+              <Analytics event={LogEvents.searchSubmit}>
                 <SearchButton />
               </Analytics>
             ) : (
-              <SearchButton isToggle onClick={() => setIsExpanded(true)} />
+              <Analytics event={LogEvents.searchClickExpand}>
+                <SearchButton isToggle onClick={() => setIsExpanded(true)} />
+              </Analytics>
             )}
           </div>
           <div className="hidden h-full md:flex">
-            <Analytics event={LogEvents.searchPageSubmit}>
+            <Analytics event={LogEvents.searchSubmit}>
               <SearchButton />
             </Analytics>
           </div>
         </>
       </form>
       {isExpanded && (
-        <Analytics event={LogEvents.searchPageClickCancel}>
+        <Analytics event={LogEvents.searchClickCancel}>
           <button
             type="button"
             className={[
