@@ -1,24 +1,25 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { NoticeDetail } from '@/api/notice/notice';
 import { sendNoticeAlarm } from '@/api/notice/send-alarm';
-import { calculateRemainingTime } from '@/app/[lng]/write/calculateRemainingTime';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
-interface SendPushNotificationAlertProps
+import { getTimeDiff } from './getTimeDiff';
+
+interface SendPushAlarmProps
   extends Pick<NoticeDetail, 'id' | 'author' | 'publishedAt'> {}
 
-const SendPushNotificationAlert = ({
+const SendPushAlarm = ({
   id,
   author,
   publishedAt,
   lng,
-}: PropsWithLng<SendPushNotificationAlertProps>): JSX.Element | null => {
+}: PropsWithLng<SendPushAlarmProps>): JSX.Element | null => {
   const { t } = useTranslation(lng);
 
   const handleSendPushNotification = useCallback(async () => {
@@ -57,33 +58,55 @@ const SendPushNotificationAlert = ({
   const { data: user } = useSession();
   const isMyNotice = user?.user.uuid === author.uuid;
 
-  const [timeRemaining, setTimeRemaining] = useState(
-    calculateRemainingTime(publishedAt),
-  );
-
+  const [timeRemaining, setTimeRemaining] = useState(getTimeDiff(publishedAt));
   useEffect(() => {
+    console.log('publishedAt', publishedAt);
+    console.log('timeRemaining', timeRemaining);
+
+    if (timeRemaining.minutes < 0 || timeRemaining.seconds < 0) {
+      return;
+    }
+
+    const intervalDuration =
+      timeRemaining.minutes > 1
+        ? 60000
+        : timeRemaining.seconds > 15
+          ? 10000
+          : 1000;
+
     const interval = setInterval(() => {
-      setTimeRemaining(calculateRemainingTime(publishedAt));
-    }, 1000);
+      setTimeRemaining(getTimeDiff(publishedAt));
+    }, intervalDuration);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timeRemaining, publishedAt]);
 
-  const isEditable = timeRemaining.minutes > 0 && timeRemaining.seconds > 0;
+  const isEditable = timeRemaining.minutes >= 0 && timeRemaining.seconds >= 0;
 
-  if (!(isMyNotice && isEditable)) return null;
+  const showComponent = useMemo(
+    () => isMyNotice && isEditable,
+    [isMyNotice, isEditable],
+  );
 
   return (
-    <div className="inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] bg-[#fff4f0] px-5 py-[15px] font-normal text-primary">
-      <span>{t('zabo.sentPushNotificationAlert.title')} </span>
-      <span
-        className="cursor-pointer font-bold underline"
-        onClick={handleSendPushNotification}
+    <div
+      className={`transform transition-all duration-1000 ease-in-out ${
+        showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden'
+      }`}
+    >
+      <div
+        className={`inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] bg-[#fff4f0] px-5 py-[15px] font-normal text-primary`}
       >
-        {t('zabo.sentPushNotificationAlert.action')}
-      </span>
+        <span>{t('zabo.sentPushNotificationAlert.title')} </span>
+        <span
+          className="cursor-pointer font-bold underline"
+          onClick={handleSendPushNotification}
+        >
+          {t('zabo.sentPushNotificationAlert.action')}
+        </span>
+      </div>
     </div>
   );
 };
 
-export default SendPushNotificationAlert;
+export default SendPushAlarm;

@@ -9,7 +9,7 @@ import AdditionalNotices from './AdditionalNotices';
 import Content from './Content';
 import ImageStack from './ImageStack';
 import NoticeInfo from './NoticeInfo';
-import SendPushNotificationAlert from './SendPushNotificationAlert';
+import SendPushAlarm from './SendPushNotificationAlert';
 
 export const generateMetadata = async (
   {
@@ -72,7 +72,7 @@ const DetailedNoticePage = async ({
           </div>
 
           <div className="flex flex-col gap-[18px] md:w-[60%]">
-            <SendPushNotificationAlert {...notice} lng={lng} />
+            <SendPushAlarm {...notice} lng={lng} />
 
             <NoticeInfo
               {...notice}
