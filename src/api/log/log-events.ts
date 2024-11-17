@@ -30,7 +30,17 @@ const LogEvents = {
   footerClickGist: 'footer_click_gist',
   footerClickGijol: 'footer_click_gijol',
 
-  // Home Page
+  // Sidebar
+  sidebarClickLink: 'sidebar_click_link',
+
+  // My Page
+  myClickMyNotice: 'my_click_my_notice',
+  myClickReminded: 'my_click_reminded',
+  myClickBugReport: 'my_click_bug_report',
+  myToggleLanguage: 'my_toggle_language',
+  myClickMode: 'my_click_mode',
+  myClickLogout: 'my_click_logout',
+  myClickUnregister: 'my_click_unregister',
 
   // Notice Writing Page
   noticeWritingPageTypeTitle: 'notice_writing_page_type_title',

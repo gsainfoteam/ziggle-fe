@@ -2,6 +2,8 @@
 
 import { useTheme } from 'next-themes';
 
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
 import Segmented from '@/app/components/shared/Segmented';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -35,7 +37,12 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             },
           ]}
           value={theme ?? 'system'}
-          onChange={(newTheme) => setTheme(newTheme)}
+          onChange={(newTheme) => {
+            sendLog(LogEvents.myClickMode, {
+              mode: newTheme,
+            });
+            setTheme(newTheme);
+          }}
         />
       </div>
     </MypageBox>

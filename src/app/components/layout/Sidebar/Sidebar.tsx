@@ -1,13 +1,15 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
+import LogEvents from '@/api/log/log-events';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
+import Analytics from '../../shared/Analytics';
 import { sidebarObject } from './sidebarObject';
 
 interface NavButtonProps {
@@ -61,17 +63,24 @@ const Sidebar = ({ lng }: PropsWithLng) => {
               .filter((menu) => (!userData ? !menu.needAuth : menu))
               .map((menu, i) => (
                 <li key={i} className="flex flex-row">
-                  <NavButton
-                    icon={
-                      <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
-                    }
-                    boldIcon={
-                      <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
-                    }
-                    title={t(menu.title)}
-                    isSelected={path.startsWith(`/${lng}/${menu.path}`)}
-                    to={`/${lng}/${menu.path}`}
-                  />
+                  <Analytics
+                    event={LogEvents.sidebarClickLink}
+                    properties={{
+                      key: menu.key,
+                    }}
+                  >
+                    <NavButton
+                      icon={
+                        <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
+                      }
+                      boldIcon={
+                        <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
+                      }
+                      title={t(menu.title)}
+                      isSelected={path.startsWith(`/${lng}/${menu.path}`)}
+                      to={`/${lng}/${menu.path}`}
+                    />
+                  </Analytics>
                 </li>
               ))}
           </ul>
