@@ -32,6 +32,7 @@ const LogEvents = {
 
   // Sidebar
   sidebarClickLink: 'sidebar_click_link',
+  sidebarClickProfile: 'sidebar_click_profile',
 
   // My Page
   myClickMyNotice: 'my_click_my_notice',

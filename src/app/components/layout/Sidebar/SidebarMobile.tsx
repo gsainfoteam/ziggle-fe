@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { User } from '@/api/auth/auth';
+import LogEvents from '@/api/log/log-events';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import DefaultProfile from '@/assets/icons/default-profile.svg';
 
+import Analytics from '../../shared/Analytics';
 import Sidebar from '.';
 
 interface SidebarProps {
@@ -50,14 +52,16 @@ const SidebarMobile = ({ onClose, lng, user }: SidebarProps & PropsWithLng) => {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <Link
-          href={user ? `/${lng}/mypage` : `/${lng}/login`}
-          className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
-        >
-          <DefaultProfile width={36} />
+        <Analytics event={LogEvents.sidebarClickProfile}>
+          <Link
+            href={user ? `/${lng}/mypage` : `/${lng}/login`}
+            className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
+          >
+            <DefaultProfile width={36} />
 
-          <p>{user?.name ?? t('navbar.login')}</p>
-        </Link>
+            <p>{user?.name ?? t('navbar.login')}</p>
+          </Link>
+        </Analytics>
         <Sidebar lng={lng} />
         <div className="h-[100px]" />
       </div>
