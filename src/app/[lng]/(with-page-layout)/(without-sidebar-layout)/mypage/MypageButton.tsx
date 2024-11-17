@@ -1,10 +1,8 @@
-'use client';
-
 import Link from 'next/link';
 import React from 'react';
 
 import CSLink from '@/app/components/shared/CSLink/CSLink';
-import { PropsWithLng } from '@/app/i18next';
+import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import BellIcon from '@/assets/icons/bell.svg';
 import PencilIcon from '@/assets/icons/edit-pencil.svg';
@@ -42,8 +40,8 @@ const MypageButton = ({ icon, buttonText, align }: MypageButtonType) => {
   );
 };
 
-const MypageButtons = ({ lng }: PropsWithLng) => {
-  const { t } = useTranslation(lng);
+const MypageButtons = async ({ lng }: PropsWithLng) => {
+  const { t } = await createTranslation(lng);
 
   const ICON_CLASSNAME = 'w-10 stroke-text dark:stroke-dark_white';
 
@@ -69,13 +67,13 @@ const MypageButtons = ({ lng }: PropsWithLng) => {
       <div className="h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
 
       <div className="flex justify-between gap-4">
-        {/* <CSLink className="flex-1">
+        <CSLink className="flex-1">
           <MypageButton
             align="right"
             icon={<FlagIcon className={ICON_CLASSNAME} />}
             buttonText={t('mypage.feedback')}
           />
-        </CSLink> */}
+        </CSLink>
       </div>
     </div>
   );

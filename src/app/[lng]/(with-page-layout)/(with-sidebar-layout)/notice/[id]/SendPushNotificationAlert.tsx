@@ -103,6 +103,12 @@ const SendPushAlarm = ({
         <span
           className="cursor-pointer font-bold underline"
           onClick={handleSendPushNotification}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              handleSendPushNotification();
+            }
+          }}
         >
           {t('zabo.sentPushNotificationAlert.action')}
         </span>
