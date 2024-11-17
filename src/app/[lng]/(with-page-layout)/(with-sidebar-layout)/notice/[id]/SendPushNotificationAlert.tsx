@@ -22,6 +22,8 @@ const SendPushAlarm = ({
 }: PropsWithLng<SendPushAlarmProps>): JSX.Element | null => {
   const { t } = useTranslation(lng);
 
+  const [isManuallyAlarmed, setIsManuallyAlarmed] = useState(false);
+
   const handleSendPushNotification = useCallback(async () => {
     const result = await Swal.fire({
       text: t('write.alerts.sendPushNotice'),
@@ -51,8 +53,7 @@ const SendPushAlarm = ({
       return;
     }
 
-    // update notice data with newNotice or refetch it
-    // so that SendPushNotificationAlert will be hidden
+    setIsManuallyAlarmed(true);
   }, [t, id]);
 
   const { data: user } = useSession();
@@ -60,10 +61,11 @@ const SendPushAlarm = ({
 
   const [timeRemaining, setTimeRemaining] = useState(getTimeDiff(publishedAt));
   useEffect(() => {
-    console.log('publishedAt', publishedAt);
-    console.log('timeRemaining', timeRemaining);
-
-    if (timeRemaining.minutes < 0 || timeRemaining.seconds < 0) {
+    if (
+      isManuallyAlarmed ||
+      timeRemaining.minutes < 0 ||
+      timeRemaining.seconds < 0
+    ) {
       return;
     }
 
@@ -79,13 +81,13 @@ const SendPushAlarm = ({
     }, intervalDuration);
 
     return () => clearInterval(interval);
-  }, [timeRemaining, publishedAt]);
+  }, [timeRemaining, publishedAt, isManuallyAlarmed]);
 
   const isEditable = timeRemaining.minutes >= 0 && timeRemaining.seconds >= 0;
 
   const showComponent = useMemo(
-    () => isMyNotice && isEditable,
-    [isMyNotice, isEditable],
+    () => isMyNotice && isEditable && !isManuallyAlarmed,
+    [isMyNotice, isEditable, isManuallyAlarmed],
   );
 
   return (
