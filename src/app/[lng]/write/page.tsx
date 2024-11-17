@@ -1,3 +1,7 @@
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+
 import { notFound, redirect } from 'next/navigation';
 
 import { auth } from '@/api/auth/auth';
@@ -5,10 +9,6 @@ import { getNotice } from '@/api/notice/get-notice';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 
 import NoticeEditor from './NoticeEditor';
-
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
 
 const WritePage = async ({
   params: { lng },
@@ -19,8 +19,6 @@ const WritePage = async ({
     noticeId?: string;
   };
 }) => {
-  const { t } = await createTranslation(lng);
-
   const userData = await auth();
   if (!userData) redirect(`/${lng}/login`);
 
@@ -32,7 +30,7 @@ const WritePage = async ({
     searchParams?.noticeId && notice?.langs.includes('en')
       ? await getNotice(Number.parseInt(searchParams.noticeId), 'en')
       : null;
-  if ((searchParams?.noticeId) && !notice) notFound();
+  if (searchParams?.noticeId && !notice) notFound();
 
   const isAuthor = userData.user.uuid === notice?.author.uuid;
   if (notice && !isAuthor) redirect(`/${lng}/notice/${notice.id}`);

@@ -43,15 +43,24 @@ const LogEvents = {
   myClickLogout: 'my_click_logout',
   myClickUnregister: 'my_click_unregister',
 
+  // Notice Detail Page
+  detailClickImage: 'detail_click_image',
+  detailClickEmoji: 'detail_click_emoji',
+  detailClickShare: 'detail_click_share',
+  detailClickCopyLink: 'detail_click_copy_link',
+
   // Notice Writing Page
-  noticeWritingPageTypeTitle: 'notice_writing_page_type_title',
-  noticeWritingPageCheckDeadline: 'notice_writing_page_check_deadline',
-  noticeWritingPageCheckEnglish: 'notice_writing_page_check_english',
-  noticeWritingPageSetDeadline: 'notice_writing_page_set_deadline',
-  noticeWritingPageSetType: 'notice_writing_page_set_type',
-  noticeWritingPageTypeTag: 'notice_writing_page_type_tag',
-  noticeWritingPageTypeContent: 'notice_writing_page_type_content',
-  noticeWritingPageClickSubmit: 'notice_writing_page_click_submit',
+  writingAcceptSaved: 'writing_accept_saved',
+  writingRejectSaved: 'writing_reject_saved',
+  writingToggleEnglish: 'writing_toggle_english',
+  writingChangeTab: 'writing_change_tab',
+  writingClickDeepl: 'writing_click_deepl',
+  writingSelectType: 'writing_select_type',
+  writingToggleDeadline: 'writing_toggle_deadline',
+  writingSetDeadline: 'writing_set_deadline',
+  writingSubmit: 'writing_submit',
+  // edit mode
+  writingModify: 'writing_modify',
 
   // Components
   noticeClick: 'notice_click',

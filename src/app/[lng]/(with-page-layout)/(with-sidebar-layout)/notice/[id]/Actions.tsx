@@ -6,6 +6,8 @@ import { Trans } from 'react-i18next';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
 import {
   addReaction,
   deleteReaction,
@@ -13,6 +15,7 @@ import {
   Notice,
   Reaction,
 } from '@/api/notice/notice';
+import Analytics from '@/app/components/shared/Analytics';
 import { useTranslation } from '@/app/i18next/client';
 import { Locale } from '@/app/i18next/settings';
 import AnguishedFace from '@/assets/icons/anguished-face.svg';
@@ -132,6 +135,7 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
   };
 
   const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
+    sendLog(LogEvents.detailClickEmoji, { emoji, isReacted });
     const reactions = await toggleReaction(emoji, isReacted);
 
     if (reactions) {
@@ -163,9 +167,13 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
           />
         ))}
 
-      <ShareButton title={title} lng={lng} />
+      <Analytics event={LogEvents.detailClickShare}>
+        <ShareButton title={title} lng={lng} />
+      </Analytics>
 
-      <CopyLinkButton title={title} lng={lng} />
+      <Analytics event={LogEvents.detailClickCopyLink}>
+        <CopyLinkButton title={title} lng={lng} />
+      </Analytics>
     </div>
   );
 };
