@@ -144,14 +144,15 @@ const NoticeEditor = ({
         type: 'SET_ADDITIONAL_KOREAN_CONTENT',
         additionalKoreanContent: '',
       });
-      if (englishTitle === undefined || englishContent === undefined) return;
-      dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle });
-      dispatch({ type: 'SET_ENGLISH_CONTENT', englishContent });
-      dispatch({
-        type: 'SET_ADDITIONAL_ENGLISH_CONTENT',
-        additionalEnglishContent: '',
-      });
-      dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
+      if (englishTitle !== undefined && englishContent !== undefined) {
+        dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle });
+        dispatch({ type: 'SET_ENGLISH_CONTENT', englishContent });
+        dispatch({
+          type: 'SET_ADDITIONAL_ENGLISH_CONTENT',
+          additionalEnglishContent: '',
+        });
+        dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
+      }
       setIsLoading(false);
     };
 
