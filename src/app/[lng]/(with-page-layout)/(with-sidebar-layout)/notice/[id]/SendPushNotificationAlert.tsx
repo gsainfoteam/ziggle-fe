@@ -71,6 +71,16 @@ const SendPushAlarm = ({
   const { data: user } = useSession();
   const isMyNotice = user?.user.uuid === author.uuid;
 
+  const MINUTE = 60000;
+  const TEN_SECONDS = 10000;
+  const ONE_SECOND = 1000;
+
+  const getIntervalDuration = (minutes: number, seconds: number) => {
+    if (minutes > 1) return MINUTE;
+    if (seconds > 15) return TEN_SECONDS;
+    return ONE_SECOND;
+  };
+
   const [timeRemaining, setTimeRemaining] = useState(getTimeDiff(publishedAt));
   useEffect(() => {
     let isSubscribed = true;
@@ -82,16 +92,20 @@ const SendPushAlarm = ({
       return;
     }
 
-    const intervalDuration =
-      timeRemaining.minutes > 1
-        ? 60000
-        : timeRemaining.seconds > 15
-          ? 10000
-          : 1000;
+    const intervalDuration = getIntervalDuration(
+      timeRemaining.minutes,
+      timeRemaining.seconds
+    );
 
     const interval = setInterval(() => {
       if (isSubscribed) {
-        setTimeRemaining(getTimeDiff(publishedAt));
+        const newTimeRemaining = getTimeDiff(publishedAt);
+        if (
+          newTimeRemaining.minutes !== timeRemaining.minutes ||
+          newTimeRemaining.seconds !== timeRemaining.seconds
+        ) {
+          setTimeRemaining(newTimeRemaining);
+        }
       }
     }, intervalDuration);
 
