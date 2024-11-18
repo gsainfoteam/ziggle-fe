@@ -45,9 +45,12 @@ const LogEvents = {
 
   // Notice Detail Page
   detailClickImage: 'detail_click_image',
-  detailClickEmoji: 'detail_click_emoji',
+  detailClickReaction: 'detail_click_reaction',
   detailClickShare: 'detail_click_share',
   detailClickCopyLink: 'detail_click_copy_link',
+  // only for author
+  detailClickEdit: 'detail_click_edit',
+  detailClickRemove: 'detail_click_remove',
 
   // Notice Writing Page
   writingAcceptSaved: 'writing_accept_saved',
@@ -62,8 +65,13 @@ const LogEvents = {
   // edit mode
   writingModify: 'writing_modify',
 
+  // Category Page
+  categoryToggleDeadline: 'category_toggle_deadline',
+
   // Components
   noticeClick: 'notice_click',
+  noticeClickReaction: 'notice_click_reaction',
+  noticeClickShare: 'notice_click_share',
   searchResultClick: 'search_result_click',
   search: 'search',
 } as const;

@@ -135,7 +135,7 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
   };
 
   const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
-    sendLog(LogEvents.detailClickEmoji, { emoji, isReacted });
+    sendLog(LogEvents.detailClickReaction, { id, type: emoji, isReacted });
     const reactions = await toggleReaction(emoji, isReacted);
 
     if (reactions) {
@@ -167,11 +167,21 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
           />
         ))}
 
-      <Analytics event={LogEvents.detailClickShare}>
+      <Analytics
+        event={LogEvents.detailClickShare}
+        properties={{
+          id,
+        }}
+      >
         <ShareButton title={title} lng={lng} />
       </Analytics>
 
-      <Analytics event={LogEvents.detailClickCopyLink}>
+      <Analytics
+        event={LogEvents.detailClickCopyLink}
+        properties={{
+          id,
+        }}
+      >
         <CopyLinkButton title={title} lng={lng} />
       </Analytics>
     </div>

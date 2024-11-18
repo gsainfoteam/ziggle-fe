@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 
+import LogEvents from '@/api/log/log-events';
 import { deleteNotice } from '@/api/notice/notice';
+import Analytics from '@/app/components/shared/Analytics';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import EditPencilIcon from '@/assets/icons/edit-pencil.svg';
@@ -50,23 +52,35 @@ const AuthorActions = ({ noticeId, lng }: PropsWithLng<WriterActionsProps>) => {
 
   return (
     <div className={'flex gap-6'}>
-      <Link
-        href={`/write?noticeId=${noticeId}`}
-        className={'flex items-center gap-[10px]'}
+      <Analytics
+        event={LogEvents.detailClickEdit}
+        properties={{ id: noticeId }}
       >
-        <EditPencilIcon
-          className={'w-5 stroke-greyDark dark:stroke-dark_white'}
-        />
-        <p className={'text-greyDark'}>{t('zabo.authorActions.edit')}</p>
-      </Link>
+        <Link
+          href={`/write?noticeId=${noticeId}`}
+          className={'flex items-center gap-[10px]'}
+        >
+          <EditPencilIcon
+            className={'w-5 stroke-greyDark dark:stroke-dark_white'}
+          />
+          <p className={'text-greyDark'}>{t('zabo.authorActions.edit')}</p>
+        </Link>
+      </Analytics>
 
-      <button
-        className={'flex items-center gap-[10px]'}
-        onClick={handleRemoveNotice}
+      <Analytics
+        event={LogEvents.detailClickRemove}
+        properties={{ id: noticeId }}
       >
-        <RemoveIcon className={'w-5 stroke-greyDark dark:stroke-dark_white'} />
-        <p className={'text-greyDark'}>{t('zabo.authorActions.remove')}</p>
-      </button>
+        <button
+          className={'flex items-center gap-[10px]'}
+          onClick={handleRemoveNotice}
+        >
+          <RemoveIcon
+            className={'w-5 stroke-greyDark dark:stroke-dark_white'}
+          />
+          <p className={'text-greyDark'}>{t('zabo.authorActions.remove')}</p>
+        </button>
+      </Analytics>
     </div>
   );
 };
