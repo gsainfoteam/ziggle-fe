@@ -6,7 +6,6 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 
 import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
-import { bool } from 'prop-types';
 import { useEffect, useReducer, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
