@@ -61,11 +61,6 @@ const TinyMCEEditor = ({
         { title: 'New page', value: '_blank', selected: true },
       ],
     }}
-    onBlur={(event) =>
-      sendLog(LogEvents.noticeWritingPageTypeContent, {
-        content: event.target.getContent(),
-      })
-    }
   />
 );
 

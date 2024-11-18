@@ -59,11 +59,6 @@ const TitleAndContent = ({
         }}
         type="text"
         placeholder={t('write.writeTitle')}
-        onBlur={(e) => {
-          sendLog(LogEvents.noticeWritingPageTypeTitle, {
-            title: e.target.value,
-          });
-        }}
         className={
           'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
           (disabled
