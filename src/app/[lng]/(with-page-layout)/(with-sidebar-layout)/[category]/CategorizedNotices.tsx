@@ -43,6 +43,7 @@ const CategorizedNotices = async ({
                 <Analytics
                   event={LogEvents.noticeClick}
                   properties={{
+                    type: 'zabo',
                     id: notice.id,
                     searchParams: noticeSearchParams,
                   }}

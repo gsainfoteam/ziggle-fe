@@ -72,8 +72,6 @@ const LogEvents = {
   noticeClick: 'notice_click',
   noticeClickReaction: 'notice_click_reaction',
   noticeClickShare: 'notice_click_share',
-  searchResultClick: 'search_result_click',
-  search: 'search',
 } as const;
 
 export default LogEvents;
