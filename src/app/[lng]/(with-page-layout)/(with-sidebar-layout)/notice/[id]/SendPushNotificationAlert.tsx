@@ -23,8 +23,10 @@ const SendPushAlarm = ({
   const { t } = useTranslation(lng);
 
   const [isManuallyAlarmed, setIsManuallyAlarmed] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   const handleSendPushNotification = useCallback(async () => {
+    if (isLoading) return;
     const result = await Swal.fire({
       text: t('write.alerts.sendPushNotice'),
       icon: 'question',
@@ -34,33 +36,38 @@ const SendPushAlarm = ({
     });
 
     if (!result.isConfirmed) return;
+    setIsLoading(true);
 
-    Swal.fire({
-      text: t('write.alerts.sendingAlarmNotice'),
-      icon: 'info',
-      showConfirmButton: false,
-      allowOutsideClick: false,
-    });
-
-    const newNotice = await sendNoticeAlarm({ id }).catch(() => null);
-
-    if (!newNotice) {
+    try {
+      Swal.fire({
+        text: t('write.alerts.sendingAlarmNotice'),
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+      });
+  
+      const newNotice = await sendNoticeAlarm({ id }).catch(() => null);
+  
+      if (!newNotice) throw new Error('No newNotice returned');
+  
+      setIsManuallyAlarmed(true);
+    } catch (error) {
       Swal.fire({
         text: t('write.alerts.sendPushNoticeFail'),
         icon: 'error',
         confirmButtonText: t('alertResponse.confirm'),
       });
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsManuallyAlarmed(true);
-  }, [t, id]);
+  }, [t, id, isLoading]);
 
   const { data: user } = useSession();
   const isMyNotice = user?.user.uuid === author.uuid;
 
   const [timeRemaining, setTimeRemaining] = useState(getTimeDiff(publishedAt));
   useEffect(() => {
+    let isSubscribed = true;
     if (
       isManuallyAlarmed ||
       timeRemaining.minutes < 0 ||
@@ -77,10 +84,15 @@ const SendPushAlarm = ({
           : 1000;
 
     const interval = setInterval(() => {
-      setTimeRemaining(getTimeDiff(publishedAt));
+      if (isSubscribed) {
+        setTimeRemaining(getTimeDiff(publishedAt));
+      }
     }, intervalDuration);
 
-    return () => clearInterval(interval);
+    return () => {
+      isSubscribed = false;
+      clearInterval(interval);
+    }
   }, [timeRemaining, publishedAt, isManuallyAlarmed]);
 
   const isEditable = timeRemaining.minutes >= 0 && timeRemaining.seconds >= 0;
