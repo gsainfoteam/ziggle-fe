@@ -39,6 +39,8 @@ jobs:
           echo "${{ vars.ENV }}" >> .env.production
           echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
           echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
+          echo "NEXT_PUBLIC_GA_TRACKING_ID=${{ secrets.GA_TRACKING_ID }}" >> .env.production
+          echo "NEXT_PUBLIC_AMPLITUDE_API_KEY=${{ secrets.AMPLITUDE_API_KEY }}" >> .env
 
       - name: Build, tag, and push image to Amazon ECR
         uses: docker/build-push-action@v5
