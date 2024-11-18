@@ -24,7 +24,7 @@ const SendPushAlarm = ({
 
   const [isManuallyAlarmed, setIsManuallyAlarmed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const handleSendPushNotification = useCallback(async () => {
     if (isLoading) return;
     const result = await Swal.fire({
@@ -45,12 +45,18 @@ const SendPushAlarm = ({
         showConfirmButton: false,
         allowOutsideClick: false,
       });
-  
+
       const newNotice = await sendNoticeAlarm({ id }).catch(() => null);
-  
+
       if (!newNotice) throw new Error('No newNotice returned');
-  
+
       setIsManuallyAlarmed(true);
+
+      Swal.fire({
+        text: t('write.alerts.sendPushNoticeSuccess'),
+        icon: 'success',
+        confirmButtonText: t('alertResponse.confirm'),
+      });
     } catch (error) {
       Swal.fire({
         text: t('write.alerts.sendPushNoticeFail'),
@@ -92,7 +98,7 @@ const SendPushAlarm = ({
     return () => {
       isSubscribed = false;
       clearInterval(interval);
-    }
+    };
   }, [timeRemaining, publishedAt, isManuallyAlarmed]);
 
   const isEditable = timeRemaining.minutes >= 0 && timeRemaining.seconds >= 0;
