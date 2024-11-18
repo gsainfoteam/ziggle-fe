@@ -109,20 +109,33 @@ const NoticeEditor = ({
         return;
       }
 
-      dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: draft.korean.title });
+      const { korean, english, deadline } = draft;
+      dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: korean.title });
       dispatch({
         type: 'SET_KOREAN_CONTENT',
-        koreanContent: draft.korean.content,
+        koreanContent: korean.content,
       });
-      if (!draft.english) return;
-      dispatch({
-        type: 'SET_ENGLISH_TITLE',
-        englishTitle: draft.english.title,
-      });
-      dispatch({
-        type: 'SET_ENGLISH_CONTENT',
-        englishContent: draft.english.content,
-      });
+      if (english) {
+        dispatch({
+          type: 'TOGGLE_ENGLISH_VERSION',
+        });
+        dispatch({
+          type: 'SET_ENGLISH_TITLE',
+          englishTitle: english.title,
+        });
+        dispatch({
+          type: 'SET_ENGLISH_CONTENT',
+          englishContent: english.content,
+        });
+        if (english.additionalContent) {
+          dispatch({
+            type: 'SET_ADDITIONAL_ENGLISH_CONTENT',
+            additionalEnglishContent: english.additionalContent,
+          });
+        }
+      }
+      if (deadline)
+        dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
 
       setIsLoading(false);
     };
