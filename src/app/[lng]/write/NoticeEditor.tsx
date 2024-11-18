@@ -189,6 +189,20 @@ const NoticeEditor = ({
   const handleSubmit = async () => {
     if (isLoading) return;
 
+    await Swal.fire({
+      text: t('write.alerts.pushWillDelayedNotice'),
+      icon: 'info',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+
+    await Swal.fire({
+      text: t('write.alerts.pushWillDelayedNotice'),
+      icon: 'info',
+      confirmButtonText: t('alertResponse.confirm'),
+    });
+
+    setIsLoading(true);
+
     const noticeToSubmit: NoticeSubmitForm & { t: T } = {
       title: state.korean.title,
       deadline: state.deadline
@@ -208,7 +222,6 @@ const NoticeEditor = ({
       notice: noticeToSubmit,
     });
 
-    setIsLoading(true);
     const noticeId = await handleNoticeSubmit(noticeToSubmit);
     if (!noticeId) {
       setIsLoading(false);

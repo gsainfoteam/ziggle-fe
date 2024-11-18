@@ -143,6 +143,11 @@
       "writeTitle": "Write a title of English notice here"
     },
 
+    "sentPushNotificationAlert": {
+      "title": "You can't edit once you send a notification.",
+      "action": "Send Push Notification"
+    },
+
     "authorActions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",
@@ -332,7 +337,12 @@
       "attachAdditionalNoticeFail": "Failed to post additional notice. Please try posting it again.",
       "copyAdditionalNotice": "Copy additional notice",
       "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
-      "copyInternationalAdditionalNotice": "Copy En. add. notice"
+      "copyInternationalAdditionalNotice": "Copy En. add. notice",
+      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
+      "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
+      "sendingAlarmNotice":"Sending notifications...", 
+      "sendPushNoticeFail": "Failed to send push notification",
+      "sendPushNoticeSuccess": "Push notification sent successfully"
     }
   },
   "group": {
