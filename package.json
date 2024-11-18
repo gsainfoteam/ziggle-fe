@@ -11,6 +11,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.11.9",
+    "@next/third-parties": "^15.0.3",
     "@tinymce/tinymce-react": "^4.3.0",
     "@toss/use-overlay": "^1.4.0",
     "@vercel/og": "^0.5.17",
