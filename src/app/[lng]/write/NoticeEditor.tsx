@@ -151,8 +151,10 @@ const NoticeEditor = ({
           type: 'SET_ADDITIONAL_ENGLISH_CONTENT',
           additionalEnglishContent: '',
         });
-        dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
       }
+      if (deadline)
+        dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
+
       setIsLoading(false);
     };
 
