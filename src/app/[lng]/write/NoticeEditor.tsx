@@ -194,12 +194,6 @@ const NoticeEditor = ({
       confirmButtonText: t('alertResponse.confirm'),
     });
 
-    await Swal.fire({
-      text: t('write.alerts.pushWillDelayedNotice'),
-      icon: 'info',
-      confirmButtonText: t('alertResponse.confirm'),
-    });
-
     setIsLoading(true);
 
     const noticeToSubmit: NoticeSubmitForm & { t: T } = {
@@ -240,10 +234,10 @@ const NoticeEditor = ({
   const handleModify = async () => {
     if (isLoading || !notice) return;
 
-    const editedLangs: ('ko' | 'en')[] = [];
-    if (state.korean.content !== notice.content) editedLangs.push('ko');
-    if (notice.enContent && state.english?.content !== notice.enContent)
-      editedLangs.push('en');
+    const editedLangs: ('ko' | 'en')[] = [
+      state.korean.content !== notice.content && 'ko',
+      notice.enContent && state.english?.content !== notice.enContent && 'en',
+    ].filter(Boolean) as ('ko' | 'en')[];
 
     const isEdited = !!editedLangs.length;
 
