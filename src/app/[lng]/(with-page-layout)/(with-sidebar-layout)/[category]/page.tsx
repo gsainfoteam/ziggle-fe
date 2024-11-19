@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 
+import LogEvents from '@/api/log/log-events';
 import { sidebarObject } from '@/app/components/layout/Sidebar/sidebarObject';
+import Analytics from '@/app/components/shared/Analytics';
 import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
 import styles from '@/app/components/shared/Toggle/toggle.module.css';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
@@ -52,19 +54,27 @@ export default async function CategoryPage({
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (
               <div className={`flex items-center gap-3`}>
-                <Link
-                  href={`${category}?page=0${
-                    sortByDeadline ? '' : '&deadline=true'
-                  }`}
-                  className="flex rounded-full"
+                <Analytics
+                  event={LogEvents.categoryToggleDeadline}
+                  properties={{
+                    category,
+                    sortByDeadline,
+                  }}
                 >
-                  <input
-                    className={styles.checkbox}
-                    type="checkbox"
-                    checked={sortByDeadline}
-                    readOnly
-                  />
-                </Link>
+                  <Link
+                    href={`${category}?page=0${
+                      sortByDeadline ? '' : '&deadline=true'
+                    }`}
+                    className="flex rounded-full"
+                  >
+                    <input
+                      className={styles.checkbox}
+                      type="checkbox"
+                      checked={sortByDeadline}
+                      readOnly
+                    />
+                  </Link>
+                </Analytics>
 
                 <p
                   className={`text-lg font-medium ${

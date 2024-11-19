@@ -2,6 +2,8 @@
 
 import { signOut } from 'next-auth/react';
 
+import LogEvents from '@/api/log/log-events';
+import Analytics from '@/app/components/shared/Analytics';
 import Button from '@/app/components/shared/Button';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -22,19 +24,23 @@ export default function ClientActions({ lng }: PropsWithLng) {
   return (
     <>
       <Button onClick={handleSignOut}>
-        <MypageBox>
-          <div className="flex self-stretch text-greyDark dark:text-dark_white">
-            {t('mypage.logout')}
-          </div>
-        </MypageBox>
+        <Analytics event={LogEvents.myClickLogout}>
+          <MypageBox>
+            <div className="flex self-stretch text-greyDark dark:text-dark_white">
+              {t('mypage.logout')}
+            </div>
+          </MypageBox>
+        </Analytics>
       </Button>
 
       <Button onClick={handleWithdrawal}>
-        <MypageBox>
-          <div className="flex self-stretch text-greyDark dark:text-dark_white">
-            {t('mypage.quit')}
-          </div>
-        </MypageBox>
+        <Analytics event={LogEvents.myClickUnregister}>
+          <MypageBox>
+            <div className="flex self-stretch text-greyDark dark:text-dark_white">
+              {t('mypage.quit')}
+            </div>
+          </MypageBox>
+        </Analytics>
       </Button>
     </>
   );

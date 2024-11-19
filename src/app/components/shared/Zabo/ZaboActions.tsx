@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
+import LogEvents from '@/api/log/log-events';
 import {
   addReaction,
   deleteReaction,
@@ -18,6 +19,7 @@ import Fire from '@/assets/icons/fire.svg';
 import FireActivated from '@/assets/icons/fire-activated.svg';
 import ShareIcon from '@/assets/icons/share.svg';
 
+import Analytics from '../Analytics';
 import Button from '../Button';
 
 type ZaboActionsProps = PropsWithLng<Notice>;
@@ -130,8 +132,20 @@ const ZaboActions = ({ id, title, reactions, lng }: ZaboActionsProps) => {
 
   return (
     <div className={'flex items-center justify-between'}>
-      <FireButton id={id} fire={fire} lng={lng} />
-      <ShareButton title={title} lng={lng} />
+      <Analytics
+        event={LogEvents.noticeClickReaction}
+        properties={{ id, emoji: fire.emoji }}
+      >
+        <FireButton id={id} fire={fire} lng={lng} />
+      </Analytics>
+      <Analytics
+        event={LogEvents.noticeClickShare}
+        properties={{
+          id,
+        }}
+      >
+        <ShareButton title={title} lng={lng} />
+      </Analytics>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
 import dayjs from 'dayjs';
 import { dir } from 'i18next';
 import type { Metadata } from 'next';
@@ -9,6 +10,8 @@ import Script from 'next/script';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
+
+import AmplitudeProvider from './AmplitudeProvider';
 
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',
@@ -112,8 +115,11 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        {children}
+        <AmplitudeProvider>{children}</AmplitudeProvider>
       </body>
+      {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />
+      )}
     </html>
   );
 }

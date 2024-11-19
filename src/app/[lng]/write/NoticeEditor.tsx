@@ -23,9 +23,10 @@ import { calculateRemainingTime } from '@/app/[lng]/write/calculateRemainingTime
 import DateTimePicker from '@/app/[lng]/write/DateTimePicker';
 import handleNoticeEdit from '@/app/[lng]/write/handle-notice-edit';
 import { WarningSwal } from '@/app/[lng]/write/swals';
+import Analytics from '@/app/components/shared/Analytics';
 import Button from '@/app/components/shared/Button';
 import Toggle from '@/app/components/shared/Toggle/Toggle';
-import { PropsWithLng } from '@/app/i18next';
+import { PropsWithLng, T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ClockIcon from '@/assets/icons/clock.svg';
@@ -37,7 +38,7 @@ import AddAdditionalNotice from '../(with-page-layout)/(with-sidebar-layout)/not
 import AttachPhotoArea, { FileWithUrl } from './AttachPhotoArea';
 import DeepLButton from './DeepLButton';
 import EditableTimer from './EditableTimer';
-import handleNoticeSubmit from './handle-notice-submit';
+import handleNoticeSubmit, { NoticeSubmitForm } from './handle-notice-submit';
 import LanguageTab from './LanguageTab';
 import {
   Draft,
@@ -106,9 +107,13 @@ const NoticeEditor = ({
       });
       if (!isConfirmed) {
         setIsLoading(false);
+        sendLog(LogEvents.writingRejectSaved);
         return;
       }
 
+      sendLog(LogEvents.writingAcceptSaved, {
+        draft,
+      });
       dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: draft.korean.title });
       dispatch({
         type: 'SET_KOREAN_CONTENT',
@@ -190,7 +195,8 @@ const NoticeEditor = ({
     });
 
     setIsLoading(true);
-    const noticeId = await handleNoticeSubmit({
+
+    const noticeToSubmit: NoticeSubmitForm & { t: T } = {
       title: state.korean.title,
       deadline: state.deadline
         ? state.deadline.toDate() ?? undefined
@@ -203,7 +209,13 @@ const NoticeEditor = ({
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCatgoryMapper[state.noticeType],
       t,
+    };
+
+    sendLog(LogEvents.writingSubmit, {
+      notice: noticeToSubmit,
     });
+
+    const noticeId = await handleNoticeSubmit(noticeToSubmit);
     if (!noticeId) {
       setIsLoading(false);
       Swal.fire({
@@ -222,6 +234,13 @@ const NoticeEditor = ({
   const handleModify = async () => {
     if (isLoading || !notice) return;
 
+    const editedLangs: ('ko' | 'en')[] = [
+      state.korean.content !== notice.content && 'ko',
+      notice.enContent && state.english?.content !== notice.enContent && 'en',
+    ].filter(Boolean) as ('ko' | 'en')[];
+
+    const isEdited = !!editedLangs.length;
+
     const warningSwal = WarningSwal(t);
     if (!state.korean.additionalContent && state.english?.additionalContent) {
       warningSwal(t('write.alerts.needKoreanAdditionalNotice'));
@@ -238,12 +257,7 @@ const NoticeEditor = ({
     });
 
     if (!hasTimedOut) {
-      const editedLangs: ('ko' | 'en')[] = [];
-      if (state.korean.content !== notice.content) editedLangs.push('ko');
-      if (notice.enContent && state.english?.content !== notice.enContent)
-        editedLangs.push('en');
-
-      if (editedLangs.length) {
+      if (isEdited) {
         const updatedNoticeId = await handleNoticeEdit({
           noticeId: notice.id,
           koreanBody: state.korean.content,
@@ -263,12 +277,14 @@ const NoticeEditor = ({
       }
     }
 
-    if (notice.enContent === undefined && state.english) {
+    const isEnglishAttached = notice.enContent === undefined && !!state.english;
+
+    if (isEnglishAttached) {
       const englishNotice = await attachInternationalNotice({
         lang: 'en',
-        title: state.english.title,
+        title: (state.english as { title: string }).title,
         deadline: state.deadline ? state.deadline.toDate() : undefined,
-        body: state.english.content,
+        body: (state.english as { content: string }).content,
         noticeId: notice.id,
         contentId: 1,
       }).catch(() => null);
@@ -291,10 +307,12 @@ const NoticeEditor = ({
       }
     }
 
-    if (state.korean.additionalContent) {
+    const isAdditionalAttached = state.korean.additionalContent !== undefined;
+
+    if (isAdditionalAttached) {
       const additionalKoreanNotice = await createAdditionalNotice({
         noticeId: notice.id,
-        body: state.korean.additionalContent,
+        body: state.korean.additionalContent ?? '',
         deadline: state.deadline ? state.deadline.toDate() : undefined,
       }).catch(() => null);
 
@@ -349,6 +367,12 @@ const NoticeEditor = ({
         }
       }
     }
+
+    sendLog(LogEvents.writingModify, {
+      isEdited,
+      isEnglishAttached,
+      isAdditionalAttached,
+    });
 
     Swal.fire({
       text: t('write.alerts.modificationSuccess'),
@@ -408,8 +432,8 @@ const NoticeEditor = ({
           isSwitched={!!state.english}
           onSwitch={() => {
             dispatch({ type: 'TOGGLE_ENGLISH_VERSION' });
-            sendLog(LogEvents.noticeWritingPageCheckEnglish, {
-              hasEnglishContent: !!state.english,
+            sendLog(LogEvents.writingToggleEnglish, {
+              hasEnglish: !!state.english,
             });
           }}
         />
@@ -422,9 +446,12 @@ const NoticeEditor = ({
 
       <NoticeTypeSelector
         selectedNoticeType={state.noticeType}
-        setNoticeType={(selectedNoticeType) =>
-          dispatch({ type: 'SET_NOTICE_TYPE', selectedNoticeType })
-        }
+        setNoticeType={(selectedNoticeType) => {
+          dispatch({ type: 'SET_NOTICE_TYPE', selectedNoticeType });
+          sendLog(LogEvents.writingSelectType, {
+            type: selectedNoticeType,
+          });
+        }}
         t={t}
         disabled={isEditMode}
       />
@@ -433,9 +460,12 @@ const NoticeEditor = ({
         <div className="mt-10">
           <LanguageTab
             writingTab={state.writingTab}
-            setWritingTab={(selectedWritingTab) =>
-              dispatch({ type: 'SET_WRITING_TAB', selectedWritingTab })
-            }
+            setWritingTab={(selectedWritingTab) => {
+              dispatch({ type: 'SET_WRITING_TAB', selectedWritingTab });
+              sendLog(LogEvents.writingChangeTab, {
+                tab: selectedWritingTab,
+              });
+            }}
             t={t}
           />
         </div>
@@ -495,15 +525,17 @@ const NoticeEditor = ({
       )}
 
       {state.english && (
-        <DeepLButton
-          t={t}
-          editorRef={
-            state.writingTab === 'korean'
-              ? koreanContentEditorRef
-              : englishContentEditorRef
-          }
-          originalLanguage={state.writingTab}
-        />
+        <Analytics event={LogEvents.writingClickDeepl}>
+          <DeepLButton
+            t={t}
+            editorRef={
+              state.writingTab === 'korean'
+                ? koreanContentEditorRef
+                : englishContentEditorRef
+            }
+            originalLanguage={state.writingTab}
+          />
+        </Analytics>
       )}
 
       {/* 수정 모드이면서 (한국어 탭 && 수정 불가능) 또는 (영어 탭 && 수정 불가능 && 영어 공지 있음) */}
@@ -557,7 +589,7 @@ const NoticeEditor = ({
           isSwitched={!!state.deadline}
           onSwitch={(e) => {
             dispatch({ type: 'TOGGLE_DEADLINE' });
-            sendLog(LogEvents.noticeWritingPageCheckDeadline, {
+            sendLog(LogEvents.writingToggleDeadline, {
               hasDeadline: e.target.checked,
             });
           }}
@@ -568,9 +600,12 @@ const NoticeEditor = ({
         {state.deadline && (
           <DateTimePicker
             dateTime={state.deadline}
-            onChange={(dateTime: Dayjs) =>
-              dispatch({ type: 'SET_DEADLINE', deadline: dateTime })
-            }
+            onChange={(dateTime: Dayjs) => {
+              dispatch({ type: 'SET_DEADLINE', deadline: dateTime });
+              sendLog(LogEvents.writingSetDeadline, {
+                deadline: dateTime.toDate(),
+              });
+            }}
           />
         )}
       </div>

@@ -1,12 +1,15 @@
 import Link from 'next/link';
 
+import LogEvents from '@/api/log/log-events';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import AppStoreLogo from '@/assets/logos/appstore.svg';
 import GitHubLogo from '@/assets/logos/github.svg';
 import InfoteamLogo from '@/assets/logos/infoteam.svg';
 import PlayStoreLogo from '@/assets/logos/playstore.svg';
 
+import Analytics from '../../shared/Analytics';
 import CSLink from '../../shared/CSLink/CSLink';
+import keyToLogEvent from './keyToLogEvent';
 
 export const playStoreLink =
   'https://play.google.com/store/apps/details?id=me.gistory.ziggle';
@@ -19,7 +22,17 @@ const ExternalLink = ({ ...props }: React.ComponentProps<typeof Link>) => (
 interface FooterLink {
   name: string;
   link: string;
-  key?: string;
+  key:
+    | 'github'
+    | 'playStore'
+    | 'appStore'
+    | 'bugReport'
+    | 'serviceTerms'
+    | 'privacyPolicy'
+    | 'contact'
+    | 'house'
+    | 'gist'
+    | 'gijol';
 }
 
 const Footer = async ({ lng }: PropsWithLng) => {
@@ -36,15 +49,21 @@ const Footer = async ({ lng }: PropsWithLng) => {
             </div>
           </div>
           <div className="flex gap-4">
-            <ExternalLink href="https://github.com/gsainfoteam">
-              <GitHubLogo className="w-10" />
-            </ExternalLink>
-            <ExternalLink href={playStoreLink}>
-              <PlayStoreLogo className="w-10" />
-            </ExternalLink>
-            <ExternalLink href={appStoreLink}>
-              <AppStoreLogo className="w-10" />
-            </ExternalLink>
+            <Analytics event={LogEvents.footerClickGithub}>
+              <ExternalLink href="https://github.com/gsainfoteam">
+                <GitHubLogo className="w-10" />
+              </ExternalLink>
+            </Analytics>
+            <Analytics event={LogEvents.footerClickPlayStore}>
+              <ExternalLink href={playStoreLink}>
+                <PlayStoreLogo className="w-10" />
+              </ExternalLink>
+            </Analytics>
+            <Analytics event={LogEvents.footerClickAppStore}>
+              <ExternalLink href={appStoreLink}>
+                <AppStoreLogo className="w-10" />
+              </ExternalLink>
+            </Analytics>
           </div>
         </div>
         <div className="text-xs sm:text-base">{t('footer.copyright')}</div>
@@ -56,13 +75,17 @@ const Footer = async ({ lng }: PropsWithLng) => {
           <div key={title} className="flex w-32 flex-col gap-2 md:gap-6">
             <div className="text-sm font-bold">{title}</div>
             <div className="flex flex-col gap-2">
-              {links.map(({ link, name, key }: FooterLink) =>
-                key === 'bugReport' ? (
-                  <CSLink key={name}>{name}</CSLink>
-                ) : (
-                  <ExternalLink key={name} href={link}>
-                    {name}
-                  </ExternalLink>
+              {(links as FooterLink[]).map(
+                ({ link, name, key }: FooterLink) => (
+                  <Analytics event={keyToLogEvent[key]} key={name}>
+                    {key === 'bugReport' ? (
+                      <CSLink key={name}>{name}</CSLink>
+                    ) : (
+                      <ExternalLink key={name} href={link}>
+                        {name}
+                      </ExternalLink>
+                    )}
+                  </Analytics>
                 ),
               )}
             </div>

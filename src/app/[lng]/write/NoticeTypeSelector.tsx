@@ -31,7 +31,7 @@ const NoticeTypeSelector = ({
             onClick={() => {
               if (disabled) return;
               setNoticeType(noticeType);
-              sendLog(LogEvents.noticeWritingPageSetType, {
+              sendLog(LogEvents.writingSelectType, {
                 type: noticeType,
               });
             }}
