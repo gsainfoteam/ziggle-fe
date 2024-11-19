@@ -19,8 +19,6 @@ const WritePage = async ({
     noticeId?: string;
   };
 }) => {
-  const { t } = await createTranslation(lng);
-
   const userData = await auth();
   if (!userData) redirect(`/${lng}/login`);
 

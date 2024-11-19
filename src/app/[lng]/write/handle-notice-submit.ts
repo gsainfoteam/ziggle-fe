@@ -12,7 +12,7 @@ import { T } from '@/app/i18next';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 
-interface NoticeSubmitForm {
+export interface NoticeSubmitForm {
   title?: string;
   enTitle?: string;
   deadline?: Date;
@@ -39,8 +39,6 @@ const handleNoticeSubmit = async ({
   category,
   t,
 }: NoticeSubmitForm & { t: T }) => {
-  sendLog(LogEvents.noticeWritingPageClickSubmit);
-
   const warningSwal = WarningSwal(t);
 
   if (!title) {

@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
+import LogEvents from '@/api/log/log-events';
+import Analytics from '@/app/components/shared/Analytics';
 import { PropsWithLng } from '@/app/i18next';
 
 import ShowcaseModal from './ShowcaseModal';
@@ -34,14 +36,16 @@ const ImageStack = ({
       <div className="flex flex-col gap-[10px]">
         {sources.map((src, i) => (
           <div key={src} className="relative cursor-pointer">
-            <Image
-              src={src}
-              alt={alt}
-              width={width ?? 400}
-              height={300}
-              onClick={() => onImageClick(i)}
-              className="shrink-0 basis-48 rounded-[10px] border-2 border-greyBorder object-cover md:basis-80"
-            />
+            <Analytics event={LogEvents.detailClickImage}>
+              <Image
+                src={src}
+                alt={alt}
+                width={width ?? 400}
+                height={300}
+                onClick={() => onImageClick(i)}
+                className="shrink-0 basis-48 rounded-[10px] border-2 border-greyBorder object-cover md:basis-80"
+              />
+            </Analytics>
           </div>
         ))}
       </div>
