@@ -240,11 +240,12 @@ const NoticeEditor = ({
   const handleModify = async () => {
     if (isLoading || !notice) return;
 
-    const logProperties = {
-      isEdited: false,
-      attachEnglish: false,
-      attachAdditional: false,
-    };
+    const editedLangs: ('ko' | 'en')[] = [];
+    if (state.korean.content !== notice.content) editedLangs.push('ko');
+    if (notice.enContent && state.english?.content !== notice.enContent)
+      editedLangs.push('en');
+
+    const isEdited = !!editedLangs.length;
 
     const warningSwal = WarningSwal(t);
     if (!state.korean.additionalContent && state.english?.additionalContent) {
@@ -262,14 +263,7 @@ const NoticeEditor = ({
     });
 
     if (!hasTimedOut) {
-      const editedLangs: ('ko' | 'en')[] = [];
-      if (state.korean.content !== notice.content) editedLangs.push('ko');
-      if (notice.enContent && state.english?.content !== notice.enContent)
-        editedLangs.push('en');
-
-      if (editedLangs.length) {
-        logProperties.isEdited = true;
-
+      if (isEdited) {
         const updatedNoticeId = await handleNoticeEdit({
           noticeId: notice.id,
           koreanBody: state.korean.content,
@@ -289,14 +283,14 @@ const NoticeEditor = ({
       }
     }
 
-    if (notice.enContent === undefined && state.english) {
-      logProperties.attachEnglish = true;
+    const isEnglishAttached = notice.enContent === undefined && !!state.english;
 
+    if (isEnglishAttached) {
       const englishNotice = await attachInternationalNotice({
         lang: 'en',
-        title: state.english.title,
+        title: (state.english as { title: string }).title,
         deadline: state.deadline ? state.deadline.toDate() : undefined,
-        body: state.english.content,
+        body: (state.english as { content: string }).content,
         noticeId: notice.id,
         contentId: 1,
       }).catch(() => null);
@@ -319,12 +313,12 @@ const NoticeEditor = ({
       }
     }
 
-    if (state.korean.additionalContent) {
-      logProperties.attachAdditional = true;
+    const isAdditionalAttached = state.korean.additionalContent !== undefined;
 
+    if (isAdditionalAttached) {
       const additionalKoreanNotice = await createAdditionalNotice({
         noticeId: notice.id,
-        body: state.korean.additionalContent,
+        body: state.korean.additionalContent ?? '',
         deadline: state.deadline ? state.deadline.toDate() : undefined,
       }).catch(() => null);
 
@@ -380,7 +374,11 @@ const NoticeEditor = ({
       }
     }
 
-    sendLog(LogEvents.writingModify, logProperties);
+    sendLog(LogEvents.writingModify, {
+      isEdited,
+      isEnglishAttached,
+      isAdditionalAttached,
+    });
 
     Swal.fire({
       text: t('write.alerts.modificationSuccess'),
