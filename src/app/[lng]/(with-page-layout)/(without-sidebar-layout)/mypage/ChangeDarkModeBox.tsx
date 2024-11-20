@@ -35,10 +35,14 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             {t('mypage.loadingDarkModeSettings')}
           </span>
         ) : (
-          <div className="flex items-center gap-4">
+          <div
+            className="flex items-center gap-4"
+            role="radiogroup"
+            aria-label={t('mypage.darkModeSettings')}
+          >
             <button
               onClick={() => setTheme('light')}
-              aria-label="Set color scheme to light"
+              aria-label={t('mypage.darkModeOptions.light')}
             >
               <LightModeIcon
                 className={clsx(
@@ -51,7 +55,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             </button>
             <button
               onClick={() => setTheme('dark')}
-              aria-label="Set color scheme to dark"
+              aria-label={t('mypage.darkModeOptions.dark')}
             >
               <DarkModeIcon
                 className={clsx(
@@ -64,7 +68,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             </button>
             <button
               onClick={() => setTheme('system')}
-              aria-label="Set color scheme to follow system dark mode preference"
+              aria-label={t('mypage.darkModeOptions.system')}
             >
               <SystemModeIcon
                 className={clsx(

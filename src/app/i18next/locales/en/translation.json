@@ -223,6 +223,11 @@
     "switchLanguage": "Enable English",
     "darkModeSettings": "Dark Mode Settings",
     "loadingDarkModeSettings": "loading...",
+    "darkModeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
