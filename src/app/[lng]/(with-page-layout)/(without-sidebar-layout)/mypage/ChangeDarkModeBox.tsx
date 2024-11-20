@@ -4,7 +4,6 @@ import { useTheme } from 'next-themes';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
-import Segmented from '@/app/components/shared/Segmented';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -21,7 +20,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
         <div className="flex text-greyDark dark:text-dark_white">
           {t('mypage.darkModeSettings')}
         </div>
-        <Segmented
+        {/* <Segmented
           options={[
             {
               label: t('mypage.darkModeOptions.light'),
@@ -43,7 +42,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             });
             setTheme(newTheme);
           }}
-        />
+        /> */}
       </div>
     </MypageBox>
   );
