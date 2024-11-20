@@ -222,6 +222,7 @@
     "quit": "Withdrawal",
     "switchLanguage": "Enable English",
     "darkModeSettings": "Dark Mode Settings",
+    "loadingDarkModeSettings": "loading...",
     "darkModeOptions": {
       "light": "Light",
       "dark": "Dark",
