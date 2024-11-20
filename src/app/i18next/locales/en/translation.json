@@ -222,11 +222,6 @@
     "quit": "Withdrawal",
     "switchLanguage": "Enable English",
     "darkModeSettings": "Dark Mode Settings",
-    "darkModeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
-    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
