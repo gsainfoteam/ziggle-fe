@@ -28,29 +28,6 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
           <LightModeIcon className="h-6" />
           <SystemModeIcon className="h-6" />
         </div>
-        {/* <Segmented
-          options={[
-            {
-              label: t('mypage.darkModeOptions.light'),
-              value: 'light',
-            },
-            {
-              label: t('mypage.darkModeOptions.dark'),
-              value: 'dark',
-            },
-            {
-              label: t('mypage.darkModeOptions.system'),
-              value: 'system',
-            },
-          ]}
-          value={theme ?? 'system'}
-          onChange={(newTheme) => {
-            sendLog(LogEvents.myClickMode, {
-              mode: newTheme,
-            });
-            setTheme(newTheme);
-          }}
-        /> */}
       </div>
     </MypageBox>
   );
