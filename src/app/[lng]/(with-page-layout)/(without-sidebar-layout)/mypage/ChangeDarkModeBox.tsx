@@ -39,7 +39,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             <button onClick={() => setTheme('light')}>
               <LightModeIcon
                 className={clsx(
-                  'h-6',
+                  'h-6 transition-colors duration-300',
                   theme === 'light'
                     ? 'fill-[var(--primary)]'
                     : 'fill-[var(--grey)]',
@@ -49,7 +49,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             <button onClick={() => setTheme('dark')}>
               <DarkModeIcon
                 className={clsx(
-                  'h-6',
+                  'h-6 transition-colors duration-300',
                   theme === 'dark'
                     ? 'fill-[var(--primary)]'
                     : 'fill-[var(--grey)]',
@@ -59,7 +59,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
             <button onClick={() => setTheme('system')}>
               <SystemModeIcon
                 className={clsx(
-                  'h-6',
+                  'h-6 transition-colors duration-300',
                   theme === 'system'
                     ? 'fill-[var(--primary)] stroke-[var(--primary)]'
                     : 'fill-[var(--grey)] stroke-[var(--grey)]',
