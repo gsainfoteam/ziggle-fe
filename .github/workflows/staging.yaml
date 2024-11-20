@@ -18,6 +18,11 @@ jobs:
     permissions:
       contents: read
       packages: write
+      deployments: write
+      
+    environment:
+      name: staging
+      url: https://stg.ziggle.gistory.me
 
     steps:
       - name: Checkout
@@ -25,7 +30,9 @@ jobs:
 
       - name: setup environment
         run: |
-          echo "API_VERSION=${{ github.run_number }}-${{ github.run_number }}" >> .env
+          echo "${{ vars.ENV }}" >> .env.production
+          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+          echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
 
       - name: Login to the Container Registry
         uses: docker/login-action@v3
