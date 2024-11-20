@@ -1,6 +1,8 @@
 'use client';
 
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import LogEvents from '@/api/log/log-events';
 import sendLog from '@/api/log/send-log';
@@ -15,7 +17,12 @@ import MypageBox from './MypageBox';
 const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <MypageBox>
@@ -23,11 +30,44 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
         <div className="flex text-greyDark dark:text-dark_white">
           {t('mypage.darkModeSettings')}
         </div>
-        <div className="flex items-center gap-4">
-          <DarkModeIcon className="h-6" />
-          <LightModeIcon className="h-6" />
-          <SystemModeIcon className="h-6" />
-        </div>
+        {!mounted ? (
+          <span className="color-[var(--grey)]">
+            {t('mypage.loadingDarkModeSettings')}
+          </span>
+        ) : (
+          <div className="flex items-center gap-4">
+            <button onClick={() => setTheme('light')}>
+              <LightModeIcon
+                className={clsx(
+                  'h-6',
+                  theme === 'light'
+                    ? 'fill-[var(--primary)]'
+                    : 'fill-[var(--grey)]',
+                )}
+              />
+            </button>
+            <button onClick={() => setTheme('dark')}>
+              <DarkModeIcon
+                className={clsx(
+                  'h-6',
+                  theme === 'dark'
+                    ? 'fill-[var(--primary)]'
+                    : 'fill-[var(--grey)]',
+                )}
+              />
+            </button>
+            <button onClick={() => setTheme('system')}>
+              <SystemModeIcon
+                className={clsx(
+                  'h-6',
+                  theme === 'system'
+                    ? 'fill-[var(--primary)] stroke-[var(--primary)]'
+                    : 'fill-[var(--grey)] stroke-[var(--grey)]',
+                )}
+              />
+            </button>
+          </div>
+        )}
       </div>
     </MypageBox>
   );

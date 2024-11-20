@@ -210,6 +210,7 @@
     "quit": "회원탈퇴",
     "switchLanguage": "언어 설정을 영어로 변경",
     "darkModeSettings": "다크 모드 설정",
+    "loadingDarkModeSettings": "불러오는 중...",
     "feedback": "피드백 및 버그 제보"
   },
   "searchPage": {
