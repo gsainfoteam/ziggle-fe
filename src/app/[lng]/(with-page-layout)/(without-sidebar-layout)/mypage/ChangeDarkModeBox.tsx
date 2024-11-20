@@ -36,7 +36,10 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
           </span>
         ) : (
           <div className="flex items-center gap-4">
-            <button onClick={() => setTheme('light')}>
+            <button
+              onClick={() => setTheme('light')}
+              aria-label="Set color scheme to light"
+            >
               <LightModeIcon
                 className={clsx(
                   'h-6 transition-colors duration-300',
@@ -46,7 +49,10 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
                 )}
               />
             </button>
-            <button onClick={() => setTheme('dark')}>
+            <button
+              onClick={() => setTheme('dark')}
+              aria-label="Set color scheme to dark"
+            >
               <DarkModeIcon
                 className={clsx(
                   'h-6 transition-colors duration-300',
@@ -56,7 +62,10 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
                 )}
               />
             </button>
-            <button onClick={() => setTheme('system')}>
+            <button
+              onClick={() => setTheme('system')}
+              aria-label="Set color scheme to follow system dark mode preference"
+            >
               <SystemModeIcon
                 className={clsx(
                   'h-6 transition-colors duration-300',
