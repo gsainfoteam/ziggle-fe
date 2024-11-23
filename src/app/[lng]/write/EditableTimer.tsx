@@ -27,9 +27,9 @@ const EditableTimer = ({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [createdAt]);
 
-  const isEditable = timeRemaining.minutes > 0 && timeRemaining.seconds > 0;
+  const isEditable = timeRemaining.minutes > 0 && timeRemaining.seconds >= 0;
 
   return (
     <p
@@ -45,7 +45,10 @@ const EditableTimer = ({
         <>
           {t('write.editableTimer')}{' '}
           <span className={'font-bold'}>
-            {`${timeRemaining.minutes}:${timeRemaining.seconds}`}
+            {`${timeRemaining.minutes}:${String(timeRemaining.seconds).padStart(
+              2,
+              '0',
+            )}`}
           </span>
         </>
       ) : (

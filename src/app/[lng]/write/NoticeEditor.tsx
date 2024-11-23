@@ -323,7 +323,7 @@ const NoticeEditor = ({
       }
     }
 
-    const isAdditionalAttached = state.korean.additionalContent !== undefined;
+    const isAdditionalAttached = !!state.korean.additionalContent;
 
     if (isAdditionalAttached) {
       const additionalKoreanNotice = await createAdditionalNotice({
