@@ -59,6 +59,6 @@ const config: Config = {
     },
   },
   plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
-  darkMode: 'class',
+  darkMode: ['class', '[data-theme="dark"]'],
 };
 export default config;

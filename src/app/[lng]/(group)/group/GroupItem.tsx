@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { GroupInfo } from '@/api/group/group';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
+import { PropsWithLng } from '@/app/i18next';
 import ArrowRight from '@/assets/icons/arrow-right.svg';
 import Crown from '@/assets/icons/crown.svg';
 import GroupProfileDefault from '@/assets/icons/group-profile-default.webp';
@@ -32,9 +32,7 @@ const GroupItem = async ({
           {group.name}
         </p>
 
-        {group.president && (
-          <Crown className="ml-1 inline stroke-text" />
-        )}
+        {group.president && <Crown className="ml-1 inline stroke-text" />}
 
         <div className="flex-grow" />
 

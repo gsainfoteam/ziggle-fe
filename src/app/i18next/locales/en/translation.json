@@ -46,11 +46,13 @@
         "links": [
           {
             "name": "Introduce Infoteam",
-            "link": "https://introduce.gistory.me"
+            "link": "https://introduce.gistory.me",
+            "key": "introduce"
           },
           {
             "name": "Bug Report",
-            "link": "https://cs.gistory.me/?service=Ziggle"
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "key": "bugReport"
           }
         ]
       },
@@ -59,15 +61,18 @@
         "links": [
           {
             "name": "Terms of Service",
-            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257"
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "key": "serviceTerms"
           },
           {
             "name": "Privacy Policy",
-            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "key": "privacyPolicy"
           },
           {
             "name": "FAQ",
-            "link": "mailto:ziggle@gistory.me"
+            "link": "mailto:ziggle@gistory.me",
+            "key": "contact"
           }
         ]
       },
@@ -76,15 +81,18 @@
         "links": [
           {
             "name": "GIST House",
-            "link": "https://sites.google.com/view/gisthouse/home"
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "key": "house"
           },
           {
             "name": "GIST Homepage",
-            "link": "https://www.gist.ac.kr/kr/main.html"
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "key": "gist"
           },
           {
             "name": "Gijol",
-            "link": "https://gijol.im"
+            "link": "https://gijol.im",
+            "key": "gijol"
           }
         ]
       }
@@ -133,6 +141,11 @@
     "writeEnglishNotice": {
       "title": "Write English Notice",
       "writeTitle": "Write a title of English notice here"
+    },
+
+    "sentPushNotificationAlert": {
+      "title": "You can't edit once you send a notification.",
+      "action": "Send Push Notification"
     },
 
     "authorActions": {
@@ -208,7 +221,13 @@
     "logout": "Log Out",
     "quit": "Withdrawal",
     "switchLanguage": "Enable English",
-    "switchDarkMode": "Enable Dark Mode",
+    "darkModeSettings": "Dark Mode Settings",
+    "loadingDarkModeSettings": "loading...",
+    "darkModeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
@@ -306,6 +325,9 @@
       "submittingNotice": "Creating a notice...",
       "submitSuccess": "The notice was submitted successfully",
       "submitFail": "Failed to submit notice",
+      "modifyingNotice": "Modifying the notice...", 
+      "modificationSuccess": "The notice was modified successfully", 
+      "modificationFail": "Failed to modify the notice", 
       "deleteSuccess": "The notice was deleted successfully",
       "deleteFail": "Failed to delete notice",
       "tagCreationFail": "Failed to create tag",
@@ -316,7 +338,12 @@
       "attachAdditionalNoticeFail": "Failed to post additional notice. Please try posting it again.",
       "copyAdditionalNotice": "Copy additional notice",
       "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
-      "copyInternationalAdditionalNotice": "Copy En. add. notice"
+      "copyInternationalAdditionalNotice": "Copy En. add. notice",
+      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
+      "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
+      "sendingAlarmNotice":"Sending notifications...", 
+      "sendPushNoticeFail": "Failed to send push notification",
+      "sendPushNoticeSuccess": "Push notification sent successfully"
     }
   },
   "group": {

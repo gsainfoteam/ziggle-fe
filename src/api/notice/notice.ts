@@ -44,6 +44,7 @@ export interface Notice {
     uuid: string;
   };
   createdAt: dayjs.Dayjs | string;
+  publishedAt: dayjs.Dayjs | string;
   tags: string[];
   views: number;
   imageUrls: string[];

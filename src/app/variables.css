@@ -1,5 +1,5 @@
 :root {
-  --primary: #ff4500;
+  --primary: #ff4500; /* Should be same as primary at ./const.ts */
   --secondary: #fff4f0;
   --text: #252525;
   --secondaryText: #959595;
@@ -17,16 +17,6 @@
   --dark_white: #ffffff;
   --dark_secondary: #432b22;
 
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --text: var(--dark_white);
-    --white: var(--dark_dark);
-    --greyLight: var(--dark_greyDark);
-    --greyDark: var(--dark_grey);
-    --secondary: var(--dark_secondary);
-  }
 }
 
 /* Dark mode variables. These are just for convenience. Overwrite them when that's proper. No accurate 1:1 mapping exist. */

@@ -1,3 +1,6 @@
+import { track } from '@amplitude/analytics-browser';
+import { sendGAEvent } from '@next/third-parties/google';
+
 import LogEvents from './log-events';
 
 declare global {
@@ -6,22 +9,21 @@ declare global {
   }
 }
 
-export const analytics = Object.entries(LogEvents).reduce(
-  (acc, [key, value]) => ({
-    ...acc,
-    [`log${key.charAt(0).toUpperCase() + key.slice(1)}`]: (
-      properties?: object,
-    ) => sendLog(value, properties),
-  }),
-  {},
-) as Record<
-  `log${Capitalize<keyof typeof LogEvents>}`,
-  (properties?: object) => void
->;
-
 const sendLog = (
   event: (typeof LogEvents)[keyof typeof LogEvents],
   properties?: object,
-) => window.smartlook('track', event, properties);
+) => {
+  if (process.env.NODE_ENV !== 'production') {
+    return;
+  }
+
+  window.smartlook('track', event, properties);
+
+  properties
+    ? sendGAEvent('event', event, properties)
+    : sendGAEvent('event', event);
+
+  track(event, properties);
+};
 
 export default sendLog;

@@ -1,4 +1,4 @@
-import { Tag } from '@/app/[lng]/(write)/write/TagInput';
+import { Tag } from '@/app/[lng]/write/TagInput';
 
 import { ziggleApi } from '..';
 

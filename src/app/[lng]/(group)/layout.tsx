@@ -1,15 +1,13 @@
+import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
-import '@/app/initDayjs';
 
 import type { Viewport } from 'next';
 import { ToastContainer } from 'react-toastify';
 
-import Footer from '@/app/components/templates/Footer';
-import Navbar from '@/app/components/templates/Navbar';
-import NavbarWrite from '@/app/components/templates/NavbarWrite';
-import { createTranslation, PropsWithLng } from '@/app/i18next';
-
-import InitClient from '../(common)/InitClient';
+import Footer from '@/app/components/layout/Footer';
+import InitClient from '@/app/components/layout/InitClient';
+import NavbarWrite from '@/app/components/layout/NavbarWrite';
+import { PropsWithLng } from '@/app/i18next';
 
 export const viewport: Viewport = {
   themeColor: '#ff4500',
@@ -22,8 +20,6 @@ export default async function Layout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const { t } = await createTranslation(lng);
-
   return (
     <InitClient lng={lng}>
       <div>
@@ -33,8 +29,7 @@ export default async function Layout({
           <div className="w-0 grow md:mx-5">{children}</div>
         </div>
 
-        <div className="h-[500px]" />
-        <Footer t={t} />
+        <Footer lng={lng} />
       </div>
       <ToastContainer className="w-64" />
     </InitClient>
