@@ -14,7 +14,7 @@ test.describe('User-only actions', () => {
 
     await expect(page).toHaveURL(/localhost:3000\/en\/write/);
 
-    await page.getByLabel('Write English Notice too').check();
+    await page.getByTestId('Write English Notice too').check();
 
     await page.getByText('General').click();
 

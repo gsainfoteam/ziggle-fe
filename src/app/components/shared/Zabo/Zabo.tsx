@@ -40,7 +40,7 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
   const hasImage = imageUrls.length > 0;
 
   return (
-    <Link href={`/${lng}/notice/${id}`} id={'zabo'}>
+    <Link href={`/${lng}/notice/${id}`} data-testid={'zabo'}>
       <div
         className={
           'flex flex-col rounded-[10px] py-[10px] text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
