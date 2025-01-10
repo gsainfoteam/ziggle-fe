@@ -28,7 +28,8 @@ jobs:
         until curl -s http://localhost:3000 > /dev/null; do
           echo "Server is not ready yet. Retrying in 2 seconds..."
           sleep 2
-        done    - name: Run Playwright tests
+        done
+    - name: Run Playwright tests
       run: yarn playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
