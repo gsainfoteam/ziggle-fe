@@ -12,11 +12,11 @@ jobs:
       with:
         node-version: lts/*
     - name: setup environment
-        run: |
-          echo "${{ secrets.TEST_IDP_EMAIL }}" >> .env
-          echo "${{ secrets.TEST_IDP_PASSWORD }}" >> .env
-          echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
-          echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
+      run: |
+        echo "TEST_IDP_EMAIL=${{ secrets.TEST_IDP_EMAIL }}" >> .env
+        echo "TEST_IDP_PASSWORD=${{ secrets.TEST_IDP_PASSWORD }}" >> .env
+        echo "NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }}" >> .env.production
+        echo "IDP_CLIENT_SECRET=${{ secrets.IDP_CLIENT_SECRET }}" >> .env.production
     - name: Install dependencies
       run: npm install -g yarn && yarn
     - name: Install Playwright Browsers
