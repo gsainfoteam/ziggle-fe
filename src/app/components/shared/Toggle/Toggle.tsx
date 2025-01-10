@@ -7,9 +7,15 @@ interface ToggleProps {
   onSwitch: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Toggle = ({ isSwitched, onSwitch }: ToggleProps) => {
+const Toggle = ({
+  isSwitched,
+  onSwitch,
+  ...props
+}: React.PropsWithChildren<
+  React.LabelHTMLAttributes<HTMLLabelElement> & ToggleProps
+>) => {
   return (
-    <label className={styles.wrapper}>
+    <label className={styles.wrapper} {...props}>
       <input
         role="switch"
         type="checkbox"

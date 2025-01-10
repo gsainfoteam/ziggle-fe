@@ -26,6 +26,7 @@ const NoticeTypeSelector = ({
       <div className="mb-5 flex gap-[10px]">
         {noticeTypes.map((noticeType) => (
           <div
+            data-testid={`write-type-${noticeType}`}
             className="cursor-pointer"
             key={noticeType}
             onClick={() => {
