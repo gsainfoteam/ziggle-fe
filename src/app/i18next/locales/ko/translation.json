@@ -148,6 +148,11 @@
       "alreadyWroteEnglishNotice": "영어 공지를 작성하셨습니다!",
       "writeAdditionalNotice": "추가 공지 작성하기",
       "writeAdditionalNoticeDescription": "기존 공지사항에서 정정해야 할 부분이 있거나, 마감 시간을 변경하고 싶을 때 추가 공지를 작성해보세요."
+    }, 
+
+    "group": {
+      "group": "그룹", 
+      "verifiedDescription": "지글팀이 확인한 공식 계정"
     }
   },
   "emptyNotices": "글이 없습니다. =ㅅ=",
