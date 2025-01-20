@@ -9,8 +9,8 @@ export interface GroupInfo {
   profileImageUrl: string | null;
 }
 
-export const serachGroupsWithName = async (groupName: string, lang: Locale) => {
+export const searchGroupWithName = async (groupName: string, lang: Locale) => {
   return await ziggleApi
-    .get<GroupInfo[]>(`/groups/search?name=${groupName}&lang=${lang}`)
-    .then(({ data }) => data);
+    .get<{ list: GroupInfo[] }>(`/group/search?query=${groupName}&lang=${lang}`)
+    .then(({ data: { list } }) => list);
 };

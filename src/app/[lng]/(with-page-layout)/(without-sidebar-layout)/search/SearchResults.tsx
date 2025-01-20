@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ComponentProps, Suspense } from 'react';
 
-import { serachGroupsWithName } from '@/api/group/search-groups-with-name';
+import { searchGroupWithName } from '@/api/group/search-groups-with-name';
 import { getAllNotices } from '@/api/notice/notice-server';
 import Analytics from '@/app/components/shared/Analytics';
 import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
@@ -30,7 +30,7 @@ const Results = async ({
   }).catch(() => ({ list: [], total: 0 }));
 
   const groups = props.search
-    ? await serachGroupsWithName(props.search, lng).catch(() => [])
+    ? await searchGroupWithName(props.search, lng).catch(() => [])
     : [];
 
   return (
