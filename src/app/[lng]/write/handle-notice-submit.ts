@@ -12,7 +12,7 @@ import { T } from '@/app/i18next';
 
 type NoticeLanguage = 'ko' | 'en' | 'both';
 
-interface NoticeSubmitForm {
+export interface NoticeSubmitForm {
   title?: string;
   enTitle?: string;
   deadline?: Date;
@@ -39,8 +39,6 @@ const handleNoticeSubmit = async ({
   category,
   t,
 }: NoticeSubmitForm & { t: T }) => {
-  sendLog(LogEvents.noticeWritingPageClickSubmit);
-
   const warningSwal = WarningSwal(t);
 
   if (!title) {
@@ -184,7 +182,8 @@ const handleNoticeSubmit = async ({
   const tagIds: number[] | undefined = await handleTagSubmit(tags, t);
   if (!tagIds) return;
 
-  const imageKeys = await uploadImages(images).catch(() => null);
+  const imageKeys =
+    images.length > 0 ? await uploadImages(images).catch(() => null) : [];
   if (!imageKeys) {
     Swal.fire({
       text: t('write.alerts.submitFail'),

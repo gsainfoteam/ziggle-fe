@@ -1,7 +1,9 @@
 import React from 'react';
 
+import LogEvents from '@/api/log/log-events';
 import { NoticeSearchParams } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
+import Analytics from '@/app/components/shared/Analytics';
 import Pagination from '@/app/components/shared/Pagination';
 import Zabo from '@/app/components/shared/Zabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
@@ -38,7 +40,16 @@ const CategorizedNotices = async ({
           <div className="flex w-full flex-col md:max-w-[800px]">
             {...notices.list.map((notice) => (
               <React.Fragment key={notice.id}>
-                <Zabo key={notice.id} {...notice} lng={lng} />
+                <Analytics
+                  event={LogEvents.noticeClick}
+                  properties={{
+                    type: 'zabo',
+                    id: notice.id,
+                    searchParams: noticeSearchParams,
+                  }}
+                >
+                  <Zabo key={notice.id} {...notice} lng={lng} />
+                </Analytics>
                 <div className="my-[30px] h-[1px] bg-greyLight dark:bg-dark_greyBorder" />
               </React.Fragment>
             ))}

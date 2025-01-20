@@ -53,12 +53,14 @@ const Navbar = ({ lng }: PropsWithLng) => {
           <Suspense>
             <SearchBar lng={lng} />
           </Suspense>
-          <Button
-            onClick={handleSidebarOpen}
-            className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden md:h-full"
-          >
-            <MenuIcon className="h-6 stroke-text dark:stroke-dark_white md:hidden" />
-          </Button>
+          <Analytics event={LogEvents.navBarClickMenu}>
+            <Button
+              onClick={handleSidebarOpen}
+              className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden"
+            >
+              <MenuIcon className="h-6 stroke-text dark:stroke-dark_white md:hidden" />
+            </Button>
+          </Analytics>
         </div>
       </div>
       <Analytics

@@ -20,7 +20,19 @@ import MessageAlert from '@/assets/icons/message-alert.svg';
 import OpenBook from '@/assets/icons/open-book.svg';
 
 type MenuPath = HomePath | 'write' | 'group' | 'own' | 'reminded';
+type LogKey =
+  | 'home'
+  | 'urgent'
+  | 'zigglepick'
+  | 'recruit'
+  | 'event'
+  | 'general'
+  | 'academic'
+  | 'write'
+  | 'myNotice'
+  | 'reminded';
 export interface SidebarObject {
+  key: LogKey;
   title: ParseKeys;
   path: MenuPath;
   icons: {
@@ -34,6 +46,7 @@ export interface SidebarObject {
 export const sidebarObject: SidebarObject[][] = [
   [
     {
+      key: 'home',
       title: 'sidebar.home',
       path: 'home',
       icons: {
@@ -45,6 +58,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'urgent',
       title: 'sidebar.urgent',
       path: 'deadline',
       icons: {
@@ -56,6 +70,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'zigglepick',
       title: 'sidebar.zigglepick',
       path: 'zigglepick',
       icons: {
@@ -69,6 +84,7 @@ export const sidebarObject: SidebarObject[][] = [
   ],
   [
     {
+      key: 'recruit',
       title: 'sidebar.recruit',
       path: 'recruit',
       icons: {
@@ -81,6 +97,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'event',
       title: 'sidebar.event',
       path: 'event',
       icons: {
@@ -93,6 +110,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'general',
       title: 'sidebar.general',
       path: 'etc',
       icons: {
@@ -105,6 +123,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'academic',
       title: 'sidebar.academic',
       path: 'academic',
       icons: {
@@ -119,6 +138,7 @@ export const sidebarObject: SidebarObject[][] = [
   ],
   [
     {
+      key: 'write',
       title: 'sidebar.write',
       path: 'write',
       icons: {
@@ -127,6 +147,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'myNotice',
       title: 'mypage.myNotice',
       path: 'own',
       icons: {
@@ -140,6 +161,7 @@ export const sidebarObject: SidebarObject[][] = [
       },
     },
     {
+      key: 'reminded',
       title: 'mypage.remindNotice',
       path: 'reminded',
       icons: {

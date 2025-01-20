@@ -1,68 +1,86 @@
 'use client';
 
+import clsx from 'clsx';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 
-import Toggle from '@/app/components/shared/Toggle/Toggle';
+import LogEvents from '@/api/log/log-events';
+import sendLog from '@/api/log/send-log';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
+import DarkModeIcon from '@/assets/icons/half-moon.svg';
+import LightModeIcon from '@/assets/icons/sun-light.svg';
+import SystemModeIcon from '@/assets/icons/system-outlined.svg';
 
 import MypageBox from './MypageBox';
 
-export type ColorTheme = 'light' | 'dark';
-export type ColorThemeCookie = { name: 'theme'; value: ColorTheme };
-
-export const useColorTheme = (): [
-  ColorTheme | undefined,
-  (newTheme: ColorTheme) => void,
-] => {
-  const [cookies, setCookie] = useCookies(['theme']);
-  const [theme, setTheme] = useState<ColorTheme>();
-
-  useEffect(() => {
-    const cookieTheme = cookies.theme as ColorTheme | undefined;
-
-    if (cookieTheme) {
-      setTheme(cookieTheme);
-    } else {
-      const prefersDarkMode =
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme: ColorTheme = prefersDarkMode ? 'dark' : 'light';
-      setTheme(systemTheme);
-      setCookie('theme', systemTheme, { path: '/' });
-    }
-  }, [theme, cookies.theme, setCookie]);
-
-  const updateTheme = (newTheme: ColorTheme) => {
-    setTheme(newTheme);
-    setCookie('theme', newTheme, { path: '/' });
-  };
-
-  return [theme, updateTheme];
-};
-
-const ChangeDarkModeBox = ({
-  lng,
-  defaultTheme,
-}: PropsWithLng<{ defaultTheme: ColorTheme }>) => {
+const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
 
-  const [theme, setTheme] = useColorTheme();
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <MypageBox>
       <div className="flex justify-between self-stretch">
         <div className="flex text-greyDark dark:text-dark_white">
-          {t('mypage.switchDarkMode')}
+          {t('mypage.darkModeSettings')}
         </div>
-        <Toggle
-          isSwitched={(theme ?? defaultTheme) === 'dark'}
-          onSwitch={() => {
-            setTheme(theme === 'dark' ? 'light' : 'dark');
-            window.location.reload();
-          }}
-        />
+        {!mounted ? (
+          <span className="color-[var(--grey)]">
+            {t('mypage.loadingDarkModeSettings')}
+          </span>
+        ) : (
+          <div
+            className="flex items-center gap-4"
+            role="radiogroup"
+            aria-label={t('mypage.darkModeSettings')}
+          >
+            <button
+              onClick={() => setTheme('light')}
+              aria-label={t('mypage.darkModeOptions.light')}
+            >
+              <LightModeIcon
+                className={clsx(
+                  'h-6 transition-colors duration-300',
+                  theme === 'light'
+                    ? 'fill-[var(--primary)]'
+                    : 'fill-[var(--grey)]',
+                )}
+              />
+            </button>
+            <button
+              onClick={() => setTheme('dark')}
+              aria-label={t('mypage.darkModeOptions.dark')}
+            >
+              <DarkModeIcon
+                className={clsx(
+                  'h-6 transition-colors duration-300',
+                  theme === 'dark'
+                    ? 'fill-[var(--primary)]'
+                    : 'fill-[var(--grey)]',
+                )}
+              />
+            </button>
+            <button
+              onClick={() => setTheme('system')}
+              aria-label={t('mypage.darkModeOptions.system')}
+            >
+              <SystemModeIcon
+                className={clsx(
+                  'h-6 transition-colors duration-300',
+                  theme === 'system'
+                    ? 'fill-[var(--primary)] stroke-[var(--primary)]'
+                    : 'fill-[var(--grey)] stroke-[var(--grey)]',
+                )}
+              />
+            </button>
+          </div>
+        )}
       </div>
     </MypageBox>
   );

@@ -14,10 +14,18 @@
   }
 }
 
+:root {
+  --transition-duration: 200ms;
+}
 
 body {
   color: var(--text);
   background: var(--white);
+
+
+  transition: background-color var(--transition-duration) ease,
+              color var(--transition-duration) ease;
+
 }
 
 @keyframes fadeInWithGoUp {

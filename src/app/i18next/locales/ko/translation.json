@@ -44,10 +44,11 @@
       {
         "title": "소개",
         "links": [
-          { "name": "인포팀 소개", "link": "https://introduce.gistory.me" },
+          { "name": "인포팀 소개", "link": "https://introduce.gistory.me", "key": "introduce" },
           {
             "name": "버그 제보",
-            "link": "https://cs.gistory.me/?service=Ziggle"
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "key": "bugReport"
           }
         ]
       },
@@ -56,13 +57,17 @@
         "links": [
           {
             "name": "서비스이용약관",
-            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257"
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "key": "serviceTerms"
           },
           {
             "name": "개인정보처리방침",
-            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1"
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "key": "privacyPolicy"
           },
-          { "name": "문의", "link": "mailto:ziggle@gistory.me" }
+          { "name": "문의", "link": "mailto:ziggle@gistory.me",
+            "key": "contact"
+        }
         ]
       },
       {
@@ -70,13 +75,17 @@
         "links": [
           {
             "name": "지스트 하우스",
-            "link": "https://sites.google.com/view/gisthouse/home"
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "key": "house"
           },
           {
             "name": "GIST 홈페이지",
-            "link": "https://www.gist.ac.kr/kr/main.html"
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "key": "gist"
           },
-          { "name": "지졸", "link": "https://gijol.im" }
+          { "name": "지졸", "link": "https://gijol.im",
+            "key": "gijol"
+          }
         ]
       }
     ]
@@ -124,6 +133,11 @@
     "writeEnglishNotice": {
       "title": "영어 공지 작성하기",
       "writeTitle": "영어 공지 제목을 입력하세요"
+    },
+
+    "sentPushNotificationAlert": {
+      "title": "알림을 보내면 수정이 불가능합니다.",
+      "action": "알림 보내기"
     },
 
     "authorActions": {
@@ -200,7 +214,13 @@
     "logout": "로그아웃",
     "quit": "회원탈퇴",
     "switchLanguage": "언어 설정을 영어로 변경",
-    "switchDarkMode": "다크 모드 켜기",
+    "darkModeSettings": "다크 모드 설정",
+    "loadingDarkModeSettings": "불러오는 중...",
+    "darkModeOptions": {
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템"
+    },
     "feedback": "피드백 및 버그 제보"
   },
   "searchPage": {
@@ -310,7 +330,12 @@
       "attachAdditionalNoticeFail": "추가 공지 작성에 실패했습니다",
       "copyAdditionalNotice": "추가 공지 복사",
       "attachInternationalAdditionalNoticeFail": "영어 추가 공지 작성에 실패했습니다",
-      "copyInternationalAdditionalNotice": "영어 추가 공지 복사"
+      "copyInternationalAdditionalNotice": "영어 추가 공지 복사",
+      "pushWillDelayedNotice": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요.",
+      "sendPushNotice": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
+      "sendingAlarmNotice":"알림 보내는 중...", 
+      "sendPushNoticeFail": "알림 전송에 실패했습니다",
+      "sendPushNoticeSuccess": "알림을 성공적으로 보냈습니다"
     }
   },
   "group": {

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ComponentProps, Suspense } from 'react';
 
 import { searchGroupWithName } from '@/api/group/search-groups-with-name';
+import LogEvents from '@/api/log/log-events';
 import { getAllNotices } from '@/api/notice/notice-server';
 import Analytics from '@/app/components/shared/Analytics';
 import LoadingCatAnimation from '@/app/components/shared/LoadingCatAnimation';
@@ -82,10 +83,10 @@ const Results = async ({
           ))}
         {notices.list.map((notice) => (
           <Analytics
-            event="search_result_click"
+            event={LogEvents.noticeClick}
             properties={{
-              location: 'SearchPage',
-              isText: notice.imageUrls.length === 0,
+              type: 'searchResult',
+              id: notice.id,
             }}
             key={notice.id}
           >

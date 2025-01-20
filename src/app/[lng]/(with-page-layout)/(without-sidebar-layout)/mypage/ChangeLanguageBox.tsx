@@ -2,6 +2,8 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 
+import LogEvents from '@/api/log/log-events';
+import Analytics from '@/app/components/shared/Analytics';
 import Toggle from '@/app/components/shared/Toggle/Toggle';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
@@ -29,7 +31,9 @@ const ChangeLanguageBox = ({ lng }: PropsWithLng) => {
         <div className="flex text-greyDark dark:text-dark_white">
           {t('mypage.switchLanguage')}
         </div>
-        <Toggle isSwitched={lng === 'en'} onSwitch={switchLanguage} />
+        <Analytics event={LogEvents.myToggleLanguage}>
+          <Toggle isSwitched={lng === 'en'} onSwitch={switchLanguage} />
+        </Analytics>
       </div>
     </MypageBox>
   );
