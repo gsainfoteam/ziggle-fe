@@ -59,7 +59,7 @@ const Results = async ({
                     )}
                   </div>
                   <div className="w-full">
-                    <div className="text-sm font-normal text-greyDark dark:text-dark_greyDark">
+                    <div className="text-sm font-normal text-greyDark dark:text-dark_greyBorder">
                       {t('zabo.group.group')}
                     </div>
                     <div className="flex items-center gap-1 break-words text-2xl font-semibold text-text">
