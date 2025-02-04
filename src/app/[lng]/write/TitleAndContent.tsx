@@ -52,6 +52,7 @@ const TitleAndContent = ({
       </div>
 
       <input
+        data-testid="write-title-input"
         disabled={disabled}
         value={title}
         onChange={(e) => {

@@ -27,7 +27,7 @@ const NoticeInfo = async ({
   const session = await auth();
 
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-col gap-[18px]" data-testid={'notice-info'}>
       {deadline && <Deadline deadline={dayjs(deadline).tz()} t={t} />}
 
       <Metadata
@@ -59,7 +59,10 @@ const Deadline = ({ deadline, t }: PropsWithT<{ deadline: dayjs.Dayjs }>) => {
 };
 
 const Title = ({ title }: { title: string }) => (
-  <div className="line-clamp-3 text-[25px] font-semibold leading-[30px]">
+  <div
+    className="line-clamp-3 text-[25px] font-semibold leading-[30px]"
+    data-testid={'notice-title'}
+  >
     {title}
   </div>
 );
