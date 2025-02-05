@@ -288,6 +288,7 @@
     "photoDescription": "첨부된 사진 중 첫 번째 사진이 대표 사진으로 설정됩니다.",
     "dragToAddPhoto": "끌어서 사진 추가",
     "orAddFromPC": "...또는 파일 선택",
+    "selectAccount": "계정 선택",
 
     "submit": "공지 제출하기",
     "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
@@ -336,7 +337,8 @@
       "sendingAlarmNotice":"알림 보내는 중...", 
       "sendPushNoticeFail": "알림 전송에 실패했습니다",
       "sendPushNoticeSuccess": "알림을 성공적으로 보냈습니다"
-    }
+    },
+    "writeAsMyself": "내 계정으로 작성"
   },
   "group": {
     "mainTitle": "내가 속한 그룹들",
