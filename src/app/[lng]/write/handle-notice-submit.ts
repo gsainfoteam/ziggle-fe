@@ -22,6 +22,7 @@ export interface NoticeSubmitForm {
   tags: string[];
   images: File[];
   category: (typeof Category)[keyof typeof Category];
+  groupId: string | null;
 }
 
 export const TITLE_MAX_LENGTH = 50;
@@ -37,6 +38,7 @@ const handleNoticeSubmit = async ({
   tags,
   images,
   category,
+  groupId,
   t,
 }: NoticeSubmitForm & { t: T }) => {
   const warningSwal = WarningSwal(t);
@@ -200,6 +202,7 @@ const handleNoticeSubmit = async ({
     images: imageKeys,
     tags: tagIds,
     category,
+    groupId,
   }).catch(() => null);
 
   if (!notice) {
