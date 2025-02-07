@@ -676,8 +676,6 @@ const NoticeEditor = ({
             }
             t={t}
           />
-
-          {state.account}
         </>
       )}
 
