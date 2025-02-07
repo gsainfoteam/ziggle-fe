@@ -30,6 +30,7 @@ import { PropsWithLng, T } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 import AddPhotoIcon from '@/assets/icons/add-photo.svg';
 import ClockIcon from '@/assets/icons/clock.svg';
+import ColorFilterIcon from '@/assets/icons/color-filter.svg';
 import GlobeIcon from '@/assets/icons/globe.svg';
 import TagIcon from '@/assets/icons/tag.svg';
 import TypeIcon from '@/assets/icons/type.svg';
@@ -49,6 +50,7 @@ import {
   retrieveDraftFromLocalStorage,
 } from './noticeEditorActions';
 import NoticeTypeSelector from './NoticeTypeSelector';
+import SelectAccountArea from './SelectAccountArea';
 import TagInput, { Tag } from './TagInput';
 import TitleAndContent from './TitleAndContent';
 
@@ -224,6 +226,7 @@ const NoticeEditor = ({
       tags: [...state.tags.map(({ name }) => name)],
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCatgoryMapper[state.noticeType],
+      groupId: state.account,
       t,
     };
 
@@ -659,6 +662,19 @@ const NoticeEditor = ({
             setPhotos={(photos: FileWithUrl[]) =>
               dispatch({ type: 'SET_PHOTOS', photos })
             }
+          />
+
+          <div className="mb-1 mt-10 flex items-center gap-2">
+            <ColorFilterIcon className="w-5 stroke-text md:w-6" />
+            <p className="font-medium md:text-lg">{t('write.selectAccount')}</p>
+          </div>
+
+          <SelectAccountArea
+            account={state.account}
+            setAccount={(account: string | null) =>
+              dispatch({ type: 'SET_ACCOUNT', account })
+            }
+            t={t}
           />
         </>
       )}

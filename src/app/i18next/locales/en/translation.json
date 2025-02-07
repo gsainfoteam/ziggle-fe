@@ -299,6 +299,7 @@
     "photoDescription": "The first of the attached photos is set as the representative photo.",
     "dragToAddPhoto": "Drag to add photos",
     "orAddFromPC": "...or browse files",
+    "selectAccount": "Select Account",
 
     "submit": "Submit Notice",
     "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
@@ -348,7 +349,8 @@
       "sendingAlarmNotice":"Sending notifications...", 
       "sendPushNoticeFail": "Failed to send push notification",
       "sendPushNoticeSuccess": "Push notification sent successfully"
-    }
+    },
+    "writeAsMyself": "Write as myself"
   },
   "group": {
     "mainTitle": "My Groups",

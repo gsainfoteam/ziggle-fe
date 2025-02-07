@@ -105,6 +105,7 @@ export const createNotice = ({
   images,
   tags,
   category,
+  groupId,
 }: {
   title: string;
   deadline?: Date;
@@ -112,9 +113,18 @@ export const createNotice = ({
   images: string[];
   tags: number[];
   category: (typeof Category)[keyof typeof Category];
+  groupId: string | null;
 }): Promise<NoticeDetail> =>
   ziggleApi
-    .post('/notice', { title, deadline, body, images, tags, category })
+    .post('/notice', {
+      title,
+      deadline,
+      body,
+      images,
+      tags,
+      category,
+      groupId: groupId ?? undefined,
+    })
     .then((res) => res.data);
 
 export const updateNotice = ({

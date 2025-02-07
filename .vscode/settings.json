@@ -18,5 +18,10 @@
     "Zabo",
     "Ziggle"
   ],
-  "svg.preview.background": "custom"
+  "svg.preview.background": "custom",
+  "i18n-ally.localesPaths": [
+    "public/tinymce/langs",
+    "src/app/i18next/locales",
+    "public/tinymce/plugins/help/js/i18n"
+  ]
 }
