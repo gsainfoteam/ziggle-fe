@@ -1,9 +1,12 @@
 'use server';
 
 import dayjs from 'dayjs';
+import Image from 'next/image';
+import Link from 'next/link';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
 import { auth } from '@/api/auth/auth';
+import { getGroup, GroupInfo } from '@/api/group/group';
 import { NoticeDetail } from '@/api/notice/notice';
 import AuthorActions from '@/app/[lng]/(with-page-layout)/(with-sidebar-layout)/notice/[id]/AuthorActions';
 import Tags from '@/app/components/shared/Tags';
@@ -22,10 +25,12 @@ const NoticeInfo = async ({
   views,
   tags = [],
   lng,
+  groupId,
 }: PropsWithLng<NoticeInfoProps>) => {
   const { t } = await createTranslation(lng);
   const session = await auth();
 
+  const groupInfo = groupId ? await getGroup(groupId) : null;
   return (
     <div className="flex flex-col gap-[18px]">
       {deadline && <Deadline deadline={dayjs(deadline).tz()} t={t} />}
@@ -34,6 +39,7 @@ const NoticeInfo = async ({
         author={author.name}
         createdAt={dayjs(createdAt)}
         views={views}
+        groupInfo={groupInfo}
         t={t}
       />
 
@@ -69,23 +75,42 @@ const Metadata = ({
   createdAt,
   views,
   t,
+  groupInfo,
 }: PropsWithT<{
   author: string;
   createdAt: dayjs.Dayjs;
   views: number;
+  groupInfo: GroupInfo | null;
 }>) => {
   const timeAgo = dayjs(createdAt).fromNow();
 
   return (
     <>
       <div className={'flex items-center'}>
-        <DefaultProfile width={36} height={36} />
+        {groupInfo?.profileImageUrl ? (
+          <Image
+            src={groupInfo.profileImageUrl}
+            width={36}
+            height={36}
+            alt={groupInfo.name}
+          />
+        ) : (
+          <DefaultProfile width={36} height={36} />
+        )}
 
-        <p className={'ml-2 text-lg font-medium'}>{author}</p>
+        {groupInfo ? (
+          <Link
+            href={`${process.env.NEXT_PUBLIC_GROUPS_URL}/group/${groupInfo.uuid}`}
+          >
+            <span className={'ml-2 text-lg font-medium'}>{groupInfo.name}</span>
+          </Link>
+        ) : (
+          <span className={'ml-2 text-lg font-medium'}>{author}</span>
+        )}
 
-        <p className={'mx-[5px] font-bold text-greyDark'}>·</p>
+        <span className={'mx-[5px] font-bold text-greyDark'}>·</span>
 
-        <p className={'font-medium text-greyDark'}>{timeAgo}</p>
+        <span className={'font-medium text-greyDark'}>{timeAgo}</span>
       </div>
     </>
   );

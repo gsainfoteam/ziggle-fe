@@ -19,10 +19,16 @@ export interface InviteCode {
   code: string;
 }
 
-export const getMyGroups = async (): Promise<GroupInfo[]> => {
+export const getGroupsToken = async (): Promise<string> => {
   const { groupsToken } = await ziggleApi
     .post<{ groupsToken: string }>('/group/token')
     .then(({ data }) => data);
+
+  return groupsToken;
+};
+
+export const getMyGroups = async (): Promise<GroupInfo[]> => {
+  const groupsToken = await getGroupsToken();
 
   return ziggleApi
     .get<GroupInfo[]>('/group/my', {
@@ -31,4 +37,8 @@ export const getMyGroups = async (): Promise<GroupInfo[]> => {
       },
     })
     .then(({ data }) => data);
+};
+
+export const getGroup = async (uuid: string): Promise<GroupInfo> => {
+  return ziggleApi.get<GroupInfo>(`/group/${uuid}`).then(({ data }) => data);
 };

@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
+import Image from 'next/image';
 import Link from 'next/link';
 
+import { getGroup } from '@/api/group/group';
 import { Notice } from '@/api/notice/notice';
 import { PropsWithLng } from '@/app/i18next';
 import DefaultProfile from '@/assets/icons/default-profile.svg';
@@ -34,10 +36,13 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
     tags,
     lng,
     id,
+    groupId,
   } = props;
   const timeAgo = dayjs(createdAt).fromNow();
 
   const hasImage = imageUrls.length > 0;
+
+  const groupInfo = groupId ? await getGroup(groupId) : null;
 
   return (
     <Link href={`/${lng}/notice/${id}`}>
@@ -47,17 +52,28 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
         }
       >
         <div className={'mx-3 my-[10px] flex flex-wrap items-center gap-y-3'}>
-          <DefaultProfile width={36} height={36} />
+          {groupInfo?.profileImageUrl ? (
+            <Image
+              src={groupInfo.profileImageUrl}
+              width={36}
+              height={36}
+              alt={groupInfo.name}
+              className={'rounded-full'}
+            />
+          ) : (
+            <DefaultProfile width={36} height={36} />
+          )}
+          <span className={'ml-2 text-lg font-medium dark:text-dark_white'}>
+            {groupInfo ? groupInfo.name : author.name}
+          </span>
 
-          <p className={'ml-2 text-lg font-medium dark:text-dark_white'}>
-            {author.name}
-          </p>
+          <span className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>
+            ·
+          </span>
 
-          <p className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>·</p>
-
-          <p className={'font-medium text-greyDark dark:text-grey'}>
+          <span className={'font-medium text-greyDark dark:text-grey'}>
             {timeAgo}
-          </p>
+          </span>
 
           {deadline !== null && (
             <>
