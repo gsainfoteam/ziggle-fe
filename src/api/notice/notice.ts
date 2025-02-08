@@ -4,6 +4,7 @@ import useSWRInfinite from 'swr/infinite';
 import { Locale } from '@/app/i18next/settings';
 
 import { ziggleApi } from '..';
+import { getGroupsToken } from '../group/group';
 
 export interface NoticePaginationParams {
   offset?: number;
@@ -51,6 +52,7 @@ export interface Notice {
   documentUrls: string[];
   isReminded: boolean;
   reactions: Reaction[];
+  groupId: string | null;
 }
 
 export interface Reaction {
@@ -98,7 +100,7 @@ export const useNotices = () => {
   };
 };
 
-export const createNotice = ({
+export const createNotice = async ({
   title,
   deadline,
   body,
@@ -114,18 +116,37 @@ export const createNotice = ({
   tags: number[];
   category: (typeof Category)[keyof typeof Category];
   groupId: string | null;
-}): Promise<NoticeDetail> =>
-  ziggleApi
-    .post('/notice', {
-      title,
-      deadline,
-      body,
-      images,
-      tags,
-      category,
-      groupId: groupId ?? undefined,
-    })
+}): Promise<NoticeDetail> => {
+  let groupsToken: string | null = null;
+
+  if (groupId) {
+    groupsToken = await getGroupsToken();
+  }
+
+  return ziggleApi
+    .post(
+      '/notice',
+      {
+        title,
+        deadline,
+        body,
+        images,
+        tags,
+        category,
+        groupId: groupId ?? undefined,
+      },
+      {
+        ...(groupsToken
+          ? {
+              headers: {
+                'Groups-Token': groupsToken,
+              },
+            }
+          : {}),
+      },
+    )
     .then((res) => res.data);
+};
 
 export const updateNotice = ({
   noticeId,
