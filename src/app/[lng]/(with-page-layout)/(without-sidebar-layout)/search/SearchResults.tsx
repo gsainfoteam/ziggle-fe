@@ -39,7 +39,7 @@ const Results = async ({
       <div className="flex flex-col flex-nowrap gap-[10px]">
         <div className="h-8" />
         {groups.length !== 0 &&
-          groups.map(({ uuid, name, verified, profileImageUrl }) => (
+          groups.map(({ uuid, name, verifiedAt, profileImageUrl }) => (
             <Link
               key={uuid}
               className="min-w-fit"
@@ -66,7 +66,7 @@ const Results = async ({
                       <HighlightedText query={props.search ?? ''}>
                         {name}
                       </HighlightedText>
-                      {verified && (
+                      {verifiedAt && (
                         <>
                           <VerifiedBadge className="peer aspect-square h-6 w-6" />
                           <div className="hidden text-sm font-normal text-greyDark opacity-0 transition-opacity peer-hover:opacity-100 dark:text-dark_greyDark md:flex">

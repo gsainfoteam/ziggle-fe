@@ -1,3 +1,9 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useState } from 'react';
+
+import { getMyGroups, GroupInfo } from '@/api/group/group';
 import { PropsWithT } from '@/app/i18next';
 import NavArrowRightIcon from '@/assets/icons/nav-arrow-right.svg';
 
@@ -8,18 +14,17 @@ interface SelectAccountAreaProps {
   setAccount: (account: string | null) => void;
 }
 
-// 임시 데이터
-const DUMMY_ACCOUNTS = [
-  { id: 'club_account', name: '동아리 계정' },
-  { id: 'department_account', name: '학과 계정' },
-  { id: 'council_account', name: '학생회 계정' },
-];
-
 const SelectAccountArea = ({
   account,
   setAccount,
   t,
 }: PropsWithT<SelectAccountAreaProps>) => {
+  const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
+
+  useEffect(() => {
+    getMyGroups().then(setMyGroups);
+  }, []);
+
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setAccount(selectedValue === '' ? null : selectedValue);
@@ -40,9 +45,9 @@ const SelectAccountArea = ({
       >
         <option value="">{t('write.writeAsMyself')}</option>
 
-        {DUMMY_ACCOUNTS.map((acc) => (
-          <option key={acc.id} value={acc.id}>
-            {acc.name}
+        {myGroups.map((group) => (
+          <option key={group.uuid} value={group.uuid}>
+            {group.name}
           </option>
         ))}
       </select>
