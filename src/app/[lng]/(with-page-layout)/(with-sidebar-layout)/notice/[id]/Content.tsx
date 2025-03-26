@@ -7,6 +7,7 @@ interface ContentProps {
 const Content = ({ content }: ContentProps) => {
   return (
     <div
+      data-testid={'notice-content'}
       className={[
         'font-normal leading-[1.4]',
         '[&_p]:my-4 [&_p]:text-lg',
