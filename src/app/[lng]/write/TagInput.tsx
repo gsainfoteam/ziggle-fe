@@ -77,6 +77,7 @@ const TagInput = ({ tags, setTags, t }: PropsWithT<TagInputProps>) => {
           </TagChip>
         ))}
         <input
+          data-testid="write-tag-input"
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('write.writeTags') : ''}
