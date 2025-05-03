@@ -1,6 +1,5 @@
 import { getServerSession, NextAuthOptions } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
-import { OAuthConfig } from 'next-auth/providers/oauth';
 
 import { ziggleApi } from '..';
 
