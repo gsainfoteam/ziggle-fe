@@ -1,6 +1,5 @@
 import { getServerSession, NextAuthOptions } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
-import { OAuthConfig } from 'next-auth/providers/oauth';
 
 import { ziggleApi } from '..';
 
@@ -32,7 +31,7 @@ export const config = {
       }
       if (account) {
         token.accessToken = account.access_token!;
-        token.accessTokenExpires = Date.now() + account.expires_in * 1000;
+        token.accessTokenExpires = account.expires_at! * 1000;
         token.refreshToken = account.refresh_token!;
       }
 
@@ -66,24 +65,27 @@ export const config = {
         },
       },
       idToken: true,
-      checks: ['state'],
+      checks: ['state', 'pkce', 'nonce'],
       client: { id_token_signed_response_alg: 'ES256' },
-      profile: async (profile) => {
+      profile: async (profile: {
+        sub: string;
+        aud: string;
+        nonce: string;
+        scope: string;
+        name: string;
+        email: string;
+        student_id: string;
+        iss: string;
+      }) => {
         return {
-          id: profile.uuid,
-          studentNumber: profile.studentId,
+          id: profile.sub,
+          studentNumber: profile.student_id,
           email: profile.email,
           name: profile.name,
-          uuid: profile.uuid,
+          uuid: profile.sub,
         };
       },
-    } as OAuthConfig<{
-      uuid: string;
-      email: string;
-      name: string;
-      studentId: string;
-      phoneNumber: string;
-    }>,
+    },
   ],
 } satisfies NextAuthOptions;
 
