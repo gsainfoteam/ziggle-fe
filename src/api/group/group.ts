@@ -1,6 +1,8 @@
+import axios from 'axios';
 import dayjs from 'dayjs';
 
 import { ziggleApi } from '..';
+import { auth } from '../auth/auth';
 
 export interface GroupInfo {
   uuid: string;
@@ -20,8 +22,15 @@ export interface InviteCode {
 }
 
 export const getGroupsToken = async (): Promise<string> => {
-  const { groupsToken } = await ziggleApi
-    .post<{ groupsToken: string }>('/group/token')
+  const session = await auth();
+  const idpToekn = session?.accessToken;
+  const { groupsToken } = await axios
+    .post<{ groupsToken: string }>(
+      `${process.env.NEXT_PUBLIC_GROUPS_API_URL}/external`,
+      {
+        idpToekn: idpToekn,
+      },
+    )
     .then(({ data }) => data);
 
   return groupsToken;
