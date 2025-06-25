@@ -7,6 +7,7 @@ import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import { Toaster } from 'react-hot-toast';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
@@ -115,7 +116,10 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <AmplitudeProvider>{children}</AmplitudeProvider>
+        <AmplitudeProvider>
+          {children}
+          <Toaster />
+        </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import Swal from 'sweetalert2';
 
 import LogEvents from '@/api/log/log-events';

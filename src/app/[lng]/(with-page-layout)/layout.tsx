@@ -2,7 +2,6 @@ import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import type { Viewport } from 'next';
-import { ToastContainer } from 'react-toastify';
 
 import Footer from '@/app/components/layout/Footer';
 import InitClient from '@/app/components/layout/InitClient';
@@ -27,7 +26,6 @@ export default async function Layout({
         <div className="mb-96 flex">{children}</div>
         <Footer lng={lng} />
       </div>
-      <ToastContainer className="w-64" />
     </InitClient>
   );
 }
