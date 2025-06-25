@@ -403,331 +403,296 @@ const NoticeEditor = ({
     push(`/${lng}/notice/${notice.id}`);
   };
 
-  const translate = async () => {
-    if (!state.english) return;
-
-    const editorRef =
-      state.writingTab === 'korean'
-        ? koreanContentEditorRef
-        : englishContentEditorRef;
-
-    if (!editorRef.current) return;
-
-    const { getContent, setContent } = editorRef.current;
-
-    const content = getContent();
-    if (!content) return;
-
-    const translatedContent = await translateContent(
-      content,
-      state.writingTab === 'korean' ? 'en' : 'ko',
-    );
-
-    setContent(translatedContent);
-
-    if (state.writingTab === 'korean') {
-      dispatch({
-        type: 'SET_ENGLISH_CONTENT',
-        englishContent: translatedContent,
-      });
-    } else {
-      dispatch({
-        type: 'SET_KOREAN_CONTENT',
-        koreanContent: translatedContent,
-      });
-    }
-  };
-
   return (
-    <Analytics eventName={LogEvents.writingView}>
-      <div className="mx-auto flex w-full max-w-screen-lg flex-col gap-5 p-5">
-        {isEditMode && (
-          <>
-            {notice?.createdAt && (
-              <EditableTimer createdAt={notice.createdAt} lng={lng} />
-            )}
-            <p
-              className={
-                'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
-              }
-            >
-              {t('write.editDescription')}
-            </p>
-          </>
-        )}
-
-        {!isEditMode && (
-          <div className={'flex justify-end'}>
-            <p className={'text-sm text-primary'}>
-              {t('write.autoSaveDescription')}
-            </p>
-          </div>
-        )}
-
-        <div className={'mb-10 mt-10 flex items-center gap-2'}>
-          <GlobeIcon
-            className={
-              'w-5 md:w-6 ' +
-              (state.english
-                ? 'stroke-text dark:stroke-dark_white'
-                : 'stroke-grey dark:stroke-dark_grey')
-            }
-          />
+    <>
+      {isEditMode && (
+        <>
+          {notice?.createdAt && (
+            <EditableTimer createdAt={notice.createdAt} lng={lng} />
+          )}
           <p
             className={
-              'mr-1 text-lg font-medium ' +
-              (state.english
-                ? 'text-text dark:text-dark_white'
-                : 'text-grey dark:text-dark_grey')
+              'mt-[10px] rounded-[15px] bg-greyLight px-5 py-[15px] text-lg text-greyDark'
             }
           >
-            {t('write.writeEnglishNotice')}
+            {t('write.editDescription')}
           </p>
-          <Toggle
-            isSwitched={!!state.english}
-            onSwitch={() => {
-              dispatch({ type: 'TOGGLE_ENGLISH_VERSION' });
-              sendLog(LogEvents.writingToggleEnglish, {
-                hasEnglish: !!state.english,
-              });
-            }}
-          />
-        </div>
+        </>
+      )}
 
-        <div className="mb-3 flex gap-[6px]">
-          <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
-          <p className="font-medium">{t('write.noticeType')}</p>
+      {!isEditMode && (
+        <div className={'flex justify-end'}>
+          <p className={'text-sm text-primary'}>
+            {t('write.autoSaveDescription')}
+          </p>
         </div>
+      )}
 
-        <NoticeTypeSelector
-          selectedNoticeType={state.noticeType}
-          setNoticeType={(selectedNoticeType) => {
-            dispatch({ type: 'SET_NOTICE_TYPE', selectedNoticeType });
-            sendLog(LogEvents.writingSelectType, {
-              type: selectedNoticeType,
+      <div className={'mb-10 mt-10 flex items-center gap-2'}>
+        <GlobeIcon
+          className={
+            'w-5 md:w-6 ' +
+            (state.english
+              ? 'stroke-text dark:stroke-dark_white'
+              : 'stroke-grey dark:stroke-dark_grey')
+          }
+        />
+        <p
+          className={
+            'mr-1 text-lg font-medium ' +
+            (state.english
+              ? 'text-text dark:text-dark_white'
+              : 'text-grey dark:text-dark_grey')
+          }
+        >
+          {t('write.writeEnglishNotice')}
+        </p>
+        <Toggle
+          isSwitched={!!state.english}
+          onSwitch={() => {
+            dispatch({ type: 'TOGGLE_ENGLISH_VERSION' });
+            sendLog(LogEvents.writingToggleEnglish, {
+              hasEnglish: !!state.english,
             });
           }}
-          t={t}
-          disabled={isEditMode}
         />
+      </div>
 
-        {state.english && (
-          <div className="mt-10">
-            <LanguageTab
-              writingTab={state.writingTab}
-              setWritingTab={(selectedWritingTab) => {
-                dispatch({ type: 'SET_WRITING_TAB', selectedWritingTab });
-                sendLog(LogEvents.writingChangeTab, {
-                  tab: selectedWritingTab,
-                });
-              }}
-              t={t}
-            />
-          </div>
-        )}
+      <div className="mb-3 flex gap-[6px]">
+        <TypeIcon className="w-5 stroke-text dark:stroke-dark_white md:w-6" />
+        <p className="font-medium">{t('write.noticeType')}</p>
+      </div>
 
-        {state.writingTab === 'korean' && (
-          <div
+      <NoticeTypeSelector
+        selectedNoticeType={state.noticeType}
+        setNoticeType={(selectedNoticeType) => {
+          dispatch({ type: 'SET_NOTICE_TYPE', selectedNoticeType });
+          sendLog(LogEvents.writingSelectType, {
+            type: selectedNoticeType,
+          });
+        }}
+        t={t}
+        disabled={isEditMode}
+      />
+
+      {state.english && (
+        <div className="mt-10">
+          <LanguageTab
+            writingTab={state.writingTab}
+            setWritingTab={(selectedWritingTab) => {
+              dispatch({ type: 'SET_WRITING_TAB', selectedWritingTab });
+              sendLog(LogEvents.writingChangeTab, {
+                tab: selectedWritingTab,
+              });
+            }}
+            t={t}
+          />
+        </div>
+      )}
+
+      {state.writingTab === 'korean' && (
+        <div
+          className={
+            'flex flex-col justify-stretch ' +
+            (state.writingTab !== 'korean' ? 'hidden' : '')
+          }
+        >
+          <TitleAndContent
+            title={state.korean.title}
+            titleLabel={t('write.koreanTitle')}
+            onChangeTitle={(newTitle: string) =>
+              dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: newTitle })
+            }
+            content={state.korean.content}
+            onChangeContent={(newContent: string) =>
+              dispatch({
+                type: 'SET_KOREAN_CONTENT',
+                koreanContent: newContent,
+              })
+            }
+            contentLabel={t('write.koreanContent')}
+            editorRef={koreanContentEditorRef}
+            t={t}
+            disabled={isEditMode && hasTimedOut}
+          />
+        </div>
+      )}
+
+      {state.writingTab === 'english' && state.english && (
+        <div className={'flex flex-col justify-stretch'}>
+          <TitleAndContent
+            title={state.english.title}
+            titleLabel={t('write.englishTitle')}
+            onChangeTitle={(newTitle: string) =>
+              dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle: newTitle })
+            }
+            content={state.english.content}
+            contentLabel={t('write.englishContent')}
+            onChangeContent={(newContent: string) =>
+              dispatch({
+                type: 'SET_ENGLISH_CONTENT',
+                englishContent: newContent,
+              })
+            }
+            editorRef={englishContentEditorRef}
+            t={t}
+            disabled={
+              (isEditMode && notice?.enTitle && hasTimedOut) || !state.english
+            }
+          />
+        </div>
+      )}
+
+      {state.english && (
+        <Analytics event={LogEvents.writingClickDeepl}>
+          <DeepLButton
+            t={t}
+            editorRef={
+              state.writingTab === 'korean'
+                ? koreanContentEditorRef
+                : englishContentEditorRef
+            }
+            originalLanguage={state.writingTab}
+          />
+        </Analytics>
+      )}
+
+      {/* 수정 모드이면서 (한국어 탭 && 수정 불가능) 또는 (영어 탭 && 수정 불가능 && 영어 공지 있음) */}
+      {isEditMode &&
+        ((state.writingTab === 'korean' && hasTimedOut) ||
+          (state.writingTab === 'english' &&
+            hasTimedOut &&
+            notice?.enTitle)) && (
+          <p
             className={
-              'flex flex-col justify-stretch ' +
-              (state.writingTab !== 'korean' ? 'hidden' : '')
+              'my-10 rounded-[10px] bg-greyLight px-[20px] py-[15px] text-center text-lg text-greyDark'
             }
           >
-            <TitleAndContent
-              title={state.korean.title}
-              titleLabel={t('write.koreanTitle')}
-              onChangeTitle={(newTitle: string) =>
-                dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: newTitle })
-              }
-              content={state.korean.content}
-              onChangeContent={(newContent: string) =>
-                dispatch({
-                  type: 'SET_KOREAN_CONTENT',
-                  koreanContent: newContent,
-                })
-              }
-              contentLabel={t('write.koreanContent')}
-              editorRef={koreanContentEditorRef}
-              t={t}
-              disabled={isEditMode && hasTimedOut}
-            />
-          </div>
-        )}
-
-        {state.writingTab === 'english' && state.english && (
-          <div className={'flex flex-col justify-stretch'}>
-            <TitleAndContent
-              title={state.english.title}
-              titleLabel={t('write.englishTitle')}
-              onChangeTitle={(newTitle: string) =>
-                dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle: newTitle })
-              }
-              content={state.english.content}
-              contentLabel={t('write.englishContent')}
-              onChangeContent={(newContent: string) =>
-                dispatch({
-                  type: 'SET_ENGLISH_CONTENT',
-                  englishContent: newContent,
-                })
-              }
-              editorRef={englishContentEditorRef}
-              t={t}
-              disabled={
-                (isEditMode && notice?.enTitle && hasTimedOut) || !state.english
-              }
-            />
-          </div>
-        )}
-
-        {state.english && (
-          <Analytics event={LogEvents.writingClickDeepl}>
-            <DeepLButton
-              t={t}
-              editorRef={
-                state.writingTab === 'korean'
-                  ? koreanContentEditorRef
-                  : englishContentEditorRef
-              }
-              originalLanguage={state.writingTab}
-            />
-          </Analytics>
-        )}
-
-        {/* 수정 모드이면서 (한국어 탭 && 수정 불가능) 또는 (영어 탭 && 수정 불가능 && 영어 공지 있음) */}
-        {isEditMode &&
-          ((state.writingTab === 'korean' && hasTimedOut) ||
-            (state.writingTab === 'english' &&
-              hasTimedOut &&
-              notice?.enTitle)) && (
-            <p
-              className={
-                'my-10 rounded-[10px] bg-greyLight px-[20px] py-[15px] text-center text-lg text-greyDark'
-              }
-            >
-              {t('write.editDisabled')}
-            </p>
-          )}
-
-        {isEditMode &&
-          notice &&
-          state.korean.additionalContent !== undefined && (
-            <>
-              <div className="h-10" />
-              <div className="flex flex-col gap-3">
-                <AddAdditionalNotice
-                  onAddNotice={(b, cb) => {
-                    // This is a placeholder. A proper implementation is needed.
-                  }}
-                />
-                <AddAdditionalNotice
-                  lang="en"
-                  onAddNotice={(b, cb) => {
-                    // This is a placeholder. A proper implementation is needed.
-                  }}
-                />
-              </div>
-            </>
-          )}
-
-        <div className={'mb-3 mt-10 flex items-center gap-2'}>
-          <ClockIcon className={'w-5 stroke-text md:w-6'} />
-
-          <p className="text-lg font-medium">
-            {t(isEditMode ? 'write.changeDeadline' : 'write.setupDeadline')}
+            {t('write.editDisabled')}
           </p>
+        )}
 
-          <Toggle
-            isSwitched={!!state.deadline}
-            onSwitch={(e) => {
-              dispatch({ type: 'TOGGLE_DEADLINE' });
-              sendLog(LogEvents.writingToggleDeadline, {
-                hasDeadline: e.target.checked,
+      {isEditMode && notice && state.korean.additionalContent !== undefined && (
+        <>
+          <div className="h-10" />
+          <AddAdditionalNotice
+            noticeId={notice.id}
+            originallyHasDeadline={notice.deadline}
+            koreanContent={state.korean.additionalContent}
+            englishContent={state.english?.additionalContent}
+            onKoreanContentChange={(value: string) =>
+              dispatch({
+                type: 'SET_ADDITIONAL_KOREAN_CONTENT',
+                additionalKoreanContent: value,
+              })
+            }
+            onEnglishContentChange={(value: string) =>
+              dispatch({
+                type: 'SET_ADDITIONAL_ENGLISH_CONTENT',
+                additionalEnglishContent: value,
+              })
+            }
+            lng={lng}
+          />
+        </>
+      )}
+
+      <div className={'mb-3 mt-10 flex items-center gap-2'}>
+        <ClockIcon className={'w-5 stroke-text md:w-6'} />
+
+        <p className="text-lg font-medium">
+          {t(isEditMode ? 'write.changeDeadline' : 'write.setupDeadline')}
+        </p>
+
+        <Toggle
+          isSwitched={!!state.deadline}
+          onSwitch={(e) => {
+            dispatch({ type: 'TOGGLE_DEADLINE' });
+            sendLog(LogEvents.writingToggleDeadline, {
+              hasDeadline: e.target.checked,
+            });
+          }}
+        />
+
+        <div className={'w-1'} />
+
+        {state.deadline && (
+          <DateTimePicker
+            dateTime={state.deadline}
+            onChange={(dateTime: Dayjs) => {
+              dispatch({ type: 'SET_DEADLINE', deadline: dateTime });
+              sendLog(LogEvents.writingSetDeadline, {
+                deadline: dateTime.toDate(),
               });
             }}
           />
-
-          <div className={'w-1'} />
-
-          {state.deadline && (
-            <DateTimePicker
-              dateTime={state.deadline}
-              onChange={(dateTime: Dayjs) => {
-                dispatch({ type: 'SET_DEADLINE', deadline: dateTime });
-                sendLog(LogEvents.writingSetDeadline, {
-                  deadline: dateTime.toDate(),
-                });
-              }}
-            />
-          )}
-        </div>
-
-        {!isEditMode && (
-          <>
-            <div className="mb-2 mt-10 flex gap-2">
-              <TagIcon className="w-5 fill-text md:w-6" />
-              <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
-              <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
-            </div>
-
-            <p className="font-regular mb-3 text-sm text-secondaryText">
-              {t('write.writeTagsDescription')}
-            </p>
-
-            <TagInput
-              tags={state.tags}
-              setTags={(tags: Tag[]) => dispatch({ type: 'SET_TAGS', tags })}
-              t={t}
-            />
-
-            <div className="mb-1 mt-10 flex items-center gap-2">
-              <AddPhotoIcon className="w-5 stroke-text md:w-6" />
-              <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
-              <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
-            </div>
-            <p className="font-regular mb-3 text-sm text-secondaryText">
-              {t('write.photoDescription')}
-            </p>
-
-            <AttachPhotoArea
-              t={t}
-              photos={state.photos}
-              setPhotos={(photos: FileWithUrl[]) =>
-                dispatch({ type: 'SET_PHOTOS', photos })
-              }
-            />
-
-            <div className="mb-1 mt-10 flex items-center gap-2">
-              <ColorFilterIcon className="w-5 stroke-text md:w-6" />
-              <p className="font-medium md:text-lg">
-                {t('write.selectAccount')}
-              </p>
-            </div>
-
-            <SelectAccountArea
-              account={state.account}
-              setAccount={(account: string | null) =>
-                dispatch({ type: 'SET_ACCOUNT', account })
-              }
-              t={t}
-            />
-          </>
         )}
-
-        <div className={'mt-[10rem] flex flex-col items-center'}>
-          <Button
-            variant="contained"
-            className="mb-4 w-60 rounded-[10px] py-2"
-            onClick={isEditMode ? handleModify : handleSubmit}
-            disabled={isLoading}
-          >
-            <p className="mx-3 my-1 text-base font-bold">{t('write.submit')}</p>
-          </Button>
-          <p className="font-regular max-w-[70%] text-center text-sm text-secondaryText">
-            {t('write.submitDescription')}
-          </p>
-        </div>
       </div>
-    </Analytics>
+
+      {!isEditMode && (
+        <>
+          <div className="mb-2 mt-10 flex gap-2">
+            <TagIcon className="w-5 fill-text md:w-6" />
+            <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
+            <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
+          </div>
+
+          <p className="font-regular mb-3 text-sm text-secondaryText">
+            {t('write.writeTagsDescription')}
+          </p>
+
+          <TagInput
+            tags={state.tags}
+            setTags={(tags: Tag[]) => dispatch({ type: 'SET_TAGS', tags })}
+            t={t}
+          />
+
+          <div className="mb-1 mt-10 flex items-center gap-2">
+            <AddPhotoIcon className="w-5 stroke-text md:w-6" />
+            <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
+            <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
+          </div>
+          <p className="font-regular mb-3 text-sm text-secondaryText">
+            {t('write.photoDescription')}
+          </p>
+
+          <AttachPhotoArea
+            t={t}
+            photos={state.photos}
+            setPhotos={(photos: FileWithUrl[]) =>
+              dispatch({ type: 'SET_PHOTOS', photos })
+            }
+          />
+
+          <div className="mb-1 mt-10 flex items-center gap-2">
+            <ColorFilterIcon className="w-5 stroke-text md:w-6" />
+            <p className="font-medium md:text-lg">{t('write.selectAccount')}</p>
+          </div>
+
+          <SelectAccountArea
+            account={state.account}
+            setAccount={(account: string | null) =>
+              dispatch({ type: 'SET_ACCOUNT', account })
+            }
+            t={t}
+          />
+        </>
+      )}
+
+      <div className={'mt-[10rem] flex flex-col items-center'}>
+        <Button
+          variant="contained"
+          className="mb-4 w-60 rounded-[10px] py-2"
+          onClick={isEditMode ? handleModify : handleSubmit}
+          disabled={isLoading}
+        >
+          <p className="mx-3 my-1 text-base font-bold">{t('write.submit')}</p>
+        </Button>
+        <p className="font-regular max-w-[70%] text-center text-sm text-secondaryText">
+          {t('write.submitDescription')}
+        </p>
+      </div>
+    </>
   );
 };
 
