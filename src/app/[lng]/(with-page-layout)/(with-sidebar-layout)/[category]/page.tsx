@@ -27,7 +27,7 @@ export default async function CategoryPage({
 }: CategoryPageProps) {
   const { t } = await createTranslation(lng);
 
-  const sortByDeadline = searchParams?.deadline === 'true' ?? false;
+  const sortByDeadline = searchParams?.deadline === 'true';
   const page = parseInt(searchParams?.page ?? '');
   const isPageValid = !Number.isNaN(page) && page >= 0;
   if (!isPageValid) {
