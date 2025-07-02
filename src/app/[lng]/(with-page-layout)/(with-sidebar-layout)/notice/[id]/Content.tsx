@@ -1,4 +1,4 @@
-import { sanitize } from 'isomorphic-dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 
 interface ContentProps {
   content: string;
@@ -17,7 +17,7 @@ const Content = ({ content }: ContentProps) => {
         '[&_strong]:font-semibold',
         'break-all',
       ].join(' ')}
-      dangerouslySetInnerHTML={{ __html: sanitize(content) }}
+      dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />
   );
 };
