@@ -91,17 +91,9 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           {title}
         </p>
 
-        {!hasImage && <ZaboTags notice={props} />}
-
         {hasImage && <ZaboImageCarousel imageUrls={imageUrls} title={title} />}
 
-        {hasImage && (
-          <div className="mx-2 my-4">
-            <ZaboActions {...props} />
-          </div>
-        )}
-
-        {hasImage && <ZaboTags notice={props} />}
+        <ZaboTags notice={props} />
 
         <div
           className={'mx-4 mt-[10px] line-clamp-3 text-lg dark:text-dark_white'}
@@ -109,11 +101,9 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           {props.content}
         </div>
 
-        {!hasImage && (
-          <div className="mx-2 mt-4">
-            <ZaboActions {...props} />
-          </div>
-        )}
+        <div className="mx-2 mt-4">
+          <ZaboActions {...props} />
+        </div>
       </div>
     </Link>
   );
