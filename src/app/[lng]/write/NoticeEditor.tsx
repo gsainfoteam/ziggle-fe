@@ -217,7 +217,7 @@ const NoticeEditor = ({
     const noticeToSubmit: NoticeSubmitForm & { t: T } = {
       title: state.korean.title,
       deadline: state.deadline
-        ? state.deadline.toDate() ?? undefined
+        ? (state.deadline.toDate() ?? undefined)
         : undefined,
       noticeLanguage: state.english ? 'both' : 'ko',
       koreanBody: state.korean.content,
@@ -448,6 +448,7 @@ const NoticeEditor = ({
           {t('write.writeEnglishNotice')}
         </p>
         <Toggle
+          data-testid="write-has-english-version-toggle"
           isSwitched={!!state.english}
           onSwitch={() => {
             dispatch({ type: 'TOGGLE_ENGLISH_VERSION' });
@@ -681,6 +682,7 @@ const NoticeEditor = ({
 
       <div className={'mt-[10rem] flex flex-col items-center'}>
         <Button
+          data-testid="write-submit-button"
           variant="contained"
           className="mb-4 w-60 rounded-[10px] py-2"
           onClick={isEditMode ? handleModify : handleSubmit}

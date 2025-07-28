@@ -13,6 +13,7 @@ const LanguageTab = ({
   return (
     <div className={'grid grid-cols-[90px_90px_1fr] justify-items-stretch'}>
       <button
+        data-testid="write-korean-version-toggle"
         onClick={() => setWritingTab('korean')}
         className={
           'border-b-[3px] p-[15px] pb-3 ' +
@@ -29,6 +30,7 @@ const LanguageTab = ({
         </p>
       </button>
       <button
+        data-testid="write-english-version-toggle"
         onClick={() => setWritingTab('english')}
         className={
           'border-b-[3px] p-[15px] pb-3 ' +

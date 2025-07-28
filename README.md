@@ -147,6 +147,15 @@ yarn install
 yarn dev
 ```
 
+## Test
+
+Playwright를 이용하여 E2E 테스트를 진행하고 있습니다.
+
+```bash
+yarn playwright test // 모든 테스트 실행
+yarn playwright test --ui // 테스트 콘솔 UI 실행
+```
+
 ## Misc
 
 해당 프로젝트는 `.gitattributes` 파일에서 eol 설정을 `lf`로 하고 있습니다.
