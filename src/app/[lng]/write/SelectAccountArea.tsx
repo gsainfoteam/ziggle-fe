@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { useState } from 'react';
 
-import { getMyGroups, GroupInfo } from '@/api/group/group';
+import { thirdPartyAuth ,getGroupsToken, getMyGroups, GroupInfo } from '@/api/group/group';
 import { PropsWithT } from '@/app/i18next';
 import NavArrowRightIcon from '@/assets/icons/nav-arrow-right.svg';
 
 import { EditorAction } from './noticeEditorActions';
+import { usePathname } from 'next/navigation';
 
 interface SelectAccountAreaProps {
   account: string | null;
@@ -20,10 +21,12 @@ const SelectAccountArea = ({
   t,
 }: PropsWithT<SelectAccountAreaProps>) => {
   const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
-
+  const path: string = usePathname();
   useEffect(() => {
-    getMyGroups().then(setMyGroups);
-  }, []);
+    thirdPartyAuth(path);
+    getGroupsToken();
+    getMyGroups().then();
+  }, [path]);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
