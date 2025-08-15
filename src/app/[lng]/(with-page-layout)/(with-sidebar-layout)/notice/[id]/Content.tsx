@@ -113,7 +113,7 @@ interface ContentProps {
 const Content = ({ content }: ContentProps) => (
   <div
     className={[
-      'text-white dark:text-dark_white',
+      'text-text dark:text-dark_white',
       'font-normal leading-[1.4]',
       '[&_p]:my-4 [&_p]:text-lg',
       '[&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl',
