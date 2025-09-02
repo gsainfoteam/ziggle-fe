@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
+import { redirect } from 'next/dist/server/api-utils';
 
 import { ziggleApi } from '..';
 
@@ -20,21 +21,25 @@ export interface InviteCode {
   code: string;
 }
 
-const groupsBaseUrl = process.env.NEXT_PUBLIC_GROUPS_API_URL;
+const groupsAPIUrl = process.env.NEXT_PUBLIC_GROUPS_API_URL;
+const groupsUrl = process.env.NEXT_PUBLIC_GROUPS_URL;
 const clientId = process.env.NEXT_PUBLIC_GROUPS_CLIENT_ID;
-const clientSecret = process.env.GROUPS_CLIENT_SECRET;
-const basedURL = process.env.NEXT_PUBLIC_GROUPS_REDIRECT_BASE_URL;
+const redirectUri = process.env.NEXT_PUBLIC_GROUPS_REDIRECT_URI;
+
 export const thirdPartyAuth = async (path: string) => {
-  const { data } = await axios.get(
-    `${groupsBaseUrl}third-party/authorize?client_id=${clientId}&redirect_uri=${basedURL}${path}`,
-  );
+  localStorage.setItem('returnTo', path);
+  window.location.href = `${groupsUrl}/thirdParty?client_id=${clientId}&redirect_uri=${redirectUri}`;
 };
 
-export const getGroupsToken = async (code: string, path: string) => {
-  const { data } = await axios.get(
-    `${groupsBaseUrl}third-party/token/authorize?client_id=${clientId}&code=${code}&redirect_uri=${basedURL}${path}&`,
-  );
-  return;
+export const getGroupsToken = async (code: string) => {
+  return await axios
+    .post(`${groupsAPIUrl}third-party/token`, {
+      client_id: clientId,
+      code: code,
+      redirect_uri: redirectUri,
+    })
+    .then((res) => res)
+    .catch((err) => console.error(err));
 };
 
 export const getMyGroups = async () => {
@@ -42,5 +47,7 @@ export const getMyGroups = async () => {
 };
 
 export const getGroup = async (uuid: string): Promise<GroupInfo> => {
-  return ziggleApi.get<GroupInfo>(`/group/${uuid}`).then(({ data }) => data);
+  return axios
+    .get<GroupInfo>(`${groupsUrl}/group/${uuid}`)
+    .then(({ data }) => data);
 };

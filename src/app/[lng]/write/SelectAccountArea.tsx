@@ -1,14 +1,19 @@
 'use client';
 
-import { use, useEffect } from 'react';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import Swal from 'sweetalert2';
+import { use, useEffect, useState } from 'react';
 
-import { thirdPartyAuth ,getGroupsToken, getMyGroups, GroupInfo } from '@/api/group/group';
+import {
+  getGroupsToken,
+  getMyGroups,
+  GroupInfo,
+  thirdPartyAuth,
+} from '@/api/group/group';
 import { PropsWithT } from '@/app/i18next';
 import NavArrowRightIcon from '@/assets/icons/nav-arrow-right.svg';
 
 import { EditorAction } from './noticeEditorActions';
-import { usePathname } from 'next/navigation';
 
 interface SelectAccountAreaProps {
   account: string | null;
@@ -21,17 +26,37 @@ const SelectAccountArea = ({
   t,
 }: PropsWithT<SelectAccountAreaProps>) => {
   const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
   const path: string = usePathname();
-  useEffect(() => {
-    thirdPartyAuth(path);
-    getGroupsToken();
-    getMyGroups().then();
-  }, [path]);
+
+  // useEffect(() => {
+  //   thirdPartyAuth(path);
+  //   //TODO: Make Login Hub page for get authrization code
+  //   getGroupsToken('temporary code');
+  // }, [path]);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setAccount(selectedValue === '' ? null : selectedValue);
+    if (selectedValue === 'groupSelect') {
+      setIsModalOpen(true);
+    }
   };
+
+  useEffect(() => {
+    isModalOpen &&
+      Swal.fire({
+        title: 'Redirecting',
+        text: 'Do you want to get group information?',
+        icon: 'info',
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          thirdPartyAuth(path);
+        }
+        setIsModalOpen(false);
+      });
+  }, [path, isModalOpen]);
 
   return (
     <div className="relative mt-2">
@@ -47,6 +72,7 @@ const SelectAccountArea = ({
         } focus:border-primary focus:outline-none`}
       >
         <option value="">{t('write.writeAsMyself')}</option>
+        <option value="groupSelect">If you want write as a group</option>
 
         {myGroups.map((group) => (
           <option key={group.uuid} value={group.uuid}>

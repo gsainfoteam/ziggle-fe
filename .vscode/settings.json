@@ -12,7 +12,8 @@
     "source.sortImports": "never",
     "source.organizeImports": "never"
   },
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "cSpell.words": [
     "Swal",
     "Zabo",

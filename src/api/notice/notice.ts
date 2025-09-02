@@ -52,7 +52,11 @@ export interface Notice {
   documentUrls: string[];
   isReminded: boolean;
   reactions: Reaction[];
-  groupId: string | null;
+  group: {
+    id: string;
+    name: string;
+    profileImageUrl: string | null;
+  } | null;
 }
 
 export interface Reaction {
