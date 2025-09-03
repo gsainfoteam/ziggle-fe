@@ -1,8 +1,8 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Swal from 'sweetalert2';
 import { use, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 import {
   getGroupsToken,
@@ -10,10 +10,9 @@ import {
   GroupInfo,
   thirdPartyAuth,
 } from '@/api/group/group';
+import Button from '@/app/components/shared/Button';
 import { PropsWithT } from '@/app/i18next';
 import NavArrowRightIcon from '@/assets/icons/nav-arrow-right.svg';
-
-import { EditorAction } from './noticeEditorActions';
 
 interface SelectAccountAreaProps {
   account: string | null;
@@ -28,19 +27,15 @@ const SelectAccountArea = ({
   const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
   const path: string = usePathname();
-
-  // useEffect(() => {
-  //   thirdPartyAuth(path);
-  //   //TODO: Make Login Hub page for get authrization code
-  //   getGroupsToken('temporary code');
-  // }, [path]);
+  localStorage.setItem('redirectPath', path);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     setAccount(selectedValue === '' ? null : selectedValue);
-    if (selectedValue === 'groupSelect') {
-      setIsModalOpen(true);
-    }
+  };
+
+  const handleGroupLogin = () => {
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -53,10 +48,23 @@ const SelectAccountArea = ({
       }).then((result) => {
         if (result.isConfirmed) {
           thirdPartyAuth(path);
+          setIsModalOpen(false);
         }
         setIsModalOpen(false);
       });
   }, [path, isModalOpen]);
+
+  const thirdPartycode = localStorage.getItem('thirdPartycode');
+  useEffect(() => {
+    const handleThirdPartyCode = async () => {
+      if (thirdPartycode) {
+        const data = await getGroupsToken(thirdPartycode);
+        localStorage.removeItem('thirdPartycode');
+        console.log(data.token);
+      }
+      handleThirdPartyCode();
+    };
+  }, [thirdPartycode]);
 
   return (
     <div className="relative mt-2">
@@ -72,14 +80,23 @@ const SelectAccountArea = ({
         } focus:border-primary focus:outline-none`}
       >
         <option value="">{t('write.writeAsMyself')}</option>
-        <option value="groupSelect">If you want write as a group</option>
-
-        {myGroups.map((group) => (
-          <option key={group.uuid} value={group.uuid}>
-            {group.name}
-          </option>
-        ))}
+        {myGroups.length &&
+          myGroups.map((group) => (
+            <option key={group.uuid} value={group.uuid}>
+              {group.name}
+            </option>
+          ))}
       </select>
+
+      <Button
+        variant="contained"
+        className="w-30 my-4 rounded-[10px] py-2"
+        onClick={handleGroupLogin}
+      >
+        <p className="mx-3 my-1 text-base font-bold">
+          Clike here if you want to write as group
+        </p>
+      </Button>
     </div>
   );
 };

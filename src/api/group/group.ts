@@ -38,7 +38,7 @@ export const getGroupsToken = async (code: string) => {
       code: code,
       redirect_uri: redirectUri,
     })
-    .then((res) => res)
+    .then((res) => res.data)
     .catch((err) => console.error(err));
 };
 
