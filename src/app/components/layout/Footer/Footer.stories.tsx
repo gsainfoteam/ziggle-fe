@@ -1,6 +1,6 @@
 import { StoryFn } from '@storybook/react';
 
-import { Locale, fallbackLng } from '@/app/i18next/settings';
+import { fallbackLng, Locale } from '@/app/i18next/settings';
 
 import Footer from '.';
 

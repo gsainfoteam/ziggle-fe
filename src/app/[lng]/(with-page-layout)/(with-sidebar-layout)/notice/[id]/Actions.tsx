@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { Trans } from 'react-i18next';
+import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 
 import LogEvents from '@/api/log/log-events';

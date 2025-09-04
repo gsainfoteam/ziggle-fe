@@ -7,7 +7,7 @@ import 'react-datetime-picker/dist/DateTimePicker.css';
 import dayjs, { Dayjs } from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from 'sonner';
 import Swal from 'sweetalert2';
 import { Editor } from 'tinymce';
 
@@ -217,7 +217,7 @@ const NoticeEditor = ({
     const noticeToSubmit: NoticeSubmitForm & { t: T } = {
       title: state.korean.title,
       deadline: state.deadline
-        ? state.deadline.toDate() ?? undefined
+        ? (state.deadline.toDate() ?? undefined)
         : undefined,
       noticeLanguage: state.english ? 'both' : 'ko',
       koreanBody: state.korean.content,
