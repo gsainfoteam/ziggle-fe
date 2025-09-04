@@ -2,7 +2,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 export const isServer = typeof window === 'undefined';
 
-const CLIENT_SERVER_TIME_OFFSET_SECONDS = 10
+const CLIENT_SERVER_TIME_OFFSET_SECONDS = 10;
 export const getTimeDiff = (createdAt: Dayjs | string) => {
   const currentTime = dayjs();
   const diffInSeconds = dayjs(createdAt)

@@ -1,5 +1,5 @@
-import { fallbackLng } from '@/app/i18next/settings';
 import {} from '@/app/i18next/client';
+import { fallbackLng } from '@/app/i18next/settings';
 
 import Navbar from '.';
 

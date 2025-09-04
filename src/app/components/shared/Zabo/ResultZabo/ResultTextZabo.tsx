@@ -70,7 +70,7 @@ const ResultTextZabo = async (props: ResultZaboProps) => {
               {content ?? t('zabo.noContent')}
             </HighlightedText>
           ) : (
-            content ?? t('zabo.noContent')
+            (content ?? t('zabo.noContent'))
           )}
         </div>
         <ZaboActions {...props} />

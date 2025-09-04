@@ -94,7 +94,7 @@ const SendPushAlarm = ({
 
     const intervalDuration = getIntervalDuration(
       timeRemaining.minutes,
-      timeRemaining.seconds
+      timeRemaining.seconds,
     );
 
     const interval = setInterval(() => {

@@ -36,12 +36,13 @@ const ZaboImageCarousel = ({
         Math.floor(e.currentTarget.scrollLeft / (imageSize + gap)) +
         Math.floor(
           (e.currentTarget.clientWidth + gap + imageSize) / (imageSize + gap),
-        ) - 1,
+        ) -
+        1,
     });
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-2 group">
+    <div className="group flex w-full flex-col items-center gap-2">
       <div
         ref={imagesContainerRef}
         onScroll={handleScroll}
@@ -58,8 +59,8 @@ const ZaboImageCarousel = ({
           <Image
             style={{
               scrollSnapAlign: 'start',
-              minWidth: imageSize, 
-              minHeight: imageSize
+              minWidth: imageSize,
+              minHeight: imageSize,
             }}
             key={url}
             src={url}
@@ -71,19 +72,22 @@ const ZaboImageCarousel = ({
         ))}
       </div>
       {indicesInView.last <= imageUrls.length && (
-        <div className="group-hover:opacity-100 opacity-0 flex h-4 w-fit items-center justify-center rounded-full px-2 py-1 backdrop-blur-lg backdrop-invert-[30%] transition-opacity duration-500">
+        <div className="flex h-4 w-fit items-center justify-center rounded-full px-2 py-1 opacity-0 backdrop-blur-lg backdrop-invert-[30%] transition-opacity duration-500 group-hover:opacity-100">
           {imageUrls.map((url, i) => (
             <div
               key={url}
               className={`
               flex rounded-full bg-dark_white
               ${
-                i < indicesInView.first - 2 || indicesInView.first + maxControls - 1 < i
+                i < indicesInView.first - 2 ||
+                indicesInView.first + maxControls - 1 < i
                   ? 'mx-0 h-0 w-0'
                   : 'mx-1 h-2 w-2' +
-                    (i == indicesInView.first + maxControls - 2 || i == indicesInView.first - 1
+                    (i == indicesInView.first + maxControls - 2 ||
+                    i == indicesInView.first - 1
                       ? ' scale-75'
-                      : i == indicesInView.first + maxControls - 1 || i == indicesInView.first - 2
+                      : i == indicesInView.first + maxControls - 1 ||
+                          i == indicesInView.first - 2
                         ? ' scale-50'
                         : '')
               }
