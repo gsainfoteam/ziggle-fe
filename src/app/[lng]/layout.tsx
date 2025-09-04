@@ -118,7 +118,7 @@ export default async function RootLayout({
       >
         <AmplitudeProvider>
           {children}
-          <Toaster />
+          <Toaster position="bottom-right" />
         </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
