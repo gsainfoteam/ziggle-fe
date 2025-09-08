@@ -23,10 +23,12 @@ export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
 export type ZaboProps = Notice & {
   width?: number;
   height?: number; // migration ongoing | remove after migration complete
+  // mockGroupInfo?: { name: string; profileImageUrl?: string } | null;
 };
 
 const Zabo = async (props: ZaboProps & PropsWithLng) => {
   const {
+    content,
     createdAt,
     author,
     deadline,
@@ -37,21 +39,30 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
     lng,
     id,
     groupId,
+    // mockGroupInfo,
   } = props;
   const timeAgo = dayjs(createdAt).fromNow();
 
-  const hasImage = imageUrls.length > 0;
-
   const groupInfo = groupId ? await getGroup(groupId) : null;
+  // const groupInfo =
+  //   mockGroupInfo !== undefined
+  //     ? mockGroupInfo
+  //     : groupId
+  //       ? await getGroup(groupId)
+  //       : null;
+
+  const hasImage = imageUrls.length > 0;
+  const hasContent = content.trim().length > 0;
+  const hasTags = tags.length > 0;
 
   return (
     <Link href={`/${lng}/notice/${id}`}>
       <div
         className={
-          'flex flex-col rounded-[10px] py-[10px] text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
+          'flex flex-col rounded-[10px] pt-2.5 text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
         }
       >
-        <div className={'mx-3 my-[10px] flex flex-wrap items-center gap-y-3'}>
+        <div className={'mx-3 my-2.5 flex flex-wrap items-center gap-y-3'}>
           {groupInfo?.profileImageUrl ? (
             <Image
               src={groupInfo.profileImageUrl}
@@ -83,25 +94,29 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           )}
         </div>
 
-        <p
-          className={
-            'mx-4 mb-[10px] line-clamp-3 text-xl font-semibold dark:text-dark_white'
-          }
-        >
-          {title}
-        </p>
+        <div className="flex w-full flex-col gap-2.5 px-4 pb-2.5">
+          <p
+            className={
+              'line-clamp-3 text-xl font-semibold dark:text-dark_white'
+            }
+          >
+            {title}
+          </p>
 
-        {hasImage && <ZaboImageCarousel imageUrls={imageUrls} title={title} />}
+          {hasImage && (
+            <ZaboImageCarousel imageUrls={imageUrls} title={title} />
+          )}
 
-        <ZaboTags notice={props} />
+          {hasTags && <ZaboTags notice={props} />}
 
-        <div
-          className={'mx-4 mt-[10px] line-clamp-3 text-lg dark:text-dark_white'}
-        >
-          {props.content}
+          {hasContent && (
+            <div className={'line-clamp-3 w-full text-lg dark:text-dark_white'}>
+              {content}
+            </div>
+          )}
         </div>
 
-        <div className="mx-2 mt-4">
+        <div className="mx-3 my-2.5">
           <ZaboActions {...props} />
         </div>
       </div>

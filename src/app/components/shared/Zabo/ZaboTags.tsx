@@ -8,7 +8,7 @@ interface ZaboTagsProps {
 
 const ZaboTags = ({ notice: { tags } }: ZaboTagsProps) => {
   return (
-    <div className={'mx-3 flex flex-wrap gap-[5px]'}>
+    <div className={'flex flex-wrap gap-2'}>
       {tags.map((tag) => (
         <Tag key={tag} name={tag} />
       ))}
