@@ -121,8 +121,7 @@ export const createNotice = async ({
   category: (typeof Category)[keyof typeof Category];
   group: { uuid: string; name: string; profileImageUrl: string | null } | null;
 }): Promise<NoticeDetail> => {
-  let groupsToken: string | null = null;
-
+  const groupsToken: string | null = localStorage.getItem('groupsAccessToken');
   return ziggleApi
     .post(
       '/notice',
