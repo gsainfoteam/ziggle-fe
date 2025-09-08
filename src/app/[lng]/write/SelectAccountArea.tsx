@@ -98,16 +98,17 @@ const SelectAccountArea = ({
             </option>
           ))}
       </select>
-
-      <Button
-        variant="contained"
-        className="w-30 my-4 rounded-[10px] py-2"
-        onClick={handleGroupLogin}
-      >
-        <p className="mx-3 my-1 text-base font-bold">
-          Clike here if you want to write as group
-        </p>
-      </Button>
+      {myGroups.length === 0 ? (
+        <Button
+          variant="contained"
+          className="w-30 my-4 rounded-[10px] py-2"
+          onClick={handleGroupLogin}
+        >
+          <p className="mx-3 my-1 text-base font-bold">
+            Clike here if you want to write as group
+          </p>
+        </Button>
+      ) : null}
     </div>
   );
 };
