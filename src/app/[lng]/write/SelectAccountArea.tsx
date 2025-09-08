@@ -53,19 +53,30 @@ const SelectAccountArea = ({
         setIsModalOpen(false);
       });
   }, [path, isModalOpen]);
-
   const thirdPartycode = localStorage.getItem('thirdPartycode');
+  const acessToken = localStorage.getItem('groupsAccessToken');
   useEffect(() => {
     const handleThirdPartyCode = async () => {
       if (thirdPartycode) {
         const data = await getGroupsToken(thirdPartycode);
-        localStorage.removeItem('thirdPartycode');
-        console.log(data.token);
+        console.log(data);
+        if (data) {
+          localStorage.setItem('groupsAccessToken', data.accessToken);
+        }
       }
-      handleThirdPartyCode();
     };
+    handleThirdPartyCode();
   }, [thirdPartycode]);
-
+  useEffect(() => {
+    getMyGroups(acessToken!)
+      .then((data) => {
+        console.log('data', data);
+        setMyGroups(data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [acessToken]);
   return (
     <div className="relative mt-2">
       <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">

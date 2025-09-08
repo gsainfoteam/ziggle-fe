@@ -39,11 +39,22 @@ export const getGroupsToken = async (code: string) => {
       redirect_uri: redirectUri,
     })
     .then((res) => res.data)
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err)
+    });
 };
 
-export const getMyGroups = async () => {
-  return;
+export const getMyGroups = async (accessToken: string) => {
+  return axios
+    .get(`${groupsAPIUrl}third-party/userinfo`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    })
+    .then((res) => res.data)
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 export const getGroup = async (uuid: string): Promise<GroupInfo> => {
