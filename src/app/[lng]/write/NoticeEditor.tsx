@@ -226,7 +226,7 @@ const NoticeEditor = ({
       tags: [...state.tags.map(({ name }) => name)],
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCatgoryMapper[state.noticeType],
-      groupId: state.account,
+      group: state.group,
       t,
     };
 
@@ -670,10 +670,14 @@ const NoticeEditor = ({
           </div>
 
           <SelectAccountArea
-            account={state.account}
-            setAccount={(account: string | null) =>
-              dispatch({ type: 'SET_ACCOUNT', account })
-            }
+            group={state.group}
+            setGroup={(
+              group: {
+                uuid: string;
+                name: string;
+                profileImageUrl: string | null;
+              } | null,
+            ) => dispatch({ type: 'SET_ACCOUNT', group })}
             t={t}
           />
         </>

@@ -14,14 +14,20 @@ import Button from '@/app/components/shared/Button';
 import { PropsWithT } from '@/app/i18next';
 import NavArrowRightIcon from '@/assets/icons/nav-arrow-right.svg';
 
+type Group = {
+  uuid: string;
+  name: string;
+  profileImageUrl: string | null;
+};
+
 interface SelectAccountAreaProps {
-  account: string | null;
-  setAccount: (account: string | null) => void;
+  group: Group | null;
+  setGroup: (group: Group | null) => void;
 }
 
 const SelectAccountArea = ({
-  account,
-  setAccount,
+  group,
+  setGroup,
   t,
 }: PropsWithT<SelectAccountAreaProps>) => {
   const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
@@ -31,7 +37,24 @@ const SelectAccountArea = ({
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-    setAccount(selectedValue === '' ? null : selectedValue);
+    if (selectedValue === '') {
+      setGroup(null);
+    } else {
+      const selectedGroup = myGroups.find(
+        (group) => group.uuid === selectedValue,
+      );
+      console.log('selectedGroup', selectedGroup);
+      if (!selectedGroup) {
+        setGroup(null);
+        return;
+      }
+      const groupData = {
+        uuid: selectedGroup?.uuid,
+        name: selectedGroup?.name,
+        profileImageUrl: selectedGroup?.profileImageUrl || null,
+      };
+      setGroup(groupData);
+    }
   };
 
   const handleGroupLogin = () => {
@@ -84,10 +107,10 @@ const SelectAccountArea = ({
       </div>
 
       <select
-        value={account ?? ''}
+        value={group?.uuid ?? ''}
         onChange={handleAccountChange}
         className={`w-full appearance-none rounded-[10px] bg-greyLight px-4 py-3.5 ${
-          account ? 'text-primary' : 'text-greyDark'
+          group ? 'text-primary' : 'text-greyDark'
         } focus:border-primary focus:outline-none`}
       >
         <option value="">{t('write.writeAsMyself')}</option>

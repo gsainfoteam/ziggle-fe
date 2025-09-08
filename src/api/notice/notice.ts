@@ -111,7 +111,7 @@ export const createNotice = async ({
   images,
   tags,
   category,
-  groupId,
+  group,
 }: {
   title: string;
   deadline?: Date;
@@ -119,13 +119,9 @@ export const createNotice = async ({
   images: string[];
   tags: number[];
   category: (typeof Category)[keyof typeof Category];
-  groupId: string | null;
+  group: { uuid: string; name: string; profileImageUrl: string | null } | null;
 }): Promise<NoticeDetail> => {
   let groupsToken: string | null = null;
-
-  if (groupId) {
-    groupsToken = await getGroupsToken();
-  }
 
   return ziggleApi
     .post(
@@ -137,7 +133,7 @@ export const createNotice = async ({
         images,
         tags,
         category,
-        groupId: groupId ?? undefined,
+        group: group ?? undefined,
       },
       {
         ...(groupsToken
