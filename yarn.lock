@@ -2980,15 +2980,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@toss/use-overlay@npm:^1.4.0":
-  version: 1.4.2
-  resolution: "@toss/use-overlay@npm:1.4.2"
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-  checksum: 10c0/3e0621d403e88e6f3b013177729972da3460a02c7effe08aff5fcb94a86354220690fdf72dca768b3ef0d9330658632404820f5d3ac3dcc5e34824cf77007e3e
-  languageName: node
-  linkType: hard
-
 "@trysound/sax@npm:0.2.0":
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
@@ -9219,6 +9210,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"overlay-kit@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "overlay-kit@npm:1.8.5"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18 || ^19
+    react-dom: ^16.8 || ^17 || ^18 || ^19
+  checksum: 10c0/2a34071c56175fdaaf48f7a8306d0fd9c9cda02b71511c0e5d99aa9f8e703a8c353e69f110b80c61b514ed84d6ea1da3652b2dd7f06186e29aaa7ebc08598aec
+  languageName: node
+  linkType: hard
+
 "own-keys@npm:^1.0.1":
   version: 1.0.1
   resolution: "own-keys@npm:1.0.1"
@@ -12912,7 +12913,6 @@ __metadata:
     "@storybook/react": "npm:^8.1.2"
     "@svgr/webpack": "npm:^8.1.0"
     "@tinymce/tinymce-react": "npm:^4.3.0"
-    "@toss/use-overlay": "npm:^1.4.0"
     "@types/debug": "npm:^4"
     "@types/jsdom": "npm:^21.1.3"
     "@types/node": "npm:^20"
@@ -12944,6 +12944,7 @@ __metadata:
     next-auth: "npm:^4.24.7"
     next-themes: "npm:^0.4.3"
     node-fetch: "npm:2"
+    overlay-kit: "npm:^1.8.5"
     postcss: "npm:^8"
     prettier: "npm:^3.1.0"
     prettier-plugin-tailwindcss: "npm:^0.5.7"
