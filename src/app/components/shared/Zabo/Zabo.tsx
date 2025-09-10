@@ -27,6 +27,7 @@ export type ZaboProps = Notice & {
 
 const Zabo = async (props: ZaboProps & PropsWithLng) => {
   const {
+    content,
     createdAt,
     author,
     deadline,
@@ -36,35 +37,35 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
     tags,
     lng,
     id,
-    groupId,
+    group,
   } = props;
   const timeAgo = dayjs(createdAt).fromNow();
 
   const hasImage = imageUrls.length > 0;
-
-  const groupInfo = groupId ? await getGroup(groupId) : null;
+  const hasContent = content.trim().length > 0;
+  const hasTags = tags.length > 0;
 
   return (
     <Link href={`/${lng}/notice/${id}`}>
       <div
         className={
-          'flex flex-col rounded-[10px] py-[10px] text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
+          'flex flex-col rounded-[10px] pt-2.5 text-text transition hover:bg-greyLight dark:hover:bg-dark_greyDark'
         }
       >
-        <div className={'mx-3 my-[10px] flex flex-wrap items-center gap-y-3'}>
-          {groupInfo?.profileImageUrl ? (
+        <div className={'mx-3 my-2.5 flex flex-wrap items-center gap-y-3'}>
+          {group?.profileImageUrl ? (
             <Image
-              src={groupInfo.profileImageUrl}
+              src={group.profileImageUrl}
               width={36}
               height={36}
-              alt={groupInfo.name}
+              alt={group.name}
               className={'rounded-full'}
             />
           ) : (
             <DefaultProfile width={36} height={36} />
           )}
           <span className={'ml-2 text-lg font-medium dark:text-dark_white'}>
-            {groupInfo ? groupInfo.name : author.name}
+            {group ? group.name : author.name}
           </span>
 
           <span className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>
@@ -83,25 +84,29 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
           )}
         </div>
 
-        <p
-          className={
-            'mx-4 mb-[10px] line-clamp-3 text-xl font-semibold dark:text-dark_white'
-          }
-        >
-          {title}
-        </p>
+        <div className="flex w-full flex-col gap-2.5 px-4 pb-2.5">
+          <p
+            className={
+              'line-clamp-3 text-xl font-semibold dark:text-dark_white'
+            }
+          >
+            {title}
+          </p>
 
-        {hasImage && <ZaboImageCarousel imageUrls={imageUrls} title={title} />}
+          {hasImage && (
+            <ZaboImageCarousel imageUrls={imageUrls} title={title} />
+          )}
 
-        <ZaboTags notice={props} />
+          {hasTags && <ZaboTags notice={props} />}
 
-        <div
-          className={'mx-4 mt-[10px] line-clamp-3 text-lg dark:text-dark_white'}
-        >
-          {props.content}
+          {hasContent && (
+            <div className={'line-clamp-3 w-full text-lg dark:text-dark_white'}>
+              {content}
+            </div>
+          )}
         </div>
 
-        <div className="mx-2 mt-4">
+        <div className="mx-3 my-2.5">
           <ZaboActions {...props} />
         </div>
       </div>
