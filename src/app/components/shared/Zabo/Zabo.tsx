@@ -23,7 +23,6 @@ export type ZaboSize<Origin extends ZaboOrigin> = Origin extends 'width'
 export type ZaboProps = Notice & {
   width?: number;
   height?: number; // migration ongoing | remove after migration complete
-  // mockGroupInfo?: { name: string; profileImageUrl?: string } | null;
 };
 
 const Zabo = async (props: ZaboProps & PropsWithLng) => {
@@ -38,18 +37,9 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
     tags,
     lng,
     id,
-    groupId,
-    // mockGroupInfo,
+    group,
   } = props;
   const timeAgo = dayjs(createdAt).fromNow();
-
-  const groupInfo = groupId ? await getGroup(groupId) : null;
-  // const groupInfo =
-  //   mockGroupInfo !== undefined
-  //     ? mockGroupInfo
-  //     : groupId
-  //       ? await getGroup(groupId)
-  //       : null;
 
   const hasImage = imageUrls.length > 0;
   const hasContent = content.trim().length > 0;
@@ -63,19 +53,19 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
         }
       >
         <div className={'mx-3 my-2.5 flex flex-wrap items-center gap-y-3'}>
-          {groupInfo?.profileImageUrl ? (
+          {group?.profileImageUrl ? (
             <Image
-              src={groupInfo.profileImageUrl}
+              src={group.profileImageUrl}
               width={36}
               height={36}
-              alt={groupInfo.name}
+              alt={group.name}
               className={'rounded-full'}
             />
           ) : (
             <DefaultProfile width={36} height={36} />
           )}
           <span className={'ml-2 text-lg font-medium dark:text-dark_white'}>
-            {groupInfo ? groupInfo.name : author.name}
+            {group ? group.name : author.name}
           </span>
 
           <span className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>

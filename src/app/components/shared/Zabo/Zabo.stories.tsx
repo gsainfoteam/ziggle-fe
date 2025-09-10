@@ -39,7 +39,7 @@ const mockNotice: Notice = {
     { emoji: '❤️', count: 12, isReacted: false },
     { emoji: '😭', count: 0, isReacted: false },
   ],
-  groupId: null,
+  group: null,
   isReminded: false,
 };
 
@@ -63,6 +63,7 @@ const mockNoticeWithImage: Notice = {
     { emoji: '❤️', count: 67, isReacted: true },
     { emoji: '😭', count: 2, isReacted: false },
   ],
+  group: null,
 };
 
 const mockNoticeWithGroup: Notice = {
@@ -75,7 +76,11 @@ const mockNoticeWithGroup: Notice = {
     name: '지스트 총학생회',
     uuid: '20200002',
   },
-  groupId: null, // Storybook에서는 API 호출 피하기 위해 null로 설정
+  group: {
+    uuid: 'gist-student-council',
+    name: '지스트 총학생회',
+    profileImageUrl: 'https://picsum.photos/36/36?random=council',
+  },
   tags: ['총학생회', '정기총회', '공지'],
   deadline: null,
   currentDeadline: null,
@@ -89,6 +94,7 @@ const mockNoticeWithLongContent: Notice = {
   content:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tellus vitae velit semper, eu maximus dui elementum. Donec accumsan turpis eu orci pharetra, a vehicula risus aliquam. Etiam dignissim est dolor. Suspendisse rutrum laoreet augue. Suspendisse potenti. In hac habitasse platea dictumst. Donec a ex sed odio fringilla vulputate eu et eros. Integer pulvinar, velit ac tempus ultrices, orci massa vehicula libero, id aliquet turpis magna viverra diam. Praesent volutpat turpis ex, a ullamcorper odio pharetra at. Curabitur sollicitudin mollis arcu, ac consequat eros gravida nec. Aliquam euismod turpis in neque suscipit hendrerit. Integer magna urna, ultricies ut varius vel, suscipit sit amet justo. Nullam cursus justo et mattis sollicitudin. Nulla et finibus sem. Aliquam sit amet elit mi.',
   tags: ['긴내용', '테스트', 'UI'],
+  group: null,
 };
 
 const args = {
@@ -119,10 +125,6 @@ export const WithGroup = Template.bind({});
 WithGroup.args = {
   ...args,
   ...mockNoticeWithGroup,
-  // mockGroupInfo: {
-  //   name: '지스트 총학생회',
-  //   profileImageUrl: 'https://picsum.photos/36/36?random=group1',
-  // },
 };
 
 export const LongContent = Template.bind({});

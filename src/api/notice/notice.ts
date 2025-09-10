@@ -33,6 +33,12 @@ export interface NoticeSearchParams {
   my?: 'own' | 'reminders';
 }
 
+export interface Group {
+  uuid: string;
+  name: string;
+  profileImageUrl: string | null;
+}
+
 export interface Notice {
   id: number;
   title: string;
@@ -52,7 +58,7 @@ export interface Notice {
   documentUrls: string[];
   isReminded: boolean;
   reactions: Reaction[];
-  groupId: string | null;
+  group: Group | null;
 }
 
 export interface Reaction {
