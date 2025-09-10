@@ -22,7 +22,11 @@ export interface EditorState {
   tags: Tag[];
   photos: FileWithUrl[];
   isLoading: boolean;
-  account: string | null;
+  group: {
+    uuid: string;
+    name: string;
+    profileImageUrl: string | null;
+  } | null;
 }
 
 export const initialEditorState: EditorState = {
@@ -38,7 +42,7 @@ export const initialEditorState: EditorState = {
   tags: [],
   photos: [],
   isLoading: false,
-  account: null,
+  group: null,
 };
 
 export type EditorAction =
@@ -58,7 +62,14 @@ export type EditorAction =
       type: 'SET_ADDITIONAL_ENGLISH_CONTENT';
       additionalEnglishContent: string;
     }
-  | { type: 'SET_ACCOUNT'; account: string | null };
+  | {
+      type: 'SET_ACCOUNT';
+      group: {
+        uuid: string;
+        name: string;
+        profileImageUrl: string | null;
+      } | null;
+    };
 
 export const editorStateReducer = (
   state: EditorState,
@@ -155,7 +166,7 @@ export const editorStateReducer = (
       };
     }
     case 'SET_ACCOUNT':
-      return { ...state, account: action.account };
+      return { ...state, group: action.group };
     default:
       return state;
   }

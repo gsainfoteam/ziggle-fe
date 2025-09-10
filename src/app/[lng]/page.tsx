@@ -1,11 +1,12 @@
-import { redirect } from 'next/navigation';
-
 import { PropsWithLng } from '@/app/i18next';
+import ThirdParty from './thirdParty';
 
-export default async function Home({
-  params: { lng },
-}: {
+type Props = {
   params: PropsWithLng;
-}) {
-  redirect(`/${lng}/home`);
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Home({ params: { lng }, searchParams }: Props) {
+  const code = searchParams.code;
+  return <ThirdParty code={code as string} lng={lng} />;
 }

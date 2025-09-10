@@ -52,7 +52,11 @@ export interface Notice {
   documentUrls: string[];
   isReminded: boolean;
   reactions: Reaction[];
-  groupId: string | null;
+  group: {
+    id: string;
+    name: string;
+    profileImageUrl: string | null;
+  } | null;
 }
 
 export interface Reaction {
@@ -107,7 +111,7 @@ export const createNotice = async ({
   images,
   tags,
   category,
-  groupId,
+  group,
 }: {
   title: string;
   deadline?: Date;
@@ -115,14 +119,9 @@ export const createNotice = async ({
   images: string[];
   tags: number[];
   category: (typeof Category)[keyof typeof Category];
-  groupId: string | null;
+  group: { uuid: string; name: string; profileImageUrl: string | null } | null;
 }): Promise<NoticeDetail> => {
-  let groupsToken: string | null = null;
-
-  if (groupId) {
-    groupsToken = await getGroupsToken();
-  }
-
+  const groupsToken: string | null = localStorage.getItem('groupsAccessToken');
   return ziggleApi
     .post(
       '/notice',
@@ -133,7 +132,7 @@ export const createNotice = async ({
         images,
         tags,
         category,
-        groupId: groupId ?? undefined,
+        group: group ?? undefined,
       },
       {
         ...(groupsToken

@@ -36,14 +36,13 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
     tags,
     lng,
     id,
-    groupId,
+    group,
   } = props;
   const timeAgo = dayjs(createdAt).fromNow();
 
   const hasImage = imageUrls.length > 0;
 
-  const groupInfo = groupId ? await getGroup(groupId) : null;
-
+  console.log('group', group);
   return (
     <Link href={`/${lng}/notice/${id}`}>
       <div
@@ -52,19 +51,19 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
         }
       >
         <div className={'mx-3 my-[10px] flex flex-wrap items-center gap-y-3'}>
-          {groupInfo?.profileImageUrl ? (
+          {group?.profileImageUrl ? (
             <Image
-              src={groupInfo.profileImageUrl}
+              src={group.profileImageUrl}
               width={36}
               height={36}
-              alt={groupInfo.name}
+              alt={group.name}
               className={'rounded-full'}
             />
           ) : (
             <DefaultProfile width={36} height={36} />
           )}
           <span className={'ml-2 text-lg font-medium dark:text-dark_white'}>
-            {groupInfo ? groupInfo.name : author.name}
+            {group ? group.name : author.name}
           </span>
 
           <span className={'mx-[5px] font-bold text-greyDark dark:text-grey'}>
