@@ -2,10 +2,10 @@
 
 import '@/app/components/layout/initDayjs';
 
-import { OverlayProvider } from '@toss/use-overlay';
 import dynamic from 'next/dynamic';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
+import { OverlayProvider } from 'overlay-kit';
 import { Suspense } from 'react';
 import { SWRConfig } from 'swr';
 
