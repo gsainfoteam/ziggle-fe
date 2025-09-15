@@ -53,6 +53,11 @@
             "name": "Bug Report",
             "link": "https://cs.gistory.me/?service=Ziggle",
             "key": "bugReport"
+          },
+          {
+            "name": "Service Status Check",
+            "link": "https://uptime.icarus.gistory.me/status/ziggle",
+            "key": "serviceStatus"
           }
         ]
       },
