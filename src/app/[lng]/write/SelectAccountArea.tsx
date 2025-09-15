@@ -114,7 +114,7 @@ const SelectAccountArea = ({
         } focus:border-primary focus:outline-none`}
       >
         <option value="">{t('write.writeAsMyself')}</option>
-        {myGroups.length &&
+        {myGroups.length > 0 &&
           myGroups.map((group) => (
             <option key={group.uuid} value={group.uuid}>
               {group.name}
