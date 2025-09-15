@@ -26,9 +26,10 @@ const groupsUrl = process.env.NEXT_PUBLIC_GROUPS_URL;
 const clientId = process.env.NEXT_PUBLIC_GROUPS_CLIENT_ID;
 const redirectUri = process.env.NEXT_PUBLIC_GROUPS_REDIRECT_URI;
 
-export const thirdPartyAuth = async (path: string) => {
-  localStorage.setItem('returnTo', path);
-  window.location.href = `${groupsUrl}/thirdParty?client_id=${clientId}&redirect_uri=${redirectUri}`;
+export const thirdPartyAuth = async () => {
+  window.location.href = `${groupsUrl}/thirdParty?client_id=${encodeURI(
+    clientId!,
+  )}&redirect_uri=${encodeURI(redirectUri!)}`;
 };
 
 export const getGroupsToken = async (code: string) => {
@@ -40,7 +41,7 @@ export const getGroupsToken = async (code: string) => {
     })
     .then((res) => res.data)
     .catch((err) => {
-      console.error(err)
+      console.error(err);
     });
 };
 
@@ -49,7 +50,7 @@ export const getMyGroups = async (accessToken: string) => {
     .get(`${groupsAPIUrl}third-party/userinfo`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     })
     .then((res) => res.data)
     .catch((err) => {

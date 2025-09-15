@@ -70,7 +70,7 @@ const SelectAccountArea = ({
         showCancelButton: true,
       }).then((result) => {
         if (result.isConfirmed) {
-          thirdPartyAuth(path);
+          thirdPartyAuth();
           setIsModalOpen(false);
         }
         setIsModalOpen(false);
