@@ -12,6 +12,7 @@ const keyToLogEvent = {
   house: LogEvents.footerClickHouse,
   gist: LogEvents.footerClickGist,
   gijol: LogEvents.footerClickGijol,
+  serviceStatus: LogEvents.footerClickServiceStatus,
 };
 
 export default keyToLogEvent;

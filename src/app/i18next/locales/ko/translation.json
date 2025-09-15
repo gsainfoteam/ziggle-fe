@@ -49,6 +49,11 @@
             "name": "버그 제보",
             "link": "https://cs.gistory.me/?service=Ziggle",
             "key": "bugReport"
+          },
+          {
+            "name": "서비스 상태 확인",
+            "link": "https://uptime.icarus.gistory.me/status/ziggle",
+            "key": "serviceStatus"
           }
         ]
       },
