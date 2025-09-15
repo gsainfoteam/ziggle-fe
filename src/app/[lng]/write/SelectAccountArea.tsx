@@ -46,7 +46,6 @@ const SelectAccountArea = ({
       const selectedGroup = myGroups.find(
         (group) => group.uuid === selectedValue,
       );
-      console.log('selectedGroup', selectedGroup);
       if (!selectedGroup) {
         setGroup(null);
         return;

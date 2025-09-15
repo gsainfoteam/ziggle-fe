@@ -42,7 +42,6 @@ const Zabo = async (props: ZaboProps & PropsWithLng) => {
 
   const hasImage = imageUrls.length > 0;
 
-  console.log('group', group);
   return (
     <Link href={`/${lng}/notice/${id}`}>
       <div
