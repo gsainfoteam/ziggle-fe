@@ -346,7 +346,8 @@
     "mainDescription": "특정 그룹에 속하길 바라신다면, 해당 그룹의 관리자에게 문의해주세요.",
     "createGroup": "그룹 생성하기",
     "manageGroup": "그룹 관리",
-    "leaveGroup": "그룹 나가기"
+    "leaveGroup": "그룹 나가기",
+    "loginGroupsClient": "그룹으로 공지를 작성하고 싶다면, 그룹스에 로그인해주세요"
   },
   "installApp": {
     "title": "모바일 앱을 설치해보세요!",

@@ -1,8 +1,35 @@
 import axios from 'axios';
 import dayjs from 'dayjs';
-import { redirect } from 'next/dist/server/api-utils';
 
-import { ziggleApi } from '..';
+export interface GroupInfoForUser {
+  Role: [
+    {
+      RoleExternalPermission: [
+        {
+          clientUuid: string;
+          permission: string;
+          roleId: number;
+          roleGroupUuid: string;
+        },
+      ];
+      name: string;
+      id: number;
+      groupUuid: string;
+      permissions: ['MEMBER_UPDATE'];
+    },
+  ];
+  name: string;
+  description: string;
+  uuid: string;
+  createdAt: Date;
+  verifiedAt: Date;
+  presidentUuid: string;
+  deletedAt: Date;
+  notionPageId: string;
+  profileImageKey: string | null;
+}
+
+export type UserInfo = GroupInfoForUser[];
 
 export interface GroupInfo {
   uuid: string;
@@ -21,6 +48,18 @@ export interface InviteCode {
   code: string;
 }
 
+export type ThirdPartyGroup = {
+  uuid: string;
+  name: string;
+  profileImageUrl: string | null;
+};
+
+interface TokenResponse {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+}
+
 const groupsAPIUrl = process.env.NEXT_PUBLIC_GROUPS_API_URL;
 const groupsUrl = process.env.NEXT_PUBLIC_GROUPS_URL;
 const clientId = process.env.NEXT_PUBLIC_GROUPS_CLIENT_ID;
@@ -33,21 +72,22 @@ export const thirdPartyAuth = async () => {
 };
 
 export const getGroupsToken = async (code: string) => {
-  return await axios
-    .post(`${groupsAPIUrl}third-party/token`, {
+  return axios
+    .post<TokenResponse>(`${groupsAPIUrl}third-party/token`, {
       client_id: clientId,
-      code: code,
+      code,
       redirect_uri: redirectUri,
     })
-    .then((res) => res.data)
+    .then((res) => res.data.access_token)
     .catch((err) => {
       console.error(err);
+      return null;
     });
 };
 
-export const getMyGroups = async (accessToken: string) => {
+export const getUserInfo = async (accessToken: string) => {
   return axios
-    .get(`${groupsAPIUrl}third-party/userinfo`, {
+    .get<UserInfo>(`${groupsAPIUrl}third-party/userinfo`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -55,6 +95,7 @@ export const getMyGroups = async (accessToken: string) => {
     .then((res) => res.data)
     .catch((err) => {
       console.error(err);
+      return null;
     });
 };
 

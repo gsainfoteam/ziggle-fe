@@ -1,14 +1,14 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 import {
   getGroupsToken,
-  getMyGroups,
-  GroupInfo,
+  getUserInfo,
   thirdPartyAuth,
+  UserInfo,
 } from '@/api/group/group';
 import Button from '@/app/components/shared/Button';
 import { PropsWithT } from '@/app/i18next';
@@ -30,10 +30,13 @@ const SelectAccountArea = ({
   setGroup,
   t,
 }: PropsWithT<SelectAccountAreaProps>) => {
-  const [myGroups, setMyGroups] = useState<GroupInfo[]>([]);
+  const [myGroups, setMyGroups] = useState<UserInfo>([]);
   const [isModalOpen, setIsModalOpen] = useState<Boolean>(false);
   const path: string = usePathname();
-  localStorage.setItem('redirectPath', path);
+
+  useEffect(() => {
+    localStorage.setItem('redirectPath', path);
+  }, [path]);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -51,7 +54,7 @@ const SelectAccountArea = ({
       const groupData = {
         uuid: selectedGroup?.uuid,
         name: selectedGroup?.name,
-        profileImageUrl: selectedGroup?.profileImageUrl || null,
+        profileImageUrl: selectedGroup?.profileImageKey || null,
       };
       setGroup(groupData);
     }
@@ -77,29 +80,34 @@ const SelectAccountArea = ({
       });
   }, [path, isModalOpen]);
   const thirdPartycode = localStorage.getItem('thirdPartycode');
-  const acessToken = localStorage.getItem('groupsAccessToken');
+  const [accessToken, setAccessToken] = useState<string | null>(
+    localStorage.getItem('groupsAccessToken'),
+  );
   useEffect(() => {
-    const handleThirdPartyCode = async () => {
+    (async () => {
       if (thirdPartycode) {
-        const data = await getGroupsToken(thirdPartycode);
-        console.log(data);
-        if (data) {
-          localStorage.setItem('groupsAccessToken', data.accessToken);
+        const accessToken = await getGroupsToken(thirdPartycode);
+        if (accessToken) {
+          localStorage.setItem('groupsAccessToken', accessToken);
+          setAccessToken(accessToken);
+          localStorage.removeItem('thirdPartycode');
         }
       }
-    };
-    handleThirdPartyCode();
+    })();
   }, [thirdPartycode]);
+
   useEffect(() => {
-    getMyGroups(acessToken!)
-      .then((data) => {
-        console.log('data', data);
-        setMyGroups(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [acessToken]);
+    (async () => {
+      if (!accessToken) return;
+      const group = await getUserInfo(accessToken);
+      if (!group) {
+        console.log(`User do not belong to any group`);
+        //TODO: handle if user do not belong to any group
+        return;
+      }
+      setMyGroups(group);
+    })();
+  }, [accessToken]);
   return (
     <div className="relative mt-2">
       <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
@@ -128,7 +136,7 @@ const SelectAccountArea = ({
           onClick={handleGroupLogin}
         >
           <p className="mx-3 my-1 text-base font-bold">
-            Clike here if you want to write as group
+            {t(`group.loginGroupsClient`)}
           </p>
         </Button>
       ) : null}

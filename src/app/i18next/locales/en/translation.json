@@ -358,7 +358,8 @@
     "mainDescription": "If you want to join a specific group, please contact the group administrator.",
     "createGroup": "Create Group",
     "manageGroup": "Manage Group",
-    "leaveGroup": "Leave Group"
+    "leaveGroup": "Leave Group",
+    "loginGroupsClient": "If you want to write notice as a group, please log in to the Groups"
   },
   "installApp": {
     "title": "Install the mobile app!",
