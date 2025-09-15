@@ -79,22 +79,22 @@ const SelectAccountArea = ({
         setIsModalOpen(false);
       });
   }, [path, isModalOpen]);
-  const thirdPartycode = localStorage.getItem('thirdPartycode');
+  const thirdPartyCode = localStorage.getItem('thirdPartyCode');
   const [accessToken, setAccessToken] = useState<string | null>(
     localStorage.getItem('groupsAccessToken'),
   );
   useEffect(() => {
     (async () => {
-      if (thirdPartycode) {
-        const accessToken = await getGroupsToken(thirdPartycode);
+      if (thirdPartyCode) {
+        const accessToken = await getGroupsToken(thirdPartyCode);
         if (accessToken) {
           localStorage.setItem('groupsAccessToken', accessToken);
           setAccessToken(accessToken);
-          localStorage.removeItem('thirdPartycode');
+          localStorage.removeItem('thirdPartyCode');
         }
       }
     })();
-  }, [thirdPartycode]);
+  }, [thirdPartyCode]);
 
   useEffect(() => {
     (async () => {

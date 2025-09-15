@@ -1,16 +1,23 @@
 'use client';
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 type Props = {
   lng: 'ko' | 'en';
   code: string;
 };
 export default function ThirdParty({ code, lng }: Props) {
-  if (code && typeof code === 'string') {
-    localStorage.setItem('thirdPartycode', code);
-    const path = localStorage.getItem('redirectPath');
-    redirect(path ? path : `/${lng}/home`);
-  } else {
-    redirect(`/${lng}/home`);
-  }
-  return <div></div>;
+  const router = useRouter();
+  useEffect(() => {
+    if (code) {
+      localStorage.setItem('thirdPartyCode', code);
+      const path = localStorage.getItem('redirectPath');
+      router.replace(path ? path : `/${lng}/home`);
+    } else {
+      router.replace(`/${lng}/home`);
+    }
+    localStorage.removeItem('redirectPath');
+  }, [code, lng, router]);
+
+  return null;
 }

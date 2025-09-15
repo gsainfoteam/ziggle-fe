@@ -1,4 +1,5 @@
 import { PropsWithLng } from '@/app/i18next';
+
 import ThirdParty from './thirdParty';
 
 type Props = {
