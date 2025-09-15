@@ -15,7 +15,6 @@ export default function ThirdParty({ code, lng }: Props) {
     } else {
       router.replace(`/${lng}/home`);
     }
-    localStorage.removeItem('redirectPath');
   }, [code, lng, router]);
 
   return null;

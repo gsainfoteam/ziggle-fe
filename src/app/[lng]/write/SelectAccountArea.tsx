@@ -36,7 +36,7 @@ const SelectAccountArea = ({
 
   useEffect(() => {
     localStorage.setItem('redirectPath', path);
-  }, [path]);
+  });
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
@@ -89,12 +89,10 @@ const SelectAccountArea = ({
         if (accessToken) {
           localStorage.setItem('groupsAccessToken', accessToken);
           setAccessToken(accessToken);
-          localStorage.removeItem('thirdPartyCode');
         }
       }
     })();
   }, [thirdPartyCode]);
-
   useEffect(() => {
     (async () => {
       if (!accessToken) return;

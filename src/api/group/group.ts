@@ -55,7 +55,7 @@ export type ThirdPartyGroup = {
 };
 
 interface TokenResponse {
-  access_token: string;
+  accessToken: string;
   expires_in: number;
   token_type: string;
 }
@@ -78,7 +78,7 @@ export const getGroupsToken = async (code: string) => {
       code,
       redirect_uri: redirectUri,
     })
-    .then((res) => res.data.access_token)
+    .then((res) => res.data.accessToken)
     .catch((err) => {
       console.error(err);
       return null;
