@@ -10,7 +10,7 @@ export default async function Layout({
 }) {
   return (
     <InitClient emptyLayout lng={lng}>
-      {children}
+    {children}
     </InitClient>
   );
 }

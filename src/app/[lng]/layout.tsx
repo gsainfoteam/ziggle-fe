@@ -81,7 +81,7 @@ export default async function RootLayout({
   dayjs.locale(lng);
 
   return (
-    <html lang={lng} dir={dir(lng)} suppressHydrationWarning>
+    <html lang={lng} dir={dir(lng)}>
       <Script id="smartlook-api">
         {`
           window.smartlook ||

@@ -1,5 +1,10 @@
 {
+
   "lang": "ko",
+  "home": {
+    "login": "GIST 계정으로 로그인",
+    "subtitle": "지스트이언을 위한 지글"
+  },
   "metadata": {
     "title": "지글",
     "description": "지스트의 모든 공지를 한눈에"

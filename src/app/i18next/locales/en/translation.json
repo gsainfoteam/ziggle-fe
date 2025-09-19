@@ -1,5 +1,9 @@
 {
   "lang": "en",
+  "home": {
+    "login": "Login with GIST account",
+    "subtitle": "Ziggle for GISTians"
+  },
   "metadata": {
     "title": "Ziggle",
     "description": "All Notices in GIST at a glance"
