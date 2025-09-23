@@ -12,7 +12,7 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
 import AmplitudeProvider from './AmplitudeProvider';
-
+import SessionProviderWrapper from './SessionWrapper';
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',
 });
@@ -115,7 +115,9 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <AmplitudeProvider>{children}</AmplitudeProvider>
+        <AmplitudeProvider>
+          <SessionProviderWrapper>{children}</SessionProviderWrapper>
+        </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />
