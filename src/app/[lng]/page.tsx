@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -27,46 +27,67 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [openModal, setOpenModal] = useState<boolean>(false);
-
+  const postConcent = async () => {
+    await ziggleApi.post('user/consent');
+  };
+  const deleteUser = async () => {
+    await ziggleApi.delete('/user');
+  };
   useEffect(() => {
     (async () => {
       if (session && status === 'authenticated') {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
-          router.push(`${lng}/home`);
+          router.push(`/home`);
         } else {
           setOpenModal(true);
         }
       }
     })();
-  }, [session, status]);
-
+  }, [session, status, lng, router]);
+  async function showZigglePolicyModal() {
+    await Swal.fire({
+      title: '지글 이용약관 및 개인정보 약관 동의',
+      html: '<a href="https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1" target="_blank">지글 개인정보처리방침</a> <br> <a href="https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257">지글 이용약관</a> <br> 지글을 이용하기 위해서는 다음의 이용약관 및 <br> 개인정보 약관에 대한 동의가 필요합니다. ',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: '동의',
+      cancelButtonText: '취소',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: '동의 완료',
+          text: '약관에 동의하셨습니다.',
+          icon: 'success',
+        });
+        setOpenModal(false);
+        postConcent();
+        router.push(`${lng}/home`);
+      } else {
+        Swal.fire({
+          title: '정말로 거절하시겠습니까?',
+          html: '약관에 동의하지 않는 경우 지글을 이용할 수 없으며, <br> 지글로부터 자동 탈퇴 처리됩니다.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: '네, 동의하지 않겠습니다.',
+          cancelButtonText: '약관으로 돌아가기',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            deleteUser();
+            signOut();
+            setOpenModal(false);
+          } else {
+            showZigglePolicyModal();
+          }
+        });
+      }
+    });
+  }
   useEffect(() => {
     if (openModal) {
-      Swal.fire({
-        title: '개인정보 약관 동의',
-        text: '(개인정보 약관 보여주기)',
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonText: '동의',
-        cancelButtonText: '취소',
-        //Show Terms and Conditions/Personal Information Processing
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: '동의 완료',
-            text: '약관에 동의하셨습니다.',
-            icon: 'success',
-          });
-          setOpenModal(false);
-          // route.psuh(`${lng}/home`);
-          // TODO: Post consent of user as true
-        } else {
-          setOpenModal(false);
-          // Check user's intentaion again
-          // TODO: Withdrwal
-        }
-      });
+      showZigglePolicyModal();
     }
   }, [openModal]);
 
