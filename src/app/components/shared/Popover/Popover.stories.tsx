@@ -1,4 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
+import { overlay } from 'overlay-kit';
 
 import Lang from '@/assets/icons/lang.svg';
 import LangEn from '@/assets/icons/lang-en.svg';
@@ -15,24 +16,27 @@ import SunFull from '@/assets/icons/sun-full.svg';
 import System from '@/assets/icons/system.svg';
 import SystemFull from '@/assets/icons/system-full.svg';
 
-import Dropdown from '.';
+import { Popover, PopoverItem } from '.';
 
 export default {
-  title: 'shared/Dropdown',
-  component: Dropdown,
+  title: 'shared/Popover',
+  component: Popover,
   parameters: {
     layout: 'padded',
   },
   argTypes: {
+    isOpen: {
+      control: 'boolean',
+    },
     selectedIndex: {
       control: { type: 'select' },
-      options: [null, 0, 1, 2, 3],
+      options: [undefined, 0, 1, 2, 3],
     },
     onSelect: {
       action: 'selected',
     },
   },
-} as Meta<typeof Dropdown>;
+} as Meta<typeof Popover>;
 
 const mockItems = [
   {
@@ -72,17 +76,18 @@ const mockItems = [
   },
 ];
 
-const Template: StoryFn<typeof Dropdown> = (args) => {
+const Template: StoryFn<typeof Popover> = (args) => {
   return (
     <div className="w-48">
-      <Dropdown {...args} />
+      <Popover {...args} />
     </div>
   );
 };
 
 const args = {
+  isOpen: true,
   items: mockItems,
-  selectedIndex: null,
+  selectedIndex: undefined,
 };
 
 export const Default = Template.bind({});
@@ -109,4 +114,33 @@ SingleItem.args = {
   ...args,
   items: mockItems.slice(0, 1),
   selectedIndex: 0,
+};
+
+export const ChangeTheme = () => {
+  return (
+    <PopoverItem
+      icon={Palette}
+      boldIcon={PaletteFull}
+      label="테마"
+      isSelected={false}
+      onClick={async () => {
+        const result = await overlay.openAsync<number>(({ isOpen, close }) => {
+          return (
+            <Popover
+              isOpen={isOpen}
+              items={[
+                { icon: Sun, boldIcon: SunFull, label: '라이트' },
+                { icon: Moon, boldIcon: MoonFull, label: '다크' },
+                { icon: System, boldIcon: SystemFull, label: '자동' },
+              ]}
+              onSelect={(index) => {
+                close(index);
+              }}
+            />
+          );
+        });
+        console.log('Selected index:', result);
+      }}
+    />
+  );
 };

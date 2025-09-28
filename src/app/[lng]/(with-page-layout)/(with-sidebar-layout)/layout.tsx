@@ -12,7 +12,7 @@ export default async function Layout({
 }: LayoutProps) {
   return (
     <>
-      <div className="ml-4 mt-6 hidden md:block">
+      <div className="ml-4 mt-6 hidden justify-between md:block">
         <Sidebar lng={lng} />
       </div>
 

@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import LogEvents from '@/api/log/log-events';
+import ChangeDarkModeBox from '@/app/[lng]/(with-page-layout)/(without-sidebar-layout)/mypage/ChangeDarkModeBox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -20,7 +21,7 @@ interface NavButtonProps {
   to: string;
 }
 
-const NavButton = ({
+export const NavButton = ({
   title,
   icon,
   boldIcon,
@@ -56,6 +57,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
 
   return (
     <>
+      <ChangeDarkModeBox lng={lng} />
       {sidebarObject.map((group, i) => (
         <Fragment key={i}>
           <ul className="flex flex-col gap-y-2">
