@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
-import { ThemeProvider } from 'next-themes';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
@@ -12,6 +11,7 @@ import { useTranslation } from '@/app/i18next/client';
 import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
+import InitClient from '../components/layout/InitClient';
 import Button from '../components/shared/Button';
 
 interface UserInfo {
@@ -27,6 +27,10 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const postConcent = async () => {
     await ziggleApi.post('user/consent');
   };
@@ -92,8 +96,15 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
     }
   }, [openModal]);
 
+  if (!mounted) {
+    return (
+      <InitClient lng={lng}>
+        <div className="flex h-dvh w-full flex-col items-center justify-center gap-8" />
+      </InitClient>
+    );
+  }
   return (
-    <ThemeProvider>
+    <InitClient lng={lng}>
       <div className="flex h-dvh w-full flex-col items-center justify-center gap-8">
         <div className="block dark:hidden">
           <ZiggleLogo className="h-20" />
@@ -108,6 +119,6 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
           {t('home.login')}
         </Button>
       </div>
-    </ThemeProvider>
+    </InitClient>
   );
 }
