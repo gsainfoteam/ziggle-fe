@@ -38,6 +38,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
       if (session && status === 'authenticated') {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
+          // setOpenModal(true);
           router.push(`/home`);
         } else {
           setOpenModal(true);

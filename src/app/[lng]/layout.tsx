@@ -8,6 +8,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 
+import { auth } from '@/api/auth/auth';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
