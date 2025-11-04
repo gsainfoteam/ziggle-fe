@@ -12,6 +12,9 @@ export default async function Layout({
   params: PropsWithLng;
 }) {
   const session = await auth();
+  if (!session) {
+    redirect(`/${lng}`);
+  }
   return (
     <InitClient emptyLayout lng={lng}>
       {children}
