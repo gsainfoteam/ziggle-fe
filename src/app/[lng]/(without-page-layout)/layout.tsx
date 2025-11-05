@@ -1,5 +1,3 @@
-import { redirect } from 'next/navigation';
-
 import { auth } from '@/api/auth/auth';
 import InitClient from '@/app/components/layout/InitClient';
 import { PropsWithLng } from '@/app/i18next';
@@ -11,7 +9,6 @@ export default async function Layout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
-  const session = await auth();
   return (
     <InitClient emptyLayout lng={lng}>
       {children}
