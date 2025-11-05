@@ -29,6 +29,7 @@ const LogEvents = {
   footerClickHouse: 'footer_click_house',
   footerClickGist: 'footer_click_gist',
   footerClickGijol: 'footer_click_gijol',
+  footerClickServiceStatus: 'footer_click_service_status',
 
   // Sidebar
   sidebarClickLink: 'sidebar_click_link',

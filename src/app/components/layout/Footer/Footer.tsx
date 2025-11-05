@@ -32,7 +32,8 @@ interface FooterLink {
     | 'contact'
     | 'house'
     | 'gist'
-    | 'gijol';
+    | 'gijol'
+    | 'serviceStatus';
 }
 
 const Footer = async ({ lng }: PropsWithLng) => {
