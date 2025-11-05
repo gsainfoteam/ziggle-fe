@@ -8,7 +8,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 
-import { auth } from '@/api/auth/auth';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
@@ -40,7 +39,7 @@ export const generateMetadata = async ({
     title: {
       template: `%s | ${t('metadata.title')}`,
       default: t('metadata.title'),
-    },
+    },  
     description: t('metadata.description'),
     twitter: {
       card: 'summary_large_image',
