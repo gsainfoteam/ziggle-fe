@@ -50,18 +50,23 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
     })();
   }, [session, status, lng, router]);
   async function showZigglePolicyModal() {
+    const initialHtml = `
+    <a href="https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1" target="_blank">${t('zigglePolicyModal.initial.privacyPolicyLink')}</a> <br> 
+    <a href="https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257" target="_blank">${t('zigglePolicyModal.initial.termsOfServiceLink')}</a> <br> 
+    ${t('zigglePolicyModal.initial.description')}
+  `;
     await Swal.fire({
-      title: '지글 이용약관 및 개인정보 약관 동의',
-      html: '<a href="https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1" target="_blank">지글 개인정보처리방침</a> <br> <a href="https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257">지글 이용약관</a> <br> 지글을 이용하기 위해서는 다음의 이용약관 및 <br> 개인정보 약관에 대한 동의가 필요합니다. ',
+      title: t('zigglePolicyModal.initial.title'),
+      html: initialHtml,
       icon: 'info',
       showCancelButton: true,
-      confirmButtonText: '동의',
-      cancelButtonText: '취소',
+      confirmButtonText: t('zigglePolicyModal.initial.confirmButton'),
+      cancelButtonText: t('zigglePolicyModal.initial.cancelButton'),
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          title: '동의 완료',
-          text: '약관에 동의하셨습니다.',
+          title: t('zigglePolicyModal.success.title'),
+          text: t('zigglePolicyModal.success.text'),
           icon: 'success',
         });
         setOpenModal(false);
@@ -69,14 +74,14 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         router.push(`${lng}/home`);
       } else {
         Swal.fire({
-          title: '정말로 거절하시겠습니까?',
-          html: '약관에 동의하지 않는 경우 지글을 이용할 수 없으며, <br> 지글로부터 자동 탈퇴 처리됩니다.',
+          title: t('zigglePolicyModal.rejectConfirm.title'),
+          html: t('zigglePolicyModal.rejectConfirm.description'),
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#d33',
           cancelButtonColor: '#3085d6',
-          confirmButtonText: '네, 동의하지 않겠습니다.',
-          cancelButtonText: '약관으로 돌아가기',
+          confirmButtonText: t('zigglePolicyModal.rejectConfirm.confirmButton'),
+          cancelButtonText: t('zigglePolicyModal.rejectConfirm.cancelButton'),
         }).then((result) => {
           if (result.isConfirmed) {
             deleteUser();

@@ -374,5 +374,25 @@
     "text": "You can use more convenient service.",
     "open": "Open App or Install App",
     "cancel": "Never mind"
+  },
+  "zigglePolicyModal": {
+    "initial": {
+      "title": "Agreement to Ziggle's Terms of Service and Privacy Policy",
+      "privacyPolicyLink": "Ziggle Privacy Policy",
+      "termsOfServiceLink": "Ziggle Terms of Service",
+      "description": "To use Ziggle, you must agree to the following Terms of Service <br> and Privacy Policy.",
+      "confirmButton": "Agree",
+      "cancelButton": "Cancel"
+    },
+    "success": {
+      "title": "Agreement Complete",
+      "text": "You have agreed to the terms."
+    },
+    "rejectConfirm": {
+      "title": "Are you sure you want to decline?",
+      "description": "If you do not agree to the terms, you cannot use Ziggle, <br> and your account will be automatically withdrawn.",
+      "confirmButton": "Yes, I do not agree",
+      "cancelButton": "Return to Terms"
+    }
   }
-}
+  }
