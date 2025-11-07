@@ -12,7 +12,7 @@ import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
 
 import AmplitudeProvider from './AmplitudeProvider';
-
+import SessionProviderWrapper from './SessionWrapper';
 const pretendard = localFont({
   src: '../../assets/fonts/PretendardVariable.woff2',
 });
@@ -39,7 +39,7 @@ export const generateMetadata = async ({
     title: {
       template: `%s | ${t('metadata.title')}`,
       default: t('metadata.title'),
-    },
+    },  
     description: t('metadata.description'),
     twitter: {
       card: 'summary_large_image',
@@ -81,7 +81,7 @@ export default async function RootLayout({
   dayjs.locale(lng);
 
   return (
-    <html lang={lng} dir={dir(lng)} suppressHydrationWarning>
+    <html lang={lng} dir={dir(lng)}>
       <Script id="smartlook-api">
         {`
           window.smartlook ||
@@ -115,7 +115,9 @@ export default async function RootLayout({
           'selection:bg-primary/20'
         }
       >
-        <AmplitudeProvider>{children}</AmplitudeProvider>
+        <AmplitudeProvider>
+          <SessionProviderWrapper>{children}</SessionProviderWrapper>
+        </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />

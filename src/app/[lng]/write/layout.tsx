@@ -2,7 +2,9 @@ import '@/app/components/layout/initDayjs';
 import '@/app/globals.css';
 
 import type { Viewport } from 'next';
+import { redirect } from 'next/navigation';
 
+import { auth } from '@/api/auth/auth';
 import Footer from '@/app/components/layout/Footer';
 import NavbarWrite from '@/app/components/layout/NavbarWrite';
 import { PropsWithLng } from '@/app/i18next';
@@ -20,6 +22,10 @@ export default async function Layout({
   children: React.ReactNode;
   params: PropsWithLng;
 }) {
+  const session = await auth();
+  if (!session) {
+    redirect(`/${lng}`);
+  }
   return (
     <InitClient lng={lng}>
       <div>

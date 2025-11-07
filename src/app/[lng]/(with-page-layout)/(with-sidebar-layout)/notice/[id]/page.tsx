@@ -2,6 +2,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { getNotice } from '@/api/notice/get-notice';
+import { createTranslation } from '@/app/i18next';
 import { Locale } from '@/app/i18next/settings';
 
 import Actions from './Actions';
@@ -12,26 +13,21 @@ import NoticeInfo from './NoticeInfo';
 import SendPushAlarm from './SendPushNotificationAlert';
 
 export const generateMetadata = async (
-  {
-    params: { id },
-    searchParams: { lng },
-  }: { params: { id: string }; searchParams: { lng: Locale } },
+  { searchParams: { lng } }: { searchParams: { lng: Locale } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> => {
-  const notice = await getNotice(Number.parseInt(id), lng).catch(() => null);
-  if (!notice) return {};
+  const { t } = await createTranslation(lng);
   const previousImages = (await parent).openGraph?.images ?? [];
 
   return {
-    title: notice.title,
-    description: notice.content.slice(0, 100).replace(/\n/g, ' '),
-    keywords: notice.tags,
-    authors: [{ name: notice.author.name }],
+    title: t('metadata.title'),
+    description: t('metadata.description'),
+    keywords: ['ziggle', 'GIST', 'notice'],
     openGraph: {
-      title: notice.title,
-      description: notice.content.slice(0, 100).replace(/\n/g, ' '),
-      url: `https://ziggle.gistory.me/notice/${id}`,
-      images: [...notice.imageUrls, ...previousImages],
+      title: t('metadata.title'),
+      description: t('metadata.description'),
+      url: `https://ziggle.gistory.me/`,
+      images: [...previousImages],
     },
   };
 };

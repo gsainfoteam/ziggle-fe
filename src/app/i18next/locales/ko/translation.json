@@ -1,5 +1,10 @@
 {
+
   "lang": "ko",
+  "home": {
+    "login": "GIST 계정으로 로그인",
+    "subtitle": "지스트이언을 위한 지글"
+  },
   "metadata": {
     "title": "지글",
     "description": "지스트의 모든 공지를 한눈에"
@@ -358,5 +363,26 @@
     "text": "더욱 편리한 서비스를 이용하실 수 있습니다.",
     "open": "지글 앱을 열거나 설치하기",
     "cancel": "괜찮아요"
+  }
+  ,
+  "zigglePolicyModal": {
+    "initial": {
+      "title": "지글 이용약관 및 개인정보 약관 동의",
+      "privacyPolicyLink": "지글 개인정보처리방침",
+      "termsOfServiceLink": "지글 이용약관",
+      "description": "지글을 이용하기 위해서는 다음의 이용약관 및 <br> 개인정보 약관에 대한 동의가 필요합니다.",
+      "confirmButton": "동의",
+      "cancelButton": "취소"
+    },
+    "success": {
+      "title": "동의 완료",
+      "text": "약관에 동의하셨습니다."
+    },
+    "rejectConfirm": {
+      "title": "정말로 거절하시겠습니까?",
+      "description": "약관에 동의하지 않는 경우 지글을 이용할 수 없으며, <br> 지글로부터 자동 탈퇴 처리됩니다.",
+      "confirmButton": "네 동의하지 않겠습니다.",
+      "cancelButton": "약관으로 돌아가기"
+    }
   }
 }
