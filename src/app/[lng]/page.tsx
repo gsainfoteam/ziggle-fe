@@ -31,7 +31,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   useEffect(() => {
     setMounted(true);
   }, []);
-  const postConsent = async () => {
+  const postConcent = async () => {
     await ziggleApi.post('user/consent');
   };
   const deleteUser = async () => {
@@ -42,8 +42,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
       if (session && status === 'authenticated') {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
-          // setOpenModal(true);
-          router.push(`/home`);
+          router.push(`${lng}/home`);
         } else {
           setOpenModal(true);
         }
@@ -66,7 +65,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
           icon: 'success',
         });
         setOpenModal(false);
-        postConsent();
+        postConcent();
         router.push(`${lng}/home`);
       } else {
         Swal.fire({
