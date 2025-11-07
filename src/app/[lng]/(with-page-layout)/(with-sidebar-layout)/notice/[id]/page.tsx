@@ -22,7 +22,7 @@ export const generateMetadata = async (
   return {
     title: t('metadata.title'),
     description: t('metadata.description'),
-    keywords: 'ziggle, GIST, notice',
+    keywords: ['ziggle', 'GIST', 'notice'],
     openGraph: {
       title: t('metadata.title'),
       description: t('metadata.description'),
