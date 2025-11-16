@@ -57,7 +57,6 @@ const Sidebar = ({ lng }: PropsWithLng) => {
 
   return (
     <>
-      <ChangeDarkModeBox lng={lng} />
       {sidebarObject.map((group, i) => (
         <Fragment key={i}>
           <ul className="flex flex-col gap-y-2">
@@ -91,6 +90,7 @@ const Sidebar = ({ lng }: PropsWithLng) => {
           )}
         </Fragment>
       ))}
+      <ChangeDarkModeBox lng={lng} />
     </>
   );
 };

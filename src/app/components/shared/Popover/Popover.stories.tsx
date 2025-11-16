@@ -1,5 +1,4 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { overlay } from 'overlay-kit';
 
 import Lang from '@/assets/icons/lang.svg';
 import LangEn from '@/assets/icons/lang-en.svg';
@@ -16,7 +15,7 @@ import SunFull from '@/assets/icons/sun-full.svg';
 import System from '@/assets/icons/system.svg';
 import SystemFull from '@/assets/icons/system-full.svg';
 
-import { Popover, PopoverItem } from '.';
+import { Popover } from '.';
 
 export default {
   title: 'shared/Popover',
@@ -79,13 +78,19 @@ const mockItems = [
 const Template: StoryFn<typeof Popover> = (args) => {
   return (
     <div className="w-48">
-      <Popover {...args} />
+      <Popover {...args}>
+        <Popover.Trigger
+          icon={Palette}
+          boldIcon={PaletteFull}
+          label="테마"
+          isSelected={false}
+        />
+      </Popover>
     </div>
   );
 };
 
 const args = {
-  isOpen: true,
   items: mockItems,
   selectedIndex: undefined,
 };
@@ -118,29 +123,22 @@ SingleItem.args = {
 
 export const ChangeTheme = () => {
   return (
-    <PopoverItem
-      icon={Palette}
-      boldIcon={PaletteFull}
-      label="테마"
-      isSelected={false}
-      onClick={async () => {
-        const result = await overlay.openAsync<number>(({ isOpen, close }) => {
-          return (
-            <Popover
-              isOpen={isOpen}
-              items={[
-                { icon: Sun, boldIcon: SunFull, label: '라이트' },
-                { icon: Moon, boldIcon: MoonFull, label: '다크' },
-                { icon: System, boldIcon: SystemFull, label: '자동' },
-              ]}
-              onSelect={(index) => {
-                close(index);
-              }}
-            />
-          );
-        });
-        console.log('Selected index:', result);
+    <Popover
+      items={[
+        { icon: Sun, boldIcon: SunFull, label: '라이트' },
+        { icon: Moon, boldIcon: MoonFull, label: '다크' },
+        { icon: System, boldIcon: SystemFull, label: '자동' },
+      ]}
+      onSelect={(index) => {
+        console.log('Selected index:', index);
       }}
-    />
+    >
+      <Popover.Trigger
+        icon={Palette}
+        boldIcon={PaletteFull}
+        label="테마"
+        isSelected={false}
+      />
+    </Popover>
   );
 };
