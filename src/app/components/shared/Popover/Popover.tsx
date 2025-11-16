@@ -1,12 +1,20 @@
 'use client';
 
+import {
+  autoUpdate,
+  flip,
+  offset,
+  shift,
+  useDismiss,
+  useFloating,
+  useInteractions,
+} from '@floating-ui/react';
 import clsx from 'clsx';
 import React, {
   createContext,
   type ReactNode,
   useCallback,
   useContext,
-  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -55,88 +63,42 @@ const PopoverRoot: React.FC<PopoverProps> = ({
   children,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState<{ x: number; y: number } | null>(
-    null,
-  );
-  const popoverContentRef = useRef<HTMLDivElement>(null);
   const triggerElementRef = useRef<HTMLElement | null>(null);
+
+  const floatingPlacement = `${placement}-start` as const;
+
+  const { refs, floatingStyles, context } = useFloating({
+    open: isOpen,
+    onOpenChange: setIsOpen,
+    placement: floatingPlacement,
+    middleware: [offset(offsetValue), flip(), shift({ padding: 8 })],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const dismiss = useDismiss(context, {
+    outsidePress: true,
+  });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
 
   const closePopover = useCallback(() => {
     setIsOpen(false);
-    setPosition(null);
     triggerElementRef.current = null;
   }, []);
 
   const openPopover = async (
     buttonElement: HTMLElement,
   ): Promise<number | null> => {
-    // 이미 열려있으면 닫기
     if (isOpen) {
       closePopover();
       return null;
     }
 
-    // 버튼의 위치를 가져옴
-    const rect = buttonElement.getBoundingClientRect();
     triggerElementRef.current = buttonElement;
-
-    // Popover의 크기를 추정
-    const popoverWidth = 140; // w-35는 약 140px
-    const popoverHeight = items.length * 40; // 각 아이템이 약 40px 높이
-
-    // 위치 계산
-    let x = 0;
-    let y = 0;
-
-    switch (placement) {
-      case 'bottom':
-        x = rect.left;
-        y = rect.bottom + offsetValue;
-        break;
-      case 'top':
-        x = rect.left;
-        y = rect.top - popoverHeight - offsetValue;
-        break;
-      case 'left':
-        x = rect.left - popoverWidth - offsetValue;
-        y = rect.top;
-        break;
-      case 'right':
-        x = rect.right + offsetValue;
-        y = rect.top;
-        break;
-    }
-
-    setPosition({ x, y });
+    refs.setReference(buttonElement);
     setIsOpen(true);
     return null;
   };
-
-  // 외부 클릭 감지
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const pageClickEvent = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        popoverContentRef.current &&
-        !popoverContentRef.current.contains(target) &&
-        triggerElementRef.current &&
-        !triggerElementRef.current.contains(target)
-      ) {
-        closePopover();
-      }
-    };
-
-    // 다음 이벤트 루프에서 리스너 추가 (현재 클릭 이벤트가 처리된 후)
-    setTimeout(() => {
-      window.addEventListener('click', pageClickEvent, true);
-    }, 0);
-
-    return () => {
-      window.removeEventListener('click', pageClickEvent, true);
-    };
-  }, [isOpen, closePopover]);
 
   return (
     <PopoverContext.Provider
@@ -151,21 +113,16 @@ const PopoverRoot: React.FC<PopoverProps> = ({
       }}
     >
       {children}
-      {isOpen && position && (
+      {isOpen && (
         <div
-          ref={popoverContentRef}
+          ref={refs.setFloating}
           style={{
-            position: 'fixed',
-            top: `${position.y}px`,
-            left: `${position.x}px`,
+            ...floatingStyles,
             zIndex: 1000,
           }}
-          onClick={(e) => {
-            // Popover 내부 클릭은 이벤트 전파 방지
-            e.stopPropagation();
-          }}
+          {...getFloatingProps()}
         >
-          <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 dark:border-dark_greyBorder dark:bg-dark_dark">
+          <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark">
             {items.map((item, index) => {
               const Icon = selectedIndex === index ? item.boldIcon : item.icon;
 
@@ -269,7 +226,7 @@ const PopoverContent: React.FC<PopoverContentProps> = ({
   if (externalIsOpen === false) return null;
 
   return (
-    <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 dark:border-dark_greyBorder dark:bg-dark_dark">
+    <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark">
       {items.map((item, index) => {
         const Icon = selectedIndex === index ? item.boldIcon : item.icon;
 
