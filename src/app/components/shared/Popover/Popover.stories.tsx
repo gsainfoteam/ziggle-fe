@@ -24,12 +24,9 @@ export default {
     layout: 'padded',
   },
   argTypes: {
-    isOpen: {
-      control: 'boolean',
-    },
     selectedIndex: {
       control: { type: 'select' },
-      options: [undefined, 0, 1, 2, 3],
+      options: [undefined, 0, 1, 2, 3, 4, 5, 6],
     },
     onSelect: {
       action: 'selected',
