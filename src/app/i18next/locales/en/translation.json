@@ -32,7 +32,14 @@
     "general": "General",
     "academic": "Academic",
     "write": "Write Notice",
-    "groups": "Groups"
+    "groups": "Groups",
+    "theme": "Theme",
+    "themeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "language": "Language"
   },
   "alertResponse": {
     "yes": "Yes",
@@ -233,14 +240,6 @@
     "totalList": "view all",
     "logout": "Log Out",
     "quit": "Withdrawal",
-    "switchLanguage": "Enable English",
-    "darkModeSettings": "Dark Mode Settings",
-    "loadingDarkModeSettings": "loading...",
-    "darkModeOptions": {
-      "light": "Light",
-      "dark": "Dark",
-      "system": "System"
-    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {

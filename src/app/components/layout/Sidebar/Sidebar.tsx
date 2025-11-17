@@ -7,6 +7,7 @@ import { Fragment } from 'react';
 
 import LogEvents from '@/api/log/log-events';
 import ChangeDarkModeBox from '@/app/[lng]/(with-page-layout)/(without-sidebar-layout)/mypage/ChangeDarkModeBox';
+import ChangeLanguageBox from '@/app/[lng]/(with-page-layout)/(without-sidebar-layout)/mypage/ChangeLanguageBox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -93,7 +94,14 @@ const Sidebar = ({ lng }: PropsWithLng) => {
         ))}
       </div>
       <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
-      <ChangeDarkModeBox lng={lng} />
+      <ul className="flex flex-col gap-y-2">
+        <li className="w-full">
+          <ChangeDarkModeBox lng={lng} />
+        </li>
+        <li className="w-full">
+          <ChangeLanguageBox lng={lng} />
+        </li>
+      </ul>
     </div>
   );
 };
