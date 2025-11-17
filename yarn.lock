@@ -1688,6 +1688,58 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@floating-ui/core@npm:^1.7.3":
+  version: 1.7.3
+  resolution: "@floating-ui/core@npm:1.7.3"
+  dependencies:
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/edfc23800122d81df0df0fb780b7328ae6c5f00efbb55bd48ea340f4af8c5b3b121ceb4bb81220966ab0f87b443204d37105abdd93d94846468be3243984144c
+  languageName: node
+  linkType: hard
+
+"@floating-ui/dom@npm:^1.7.4":
+  version: 1.7.4
+  resolution: "@floating-ui/dom@npm:1.7.4"
+  dependencies:
+    "@floating-ui/core": "npm:^1.7.3"
+    "@floating-ui/utils": "npm:^0.2.10"
+  checksum: 10c0/da6166c25f9b0729caa9f498685a73a0e28251613b35d27db8de8014bc9d045158a23c092b405321a3d67c2064909b6e2a7e6c1c9cc0f62967dca5779f5aef30
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react-dom@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "@floating-ui/react-dom@npm:2.1.6"
+  dependencies:
+    "@floating-ui/dom": "npm:^1.7.4"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/6654834a8e73ecbdbc6cad2ad8f7abc698ac7c1800ded4d61113525c591c03d2e3b59d3cf9205859221465ea38c87af4f9e6e204703c5b7a7e85332d1eef2e18
+  languageName: node
+  linkType: hard
+
+"@floating-ui/react@npm:^0.27.16":
+  version: 0.27.16
+  resolution: "@floating-ui/react@npm:0.27.16"
+  dependencies:
+    "@floating-ui/react-dom": "npm:^2.1.6"
+    "@floating-ui/utils": "npm:^0.2.10"
+    tabbable: "npm:^6.0.0"
+  peerDependencies:
+    react: ">=17.0.0"
+    react-dom: ">=17.0.0"
+  checksum: 10c0/a026266d8875e69de1ac1e1a00588660c8ee299c1e7d067c5c5fd1d69a46fd10acff5dd6cb66c3fe40a3347b443234309ba95f5b33d49059d0cda121f558f566
+  languageName: node
+  linkType: hard
+
+"@floating-ui/utils@npm:^0.2.10":
+  version: 0.2.10
+  resolution: "@floating-ui/utils@npm:0.2.10"
+  checksum: 10c0/e9bc2a1730ede1ee25843937e911ab6e846a733a4488623cd353f94721b05ec2c9ec6437613a2ac9379a94c2fd40c797a2ba6fa1df2716f5ce4aa6ddb1cf9ea4
+  languageName: node
+  linkType: hard
+
 "@humanwhocodes/config-array@npm:^0.13.0":
   version: 0.13.0
   resolution: "@humanwhocodes/config-array@npm:0.13.0"
@@ -2977,15 +3029,6 @@ __metadata:
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
   checksum: 10c0/073bfa548026b1ebaf1659eb8961e526be22fa77139b10d60e712f46d2f0f05f4e6c8bec62a087d41088ee9e29faa7f54838568e475ab2f776171003c3920858
-  languageName: node
-  linkType: hard
-
-"@toss/use-overlay@npm:^1.4.0":
-  version: 1.4.2
-  resolution: "@toss/use-overlay@npm:1.4.2"
-  peerDependencies:
-    react: ^16.8 || ^17 || ^18
-  checksum: 10c0/3e0621d403e88e6f3b013177729972da3460a02c7effe08aff5fcb94a86354220690fdf72dca768b3ef0d9330658632404820f5d3ac3dcc5e34824cf77007e3e
   languageName: node
   linkType: hard
 
@@ -9219,6 +9262,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"overlay-kit@npm:^1.8.5":
+  version: 1.8.5
+  resolution: "overlay-kit@npm:1.8.5"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18 || ^19
+    react-dom: ^16.8 || ^17 || ^18 || ^19
+  checksum: 10c0/2a34071c56175fdaaf48f7a8306d0fd9c9cda02b71511c0e5d99aa9f8e703a8c353e69f110b80c61b514ed84d6ea1da3652b2dd7f06186e29aaa7ebc08598aec
+  languageName: node
+  linkType: hard
+
 "own-keys@npm:^1.0.1":
   version: 1.0.1
   resolution: "own-keys@npm:1.0.1"
@@ -11726,6 +11779,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tabbable@npm:^6.0.0":
+  version: 6.3.0
+  resolution: "tabbable@npm:6.3.0"
+  checksum: 10c0/57ba019d29b5cfa0c862248883bcec0e6d29d8f156ba52a1f425e7cfeca4a0fc701ab8d035c4c86ddf74ecdbd0e9f454a88d9b55d924a51f444038e9cd14d7a0
+  languageName: node
+  linkType: hard
+
 "tailwind-scrollbar@npm:^3.0.5":
   version: 3.1.0
   resolution: "tailwind-scrollbar@npm:3.1.0"
@@ -12902,6 +12962,7 @@ __metadata:
   resolution: "ziggle-fe@workspace:."
   dependencies:
     "@amplitude/analytics-browser": "npm:^2.11.9"
+    "@floating-ui/react": "npm:^0.27.16"
     "@next/third-parties": "npm:^15.0.3"
     "@storybook/addon-essentials": "npm:^8.1.2"
     "@storybook/addon-interactions": "npm:^8.1.2"
@@ -12912,7 +12973,6 @@ __metadata:
     "@storybook/react": "npm:^8.1.2"
     "@svgr/webpack": "npm:^8.1.0"
     "@tinymce/tinymce-react": "npm:^4.3.0"
-    "@toss/use-overlay": "npm:^1.4.0"
     "@types/debug": "npm:^4"
     "@types/jsdom": "npm:^21.1.3"
     "@types/node": "npm:^20"
@@ -12944,6 +13004,7 @@ __metadata:
     next-auth: "npm:^4.24.7"
     next-themes: "npm:^0.4.3"
     node-fetch: "npm:2"
+    overlay-kit: "npm:^1.8.5"
     postcss: "npm:^8"
     prettier: "npm:^3.1.0"
     prettier-plugin-tailwindcss: "npm:^0.5.7"

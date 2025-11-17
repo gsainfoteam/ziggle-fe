@@ -2,7 +2,7 @@ import '../src/app/globals.css';
 
 import type { Preview } from '@storybook/react';
 import React from 'react';
-import { OverlayProvider } from '@toss/use-overlay';
+import { OverlayProvider } from 'overlay-kit';
 
 const preview: Preview = {
   parameters: {

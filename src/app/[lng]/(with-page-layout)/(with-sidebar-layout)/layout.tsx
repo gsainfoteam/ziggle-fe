@@ -12,7 +12,7 @@ export default async function Layout({
 }: LayoutProps) {
   return (
     <>
-      <div className="sticky top-20 ml-4 mt-6 hidden h-fit self-start md:block">
+      <div className="sticky top-20 my-6 ml-4 hidden h-fit self-start md:block">
         <Sidebar lng={lng} />
       </div>
 
