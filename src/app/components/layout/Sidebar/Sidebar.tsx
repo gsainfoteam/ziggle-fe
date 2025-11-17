@@ -6,8 +6,8 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import LogEvents from '@/api/log/log-events';
-import ChangeDarkModeBox from '@/app/[lng]/(with-page-layout)/(without-sidebar-layout)/mypage/ChangeDarkModeBox';
-import ChangeLanguageBox from '@/app/[lng]/(with-page-layout)/(without-sidebar-layout)/mypage/ChangeLanguageBox';
+import ChangeDarkModeBox from '@/app/components/layout/Sidebar/ChangeDarkModeBox';
+import ChangeLanguageBox from '@/app/components/layout/Sidebar/ChangeLanguageBox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 

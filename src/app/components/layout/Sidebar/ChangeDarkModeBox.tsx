@@ -44,7 +44,7 @@ const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
           index === 0 ? 'light' : index === 1 ? 'dark' : 'system';
         setTheme(themeValue);
       }}
-      placement="top"
+      placement="bottom"
       offsetValue={8}
     >
       <Popover.Trigger

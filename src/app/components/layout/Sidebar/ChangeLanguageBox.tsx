@@ -31,7 +31,7 @@ const ChangeLanguageBox = ({ lng }: PropsWithLng) => {
       ]}
       selectedIndex={lng === 'ko' ? 0 : 1}
       onSelect={switchLanguage}
-      placement="top"
+      placement="bottom"
       offsetValue={8}
     >
       <Popover.Trigger
