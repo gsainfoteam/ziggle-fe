@@ -175,14 +175,14 @@ const PopoverTrigger: React.FC<PopoverTriggerProps> = ({
   isSelected = false,
   className,
 }) => {
-  const { openPopover } = usePopoverContext();
-  const Icon = isSelected ? BoldIconComponent : IconComponent;
+  const { openPopover, isOpen } = usePopoverContext();
+  const Icon = isSelected || isOpen ? BoldIconComponent : IconComponent;
 
   return (
     <div
       className={clsx(
         'w-35 flex items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey',
-        isSelected && 'bg-greyLight dark:bg-dark_greyDark',
+        (isSelected || isOpen) && 'bg-greyLight dark:bg-dark_greyDark',
         className,
       )}
       onClick={async (e) => {
@@ -193,7 +193,10 @@ const PopoverTrigger: React.FC<PopoverTriggerProps> = ({
         <Icon />
       </span>
       <span
-        className={clsx('ml-4', isSelected ? 'font-semibold' : 'font-normal')}
+        className={clsx(
+          'ml-4',
+          isSelected || isOpen ? 'font-semibold' : 'font-normal',
+        )}
       >
         {label}
       </span>
