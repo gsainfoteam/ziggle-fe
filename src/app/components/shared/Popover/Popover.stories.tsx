@@ -105,7 +105,7 @@ export const SecondSelected = Template.bind({});
 SecondSelected.args = { ...args, selectedIndex: 1 };
 
 export const LastSelected = Template.bind({});
-LastSelected.args = { ...args, selectedIndex: 3 };
+LastSelected.args = { ...args, selectedIndex: mockItems.length - 1 };
 
 export const TwoItems = Template.bind({});
 TwoItems.args = {

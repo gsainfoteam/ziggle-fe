@@ -15,6 +15,7 @@ import React, {
   type ReactNode,
   useCallback,
   useContext,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -31,7 +32,7 @@ interface PopoverContextValue {
   onSelect?: (index: number) => void;
   placement?: 'bottom' | 'top' | 'left' | 'right';
   offsetValue?: number;
-  openPopover: (buttonElement: HTMLElement) => Promise<number | null>;
+  openPopover: (buttonElement: HTMLElement) => Promise<void>;
   isOpen: boolean;
 }
 
@@ -77,27 +78,25 @@ const PopoverRoot: React.FC<PopoverProps> = ({
 
   const dismiss = useDismiss(context, {
     outsidePress: true,
+    escapeKey: true,
   });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([dismiss]);
+  const { getFloatingProps } = useInteractions([dismiss]);
 
   const closePopover = useCallback(() => {
     setIsOpen(false);
     triggerElementRef.current = null;
   }, []);
 
-  const openPopover = async (
-    buttonElement: HTMLElement,
-  ): Promise<number | null> => {
+  const openPopover = async (buttonElement: HTMLElement) => {
     if (isOpen) {
       closePopover();
-      return null;
+      return;
     }
 
     triggerElementRef.current = buttonElement;
     refs.setReference(buttonElement);
     setIsOpen(true);
-    return null;
   };
 
   return (
@@ -230,6 +229,12 @@ const PopoverContent: React.FC<PopoverContentProps> = ({
   const [internalSelectedIndex, setInternalSelectedIndex] = useState(
     externalSelectedIndex ?? context.selectedIndex,
   );
+
+  useEffect(() => {
+    if (externalSelectedIndex !== undefined) {
+      setInternalSelectedIndex(externalSelectedIndex);
+    }
+  }, [externalSelectedIndex]);
 
   const items = externalItems ?? context.items;
   const selectedIndex = externalSelectedIndex ?? internalSelectedIndex;
