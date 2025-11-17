@@ -122,18 +122,24 @@ const PopoverRoot: React.FC<PopoverProps> = ({
           }}
           {...getFloatingProps()}
         >
-          <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark">
+          <div
+            role="listbox"
+            className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark"
+          >
             {items.map((item, index) => {
               const Icon = selectedIndex === index ? item.boldIcon : item.icon;
 
               return (
-                <div
+                <button
+                  type="button"
                   key={index}
                   className={clsx(
-                    'w-35 flex items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey',
+                    'flex w-full cursor-pointer items-center rounded-md px-4 py-2 text-left transition duration-300 hover:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:hover:bg-dark_grey',
                     selectedIndex === index &&
                       'bg-greyLight dark:bg-dark_greyDark',
                   )}
+                  role="option"
+                  aria-selected={selectedIndex === index}
                   onClick={() => {
                     onSelect?.(index);
                     closePopover();
@@ -150,7 +156,7 @@ const PopoverRoot: React.FC<PopoverProps> = ({
                   >
                     {item.label}
                   </span>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -179,12 +185,15 @@ const PopoverTrigger: React.FC<PopoverTriggerProps> = ({
   const Icon = isSelected || isOpen ? BoldIconComponent : IconComponent;
 
   return (
-    <div
+    <button
+      type="button"
       className={clsx(
-        'w-35 flex items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey',
+        'flex w-full items-center rounded-md px-4 py-2 text-left transition duration-300 hover:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:hover:bg-dark_grey',
         (isSelected || isOpen) && 'bg-greyLight dark:bg-dark_greyDark',
         className,
       )}
+      aria-expanded={isOpen}
+      aria-haspopup="listbox"
       onClick={async (e) => {
         await openPopover(e.currentTarget);
       }}
@@ -200,7 +209,7 @@ const PopoverTrigger: React.FC<PopoverTriggerProps> = ({
       >
         {label}
       </span>
-    </div>
+    </button>
   );
 };
 
@@ -229,17 +238,23 @@ const PopoverContent: React.FC<PopoverContentProps> = ({
   if (externalIsOpen === false) return null;
 
   return (
-    <div className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark">
+    <div
+      role="listbox"
+      className="flex flex-col rounded-xl border border-greyBorder bg-white p-1.5 shadow-lg dark:border-dark_greyBorder dark:bg-dark_dark"
+    >
       {items.map((item, index) => {
         const Icon = selectedIndex === index ? item.boldIcon : item.icon;
 
         return (
-          <div
+          <button
+            type="button"
             key={index}
             className={clsx(
-              'w-35 flex items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none dark:hover:bg-dark_grey',
+              'flex w-full cursor-pointer items-center rounded-md px-4 py-2 text-left transition duration-300 hover:bg-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:hover:bg-dark_grey',
               selectedIndex === index && 'bg-greyLight dark:bg-dark_greyDark',
             )}
+            role="option"
+            aria-selected={selectedIndex === index}
             onClick={() => {
               setInternalSelectedIndex(index);
               onSelect?.(index);
@@ -256,7 +271,7 @@ const PopoverContent: React.FC<PopoverContentProps> = ({
             >
               {item.label}
             </span>
-          </div>
+          </button>
         );
       })}
     </div>

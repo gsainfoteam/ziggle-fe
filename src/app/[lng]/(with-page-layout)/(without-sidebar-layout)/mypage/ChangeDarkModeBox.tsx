@@ -17,15 +17,7 @@ import SystemFull from '@/assets/icons/system-full.svg';
 
 const ChangeDarkModeBox = ({ lng }: PropsWithLng) => {
   const { t } = useTranslation(lng);
-
-  // TODO: support i18n
-
-  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <Popover
