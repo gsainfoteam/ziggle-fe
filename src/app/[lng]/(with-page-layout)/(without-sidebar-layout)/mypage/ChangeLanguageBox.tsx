@@ -2,40 +2,45 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 
-import LogEvents from '@/api/log/log-events';
-import Analytics from '@/app/components/shared/Analytics';
-import Toggle from '@/app/components/shared/Toggle/Toggle';
+import { Popover } from '@/app/components/shared/Popover';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
-
-import MypageBox from './MypageBox';
+import Lang from '@/assets/icons/lang.svg';
+import LangEn from '@/assets/icons/lang-en.svg';
+import LangEnFull from '@/assets/icons/lang-en-full.svg';
+import LangFull from '@/assets/icons/lang-full.svg';
+import LangKo from '@/assets/icons/lang-ko.svg';
+import LangKoFull from '@/assets/icons/lang-ko-full.svg';
 
 const ChangeLanguageBox = ({ lng }: PropsWithLng) => {
   const pathname = usePathname();
   const { push } = useRouter();
-
-  const switchLanguage = () => {
-    push(
-      `/${lng === 'en' ? 'ko' : 'en'}/${pathname
-        .split('/')
-        .slice(2)
-        .join('/')}`,
-    );
-  };
-
   const { t } = useTranslation(lng);
 
+  const switchLanguage = (index: number) => {
+    const newLang = index === 0 ? 'ko' : 'en';
+    push(`/${newLang}/${pathname.split('/').slice(2).join('/')}`);
+  };
+
   return (
-    <MypageBox>
-      <div className="flex justify-between self-stretch">
-        <div className="flex text-greyDark dark:text-dark_white">
-          {t('mypage.switchLanguage')}
-        </div>
-        <Analytics event={LogEvents.myToggleLanguage}>
-          <Toggle isSwitched={lng === 'en'} onSwitch={switchLanguage} />
-        </Analytics>
-      </div>
-    </MypageBox>
+    <Popover
+      items={[
+        // 의도적으로 i18n을 사용하지 않음
+        { icon: LangKo, boldIcon: LangKoFull, label: '한국어' },
+        { icon: LangEn, boldIcon: LangEnFull, label: 'English' },
+      ]}
+      selectedIndex={lng === 'ko' ? 0 : 1}
+      onSelect={switchLanguage}
+      placement="top"
+      offsetValue={8}
+    >
+      <Popover.Trigger
+        icon={Lang}
+        boldIcon={LangFull}
+        label={t('sidebar.language')}
+        isSelected={false}
+      />
+    </Popover>
   );
 };
 
