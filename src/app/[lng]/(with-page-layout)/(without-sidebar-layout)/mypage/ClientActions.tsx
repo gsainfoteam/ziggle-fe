@@ -29,12 +29,12 @@ export default function ClientActions({ lng }: PropsWithLng) {
       buttonsStyling: false
     });
     swalWithBootstrapButtons.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "정말 탈퇴하시겠습니까?",
+      text: "탈퇴 버튼 선택 시, 계정은 삭제되며 복구되지 않습니다.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel!",
+      confirmButtonText: "탈퇴",
+      cancelButtonText: "취소",
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
@@ -42,8 +42,8 @@ export default function ClientActions({ lng }: PropsWithLng) {
         //index.ts에 설명 적어둠. fetch대신 ziggleApi.delete쓰기. 
         //원래 경로는 https://api.stg.ziggle.gistory.me/user인데 bff써서 /user만 쓰는거.
         swalWithBootstrapButtons.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
+          title: "탈퇴 완료",
+          text: "회원님의 Ziggle 계정이 성공적으로 삭제되었습니다.",
           icon: "success"
         });
       } else if (
