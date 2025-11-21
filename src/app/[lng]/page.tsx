@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
+import { overlay } from 'overlay-kit';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
@@ -12,6 +13,7 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
 import InitClient from '../components/layout/InitClient';
+import ConfirmModal from '../components/layout/Modal/ConfirmModal';
 import Button from '../components/shared/Button';
 
 interface UserInfo {
@@ -121,6 +123,17 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         </p>
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>
           {t('home.login')}
+        </Button>
+
+        <Button
+          variant="outlined"
+          onClick={() => {
+            overlay.open(({ isOpen, close }) => {
+              return <ConfirmModal isOpen={isOpen} close={close} />;
+            });
+          }}
+        >
+          testing modal
         </Button>
       </div>
     </InitClient>
