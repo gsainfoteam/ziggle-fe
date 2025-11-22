@@ -13,7 +13,7 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg';
 
 import InitClient from '../components/layout/InitClient';
-import ConfirmModal from '../components/layout/Modal/ConfirmModal';
+import PolicyModal from '../components/layout/Modal/PolicyModal';
 import Button from '../components/shared/Button';
 
 interface UserInfo {
@@ -124,12 +124,13 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>
           {t('home.login')}
         </Button>
-
         <Button
           variant="outlined"
           onClick={() => {
-            overlay.open(({ isOpen, close }) => {
-              return <ConfirmModal isOpen={isOpen} close={close} />;
+            overlay.open(({ isOpen, close, unmount }) => {
+              return (
+                <PolicyModal isOpen={isOpen} close={close} unmount={unmount} />
+              );
             });
           }}
         >

@@ -7,6 +7,7 @@ import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import { OverlayProvider } from 'overlay-kit';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
@@ -39,7 +40,7 @@ export const generateMetadata = async ({
     title: {
       template: `%s | ${t('metadata.title')}`,
       default: t('metadata.title'),
-    },  
+    },
     description: t('metadata.description'),
     twitter: {
       card: 'summary_large_image',
@@ -116,7 +117,9 @@ export default async function RootLayout({
         }
       >
         <AmplitudeProvider>
-          <SessionProviderWrapper>{children}</SessionProviderWrapper>
+          <SessionProviderWrapper>
+            <OverlayProvider>{children}</OverlayProvider>
+          </SessionProviderWrapper>
         </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
