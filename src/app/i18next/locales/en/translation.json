@@ -233,6 +233,18 @@
     "totalList": "view all",
     "logout": "Log Out",
     "quit": "Withdrawal",
+    "withdrawal": {
+      "confirm": {
+        "title": "Are you sure you want to withdraw?",
+        "text": "By selecting the withdrawal button, your account will be deleted and cannot be restored.",
+        "okBtn": "Withdraw",
+        "cancelBtn": "Cancel"
+      },
+      "success": {
+        "title": "Withdrawal Complete",
+        "text": "Your Ziggle account has been successfully deleted."
+      }
+    },
     "switchLanguage": "Enable English",
     "darkModeSettings": "Dark Mode Settings",
     "loadingDarkModeSettings": "loading...",
