@@ -2,7 +2,7 @@ import privacyData from './policy.json';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="mx-auto max-w-3xl p-6 text-gray-800">
+    <div className="mx-auto max-w-3xl p-6 text-gray-800 dark:text-dark_white">
       {/* 헤더 영역 */}
       <h1 className="mb-2 text-3xl font-bold">{privacyData.meta.title}</h1>
       <p className="mb-6 text-sm text-gray-500">
@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
         {privacyData.notices.map((notice, idx) => (
           <p
             key={idx}
-            className="mb-1 flex items-start gap-2 text-sm last:mb-0"
+            className="dark: mb-1 flex items-start gap-2 text-sm text-black last:mb-0 "
           >
             <span>💡</span>
             {notice}
@@ -40,7 +40,7 @@ const PrivacyPolicy = () => {
                   )}
 
                   {'text' in item && (
-                    <p className="mb-2 whitespace-pre-wrap text-gray-700">
+                    <p className="dark: text-dark mb-2 whitespace-pre-wrap">
                       {item.text}
                     </p>
                   )}
