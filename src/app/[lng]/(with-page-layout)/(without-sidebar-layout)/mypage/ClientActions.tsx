@@ -11,7 +11,7 @@ import { useTranslation } from '@/app/i18next/client';
 import MypageBox from './MypageBox';
 
 import Swal from 'sweetalert2';
-import { ziggleApi } from '@/api/index'; //api/index에서 정의한 ziggleApi불러오기
+import { ziggleApi } from '@/api/index';
 
 export default function ClientActions({ lng }: PropsWithLng) {
   const { t } = useTranslation(lng);
@@ -56,12 +56,6 @@ export default function ClientActions({ lng }: PropsWithLng) {
             icon: "error"
           });
         }
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        await swalWithBootstrapButtons.fire({
-          title: "Cancelled",
-          text: "Your account is safe.",
-          icon: "info" //info?
-        });
       }
     } catch (err) {
       console.error('withdrawal flow error:', err);
