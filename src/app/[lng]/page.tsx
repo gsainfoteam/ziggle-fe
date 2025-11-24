@@ -74,9 +74,6 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>
           {t('home.login')}
         </Button>
-        <Button variant="outlined" onClick={handleOpenOverlay}>
-          testing modal
-        </Button>
       </div>
     </InitClient>
   );
