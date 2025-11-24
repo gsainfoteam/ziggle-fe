@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { overlay } from 'overlay-kit';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Swal from 'sweetalert2';
 
 import { ziggleApi } from '@/api';
@@ -30,6 +30,23 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const { data: session, status } = useSession();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
+  const isOverlayOpen = useRef(false);
+
+  const handleOpenOverlay = () => {
+    if (isOverlayOpen.current) return;
+    isOverlayOpen.current = true;
+    overlay.open(({ isOpen, unmount }) => {
+      return (
+        <PolicyModal
+          isOpen={isOpen}
+          unmount={() => {
+            isOverlayOpen.current = false;
+            unmount();
+          }}
+        />
+      );
+    });
+  };
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -124,16 +141,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>
           {t('home.login')}
         </Button>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            overlay.open(({ isOpen, close, unmount }) => {
-              return (
-                <PolicyModal isOpen={isOpen} close={close} unmount={unmount} />
-              );
-            });
-          }}
-        >
+        <Button variant="outlined" onClick={handleOpenOverlay}>
           testing modal
         </Button>
       </div>

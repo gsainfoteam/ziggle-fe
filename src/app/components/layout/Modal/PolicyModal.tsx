@@ -5,11 +5,9 @@ import Button from '../../shared/Button';
 import PrivacyPolicy from './policy';
 export default function PolicyModal({
   isOpen,
-  close,
   unmount,
 }: {
   isOpen: boolean;
-  close: () => void;
   unmount: () => void;
 }) {
   return (
@@ -18,7 +16,7 @@ export default function PolicyModal({
       onClick={unmount}
     >
       <div
-        className="flex h-[500px] w-[520px] flex-col justify-between  rounded-xl bg-white p-[25px]"
+        className="flex h-[500px] w-[520px] flex-col justify-between  rounded-xl bg-white p-[25px] "
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
