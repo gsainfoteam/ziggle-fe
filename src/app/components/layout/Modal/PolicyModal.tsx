@@ -1,4 +1,5 @@
 import { overlay } from 'overlay-kit';
+import { useState } from 'react';
 
 import { ziggleApi } from '@/api';
 import Xmark_dark from '@/assets/icons/xmark_dark.svg';
@@ -10,6 +11,8 @@ import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
 
 export default function PolicyModal({ unmount }: { unmount: () => void }) {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const postConcent = async () => {
     await ziggleApi.post('user/consent');
   };
@@ -88,7 +91,13 @@ export default function PolicyModal({ unmount }: { unmount: () => void }) {
             <PrivacyPolicy />
           </div>
           <div className="flex gap-2">
-            <input className="" id="confirm" type="checkbox" />
+            <input
+              className=""
+              id="confirm"
+              type="checkbox"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
             <label htmlFor="confirm">(필수) 개인정보 수집 동의</label>
           </div>
         </div>
@@ -106,7 +115,7 @@ export default function PolicyModal({ unmount }: { unmount: () => void }) {
           </Button>
           <Button
             className="w-[220px]"
-            variant="contained"
+            variant={isChecked ? 'contained' : 'disabled'}
             onClick={handleConfirmModal}
           >
             동의
