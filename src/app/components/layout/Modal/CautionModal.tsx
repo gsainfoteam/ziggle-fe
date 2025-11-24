@@ -11,10 +11,12 @@ export default function CautionModal({
   isOpen,
   unmount,
   unmountPolicy,
+  lng,
 }: {
   isOpen: boolean;
   unmount: () => void;
   unmountPolicy: () => void;
+  lng: 'en' | 'ko';
 }) {
   const deleteUser = async () => {
     await ziggleApi.delete('/user');
@@ -63,7 +65,7 @@ export default function CautionModal({
             onClick={() => {
               unmount();
               overlay.open(({ unmount }) => {
-                return <PolicyModal unmount={unmount} />;
+                return <PolicyModal unmount={unmount} lng={lng} />;
               });
             }}
           >

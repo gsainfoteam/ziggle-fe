@@ -7,9 +7,11 @@ import Button from '../../shared/Button';
 export default function ConfirmModal({
   isOpen,
   unmount,
+  lng,
 }: {
   isOpen: boolean;
   unmount: () => void;
+  lng: 'en' | 'ko';
 }) {
   const router = useRouter();
   return (
@@ -52,7 +54,7 @@ export default function ConfirmModal({
           <Button
             className="w-[220px]"
             variant="contained"
-            onClick={() => router.push(`/`)}
+            onClick={() => router.push(`/${lng}/home`)}
           >
             메인으로 이동
           </Button>

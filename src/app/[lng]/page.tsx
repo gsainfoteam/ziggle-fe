@@ -40,6 +40,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
             isOverlayOpen.current = false;
             unmount();
           }}
+          lng={lng}
         />
       );
     });

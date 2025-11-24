@@ -10,7 +10,13 @@ import CautionModal from './CautionModal';
 import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
 
-export default function PolicyModal({ unmount }: { unmount: () => void }) {
+export default function PolicyModal({
+  unmount,
+  lng,
+}: {
+  unmount: () => void;
+  lng: 'en' | 'ko';
+}) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const unmountPolicy = unmount;
 
@@ -26,6 +32,7 @@ export default function PolicyModal({ unmount }: { unmount: () => void }) {
           isOpen={isOpen}
           unmount={unmount}
           unmountPolicy={unmountPolicy}
+          lng={lng}
         />
       );
     });
@@ -35,7 +42,7 @@ export default function PolicyModal({ unmount }: { unmount: () => void }) {
     postConcent();
     unmount();
     overlay.open(({ isOpen, unmount }) => {
-      return <ConfirmModal isOpen={isOpen} unmount={unmount} />;
+      return <ConfirmModal isOpen={isOpen} unmount={unmount} lng={lng} />;
     });
   };
   return (
