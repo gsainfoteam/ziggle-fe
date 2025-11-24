@@ -16,8 +16,6 @@ export default function CautionModal({
   unmount: () => void;
   unmountPolicy: () => void;
 }) {
-  const router = useRouter();
-
   const deleteUser = async () => {
     await ziggleApi.delete('/user');
   };
