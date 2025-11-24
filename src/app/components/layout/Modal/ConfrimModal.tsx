@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 
+import Check_mark from '@/assets/icons/checkmark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
@@ -25,10 +26,14 @@ export default function ConfirmModal({
             <Xmark_white />
           </button>
         </div>
-        <p className="mb-3 text-xl font-semibold md:text-2xl">
+        <div className="flex justify-center">
+          <Check_mark />
+        </div>
+
+        <p className="mb-3 text-center text-xl font-semibold md:text-2xl">
           개인정보 동의 완료
         </p>
-        <p>개인정보 동의가 완료되었습니다.</p>
+        <p className="text-center">개인정보 동의가 완료되었습니다.</p>
         <div
           className="flex w-full justify-between
         "
