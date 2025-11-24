@@ -1,5 +1,6 @@
 import { overlay } from 'overlay-kit';
 
+import { ziggleApi } from '@/api';
 import Xmark_dark from '@/assets/icons/xmark_dark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
@@ -7,6 +8,7 @@ import Button from '../../shared/Button';
 import CautionModal from './CautionModal';
 import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
+
 export default function PolicyModal({
   isOpen,
   unmount,
@@ -14,6 +16,10 @@ export default function PolicyModal({
   isOpen: boolean;
   unmount: () => void;
 }) {
+  const postConcent = async () => {
+    await ziggleApi.post('user/consent');
+  };
+
   const handleCutionModal = () => {
     unmount();
     overlay.open(({ isOpen, unmount }) => {
@@ -22,6 +28,7 @@ export default function PolicyModal({
   };
 
   const handleConfirmModal = () => {
+    postConcent();
     unmount();
     overlay.open(({ isOpen, unmount }) => {
       return <ConfirmModal isOpen={isOpen} unmount={unmount} />;
