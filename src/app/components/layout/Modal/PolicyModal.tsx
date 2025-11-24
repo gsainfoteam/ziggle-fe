@@ -1,3 +1,5 @@
+import { overlay } from 'overlay-kit';
+
 import Xmark_dark from '@/assets/icons/xmark_dark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
