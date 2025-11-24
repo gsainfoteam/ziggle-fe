@@ -28,10 +28,20 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [mounted, setMounted] = useState(false);
+  const isOverlayOpen = useRef(false);
 
   const handleOpenOverlay = () => {
+    if (isOverlayOpen.current) return;
+    isOverlayOpen.current = true;
     overlay.open(({ unmount }) => {
-      return <PolicyModal unmount={unmount} />;
+      return (
+        <PolicyModal
+          unmount={() => {
+            isOverlayOpen.current = false;
+            unmount();
+          }}
+        />
+      );
     });
   };
 

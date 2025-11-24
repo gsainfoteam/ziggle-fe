@@ -12,6 +12,7 @@ import PrivacyPolicy from './policy';
 
 export default function PolicyModal({ unmount }: { unmount: () => void }) {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const unmountPolicy = unmount;
 
   const postConcent = async () => {
     await ziggleApi.post('user/consent');
@@ -20,7 +21,13 @@ export default function PolicyModal({ unmount }: { unmount: () => void }) {
   const handleCutionModal = () => {
     unmount();
     overlay.open(({ isOpen, unmount }) => {
-      return <CautionModal isOpen={isOpen} unmount={unmount} />;
+      return (
+        <CautionModal
+          isOpen={isOpen}
+          unmount={unmount}
+          unmountPolicy={unmountPolicy}
+        />
+      );
     });
   };
 

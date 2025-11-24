@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import { ziggleApi } from '@/api';
@@ -9,10 +10,14 @@ import PolicyModal from './PolicyModal';
 export default function CautionModal({
   isOpen,
   unmount,
+  unmountPolicy,
 }: {
   isOpen: boolean;
   unmount: () => void;
+  unmountPolicy: () => void;
 }) {
+  const router = useRouter();
+
   const deleteUser = async () => {
     await ziggleApi.delete('/user');
   };
@@ -43,7 +48,15 @@ export default function CautionModal({
           className="flex w-full justify-between
         "
         >
-          <Button className="w-[220px]" variant="outlined" onClick={deleteUser}>
+          <Button
+            className="w-[220px]"
+            variant="outlined"
+            onClick={() => {
+              deleteUser();
+              unmountPolicy();
+              unmount();
+            }}
+          >
             네, 동의하지 않겠습니다.
           </Button>
           <Button
