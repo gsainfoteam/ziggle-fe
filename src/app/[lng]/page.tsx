@@ -30,17 +30,13 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const { data: session, status } = useSession();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
-  const isOverlayOpen = useRef(false);
 
   const handleOpenOverlay = () => {
-    if (isOverlayOpen.current) return;
-    isOverlayOpen.current = true;
     overlay.open(({ isOpen, unmount }) => {
       return (
         <PolicyModal
           isOpen={isOpen}
           unmount={() => {
-            isOverlayOpen.current = false;
             unmount();
           }}
         />
