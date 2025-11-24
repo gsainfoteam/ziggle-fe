@@ -9,13 +9,7 @@ import CautionModal from './CautionModal';
 import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
 
-export default function PolicyModal({
-  isOpen,
-  unmount,
-}: {
-  isOpen: boolean;
-  unmount: () => void;
-}) {
+export default function PolicyModal({ unmount }: { unmount: () => void }) {
   const postConcent = async () => {
     await ziggleApi.post('user/consent');
   };

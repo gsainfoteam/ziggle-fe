@@ -51,8 +51,8 @@ export default function CautionModal({
             variant="contained"
             onClick={() => {
               unmount();
-              overlay.open(({ isOpen, unmount }) => {
-                return <PolicyModal isOpen={isOpen} unmount={unmount} />;
+              overlay.open(({ unmount }) => {
+                return <PolicyModal unmount={unmount} />;
               });
             }}
           >

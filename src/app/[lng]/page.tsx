@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { overlay } from 'overlay-kit';
 import { useEffect, useRef, useState } from 'react';
-import Swal from 'sweetalert2';
 
 import { ziggleApi } from '@/api';
 import { PropsWithLng } from '@/app/i18next';
@@ -28,30 +27,18 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const { t } = useTranslation(lng);
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [openModal, setOpenModal] = useState<boolean>(false);
   const [mounted, setMounted] = useState(false);
 
   const handleOpenOverlay = () => {
-    overlay.open(({ isOpen, unmount }) => {
-      return (
-        <PolicyModal
-          isOpen={isOpen}
-          unmount={() => {
-            unmount();
-          }}
-        />
-      );
+    overlay.open(({ unmount }) => {
+      return <PolicyModal unmount={unmount} />;
     });
   };
+
   useEffect(() => {
     setMounted(true);
   }, []);
-  const postConcent = async () => {
-    await ziggleApi.post('user/consent');
-  };
-  const deleteUser = async () => {
-    await ziggleApi.delete('/user');
-  };
+
   useEffect(() => {
     (async () => {
       if (session && status === 'authenticated') {
@@ -59,61 +46,11 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         if (data.consent === true) {
           router.push(`${lng}/home`);
         } else {
-          setOpenModal(true);
+          handleOpenOverlay();
         }
       }
     })();
   }, [session, status, lng, router]);
-  async function showZigglePolicyModal() {
-    const initialHtml = `
-    <a href="https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1" target="_blank">${t('zigglePolicyModal.initial.privacyPolicyLink')}</a> <br> 
-    <a href="https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257" target="_blank">${t('zigglePolicyModal.initial.termsOfServiceLink')}</a> <br> 
-    ${t('zigglePolicyModal.initial.description')}
-  `;
-    await Swal.fire({
-      title: t('zigglePolicyModal.initial.title'),
-      html: initialHtml,
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonText: t('zigglePolicyModal.initial.confirmButton'),
-      cancelButtonText: t('zigglePolicyModal.initial.cancelButton'),
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: t('zigglePolicyModal.success.title'),
-          text: t('zigglePolicyModal.success.text'),
-          icon: 'success',
-        });
-        setOpenModal(false);
-        postConcent();
-        router.push(`${lng}/home`);
-      } else {
-        Swal.fire({
-          title: t('zigglePolicyModal.rejectConfirm.title'),
-          html: t('zigglePolicyModal.rejectConfirm.description'),
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#d33',
-          cancelButtonColor: '#3085d6',
-          confirmButtonText: t('zigglePolicyModal.rejectConfirm.confirmButton'),
-          cancelButtonText: t('zigglePolicyModal.rejectConfirm.cancelButton'),
-        }).then((result) => {
-          if (result.isConfirmed) {
-            deleteUser();
-            signOut();
-            setOpenModal(false);
-          } else {
-            showZigglePolicyModal();
-          }
-        });
-      }
-    });
-  }
-  useEffect(() => {
-    if (openModal) {
-      showZigglePolicyModal();
-    }
-  }, [openModal]);
 
   if (!mounted) {
     return (
