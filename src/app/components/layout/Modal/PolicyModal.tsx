@@ -4,6 +4,8 @@ import Xmark_dark from '@/assets/icons/xmark_dark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
+import CautionModal from './CautionModal';
+import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
 export default function PolicyModal({
   isOpen,
@@ -12,6 +14,19 @@ export default function PolicyModal({
   isOpen: boolean;
   unmount: () => void;
 }) {
+  const handleCutionModal = () => {
+    unmount();
+    overlay.open(({ isOpen, unmount }) => {
+      return <CautionModal isOpen={isOpen} unmount={unmount} />;
+    });
+  };
+
+  const handleConfirmModal = () => {
+    unmount();
+    overlay.open(({ isOpen, unmount }) => {
+      return <ConfirmModal isOpen={isOpen} unmount={unmount} />;
+    });
+  };
   return (
     <div
       className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
@@ -81,10 +96,18 @@ export default function PolicyModal({
           className="flex w-full justify-between
         "
         >
-          <Button className="w-[220px]" variant="outlined" onClick={unmount}>
+          <Button
+            className="w-[220px]"
+            variant="outlined"
+            onClick={handleCutionModal}
+          >
             동의 안함
           </Button>
-          <Button className="w-[220px]" variant="contained">
+          <Button
+            className="w-[220px]"
+            variant="contained"
+            onClick={handleConfirmModal}
+          >
             동의
           </Button>
         </div>

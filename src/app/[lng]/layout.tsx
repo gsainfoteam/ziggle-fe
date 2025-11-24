@@ -117,9 +117,7 @@ export default async function RootLayout({
         }
       >
         <AmplitudeProvider>
-          <SessionProviderWrapper>
-            <OverlayProvider>{children}</OverlayProvider>
-          </SessionProviderWrapper>
+          <SessionProviderWrapper>{children}</SessionProviderWrapper>
         </AmplitudeProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
