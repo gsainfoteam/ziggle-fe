@@ -38,7 +38,7 @@ const Navbar = ({ lng }: PropsWithLng) => {
     <header className="sticky top-0 z-50 flex w-full items-center justify-between bg-white py-3 pl-2 pr-1 text-text dark:bg-dark_dark md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
         <Analytics event={LogEvents.navBarClickLogo}>
-          <Link href={`/${lng}`}>
+          <Link href={`/${lng}/home`}>
             <div className="block dark:hidden">
               <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
               <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
