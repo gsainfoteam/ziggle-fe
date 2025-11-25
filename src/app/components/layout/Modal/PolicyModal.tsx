@@ -2,6 +2,7 @@ import { overlay } from 'overlay-kit';
 import { useState } from 'react';
 
 import { ziggleApi } from '@/api';
+import { useTranslation } from '@/app/i18next/client';
 import Xmark_dark from '@/assets/icons/xmark_dark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
@@ -15,8 +16,10 @@ export default function PolicyModal({
   lng,
 }: {
   unmount: () => void;
-  lng: 'en' | 'ko';
+  lng: 'ko' | 'en';
 }) {
+  const { t } = useTranslation(lng);
+
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const unmountPolicy = unmount;
 
@@ -60,47 +63,48 @@ export default function PolicyModal({
           </button>
         </div>
         <p className="mb-3 text-xl font-semibold md:text-2xl">
-          개인정보 처리 방침 계정 안내
+          {t('zigglePolicyModal.policy.title')}
         </p>
 
         <div className="flex grow flex-col justify-around">
-          <p>
-            지글의 개인정보 수집 목적은 다음과 같습니다.
-            <br /> 내용을 자세히 읽어 보신 후 동의를 결정하여 주시길 바랍니다.
-          </p>
+          <p>{t('zigglePolicyModal.policy.content')}</p>
           <div className="overflow-hidden rounded-xl border border-primary">
             <table className="w-full text-center text-sm">
               <thead className="bg-primary/10">
                 <tr>
                   <th className="border-r border-primary p-3 last:border-r-0">
-                    수집 목적
+                    {t('zigglePolicyModal.table.header.purpose')}
                   </th>
                   <th className="border-r border-primary p-3 last:border-r-0">
-                    필수 항목
+                    {t('zigglePolicyModal.table.header.mandatory')}
                   </th>
                   <th className="border-r border-primary p-3 last:border-r-0">
-                    선택 항목
+                    {t('zigglePolicyModal.table.header.choice')}
                   </th>
-                  <th className="p-3">이용 기간</th>
+                  <th className="p-3">
+                    {t('zigglePolicyModal.table.header.duration')}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-t border-primary">
                   <td className="border-r border-primary p-3 last:border-r-0">
-                    관리
+                    {t('zigglePolicyModal.table.content.purpose')}
                   </td>
                   <td className="border-r border-primary p-3 last:border-r-0">
-                    이름, 이메일
+                    {t('zigglePolicyModal.table.content.mandatory')}
                   </td>
                   <td className="border-r border-primary p-3 last:border-r-0">
-                    연락처, 학번
+                    {t('zigglePolicyModal.table.content.choice')}
                   </td>
-                  <td className="p-3">수집일부터 1년까지</td>
+                  <td className="p-3">
+                    {t('zigglePolicyModal.table.content.duration')}
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p>자세한 내용은 개인정보 처리 방침을 확인해주세요.</p>
+          <p>{t('zigglePolicyModal.policy.detail')}</p>
           <div className="max-h-[6rem] overflow-y-auto scroll-smooth rounded-lg border border-primary">
             <PrivacyPolicy />
           </div>
@@ -112,7 +116,9 @@ export default function PolicyModal({
               checked={isChecked}
               onChange={(e) => setIsChecked(e.target.checked)}
             />
-            <label htmlFor="confirm">(필수) 개인정보 수집 동의</label>
+            <label htmlFor="confirm">
+              {t('zigglePolicyModal.policy.checkbox')}
+            </label>
           </div>
         </div>
 
@@ -125,14 +131,14 @@ export default function PolicyModal({
             variant="outlined"
             onClick={handleCutionModal}
           >
-            동의 안함
+            {t('zigglePolicyModal.policy.cancelButton')}
           </Button>
           <Button
             className="w-[220px]"
             variant={isChecked ? 'contained' : 'disabled'}
             onClick={handleConfirmModal}
           >
-            동의
+            {t('zigglePolicyModal.policy.confirmButton')}
           </Button>
         </div>
       </div>

@@ -374,24 +374,42 @@
     "open": "Open App or Install App",
     "cancel": "Never mind"
   },
+  
   "zigglePolicyModal": {
-    "initial": {
-      "title": "Agreement to Ziggle's Terms of Service and Privacy Policy",
-      "privacyPolicyLink": "Ziggle Privacy Policy",
-      "termsOfServiceLink": "Ziggle Terms of Service",
-      "description": "To use Ziggle, you must agree to the following Terms of Service <br> and Privacy Policy.",
-      "confirmButton": "Agree",
-      "cancelButton": "Cancel"
+    "policy": {
+      "title": "Privacy Policy & Account Notice",
+      "content": "The purpose of Ziggle's personal information collection is as follows. <br> Please read the details carefully before deciding to consent.",
+      "detail": "Please check the Privacy Policy for more details.",
+      "checkbox": "(Required) Consent to collection of personal information",
+      "cancelButton": "Cancel",
+      "confirmButton": "Agree"
     },
-    "success": {
-      "title": "Agreement Complete",
-      "text": "You have agreed to the terms."
+    "table": {
+      "header": {
+        "purpose": "Purpose",
+        "mandatory": "Mandatory Items",
+        "choice": "Optional Items",
+        "duration": "Retention Period"
+      },
+      "content": {
+        "purpose": "Management",
+        "mandatory": "Name, Email",
+        "choice": "Contact Info, Student ID",
+        "duration": "1 year from collection"
+      }
     },
-    "rejectConfirm": {
+    "confirm": {
+      "title": "Consent Completed",
+      "text": "Your consent to personal information collection is complete.",
+      "return": "View Consent History",
+      "main": "Go to Main"
+    },
+    "caution": {
       "title": "Are you sure you want to decline?",
-      "description": "If you do not agree to the terms, you cannot use Ziggle, <br> and your account will be automatically withdrawn.",
-      "confirmButton": "Yes, I do not agree",
-      "cancelButton": "Return to Terms"
+      "description": "If you do not agree to the revised Terms of Service, you will no longer be able to use Ziggle. Your account will be automatically terminated, and your data will be deleted.",
+      "rejectButton": "Yes, I decline",
+      "returnButton": "Back to Terms"
     }
   }
-  }
+}
+  

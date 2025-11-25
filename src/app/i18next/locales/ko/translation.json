@@ -365,23 +365,39 @@
   }
   ,
   "zigglePolicyModal": {
-    "initial": {
-      "title": "지글 이용약관 및 개인정보 약관 동의",
-      "privacyPolicyLink": "지글 개인정보처리방침",
-      "termsOfServiceLink": "지글 이용약관",
-      "description": "지글을 이용하기 위해서는 다음의 이용약관 및 <br> 개인정보 약관에 대한 동의가 필요합니다.",
-      "confirmButton": "동의",
-      "cancelButton": "취소"
+    "policy": {
+      "title": "개인정보 처리 방침 계정 안내",
+      "content": "지글의 개인정보 수집 목적은 다음과 같습니다. <br> 내용을 자세히 읽어 보신 후 동의를 결정하여 주시길 바랍니다.",
+      "detail": "자세한 내용은 개인정보 처리 방침을 확인해주세요.",
+      "checkbox": "(필수) 개인정보 수집 동의",
+      "cancelButton": "취소",
+      "confirmButton": "동의"
     },
-    "success": {
-      "title": "동의 완료",
-      "text": "약관에 동의하셨습니다."
+    "table": {
+      "header": {
+        "purpose": "수집 목적",
+        "mandatory": "필수 항목",
+        "choice": "선택 항목",
+        "duration": "이용 기간"
+      },
+      "content": {
+        "purpose": "관리",
+        "mandatory": "이름, 이메일",
+        "choice": "연락처, 학번",
+        "duration": "수집일부터 1년까지"
+      }
     },
-    "rejectConfirm": {
+    "confirm": {
+      "title": "개인정보 동의 완료",
+      "text": "개인정보 동의가 완료되었습니다.",
+      "return": "동의 내역 확인",
+      "main": "메인으로 이동"
+    },
+    "caution": {
       "title": "정말로 거절하시겠습니까?",
-      "description": "약관에 동의하지 않는 경우 지글을 이용할 수 없으며, <br> 지글로부터 자동 탈퇴 처리됩니다.",
-      "confirmButton": "네 동의하지 않겠습니다.",
-      "cancelButton": "약관으로 돌아가기"
+      "description": "개정된 이용약관에 동의하지 않으시면, 지글 이용이 중단됩니다. 계정은 자동으로 해지 처리되며, 계정 정보는 파기됩니다.",
+      "rejectButton": "네 동의하지 않겠습니다.",
+      "returnButton": "약관으로 돌아가기"
     }
   }
 }

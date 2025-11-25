@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import { ziggleApi } from '@/api';
+import { useTranslation } from '@/app/i18next/client';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
@@ -18,6 +19,8 @@ export default function CautionModal({
   unmountPolicy: () => void;
   lng: 'en' | 'ko';
 }) {
+  const { t } = useTranslation(lng);
+
   const deleteUser = async () => {
     await ziggleApi.delete('/user');
   };
@@ -37,11 +40,10 @@ export default function CautionModal({
           </button>
         </div>
         <p className="mb-3 text-center text-xl font-semibold md:text-2xl">
-          정말로 거절하시겠습니까?
+          {t('zigglePolicyModal.caution.title')}
         </p>
         <p className="text-center">
-          개정된 이용약관에 동의하지 않으시면, 지글 이용이 중단됩니다. 계정은
-          자동으로 해지 처리되며, 계정 정보는 파기됩니다.
+          {t('zigglePolicyModal.caution.description')}
         </p>
 
         <div
@@ -57,7 +59,7 @@ export default function CautionModal({
               unmount();
             }}
           >
-            네, 동의하지 않겠습니다.
+            {t('zigglePolicyModal.caution.rejectButton')}
           </Button>
           <Button
             className="w-[220px]"
@@ -69,7 +71,7 @@ export default function CautionModal({
               });
             }}
           >
-            약관으로 돌아가기
+            {t('zigglePolicyModal.caution.returnButton')}
           </Button>
         </div>
       </div>

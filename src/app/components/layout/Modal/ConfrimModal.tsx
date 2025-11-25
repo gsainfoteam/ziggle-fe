@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 
+import { useTranslation } from '@/app/i18next/client';
 import Check_mark from '@/assets/icons/checkmark.svg';
 import Xmark_white from '@/assets/icons/xmark_white.svg';
 
@@ -13,6 +14,8 @@ export default function ConfirmModal({
   unmount: () => void;
   lng: 'en' | 'ko';
 }) {
+  const { t } = useTranslation(lng);
+
   const router = useRouter();
   return (
     <div
@@ -33,9 +36,9 @@ export default function ConfirmModal({
         </div>
 
         <p className="mb-3 text-center text-xl font-semibold md:text-2xl">
-          개인정보 동의 완료
+          {t('zigglePolicyModal.confirm.title')}
         </p>
-        <p className="text-center">개인정보 동의가 완료되었습니다.</p>
+        <p className="text-center">{t('zigglePolicyModal.confirm.text')}</p>
         <div
           className="flex w-full justify-between
         "
@@ -49,14 +52,14 @@ export default function ConfirmModal({
               )
             }
           >
-            동의 내역확인
+            {t('zigglePolicyModal.confirm.return')}
           </Button>
           <Button
             className="w-[220px]"
             variant="contained"
             onClick={() => router.push(`/${lng}/home`)}
           >
-            메인으로 이동
+            {t('zigglePolicyModal.confirm.main')}
           </Button>
         </div>
       </div>
