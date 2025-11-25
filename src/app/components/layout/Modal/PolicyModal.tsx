@@ -54,7 +54,7 @@ export default function PolicyModal({
       onClick={unmount}
     >
       <div
-        className="flex h-[500px] w-[520px] flex-col justify-between  rounded-xl bg-white p-[25px] "
+        className="flex h-[521.5px] w-[500px] flex-col justify-between  gap-[10px] rounded-[20px] bg-white p-[25px]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
@@ -68,36 +68,36 @@ export default function PolicyModal({
 
         <div className="flex grow flex-col justify-around">
           <p>{t('zigglePolicyModal.policy.content')}</p>
-          <div className="overflow-hidden rounded-xl border border-primary">
-            <table className="w-full text-center text-sm">
-              <thead className="bg-primary/10">
+          <div className="h-[57.5px] w-[415.5px] overflow-hidden rounded-xl border border-primary">
+            <table className="h-full w-full border-collapse text-center text-sm">
+              <thead>
                 <tr>
-                  <th className="border-r border-primary p-3 last:border-r-0">
+                  <th className="border-r border-primary  ">
                     {t('zigglePolicyModal.table.header.purpose')}
                   </th>
-                  <th className="border-r border-primary p-3 last:border-r-0">
+                  <th className="border-r border-primary  ">
                     {t('zigglePolicyModal.table.header.mandatory')}
                   </th>
-                  <th className="border-r border-primary p-3 last:border-r-0">
+                  <th className="border-r border-primary">
                     {t('zigglePolicyModal.table.header.choice')}
                   </th>
-                  <th className="p-3">
+                  <th className="">
                     {t('zigglePolicyModal.table.header.duration')}
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="border-t border-primary">
-                  <td className="border-r border-primary p-3 last:border-r-0">
+                  <td className="border-r border-primary  ">
                     {t('zigglePolicyModal.table.content.purpose')}
                   </td>
-                  <td className="border-r border-primary p-3 last:border-r-0">
+                  <td className="border-r border-primary ">
                     {t('zigglePolicyModal.table.content.mandatory')}
                   </td>
-                  <td className="border-r border-primary p-3 last:border-r-0">
+                  <td className="border-r border-primary ">
                     {t('zigglePolicyModal.table.content.choice')}
                   </td>
-                  <td className="p-3">
+                  <td className="">
                     {t('zigglePolicyModal.table.content.duration')}
                   </td>
                 </tr>
@@ -105,7 +105,18 @@ export default function PolicyModal({
             </table>
           </div>
           <p>{t('zigglePolicyModal.policy.detail')}</p>
-          <div className="max-h-[6rem] overflow-y-auto scroll-smooth rounded-lg border border-primary">
+          <div
+            className="max-h-[100px] overflow-y-auto scroll-smooth rounded-[10px] border border-primary p-[10px] 
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-thumb]:border-[4px]
+            [&::-webkit-scrollbar-thumb]:border-solid
+            [&::-webkit-scrollbar-thumb]:border-transparent
+            [&::-webkit-scrollbar-thumb]:bg-gray-300
+            [&::-webkit-scrollbar-thumb]:bg-clip-padding
+            dark:[&::-webkit-scrollbar-thumb]:bg-gray-600
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar]:w-[14px]"
+          >
             <PrivacyPolicy />
           </div>
           <div className="flex gap-2">

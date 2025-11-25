@@ -31,7 +31,7 @@ export default function CautionModal({
       onClick={unmount}
     >
       <div
-        className="flex h-[246px] w-[520px] flex-col justify-between  rounded-xl bg-white p-[25px] "
+        className="flex h-[246px] w-[520px] flex-col justify-between  gap-[10px] rounded-[20px] bg-white p-[25px] "
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
@@ -42,7 +42,7 @@ export default function CautionModal({
         <p className="mb-3 text-center text-xl font-semibold md:text-2xl">
           {t('zigglePolicyModal.caution.title')}
         </p>
-        <p className="text-center">
+        <p className="whitespace-pre-wrap text-center">
           {t('zigglePolicyModal.caution.description')}
         </p>
 

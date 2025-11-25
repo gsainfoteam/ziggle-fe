@@ -2,7 +2,7 @@ import privacyData from './policy.json';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="mx-auto max-w-3xl p-6 text-gray-800 dark:text-dark_white">
+    <div className="mx-auto max-w-3xl text-gray-800 dark:text-dark_white">
       {/* 헤더 영역 */}
       <h1 className="mb-2 text-3xl font-bold">{privacyData.meta.title}</h1>
       <p className="mb-6 text-sm text-gray-500">
