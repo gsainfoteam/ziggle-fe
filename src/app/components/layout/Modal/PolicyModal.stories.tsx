@@ -12,5 +12,8 @@ export default meta;
 type Story = StoryObj<typeof PolicyModal>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    unmount: () => {},
+    lng: 'ko',
+  },
 };
