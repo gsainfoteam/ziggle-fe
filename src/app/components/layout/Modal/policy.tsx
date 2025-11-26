@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
         {privacyData.notices.map((notice, idx) => (
           <p
             key={idx}
-            className="dark: mb-1 flex items-start gap-2 text-sm text-black last:mb-0 "
+            className="mb-1 flex items-start gap-2 text-sm text-black last:mb-0"
           >
             <span>💡</span>
             {notice}
