@@ -7,7 +7,6 @@ import { dir } from 'i18next';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
-import { OverlayProvider } from 'overlay-kit';
 
 import { createTranslation, PropsWithLng } from '@/app/i18next';
 import { languages } from '@/app/i18next/settings';
