@@ -21,10 +21,6 @@ export default function CautionModal({
 }) {
   const { t } = useTranslation(lng);
 
-  const deleteUser = async () => {
-    await ziggleApi.delete('/user');
-  };
-
   return (
     <div
       className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
@@ -53,8 +49,8 @@ export default function CautionModal({
           <Button
             className="w-[220px]"
             variant="outlined"
-            onClick={() => {
-              deleteUser();
+            onClick={async () => {
+              await ziggleApi.delete('/user');
               unmountPolicy();
               unmount();
             }}
