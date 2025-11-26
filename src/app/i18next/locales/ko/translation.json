@@ -366,12 +366,13 @@
   ,
   "zigglePolicyModal": {
     "policy": {
-      "title": "개인정보 처리 방침 계정 안내",
+      "title": "개인정보 처리 방침 개정 안내",
       "content": "지글의 개인정보 수집 목적은 다음과 같습니다. 내용을 자세히 읽어 보신 후 동의를 결정하여 주시길 바랍니다.",
       "detail": "자세한 내용은 개인정보 처리 방침을 확인해주세요.",
       "checkbox": "(필수) 개인정보 수집 동의",
       "cancelButton": "취소",
-      "confirmButton": "동의"
+      "confirmButton": "동의",
+      "fail": "약관 동의에 실패했습니다. 다시 로그인을 시도해주세요."
     },
     "table": {
       "header": {

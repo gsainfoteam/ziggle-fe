@@ -378,11 +378,12 @@
   "zigglePolicyModal": {
     "policy": {
       "title": "Privacy Policy & Account Notice",
-      "content": "The purpose of Ziggle's personal information collection is as follows. <br> Please read the details carefully before deciding to consent.",
+      "content": "The purpose of Ziggle's personal information collection is as follows. Please read the details carefully before deciding to consent.",
       "detail": "Please check the Privacy Policy for more details.",
       "checkbox": "(Required) Consent to collection of personal information",
       "cancelButton": "Cancel",
-      "confirmButton": "Agree"
+      "confirmButton": "Agree",
+      "fail": "Fail to agree policy - Try login again please"
     },
     "table": {
       "header": {

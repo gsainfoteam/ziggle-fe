@@ -1,5 +1,6 @@
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 import { ziggleApi } from '@/api';
 import { useTranslation } from '@/app/i18next/client';
@@ -23,11 +24,7 @@ export default function PolicyModal({
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const unmountPolicy = unmount;
 
-  const postConcent = async () => {
-    await ziggleApi.post('user/consent');
-  };
-
-  const handleCutionModal = () => {
+  const handleCautionModal = () => {
     unmount();
     overlay.open(({ isOpen, unmount }) => {
       return (
@@ -41,8 +38,15 @@ export default function PolicyModal({
     });
   };
 
-  const handleConfirmModal = () => {
-    postConcent();
+  const handleConfirmModal = async () => {
+    if (!isChecked) return;
+    try {
+      await ziggleApi.post('user/consent');
+    } catch {
+      toast.error(t('zigglePolicyModal.policy.fail'));
+      return;
+    }
+    await ziggleApi.post('user/consent');
     unmount();
     overlay.open(({ isOpen, unmount }) => {
       return <ConfirmModal isOpen={isOpen} unmount={unmount} lng={lng} />;
@@ -140,7 +144,7 @@ export default function PolicyModal({
           <Button
             className="w-[220px]"
             variant="outlined"
-            onClick={handleCutionModal}
+            onClick={handleCautionModal}
           >
             {t('zigglePolicyModal.policy.cancelButton')}
           </Button>
