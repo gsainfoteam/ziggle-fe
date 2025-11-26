@@ -8,7 +8,7 @@ import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
 import CautionModal from './CautionModal';
-import ConfirmModal from './ConfirmModal';
+import ConfirmModal from './ConfrimModal';
 import PrivacyPolicy from './policy';
 
 export default function PolicyModal({

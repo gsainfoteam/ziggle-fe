@@ -23,7 +23,7 @@ export default function ConfirmModal({
       onClick={unmount}
     >
       <div
-        className="flex h-[340px] w-[520px] flex-col  justify-between gap-[10px] rounded-[20px] bg-white  p-[25px] "
+        className="flex h-[340px] w-[520px] flex-col  justify-between gap-[10px] rounded-[20px] bg-white  p-[25px]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
