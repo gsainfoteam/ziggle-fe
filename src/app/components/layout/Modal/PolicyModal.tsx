@@ -53,12 +53,9 @@ export default function PolicyModal({
     });
   };
   return (
-    <div
-      className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
-      onClick={unmount}
-    >
+    <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
       <div
-        className="flex h-[521.5px] w-[500px] flex-col justify-between gap-[10px] rounded-[20px] bg-white p-[25px]"
+        className="mx-10 flex h-auto max-w-[500px] flex-col justify-between gap-2.5 rounded-[20px] bg-white p-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
@@ -66,11 +63,11 @@ export default function PolicyModal({
             <Xmark_white />
           </button>
         </div>
-        <p className="mb-3 text-xl font-semibold md:text-2xl">
-          {t('zigglePolicyModal.policy.title')}
-        </p>
+        <div className="flex flex-col gap-6">
+          <p className="mb-3 text-xl font-semibold md:text-2xl">
+            {t('zigglePolicyModal.policy.title')}
+          </p>
 
-        <div className="flex grow flex-col justify-around">
           <p>{t('zigglePolicyModal.policy.content')}</p>
           <div className="h-[57.5px] w-[415.5px] overflow-hidden rounded-xl border border-primary">
             <table className="h-full w-full border-collapse text-center text-sm">
@@ -124,23 +121,23 @@ export default function PolicyModal({
               {t('zigglePolicyModal.policy.checkbox')}
             </label>
           </div>
-        </div>
 
-        <div className="flex w-full justify-between gap-2.5">
-          <Button
-            className="flex-1"
-            variant="outlined"
-            onClick={handleCautionModal}
-          >
-            {t('zigglePolicyModal.policy.cancelButton')}
-          </Button>
-          <Button
-            className="flex-1"
-            variant={isChecked ? 'contained' : 'disabled'}
-            onClick={handleConfirmModal}
-          >
-            {t('zigglePolicyModal.policy.confirmButton')}
-          </Button>
+          <div className="flex w-full justify-between gap-2.5">
+            <Button
+              className="flex-1"
+              variant="outlined"
+              onClick={handleCautionModal}
+            >
+              {t('zigglePolicyModal.policy.cancelButton')}
+            </Button>
+            <Button
+              className="flex-1"
+              variant={isChecked ? 'contained' : 'disabled'}
+              onClick={handleConfirmModal}
+            >
+              {t('zigglePolicyModal.policy.confirmButton')}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

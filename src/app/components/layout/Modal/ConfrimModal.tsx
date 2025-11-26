@@ -18,28 +18,22 @@ export default function ConfirmModal({
 
   const router = useRouter();
   return (
-    <div
-      className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
-      onClick={unmount}
-    >
-      <div
-        className="flex h-[340px] w-[520px] flex-col justify-between gap-[10px] rounded-[20px] bg-white p-[25px]"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
+      <div className="mx-10 flex h-auto max-w-[500px] flex-col justify-between gap-2.5 rounded-[20px] bg-white p-6">
         <div className="flex justify-end">
           <button onClick={unmount}>
             <Xmark_white />
           </button>
         </div>
+
         <div className="flex justify-center">
           <Check_mark />
         </div>
-
         <p className="mb-3 text-center text-xl font-semibold md:text-2xl">
           {t('zigglePolicyModal.confirm.title')}
         </p>
         <p className="text-center">{t('zigglePolicyModal.confirm.text')}</p>
-        <div className="flex w-full justify-between gap-2.5">
+        <div className="flex min-w-[300px] justify-between gap-2.5">
           <Button
             className="flex-1"
             variant="outlined"
