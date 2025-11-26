@@ -39,9 +39,9 @@ export default function ConfirmModal({
           {t('zigglePolicyModal.confirm.title')}
         </p>
         <p className="text-center">{t('zigglePolicyModal.confirm.text')}</p>
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between gap-2.5">
           <Button
-            className="w-[220px]"
+            className="flex-1"
             variant="outlined"
             onClick={() =>
               router.push(
@@ -52,7 +52,7 @@ export default function ConfirmModal({
             {t('zigglePolicyModal.confirm.return')}
           </Button>
           <Button
-            className="w-[220px]"
+            className="flex-1"
             variant="contained"
             onClick={() => router.push(`/${lng}/home`)}
           >

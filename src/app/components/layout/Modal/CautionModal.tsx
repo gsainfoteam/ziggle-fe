@@ -27,7 +27,7 @@ export default function CautionModal({
       onClick={unmount}
     >
       <div
-        className="flex h-[246px] w-[520px] flex-col justify-between  gap-[10px] rounded-[20px] bg-white p-[25px] "
+        className="flex h-[246px] w-[520px] flex-col justify-between gap-[10px] rounded-[20px] bg-white p-[25px]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
@@ -42,12 +42,9 @@ export default function CautionModal({
           {t('zigglePolicyModal.caution.description')}
         </p>
 
-        <div
-          className="flex w-full justify-between
-        "
-        >
+        <div className="flex w-full justify-between gap-2.5">
           <Button
-            className="w-[220px]"
+            className="flex-1"
             variant="outlined"
             onClick={async () => {
               await ziggleApi.delete('/user');
@@ -58,7 +55,7 @@ export default function CautionModal({
             {t('zigglePolicyModal.caution.rejectButton')}
           </Button>
           <Button
-            className="w-[220px]"
+            className="flex-1"
             variant="contained"
             onClick={() => {
               unmount();
