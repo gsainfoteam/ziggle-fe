@@ -33,7 +33,14 @@
     "general": "일반",
     "academic": "학사",
     "write": "공지 작성",
-    "groups": "그룹"
+    "groups": "그룹",
+    "theme": "테마",
+    "themeOptions": {
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템"
+    },
+    "language": "언어"
   },
   "alertResponse": {
     "yes": "네",

@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react';
 import { Fragment } from 'react';
 
 import LogEvents from '@/api/log/log-events';
+import ChangeDarkModeBox from '@/app/components/layout/Sidebar/ChangeDarkModeBox';
+import ChangeLanguageBox from '@/app/components/layout/Sidebar/ChangeLanguageBox';
 import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
@@ -20,7 +22,7 @@ interface NavButtonProps {
   to: string;
 }
 
-const NavButton = ({
+export const NavButton = ({
   title,
   icon,
   boldIcon,
@@ -55,41 +57,52 @@ const Sidebar = ({ lng }: PropsWithLng) => {
   const { data: userData } = useSession();
 
   return (
-    <>
-      {sidebarObject.map((group, i) => (
-        <Fragment key={i}>
-          <ul className="flex flex-col gap-y-2">
-            {group
-              .filter((menu) => (!userData ? !menu.needAuth : menu))
-              .map((menu, i) => (
-                <li key={i} className="flex flex-row">
-                  <Analytics
-                    event={LogEvents.sidebarClickLink}
-                    properties={{
-                      key: menu.key,
-                    }}
-                  >
-                    <NavButton
-                      icon={
-                        <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
-                      }
-                      boldIcon={
-                        <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
-                      }
-                      title={t(menu.title)}
-                      isSelected={path.startsWith(`/${lng}/${menu.path}`)}
-                      to={`/${lng}/${menu.path}`}
-                    />
-                  </Analytics>
-                </li>
-              ))}
-          </ul>
-          {!(sidebarObject.length - 1 === i) && (
-            <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
-          )}
-        </Fragment>
-      ))}
-    </>
+    <div className="flex flex-col">
+      <div>
+        {sidebarObject.map((group, i) => (
+          <Fragment key={i}>
+            <ul className="flex flex-col gap-y-2">
+              {group
+                .filter((menu) => (!userData ? !menu.needAuth : menu))
+                .map((menu, i) => (
+                  <li key={i} className="flex flex-row">
+                    <Analytics
+                      event={LogEvents.sidebarClickLink}
+                      properties={{
+                        key: menu.key,
+                      }}
+                    >
+                      <NavButton
+                        icon={
+                          <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
+                        }
+                        boldIcon={
+                          <menu.icons.bold className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
+                        }
+                        title={t(menu.title)}
+                        isSelected={path.startsWith(`/${lng}/${menu.path}`)}
+                        to={`/${lng}/${menu.path}`}
+                      />
+                    </Analytics>
+                  </li>
+                ))}
+            </ul>
+            {!(sidebarObject.length - 1 === i) && (
+              <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
+            )}
+          </Fragment>
+        ))}
+      </div>
+      <div className="my-[15px] h-[1px] bg-greyLight dark:bg-dark_greyDark" />
+      <ul className="flex flex-col gap-y-2">
+        <li className="w-full">
+          <ChangeDarkModeBox lng={lng} />
+        </li>
+        <li className="w-full">
+          <ChangeLanguageBox lng={lng} />
+        </li>
+      </ul>
+    </div>
   );
 };
 

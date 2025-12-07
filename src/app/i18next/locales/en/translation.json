@@ -32,7 +32,14 @@
     "general": "General",
     "academic": "Academic",
     "write": "Write Notice",
-    "groups": "Groups"
+    "groups": "Groups",
+    "theme": "Theme",
+    "themeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "language": "Language"
   },
   "alertResponse": {
     "yes": "Yes",
