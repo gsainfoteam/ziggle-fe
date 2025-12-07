@@ -230,6 +230,30 @@
     "totalList": "전체보기",
     "logout": "로그아웃",
     "quit": "회원탈퇴",
+    "withdrawal": {
+      "confirm": {
+        "title": "정말 탈퇴하시겠습니까?",
+        "text": "탈퇴 버튼 선택 시 계정은 삭제되며 복구되지 않습니다.",
+        "okBtn": "탈퇴",
+        "cancelBtn": "취소"
+      },
+      "success": {
+        "title": "탈퇴 완료",
+        "text": "회원님의 Ziggle 계정이 성공적으로 삭제되었습니다."
+      },
+      "error": {
+        "title": "탈퇴 실패",
+        "text": "회원 탈퇴에 실패했습니다. 잠시 후 다시 시도해주세요."
+      }
+    },
+    "switchLanguage": "언어 설정을 영어로 변경",
+    "darkModeSettings": "다크 모드 설정",
+    "loadingDarkModeSettings": "불러오는 중...",
+    "darkModeOptions": {
+      "light": "라이트",
+      "dark": "다크",
+      "system": "시스템"
+    },
     "feedback": "피드백 및 버그 제보"
   },
   "searchPage": {

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { auth } from './auth/auth';
 
-const ziggleApi = axios.create({ baseURL: '/api/bff' });
+const ziggleApi = axios.create({ baseURL: '/api/bff' }); 
 
 ziggleApi.interceptors.request.use(async (config) => {
   if (typeof window !== 'undefined') return config;

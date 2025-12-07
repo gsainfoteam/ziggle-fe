@@ -240,6 +240,30 @@
     "totalList": "view all",
     "logout": "Log Out",
     "quit": "Withdrawal",
+    "withdrawal": {
+      "confirm": {
+        "title": "Are you sure you want to withdraw?",
+        "text": "By selecting the withdrawal button, your account will be deleted and cannot be restored.",
+        "okBtn": "Withdraw",
+        "cancelBtn": "Cancel"
+      },
+      "success": {
+        "title": "Withdrawal Complete",
+        "text": "Your Ziggle account has been successfully deleted."
+      },
+      "error": {
+        "title": "Withdrawal Failed",
+        "text": "An error occurred during withdrawal. Please try again later."
+      }
+    },
+    "switchLanguage": "Enable English",
+    "darkModeSettings": "Dark Mode Settings",
+    "loadingDarkModeSettings": "loading...",
+    "darkModeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
     "feedback": "Feedback or Report Bug"
   },
   "searchPage": {
