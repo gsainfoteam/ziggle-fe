@@ -10,17 +10,18 @@ import PolicyModal from './PolicyModal';
 
 export default function CautionModal({
   isOpen,
-  unmount,
-  unmountPolicy,
+  close,
+  PolicyModalId,
   lng,
 }: {
   isOpen: boolean;
-  unmount: () => void;
-  unmountPolicy: () => void;
+  close: () => void;
+  PolicyModalId: string;
   lng: 'en' | 'ko';
 }) {
   const { t } = useTranslation(lng);
 
+  if (!isOpen) return null;
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
       <div
@@ -28,7 +29,7 @@ export default function CautionModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
-          <button onClick={unmount}>
+          <button onClick={close}>
             <Xmark_white />
           </button>
         </div>
@@ -46,8 +47,7 @@ export default function CautionModal({
               variant="outlined"
               onClick={async () => {
                 await ziggleApi.delete('/user');
-                unmountPolicy();
-                unmount();
+                close();
               }}
             >
               {t('zigglePolicyModal.caution.rejectButton')}
@@ -56,9 +56,16 @@ export default function CautionModal({
               className="flex-1"
               variant="contained"
               onClick={() => {
-                unmount();
-                overlay.open(({ unmount }) => {
-                  return <PolicyModal unmount={unmount} lng={lng} />;
+                close();
+                overlay.open(({ isOpen, close }) => {
+                  return (
+                    <PolicyModal
+                      isOpen={isOpen}
+                      close={close}
+                      lng={lng}
+                      overlayId={PolicyModalId}
+                    />
+                  );
                 });
               }}
             >

@@ -7,21 +7,23 @@ import Xmark_white from '@/assets/icons/xmark_white.svg';
 import Button from '../../shared/Button';
 export default function ConfirmModal({
   isOpen,
-  unmount,
+  close,
   lng,
 }: {
   isOpen: boolean;
-  unmount: () => void;
+  close: () => void;
   lng: 'en' | 'ko';
 }) {
   const { t } = useTranslation(lng);
 
   const router = useRouter();
+
+  if (!isOpen) return null;
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
       <div className="mx-10 flex h-auto max-w-[500px] flex-col justify-between gap-2.5 rounded-[20px] bg-white p-6">
         <div className="flex justify-end">
-          <button onClick={unmount}>
+          <button onClick={close}>
             <Xmark_white />
           </button>
         </div>
