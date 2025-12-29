@@ -13,7 +13,7 @@ type Story = StoryObj<typeof PolicyModal>;
 
 export const Primary: Story = {
   args: {
-    unmount: () => {},
+    close: () => {},
     lng: 'ko',
   },
 };
