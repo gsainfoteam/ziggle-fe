@@ -3,9 +3,8 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import { ziggleApi } from '@/api';
+import Xmark from '@/app/components/shared/Xmark/Xmark';
 import { useTranslation } from '@/app/i18next/client';
-import Xmark_dark from '@/assets/icons/xmark_dark.svg';
-import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
 import CautionModal from './CautionModal';
@@ -65,7 +64,7 @@ export default function PolicyModal({
       >
         <div className="flex justify-end">
           <button onClick={close}>
-            <Xmark_white />
+            <Xmark className="text-text dark:text-dark_white" />
           </button>
         </div>
         <div className="flex flex-col gap-6">

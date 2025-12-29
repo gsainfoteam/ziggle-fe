@@ -1,9 +1,8 @@
-import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import { ziggleApi } from '@/api';
+import Xmark from '@/app/components/shared/Xmark/Xmark';
 import { useTranslation } from '@/app/i18next/client';
-import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
 import PolicyModal from './PolicyModal';
@@ -30,7 +29,7 @@ export default function CautionModal({
       >
         <div className="flex justify-end">
           <button onClick={close}>
-            <Xmark_white />
+            <Xmark className="text-text dark:text-dark_white" />
           </button>
         </div>
         <div className="flex flex-col gap-6">

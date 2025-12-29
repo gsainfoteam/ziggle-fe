@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation';
 
+import Xmark from '@/app/components/shared/Xmark/Xmark';
 import { useTranslation } from '@/app/i18next/client';
 import Check_mark from '@/assets/icons/checkmark.svg';
-import Xmark_white from '@/assets/icons/xmark_white.svg';
 
 import Button from '../../shared/Button';
 export default function ConfirmModal({
@@ -24,7 +24,7 @@ export default function ConfirmModal({
       <div className="mx-10 flex h-auto max-w-[500px] flex-col justify-between gap-2.5 rounded-[20px] bg-white p-6">
         <div className="flex justify-end">
           <button onClick={close}>
-            <Xmark_white />
+            <Xmark className="text-text dark:text-dark_white" />
           </button>
         </div>
 

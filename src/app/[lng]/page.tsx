@@ -1,9 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { overlay } from 'overlay-kit';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ziggleApi } from '@/api';
 import { PropsWithLng } from '@/app/i18next';
@@ -47,18 +47,17 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   }, []);
 
   useEffect(() => {
-    // (async () => {
-    //   if (session && status === 'authenticated') {
-    //     const { data } = await ziggleApi.get<UserInfo>('/user/info');
-    //     if (data.consent === true) {
-    //       router.push(`${lng}/home`);
-    //     } else {
-    //       handleOpenOverlay();
-    //     }
-    //   }
-    // })();
-    handleOpenOverlay();
-  }, []);
+    (async () => {
+      if (session && status === 'authenticated') {
+        const { data } = await ziggleApi.get<UserInfo>('/user/info');
+        if (data.consent === true) {
+          router.push(`${lng}/home`);
+        } else {
+          handleOpenOverlay();
+        }
+      }
+    })();
+  }, [lng, router, session, status]);
 
   if (!mounted) {
     return (
