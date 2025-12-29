@@ -28,19 +28,15 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [mounted, setMounted] = useState(false);
-  const isOverlayOpen = useRef(false);
 
   const handleOpenOverlay = () => {
-    if (isOverlayOpen.current) return;
-    isOverlayOpen.current = true;
-    overlay.open(({ unmount }) => {
+    overlay.open(({ isOpen, close }, { overlayId }) => {
       return (
         <PolicyModal
-          unmount={() => {
-            isOverlayOpen.current = false;
-            unmount();
-          }}
+          isOpen={isOpen}
+          close={close}
           lng={lng}
+          overlayId={overlayId}
         />
       );
     });
@@ -51,17 +47,18 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   }, []);
 
   useEffect(() => {
-    (async () => {
-      if (session && status === 'authenticated') {
-        const { data } = await ziggleApi.get<UserInfo>('/user/info');
-        if (data.consent === true) {
-          router.push(`${lng}/home`);
-        } else {
-          handleOpenOverlay();
-        }
-      }
-    })();
-  }, [session, status, lng, router]);
+    // (async () => {
+    //   if (session && status === 'authenticated') {
+    //     const { data } = await ziggleApi.get<UserInfo>('/user/info');
+    //     if (data.consent === true) {
+    //       router.push(`${lng}/home`);
+    //     } else {
+    //       handleOpenOverlay();
+    //     }
+    //   }
+    // })();
+    handleOpenOverlay();
+  }, []);
 
   if (!mounted) {
     return (
@@ -79,7 +76,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <div className="hidden dark:block">
           <ZiggleLogoDark className="h-20" />
         </div>
-        <p className="text-xl font-semibold md:text-2xl">
+        <p className="font-semxbold text-xl md:text-2xl">
           {t('home.subtitle')}
         </p>
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>

@@ -13,45 +13,50 @@ import ConfirmModal from './ConfirmModal';
 import PrivacyPolicy from './policy';
 
 export default function PolicyModal({
-  unmount,
+  isOpen,
+  close,
   lng,
+  overlayId,
 }: {
-  unmount: () => void;
+  isOpen: boolean;
+  close: () => void;
   lng: 'ko' | 'en';
+  overlayId: string;
 }) {
   const { t } = useTranslation(lng);
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
-  const unmountPolicy = unmount;
+  // const unmountPolicy = unmount;
 
-  const handleCautionModal = () => {
-    unmount();
-    overlay.open(({ isOpen, unmount }) => {
-      return (
-        <CautionModal
-          isOpen={isOpen}
-          unmount={unmount}
-          unmountPolicy={unmountPolicy}
-          lng={lng}
-        />
-      );
-    });
-  };
+  // const handleCautionModal = () => {
+  //   overlay.close(overlayId);
+  //   overlay.open(({ isOpen, unmount }) => {
+  //     return (
+  //       <CautionModal
+  //         isOpen={isOpen}
+  //         unmount={unmount}
+  //         unmountPolicy={unmountPolicy}
+  //         lng={lng}
+  //       />
+  //     );
+  //   });
+  // };
 
-  const handleConfirmModal = async () => {
-    if (!isChecked) return;
-    try {
-      await ziggleApi.post('user/consent');
-    } catch {
-      toast.error(t('zigglePolicyModal.policy.fail'));
-      return;
-    }
-    await ziggleApi.post('user/consent');
-    unmount();
-    overlay.open(({ isOpen, unmount }) => {
-      return <ConfirmModal isOpen={isOpen} unmount={unmount} lng={lng} />;
-    });
-  };
+  // const handleConfirmModal = async () => {
+  //   if (!isChecked) return;
+  //   try {
+  //     await ziggleApi.post('user/consent');
+  //   } catch {
+  //     toast.error(t('zigglePolicyModal.policy.fail'));
+  //     return;
+  //   }
+  //   await ziggleApi.post('user/consent');
+  //   unmount();
+  //   overlay.open(({ isOpen, unmount }) => {
+  //     return <ConfirmModal isOpen={isOpen} unmount={unmount} lng={lng} />;
+  //   });
+  // };
+  if (!isOpen) return null;
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
       <div
@@ -59,7 +64,7 @@ export default function PolicyModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
-          <button onClick={unmount}>
+          <button onClick={close}>
             <Xmark_white />
           </button>
         </div>
@@ -126,14 +131,14 @@ export default function PolicyModal({
             <Button
               className="flex-1"
               variant="outlined"
-              onClick={handleCautionModal}
+              // onClick={handleCautionModal}
             >
               {t('zigglePolicyModal.policy.cancelButton')}
             </Button>
             <Button
               className="flex-1"
               variant={isChecked ? 'contained' : 'disabled'}
-              onClick={handleConfirmModal}
+              // onClick={handleConfirmModal}
             >
               {t('zigglePolicyModal.policy.confirmButton')}
             </Button>
