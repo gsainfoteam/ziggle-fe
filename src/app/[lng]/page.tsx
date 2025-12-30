@@ -75,7 +75,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <div className="hidden dark:block">
           <ZiggleLogoDark className="h-20" />
         </div>
-        <p className="font-semxbold text-xl md:text-2xl">
+        <p className="font-semibold text-xl md:text-2xl">
           {t('home.subtitle')}
         </p>
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>

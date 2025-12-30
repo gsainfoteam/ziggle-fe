@@ -111,7 +111,7 @@ export default function PolicyModal({
           </div>
           <p>{t('zigglePolicyModal.policy.detail')}</p>
           <div className="max-h-[100px] overflow-y-auto scroll-smooth rounded-[10px] border border-primary p-[10px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-[4px] [&::-webkit-scrollbar-thumb]:border-solid [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-thumb]:bg-clip-padding dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-[14px]">
-            <PrivacyPolicy />
+            <PrivacyPolicy lng={lng} />
           </div>
           <div className="flex gap-2">
             <input

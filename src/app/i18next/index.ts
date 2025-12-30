@@ -8,6 +8,7 @@ import {
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
 
+import type policy from '@/app/i18next/locales/en/policy.json';
 import type translation from '@/app/i18next/locales/en/translation.json';
 
 import { defaultNS, getOptions, Locale } from './settings';
@@ -18,6 +19,7 @@ declare module 'i18next' {
     defaultNS: typeof defaultNS;
     resources: {
       translation: typeof translation;
+      policy: typeof policy;
     };
   }
 }

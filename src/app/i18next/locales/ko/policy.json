@@ -1,14 +1,17 @@
 {
+  "lang": "ko",
   "meta": {
     "title": "개인정보 처리방침",
     "publisher": "GIST 학부 총학생회 정보국",
+    "effectiveDateTitle": "시행일",
     "effectiveDate": "2023-08-14",
     "announcementDate": "2023-08-14",
     "contact": {
       "name": "고도현",
       "position": "프로젝트 관리자",
       "email": "ziggle@gistory.me"
-    }
+    },
+  "relatedLink": "관련 링크 바로가기"
   },
   "intro": "「개인정보 보호법」 제30조에 따라 지글(”ziggle.gistory.me”)을 이용하는 사용자의 개인정보 보호 및 권익을 보호하고 개인정보와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 두고 있습니다.",
   "notices": [
