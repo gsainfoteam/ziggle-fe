@@ -15,5 +15,7 @@ export const Primary: Story = {
   args: {
     close: () => {},
     lng: 'ko',
+    isOpen: true,
+    overlayId: 'story-overlay-id',
   },
 };
