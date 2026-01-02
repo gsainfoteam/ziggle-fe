@@ -48,7 +48,6 @@ export default function PolicyModal({
       toast.error(t('zigglePolicyModal.policy.fail'));
       return;
     }
-    await ziggleApi.post('user/consent');
     close();
     overlay.open(({ isOpen, close }) => {
       return <ConfirmModal isOpen={isOpen} close={close} lng={lng} />;
