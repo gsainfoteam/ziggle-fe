@@ -30,7 +30,7 @@ const initI18next = async (lng: Locale, ns: Namespace) => {
     .use(initReactI18next)
     .use(
       resourcesToBackend(
-        (language: string, namespace: string) =>
+        (language: string, namespace: typeof ns) =>
           import(`./locales/${language}/${namespace}.json`),
       ),
     )
@@ -62,7 +62,7 @@ export async function createTranslation<
 export type T<
   Ns extends Namespace = DefaultNamespace,
   TKPrefix extends KeyPrefix<Ns> = undefined,
-> = TFunction<Ns, TKPrefix>;
+> = TFunction<Namespace, TKPrefix>;
 
 export type PropsWithT<P = unknown> = P & { t: T };
 export type PropsWithLng<P = unknown> = P & { lng: Locale };
