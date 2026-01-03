@@ -72,7 +72,7 @@ export default function PolicyModal({
           </p>
 
           <p>{t('zigglePolicyModal.policy.content')}</p>
-          <div className="w-[415.5px] overflow-hidden rounded-xl border border-primary">
+          <div className="w-full overflow-hidden rounded-xl border border-primary">
             <table className="h-full w-full border-collapse text-center text-sm">
               <thead>
                 <tr>
