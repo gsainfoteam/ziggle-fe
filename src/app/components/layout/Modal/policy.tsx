@@ -16,9 +16,9 @@ interface Section {
 }
 
 const PrivacyPolicy = ({ lng }: { lng: 'ko' | 'en' }) => {
-  const { t } = useTranslation(lng, 'policy');
+  const { t } = useTranslation<any>(lng, 'policy');
 
-  const notices = t('notices', { returnObjects: true }) as string[];
+  const notices = t('notices', { returnObjects: true }) as unknown as string[];
   const sections = t('sections', { returnObjects: true }) as Section[];
   const intro = t('intro');
 
