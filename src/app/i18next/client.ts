@@ -9,6 +9,7 @@ import {
   initReactI18next,
   useTranslation as useTranslationOrg,
   UseTranslationOptions,
+  UseTranslationResponse,
 } from 'react-i18next';
 
 import {
@@ -39,7 +40,11 @@ i18next
 export function useTranslation<
   Ns extends Namespace = DefaultNamespace,
   TKPrefix extends KeyPrefix<Ns> = undefined,
->(lng: Locale, ns?: Namespace, options?: UseTranslationOptions<TKPrefix>) {
+>(
+  lng: Locale,
+  ns?: Namespace,
+  options?: UseTranslationOptions<TKPrefix>,
+): UseTranslationResponse<Ns, TKPrefix> {
   const [cookies, setCookie] = useCookies([cookieName]);
   const ret = useTranslationOrg(ns, { lng, ...options });
 
@@ -48,5 +53,5 @@ export function useTranslation<
     setCookie(cookieName, lng, { path: '/', sameSite: 'lax' });
   }, [lng, cookies, setCookie]);
 
-  return ret;
+  return ret as UseTranslationResponse<Ns, TKPrefix>;
 }

@@ -39,7 +39,7 @@ export const generateMetadata = async ({
     title: {
       template: `%s | ${t('metadata.title')}`,
       default: t('metadata.title'),
-    },  
+    },
     description: t('metadata.description'),
     twitter: {
       card: 'summary_large_image',
