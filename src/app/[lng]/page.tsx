@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { overlay } from 'overlay-kit';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ziggleApi } from '@/api';
 import { PropsWithLng } from '@/app/i18next';
@@ -28,9 +28,11 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [mounted, setMounted] = useState(false);
+  const hasOpenedRef = useRef(false);
 
   const handleOpenOverlay = () => {
-    overlay.open(({ isOpen, close }, { overlayId }) => {
+    overlay.open(({ isOpen, close, overlayId }) => {
+      hasOpenedRef.current = true;
       return (
         <PolicyModal
           isOpen={isOpen}
@@ -45,10 +47,9 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   useEffect(() => {
     setMounted(true);
   }, []);
-
   useEffect(() => {
     (async () => {
-      if (session && status === 'authenticated') {
+      if (session && status === 'authenticated' && !hasOpenedRef.current) {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
           router.push(`${lng}/home`);
@@ -75,7 +76,7 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
         <div className="hidden dark:block">
           <ZiggleLogoDark className="h-20" />
         </div>
-        <p className="font-semibold text-xl md:text-2xl">
+        <p className="text-xl font-semibold md:text-2xl">
           {t('home.subtitle')}
         </p>
         <Button variant="outlined" onClick={() => router.push(`/${lng}/login`)}>
