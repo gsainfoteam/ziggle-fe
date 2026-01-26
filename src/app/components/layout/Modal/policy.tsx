@@ -2,105 +2,163 @@
 
 import { useTranslation } from '@/app/i18next/client';
 
-interface ContentItem {
-  subtitle?: string;
-  text?: string;
-  items?: string[];
-  link?: string;
-}
-
-interface Section {
-  id: number;
-  title: string;
-  content: ContentItem[];
-}
-
 const PrivacyPolicy = ({ lng }: { lng: 'ko' | 'en' }) => {
-  const { t } = useTranslation<any>(lng, 'policy', { useSuspense: false });
+  const { t, ready } = useTranslation(lng);
+  if (!ready) return;
+  if (ready)
+    return (
+      <div className="mx-auto max-w-4xl rounded-lg bg-white p-6 text-gray-800 shadow-md dark:bg-gray-900 dark:text-gray-100">
+        {/* --- Header --- */}
+        <header className="mb-8 border-b border-gray-200 pb-4 dark:border-gray-700">
+          <h1 className="mb-2 text-3xl font-bold">
+            {t('privacyPolicyDetail.title')}
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            {t('privacyPolicyDetail.effectiveDate')}
+          </p>
+        </header>
 
-  const notices = t('notices', { returnObjects: true }) as unknown as string[];
-  const sections = t('sections', { returnObjects: true }) as Section[];
-  const intro = t('intro');
+        <div className="space-y-8">
+          <h2 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-300">
+            {t('privacyPolicyDetail.header')}
+          </h2>
 
-  return (
-    <div className="mx-auto max-w-3xl text-gray-800 dark:text-gray-200">
-      {/* 헤더 영역 */}
-      <h1 className="mb-2 text-3xl font-bold">{t('meta.title')}</h1>
-      <p className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-        {t('meta.effectiveDateTitle')}: {t('meta.effectiveDate')} |{' '}
-        {t('meta.publisher')}
-      </p>
-
-      {/* 공지사항 박스 */}
-      {Array.isArray(notices) && notices.length > 0 && (
-        <div className="mb-8 rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900 dark:bg-yellow-900/30">
-          {notices.map((notice, idx) => (
-            <p
-              key={idx}
-              className="mb-1 flex items-start gap-2 text-sm text-black last:mb-0 dark:text-gray-200"
-            >
-              <span>💡</span>
-              {notice}
+          {/* --- Section 1: Purpose --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.purpose.title')}
+            </h3>
+            <p className="mb-3 leading-relaxed">
+              {t('privacyPolicyDetail.sections.purpose.content')}
             </p>
-          ))}
+            <ul className="list-inside list-disc space-y-1 pl-4 text-gray-600 dark:text-gray-400">
+              {(
+                t('privacyPolicyDetail.sections.purpose.items', {
+                  returnObjects: true,
+                }) as string[]
+              ).map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          {/* --- Section 2: Retention --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.retention.title')}
+            </h3>
+            <p className="leading-relaxed">
+              {t('privacyPolicyDetail.sections.retention.content')}
+            </p>
+          </section>
+
+          {/* --- Section 3: Items --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.items.title')}
+            </h3>
+            <p className="mb-3">
+              {t('privacyPolicyDetail.sections.items.content')}
+            </p>
+            <div className="rounded-md bg-gray-50 p-4 dark:bg-gray-800">
+              <p className="mb-1">
+                <span className="font-semibold">· </span>
+                {t('privacyPolicyDetail.sections.items.mandatory')}
+              </p>
+              <p>
+                <span className="font-semibold">· </span>
+                {t('privacyPolicyDetail.sections.items.optional')}
+              </p>
+            </div>
+          </section>
+
+          {/* --- Section 4: Third Party --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.thirdParty.title')}
+            </h3>
+            <p className="leading-relaxed">
+              {t('privacyPolicyDetail.sections.thirdParty.content')}
+            </p>
+          </section>
+
+          {/* --- Section 5: Entrustment --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.entrustment.title')}
+            </h3>
+            <p className="mb-3">
+              {t('privacyPolicyDetail.sections.entrustment.content')}
+            </p>
+            <div className="space-y-2 rounded-md bg-gray-50 p-4 dark:bg-gray-800">
+              <p>{t('privacyPolicyDetail.sections.entrustment.trustee')}</p>
+              <p>{t('privacyPolicyDetail.sections.entrustment.task')}</p>
+            </div>
+          </section>
+
+          {/* --- Section 6: Rights --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.rights.title')}
+            </h3>
+            <p className="mb-3">
+              {t('privacyPolicyDetail.sections.rights.content')}
+            </p>
+            <ul className="list-inside list-disc space-y-1 pl-4 text-gray-600 dark:text-gray-400">
+              {(
+                t('privacyPolicyDetail.sections.rights.list', {
+                  returnObjects: true,
+                }) as string[]
+              ).map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          {/* --- Section 7: Safety --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.safety.title')}
+            </h3>
+            <p className="mb-3">
+              {t('privacyPolicyDetail.sections.safety.content')}
+            </p>
+            <ul className="space-y-2 border-l-4 border-blue-500 bg-gray-50 py-3 pl-4 pr-3 dark:bg-gray-800">
+              <li>{t('privacyPolicyDetail.sections.safety.managerial')}</li>
+              <li>{t('privacyPolicyDetail.sections.safety.technical')}</li>
+              <li>{t('privacyPolicyDetail.sections.safety.physical')}</li>
+            </ul>
+          </section>
+
+          {/* --- Section 8: Officer --- */}
+          <section>
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.officer.title')}
+            </h3>
+            <p className="mb-3">
+              {t('privacyPolicyDetail.sections.officer.content')}
+            </p>
+            <div className="font-medium text-blue-600 dark:text-blue-400">
+              <p>{t('privacyPolicyDetail.sections.officer.name')}</p>
+              <p>{t('privacyPolicyDetail.sections.officer.contact')}</p>
+            </div>
+          </section>
+
+          {/* --- Section 9: Changes --- */}
+          <section className="mt-8 border-t border-gray-200 pt-6 dark:border-gray-700">
+            <h3 className="mb-2 text-lg font-bold">
+              {t('privacyPolicyDetail.sections.changes.title')}
+            </h3>
+            <p className="mb-4 leading-relaxed">
+              {t('privacyPolicyDetail.sections.changes.content')}
+            </p>
+            <p className="text-right text-sm font-bold text-gray-500">
+              {t('privacyPolicyDetail.sections.changes.lastModified')}
+            </p>
+          </section>
         </div>
-      )}
-
-      <p className="mb-8 whitespace-pre-wrap leading-relaxed">{intro}</p>
-
-      {/* 본문 섹션 반복 렌더링 */}
-      <div className="space-y-10">
-        {Array.isArray(sections) &&
-          sections.map((section) => (
-            <section key={section.id}>
-              <h2 className="mb-4 text-xl font-bold text-primary dark:text-blue-400">
-                {section.id}. {section.title}
-              </h2>
-
-              <div className="space-y-4 pl-2">
-                {section.content.map((item, idx) => (
-                  <div key={idx}>
-                    {item.subtitle && (
-                      <h3 className="mb-1 font-semibold dark:text-gray-100">
-                        • {item.subtitle}
-                      </h3>
-                    )}
-
-                    {item.text && (
-                      <p className="mb-2 whitespace-pre-wrap text-gray-700 dark:text-gray-300">
-                        {item.text}
-                      </p>
-                    )}
-
-                    {/* 리스트 항목이 있다면 */}
-                    {item.items && item.items.length > 0 && (
-                      <ul className="list-inside list-disc rounded-md bg-gray-50 p-3 text-gray-600 dark:bg-gray-800 dark:text-gray-400">
-                        {item.items.map((li, i) => (
-                          <li key={i} className="mb-1 last:mb-0">
-                            {li}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    {item.link && (
-                      <a
-                        href={item.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm text-blue-500 underline hover:text-blue-600 dark:text-blue-400"
-                      >
-                        {t('meta.relatedLink')} &rarr;
-                      </a>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </section>
-          ))}
       </div>
-    </div>
-  );
+    );
 };
 
 export default PrivacyPolicy;

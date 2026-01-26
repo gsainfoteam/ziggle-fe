@@ -26,11 +26,12 @@ interface UserInfo {
 export default function Home({ params: { lng } }: { params: PropsWithLng }) {
   const { t } = useTranslation(lng);
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const [mounted, setMounted] = useState(false);
   const hasOpenedRef = useRef(false);
 
   const handleOpenOverlay = () => {
+    if (hasOpenedRef.current) return;
     overlay.open(({ isOpen, close, overlayId }) => {
       hasOpenedRef.current = true;
       return (
@@ -48,8 +49,8 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
     setMounted(true);
   }, []);
   useEffect(() => {
-    (async () => {
-      if (session && status === 'authenticated' && !hasOpenedRef.current) {
+    const checkLoginAndConsent = async () => {
+      if (status === 'authenticated' && !hasOpenedRef.current) {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
           router.push(`${lng}/home`);
@@ -57,8 +58,9 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
           handleOpenOverlay();
         }
       }
-    })();
-  }, [lng, router, session, status]);
+    };
+    checkLoginAndConsent();
+  }, [lng, router, status]);
 
   if (!mounted) {
     return (

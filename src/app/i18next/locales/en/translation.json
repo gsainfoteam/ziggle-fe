@@ -411,6 +411,71 @@
       "rejectButton": "Yes, I decline",
       "returnButton": "Back to Terms"
     }
+  },
+  "privacyPolicyDetail": {
+    "title": "Privacy Policy (2025.03.02)",
+    "effectiveDate": "Effective Date: March 2, 2025",
+    "header": "Ziggle Privacy Policy",
+    "sections": {
+      "purpose": {
+        "title": "1. Purpose of Personal Information Processing",
+        "content": "Ziggle processes personal information for the following purposes. The personal information being processed will not be used for purposes other than the following, and if the purpose of use changes, necessary measures such as obtaining separate consent will be implemented in accordance with Article 18 of the Personal Information Protection Act.",
+        "items": [
+          "Ziggle service membership registration and management",
+          "Service provision and improvement",
+          "Customer consultation and complaint handling",
+          "Marketing and advertising utilization"
+        ]
+      },
+      "retention": {
+        "title": "2. Processing and Retention Period of Personal Information",
+        "content": "Ziggle processes and retains personal information within the retention and usage period of personal information agreed upon when collecting personal information from the data subject or within the period required by law."
+      },
+      "items": {
+        "title": "3. Items of Personal Information Processed",
+        "content": "Ziggle processes the following personal information items:",
+        "mandatory": "Mandatory Items: Email, Name, Date of Birth",
+        "optional": "Optional Items: Phone number, Address, Profile image"
+      },
+      "thirdParty": {
+        "title": "4. Provision of Personal Information to Third Parties",
+        "content": "Ziggle processes personal information only within the scope specified in Article 1 (Purpose of Personal Information Processing) and provides personal information to third parties only in cases falling under Article 17 of the Personal Information Protection Act, such as the consent of the data subject or special provisions of the law."
+      },
+      "entrustment": {
+        "title": "5. Entrustment of Personal Information Processing",
+        "content": "Ziggle entrusts personal information processing tasks as follows for smooth personal information processing:",
+        "trustee": "Trustee: AWS (Amazon Web Services)",
+        "task": "Content of entrusted work: Cloud server operation and management"
+      },
+      "rights": {
+        "title": "6. Rights and Obligations of Data Subjects and How to Exercise Them",
+        "content": "Data subjects may exercise the following rights regarding personal information protection against Ziggle at any time:",
+        "list": [
+          "Request for notification of personal information processing status",
+          "Request to view personal information",
+          "Request for correction or deletion of personal information",
+          "Request to suspend processing of personal information"
+        ]
+      },
+      "safety": {
+        "title": "7. Measures to Ensure Safety of Personal Information",
+        "content": "Ziggle takes the following measures to ensure the safety of personal information:",
+        "managerial": "Managerial measures: Establishment of internal management plans, operation of a dedicated organization",
+        "technical": "Technical measures: Management of access rights to personal information processing systems, installation of access control systems",
+        "physical": "Physical measures: Access control for computer rooms, data storage rooms, etc."
+      },
+      "officer": {
+        "title": "8. Chief Privacy Officer",
+        "content": "Ziggle takes overall responsibility for personal information processing and designates a Chief Privacy Officer as follows to handle complaints and damage relief for data subjects related to personal information processing:",
+        "name": "Chief Privacy Officer: Ziggle Privacy Manager",
+        "contact": "Contact: privacy@ziggle.com"
+      },
+      "changes": {
+        "title": "9. Changes to Privacy Policy",
+        "content": "This Privacy Policy applies from the effective date. In the event of any addition, deletion, or correction of changes in accordance with laws and policies, we will notify you through the Notice board at least 7 days prior to the implementation of the changes.",
+        "lastModified": "Last Modified: March 2, 2025"
+      }
+    }
   }
 }
   
