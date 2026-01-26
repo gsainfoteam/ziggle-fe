@@ -32,8 +32,8 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
 
   const handleOpenOverlay = () => {
     if (hasOpenedRef.current) return;
+    hasOpenedRef.current = true;
     overlay.open(({ isOpen, close, overlayId }) => {
-      hasOpenedRef.current = true;
       return (
         <PolicyModal
           isOpen={isOpen}
