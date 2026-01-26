@@ -21,10 +21,14 @@ export default async function Layout({
   params: PropsWithLng;
 }) {
   const session = await auth();
-  const { data } = await ziggleApi.get<UserInfo>('/user/info');
-  if (!session || !data.consent) {
+  if (!session) {
     redirect(`/${lng}`);
   }
+  const { data } = await ziggleApi.get<UserInfo>('/user/info');
+  if (!data.consent) {
+    redirect(`/${lng}`);
+  }
+
   return (
     <InitClient emptyLayout lng={lng}>
       {children}

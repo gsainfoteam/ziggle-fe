@@ -31,6 +31,10 @@ export default async function Layout({
   params: PropsWithLng;
 }) {
   const session = await auth();
+
+  if (!session) {
+    redirect(`/${lng}`);
+  }
   const { data } = await ziggleApi.get<UserInfo>('/user/info');
   if (!session || !data.consent) {
     redirect(`/${lng}`);

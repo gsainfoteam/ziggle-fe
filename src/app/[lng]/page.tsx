@@ -53,12 +53,13 @@ export default function Home({ params: { lng } }: { params: PropsWithLng }) {
       if (status === 'authenticated' && !hasOpenedRef.current) {
         const { data } = await ziggleApi.get<UserInfo>('/user/info');
         if (data.consent === true) {
-          router.push(`${lng}/home`);
+          router.push(`/${lng}/home`);
         } else {
           handleOpenOverlay();
         }
       }
     };
+
     checkLoginAndConsent();
   }, [lng, router, status]);
 
