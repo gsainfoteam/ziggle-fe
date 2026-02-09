@@ -100,7 +100,7 @@
             "link": "https://www.gist.ac.kr/kr/main.html",
             "key": "gist"
           },
-          { "name": "지졸", "link": "https://gijol.im",
+          { "name": "지졸", "link": "https://gijol.vercel.app",
             "key": "gijol"
           }
         ]
