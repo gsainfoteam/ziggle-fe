@@ -38,7 +38,7 @@ const CategorizedNotices = async ({
 
   return (
     <>
-      {category === 'home' && ( //홈 카테고리에서만 배너 표시
+      {category === 'home' && (
         <div className="w-full mb-6 flex justify-center">
           <BannerCarousel />
         </div>
