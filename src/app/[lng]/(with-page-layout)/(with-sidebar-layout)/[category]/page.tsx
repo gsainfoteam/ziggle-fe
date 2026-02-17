@@ -96,6 +96,7 @@ export default async function CategoryPage({
             noticeSearchParams={noticeSearchParams}
             lng={lng}
             page={page}
+            category={category}
           />
         </Suspense>
       </div>
