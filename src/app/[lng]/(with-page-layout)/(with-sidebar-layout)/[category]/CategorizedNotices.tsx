@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BannerCarousel from '@/app/components/shared/BannerCarousel';
+import HomeBannerCarousel from '@/app/components/shared/HomeBannerCarousel';
 import LogEvents from '@/api/log/log-events';
 import { NoticeSearchParams } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
@@ -8,8 +8,6 @@ import Analytics from '@/app/components/shared/Analytics';
 import Pagination from '@/app/components/shared/Pagination';
 import Zabo from '@/app/components/shared/Zabo';
 import { createTranslation, PropsWithLng } from '@/app/i18next';
-import BannerInfoteam from '@/assets/images/banner_infoteam.svg';
-import BannerPotg from '@/assets/images/banner_pot-g.svg';
 import SearchNoResult from '@/assets/icons/search-no-result.svg';
 
 interface CategorizedNoticesProps {
@@ -30,11 +28,6 @@ const CategorizedNotices = async ({
 }: PropsWithLng<CategorizedNoticesProps>) => {
   const { t } = await createTranslation(lng);
 
-  const slides = [
-    { image: BannerInfoteam, url: 'https://www.notion.so/infoteam-rulrudino/2026-309365ea27df80488137d0680fd51686' },
-    { image: BannerPotg, url: 'https://pot-g.gistory.me/' },
-  ];
-
   const notices = await getAllNotices({
     ...noticeSearchParams,
     offset: page * itemsPerPage,
@@ -47,7 +40,7 @@ const CategorizedNotices = async ({
     <>
       {category === 'home' && (
         <div className="w-full mb-6 flex justify-center">
-          <BannerCarousel slides={slides} />
+          <HomeBannerCarousel />
         </div>
       )}
       {notices.list.length ? (
