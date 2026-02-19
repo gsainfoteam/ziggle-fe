@@ -122,6 +122,13 @@ export default async function RootLayout({
       {process.env.NEXT_PUBLIC_GA_TRACKING_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_TRACKING_ID} />
       )}
+      {process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY && (
+        <Script
+          src="https://chatbot.gistory.me/loader.js"
+          data-widget-key={process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY}
+          data-button-icon="logo"
+        />
+      )}
     </html>
   );
 }
