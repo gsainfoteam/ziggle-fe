@@ -1,5 +1,6 @@
 import React from 'react';
 
+import HomeBannerCarousel from '@/app/components/shared/HomeBannerCarousel';
 import LogEvents from '@/api/log/log-events';
 import { NoticeSearchParams } from '@/api/notice/notice';
 import { getAllNotices } from '@/api/notice/notice-server';
@@ -14,6 +15,7 @@ interface CategorizedNoticesProps {
   noticeSearchParams?: NoticeSearchParams;
   page: number;
   itemsPerPage?: number;
+  category?: string;
 }
 
 const CategorizedNotices = async ({
@@ -22,6 +24,7 @@ const CategorizedNotices = async ({
   itemsPerPage = 30,
   lng,
   page,
+  category,
 }: PropsWithLng<CategorizedNoticesProps>) => {
   const { t } = await createTranslation(lng);
 
@@ -35,6 +38,11 @@ const CategorizedNotices = async ({
 
   return (
     <>
+      {category === 'home' && (
+        <div className="mt-6 mb-[30px] w-full flex justify-center">
+          <HomeBannerCarousel />
+        </div>
+      )}
       {notices.list.length ? (
         <>
           <div className="flex w-full flex-col md:max-w-[800px]">

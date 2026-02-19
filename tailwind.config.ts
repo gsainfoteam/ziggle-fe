@@ -24,7 +24,7 @@ const config: Config = {
         dark_greyDark: 'var(--dark_greyDark)',
         dark_greyBorder: 'var(--dark_greyBorder)',
         dark_grey: 'var(--dark_grey)',
-        dark_white: 'var(--dark_white)',
+        dark_white: 'rgb(var(--dark_white-rgb) / <alpha-value>)',
         dark_secondary: 'var(--dark_secondary)',
       },
       spacing: {
