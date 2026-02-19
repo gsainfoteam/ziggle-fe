@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import BannerInfoteam from '@/assets/images/banner_infoteam.svg';
-import BannerPotg from '@/assets/images/banner_potg.svg';
 import NavArrowRight from '@/assets/icons/nav-arrow-right.svg';
 
-export default function BannerCarousel() {
-  const slides = [
-    { image: BannerInfoteam, url: 'https://infoteam-rulrudino.notion.site/2fb365ea27df8061ae1cdd7067d31580?pvs=105' },
-    { image: BannerPotg, url: 'https://pot-g.gistory.me/' },
-  ];
+interface Slide {
+  image: React.ComponentType<{ className?: string }>;
+  url: string;
+}
+
+interface BannerCarouselProps {
+  slides: Slide[];
+}
+
+export default function BannerCarousel({ slides }: BannerCarouselProps) {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
   const next = () => setIndex((i) => (i + 1) % slides.length);
@@ -42,6 +45,7 @@ export default function BannerCarousel() {
                 rel="noopener noreferrer"
                 className="block w-full flex-shrink-0"
                 aria-hidden={i !== index}
+                tabIndex={i !== index ? -1 : undefined}
               >
                 <Banner className="w-full h-auto block rounded-[20px]" />
               </a>
