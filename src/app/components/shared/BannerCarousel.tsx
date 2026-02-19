@@ -15,18 +15,31 @@ interface BannerCarouselProps {
 export default function BannerCarousel({ slides }: BannerCarouselProps) {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
-  const next = () => setIndex((i) => (i + 1) % slides.length);
-  const prev = () => setIndex((i) => (i - 1 + slides.length) % slides.length);
 
-  useEffect(() => {
+  const resetTimer = () => {
+    if (intervalRef.current !== null)
+      window.clearInterval(intervalRef.current);
     intervalRef.current = window.setInterval(() => {
       setIndex((i) => (i + 1) % slides.length);
     }, 5000);
+  };
+
+  const next = () => {
+    setIndex((i) => (i + 1) % slides.length);
+    resetTimer();
+  };
+  const prev = () => {
+    setIndex((i) => (i - 1 + slides.length) % slides.length);
+    resetTimer();
+  };
+
+  useEffect(() => {
+    resetTimer();
     return () => {
-      if (intervalRef.current) 
+      if (intervalRef.current !== null)
         window.clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="w-full flex justify-center">
