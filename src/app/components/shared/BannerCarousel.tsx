@@ -69,14 +69,14 @@ export default function BannerCarousel({ slides }: BannerCarouselProps) {
         <button
           onClick={prev}
           aria-label="이전"
-          className="absolute left-3 top-1/2 -translate-y-1/2 size-7 p-[5px] bg-[#ffffff80] rounded-2xl inline-flex justify-center items-center hover:bg-[#ffffffcc]"
+          className="absolute left-3 top-1/2 -translate-y-1/2 size-7 p-[5px] bg-dark_white/50 rounded-2xl inline-flex justify-center items-center hover:bg-dark_white/80"
         >
           <NavArrowRight className='w-5 h-5 rotate-180'/>
         </button>
         <button
           onClick={next}
           aria-label="다음"
-          className="absolute right-3 top-1/2 -translate-y-1/2 size-7 p-[5px] bg-[#ffffff80] rounded-2xl inline-flex justify-center items-center hover:bg-[#ffffffcc]"
+            className="absolute right-3 top-1/2 -translate-y-1/2 size-7 p-[5px] bg-dark_white/50 rounded-2xl inline-flex justify-center items-center hover:bg-dark_white/80"
         >
           <NavArrowRight className='w-5 h-5'/>
         </button>
@@ -88,7 +88,7 @@ export default function BannerCarousel({ slides }: BannerCarouselProps) {
               onClick={() => setIndex(i)}
               aria-label={`슬라이드 ${i + 1} 보기`}
               className={`w-6 h-1.5 rounded-[20px] transition-colors ${
-                i === index ? 'bg-white' : 'bg-[#D9D9D9]'
+                i === index ? 'bg-dark_white' : 'bg-deselected'
               }`}
             />
           ))}
