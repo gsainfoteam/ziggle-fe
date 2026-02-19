@@ -39,7 +39,7 @@ const CategorizedNotices = async ({
   return (
     <>
       {category === 'home' && (
-        <div className="w-full mb-6 flex justify-center">
+        <div className="mt-6 mb-[30px] w-full flex justify-center">
           <HomeBannerCarousel />
         </div>
       )}
