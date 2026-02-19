@@ -124,7 +124,7 @@ export default async function RootLayout({
       )}
       {process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY && (
         <Script
-          src={process.env.NEXT_PUBLIC_CHATBOT_LOADER_URL}
+          src="https://chatbot.gistory.me/loader.js"
           data-widget-key={process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY}
           data-button-icon="logo"
         />
