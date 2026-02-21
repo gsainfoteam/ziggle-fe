@@ -127,6 +127,9 @@ export default async function RootLayout({
           src="https://chatbot.gistory.me/loader.js"
           data-widget-key={process.env.NEXT_PUBLIC_CHATBOT_WIDGET_KEY}
           data-button-icon="logo"
+          data-primary-color="ff4500"
+          data-button-color="ff4500"
+          data-user-message-bg="ff4500"
         />
       )}
     </html>
