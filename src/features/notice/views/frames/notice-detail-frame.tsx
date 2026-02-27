@@ -1,18 +1,13 @@
-import { notFound, useParams } from '@tanstack/react-router';
+import { useLoaderData } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import { useNotice } from '../../viewmodels';
+import { Content } from '../components/content';
 import NoticeInfo from '../notice-info';
 
 export function NoticeDetailFrame() {
-  const { id } = useParams({ from: '/_layout/_sidebar/notice/$id' });
-  const { data: notice } = useNotice(Number.parseInt(id));
+  const notice = useLoaderData({ from: '/_layout/_sidebar/notice/$id' });
   const { t, i18n } = useTranslation();
-
-  if (!notice) return notFound();
-
-  const title = notice.title;
 
   const additionalContents = Object.values(
     notice.additionalContents.reduce<
@@ -33,7 +28,7 @@ export function NoticeDetailFrame() {
           {/* DESKTOP VIEW IMAGE STACK */}
           {/* <div className="hidden md:block">
             {notice.imageUrls.length > 0 && (
-              <ImageStack sources={notice.imageUrls} alt={title} />
+              <ImageStack sources={notice.imageUrls} alt={notice.title} />
             )}
           </div> */}
 
@@ -48,7 +43,7 @@ export function NoticeDetailFrame() {
                 <ImageStack
                   width={900}
                   sources={notice.imageUrls}
-                  alt={title}
+                  alt={notice.title}
                 />
               )} */}
             </div>
