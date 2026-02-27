@@ -8,6 +8,7 @@ import PlayStoreLogo from '@/assets/logos/playstore.svg?react';
 import { LogEvents } from '@/common/const/log-events';
 
 import { LogClick } from '../../analytics/log-click';
+import { CSLink } from '../../shared';
 
 // import keyToLogEvent from './keyToLogEvent';
 // import CSLink from '../../shared/CSLink/CSLink';

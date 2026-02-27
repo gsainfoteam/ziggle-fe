@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useLocation } from '@tanstack/react-router';
 
-import { LogClick } from '@/common/components/analytics/log-click';
+import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
 import { ChangeDarkModeBox } from './change-dark-mode-box';

@@ -64,5 +64,8 @@
         ]
       }
     ]
+  },
+  "navbar": {
+    "login": "Login"
   }
 }

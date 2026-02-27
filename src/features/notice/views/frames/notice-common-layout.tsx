@@ -1,6 +1,8 @@
 import { Outlet } from '@tanstack/react-router';
 
-import { Footer } from '../components';
+import { Footer } from '@/common/components';
+
+import { Navbar } from '../components/navbar';
 
 export function NoticeTopDownLayout() {
   return (

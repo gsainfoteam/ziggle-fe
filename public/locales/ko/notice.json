@@ -3,6 +3,12 @@
     "myNotice": "내 공지",
     "remindNotice": "리마인드한 공지"
   },
+  "searchPage": {
+    "searchBar": {
+      "collapse": "취소",
+      "placeholder": "검색"
+    }
+  },
   "sidebar": {
     "academic": "학사",
     "event": "행사",

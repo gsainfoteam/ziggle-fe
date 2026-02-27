@@ -3,6 +3,12 @@
     "myNotice": "My Notices",
     "remindNotice": "Reminded Notices"
   },
+  "searchPage": {
+    "searchBar": {
+      "collapse": "Cancel",
+      "placeholder": "Search"
+    }
+  },
   "sidebar": {
     "academic": "Academic",
     "event": "Events",
