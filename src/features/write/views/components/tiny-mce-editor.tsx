@@ -13,8 +13,10 @@ import 'tinymce/themes/silver';
 import 'tinymce/icons/default';
 // Editor styles
 import 'tinymce/skins/ui/oxide/skin';
+import 'tinymce/skins/ui/oxide-dark/skin';
 // Content styles, including inline UI like fake cursors
 import 'tinymce/skins/content/default/content';
+import 'tinymce/skins/content/dark/content';
 import 'tinymce/skins/ui/oxide/content';
 import 'tinymce/skins/ui/oxide-dark/content';
 
@@ -23,20 +25,18 @@ import 'tinymce/plugins/autolink';
 import 'tinymce/plugins/code';
 import 'tinymce/plugins/image';
 import 'tinymce/plugins/link';
+import { useTheme } from '@/common/lib/theme';
 
 export const TinyMCEEditor = ({
   ...props
 }: React.ComponentProps<typeof Editor>) => {
+  const { theme } = useTheme();
   return (
     <Editor
       licenseKey="gpl"
       init={{
-        skin: window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'oxide-dark'
-          : 'oxide',
-        content_css: window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'default',
+        skin: theme === 'dark' ? 'oxide-dark' : 'oxide',
+        content_css: theme === 'dark' ? 'dark' : 'default',
         promotion: false,
         plugins: ['link', 'image', 'code', 'autolink'],
         linkchecker_service_url: '/linkchecker',
