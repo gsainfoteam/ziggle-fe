@@ -23,8 +23,15 @@
   --color-dark_white: #ffffff;
   --color-dark_secondary: #432b22;
 
-  .search-bar-animation {
-    animation: fadeInWithGoUp 0.5s cubic-bezier(0, 0.51, 0.38, 1);
+  @keyframes fadeInWithGoUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
   }
 }
 
@@ -33,6 +40,10 @@
     @apply w-[calc(100%-40px)];
     @apply md:w-[calc(100%-2*(var(--spacing-pageSide)))];
     @apply max-w-[1240px];
+  }
+
+  .search-bar-animation {
+    animation: fadeInWithGoUp 0.5s cubic-bezier(0, 0.51, 0.38, 1);
   }
 }
 
@@ -47,17 +58,6 @@ body {
   transition:
     background-color var(--transition-duration) ease,
     color var(--transition-duration) ease;
-}
-
-@keyframes fadeInWithGoUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
 }
 
 html {
