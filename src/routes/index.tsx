@@ -1,7 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/')({ component: App });
+import { LandingFrame } from '#/features/landing/views/frames';
 
-function App() {
-  return <main />;
-}
+export const Route = createFileRoute('/')({ component: LandingFrame });

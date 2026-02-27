@@ -1,17 +1,13 @@
+import { TanStackDevtools } from '@tanstack/react-devtools';
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import { TanStackDevtools } from '@tanstack/react-devtools';
 import '@/common/lib/dayjs-init';
 import '@/common/lib/init-amplitude';
 
 import '../styles.css';
 
 export const Route = createRootRoute({
-  component: RootComponent,
-});
-
-function RootComponent() {
-  return (
+  component: () => (
     <>
       <Outlet />
       <TanStackDevtools
@@ -26,5 +22,5 @@ function RootComponent() {
         ]}
       />
     </>
-  );
-}
+  ),
+});

@@ -1,10 +1,11 @@
 import createFetchClient from 'openapi-fetch';
-import type { MaybeOptionalInit, Middleware } from 'openapi-fetch';
 import createQueryClient from 'openapi-react-query';
 
 import { ApiPaths } from '@/@types/api-schema';
 import type { paths } from '@/@types/api-schema';
 import { useToken } from '@/features/auth';
+
+import type { MaybeOptionalInit, Middleware } from 'openapi-fetch';
 
 let refreshPromise: ReturnType<
   typeof api.POST<
