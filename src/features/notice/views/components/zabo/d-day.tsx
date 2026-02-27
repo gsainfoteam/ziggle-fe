@@ -2,6 +2,8 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Trans } from 'react-i18next/TransWithoutContext';
 
+import { cn } from '@/common/utils';
+
 interface DDayProps {
   deadline: dayjs.Dayjs | string;
   className?: string;
@@ -14,7 +16,11 @@ const DDay = ({ deadline, className }: DDayProps) => {
 
   return (
     <p
-      className={`dark:text-text h-fit rounded-md px-[10px] py-[3px] text-[14px] text-white ${isClosed ? 'bg-greyDark' : 'bg-primary'} ${className} `}
+      className={cn(
+        'dark:text-text h-fit rounded-md px-[10px] py-[3px] text-[14px] text-white',
+        isClosed ? 'bg-greyDark' : 'bg-primary',
+        className,
+      )}
     >
       {isClosed ? (
         t('dDayPlus')

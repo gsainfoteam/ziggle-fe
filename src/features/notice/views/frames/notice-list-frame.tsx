@@ -8,6 +8,7 @@ import SearchNoResult from '@/assets/icons/search-no-result.svg?react';
 import { LogClick, LoadingCatAnimation } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
+import { cn } from '@/common/utils';
 
 import { Category } from '../../models';
 import { useNotices } from '../../viewmodels';
@@ -134,9 +135,10 @@ export function NoticeListFrame() {
                 </LogClick>
 
                 <p
-                  className={`text-lg font-medium ${
-                    sortByDeadline ? 'text-primary' : 'text-greyDark'
-                  }`}
+                  className={cn(
+                    'text-lg font-medium',
+                    sortByDeadline ? 'text-primary' : 'text-greyDark',
+                  )}
                 >
                   {t('common.sortByDeadline')}
                 </p>

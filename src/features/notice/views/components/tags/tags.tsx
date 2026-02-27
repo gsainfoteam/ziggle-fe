@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
+import { cn } from '@/common/utils';
+
 import { Tag } from './tag';
 
 const defaultTags = ['event', 'general', 'recruit', 'academic'] as const;
@@ -15,7 +17,7 @@ interface TagsProps {
 export const Tags = ({ tags, className }: TagsProps) => {
   const { t } = useTranslation('notice');
   return (
-    <div className={`flex gap-[7px] ${className ?? ''}`}>
+    <div className={cn('flex gap-[7px]', className)}>
       {tags.map((name) => (
         <Tag
           key={name}

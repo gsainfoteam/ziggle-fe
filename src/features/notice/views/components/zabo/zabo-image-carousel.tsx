@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
 
+import { cn } from '@/common/utils';
+
 interface ZaboImageCarouselProps {
   imageUrls: string[];
   title: string;
@@ -62,27 +64,27 @@ export const ZaboImageCarousel = ({
       </div>
       {indicesInView.last <= imageUrls.length && (
         <div className="flex h-4 w-fit items-center justify-center rounded-full px-2 py-1 opacity-0 backdrop-blur-lg backdrop-invert-30 transition-opacity duration-500 group-hover:opacity-100">
-          {imageUrls.map((url, i) => (
-            <div
-              key={url}
-              className={`bg-dark_white flex rounded-full ${
-                i < indicesInView.first - 2 ||
-                indicesInView.first + maxControls - 1 < i
-                  ? 'mx-0 h-0 w-0'
-                  : 'mx-1 h-2 w-2' +
-                    (i == indicesInView.first + maxControls - 2 ||
-                    i == indicesInView.first - 1
-                      ? ' scale-75'
-                      : i == indicesInView.first + maxControls - 1 ||
-                          i == indicesInView.first - 2
-                        ? ' scale-50'
-                        : '')
-              } ${
-                (i < indicesInView.first || indicesInView.last < i) &&
-                'opacity-30'
-              } transition-all duration-500`}
-            />
-          ))}
+          {imageUrls.map((url, i) => {
+            const leftOuter = indicesInView.first - 2;
+            const rightOuter = indicesInView.first + maxControls - 1;
+            return (
+              <div
+                key={url}
+                className={cn(
+                  'bg-dark_white flex rounded-full transition-all duration-500',
+                  // out of view
+                  (i < leftOuter || rightOuter < i) && 'mx-0 h-0 w-0',
+                  // in view
+                  leftOuter <= i && i <= rightOuter && 'mx-1 h-2 w-2',
+                  // margin + 1
+                  (i == leftOuter + 1 || i == rightOuter - 1) &&
+                    'scale-75 opacity-30',
+                  // margin
+                  (i == leftOuter || i == rightOuter) && 'scale-50 opacity-30',
+                )}
+              />
+            );
+          })}
         </div>
       )}
     </div>
