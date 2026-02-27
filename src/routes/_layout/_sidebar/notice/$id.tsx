@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { Loading } from '@/common/components';
+import { LoadingCatAnimation } from '@/common/components';
 import { NoticeDetailFrame, NoticeNotFoundFrame } from '@/features/notice';
 import { getNotice } from '@/features/notice/viewmodels';
 
@@ -11,7 +11,13 @@ export const Route = createFileRoute('/_layout/_sidebar/notice/$id')({
     if (!notice.data) throw notFound();
     return notice.data;
   },
-  pendingComponent: Loading,
+  pendingComponent: () => (
+    <>
+      <div className="h-48" />
+      <LoadingCatAnimation />
+      <div className="h-48" />
+    </>
+  ),
   component: NoticeDetailFrame,
   notFoundComponent: NoticeNotFoundFrame,
 });
