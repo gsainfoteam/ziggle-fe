@@ -27,6 +27,7 @@ import { AddAdditionalNotice } from './add-additional-notice';
 import { AttachPhotoArea } from './attach-photo-area';
 import { DateTimePicker } from './date-time-picker';
 import { DeepLButton } from './deep-l-button';
+import EditableTimer from './editable-timer';
 import { LanguageTab } from './language-tab';
 import { NoticeTypeSelector } from './notice-type-selector';
 import { TagInput } from './tag-input';
@@ -356,9 +357,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     <>
       {isEditMode && (
         <>
-          {notice?.createdAt && (
-            <EditableTimer createdAt={notice.createdAt} lng={lng} />
-          )}
+          {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
           <p
             className={
               'bg-greyLight text-greyDark mt-[10px] rounded-[15px] px-5 py-[15px] text-lg'
