@@ -41,3 +41,5 @@ export enum EmojiString {
   THINKING = '🤔',
   SURPRISED = '😮',
 }
+
+export { ApiPaths } from '@/@types/api-schema';

@@ -13,6 +13,10 @@ import {
   type Notice,
   type Reaction,
 } from '@/features/notice/models';
+import {
+  useAddReaction,
+  useDeleteReaction,
+} from '@/features/notice/viewmodels';
 
 interface FireButtonProps {
   id: number;
@@ -21,15 +25,23 @@ interface FireButtonProps {
 
 const FireButton = ({ id, fire }: FireButtonProps) => {
   const { t } = useTranslation('notice');
+  const { mutateAsync: addReaction } = useAddReaction();
+  const { mutateAsync: deleteReaction } = useDeleteReaction();
 
   const [currentFire, setCurrentFire] = useState<Reaction>(fire);
 
   const toggleReaction = async (emoji: string, isReacted: boolean) => {
     if (isReacted) {
-      const res = await deleteReaction(id, emoji);
+      const res = await deleteReaction({
+        params: { path: { id } },
+        body: { emoji },
+      });
       return res.reactions;
     } else {
-      const res = await addReaction(id, emoji);
+      const res = await addReaction({
+        params: { path: { id } },
+        body: { emoji },
+      });
       return res.reactions;
     }
   };
