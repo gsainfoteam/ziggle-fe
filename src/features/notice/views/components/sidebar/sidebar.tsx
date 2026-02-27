@@ -4,6 +4,7 @@ import { useLocation } from '@tanstack/react-router';
 
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { useUser } from '@/features/auth';
 
 import { ChangeDarkModeBox } from './change-dark-mode-box';
 import { ChangeLanguageBox } from './change-language-box';
@@ -14,8 +15,7 @@ export const Sidebar = () => {
   const { pathname } = useLocation();
   const sidebarObject = useSidebarObject();
 
-  // TODO: mocking
-  const userData = true;
+  const { data: user } = useUser();
 
   return (
     <div className="flex flex-col">
@@ -25,7 +25,7 @@ export const Sidebar = () => {
             <ul className="flex flex-col gap-y-2">
               {group
                 .filter((menu) =>
-                  !userData ? !('needAuth' in menu) || !menu.needAuth : true,
+                  !user ? !('needAuth' in menu) || !menu.needAuth : true,
                 )
                 .map((menu, i) => (
                   <li key={i} className="flex flex-row">

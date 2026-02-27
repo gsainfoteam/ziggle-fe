@@ -4,7 +4,7 @@ import { Navigate, Outlet, useSearch } from '@tanstack/react-router';
 
 import { Loading } from '@/common/components';
 
-import { useAuth, useAuthRedirect } from '../../viewmodels';
+import { useAuthRedirect, useUser } from '../../viewmodels';
 
 function Redirect() {
   const { redirect: redirectSearch } = useSearch({ from: '/_auth' });
@@ -19,7 +19,7 @@ function Redirect() {
 }
 
 export function AuthLayout() {
-  const { user } = useAuth();
+  const { data: user } = useUser();
 
   if (user === undefined) return <Loading />;
   if (user !== null) return <Redirect />;

@@ -12,6 +12,7 @@ import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
 import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { useUser } from '@/features/auth';
 
 import { SearchBar } from './search-bar';
 import { SidebarMobile } from './sidebar';
@@ -19,8 +20,7 @@ import { SidebarMobile } from './sidebar';
 export const Navbar = () => {
   const { t } = useTranslation('layout');
 
-  // TODO: get user, fix type
-  const user = null as { user: { name: string } } | null;
+  const { data: user } = useUser();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -70,17 +70,14 @@ export const Navbar = () => {
         >
           <AccountIcon className="flex h-6" />
           <div className="text-primary align-middle font-medium whitespace-nowrap">
-            {user?.user?.name ?? t('navbar.login')}
+            {user?.name ?? t('navbar.login')}
           </div>
         </Link>
       </LogClick>
 
       {isSidebarOpen && (
         <div className="md:hidden">
-          <SidebarMobile
-            onClose={handleSidebarClose}
-            user={user?.user ?? null}
-          />
+          <SidebarMobile onClose={handleSidebarClose} user={user ?? null} />
         </div>
       )}
     </header>

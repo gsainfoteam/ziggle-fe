@@ -1,9 +1,11 @@
+import { useUser } from '@/features/auth';
+
 export const CSLink = ({
   children,
   className,
 }: React.PropsWithChildren<{ className?: string }>) => {
-  // TODO: get email from user
-  const email = '';
+  const { data: user } = useUser();
+  const email = user?.email;
 
   return (
     <a

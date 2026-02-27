@@ -6,10 +6,15 @@ import { useToken } from '../stores';
 export const useUser = () => {
   const { token } = useToken();
 
-  return $api.useQuery(
+  const { data, ...rest } = $api.useQuery(
     'get',
     ApiPaths.UserController_getUserInfo,
     {},
     { enabled: !!token },
   );
+
+  return {
+    ...rest,
+    data: token ? data : null,
+  };
 };
