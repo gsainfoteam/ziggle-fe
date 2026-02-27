@@ -32,7 +32,7 @@ const List = ({
   });
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (!notices.list.length) {
+  if (!notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">
@@ -52,7 +52,7 @@ const List = ({
     <>
       <div className="flex flex-col flex-nowrap gap-[10px]">
         <div className="h-8" />
-        {notices.list.map((notice) => (
+        {notices?.list.map((notice) => (
           <LogClick
             eventName={LogEvents.noticeClick}
             properties={{
@@ -68,7 +68,7 @@ const List = ({
       <div className="h-4" />
       <div className="flex justify-center">
         <Pagination
-          items={notices.total}
+          items={notices?.total ?? 0}
           itemsPerPage={ITEMS_PER_CALL}
           page={pageNumber}
         />

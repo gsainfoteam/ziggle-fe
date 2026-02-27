@@ -39,7 +39,7 @@ function List({
   const { t } = useTranslation('notice');
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (!notices.list.length) {
+  if (!notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">

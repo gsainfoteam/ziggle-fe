@@ -18,16 +18,11 @@ export const useLogin = ({
 
   return $api.useMutation('post', ApiPaths.AuthController_login, {
     onSuccess: (response) => {
-      // TODO: fill type
-      const r = response as unknown as {
-        access_token: string;
-        consent_required: boolean;
-      };
-      useAuthPrompt.getState().setRequiredConsents(r.consent_required);
-      if (r.consent_required) {
+      useAuthPrompt.getState().setRequiredConsents(response.consent_required);
+      if (response.consent_required) {
         navigate({ to: '/auth/consent' });
       }
-      useToken.getState().saveToken(r.access_token);
+      useToken.getState().saveToken(response.access_token);
     },
     onError: async (error) => {
       if (error?.statusCode === 401) {
