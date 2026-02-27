@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import { useUser } from '@/features/auth';
 
+import { AuthorActions } from './components/author-actions';
 import { Tags } from './components/tags';
 
 import type { Group, NoticeDetail } from '../models';
 
-const NoticeInfo = ({
+export const NoticeInfo = ({
   id,
   currentDeadline: deadline,
   title,
@@ -31,7 +32,7 @@ const NoticeInfo = ({
         group={group}
       />
 
-      {/* {user.uuid === author.uuid && <AuthorActions noticeId={id} />} */}
+      {user?.uuid === author.uuid && <AuthorActions noticeId={id} />}
 
       <Title title={title} />
 
@@ -87,7 +88,7 @@ const Metadata = ({
           // >
           //   <span className={'ml-2 text-lg font-medium'}>{group.name}</span>
           // </Link>
-          // TOOD: implement with groups feature
+          // TODO: implement with groups feature
           <></>
         ) : (
           <span className={'ml-2 text-lg font-medium'}>{author}</span>

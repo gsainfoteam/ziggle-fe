@@ -1,4 +1,8 @@
 {
+  "alertResponse": {
+    "cancel": "취소",
+    "confirm": "확인"
+  },
   "common": {
     "sortByDeadline": "마감시간 순으로 보기"
   },
@@ -39,12 +43,30 @@
     "write": "공지 작성",
     "zigglepick": "지글픽"
   },
+  "write": {
+    "alerts": {
+      "deleteFail": "공지 삭제에 실패했습니다",
+      "deleteSuccess": "공지가 성공적으로 삭제되었습니다"
+    }
+  },
   "zabo": {
+    "additionalNotices": {
+      "deadlineChanged": "마감시간 변경",
+      "noDeadline": "마감시간 없음",
+      "title": "추가 공지"
+    },
+    "authorActions": {
+      "edit": "수정 / 영어공지 작성",
+      "remove": "삭제",
+      "removeSure": "정말로 이 공지를 삭제하시겠습니까?"
+    },
+    "close": "닫기",
     "copyLink": {
       "action": "주소 복사하기",
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
+    "downloadAll": "전체 다운로드하기",
     "dueAt": "마감시간 {{dueAt}}",
     "share": {
       "action": "공유하기",

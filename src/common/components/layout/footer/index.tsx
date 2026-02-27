@@ -1,4 +1,3 @@
-// import { createTranslation, type PropsWithLng } from '@/app/i18next';
 import { useTranslation } from 'react-i18next';
 
 import AppStoreLogo from '@/assets/logos/appstore.svg?react';
@@ -9,9 +8,6 @@ import { LogEvents } from '@/common/const/log-events';
 
 import { LogClick } from '../../analytics/log-click';
 import { CSLink } from '../../shared';
-
-// import keyToLogEvent from './keyToLogEvent';
-// import CSLink from '../../shared/CSLink/CSLink';
 
 export const playStoreLink =
   'https://play.google.com/store/apps/details?id=me.gistory.ziggle';

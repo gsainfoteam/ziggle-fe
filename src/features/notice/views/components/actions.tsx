@@ -3,15 +3,18 @@ import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import AnguishedFace from '@/assets/icons/anguished-face.svg';
-import Fire from '@/assets/icons/fire-outlined.svg';
-import LinkIcon from '@/assets/icons/link.svg';
-import LoudlyCryingFace from '@/assets/icons/loudly-crying-face.svg';
-import ShareIcon from '@/assets/icons/share.svg';
-import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg';
-import ThinkingFace from '@/assets/icons/thinking-face.svg';
+import AnguishedFace from '@/assets/icons/anguished-face.svg?react';
+import Fire from '@/assets/icons/fire-outlined.svg?react';
+import LinkIcon from '@/assets/icons/link.svg?react';
+import LoudlyCryingFace from '@/assets/icons/loudly-crying-face.svg?react';
+import ShareIcon from '@/assets/icons/share.svg?react';
+import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg?react';
+import ThinkingFace from '@/assets/icons/thinking-face.svg?react';
+import { LogClick } from '@/common/components';
+import { LogEvents } from '@/common/const/log-events';
 
-import type { EmojiString } from '../../models';
+import { EmojiString, type NoticeDetail, type Reaction } from '../../models';
+import { useAddReaction, useDeleteReaction } from '../../viewmodels';
 
 const EMOJI_WIDTH = 30;
 
@@ -96,38 +99,46 @@ const ReactionButton = ({
 };
 
 interface ReactionsProps {
-  notice: Notice;
-  lng: Locale;
+  notice: NoticeDetail;
 }
 
-const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
-  const router = useRouter();
+export const Actions = ({
+  notice: { title, id, reactions },
+}: ReactionsProps) => {
   const [currentReactions, setCurrentReactions] =
     useState<Reaction[]>(reactions);
+  const { mutateAsync: deleteReaction } = useDeleteReaction();
+  const { mutateAsync: addReaction } = useAddReaction();
 
   const toggleReaction = async (emoji: string, isReacted: boolean) => {
     try {
       if (isReacted) {
-        const res = await deleteReaction(id, emoji);
+        const res = await deleteReaction({
+          params: { path: { id } },
+          body: { emoji },
+        });
 
         return res.reactions;
       } else {
-        const res = await addReaction(id, emoji);
+        const res = await addReaction({
+          params: { path: { id } },
+          body: { emoji },
+        });
 
         return res.reactions;
       }
-    } catch (e) {
+    } catch {
       toast.error('로그인이 필요합니다.');
     }
   };
 
   const handleEmojiClick = async (emoji: string, isReacted: boolean) => {
-    sendLog(LogEvents.detailClickReaction, { id, type: emoji, isReacted });
+    // TODO: send log
+    // sendLog(LogEvents.detailClickReaction, { id, type: emoji, isReacted });
     const reactions = await toggleReaction(emoji, isReacted);
 
     if (reactions) {
       setCurrentReactions(reactions);
-      router.refresh();
     }
   };
 
@@ -154,37 +165,36 @@ const Actions = ({ notice: { title, id, reactions }, lng }: ReactionsProps) => {
           />
         ))}
 
-      <Analytics
-        event={LogEvents.detailClickShare}
+      <LogClick
+        eventName={LogEvents.detailClickShare}
         properties={{
           id,
         }}
       >
-        <ShareButton title={title} lng={lng} />
-      </Analytics>
+        <ShareButton title={title} />
+      </LogClick>
 
-      <Analytics
-        event={LogEvents.detailClickCopyLink}
+      <LogClick
+        eventName={LogEvents.detailClickCopyLink}
         properties={{
           id,
         }}
       >
-        <CopyLinkButton title={title} lng={lng} />
-      </Analytics>
+        <CopyLinkButton title={title} />
+      </LogClick>
     </div>
   );
 };
 
 interface ActionsProps {
   title: string;
-  lng: Locale;
 }
 
-const ShareButton = ({ title, lng }: ActionsProps) => {
+const ShareButton = ({ title }: ActionsProps) => {
   const { t } = useTranslation('notice');
   const handleShare = () => {
     if (!navigator.canShare) {
-      return Swal.fire({ title: t('zabo.share.unsupported'), icon: 'error' });
+      return toast.error(t('zabo.share.unsupported'));
     }
     navigator.share({
       title,
@@ -204,7 +214,7 @@ const ShareButton = ({ title, lng }: ActionsProps) => {
   );
 };
 
-const CopyLinkButton = ({ title, lng }: ActionsProps) => {
+const CopyLinkButton = ({ title }: ActionsProps) => {
   const { t } = useTranslation('notice');
   const handleCopy = () => {
     navigator.clipboard.writeText(
@@ -214,7 +224,7 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
     toast.success(
       <div className="flex flex-col text-sm font-medium">
         <Trans t={t} i18nKey="zabo.copyLink.success">
-          successed <div className="text-xs">share to friends</div>
+          succeeded <div className="text-xs">share to friends</div>
         </Trans>
       </div>,
     );
@@ -230,5 +240,3 @@ const CopyLinkButton = ({ title, lng }: ActionsProps) => {
     </ActionButton>
   );
 };
-
-export default Actions;

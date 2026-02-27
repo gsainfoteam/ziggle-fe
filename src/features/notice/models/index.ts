@@ -45,6 +45,7 @@ export enum EmojiString {
 }
 
 export type NoticeDetail = components['schemas']['ExpandedGeneralNoticeDto'];
+export type AdditionalContent = components['schemas']['AdditionalContentsDto'];
 export {
   ApiPaths,
   PathsNoticeGetParametersQueryCategory as Category,
