@@ -28,6 +28,8 @@
   },
   "searchPage": {
     "loginRequired": "Login is required",
+    "noResult": "",
+    "prompt": "",
     "searchBar": {
       "collapse": "Cancel",
       "placeholder": "Search"
@@ -72,6 +74,7 @@
     },
     "downloadAll": "Download All",
     "dueAt": "Due at {{dueAt}}",
+    "noContent": "",
     "sentPushNotificationAlert": {
       "action": "Send Push Notification",
       "title": "You can't edit once you send a notification."

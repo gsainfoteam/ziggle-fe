@@ -2,7 +2,13 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import z from 'zod';
 
+import { SearchFrame } from '@/features/notice';
+
 export const Route = createFileRoute('/_layout/search')({
-  component: () => <div>Hello "/_layout/search"!</div>,
-  validateSearch: z.object({ query: z.string().optional() }),
+  component: SearchFrame,
+  validateSearch: z.object({
+    query: z.string().optional(),
+    tags: z.string().optional(),
+    page: z.string().optional(),
+  }),
 });

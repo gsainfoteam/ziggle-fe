@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useSearch } from '@tanstack/react-router';
 
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?react';
 import { Button } from '@/common/components';
@@ -14,6 +14,7 @@ const Pagination = ({
   itemsPerPage,
   page: rawPage,
 }: PaginationProps) => {
+  const search = useSearch({ strict: false });
   const page = Number.isNaN(rawPage) ? 0 : rawPage;
   const pages = Math.ceil(items / itemsPerPage);
 
@@ -32,7 +33,7 @@ const Pagination = ({
       <div className="flex gap-1">
         {page !== 0 ? (
           <Button animated>
-            <Link to="." search={{ page: (page - 1).toString() }}>
+            <Link to="." search={{ ...search, page: (page - 1).toString() }}>
               <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 rotate-180 fill-none md:w-7" />
             </Link>
           </Button>
@@ -43,7 +44,7 @@ const Pagination = ({
         )}
         {page + 1 !== pages ? (
           <Button animated>
-            <Link to="." search={{ page: (page + 1).toString() }}>
+            <Link to="." search={{ ...search, page: (page + 1).toString() }}>
               <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 fill-none md:w-7" />
             </Link>
           </Button>

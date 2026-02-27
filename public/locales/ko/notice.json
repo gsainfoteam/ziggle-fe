@@ -28,6 +28,8 @@
   },
   "searchPage": {
     "loginRequired": "로그인이 필요합니다",
+    "noResult": "",
+    "prompt": "",
     "searchBar": {
       "collapse": "취소",
       "placeholder": "검색"
@@ -72,6 +74,7 @@
     },
     "downloadAll": "전체 다운로드하기",
     "dueAt": "마감시간 {{dueAt}}",
+    "noContent": "",
     "sentPushNotificationAlert": {
       "action": "알림 보내기",
       "title": "알림을 보내면 수정이 불가능합니다."
