@@ -29,6 +29,7 @@
     "@tanstack/react-router-devtools": "^1.132.0",
     "dayjs": "^1.11.19",
     "i18next": "^25.8.13",
+    "i18next-browser-languagedetector": "^8.2.1",
     "i18next-http-backend": "^3.0.2",
     "lucide-react": "^0.545.0",
     "openapi-fetch": "^0.17.0",
