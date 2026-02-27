@@ -1,6 +1,6 @@
 {
   "common": {
-    "sortByDeadline": ""
+    "sortByDeadline": "마감시간 순으로 보기"
   },
   "dDayPlus": "기한 지남",
   "emptyNotices": "글이 없습니다. =ㅅ=",

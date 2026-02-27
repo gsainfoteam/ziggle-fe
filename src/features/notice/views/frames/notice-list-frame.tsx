@@ -124,6 +124,7 @@ export function NoticeListFrame() {
                     className="flex rounded-full"
                   >
                     <input
+                      // TODO: use toggle component
                       // className={styles.checkbox}
                       type="checkbox"
                       checked={sortByDeadline}
