@@ -1,5 +1,5 @@
 {
-  "projectName": "ziggle-fe-renewal",
+  "projectName": "ziggle-fe",
   "mode": "file-router",
   "typescript": true,
   "tailwind": true,
@@ -12,7 +12,5 @@
   "routerOnly": true,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": [
-    "eslint"
-  ]
+  "chosenAddOns": ["eslint"]
 }
