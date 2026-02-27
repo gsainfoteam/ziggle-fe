@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 
 import { Sidebar } from './sidebar';
 
@@ -37,15 +38,17 @@ const SidebarMobile = ({ onClose, user }: SidebarProps) => {
   return ReactDOM.createPortal(
     <div className="fixed w-screen">
       <div
-        className={`bg-opacity-50 absolute inset-0 h-screen bg-black transition-opacity duration-300 ${
-          isOpen ? 'opacity-50' : 'pointer-events-none opacity-0'
-        }`}
+        className={cn(
+          'bg-opacity-50 absolute inset-0 h-screen bg-black transition-opacity duration-300',
+          isOpen ? 'opacity-50' : 'pointer-events-none opacity-0',
+        )}
         onClick={handleClose}
       />
       <div
-        className={`scrollbar-none dark:bg-dark_dark absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-[10px] transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={cn(
+          'scrollbar-none dark:bg-dark_dark absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-[10px] transition-transform duration-300',
+          isOpen ? 'translate-x-0' : '-translate-x-full',
+        )}
       >
         <LogClick eventName={LogEvents.sidebarClickProfile}>
           <Link

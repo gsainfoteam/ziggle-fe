@@ -8,6 +8,7 @@ import CloseIcon from '@/assets/icons/close.svg?react';
 import SearchIcon from '@/assets/icons/search.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 
 const SearchButton = ({
   onClick,
@@ -18,22 +19,22 @@ const SearchButton = ({
 }) => (
   <button
     type={isToggle ? 'button' : 'submit'}
-    className={[
+    className={cn(
       isToggle
         ? 'dark:bg-dark_dark bg-white'
         : 'bg-greyLight dark:bg-dark_greyDark',
       'flex h-full items-center justify-center p-0 px-2 md:pr-6 md:pl-5',
       'border-l-greyBorder dark:border-l-dark_greyBorder border-l-0 md:border-l',
       'md:bg-greyLight md:dark:bg-dark_greyDark',
-    ].join(' ')}
+    )}
     onClick={onClick}
   >
     <SearchIcon
-      className={[
+      className={cn(
         'h-6 w-6',
         isToggle ? 'stroke-text' : 'stroke-greyDark',
         'dark:stroke-dark_white md:stroke-greyDark md:dark:stroke-dark_white',
-      ].join(' ')}
+      )}
     />
   </button>
 );
@@ -69,16 +70,16 @@ export const SearchBar = () => {
 
   return (
     <div
-      className={[
+      className={cn(
         isExpanded ? 'absolute h-fit w-full' : 'static h-full w-12',
         'md:mx-4 md:h-fit md:w-full',
         'flex items-stretch justify-end md:static md:justify-center',
         'right-0 transition-[width]',
-      ].join(' ')}
+      )}
     >
       <form
         onSubmit={handleSearch}
-        className={[
+        className={cn(
           isExpanded ? 'w-full' : 'w-fit',
           'transition-[width] md:w-full md:max-w-[700px]',
           'flex flex-row-reverse justify-between md:flex-row',
@@ -86,22 +87,22 @@ export const SearchBar = () => {
           'border-greyBorder rounded-lg',
           'dark:border-dark_greyBorder md:bg-greyLight md:rounded-full md:border',
           'bg-transparent',
-        ].join(' ')}
+        )}
       >
         <div
-          className={[
+          className={cn(
             isExpanded ? 'w-full' : 'w-0',
             'flex justify-between md:w-full',
-          ].join(' ')}
+          )}
         >
           <input
-            className={[
+            className={cn(
               'flex-1 px-0 py-2 md:px-5',
               'text-base leading-4',
               'text-text placeholder-greyDark',
               'dark:bg-dark_greyDark dark:text-dark_white md:dark:bg-dark_dark md:bg-white',
               'outline-none',
-            ].join(' ')}
+            )}
             name="searchQuery"
             placeholder={t('searchPage.searchBar.placeholder')}
             value={keyword}
@@ -143,12 +144,12 @@ export const SearchBar = () => {
         <LogClick eventName={LogEvents.searchClickCancel}>
           <button
             type="button"
-            className={[
+            className={cn(
               'flex h-full w-fit items-center justify-center',
               'overflow-hidden px-2 whitespace-nowrap',
               'text-primary dark:bg-dark_dark bg-white',
               'md:hidden',
-            ].join(' ')}
+            )}
             onClick={() => setIsExpanded(false)}
           >
             {t('searchPage.searchBar.collapse')}
