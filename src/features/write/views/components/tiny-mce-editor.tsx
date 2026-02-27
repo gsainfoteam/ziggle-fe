@@ -1,6 +1,8 @@
 import type React from 'react';
+import { useImperativeHandle, useRef } from 'react';
 
 import { Editor } from '@tinymce/tinymce-react';
+import { type Editor as EditorType } from 'tinymce';
 
 // Ensure to import tinymce first as other components expect
 // a global variable `tinymce` to exist
@@ -28,12 +30,18 @@ import 'tinymce/plugins/link';
 import { useTheme } from '@/common/lib/theme';
 
 export const TinyMCEEditor = ({
+  ref,
   ...props
-}: React.ComponentProps<typeof Editor>) => {
+}: Omit<React.ComponentProps<typeof Editor>, 'onInit'> & {
+  ref: React.Ref<EditorType>;
+}) => {
   const { theme } = useTheme();
+  const _ref = useRef<EditorType>(null);
+  useImperativeHandle(ref, () => _ref.current!);
   return (
     <Editor
       licenseKey="gpl"
+      onInit={(_, editor) => (_ref.current = editor)}
       init={{
         skin: theme === 'dark' ? 'oxide-dark' : 'oxide',
         content_css: theme === 'dark' ? 'dark' : 'default',

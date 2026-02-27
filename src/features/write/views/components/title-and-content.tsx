@@ -78,7 +78,7 @@ export const TitleAndContent = ({
         disabled={disabled}
         value={content}
         onEditorChange={onChangeContent}
-        onInit={(_, editor) => (ref.current = editor)}
+        ref={ref}
       />
 
       {content.length > BODY_MAX_LENGTH && (
