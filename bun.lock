@@ -9,7 +9,6 @@
         "@tanstack/react-devtools": "^0.7.0",
         "@tanstack/react-router": "^1.132.0",
         "@tanstack/react-router-devtools": "^1.132.0",
-        "@tanstack/router-plugin": "^1.132.0",
         "dayjs": "^1.11.19",
         "lucide-react": "^0.545.0",
         "react": "^19.2.0",
