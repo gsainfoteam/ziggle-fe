@@ -41,8 +41,8 @@ const SearchButton = ({
 export const SearchBar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation('notice');
-  const { query } = useSearch({ from: '/_layout/search' });
-  const [keyword, setKeyword] = useState(query ?? '');
+  const params = useSearch({ from: '/_layout/search', shouldThrow: false });
+  const [keyword, setKeyword] = useState(params?.query ?? '');
   const router = useRouter();
 
   const handleSearch = (e: React.SubmitEvent<HTMLFormElement>) => {

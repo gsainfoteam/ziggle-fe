@@ -1,9 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/_layout')({
-  component: RouteComponent,
-});
+import { NoticeCommonLayout } from '@/features/notice';
 
-function RouteComponent() {
-  return <div>Hello "/_layout/router"!</div>;
-}
+export const Route = createFileRoute('/_layout')({
+  component: NoticeCommonLayout,
+});

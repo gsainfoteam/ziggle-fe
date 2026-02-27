@@ -4,7 +4,7 @@ import { Footer } from '@/common/components';
 
 import { Navbar } from '../components/navbar';
 
-export function NoticeTopDownLayout() {
+export function NoticeCommonLayout() {
   return (
     <div>
       <Navbar />
