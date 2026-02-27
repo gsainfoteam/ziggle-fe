@@ -40,7 +40,14 @@
     "zigglepick": "Ziggle-Pick"
   },
   "zabo": {
+    "copyLink": {
+      "action": "copy link",
+      "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
+      "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
+    },
+    "dueAt": "Due at {{dueAt}}",
     "share": {
+      "action": "Share",
       "content": "{{title}}\nCheck the notice in Ziggle!",
       "unsupported": "Your browser doesn't support sharing."
     },

@@ -1,9 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/_layout/_sidebar/notice/$id')({
-  component: RouteComponent,
-});
+import { NoticeDetailFrame, NoticeNotFoundFrame } from '@/features/notice';
 
-function RouteComponent() {
-  return <div>Hello "/_layout/_sidebar/notice/$id"!</div>;
-}
+export const Route = createFileRoute('/_layout/_sidebar/notice/$id')({
+  component: NoticeDetailFrame,
+  notFoundComponent: NoticeNotFoundFrame,
+});

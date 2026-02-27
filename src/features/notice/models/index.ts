@@ -1,3 +1,5 @@
+import type { components } from '@/@types/api-schema';
+
 import type dayjs from 'dayjs';
 
 export type Reaction = {
@@ -9,7 +11,7 @@ export type Reaction = {
 export type Group = {
   uuid: string;
   name: string;
-  profileImageUrl: string | null;
+  profileImageUrl?: string | null;
 };
 
 export type Notice = {
@@ -42,6 +44,7 @@ export enum EmojiString {
   SURPRISED = '😮',
 }
 
+export type NoticeDetail = components['schemas']['ExpandedGeneralNoticeDto'];
 export {
   ApiPaths,
   PathsNoticeGetParametersQueryCategory as Category,
