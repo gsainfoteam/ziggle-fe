@@ -4,6 +4,7 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
 import { useSendAlarm } from '../../viewmodels';
@@ -119,13 +120,12 @@ export const SendPushAlarm = ({
 
   return (
     <div
-      className={`transform transition-all duration-1000 ease-in-out ${
-        showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden'
-      }`}
+      className={cn(
+        'transform transition-all duration-1000 ease-in-out',
+        showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden',
+      )}
     >
-      <div
-        className={`text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-[15px] font-normal`}
-      >
+      <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-[15px] font-normal">
         <span>{t('zabo.sentPushNotificationAlert.title')} </span>
         <span
           className="cursor-pointer font-bold underline"

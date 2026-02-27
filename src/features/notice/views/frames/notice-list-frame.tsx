@@ -107,7 +107,7 @@ export function NoticeListFrame() {
               {title}
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (
-              <div className={`flex items-center gap-3`}>
+              <div className="flex items-center gap-3">
                 <LogClick
                   eventName={LogEvents.categoryToggleDeadline}
                   properties={{
