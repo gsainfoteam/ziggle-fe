@@ -1,0 +1,68 @@
+{
+  "footer": {
+    "copyright": "ⓒ 2024. INFOTEAM all rights reserved.",
+    "infoteam": "GIST Student Council - Information Department",
+    "sections": [
+      {
+        "title": "Introduction",
+        "links": [
+          {
+            "name": "Introduce Infoteam",
+            "link": "https://introduce.gistory.me",
+            "key": "introduce"
+          },
+          {
+            "name": "Bug Report",
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "key": "bugReport"
+          },
+          {
+            "name": "Service Status Check",
+            "link": "https://uptime.icarus.gistory.me/status/ziggle",
+            "key": "serviceStatus"
+          }
+        ]
+      },
+      {
+        "title": "Terms",
+        "links": [
+          {
+            "name": "Terms of Service",
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "key": "serviceTerms"
+          },
+          {
+            "name": "Privacy Policy",
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "key": "privacyPolicy"
+          },
+          {
+            "name": "FAQ",
+            "link": "mailto:ziggle@gistory.me",
+            "key": "contact"
+          }
+        ]
+      },
+      {
+        "title": "Shortcuts",
+        "links": [
+          {
+            "name": "GIST House",
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "key": "house"
+          },
+          {
+            "name": "GIST Homepage",
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "key": "gist"
+          },
+          {
+            "name": "Gijol",
+            "link": "https://gijol.im",
+            "key": "gijol"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ export const LogClick = ({
   children,
 }: React.PropsWithChildren<{
   eventName: string;
-  properties: Record<string, unknown>;
+  properties?: Record<string, unknown>;
   children: React.ReactNode;
 }>) => {
   const child = React.Children.only(children) as React.ReactElement<

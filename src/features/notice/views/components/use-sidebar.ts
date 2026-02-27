@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
 
-// import { type NoticeSearchParams } from '@/api/notice/notice';
-// import { type HomePath } from '@/app/[lng]/(with-page-layout)/(with-sidebar-layout)/[category]/paths';
 import Bell from '@/assets/icons/bell.svg?react';
 import BoldBell from '@/assets/icons/bold-bell.svg?react';
 import BoldCommunity from '@/assets/icons/bold-community.svg?react';
