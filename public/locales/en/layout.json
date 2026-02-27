@@ -67,5 +67,13 @@
   },
   "navbar": {
     "login": "Login"
+  },
+  "sidebar": {
+    "theme": "Theme",
+    "themeOptions": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    }
   }
 }

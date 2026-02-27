@@ -144,6 +144,7 @@ export default defineConfig(
                 '../**/viewmodels/**',
                 './**/views/**',
                 '../**/views/**',
+                '@/common/components/**',
               ],
               message:
                 '계층 내부 세부 파일에 직접 접근하지 말고 각 디렉터리의 index.ts를 사용하세요.',

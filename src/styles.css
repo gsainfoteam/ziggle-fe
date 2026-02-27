@@ -1,12 +1,12 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 @import 'react-loading-skeleton/dist/skeleton.css';
-@import './variables.css';
 @import 'tailwindcss';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
 
 @theme {
   --spacing-pageSide: 20vw;
+  --transition-duration: 200ms;
 
   --color-primary: #ff4500;
   --color-secondary: #fff4f0;
@@ -38,6 +38,16 @@
   }
 }
 
+@layer theme {
+  .dark {
+    --color-text: var(--color-dark_white);
+    --color-white: var(--color-dark_dark);
+    --color-greyLight: var(--color-dark_greyDark);
+    --color-greyDark: var(--color-dark_grey);
+    --color-secondary: var(--color-dark_secondary);
+  }
+}
+
 @layer components {
   .content {
     @apply w-[calc(100%-40px)];
@@ -50,38 +60,35 @@
   }
 }
 
-:root {
-  --transition-duration: 200ms;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-white);
+    font-family:
+      'Pretendard Variable',
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      system-ui,
+      Roboto,
+      'Helvetica Neue',
+      'Segoe UI',
+      'Apple SD Gothic Neo',
+      'Noto Sans KR',
+      'Malgun Gothic',
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 body {
-  color: var(--text);
-  background: var(--white);
+  color: var(--color-text);
 
   transition:
     background-color var(--transition-duration) ease,
     color var(--transition-duration) ease;
-}
-
-html {
-  scroll-behavior: smooth;
-
-  font-family:
-    'Pretendard Variable',
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    system-ui,
-    Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }

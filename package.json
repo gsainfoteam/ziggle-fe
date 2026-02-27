@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.35.4",
+    "@floating-ui/react": "^0.27.18",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-router": "^1.132.0",

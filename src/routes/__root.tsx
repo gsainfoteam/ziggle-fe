@@ -6,11 +6,14 @@ import '@/common/lib/init-amplitude';
 import '@/common/lib/i18n';
 
 import '../styles.css';
+import { ThemeProvider } from '@/common/lib/theme';
 
 export const Route = createRootRoute({
   component: () => (
     <>
-      <Outlet />
+      <ThemeProvider>
+        <Outlet />
+      </ThemeProvider>
       <TanStackDevtools
         config={{
           position: 'bottom-right',

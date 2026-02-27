@@ -67,5 +67,13 @@
   },
   "navbar": {
     "login": "로그인"
+  },
+  "sidebar": {
+    "theme": "테마",
+    "themeOptions": {
+      "dark": "다크",
+      "light": "라이트",
+      "system": "시스템"
+    }
   }
 }
