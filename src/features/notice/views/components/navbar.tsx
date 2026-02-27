@@ -13,8 +13,8 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
-import SearchBar from './search-bar';
-import SidebarMobile from './sidebar-mobile';
+import { SearchBar } from './search-bar';
+import { SidebarMobile } from './sidebar';
 
 export const Navbar = () => {
   const { t } = useTranslation('layout');

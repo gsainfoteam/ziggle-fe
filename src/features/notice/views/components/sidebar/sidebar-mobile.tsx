@@ -18,10 +18,14 @@ interface SidebarProps {
   user: { name: string } | null;
 }
 
-const SidebarMobile = ({ onClose, user }: SidebarProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+export const SidebarMobile = ({ onClose, user }: SidebarProps) => {
+  const [isOpen, setIsOpen] = useState(false);
 
   const { t } = useTranslation('layout');
+
+  useEffect(() => {
+    setTimeout(() => setIsOpen(true), 0);
+  }, []);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -36,7 +40,7 @@ const SidebarMobile = ({ onClose, user }: SidebarProps) => {
   }, [isOpen, onClose]);
 
   return ReactDOM.createPortal(
-    <div className="fixed w-screen">
+    <div className="fixed inset-0 w-screen">
       <div
         className={cn(
           'bg-opacity-50 absolute inset-0 h-screen bg-black transition-opacity duration-300',
@@ -67,5 +71,3 @@ const SidebarMobile = ({ onClose, user }: SidebarProps) => {
     document.body as HTMLElement,
   );
 };
-
-export default SidebarMobile;

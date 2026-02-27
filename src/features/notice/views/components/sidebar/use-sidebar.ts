@@ -16,6 +16,7 @@ import Home from '@/assets/icons/home.svg?react';
 import MessageAlert from '@/assets/icons/message-alert.svg?react';
 import OpenBook from '@/assets/icons/open-book.svg?react';
 
+// TODO: fix
 type MenuPath =
   | 'recruit'
   | 'event'
