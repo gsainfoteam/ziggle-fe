@@ -1,9 +1,11 @@
 {
+  "dDayPlus": "OVERDUE",
   "mypage": {
     "myNotice": "My Notices",
     "remindNotice": "Reminded Notices"
   },
   "searchPage": {
+    "loginRequired": "Login is required",
     "searchBar": {
       "collapse": "Cancel",
       "placeholder": "Search"
@@ -18,5 +20,12 @@
     "urgent": "Near Deadline",
     "write": "Write Notice",
     "zigglepick": "Ziggle-Pick"
+  },
+  "zabo": {
+    "share": {
+      "content": "{{title}}\nCheck the notice in Ziggle!",
+      "unsupported": "Your browser doesn't support sharing."
+    },
+    "timeLeft": "{{timeLeft}} Left"
   }
 }

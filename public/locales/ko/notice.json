@@ -1,9 +1,11 @@
 {
+  "dDayPlus": "기한 지남",
   "mypage": {
     "myNotice": "내 공지",
     "remindNotice": "리마인드한 공지"
   },
   "searchPage": {
+    "loginRequired": "로그인이 필요합니다",
     "searchBar": {
       "collapse": "취소",
       "placeholder": "검색"
@@ -18,5 +20,12 @@
     "urgent": "마감임박",
     "write": "공지 작성",
     "zigglepick": "지글픽"
+  },
+  "zabo": {
+    "share": {
+      "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
+      "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
+    },
+    "timeLeft": "{{timeLeft}} 남음"
   }
 }
