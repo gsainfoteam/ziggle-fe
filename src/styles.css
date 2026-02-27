@@ -1,6 +1,9 @@
 @import 'react-loading-skeleton/dist/skeleton.css';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 @import './variables.css';
 @import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
 
 @theme {
   --spacing-pageSide: 20vw;
@@ -62,4 +65,23 @@ body {
 
 html {
   scroll-behavior: smooth;
+
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
