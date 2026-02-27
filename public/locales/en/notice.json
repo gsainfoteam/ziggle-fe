@@ -28,8 +28,8 @@
   },
   "searchPage": {
     "loginRequired": "Login is required",
-    "noResult": "",
-    "prompt": "",
+    "noResult": "There are no search results.",
+    "prompt": "Please enter a search term",
     "searchBar": {
       "collapse": "Cancel",
       "placeholder": "Search"
@@ -74,7 +74,7 @@
     },
     "downloadAll": "Download All",
     "dueAt": "Due at {{dueAt}}",
-    "noContent": "",
+    "noContent": "내용 없음",
     "sentPushNotificationAlert": {
       "action": "Send Push Notification",
       "title": "You can't edit once you send a notification."
