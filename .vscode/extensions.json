@@ -1,10 +1,8 @@
 {
   "recommendations": [
-    "arcanis.vscode-zipfs",
     "dbaeumer.vscode-eslint",
-    "styled-components.vscode-styled-components",
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
-    "apollographql.vscode-apollo"
+    "loccy.loccy",
   ]
 }

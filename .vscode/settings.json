@@ -1,27 +1,3 @@
 {
-  "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
-  },
-  "eslint.nodePath": ".yarn/sdks",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.sortImports": "never",
-    "source.organizeImports": "never"
-  },
-  "editor.formatOnSave": false,
-  "cSpell.words": [
-    "Swal",
-    "Zabo",
-    "Ziggle"
-  ],
-  "svg.preview.background": "custom",
-  "i18n-ally.localesPaths": [
-    "public/tinymce/langs",
-    "src/app/i18next/locales",
-    "public/tinymce/plugins/help/js/i18n"
-  ]
+  "cSpell.words": ["Swal", "Zabo", "Ziggle"]
 }
