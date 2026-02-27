@@ -1,5 +1,5 @@
-@import 'react-loading-skeleton/dist/skeleton.css';
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import 'react-loading-skeleton/dist/skeleton.css';
 @import './variables.css';
 @import 'tailwindcss';
 
