@@ -46,7 +46,11 @@
   "write": {
     "alerts": {
       "deleteFail": "Failed to delete notice",
-      "deleteSuccess": "The notice was deleted successfully"
+      "deleteSuccess": "The notice was deleted successfully",
+      "sendingAlarmNotice": "Sending notifications...",
+      "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
+      "sendPushNoticeFail": "Failed to send push notification",
+      "sendPushNoticeSuccess": "Push notification sent successfully"
     }
   },
   "zabo": {
@@ -68,6 +72,10 @@
     },
     "downloadAll": "Download All",
     "dueAt": "Due at {{dueAt}}",
+    "sentPushNotificationAlert": {
+      "action": "Send Push Notification",
+      "title": "You can't edit once you send a notification."
+    },
     "share": {
       "action": "Share",
       "content": "{{title}}\nCheck the notice in Ziggle!",

@@ -6,6 +6,7 @@ import { Actions } from '../components/actions';
 import { AdditionalNotices } from '../components/additional-notices';
 import { Content } from '../components/content';
 import ImageStack from '../components/image-stack';
+import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
 
 export function NoticeDetailFrame() {
@@ -36,7 +37,7 @@ export function NoticeDetailFrame() {
           </div>
 
           <div className="flex flex-col gap-[18px] md:w-[60%]">
-            {/* <SendPushAlarm {...notice} /> */}
+            <SendPushAlarm {...notice} />
 
             <NoticeInfo {...notice} currentDeadline={notice.currentDeadline} />
 
