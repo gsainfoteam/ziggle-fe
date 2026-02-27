@@ -8,5 +8,10 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
-  "cSpell.words": ["ziggle"]
+  "cSpell.words": ["ziggle"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.prettier": "always"
+  }
 }
