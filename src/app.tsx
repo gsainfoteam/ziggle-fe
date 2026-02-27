@@ -16,7 +16,7 @@ const getRequiredEnv = (key: string): string => {
   if (!value) {
     throw new Error(`Missing required environment variable: ${key}`);
   }
-  return value as string;
+  return value;
 };
 
 const createAuthConfig = (recentLogout: boolean): TAuthConfig => ({

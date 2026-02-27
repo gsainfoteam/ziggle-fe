@@ -7,7 +7,6 @@ interface SidebarItemProps {
   icon: React.ReactNode;
   boldIcon: React.ReactNode;
   isSelected: boolean;
-  to: LinkProps['to'];
 }
 
 export const SidebarItem = ({
@@ -15,11 +14,11 @@ export const SidebarItem = ({
   icon,
   boldIcon,
   isSelected,
-  to,
-}: SidebarItemProps) => {
+  ...props
+}: SidebarItemProps & LinkProps) => {
   return (
     <Link
-      to={to}
+      {...props}
       className={cn(
         'dark:hover:bg-dark_grey flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none',
         isSelected && 'bg-greyLight dark:bg-dark_greyDark',

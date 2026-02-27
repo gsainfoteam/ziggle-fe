@@ -42,8 +42,12 @@ export const Sidebar = () => {
                         }
                         title={menu.title}
                         isSelected={pathname.startsWith(`/${menu.path}`)}
-                        // TODO: fix type assertion
-                        to={`/${menu.path}` as '/'}
+                        {...(menu.path === 'write'
+                          ? { to: '/write' }
+                          : {
+                              to: '/$category',
+                              params: { category: menu.path },
+                            })}
                       />
                     </LogClick>
                   </li>

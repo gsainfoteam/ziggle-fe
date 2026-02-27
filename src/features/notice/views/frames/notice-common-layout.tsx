@@ -15,9 +15,9 @@ export function NoticeCommonLayout() {
   if (user === null) return <Navigate to="/" />;
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <div className="mb-96 flex">
+      <div className="mb-96 flex flex-1">
         <Outlet />
       </div>
       <Footer />

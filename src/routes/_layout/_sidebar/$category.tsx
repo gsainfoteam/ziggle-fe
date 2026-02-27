@@ -12,7 +12,7 @@ export const Route = createFileRoute('/_layout/_sidebar/$category')({
       .string()
       .toUpperCase()
       .pipe(z.enum(Category))
-      .or(z.enum(['home', 'deadline', 'zigglepick']))
+      .or(z.enum(['home', 'deadline', 'zigglepick', 'reminded', 'own']))
       .catch('home'),
   }),
   validateSearch: z.object({

@@ -15,14 +15,11 @@ import Flower from '@/assets/icons/flower.svg?react';
 import Home from '@/assets/icons/home.svg?react';
 import MessageAlert from '@/assets/icons/message-alert.svg?react';
 import OpenBook from '@/assets/icons/open-book.svg?react';
+import { Category } from '@/features/notice/models';
 
 // TODO: fix
 type MenuPath =
-  | 'recruit'
-  | 'event'
-  | 'general'
-  | 'academic'
-  | 'etc'
+  | Category
   | 'home'
   | 'deadline'
   | 'zigglepick'
@@ -102,7 +99,7 @@ export const useSidebarObject = () => {
       {
         key: 'recruit',
         title: t('sidebar.recruit'),
-        path: 'recruit',
+        path: Category.RECRUIT,
         icons: {
           regular: Community,
           bold: BoldCommunity,
@@ -115,7 +112,7 @@ export const useSidebarObject = () => {
       {
         key: 'event',
         title: t('sidebar.event'),
-        path: 'event',
+        path: Category.EVENT,
         icons: {
           regular: Flower,
           bold: BoldFlower,
@@ -128,7 +125,7 @@ export const useSidebarObject = () => {
       {
         key: 'general',
         title: t('sidebar.general'),
-        path: 'etc',
+        path: Category.ETC,
         icons: {
           regular: MessageAlert,
           bold: BoldMessageAlert,
@@ -141,7 +138,7 @@ export const useSidebarObject = () => {
       {
         key: 'academic',
         title: t('sidebar.academic'),
-        path: 'academic',
+        path: Category.ACADEMIC,
         icons: {
           regular: OpenBook,
           bold: BoldOpenBook,
