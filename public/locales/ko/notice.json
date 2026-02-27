@@ -4,6 +4,20 @@
     "myNotice": "내 공지",
     "remindNotice": "리마인드한 공지"
   },
+  "notices": {
+    "academic": {
+      "name": "Academic Notices"
+    },
+    "event": {
+      "name": "Events"
+    },
+    "general": {
+      "name": "General"
+    },
+    "recruit": {
+      "name": "Recruiting"
+    }
+  },
   "searchPage": {
     "loginRequired": "로그인이 필요합니다",
     "searchBar": {

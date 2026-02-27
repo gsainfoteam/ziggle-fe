@@ -4,6 +4,20 @@
     "myNotice": "My Notices",
     "remindNotice": "Reminded Notices"
   },
+  "notices": {
+    "academic": {
+      "name": "Academic Notices"
+    },
+    "event": {
+      "name": "Events"
+    },
+    "general": {
+      "name": "General"
+    },
+    "recruit": {
+      "name": "Recruiting"
+    }
+  },
   "searchPage": {
     "loginRequired": "Login is required",
     "searchBar": {

@@ -19,6 +19,10 @@ export const Tags = ({ tags, className }: TagsProps) => {
       {tags.map((name) => (
         <Tag
           key={name}
+          // t('notices.event.name')
+          // t('notices.general.name')
+          // t('notices.recruit.name')
+          // t('notices.academic.name')
           name={`${isDefaultTag(name) ? t(`notices.${name}.name`) : name}`}
         />
       ))}
