@@ -1,0 +1,16 @@
+{
+  "mypage": {
+    "myNotice": "내 공지",
+    "remindNotice": "리마인드한 공지"
+  },
+  "sidebar": {
+    "academic": "학사",
+    "event": "행사",
+    "general": "일반",
+    "home": "홈",
+    "recruit": "모집",
+    "urgent": "마감임박",
+    "write": "공지 작성",
+    "zigglepick": "지글픽"
+  }
+}

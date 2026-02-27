@@ -1,0 +1,16 @@
+{
+  "mypage": {
+    "myNotice": "My Notices",
+    "remindNotice": "Reminded Notices"
+  },
+  "sidebar": {
+    "academic": "Academic",
+    "event": "Events",
+    "general": "General",
+    "home": "Home",
+    "recruit": "Recruit",
+    "urgent": "Near Deadline",
+    "write": "Write Notice",
+    "zigglepick": "Ziggle-Pick"
+  }
+}
