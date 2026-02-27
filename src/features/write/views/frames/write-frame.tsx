@@ -1,7 +1,3 @@
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
 import { useLoaderData } from '@tanstack/react-router';
 
 import { NoticeEditor } from '../components';

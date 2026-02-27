@@ -1,7 +1,3 @@
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
 import { useEffect, useReducer, useRef, useState } from 'react';
 
 import { useRouter } from '@tanstack/react-router';
@@ -27,6 +23,7 @@ import {
   type Draft,
 } from '../reducers';
 import { calculateRemainingTime } from '../utils';
+import { AddAdditionalNotice } from './add-additional-notice';
 import { AttachPhotoArea } from './attach-photo-area';
 import { DateTimePicker } from './date-time-picker';
 import { DeepLButton } from './deep-l-button';

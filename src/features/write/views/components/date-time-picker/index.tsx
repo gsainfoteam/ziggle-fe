@@ -1,5 +1,3 @@
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
 import './date-time-picker.css';
 
 import { type Dayjs } from 'dayjs';

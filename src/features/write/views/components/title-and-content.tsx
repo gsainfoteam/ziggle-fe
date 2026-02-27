@@ -1,7 +1,3 @@
-import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
-import 'react-datetime-picker/dist/DateTimePicker.css';
-
 import { useImperativeHandle, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
