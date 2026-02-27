@@ -12,7 +12,13 @@
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier --check .",
-    "check": "prettier --write . && eslint --fix"
+    "check": "prettier --write . && eslint --fix",
+    "i18n:status": "i18next-cli status",
+    "i18n:sync": "i18next-cli sync",
+    "i18n:lint": "i18next-cli lint",
+    "i18n:extract": "i18next-cli extract",
+    "i18n:types": "i18next-cli types",
+    "gen:i18n": "bun run i18n:extract --watch & bun run i18n:types --watch & wait"
   },
   "dependencies": {
     "@amplitude/analytics-browser": "^2.35.4",
@@ -21,9 +27,12 @@
     "@tanstack/react-router": "^1.132.0",
     "@tanstack/react-router-devtools": "^1.132.0",
     "dayjs": "^1.11.19",
+    "i18next": "^25.8.13",
+    "i18next-http-backend": "^3.0.2",
     "lucide-react": "^0.545.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-i18next": "^16.5.4",
     "react-loading-skeleton": "^3.5.0",
     "tailwindcss": "^4.1.18"
   },
@@ -38,6 +47,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
+    "i18next-cli": "^1.46.1",
     "jsdom": "^27.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
