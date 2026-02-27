@@ -6,6 +6,7 @@ import CloseIcon from '@/assets/icons/close.svg?react';
 import DownloadIcon from '@/assets/icons/download.svg?react';
 import LongArrowIcon from '@/assets/icons/long-arrow.svg?react';
 import { Button } from '@/common/components';
+import { cn } from '@/common/utils';
 
 interface ShowcaseModalProps {
   initialIndex?: number;
@@ -62,10 +63,7 @@ const ShowcaseModal = ({
       <div className="flex w-full items-center justify-center gap-5 md:gap-12">
         <Button disabled={index === 0} onClick={left}>
           <LongArrowIcon
-            className={[
-              'w-5 md:w-16',
-              ...(index === 0 ? ['stroke-secondaryText'] : []),
-            ].join(' ')}
+            className={cn('w-5 md:w-16', index === 0 && 'stroke-secondaryText')}
           />
         </Button>
         <img
@@ -79,10 +77,10 @@ const ShowcaseModal = ({
         />
         <Button disabled={index === sources.length - 1} onClick={right}>
           <LongArrowIcon
-            className={[
+            className={cn(
               'w-5 rotate-180 md:w-16',
-              ...(index === sources.length - 1 ? ['stroke-secondaryText'] : []),
-            ].join(' ')}
+              index === sources.length - 1 && 'stroke-secondaryText',
+            )}
           />
         </Button>
       </div>

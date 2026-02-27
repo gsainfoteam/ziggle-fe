@@ -14,6 +14,7 @@ import TagIcon from '@/assets/icons/tag.svg?react';
 import TypeIcon from '@/assets/icons/type.svg?react';
 import { Button, LogClick, Toggle } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 import { Category, type NoticeDetail } from '@/features/notice/models';
 
 import {
@@ -363,11 +364,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       {isEditMode && (
         <>
           {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
-          <p
-            className={
-              'bg-greyLight text-greyDark mt-[10px] rounded-[15px] px-5 py-[15px] text-lg'
-            }
-          >
+          <p className="bg-greyLight text-greyDark mt-[10px] rounded-[15px] px-5 py-[15px] text-lg">
             {t('write.editDescription')}
           </p>
         </>
@@ -383,20 +380,20 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       <div className="mt-10 mb-10 flex items-center gap-2">
         <GlobeIcon
-          className={
-            'w-5 md:w-6 ' +
-            (state.english
+          className={cn(
+            'w-5 md:w-6',
+            state.english
               ? 'stroke-text dark:stroke-dark_white'
-              : 'stroke-grey dark:stroke-dark_grey')
-          }
+              : 'stroke-grey dark:stroke-dark_grey',
+          )}
         />
         <p
-          className={
-            'mr-1 text-lg font-medium ' +
-            (state.english
+          className={cn(
+            'mr-1 text-lg font-medium',
+            state.english
               ? 'text-text dark:text-dark_white'
-              : 'text-grey dark:text-dark_grey')
-          }
+              : 'text-grey dark:text-dark_grey',
+          )}
         >
           {t('write.writeEnglishNotice')}
         </p>
@@ -446,10 +443,10 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       {state.writingTab === 'korean' && (
         <div
-          className={
-            'flex flex-col justify-stretch ' +
-            (state.writingTab !== 'korean' ? 'hidden' : '')
-          }
+          className={cn(
+            'flex flex-col justify-stretch',
+            state.writingTab !== 'korean' ? 'hidden' : '',
+          )}
         >
           <TitleAndContent
             title={state.korean.title}
@@ -514,11 +511,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           (state.writingTab === 'english' &&
             hasTimedOut &&
             notice?.enTitle)) && (
-          <p
-            className={
-              'bg-greyLight text-greyDark my-10 rounded-[10px] px-[20px] py-[15px] text-center text-lg'
-            }
-          >
+          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-[20px] py-[15px] text-center text-lg">
             {t('write.editDisabled')}
           </p>
         )}

@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
+import { cn } from '@/common/utils';
+
 interface LanguageTabProps {
   writingTab: 'korean' | 'english';
   setWritingTab: (writingTab: 'korean' | 'english') => void;
@@ -14,32 +16,32 @@ export const LanguageTab = ({
     <div className="grid grid-cols-[90px_90px_1fr] justify-items-stretch">
       <button
         onClick={() => setWritingTab('korean')}
-        className={
-          'border-b-[3px] p-[15px] pb-3 ' +
-          (writingTab === 'korean' ? 'border-primary' : 'border-grey')
-        }
+        className={cn(
+          'border-b-[3px] p-[15px] pb-3',
+          writingTab === 'korean' ? 'border-primary' : 'border-grey',
+        )}
       >
         <p
-          className={
-            'text-center ' +
-            (writingTab === 'korean' ? 'text-primary' : 'text-grey')
-          }
+          className={cn(
+            'text-center',
+            writingTab === 'korean' ? 'text-primary' : 'text-grey',
+          )}
         >
           {t('write.koreanNotice')}
         </p>
       </button>
       <button
         onClick={() => setWritingTab('english')}
-        className={
-          'border-b-[3px] p-[15px] pb-3 ' +
-          (writingTab === 'english' ? 'border-primary' : 'border-grey')
-        }
+        className={cn(
+          'border-b-[3px] p-[15px] pb-3',
+          writingTab === 'english' ? 'border-primary' : 'border-grey',
+        )}
       >
         <p
-          className={
-            'text-center ' +
-            (writingTab === 'english' ? 'text-primary' : 'text-grey')
-          }
+          className={cn(
+            'text-center',
+            writingTab === 'english' ? 'text-primary' : 'text-grey',
+          )}
         >
           {t('write.englishNotice')}
         </p>

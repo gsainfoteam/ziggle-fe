@@ -9,7 +9,8 @@ import {
   useFloating,
   useInteractions,
 } from '@floating-ui/react';
-import clsx from 'clsx';
+
+import { cn } from '@/common/utils';
 
 import { PopoverContext } from './context';
 
@@ -103,7 +104,7 @@ export const PopoverRoot = ({
                 <button
                   type="button"
                   key={index}
-                  className={clsx(
+                  className={cn(
                     'focus-visible:ring-primary dark:hover:bg-dark_grey flex w-full cursor-pointer items-center rounded-md px-4 py-2 text-left transition duration-300 hover:bg-gray-300 focus-visible:ring-2 focus-visible:outline-none',
                     selectedIndex === index &&
                       'bg-greyLight dark:bg-dark_greyDark',
@@ -119,7 +120,7 @@ export const PopoverRoot = ({
                     <Icon />
                   </span>
                   <span
-                    className={clsx(
+                    className={cn(
                       'ml-4',
                       selectedIndex === index ? 'font-semibold' : 'font-normal',
                     )}

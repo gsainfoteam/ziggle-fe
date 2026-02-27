@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import ContentIcon from '@/assets/icons/content.svg?react';
 import TextIcon from '@/assets/icons/text.svg?react';
+import { cn } from '@/common/utils';
 
 import { TinyMCEEditor } from './tiny-mce-editor';
 import { BODY_MAX_LENGTH, TITLE_MAX_LENGTH } from '../../viewmodels';
@@ -49,12 +50,12 @@ export const TitleAndContent = ({
         }}
         type="text"
         placeholder={t('write.writeTitle')}
-        className={
-          'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px] ' +
-          (disabled
+        className={cn(
+          'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px]',
+          disabled
             ? 'border-grey text-greyDark dark:text-dark_greyDark'
-            : 'border-primary text-text dark:text-dark_white')
-        }
+            : 'border-primary text-text dark:text-dark_white',
+        )}
       />
       {title.length > TITLE_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">

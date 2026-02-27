@@ -33,9 +33,7 @@ export const AddAdditionalNotice = ({
       </div>
 
       <textarea
-        className={
-          'border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white'
-        }
+        className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
         name={'searchQuery'}
         placeholder={t('zabo.additionalNotices.additionalNoticePlaceholder')}
         rows={3}
@@ -47,9 +45,7 @@ export const AddAdditionalNotice = ({
 
       {isEnglishSupported && (
         <textarea
-          className={
-            'border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white'
-          }
+          className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
           name={'searchQuery'}
           placeholder={t(
             'zabo.additionalNotices.enAdditionalNoticePlaceholder',

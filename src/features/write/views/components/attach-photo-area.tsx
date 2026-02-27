@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import AddPhotoGray from '@/assets/icons/add-photo-gray.svg?react';
 import { Button } from '@/common/components';
+import { cn } from '@/common/utils';
 
 import { AttachedPhoto } from './attached-photo';
 
@@ -71,12 +72,12 @@ export const AttachPhotoArea = ({
       <label htmlFor="file-input" />
 
       <div
-        className={
-          'flex items-center justify-center ' +
-          (photos.length > 0
+        className={cn(
+          'flex items-center justify-center',
+          photos.length > 0
             ? 'bg-greyLight p-[5px]'
-            : 'border-secondaryText rounded-[5px] border border-dashed')
-        }
+            : 'border-secondaryText rounded-[5px] border border-dashed',
+        )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
@@ -96,9 +97,7 @@ export const AttachPhotoArea = ({
               />
             ))}
             <button
-              className={
-                'flex aspect-square items-center justify-center rounded-[4px] bg-white'
-              }
+              className="flex aspect-square items-center justify-center rounded-[4px] bg-white"
               onClick={() => {
                 fileInputRef.current?.click();
               }}

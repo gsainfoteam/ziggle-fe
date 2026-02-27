@@ -43,11 +43,7 @@ export const Zabo = (props: ZaboProps) => {
 
   return (
     <Link to="/notice/$id" params={{ id: id.toString() }}>
-      <div
-        className={
-          'text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col rounded-[10px] pt-2.5 transition'
-        }
-      >
+      <div className="text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col rounded-[10px] pt-2.5 transition">
         <div className="mx-3 my-2.5 flex flex-wrap items-center gap-y-3">
           {group?.profileImageUrl ? (
             <img
@@ -81,11 +77,7 @@ export const Zabo = (props: ZaboProps) => {
         </div>
 
         <div className="flex w-full flex-col gap-2.5 px-4 pb-2.5">
-          <p
-            className={
-              'dark:text-dark_white line-clamp-3 text-xl font-semibold'
-            }
-          >
+          <p className="dark:text-dark_white line-clamp-3 text-xl font-semibold">
             {title}
           </p>
 

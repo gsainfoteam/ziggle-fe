@@ -1,5 +1,7 @@
 import DOMPurify from 'isomorphic-dompurify';
 
+import { cn } from '@/common/utils';
+
 const COLOR_STYLE_PROPS = ['background', 'background-color', 'color'];
 const BORDER_STYLE_PROPS = [
   'border',
@@ -113,7 +115,7 @@ interface ContentProps {
 export function Content({ content }: ContentProps) {
   return (
     <div
-      className={[
+      className={cn(
         'text-text dark:text-dark_white',
         'leading-[1.4] font-normal',
         '[&_p]:my-4 [&_p]:text-lg',
@@ -125,7 +127,7 @@ export function Content({ content }: ContentProps) {
         '[&_td]:border [&_td]:border-current [&_th]:border [&_th]:border-current',
         '[&_td]:px-3 [&_td]:py-2 [&_th]:px-3 [&_th]:py-2',
         '[&_p]:text-left',
-      ].join(' ')}
+      )}
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />
   );

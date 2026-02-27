@@ -12,6 +12,7 @@ import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg?rea
 import ThinkingFace from '@/assets/icons/thinking-face.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 
 import { EmojiString, type NoticeDetail, type Reaction } from '../../models';
 import { useAddReaction, useDeleteReaction } from '../../viewmodels';
@@ -37,21 +38,12 @@ interface ActionButtonProps {
 const ActionButton = ({ isSelected, onClick, children }: ActionButtonProps) => {
   return (
     <button
-      className={
-        'flex h-10 items-center gap-[7px] rounded-full border-none px-[13px] py-[5px] outline-none' +
-        ' ' +
-        `${
-          isSelected
-            ? 'bg-text dark:bg-dark_white'
-            : 'bg-greyLight dark:bg-dark_greyDark'
-        }` +
-        ' ' +
-        `${
-          isSelected
-            ? 'dark:text-dark_dark text-white'
-            : 'text-text dark:text-dark_white'
-        }`
-      }
+      className={cn(
+        'flex h-10 items-center gap-[7px] rounded-full border-none px-[13px] py-[5px] outline-none',
+        isSelected
+          ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
+          : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
+      )}
       onClick={onClick}
     >
       {children}
@@ -74,14 +66,12 @@ const ReactionButton = ({
           {EmojiComponent ? (
             emoji === EmojiString.FIRE ? (
               <span
-                className={
-                  'stroke-2 ' +
-                  `${
-                    isReacted
-                      ? 'dark:stroke-dark_dark stroke-white'
-                      : 'stroke-text dark:stroke-dark_white'
-                  }`
-                }
+                className={cn(
+                  'stroke-2',
+                  isReacted
+                    ? 'dark:stroke-dark_dark stroke-white'
+                    : 'stroke-text dark:stroke-dark_white',
+                )}
               >
                 <EmojiComponent width={EMOJI_WIDTH} />
               </span>

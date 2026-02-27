@@ -102,12 +102,7 @@ export const TagChip = ({
   onClick: () => void;
 }) => {
   return (
-    <div
-      className={
-        'bg-primary flex w-max items-center gap-2 ' +
-        'md:rounded-2x h-6 rounded-2xl pr-1 pl-1.5 md:h-8 md:pr-1 md:pl-2.5'
-      }
-    >
+    <div className="bg-primary md:rounded-2x flex h-6 w-max items-center gap-2 rounded-2xl pr-1 pl-1.5 md:h-8 md:pr-1 md:pl-2.5">
       <div className="text-sm font-medium text-white md:text-base">
         #{children}
       </div>
