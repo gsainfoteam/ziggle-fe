@@ -47,7 +47,7 @@
         "title": "바로가기",
         "links": [
           {
-            "name": "지스트 하우스",
+            "name": "하우스연합회",
             "link": "https://sites.google.com/view/gisthouse/home",
             "key": "house"
           },
@@ -58,7 +58,7 @@
           },
           {
             "name": "지졸",
-            "link": "https://gijol.im",
+            "link": "https://gijol.vercel.app/",
             "key": "gijol"
           }
         ]
