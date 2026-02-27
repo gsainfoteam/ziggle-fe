@@ -1,6 +1,6 @@
 {
   "footer": {
-    "copyright": "ⓒ 2024. INFOTEAM all rights reserved.",
+    "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
     "infoteam": "GIST Student Council - Information Department",
     "sections": [
       {

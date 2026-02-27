@@ -86,7 +86,9 @@ export const Footer = () => {
             </LogClick>
           </div>
         </div>
-        <div className="text-xs sm:text-base">{t('footer.copyright')}</div>
+        <div className="text-xs sm:text-base">
+          {t('footer.copyright', { year: new Date().getFullYear() })}
+        </div>
       </div>
       <div className="flex flex-col gap-x-24 gap-y-12 md:flex-row">
         {t('footer.sections', {
