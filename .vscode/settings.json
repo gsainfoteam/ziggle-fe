@@ -13,5 +13,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",
     "source.fixAll.prettier": "always"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
   }
 }
