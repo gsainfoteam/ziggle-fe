@@ -1,9 +1,12 @@
 {
   "alertResponse": {
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "no": "No",
+    "yes": "Yes"
   },
   "common": {
+    "optional": "Optional",
     "sortByDeadline": "Sort by Deadline"
   },
   "dDayPlus": "OVERDUE",
@@ -47,13 +50,81 @@
   },
   "write": {
     "alerts": {
+      "attachAdditionalNoticeFail": "Failed to post additional notice. Please try posting it again.",
+      "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
+      "attachInternationalFail": "Failed to post English version. Please try posting it again.",
+      "bodyLengthLessThan": "Please enter body content within {{bodyMaxLength}} characters",
+      "copyAdditionalNotice": "Copy additional notice",
+      "copyEnglishContent": "Copy English content",
+      "copyInternationalAdditionalNotice": "Copy En. add. notice",
+      "copySuccess": "The content has been copied! Paste it in the editor -> Tools -> Source code",
       "deleteFail": "Failed to delete notice",
       "deleteSuccess": "The notice was deleted successfully",
+      "modificationFail": "Failed to modify the notice",
+      "modificationSuccess": "The notice was modified successfully",
+      "modifyingNotice": "Modifying the notice...",
+      "needKoreanAdditionalNotice": "Please write a Korean additional notice",
+      "numberOfCharacter": "({{length}}/{{maxLength}} characters)",
+      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
       "sendingAlarmNotice": "Sending notifications...",
       "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
       "sendPushNoticeFail": "Failed to send push notification",
-      "sendPushNoticeSuccess": "Push notification sent successfully"
-    }
+      "sendPushNoticeSuccess": "Push notification sent successfully",
+      "submitFail": "Failed to submit notice",
+      "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters"
+    },
+    "attachPhoto": "Attach Photos",
+    "autoSaveDescription": "Drafts are saved to your computer",
+    "changeDeadline": "Change deadline",
+    "dragToAddPhoto": "Drag to add photos",
+    "editDescription": "You only have 15 minutes to edit the original notice. However, you can always write an English version.",
+    "editDisabled": "Editing original notice is disabled! 👇 Why not try an additional announcement?",
+    "englishContent": "Content - English",
+    "englishNotice": "English",
+    "englishTitle": "English Title",
+    "hasSavedNotice": "You have saved notices. Would you like to continue writing?",
+    "koreanContent": "Content - Korean",
+    "koreanNotice": "Korean",
+    "koreanTitle": "Korean Title",
+    "noticeType": "Type",
+    "noticeTypes": {
+      "event": {
+        "description": {
+          "content": "Feel free to promote your event in the event notice.",
+          "example": "Ex) festivals, exhibitions, performances, seminars, lectures, workshops",
+          "title": "🎈 Event notice"
+        },
+        "label": "Events"
+      },
+      "general": {
+        "description": {
+          "content": "Notices that are not part of a recruitment or event notices.",
+          "example": "Ex) GIST House notices, student association notices, notifications, etc.",
+          "title": "🔔 General notice"
+        },
+        "label": "General"
+      },
+      "recruit": {
+        "description": {
+          "content": "If you're looking to recruit people to your club, group, or event, try creating a recruitment announcement.",
+          "example": "Ex) club recruitment, student association recruitment, Infinite Challenge team member recruitment, contests, competitions, etc.",
+          "title": "🎯 Recruiting notice"
+        },
+        "label": "Recruiting"
+      }
+    },
+    "orAddFromPC": "...or browse files",
+    "photoDescription": "The first of the attached photos is set as the representative photo.",
+    "selectAccount": "Select Account",
+    "setupDeadline": "Set a deadline",
+    "setupTags": "Set Tags",
+    "submit": "Submit Notice",
+    "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
+    "translateWithDeepL": "Translate with DeepL",
+    "writeEnglishNotice": "Write English Notice too",
+    "writeTags": "Enter tags.",
+    "writeTagsDescription": "Separate them with a space; you don't need to type #.",
+    "writeTitle": "Enter a title here"
   },
   "zabo": {
     "additionalNotices": {

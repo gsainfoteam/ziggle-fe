@@ -68,6 +68,9 @@
   "navbar": {
     "login": "Login"
   },
+  "navbarWrite": {
+    "goBack": "Go back"
+  },
   "sidebar": {
     "language": "Language",
     "theme": "Theme",

@@ -68,6 +68,9 @@
   "navbar": {
     "login": "로그인"
   },
+  "navbarWrite": {
+    "goBack": "돌아가기"
+  },
   "sidebar": {
     "language": "언어",
     "theme": "테마",

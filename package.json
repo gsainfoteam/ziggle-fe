@@ -29,6 +29,7 @@
     "@tanstack/react-query": "^5.90.21",
     "@tanstack/react-router": "^1.132.0",
     "@tanstack/react-router-devtools": "^1.132.0",
+    "@tinymce/tinymce-react": "^6.3.0",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.19",
     "i18next": "^25.8.13",
@@ -40,6 +41,9 @@
     "openapi-fetch": "^0.17.0",
     "openapi-react-query": "^0.5.4",
     "react": "^19.2.0",
+    "react-calendar": "^6.0.0",
+    "react-clock": "^6.0.0",
+    "react-datetime-picker": "^7.0.1",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
     "react-loading-skeleton": "^3.5.0",
@@ -48,6 +52,7 @@
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.18",
+    "tinymce": "^8.3.2",
     "zustand": "^5.0.11"
   },
   "devDependencies": {

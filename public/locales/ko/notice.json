@@ -1,9 +1,12 @@
 {
   "alertResponse": {
     "cancel": "취소",
-    "confirm": "확인"
+    "confirm": "확인",
+    "no": "아니오",
+    "yes": "네"
   },
   "common": {
+    "optional": "선택",
     "sortByDeadline": "마감시간 순으로 보기"
   },
   "dDayPlus": "기한 지남",
@@ -47,13 +50,81 @@
   },
   "write": {
     "alerts": {
+      "attachAdditionalNoticeFail": "추가 공지 작성에 실패했습니다",
+      "attachInternationalAdditionalNoticeFail": "영어 추가 공지 작성에 실패했습니다",
+      "attachInternationalFail": "영어 버전 작성에 실패했습니다. 다시 시도해주세요",
+      "bodyLengthLessThan": "본문 내용은 {{bodyMaxLength}}자 이내로 입력해주세요",
+      "copyAdditionalNotice": "추가 공지 복사",
+      "copyEnglishContent": "영어 본문 복사",
+      "copyInternationalAdditionalNotice": "영어 추가 공지 복사",
+      "copySuccess": "복사 완료. 에디터의 Tools -> Source code에 붙여넣으세요.",
       "deleteFail": "공지 삭제에 실패했습니다",
       "deleteSuccess": "공지가 성공적으로 삭제되었습니다",
+      "modificationFail": "공지 수정에 실패했습니다",
+      "modificationSuccess": "공지가 성공적으로 수정되었습니다",
+      "modifyingNotice": "공지를 수정 중입니다",
+      "needKoreanAdditionalNotice": "한국어 추가 공지를 입력해주세요",
+      "numberOfCharacter": "({{length}}/{{maxLength}} 자)",
+      "pushWillDelayedNotice": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요.",
       "sendingAlarmNotice": "알림 보내는 중...",
       "sendPushNotice": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
       "sendPushNoticeFail": "알림 전송에 실패했습니다",
-      "sendPushNoticeSuccess": "알림을 성공적으로 보냈습니다"
-    }
+      "sendPushNoticeSuccess": "알림을 성공적으로 보냈습니다",
+      "submitFail": "공지 작성에 실패했습니다",
+      "titleLengthLessThan": "제목은 {{titleMaxLength}}자 이내로 입력해주세요"
+    },
+    "attachPhoto": "사진 첨부",
+    "autoSaveDescription": "초안은 컴퓨터에 자동 저장됩니다.",
+    "changeDeadline": "마감시간 변경",
+    "dragToAddPhoto": "끌어서 사진 추가",
+    "editDescription": "원본에 작성된 공지는 15분 내에만 수정하실 수 있습니다. 다만, 영어 공지는 언제나 추가로 작성 가능합니다.",
+    "editDisabled": "원문 수정이 비활성화되었군요! 👇 추가 공지를 이용해보는건 어떠신가요?",
+    "englishContent": "영어 본문",
+    "englishNotice": "영어 공지",
+    "englishTitle": "영어 제목",
+    "hasSavedNotice": "저장된 공지가 있습니다. 이어서 작성하시겠습니까?",
+    "koreanContent": "한글 본문",
+    "koreanNotice": "한글 공지",
+    "koreanTitle": "한글 제목",
+    "noticeType": "분류",
+    "noticeTypes": {
+      "event": {
+        "description": {
+          "content": "여러분이 진행하시는 행사를 행사 공지에서 마음껏 홍보하세요.",
+          "example": "예시) 축제, 전시회, 공연, 세미나, 강연, 워크숍",
+          "title": "🎈 행사 공지"
+        },
+        "label": "행사"
+      },
+      "general": {
+        "description": {
+          "content": "모집이나 행사 공지에 해당되지 않는 공지들입니다.",
+          "example": "예시) 하우스 공지, 학생회 공지, 통보 등",
+          "title": "🔔 일반 공지"
+        },
+        "label": "일반"
+      },
+      "recruit": {
+        "description": {
+          "content": "동아리, 그룹이나 행사에 사람들을 모집하고 싶으시다면, 모집 공지를 작성해보세요.",
+          "example": "예시) 동아리 신규부원 모집, 학생회 모집, 무한도전 팀원 구인, 공모전, 대회",
+          "title": "🎯 모집 공지"
+        },
+        "label": "모집"
+      }
+    },
+    "orAddFromPC": "...또는 파일 선택",
+    "photoDescription": "첨부된 사진 중 첫 번째 사진이 대표 사진으로 설정됩니다.",
+    "selectAccount": "계정 선택",
+    "setupDeadline": "마감시간 설정",
+    "setupTags": "태그 설정",
+    "submit": "공지 제출하기",
+    "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
+    "translateWithDeepL": "DeepL로 번역하기",
+    "writeEnglishNotice": "영어 공지 작성",
+    "writeTags": "태그를 입력하세요.",
+    "writeTagsDescription": "띄어쓰기로 구분해주세요. #은 입력하지 않으셔도 됩니다.",
+    "writeTitle": "제목을 입력하세요"
   },
   "zabo": {
     "additionalNotices": {
