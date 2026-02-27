@@ -65,7 +65,7 @@ export const Navbar = () => {
         }
       >
         <Link
-          to={user ? `/mypage` : `/auth/login`}
+          to={user ? '/mypage' : '/'}
           className="hidden items-center justify-center gap-2 md:flex"
         >
           <AccountIcon className="flex h-6" />

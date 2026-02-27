@@ -52,7 +52,7 @@ const SidebarMobile = ({ onClose, user }: SidebarProps) => {
       >
         <LogClick eventName={LogEvents.sidebarClickProfile}>
           <Link
-            to={user ? '/mypage' : '/auth/login'}
+            to={user ? '/mypage' : '/'}
             className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
           >
             <DefaultProfile width={36} />

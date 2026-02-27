@@ -9,7 +9,7 @@ import { useAuth, useAuthRedirect } from '@/features/auth';
 
 export function LandingFrame() {
   const { t } = useTranslation('home');
-  const { redirect } = useSearch({ from: '/' });
+  const { redirect } = useSearch({ from: '/_auth' });
   const { idpLogIn } = useAuth();
 
   return (
@@ -24,7 +24,7 @@ export function LandingFrame() {
       <Button
         variant="outlined"
         onClick={() => {
-          useAuthRedirect.getState().setRedirect(redirect);
+          useAuthRedirect.getState().setRedirect(redirect ?? '/notice');
           idpLogIn();
         }}
       >
