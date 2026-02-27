@@ -95,7 +95,7 @@ const ShowcaseModal = ({
             width={50}
             sizes="50vw"
             height={0}
-            className={'pointer box-border h-auto border'}
+            className="pointer box-border h-auto border"
             onClick={() => setIndex(index)}
           />
         ))}

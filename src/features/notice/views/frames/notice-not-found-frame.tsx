@@ -8,7 +8,7 @@ export function NoticeNotFoundFrame() {
         <h1 className="mb-3 text-4xl font-bold">404</h1>
         <p className="mb-3 text-xl">Notice not found</p>
         <Link to="/">
-          <p className={'bg-primary rounded-md px-4 py-1 text-lg'}>
+          <p className="bg-primary rounded-md px-4 py-1 text-lg">
             Go back to home
           </p>
         </Link>

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import EventIcon from '@/assets/icons/event.svg?react';
 import GeneralIcon from '@/assets/icons/general.svg?react';
 import RecruitIcon from '@/assets/icons/recruit.svg?react';
+import { cn } from '@/common/utils';
 
 import Chip from './chip';
 
@@ -46,7 +47,7 @@ export const NoticeTypeSelector = ({
                 selectedNoticeType === noticeType ? 'selected' : 'deselected'
               }
               disabled={disabled}
-              className={'gap-[5px]'}
+              className="gap-[5px]"
             >
               {(() => {
                 switch (noticeType) {
@@ -69,7 +70,10 @@ export const NoticeTypeSelector = ({
       {noticeTypes.map((noticeType) => (
         <div
           key={noticeType}
-          className={`${selectedNoticeType !== noticeType && 'hidden'} bg-greyLight dark:bg-dark_greyDark rounded-[10px] p-6`}
+          className={cn(
+            selectedNoticeType !== noticeType && 'hidden',
+            'bg-greyLight dark:bg-dark_greyDark rounded-[10px] p-6',
+          )}
         >
           <p className="text-text mb-2 text-base font-semibold md:text-xl">
             {t(`write.noticeTypes.${noticeType}.description.title`)}

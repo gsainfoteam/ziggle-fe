@@ -331,7 +331,9 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
             denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
           }).then((result) => {
             if (result.isDenied) {
-              navigator.clipboard.writeText(state?.english?.additionalContent!);
+              navigator.clipboard.writeText(
+                state?.english?.additionalContent ?? '',
+              );
               toast.success(t('write.alerts.copySuccess'));
             }
           });
@@ -350,7 +352,10 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     alert(t('write.alerts.modificationSuccess'));
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
-    router.navigate({ to: '/notice/$id', params: { id: notice.id } });
+    router.navigate({
+      to: '/notice/$id',
+      params: { id: notice.id.toString() },
+    });
   };
 
   return (
@@ -369,14 +374,14 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       )}
 
       {!isEditMode && (
-        <div className={'flex justify-end'}>
-          <p className={'text-primary text-sm'}>
+        <div className="flex justify-end">
+          <p className="text-primary text-sm">
             {t('write.autoSaveDescription')}
           </p>
         </div>
       )}
 
-      <div className={'mt-10 mb-10 flex items-center gap-2'}>
+      <div className="mt-10 mb-10 flex items-center gap-2">
         <GlobeIcon
           className={
             'w-5 md:w-6 ' +
@@ -467,7 +472,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       )}
 
       {state.writingTab === 'english' && state.english && (
-        <div className={'flex flex-col justify-stretch'}>
+        <div className="flex flex-col justify-stretch">
           <TitleAndContent
             title={state.english.title}
             titleLabel={t('write.englishTitle')}
@@ -542,8 +547,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         </>
       )}
 
-      <div className={'mt-10 mb-3 flex items-center gap-2'}>
-        <ClockIcon className={'stroke-text w-5 md:w-6'} />
+      <div className="mt-10 mb-3 flex items-center gap-2">
+        <ClockIcon className="stroke-text w-5 md:w-6" />
 
         <p className="text-lg font-medium">
           {t(isEditMode ? 'write.changeDeadline' : 'write.setupDeadline')}
@@ -560,7 +565,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           }}
         />
 
-        <div className={'w-1'} />
+        <div className="w-1" />
 
         {state.deadline && (
           <DateTimePicker
@@ -581,7 +586,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           <div className="mt-10 mb-2 flex gap-2">
             <TagIcon className="fill-text w-5 md:w-6" />
             <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
-            <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
+            <p className="text-grey">{`(${t('common.optional')})`}</p>
           </div>
 
           <p className="font-regular text-secondaryText mb-3 text-sm">
@@ -596,7 +601,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           <div className="mt-10 mb-1 flex items-center gap-2">
             <AddPhotoIcon className="stroke-text w-5 md:w-6" />
             <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
-            <p className={'text-grey'}>{`(${t('common.optional')})`}</p>
+            <p className="text-grey">{`(${t('common.optional')})`}</p>
           </div>
           <p className="font-regular text-secondaryText mb-3 text-sm">
             {t('write.photoDescription')}
@@ -621,7 +626,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         </>
       )}
 
-      <div className={'mt-40 flex flex-col items-center'}>
+      <div className="mt-40 flex flex-col items-center">
         <Button
           variant="contained"
           className="mb-4 w-60 rounded-[10px] py-2"

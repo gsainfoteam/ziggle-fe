@@ -15,7 +15,7 @@ export const AdditionalNotices = ({
   const { t } = useTranslation('notice');
 
   return (
-    <div className={'flex flex-col gap-[18px]'}>
+    <div className="flex flex-col gap-[18px]">
       {additionalContents.map((content, index) => {
         const timeAgo = dayjs(content.createdAt).fromNow();
 
@@ -35,17 +35,17 @@ export const AdditionalNotices = ({
               <p className="text-text text-lg font-semibold">
                 {t('zabo.additionalNotices.title')}
               </p>
-              <p className={'text-greyDark font-bold'}>·</p>
-              <p className={'text-greyDark font-medium'}>{timeAgo}</p>
+              <p className="text-greyDark font-bold">·</p>
+              <p className="text-greyDark font-medium">{timeAgo}</p>
             </div>
 
             {deadlineChanged && (
               <div className="ml-8">
                 <div className="flex items-center gap-3">
-                  <p className={'text-base font-bold'}>
+                  <p className="text-base font-bold">
                     {t('zabo.additionalNotices.deadlineChanged')}
                   </p>
-                  <p className={'text-secondaryText text-base font-medium'}>
+                  <p className="text-secondaryText text-base font-medium">
                     {dayjs(lastDeadline).tz().isValid()
                       ? dayjs(lastDeadline).tz().format('LLL')
                       : t('zabo.additionalNotices.noDeadline')}
@@ -53,7 +53,7 @@ export const AdditionalNotices = ({
 
                   <p>▶</p>
 
-                  <p className={'text-base font-medium'}>
+                  <p className="text-base font-medium">
                     {dayjs(content.deadline).tz().format('LLL')}
                   </p>
                 </div>

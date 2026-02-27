@@ -70,7 +70,7 @@ const Metadata = ({
 
   return (
     <>
-      <div className={'flex items-center'}>
+      <div className="flex items-center">
         {group?.profileImageUrl ? (
           <img
             src={group.profileImageUrl}
@@ -86,17 +86,17 @@ const Metadata = ({
           // <Link
           //   href={`${process.env.NEXT_PUBLIC_GROUPS_URL}/group/${group.uuid}`}
           // >
-          //   <span className={'ml-2 text-lg font-medium'}>{group.name}</span>
+          //   <span className="ml-2 text-lg font-medium">{group.name}</span>
           // </Link>
           // TODO: implement with groups feature
           <></>
         ) : (
-          <span className={'ml-2 text-lg font-medium'}>{author}</span>
+          <span className="ml-2 text-lg font-medium">{author}</span>
         )}
 
-        <span className={'text-greyDark mx-[5px] font-bold'}>·</span>
+        <span className="text-greyDark mx-[5px] font-bold">·</span>
 
-        <span className={'text-greyDark font-medium'}>{timeAgo}</span>
+        <span className="text-greyDark font-medium">{timeAgo}</span>
       </div>
     </>
   );

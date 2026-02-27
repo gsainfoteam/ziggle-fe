@@ -39,7 +39,7 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
       {isEditable ? (
         <>
           {t('write.editableTimer')}{' '}
-          <span className={'font-bold'}>
+          <span className="font-bold">
             {`${timeRemaining.minutes}:${String(timeRemaining.seconds).padStart(
               2,
               '0',

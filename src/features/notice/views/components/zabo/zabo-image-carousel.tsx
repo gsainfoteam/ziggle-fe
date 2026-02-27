@@ -58,7 +58,7 @@ export const ZaboImageCarousel = ({
             alt={`${title}: image ${i + 1}`}
             width={imageSize}
             height={imageSize}
-            className={'block rounded-md border border-gray-300 object-cover'}
+            className="block rounded-md border border-gray-300 object-cover"
           />
         ))}
       </div>

@@ -48,27 +48,27 @@ export const Zabo = (props: ZaboProps) => {
           'text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col rounded-[10px] pt-2.5 transition'
         }
       >
-        <div className={'mx-3 my-2.5 flex flex-wrap items-center gap-y-3'}>
+        <div className="mx-3 my-2.5 flex flex-wrap items-center gap-y-3">
           {group?.profileImageUrl ? (
             <img
               src={group.profileImageUrl}
               width={36}
               height={36}
               alt={group.name}
-              className={'rounded-full'}
+              className="rounded-full"
             />
           ) : (
             <DefaultProfile className="h-9 w-9" />
           )}
-          <span className={'dark:text-dark_white ml-2 text-lg font-medium'}>
+          <span className="dark:text-dark_white ml-2 text-lg font-medium">
             {group ? group.name : author.name}
           </span>
 
-          <span className={'text-greyDark dark:text-grey mx-[5px] font-bold'}>
+          <span className="text-greyDark dark:text-grey mx-[5px] font-bold">
             ·
           </span>
 
-          <span className={'text-greyDark dark:text-grey font-medium'}>
+          <span className="text-greyDark dark:text-grey font-medium">
             {timeAgo}
           </span>
 
@@ -96,7 +96,7 @@ export const Zabo = (props: ZaboProps) => {
           {hasTags && <ZaboTags notice={props} />}
 
           {hasContent && (
-            <div className={'dark:text-dark_white line-clamp-3 w-full text-lg'}>
+            <div className="dark:text-dark_white line-clamp-3 w-full text-lg">
               {content}
             </div>
           )}

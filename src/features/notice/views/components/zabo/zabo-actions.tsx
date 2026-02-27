@@ -66,7 +66,7 @@ const FireButton = ({ id, fire }: FireButtonProps) => {
   };
 
   return (
-    <div className={'flex items-center gap-1'}>
+    <div className="flex items-center gap-1">
       <Button
         animated
         className="group flex items-center gap-1"
@@ -83,9 +83,7 @@ const FireButton = ({ id, fire }: FireButtonProps) => {
           />
         )}
       </Button>
-      <p className={'dark:text-dark_white font-semibold'}>
-        {currentFire.count}
-      </p>
+      <p className="dark:text-dark_white font-semibold">{currentFire.count}</p>
     </div>
   );
 };
@@ -131,7 +129,7 @@ export const ZaboActions = ({ id, title, reactions }: Notice) => {
   };
 
   return (
-    <div className={'flex items-center justify-between'}>
+    <div className="flex items-center justify-between">
       <LogClick
         eventName={LogEvents.noticeClickReaction}
         properties={{ id, emoji: fire.emoji }}

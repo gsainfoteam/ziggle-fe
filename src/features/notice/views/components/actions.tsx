@@ -143,7 +143,7 @@ export const Actions = ({
   };
 
   return (
-    <div className={'flex w-full flex-wrap gap-x-2 gap-y-[10px] py-[10px]'}>
+    <div className="flex w-full flex-wrap gap-x-2 gap-y-[10px] py-[10px]">
       {Object.keys(emojis)
         .map((emoji) => {
           const reaction = currentReactions.find(

@@ -23,9 +23,9 @@ export const AddAdditionalNotice = ({
     englishContent !== undefined && onEnglishContentChange !== undefined;
 
   return (
-    <div className={'flex flex-col'}>
-      <div className={'mb-2 flex items-center gap-3'}>
-        <AddIcon className={'stroke-text dark:stroke-dark_white w-5 md:w-6'} />
+    <div className="flex flex-col">
+      <div className="mb-2 flex items-center gap-3">
+        <AddIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
 
         <p className="text-lg font-medium">
           {t('zabo.additionalNotices.title')}
