@@ -8,7 +8,7 @@
   "files.readonlyInclude": {
     "**/routeTree.gen.ts": true
   },
-  "cSpell.words": ["viewmodel", "viewmodels", "vite", "ziggle"],
+  "cSpell.words": ["Infoteam", "viewmodel", "viewmodels", "vite", "ziggle"],
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always",
