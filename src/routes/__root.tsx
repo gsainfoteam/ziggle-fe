@@ -6,12 +6,15 @@ import '@/common/lib/init-amplitude';
 import '@/common/lib/i18n';
 
 import '../styles.css';
+import { Toaster } from 'sonner';
+
 import { ThemeProvider } from '@/common/lib/theme';
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <ThemeProvider>
+        <Toaster />
         <Outlet />
       </ThemeProvider>
       <TanStackDevtools

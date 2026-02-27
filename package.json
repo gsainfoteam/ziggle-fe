@@ -40,6 +40,8 @@
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
     "react-loading-skeleton": "^3.5.0",
+    "react-oauth2-code-pkce": "^1.24.0",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.18",
