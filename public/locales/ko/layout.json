@@ -4,64 +4,64 @@
     "infoteam": "지스트대학 총학생회 산하 정보국",
     "sections": [
       {
-        "title": "소개",
         "links": [
           {
-            "name": "인포팀 소개",
+            "key": "introduce",
             "link": "https://introduce.gistory.me",
-            "key": "introduce"
+            "name": "인포팀 소개"
           },
           {
-            "name": "버그 제보",
+            "key": "bugReport",
             "link": "https://cs.gistory.me/?service=Ziggle",
-            "key": "bugReport"
+            "name": "버그 제보"
           },
           {
-            "name": "서비스 상태 확인",
+            "key": "serviceStatus",
             "link": "https://uptime.icarus.gistory.me/status/ziggle",
-            "key": "serviceStatus"
+            "name": "서비스 상태 확인"
           }
-        ]
+        ],
+        "title": "소개"
       },
       {
-        "title": "약관",
         "links": [
           {
-            "name": "서비스이용약관",
+            "key": "serviceTerms",
             "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
-            "key": "serviceTerms"
+            "name": "서비스이용약관"
           },
           {
-            "name": "개인정보처리방침",
+            "key": "privacyPolicy",
             "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
-            "key": "privacyPolicy"
+            "name": "개인정보처리방침"
           },
           {
-            "name": "문의",
+            "key": "contact",
             "link": "mailto:ziggle@gistory.me",
-            "key": "contact"
+            "name": "문의"
           }
-        ]
+        ],
+        "title": "약관"
       },
       {
-        "title": "바로가기",
         "links": [
           {
-            "name": "하우스연합회",
+            "key": "house",
             "link": "https://sites.google.com/view/gisthouse/home",
-            "key": "house"
+            "name": "하우스연합회"
           },
           {
-            "name": "GIST 홈페이지",
+            "key": "gist",
             "link": "https://www.gist.ac.kr/kr/main.html",
-            "key": "gist"
+            "name": "GIST 홈페이지"
           },
           {
-            "name": "지졸",
+            "key": "gijol",
             "link": "https://gijol.vercel.app/",
-            "key": "gijol"
+            "name": "지졸"
           }
-        ]
+        ],
+        "title": "바로가기"
       }
     ]
   },
@@ -69,6 +69,7 @@
     "login": "로그인"
   },
   "sidebar": {
+    "language": "언어",
     "theme": "테마",
     "themeOptions": {
       "dark": "다크",

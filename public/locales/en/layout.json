@@ -4,64 +4,64 @@
     "infoteam": "GIST Student Council - Information Department",
     "sections": [
       {
-        "title": "Introduction",
         "links": [
           {
-            "name": "Introduce Infoteam",
+            "key": "introduce",
             "link": "https://introduce.gistory.me",
-            "key": "introduce"
+            "name": "Introduce Infoteam"
           },
           {
-            "name": "Bug Report",
+            "key": "bugReport",
             "link": "https://cs.gistory.me/?service=Ziggle",
-            "key": "bugReport"
+            "name": "Bug Report"
           },
           {
-            "name": "Service Status Check",
+            "key": "serviceStatus",
             "link": "https://uptime.icarus.gistory.me/status/ziggle",
-            "key": "serviceStatus"
+            "name": "Service Status Check"
           }
-        ]
+        ],
+        "title": "Introduction"
       },
       {
-        "title": "Terms",
         "links": [
           {
-            "name": "Terms of Service",
+            "key": "serviceTerms",
             "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
-            "key": "serviceTerms"
+            "name": "Terms of Service"
           },
           {
-            "name": "Privacy Policy",
+            "key": "privacyPolicy",
             "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
-            "key": "privacyPolicy"
+            "name": "Privacy Policy"
           },
           {
-            "name": "FAQ",
+            "key": "contact",
             "link": "mailto:ziggle@gistory.me",
-            "key": "contact"
+            "name": "FAQ"
           }
-        ]
+        ],
+        "title": "Terms"
       },
       {
-        "title": "Shortcuts",
         "links": [
           {
-            "name": "GIST House",
+            "key": "house",
             "link": "https://sites.google.com/view/gisthouse/home",
-            "key": "house"
+            "name": "GIST House"
           },
           {
-            "name": "GIST Homepage",
+            "key": "gist",
             "link": "https://www.gist.ac.kr/kr/main.html",
-            "key": "gist"
+            "name": "GIST Homepage"
           },
           {
-            "name": "Gijol",
+            "key": "gijol",
             "link": "https://gijol.vercel.app/",
-            "key": "gijol"
+            "name": "Gijol"
           }
-        ]
+        ],
+        "title": "Shortcuts"
       }
     ]
   },
@@ -69,6 +69,7 @@
     "login": "Login"
   },
   "sidebar": {
+    "language": "Language",
     "theme": "Theme",
     "themeOptions": {
       "dark": "Dark",
