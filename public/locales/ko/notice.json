@@ -77,6 +77,7 @@
     "autoSaveDescription": "초안은 컴퓨터에 자동 저장됩니다.",
     "changeDeadline": "마감시간 변경",
     "dragToAddPhoto": "끌어서 사진 추가",
+    "editableTimer": "수정 불가능까지 남은 시간",
     "editDescription": "원본에 작성된 공지는 15분 내에만 수정하실 수 있습니다. 다만, 영어 공지는 언제나 추가로 작성 가능합니다.",
     "editDisabled": "원문 수정이 비활성화되었군요! 👇 추가 공지를 이용해보는건 어떠신가요?",
     "englishContent": "영어 본문",
@@ -121,6 +122,7 @@
     "submit": "공지 제출하기",
     "submitDescription": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
     "translateWithDeepL": "DeepL로 번역하기",
+    "uneditable": "수정 가능한 기한이 지났습니다.",
     "writeEnglishNotice": "영어 공지 작성",
     "writeTags": "태그를 입력하세요.",
     "writeTagsDescription": "띄어쓰기로 구분해주세요. #은 입력하지 않으셔도 됩니다.",
@@ -128,7 +130,9 @@
   },
   "zabo": {
     "additionalNotices": {
+      "additionalNoticePlaceholder": "여기에 한국어 추가 공지를 입력하세요",
       "deadlineChanged": "마감시간 변경",
+      "enAdditionalNoticePlaceholder": "여기에 영어 추가 공지를 입력하세요",
       "noDeadline": "마감시간 없음",
       "title": "추가 공지"
     },
