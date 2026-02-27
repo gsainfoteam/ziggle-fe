@@ -33,7 +33,7 @@ const Pagination = ({
       <div className="flex gap-1">
         {page !== 0 ? (
           <Button animated>
-            <Link to="." search={{ ...search, page: (page - 1).toString() }}>
+            <Link to="." search={{ ...search, page: page - 1 }}>
               <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 rotate-180 fill-none md:w-7" />
             </Link>
           </Button>
@@ -44,7 +44,7 @@ const Pagination = ({
         )}
         {page + 1 !== pages ? (
           <Button animated>
-            <Link to="." search={{ ...search, page: (page + 1).toString() }}>
+            <Link to="." search={{ ...search, page: page + 1 }}>
               <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 fill-none md:w-7" />
             </Link>
           </Button>

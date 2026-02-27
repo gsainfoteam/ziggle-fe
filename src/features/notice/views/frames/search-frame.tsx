@@ -2,7 +2,7 @@ import { useSearch } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import SearchNoResult from '@/assets/icons/search-no-result.svg';
+import SearchNoResult from '@/assets/icons/search-no-result.svg?react';
 import { LoadingCatAnimation, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
@@ -86,7 +86,6 @@ export const SearchFrame = () => {
     from: '/_layout/search',
   });
   const tags = rawTags?.split(',').filter(Boolean) ?? [];
-  const pageNumber = Number.parseInt(page ?? '');
   const { t } = useTranslation('notice');
 
   return (
@@ -94,7 +93,7 @@ export const SearchFrame = () => {
       <div className="flex w-full justify-center">
         <div className="flex w-full flex-col md:max-w-[800px]">
           {search ? (
-            <List search={search} pageNumber={pageNumber} tags={tags} />
+            <List search={search} pageNumber={page} tags={tags} />
           ) : (
             <div className="flex w-full justify-center">
               <div className="flex flex-col items-center">

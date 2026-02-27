@@ -9,6 +9,6 @@ export const Route = createFileRoute('/_layout/search')({
   validateSearch: z.object({
     query: z.string().optional(),
     tags: z.string().optional(),
-    page: z.string().optional(),
+    page: z.number().optional().default(0),
   }),
 });

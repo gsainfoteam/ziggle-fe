@@ -5,7 +5,7 @@ import { Link, useParams, useSearch } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import SearchNoResult from '@/assets/icons/search-no-result.svg?react';
-import { LogClick, LoadingCatAnimation } from '@/common/components';
+import { LogClick, LoadingCatAnimation, Toggle } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
 import { cn } from '@/common/utils';
@@ -94,8 +94,6 @@ export function NoticeListFrame() {
     .flat(2)
     .find(({ path }) => path === category)!;
   const { noticeSearchParams, icons, title } = currentSidebarObject;
-  const sortByDeadline = deadline === 'true';
-  const pageNumber = Number.parseInt(page ?? '');
 
   return (
     <main className="flex w-full flex-col items-center gap-5">
@@ -107,49 +105,44 @@ export function NoticeListFrame() {
               {title}
             </div>
             {category !== 'deadline' && category !== 'zigglepick' && (
-              <div className="flex items-center gap-3">
-                <LogClick
-                  eventName={LogEvents.categoryToggleDeadline}
-                  properties={{
-                    category,
-                    sortByDeadline,
-                  }}
+              <LogClick
+                eventName={LogEvents.categoryToggleDeadline}
+                properties={{
+                  category,
+                  sortByDeadline: deadline,
+                }}
+              >
+                <Link
+                  to="."
+                  params={{ category }}
+                  search={{ deadline: !deadline, page: 0 }}
+                  className="flex items-center gap-3 rounded-full"
                 >
-                  <Link
-                    to="."
-                    params={{ category }}
-                    search={{
-                      deadline: sortByDeadline ? 'false' : 'true',
-                      page: '0',
+                  <Toggle
+                    isSwitched={deadline}
+                    onSwitch={(e) => {
+                      const target = e.currentTarget;
+                      setTimeout(() => (target.checked = !deadline), 0);
                     }}
-                    className="flex rounded-full"
-                  >
-                    <input
-                      // TODO: use toggle component
-                      // className={styles.checkbox}
-                      type="checkbox"
-                      checked={sortByDeadline}
-                      readOnly
-                    />
-                  </Link>
-                </LogClick>
+                  />
 
-                <p
-                  className={cn(
-                    'text-lg font-medium',
-                    sortByDeadline ? 'text-primary' : 'text-greyDark',
-                  )}
-                >
-                  {t('common.sortByDeadline')}
-                </p>
-              </div>
+                  <p
+                    className={cn(
+                      'text-lg font-medium',
+                      deadline ? 'text-primary' : 'text-greyDark',
+                    )}
+                  >
+                    {t('common.sortByDeadline')}
+                  </p>
+                </Link>
+              </LogClick>
             )}
           </div>
         )}
         <List
-          sortByDeadline={sortByDeadline}
+          sortByDeadline={deadline}
           noticeSearchParams={noticeSearchParams}
-          page={pageNumber}
+          page={page}
           category={category}
         />
       </div>

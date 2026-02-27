@@ -16,7 +16,7 @@ export const Route = createFileRoute('/_layout/_sidebar/$category')({
       .catch('home'),
   }),
   validateSearch: z.object({
-    deadline: z.string().optional(),
-    page: z.string().optional(),
+    deadline: z.boolean().optional().default(false),
+    page: z.number().optional().default(0),
   }),
 });
