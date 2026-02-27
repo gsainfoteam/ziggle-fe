@@ -1,0 +1,14 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "me.gistory.ziggle",
+      "sha256_cert_fingerprints": [
+        "D5:EC:D6:10:5A:EE:B5:5B:C7:A8:43:8C:F5:C1:96:DF:83:6F:FE:B8:0E:AD:73:27:1C:F1:93:93:CD:D1:77:40",
+        "6D:99:80:2B:2C:8B:02:2E:22:8C:6A:98:39:5E:D7:F0:48:BA:11:00:C6:EC:45:84:42:B9:98:01:38:3F:ED:5C",
+        "CD:7B:35:5A:56:50:F9:4F:73:6E:CE:3D:3B:0F:00:B0:5A:D7:FB:71:F7:97:98:BB:37:BE:E6:D9:69:3A:07:5F"
+      ]
+    }
+  }
+]
