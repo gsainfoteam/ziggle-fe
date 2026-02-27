@@ -3,3 +3,4 @@ export * from './use-delete-reaction';
 export * from './use-notices';
 export * from './use-notice';
 export * from './use-send-alarm';
+export * from './use-delete-notice';

@@ -28,7 +28,7 @@ function List({
     my?: 'own' | 'reminders';
   };
   sortByDeadline: boolean;
-  category: Category | 'home' | 'deadline' | 'zigglepick';
+  category: Category | string;
 }) {
   const { data: notices, isLoading } = useNotices({
     page,
@@ -92,7 +92,7 @@ export function NoticeListFrame() {
 
   const currentSidebarObject = sidebarObject
     .flat(2)
-    .find(({ path }) => path === category.toLowerCase())!;
+    .find(({ path }) => path === category)!;
   const { noticeSearchParams, icons, title } = currentSidebarObject;
   const sortByDeadline = deadline === 'true';
   const pageNumber = Number.parseInt(page ?? '');

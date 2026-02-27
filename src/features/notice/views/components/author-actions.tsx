@@ -1,11 +1,14 @@
 import { Link, useRouter } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import EditPencilIcon from '@/assets/icons/edit-pencil.svg?react';
 import RemoveIcon from '@/assets/icons/remove.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+
+import { useDeleteNotice } from '../../viewmodels';
 
 interface WriterActionsProps {
   noticeId: number;
@@ -14,36 +17,19 @@ interface WriterActionsProps {
 export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
   const { t } = useTranslation('notice');
   const router = useRouter();
+  const { mutateAsync: deleteNotice } = useDeleteNotice();
 
-  const handleRemoveNotice = () => {
-    // TODO: implement remove notice
-    // Swal.fire({
-    //   text: t('zabo.authorActions.removeSure'),
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonText: t('alertResponse.confirm'),
-    //   cancelButtonText: t('alertResponse.cancel'),
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     deleteNotice(noticeId)
-    //       .then((e) => {
-    //         router.push(`/home`);
-    //         Swal.fire({
-    //           text: t('write.alerts.deleteSuccess'),
-    //           icon: 'success',
-    //           confirmButtonText: t('alertResponse.confirm'),
-    //         });
-    //       })
-    //       .catch((error) => {
-    //         console.error(error);
-    //         Swal.fire({
-    //           text: t('write.alerts.deleteFail'),
-    //           icon: 'error',
-    //           confirmButtonText: t('alertResponse.confirm'),
-    //         });
-    //       });
-    //   }
-    // });
+  const handleRemoveNotice = async () => {
+    if (confirm(t('zabo.authorActions.removeSure'))) {
+      try {
+        await deleteNotice({ params: { path: { id: noticeId } } });
+        router.navigate({ to: '/$category', params: { category: 'home' } });
+        toast.success(t('write.alerts.deleteSuccess'));
+      } catch (error) {
+        console.error(error);
+        toast.error(t('write.alerts.deleteFail'));
+      }
+    }
   };
 
   return (
