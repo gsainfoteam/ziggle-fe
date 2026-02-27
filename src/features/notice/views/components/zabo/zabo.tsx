@@ -23,7 +23,7 @@ export type ZaboProps = Notice & {
   height?: number; // migration ongoing | remove after migration complete
 };
 
-export const Zabo = async (props: ZaboProps) => {
+export const Zabo = (props: ZaboProps) => {
   const {
     content,
     createdAt,

@@ -42,4 +42,7 @@ export enum EmojiString {
   SURPRISED = '😮',
 }
 
-export { ApiPaths } from '@/@types/api-schema';
+export {
+  ApiPaths,
+  PathsNoticeGetParametersQueryCategory as Category,
+} from '@/@types/api-schema';

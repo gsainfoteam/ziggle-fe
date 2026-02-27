@@ -1,5 +1,9 @@
 {
+  "common": {
+    "sortByDeadline": ""
+  },
   "dDayPlus": "기한 지남",
+  "emptyNotices": "글이 없습니다. =ㅅ=",
   "mypage": {
     "myNotice": "내 공지",
     "remindNotice": "리마인드한 공지"

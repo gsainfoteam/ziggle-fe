@@ -1,5 +1,9 @@
 {
+  "common": {
+    "sortByDeadline": ""
+  },
   "dDayPlus": "OVERDUE",
+  "emptyNotices": "No content. =ㅅ=",
   "mypage": {
     "myNotice": "My Notices",
     "remindNotice": "Reminded Notices"

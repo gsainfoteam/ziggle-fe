@@ -24,7 +24,7 @@ export function LandingFrame() {
       <Button
         variant="outlined"
         onClick={() => {
-          useAuthRedirect.getState().setRedirect(redirect ?? '/notice');
+          useAuthRedirect.getState().setRedirect(redirect ?? '/home');
           idpLogIn();
         }}
       >
