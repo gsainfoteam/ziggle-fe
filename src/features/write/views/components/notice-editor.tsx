@@ -14,8 +14,13 @@ import TagIcon from '@/assets/icons/tag.svg?react';
 import TypeIcon from '@/assets/icons/type.svg?react';
 import { Button, LogClick, Toggle } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { api } from '@/common/lib';
 import { cn } from '@/common/utils';
-import { Category, type NoticeDetail } from '@/features/notice/models';
+import {
+  ApiPaths,
+  Category,
+  type NoticeDetail,
+} from '@/features/notice/models';
 
 import {
   editorStateReducer,
@@ -33,6 +38,11 @@ import { LanguageTab } from './language-tab';
 import { NoticeTypeSelector } from './notice-type-selector';
 import { TagInput } from './tag-input';
 import { TitleAndContent } from './title-and-content';
+import {
+  useHandleNoticeEdit,
+  useHandleNoticeSubmit,
+  type NoticeSubmitForm,
+} from '../../viewmodels';
 
 const NoticeTypeCategoryMapper = {
   recruit: Category.RECRUIT,
@@ -64,6 +74,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
   const koreanContentEditorRef = useRef<Editor | null>(null);
   const englishContentEditorRef = useRef<Editor | null>(null);
+  const handleNoticeSubmit = useHandleNoticeSubmit();
+  const handleNoticeEdit = useHandleNoticeEdit();
 
   useEffect(() => {
     const loadDraft = async () => {
@@ -204,13 +216,13 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const noticeId = await handleNoticeSubmit(noticeToSubmit);
     if (!noticeId) {
       setIsLoading(false);
-      alert(t('write.alerts.submitFail'));
+      toast.error(t('write.alerts.submitFail'));
       return;
     }
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
 
-    router.navigate({ to: '/notice/$id', params: { id: noticeId } });
+    router.navigate({ to: '/notice/$id', params: { id: noticeId.toString() } });
   };
 
   const handleModify = async () => {
@@ -224,13 +236,13 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const isEdited = !!editedLangs.length;
 
     if (!state.korean.additionalContent && state.english?.additionalContent) {
-      alert(t('write.alerts.needKoreanAdditionalNotice'));
+      toast.error(t('write.alerts.needKoreanAdditionalNotice'));
       return;
     }
 
     setIsLoading(true);
 
-    alert(t('write.alerts.modifyingNotice'));
+    const loading = toast.loading(t('write.alerts.modifyingNotice'));
 
     if (!hasTimedOut) {
       if (isEdited) {
@@ -240,11 +252,12 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           englishBody: state.english?.content,
           noticeLanguage: editedLangs.length === 1 ? editedLangs[0] : 'both',
           deadline: state.deadline ? state.deadline.toDate() : undefined,
-          t,
         });
 
         if (!updatedNoticeId) {
-          alert(t('write.alerts.modificationFail'));
+          toast.dismiss(loading);
+          toast.error(t('write.alerts.modificationFail'));
+          return;
         }
       }
     }
@@ -252,29 +265,41 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const isEnglishAttached = notice.enContent === undefined && !!state.english;
 
     if (isEnglishAttached) {
-      const englishNotice = await attachInternationalNotice({
-        lang: 'en',
-        title: (state.english as { title: string }).title,
-        deadline: state.deadline ? state.deadline.toDate() : undefined,
-        body: (state.english as { content: string }).content,
-        noticeId: notice.id,
-        contentId: 1,
-      }).catch(() => null);
+      const englishNotice = await api
+        .POST(ApiPaths.NoticeController_addForeignContent, {
+          params: {
+            path: {
+              id: notice.id,
+              contentIdx: 1,
+            },
+          },
+          body: {
+            lang: 'en',
+            title: (state.english as { title: string }).title,
+            deadline: state.deadline ? state.deadline.toISOString() : undefined,
+            body: (state.english as { content: string }).content,
+          },
+        })
+        .then((res) => res.data)
+        .catch(() => null);
 
       if (!englishNotice) {
         setIsLoading(false);
-        Swal.fire({
-          text: t('write.alerts.attachInternationalFail'),
-          icon: 'error',
-          confirmButtonText: t('alertResponse.confirm'),
-          showDenyButton: true,
-          denyButtonText: t('write.alerts.copyEnglishContent'),
-        }).then((result) => {
-          if (result.isDenied) {
-            navigator.clipboard.writeText(state.english?.content!);
-            toast.success(t('write.alerts.copySuccess'));
-          }
-        });
+        toast.dismiss(loading);
+        toast.error(t('write.alerts.attachInternationalFail'));
+        // TODO: add alert
+        // Swal.fire({
+        //   text: t('write.alerts.attachInternationalFail'),
+        //   icon: 'error',
+        //   confirmButtonText: t('alertResponse.confirm'),
+        //   showDenyButton: true,
+        //   denyButtonText: t('write.alerts.copyEnglishContent'),
+        // }).then((result) => {
+        //   if (result.isDenied) {
+        //     navigator.clipboard.writeText(state.english?.content!);
+        //     toast.success(t('write.alerts.copySuccess'));
+        //   }
+        // });
         return;
       }
     }
@@ -282,26 +307,34 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const isAdditionalAttached = !!state.korean.additionalContent;
 
     if (isAdditionalAttached) {
-      const additionalKoreanNotice = await createAdditionalNotice({
-        noticeId: notice.id,
-        body: state.korean.additionalContent ?? '',
-        deadline: state.deadline ? state.deadline.toDate() : undefined,
-      }).catch(() => null);
+      const additionalKoreanNotice = await api
+        .POST(ApiPaths.NoticeController_createAdditionalNotice, {
+          params: { path: { id: notice.id } },
+          body: {
+            body: state.korean.additionalContent ?? '',
+            deadline: state.deadline ? state.deadline.toISOString() : undefined,
+          },
+        })
+        .then((res) => res.data)
+        .catch(() => null);
 
       if (additionalKoreanNotice === null) {
         setIsLoading(false);
-        Swal.fire({
-          text: t('write.alerts.attachAdditionalNoticeFail'),
-          icon: 'error',
-          confirmButtonText: t('alertResponse.confirm'),
-          showDenyButton: true,
-          denyButtonText: t('write.alerts.copyAdditionalNotice'),
-        }).then((result) => {
-          if (result.isDenied) {
-            navigator.clipboard.writeText(state.korean.additionalContent!);
-            toast.success(t('write.alerts.copySuccess'));
-          }
-        });
+        toast.dismiss(loading);
+        toast.error(t('write.alerts.attachAdditionalNoticeFail'));
+        // TODO: add alert
+        // Swal.fire({
+        //   text: t('write.alerts.attachAdditionalNoticeFail'),
+        //   icon: 'error',
+        //   confirmButtonText: t('alertResponse.confirm'),
+        //   showDenyButton: true,
+        //   denyButtonText: t('write.alerts.copyAdditionalNotice'),
+        // }).then((result) => {
+        //   if (result.isDenied) {
+        //     navigator.clipboard.writeText(state.korean.additionalContent!);
+        //     toast.success(t('write.alerts.copySuccess'));
+        //   }
+        // });
         return;
       }
 
@@ -309,34 +342,49 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       if (
         Array.isArray(contents) &&
-        contents.pop().id &&
+        contents.at(-1)?.id &&
         state.english?.additionalContent
       ) {
-        const additionalEnglishNotice = await attachInternationalNotice({
-          title: '',
-          body: state.english.additionalContent,
-          lang: 'en',
-          noticeId: notice.id,
-          contentId: contents.pop().id,
-          deadline: state.deadline ? state.deadline.toDate() : undefined,
-        }).catch(() => null);
+        const additionalEnglishNotice = await api
+          .POST(ApiPaths.NoticeController_addForeignContent, {
+            params: {
+              path: {
+                id: notice.id,
+                contentIdx: contents.at(-1)!.id,
+              },
+            },
+            body: {
+              title: '',
+              body: state.english.additionalContent,
+              lang: 'en',
+              deadline: state.deadline
+                ? state.deadline.toISOString()
+                : undefined,
+            },
+          })
+          .catch(() => null);
 
         if (additionalEnglishNotice === null) {
           setIsLoading(false);
-          Swal.fire({
-            text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
-            icon: 'error',
-            confirmButtonText: t('alertResponse.confirm'),
-            showDenyButton: true,
-            denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
-          }).then((result) => {
-            if (result.isDenied) {
-              navigator.clipboard.writeText(
-                state?.english?.additionalContent ?? '',
-              );
-              toast.success(t('write.alerts.copySuccess'));
-            }
-          });
+          toast.dismiss(loading);
+          toast.error(
+            t('write.alerts.attachInternationalAdditionalNoticeFail'),
+          );
+          // TODO: add alert
+          // Swal.fire({
+          //   text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
+          //   icon: 'error',
+          //   confirmButtonText: t('alertResponse.confirm'),
+          //   showDenyButton: true,
+          //   denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
+          // }).then((result) => {
+          //   if (result.isDenied) {
+          //     navigator.clipboard.writeText(
+          //       state?.english?.additionalContent ?? '',
+          //     );
+          //     toast.success(t('write.alerts.copySuccess'));
+          //   }
+          // });
           return;
         }
       }
@@ -349,7 +397,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     //   isAdditionalAttached,
     // });
 
-    alert(t('write.alerts.modificationSuccess'));
+    toast.dismiss(loading);
+    toast.success(t('write.alerts.modificationSuccess'));
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
     router.navigate({
@@ -551,6 +600,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           onSwitch={(e) => {
             dispatch({ type: 'TOGGLE_DEADLINE' });
             // TODO: send log
+            e.isDefaultPrevented();
             // sendLog(LogEvents.writingToggleDeadline, {
             //   hasDeadline: e.target.checked,
             // });

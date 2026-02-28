@@ -1,2 +1,3 @@
 export * from './queries';
-export * from './handle-notice-submit';
+export * from './use-handle-notice-submit';
+export * from './use-handle-notice-edit';
