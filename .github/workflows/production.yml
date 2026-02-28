@@ -12,7 +12,7 @@ jobs:
       contents: read
       deployments: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
       - name: build
         env:
@@ -27,11 +27,9 @@ jobs:
           bun install
           bun run build -- --mode production
       - name: Deploy to production
-        uses: cloudflare/pages-action@v1.5.0
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          projectName: ziggle-fe-prod
-          directory: dist
+          command: pages deploy dist --project-name ziggle-fe-prod
           gitHubToken: ${{ github.token }}
-          branch: main
