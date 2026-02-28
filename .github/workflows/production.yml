@@ -1,0 +1,35 @@
+name: Production Deploy
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  preview-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+      - name: build
+        env:
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          VITE_CHATBOT_WIDGET_KEY: ${{ secrets.VITE_CHATBOT_WIDGET_KEY }}
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_IDP_CLIENT_ID: ${{ secrets.VITE_IDP_CLIENT_ID }}
+          VITE_IDP_AUTHORIZE_URL: ${{ secrets.VITE_IDP_AUTHORIZE_URL }}
+          VITE_IDP_TOKEN_URL: ${{ secrets.VITE_IDP_TOKEN_URL }}
+          VITE_IDP_REDIRECT_URI: ${{ secrets.VITE_IDP_REDIRECT_URI }}
+        run: |
+          bun install
+          bun run build -- --mode production
+      - name: Deploy to production
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy dist --project-name ziggle-fe-prod
+          gitHubToken: ${{ github.token }}
