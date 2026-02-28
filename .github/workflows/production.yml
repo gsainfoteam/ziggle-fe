@@ -1,0 +1,31 @@
+name: Production Deploy
+
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  preview-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: build
+        env:
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+        run: |
+          bun install
+          bun run build -- --mode production
+      - name: Deploy to production
+        uses: cloudflare/pages-action@v1.5.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          projectName: ziggle-fe-prod
+          directory: dist
+          gitHubToken: ${{ github.token }}
+          branch: main
