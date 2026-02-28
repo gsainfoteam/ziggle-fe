@@ -1,4 +1,4 @@
-import { useParams } from '@tanstack/react-router';
+import { useLoaderData, useParams } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
@@ -13,15 +13,19 @@ import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
 
 export function NoticeDetailFrame() {
+  const preloadedNotice = useLoaderData({
+    from: '/_layout/_sidebar/notice/$id',
+  });
   const { id } = useParams({ from: '/_layout/_sidebar/notice/$id' });
   const { data: notice } = useNotice(Number.parseInt(id ?? '0'));
+  const efficientNotice = notice ?? preloadedNotice;
   const { i18n } = useTranslation();
 
-  if (!notice) return <Loading />;
+  if (!efficientNotice) return <Loading />;
 
   const additionalContents = Object.values(
-    notice.additionalContents.reduce<
-      Record<number, (typeof notice.additionalContents)[number]>
+    efficientNotice.additionalContents.reduce<
+      Record<number, (typeof efficientNotice.additionalContents)[number]>
     >(
       (prev, curr) => ({
         ...prev,
@@ -37,34 +41,40 @@ export function NoticeDetailFrame() {
         <div className="flex gap-5">
           {/* DESKTOP VIEW IMAGE STACK */}
           <div className="hidden md:block">
-            {notice.imageUrls.length > 0 && (
-              <ImageStack sources={notice.imageUrls} alt={notice.title} />
+            {efficientNotice.imageUrls.length > 0 && (
+              <ImageStack
+                sources={efficientNotice.imageUrls}
+                alt={efficientNotice.title}
+              />
             )}
           </div>
 
           <div className="flex flex-col gap-[18px] md:w-[60%]">
-            <SendPushAlarm {...notice} />
+            <SendPushAlarm {...efficientNotice} />
 
-            <NoticeInfo {...notice} currentDeadline={notice.currentDeadline} />
+            <NoticeInfo
+              {...efficientNotice}
+              currentDeadline={efficientNotice.currentDeadline}
+            />
 
             {/* MOBILE VIEW IMAGE STACK */}
             <div className="md:hidden">
-              {notice.imageUrls.length > 0 && (
+              {efficientNotice.imageUrls.length > 0 && (
                 <ImageStack
                   width={900}
-                  sources={notice.imageUrls}
-                  alt={notice.title}
+                  sources={efficientNotice.imageUrls}
+                  alt={efficientNotice.title}
                 />
               )}
             </div>
 
-            <Content content={notice.content} />
+            <Content content={efficientNotice.content} />
 
-            <Actions notice={notice} />
+            <Actions notice={efficientNotice} />
 
             <AdditionalNotices
               additionalContents={additionalContents}
-              notice={notice}
+              notice={efficientNotice}
             />
           </div>
         </div>

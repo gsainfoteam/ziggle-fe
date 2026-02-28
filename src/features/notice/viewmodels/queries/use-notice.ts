@@ -11,8 +11,8 @@ export const useNotice = (id: number) => {
   });
 };
 
-export const getNotice = (id: number) => {
+export const getNotice = (id: number, lang?: string) => {
   return api.GET(ApiPaths.NoticeController_getNotice, {
-    params: { path: { id } },
+    params: { path: { id }, query: { lang } },
   });
 };
