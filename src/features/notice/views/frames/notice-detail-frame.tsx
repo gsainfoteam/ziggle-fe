@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from '@tanstack/react-router';
+import { useLoaderData } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
@@ -13,11 +13,10 @@ import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
 
 export function NoticeDetailFrame() {
-  const preloadedNotice = useLoaderData({
+  const { notice: preloadedNotice, numId } = useLoaderData({
     from: '/_layout/_sidebar/notice/$id',
   });
-  const { id } = useParams({ from: '/_layout/_sidebar/notice/$id' });
-  const { data: notice } = useNotice(Number.parseInt(id ?? '0'));
+  const { data: notice } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
   const { i18n } = useTranslation();
 
