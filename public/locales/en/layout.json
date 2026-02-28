@@ -1,0 +1,83 @@
+{
+  "footer": {
+    "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
+    "infoteam": "GIST Student Council - Information Department",
+    "sections": [
+      {
+        "links": [
+          {
+            "key": "introduce",
+            "link": "https://introduce.gistory.me",
+            "name": "Introduce Infoteam"
+          },
+          {
+            "key": "bugReport",
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "name": "Bug Report"
+          },
+          {
+            "key": "serviceStatus",
+            "link": "https://uptime.icarus.gistory.me/status/ziggle",
+            "name": "Service Status Check"
+          }
+        ],
+        "title": "Introduction"
+      },
+      {
+        "links": [
+          {
+            "key": "serviceTerms",
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "name": "Terms of Service"
+          },
+          {
+            "key": "privacyPolicy",
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "name": "Privacy Policy"
+          },
+          {
+            "key": "contact",
+            "link": "mailto:ziggle@gistory.me",
+            "name": "FAQ"
+          }
+        ],
+        "title": "Terms"
+      },
+      {
+        "links": [
+          {
+            "key": "house",
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "name": "GIST House"
+          },
+          {
+            "key": "gist",
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "name": "GIST Homepage"
+          },
+          {
+            "key": "gijol",
+            "link": "https://gijol.vercel.app/",
+            "name": "Gijol"
+          }
+        ],
+        "title": "Shortcuts"
+      }
+    ]
+  },
+  "navbar": {
+    "login": "Login"
+  },
+  "navbarWrite": {
+    "goBack": "Go back"
+  },
+  "sidebar": {
+    "language": "Language",
+    "theme": "Theme",
+    "themeOptions": {
+      "dark": "Dark",
+      "light": "Light",
+      "system": "System"
+    }
+  }
+}

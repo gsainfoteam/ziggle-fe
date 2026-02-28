@@ -1,27 +1,27 @@
 {
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
   "search.exclude": {
-    "**/.yarn": true,
-    "**/.pnp.*": true
+    "**/routeTree.gen.ts": true
   },
-  "eslint.nodePath": ".yarn/sdks",
-  "typescript.tsdk": ".yarn/sdks/typescript/lib",
-  "typescript.enablePromptUseWorkspaceTsdk": true,
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.sortImports": "never",
-    "source.organizeImports": "never"
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
   },
-  "editor.formatOnSave": false,
   "cSpell.words": [
-    "Swal",
+    "Infoteam",
+    "viewmodel",
+    "viewmodels",
+    "vite",
     "Zabo",
-    "Ziggle"
+    "ziggle"
   ],
-  "svg.preview.background": "custom",
-  "i18n-ally.localesPaths": [
-    "public/tinymce/langs",
-    "src/app/i18next/locales",
-    "public/tinymce/plugins/help/js/i18n"
-  ]
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.fixAll.prettier": "always"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

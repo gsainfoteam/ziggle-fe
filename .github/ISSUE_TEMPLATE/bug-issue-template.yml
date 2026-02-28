@@ -1,7 +1,7 @@
 name: Bug Issue Template
 description: An Issue Template for Bugs
-title: "[BUG] "
-labels: ["bug"]
+title: '[BUG] '
+labels: ['bug']
 assignees: []
 body:
   - type: textarea

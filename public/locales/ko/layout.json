@@ -1,0 +1,83 @@
+{
+  "footer": {
+    "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
+    "infoteam": "지스트대학 총학생회 산하 정보국",
+    "sections": [
+      {
+        "links": [
+          {
+            "key": "introduce",
+            "link": "https://introduce.gistory.me",
+            "name": "인포팀 소개"
+          },
+          {
+            "key": "bugReport",
+            "link": "https://cs.gistory.me/?service=Ziggle",
+            "name": "버그 제보"
+          },
+          {
+            "key": "serviceStatus",
+            "link": "https://uptime.icarus.gistory.me/status/ziggle",
+            "name": "서비스 상태 확인"
+          }
+        ],
+        "title": "소개"
+      },
+      {
+        "links": [
+          {
+            "key": "serviceTerms",
+            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "name": "서비스이용약관"
+          },
+          {
+            "key": "privacyPolicy",
+            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "name": "개인정보처리방침"
+          },
+          {
+            "key": "contact",
+            "link": "mailto:ziggle@gistory.me",
+            "name": "문의"
+          }
+        ],
+        "title": "약관"
+      },
+      {
+        "links": [
+          {
+            "key": "house",
+            "link": "https://sites.google.com/view/gisthouse/home",
+            "name": "하우스연합회"
+          },
+          {
+            "key": "gist",
+            "link": "https://www.gist.ac.kr/kr/main.html",
+            "name": "GIST 홈페이지"
+          },
+          {
+            "key": "gijol",
+            "link": "https://gijol.vercel.app/",
+            "name": "지졸"
+          }
+        ],
+        "title": "바로가기"
+      }
+    ]
+  },
+  "navbar": {
+    "login": "로그인"
+  },
+  "navbarWrite": {
+    "goBack": "돌아가기"
+  },
+  "sidebar": {
+    "language": "언어",
+    "theme": "테마",
+    "themeOptions": {
+      "dark": "다크",
+      "light": "라이트",
+      "system": "시스템"
+    }
+  }
+}
