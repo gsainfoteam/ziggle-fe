@@ -43,7 +43,7 @@ export const initialEditorState: EditorState = {
 };
 
 export type EditorAction =
-  | { type: 'TOGGLE_ENGLISH_VERSION' }
+  | { type: 'TOGGLE_ENGLISH_VERSION'; value: boolean }
   | { type: 'SET_NOTICE_TYPE'; selectedNoticeType: NoticeType }
   | { type: 'SET_WRITING_TAB'; selectedWritingTab: 'korean' | 'english' }
   | { type: 'SET_KOREAN_TITLE'; koreanTitle: string }
@@ -69,13 +69,13 @@ export const editorStateReducer = (
     case 'TOGGLE_ENGLISH_VERSION':
       return {
         ...state,
-        english: state.english
-          ? undefined
-          : {
+        english: action.value
+          ? (state.english ?? {
               title: '',
               content: '',
               additionalContent: undefined,
-            },
+            })
+          : undefined,
       };
     case 'SET_NOTICE_TYPE':
       return { ...state, noticeType: action.selectedNoticeType };

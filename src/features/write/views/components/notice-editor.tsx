@@ -106,9 +106,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         koreanContent: korean.content,
       });
       if (english) {
-        dispatch({
-          type: 'TOGGLE_ENGLISH_VERSION',
-        });
+        dispatch({ type: 'TOGGLE_ENGLISH_VERSION', value: true });
         dispatch({
           type: 'SET_ENGLISH_TITLE',
           englishTitle: english.title,
@@ -148,6 +146,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         additionalKoreanContent: '',
       });
       if (englishTitle !== undefined && englishContent !== undefined) {
+        dispatch({ type: 'TOGGLE_ENGLISH_VERSION', value: true });
         dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle });
         dispatch({ type: 'SET_ENGLISH_CONTENT', englishContent });
         dispatch({
@@ -255,6 +254,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         });
 
         if (!updatedNoticeId) {
+          setIsLoading(false);
           toast.dismiss(loading);
           toast.error(t('write.alerts.modificationFail'));
           return;
@@ -447,8 +447,11 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         </p>
         <Toggle
           isSwitched={!!state.english}
-          onSwitch={() => {
-            dispatch({ type: 'TOGGLE_ENGLISH_VERSION' });
+          onSwitch={(e) => {
+            dispatch({
+              type: 'TOGGLE_ENGLISH_VERSION',
+              value: e.target.checked,
+            });
             // TODO: send log
             // sendLog(LogEvents.writingToggleEnglish, {
             //   hasEnglish: !!state.english,
