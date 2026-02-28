@@ -9,16 +9,16 @@ import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
+import { useUser } from '@/features/auth';
 
 import { Sidebar } from './sidebar';
 
 interface SidebarProps {
   onClose: () => void;
-  // TODO: fix type
-  user: { name: string } | null;
 }
 
-export const SidebarMobile = ({ onClose, user }: SidebarProps) => {
+export const SidebarMobile = ({ onClose }: SidebarProps) => {
+  const { data: user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
 
   const { t } = useTranslation('layout');

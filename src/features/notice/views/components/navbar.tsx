@@ -77,7 +77,7 @@ export const Navbar = () => {
 
       {isSidebarOpen && (
         <div className="md:hidden">
-          <SidebarMobile onClose={handleSidebarClose} user={user ?? null} />
+          <SidebarMobile onClose={handleSidebarClose} />
         </div>
       )}
     </header>
