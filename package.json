@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "bun run gen:api && tsr generate && tsc && vite build",
+    "build": "bun run gen:api && bun run i18n:types && tsr generate && tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
