@@ -1,7 +1,10 @@
-import { useLoaderData } from '@tanstack/react-router';
+import { useParams } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
+import { Loading } from '@/common/components';
+
+import { useNotice } from '../../viewmodels';
 import { Actions } from '../components/actions';
 import { AdditionalNotices } from '../components/additional-notices';
 import { Content } from '../components/content';
@@ -10,8 +13,11 @@ import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
 
 export function NoticeDetailFrame() {
-  const notice = useLoaderData({ from: '/_layout/_sidebar/notice/$id' });
+  const { id } = useParams({ from: '/_layout/_sidebar/notice/$id' });
+  const { data: notice } = useNotice(Number.parseInt(id ?? '0'));
   const { i18n } = useTranslation();
+
+  if (!notice) return <Loading />;
 
   const additionalContents = Object.values(
     notice.additionalContents.reduce<
