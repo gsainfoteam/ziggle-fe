@@ -149,7 +149,7 @@ export const useHandleNoticeEdit = () => {
             })
             .then((res) => res.data)
             .catch(() => null)
-        : undefined;
+        : { id: null };
 
     const englishNotice =
       noticeLanguage === 'en' || noticeLanguage === 'both'
@@ -164,7 +164,7 @@ export const useHandleNoticeEdit = () => {
             })
             .then((res) => res.data)
             .catch(() => null)
-        : undefined;
+        : { id: null };
 
     if (!koreanNotice || !englishNotice) {
       toast.dismiss(loading);
