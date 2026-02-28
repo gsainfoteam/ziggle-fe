@@ -2,6 +2,10 @@ import dayjs, { type Dayjs } from 'dayjs';
 
 import { NOTICE_LOCAL_STORAGE_KEY } from '../components';
 
+import type { FileWithUrl } from '../components/attach-photo-area';
+import type { NoticeType } from '../components/notice-type-selector';
+import type { Tag } from '../components/tag-input';
+
 export interface EditorState {
   noticeType: NoticeType;
   writingTab: 'korean' | 'english';

@@ -183,7 +183,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
     setIsLoading(true);
 
-    const noticeToSubmit: NoticeSubmitForm & { t: T } = {
+    const noticeToSubmit: NoticeSubmitForm = {
       title: state.korean.title,
       deadline: state.deadline
         ? (state.deadline.toDate() ?? undefined)
@@ -196,7 +196,6 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCategoryMapper[state.noticeType],
       groupId: state.account,
-      t,
     };
 
     // TODO: send log
