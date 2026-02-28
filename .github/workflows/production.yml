@@ -23,6 +23,8 @@ jobs:
           VITE_IDP_AUTHORIZE_URL: ${{ secrets.VITE_IDP_AUTHORIZE_URL }}
           VITE_IDP_TOKEN_URL: ${{ secrets.VITE_IDP_TOKEN_URL }}
           VITE_IDP_REDIRECT_URI: ${{ secrets.VITE_IDP_REDIRECT_URI }}
+          SWAGGER_USER: ${{ secrets.SWAGGER_USER }}
+          SWAGGER_PASSWORD: ${{ secrets.SWAGGER_PASSWORD }}
         run: |
           bun install
           bun run build -- --mode production
