@@ -12,6 +12,7 @@ import { cn } from '@/common/utils';
 
 import { Category } from '../../models';
 import { useNotices } from '../../viewmodels';
+import { HomeBannerCarousel } from '../components/home-banner-carousel';
 import Pagination from '../components/pagination';
 import { useSidebarObject } from '../components/sidebar';
 import { Zabo } from '../components/zabo';
@@ -98,6 +99,11 @@ export function NoticeListFrame() {
   return (
     <main className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center">
+        {category === 'home' && (
+          <div className="mt-6 mb-[30px] flex w-full justify-center">
+            <HomeBannerCarousel />
+          </div>
+        )}
         {category !== 'home' && (
           <div className="flex w-full flex-row flex-wrap justify-between gap-[14px] px-[18px] py-5 font-bold md:max-w-[800px]">
             <div className="text-primary flex items-center gap-2 text-4xl">
