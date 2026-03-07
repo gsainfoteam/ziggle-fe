@@ -1,0 +1,44 @@
+export default function IrregularGrids() {
+  const columns = [
+    { blocks: [40, 100, 60, 80, 120, 70, 90] },
+    { blocks: [80, 120, 150, 60, 90, 110, 50] },
+    { blocks: [60, 50, 80, 100, 140, 70, 110] },
+    { blocks: [100, 80, 40, 120, 90, 130, 60] },
+  ];
+
+  return (
+    <div className="relative flex h-full items-center justify-center gap-4 overflow-hidden">
+      {columns.map((col, colIdx) => {
+        const isEven = colIdx % 2 === 0;
+
+        const BlockSet = () => (
+          <div className="flex flex-col gap-4 pb-4">
+            {col.blocks.map((height, blockIdx) => (
+              <div
+                key={blockIdx}
+                className="bg-primary shrink-0 rounded-xl shadow-md"
+                style={{
+                  height: `${height}px`,
+                  background:
+                    'linear-gradient(to bottom, var(--color-primary), #feb47b)',
+                  opacity: 0.7 + (blockIdx % col.blocks.length) * 0.05,
+                }}
+              />
+            ))}
+          </div>
+        );
+
+        return (
+          <div key={colIdx} className="relative h-full w-31">
+            <div
+              className={`flex flex-col ${isEven ? 'animate-col-up' : 'animate-col-down'}`}
+            >
+              <BlockSet />
+              <BlockSet />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
