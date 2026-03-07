@@ -10,20 +10,22 @@ export default function LandingModal() {
   const { idpLogIn } = useAuth();
 
   return (
-    <div className="flex h-145 w-233 rounded-2xl px-2.5">
+    <div className="flex h-145 w-233.5 rounded-2xl px-2.5">
       <div></div>
-      <div className="flex w-[384px] flex-col px-4 py-2">
-        <div className="flex flex-col items-center justify-center">
-          <div className="block dark:hidden">
-            <ZiggleLogo className="h-20" />
+      <div className="flex w-96 flex-col justify-between px-4 py-2">
+        <div className="flex h-110 flex-col items-center justify-center">
+          <div className="mb-5 block dark:hidden">
+            <ZiggleLogo className="w-55" />
           </div>
-          <div className="hidden dark:block">
-            <ZiggleLogoDark className="h-20" />
+          <div className="mb-5 hidden dark:block">
+            <ZiggleLogoDark className="w-55" />
           </div>
-          <div>{t('home.subtitle')}</div>
+          <div className="text-lg font-bold">{t('home.subtitle')}</div>
         </div>
-        <div className="flex h-fit flex-col items-center">
-          <p>개인정보처리방침 및 이용약관</p>
+        <div className="flex h-fit flex-col items-center gap-3">
+          <p className="font-xs text-greyDark font-medium">
+            {t('home.policy')}
+          </p>
           <Button
             variant="outlined"
             onClick={() => {
