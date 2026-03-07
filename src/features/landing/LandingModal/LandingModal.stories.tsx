@@ -12,6 +12,28 @@ import {
   createMemoryHistory,
 } from '@tanstack/react-router';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthContext } from 'react-oauth2-code-pkce';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false, 
+    },
+  },
+});
+
+const mockAuthContextValue = {
+  token: '', 
+  tokenData: undefined,
+  idToken: '',
+  idTokenData: undefined,
+  loginInProgress: false,
+  error: null,
+  logIn: () => console.log('Log in clicked'), 
+  logOut: () => console.log('Log out clicked'),
+};
+
 const meta: Meta<typeof LandingModal> = {
   title: 'Modals/LandingModal',
   component: LandingModal,
@@ -44,9 +66,13 @@ const meta: Meta<typeof LandingModal> = {
 
       return (
         <Suspense fallback={<div>Loading...</div>}>
-          <I18nextProvider i18n={i18n}>
-            <RouterProvider router={router} />
-          </I18nextProvider>
+          <QueryClientProvider client={queryClient}>
+            <AuthContext.Provider value={mockAuthContextValue as any}>
+              <I18nextProvider i18n={i18n}>
+                <RouterProvider router={router} />
+              </I18nextProvider>
+            </AuthContext.Provider>
+          </QueryClientProvider>
         </Suspense>
       );
     },
