@@ -7,7 +7,7 @@ export default function IrregularGrids() {
   ];
 
   return (
-    <div className="relative flex h-full items-center justify-center gap-4 overflow-hidden">
+    <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
       {columns.map((col, colIdx) => {
         const isEven = colIdx % 2 === 0;
 

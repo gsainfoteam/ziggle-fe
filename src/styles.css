@@ -74,6 +74,10 @@
   .animate-col-down {
     animation: slideDown 10s linear infinite;
   }
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  }
 }
 
 @layer base {
