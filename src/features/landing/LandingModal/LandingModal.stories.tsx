@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import LandingModal from './LandingModal';
 import { I18nextProvider } from 'react-i18next';
 import { i18n } from '@/common/lib/i18n';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useMemo } from 'react';
 
 import {
   createRootRoute,
@@ -15,24 +15,32 @@ import {
 const meta: Meta<typeof LandingModal> = {
   title: 'Modals/LandingModal',
   component: LandingModal,
+  tags: ['autodocs'],
   decorators: [
-    (Story) => {
-      const rootRoute = createRootRoute();
+    (Story, context) => {
+      const { locale } = context.globals;
 
-      const authRoute = createRoute({
-        getParentRoute: () => rootRoute,
-        path: '/_auth',
-        component: Story,
-      });
+      useEffect(() => {
+        i18n.changeLanguage(locale);
+      }, [locale]);
 
-      const routeTree = rootRoute.addChildren([authRoute]);
+      const router = useMemo(() => {
+        const rootRoute = createRootRoute();
 
-      const router = createRouter({
-        routeTree,
-        history: createMemoryHistory({
-          initialEntries: ['/_auth?redirect=/home'],
-        }),
-      });
+        const authRoute = createRoute({
+          getParentRoute: () => rootRoute,
+          path: '/_auth',
+          component: () => <Story />,
+        });
+        const routeTree = rootRoute.addChildren([authRoute]);
+
+        return createRouter({
+          routeTree,
+          history: createMemoryHistory({
+            initialEntries: ['/_auth?redirect=/home'],
+          }),
+        });
+      }, []);
 
       return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -43,12 +51,24 @@ const meta: Meta<typeof LandingModal> = {
       );
     },
   ],
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export default meta;
 type Story = StoryObj<typeof LandingModal>;
 
 export const Default: Story = {};
+
+export const globalTypes = {
+  locale: {
+    name: 'Locale',
+    description: 'Internationalization locale',
+    toolbar: {
+      icon: 'globe',
+      items: [
+        { value: 'en', title: 'English' },
+        { value: 'ko', title: '한국어' },
+      ],
+      showName: true,
+    },
+  },
+};
