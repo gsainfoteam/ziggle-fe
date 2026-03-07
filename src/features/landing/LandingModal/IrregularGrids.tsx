@@ -1,9 +1,15 @@
 export default function IrregularGrids() {
   const columns = [
-    { blocks: [40, 100, 60, 80, 120, 70, 90] },
-    { blocks: [80, 120, 150, 60, 90, 110, 50] },
-    { blocks: [60, 50, 80, 100, 140, 70, 110] },
-    { blocks: [100, 80, 40, 120, 90, 130, 60] },
+    { blocks: [200, 80, 100, 150], color: 'var(--color-primary)' },
+    {
+      blocks: [200, 80, 100, 150],
+      color: '#FF450066',
+    },
+    {
+      blocks: [200, 80, 100, 150],
+      color: '#FF450099',
+    },
+    { blocks: [200, 80, 100, 150], color: 'var(--color-primary)' },
   ];
 
   return (
@@ -16,11 +22,10 @@ export default function IrregularGrids() {
             {col.blocks.map((height, blockIdx) => (
               <div
                 key={blockIdx}
-                className="bg-primary shrink-0 rounded-xl shadow-md"
+                className="shrink-0 rounded-xl shadow-md"
                 style={{
                   height: `${height}px`,
-                  background:
-                    'linear-gradient(to bottom, var(--color-primary), #feb47b)',
+                  background: col.color,
                   opacity: 0.7 + (blockIdx % col.blocks.length) * 0.05,
                 }}
               />
