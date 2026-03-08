@@ -10,11 +10,11 @@ export default function LandingModal() {
   const { t } = useTranslation('home');
 
   const search = useSearch({ strict: false });
-  const redirect  = search.redirect
+  const redirect = search.redirect;
   const { idpLogIn } = useAuth();
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="flex h-145 w-233.5 rounded-2xl bg-white px-2.5 shadow-xl">
         <IrregularGrids />
         <div className="flex w-96 flex-col justify-between p-6">

@@ -17,7 +17,7 @@ export function NoticeCommonLayout() {
 
   return (
     <div>
-      {/* {user === null && <LandingModal />} */}
+      {user === null && <LandingModal />}
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <div className="mb-96 flex flex-1">
