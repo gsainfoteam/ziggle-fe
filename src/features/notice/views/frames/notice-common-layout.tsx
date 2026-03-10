@@ -1,9 +1,11 @@
-import { Navigate, Outlet } from '@tanstack/react-router';
+import { Outlet } from '@tanstack/react-router';
 
 import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { Navbar } from '../components/navbar';
+
+import LandingModal from '@/features/landing/LandingModal/LandingModal';
 
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth
@@ -12,15 +14,17 @@ export function NoticeCommonLayout() {
   const { data: user } = useUser();
 
   if (user === undefined) return <Loading />;
-  if (user === null) return <Navigate to="/" />;
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="mb-96 flex flex-1">
-        <Outlet />
+    <div>
+      {user === null && <LandingModal />}
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <div className="mb-96 flex flex-1">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

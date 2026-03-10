@@ -36,6 +36,22 @@
       transform: translateY(0px);
     }
   }
+  @keyframes GridSlideUp {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  @keyframes GridSlideDown {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 }
 
 @layer theme {
@@ -57,6 +73,29 @@
 
   .search-bar-animation {
     animation: fadeInWithGoUp 0.5s cubic-bezier(0, 0.51, 0.38, 1);
+  }
+
+  .animate-col-up {
+    animation: GridSlideUp 10s linear infinite;
+  }
+  .animate-col-down {
+    animation: GridSlideDown 10s linear infinite;
+  }
+  .mask-fade-y {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 10%,
+      black 90%,
+      transparent
+    );
   }
 }
 
