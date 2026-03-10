@@ -51,7 +51,7 @@ export const useHandleNoticeSubmit = () => {
 
         tagIds.push(createdTag.id);
       } else {
-        tagIds.push(searchedTag.id);
+        tagIds.push(...searchedTag.map((t) => t.id));
       }
     }
 
