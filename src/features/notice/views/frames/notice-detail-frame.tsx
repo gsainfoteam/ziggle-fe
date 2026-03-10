@@ -21,14 +21,14 @@ export function NoticeDetailFrame() {
   const efficientNotice = notice ?? preloadedNotice;
   const { i18n } = useTranslation();
 
-  if (!efficientNotice) return <Loading />;
-
   useEffect(() => {
     document.title = efficientNotice.title;
     return () => {
       document.title = '지글';
     };
   }, [efficientNotice.title]);
+
+  if (!efficientNotice) return <Loading />;
 
   const additionalContents = Object.values(
     efficientNotice.additionalContents.reduce<
