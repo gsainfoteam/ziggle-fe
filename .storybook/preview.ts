@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 
+import '@/common/lib/dayjs-init';
 import '@/common/lib/i18n';
 import '@/styles.css';
 
