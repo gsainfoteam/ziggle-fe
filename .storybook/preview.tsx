@@ -4,6 +4,7 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import '../src/common/lib/dayjs-init';
 import '../src/common/lib/i18n';
 import '../src/styles.css';
+import './docs-theme.css';
 
 const preview: Preview = {
   globalTypes: {

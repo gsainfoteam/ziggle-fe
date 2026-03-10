@@ -35,7 +35,7 @@ const queryClient = new QueryClient();
 const createZaboRouter = (notice: Notice) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <div className="w-[400px]">
+      <div className="w-160">
         <Zabo {...notice} />
       </div>
     ),
