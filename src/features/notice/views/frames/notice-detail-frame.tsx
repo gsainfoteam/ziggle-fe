@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLoaderData } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
@@ -21,6 +22,13 @@ export function NoticeDetailFrame() {
   const { i18n } = useTranslation();
 
   if (!efficientNotice) return <Loading />;
+
+  useEffect(() => {
+    document.title = efficientNotice.title;
+    return () => {
+      document.title = '지글';
+    };
+  }, [efficientNotice.title]);
 
   const additionalContents = Object.values(
     efficientNotice.additionalContents.reduce<
