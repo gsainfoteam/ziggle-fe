@@ -13,7 +13,7 @@ const columnColors = [
   'bg-primary/80',
 ];
 
-export default function IrregularGrids() {
+export default function LandingGrids() {
   return (
     <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
       {columnColors.map((color, colIdx) => {

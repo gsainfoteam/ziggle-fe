@@ -5,7 +5,7 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { useAuth, useAuthRedirect } from '@/features/auth';
 import { useSearch } from '@tanstack/react-router';
 
-import IrregularGrids from './IrregularGrids';
+import LandingGrids from './landing-grids';
 export default function LandingModal() {
   const { t } = useTranslation('home');
 
@@ -16,7 +16,7 @@ export default function LandingModal() {
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="flex h-145 w-233.5 rounded-2xl bg-white px-4">
-        <IrregularGrids />
+        <LandingGrids />
         <div className="flex w-96 flex-col justify-between p-6">
           <div className="flex h-110 flex-col items-center justify-center">
             <div className="mb-5 block dark:hidden">
