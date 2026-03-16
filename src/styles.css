@@ -36,7 +36,7 @@
       transform: translateY(0px);
     }
   }
-  @keyframes GridSlideUp {
+  @keyframes grid-slide-up {
     from {
       transform: translateY(0);
     }
@@ -44,7 +44,7 @@
       transform: translateY(-50%);
     }
   }
-  @keyframes GridSlideDown {
+  @keyframes grid-slide-down {
     from {
       transform: translateY(-50%);
     }
@@ -76,10 +76,10 @@
   }
 
   .animate-col-up {
-    animation: GridSlideUp 10s linear infinite;
+    animation: grid-slide-up 10s linear infinite;
   }
   .animate-col-down {
-    animation: GridSlideDown 10s linear infinite;
+    animation: grid-slide-down 10s linear infinite;
   }
   .mask-fade-y {
     -webkit-mask-image: linear-gradient(
