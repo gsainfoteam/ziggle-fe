@@ -5,7 +5,6 @@ import { $api } from '@/common/lib';
 
 import { ApiPaths, type Category } from '../../models';
 import { useUser } from '@/features/auth';
-import { MOCK_NOTICES } from '../mocks/mock-notices';
 
 export const useNotices = ({
   limit = ITEMS_PER_PAGE,
@@ -47,18 +46,6 @@ export const useNotices = ({
       enabled: User !== null,
     },
   );
-  if (User === null) {
-    return {
-      ...queryResult,
-      data: MOCK_NOTICES,
-      status: 'success',
-      isSuccess: true,
-      isPending: false,
-      isLoading: false,
-      isError: false,
-      error: null,
-    } as unknown as typeof queryResult;
-  }
 
   return queryResult;
 };

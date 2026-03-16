@@ -5,7 +5,6 @@ import { $api, api } from '@/common/lib';
 import { ApiPaths } from '../../models';
 import { useUser } from '@/features/auth';
 
-import { MOCK_NOTICE } from '../mocks/mock-notice';
 
 export const useNotice = (id: number) => {
   const { data: user } = useUser();
@@ -18,19 +17,6 @@ export const useNotice = (id: number) => {
     },
     { enabled: user !== null }
   );
-
-  if (user === null) {
-    return {
-      ...queryResult,
-      data: MOCK_NOTICE[0], // 순수 데이터를 여기에 쏙!
-      status: 'success',
-      isPending: false,
-      isLoading: false,
-      isSuccess: true,
-      isError: false,
-      error: null,
-    } as unknown as typeof queryResult;
-  }
 
   return queryResult;
 };
