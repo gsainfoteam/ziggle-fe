@@ -23,7 +23,11 @@ const List = ({
   pageNumber: number;
 }) => {
   const { t } = useTranslation('notice');
-  const { data: notices, isLoading } = useNotices({
+  const {
+    data: notices,
+    isLoading,
+    isNotFound,
+  } = useNotices({
     limit: ITEMS_PER_CALL,
     search,
     tags,
@@ -32,7 +36,7 @@ const List = ({
   });
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (!notices?.list.length) {
+  if (isNotFound || !notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">

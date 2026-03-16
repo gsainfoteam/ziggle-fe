@@ -173,8 +173,16 @@
     },
     "timeLeft": "{{timeLeft}} 남음"
   },
-  "noticeNotFound": {
-    "message": "찾으시는 공지가 존재하지 않습니다. URL을 확인하시거나 홈으로 돌아가주세요.",
-    "goHome": "홈으로 가기"
+  "errorHandling": {
+    "unauthorized": {
+      "message": "공지사항을 보려면 로그인이 필요합니다. 로그인 후 다시 시도해 주세요."
+    },
+    "fetchError": {
+      "message": "공지사항을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요."
+    },
+    "notFound": {
+      "message": "찾으시는 공지사항이 존재하지 않습니다. 주소를 다시 확인하시거나 홈으로 돌아가 주세요.",
+      "goHome": "홈으로 가기"
+    }
   }
 }

@@ -31,7 +31,11 @@ function List({
   sortByDeadline: boolean;
   category: Category | string;
 }) {
-  const { data: notices, isLoading } = useNotices({
+  const {
+    data: notices,
+    isLoading,
+    isNotFound,
+  } = useNotices({
     page,
     orderBy: sortByDeadline ? 'deadline' : noticeSearchParams?.orderBy,
     my: noticeSearchParams?.my,
@@ -40,7 +44,7 @@ function List({
   const { t } = useTranslation('notice');
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (!notices?.list.length) {
+  if (isNotFound || !notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">

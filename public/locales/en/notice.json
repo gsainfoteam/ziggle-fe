@@ -173,8 +173,16 @@
     },
     "timeLeft": "{{timeLeft}} Left"
   },
-  "noticeNotFound": {
-    "message": "The notice you're looking for doesn't exist. Please check the URL or return to the home page.",
-    "goHome": "Go to Home"
+  "errorHandling": {
+    "unauthorized": {
+      "message": "You need to log in to view the notices. Please log in and try again."
+    },
+    "fetchError": {
+      "message": "Failed to fetch notices. Please try again later."
+    },
+    "notFound": {
+      "message": "The notice you're looking for doesn't exist. Please check the URL or return to the home page.",
+      "goHome": "Go to Home"
+    }
   }
 }

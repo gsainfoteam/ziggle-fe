@@ -32,10 +32,11 @@ export const useNotice = (id: number) => {
   useEffect(() => {
     if (!isError) return;
     if (error?.statusCode === 401) {
-      toast.error(t('searchPage.loginRequired'));
+      toast.error(t('errorHandling.unauthorized.message'));
     } else if (error?.statusCode === 404) {
       // handling in view
     } else {
+      toast.error(t('errorHandling.fetchError.message'));
     }
   }, [error, isError, t]);
 
