@@ -172,5 +172,9 @@
       "unsupported": "Your browser doesn't support sharing."
     },
     "timeLeft": "{{timeLeft}} Left"
+  },
+  "noticeNotFound": {
+    "message": "The notice you're looking for doesn't exist. Please check the URL or return to the home page.",
+    "goHome": "Go to Home"
   }
 }

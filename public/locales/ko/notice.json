@@ -172,5 +172,9 @@
       "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
     },
     "timeLeft": "{{timeLeft}} 남음"
+  },
+  "noticeNotFound": {
+    "message": "찾으시는 공지가 존재하지 않습니다. URL을 확인하시거나 홈으로 돌아가주세요.",
+    "goHome": "홈으로 가기"
   }
 }
