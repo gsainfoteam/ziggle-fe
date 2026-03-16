@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import z from 'zod';
 
-import LandingModal from '@/features/landing/LandingModal/LandingModal';
+import LandingModal from '@/features/landing/LandingModal/landing-modal';
 
 export const Route = createFileRoute('/_auth/')({
   beforeLoad: () => {

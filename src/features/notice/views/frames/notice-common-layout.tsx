@@ -5,7 +5,7 @@ import { useUser } from '@/features/auth';
 
 import { Navbar } from '../components/navbar';
 
-import LandingModal from '@/features/landing/LandingModal/LandingModal';
+import LandingModal from '@/features/landing/LandingModal/landing-modal';
 
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth

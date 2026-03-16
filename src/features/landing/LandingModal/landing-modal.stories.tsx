@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import LandingModal from './LandingModal';
+import LandingModal from './landing-modal';
 import { I18nextProvider } from 'react-i18next';
 import { i18n } from '@/common/lib/i18n';
 import { Suspense, useEffect, useMemo } from 'react';
@@ -19,19 +19,19 @@ import { Loading } from '@/common/components';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: false, 
+      retry: false,
     },
   },
 });
 
 const mockAuthContextValue = {
-  token: '', 
+  token: '',
   tokenData: undefined,
   idToken: '',
   idTokenData: undefined,
   loginInProgress: false,
   error: null,
-  logIn: () => console.log('Log in clicked'), 
+  logIn: () => console.log('Log in clicked'),
   logOut: () => console.log('Log out clicked'),
 };
 

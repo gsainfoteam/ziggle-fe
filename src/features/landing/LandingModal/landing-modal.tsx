@@ -14,7 +14,7 @@ export default function LandingModal() {
   const { idpLogIn } = useAuth();
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="flex h-145 w-233.5 rounded-2xl bg-white px-4">
         <LandingGrids />
         <div className="flex w-96 flex-col justify-between p-6">
@@ -28,7 +28,7 @@ export default function LandingModal() {
             <div className="text-lg font-bold">{t('home.subtitle')}</div>
           </div>
           <div className="flex h-fit flex-col items-center gap-3">
-            <p className="font-xs text-greyDark font-medium">
+            <p className="text-greyDark text-xs font-medium">
               {t('home.policy')}
             </p>
             <Button

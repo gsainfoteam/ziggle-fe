@@ -4,7 +4,7 @@ import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { NavbarWrite } from '../components';
-import LandingModal from '@/features/landing/LandingModal/LandingModal';
+import LandingModal from '@/features/landing/LandingModal/landing-modal';
 
 export const WriteLayout = () => {
   const { data: user } = useUser();
