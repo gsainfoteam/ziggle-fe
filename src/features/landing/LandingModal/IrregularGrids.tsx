@@ -1,32 +1,32 @@
-export default function IrregularGrids() {
-  const columns = [
-    { blocks: [200, 80, 100, 150], color: 'var(--color-primary)' },
-    {
-      blocks: [150, 100, 100, 150],
-      color: '#FF450066',
-    },
-    {
-      blocks: [300, 100, 80, 150],
-      color: '#FF450099',
-    },
-    { blocks: [80, 100, 350, 150], color: 'var(--color-primary)' },
-  ];
+import { cn } from '@/common/utils';
 
+function getRandomInt(min = 50, max = 400) {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+}
+
+const columnColors = [
+  'bg-primary/80',
+  'bg-primary/40',
+  'bg-primary/60',
+  'bg-primary/80',
+];
+
+export default function IrregularGrids() {
   return (
     <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
-      {columns.map((col, colIdx) => {
+      {columnColors.map((color, colIdx) => {
         const isEven = colIdx % 2 === 0;
-
+        const randomHeights = Array.from({ length: 4 }, () => getRandomInt());
         const BlockSet = () => (
           <div className="flex flex-col gap-4 pb-4">
-            {col.blocks.map((height, blockIdx) => (
+            {randomHeights.map((height, blockIdx) => (
               <div
                 key={blockIdx}
-                className="shrink-0 rounded-xl"
+                className={cn('shrink-0 rounded-xl', color)}
                 style={{
                   height: `${height}px`,
-                  background: col.color,
-                  opacity: 0.7 + (blockIdx % col.blocks.length) * 0.05,
                 }}
               />
             ))}
@@ -36,7 +36,10 @@ export default function IrregularGrids() {
         return (
           <div key={colIdx} className="relative h-full w-31">
             <div
-              className={`flex flex-col ${isEven ? 'animate-col-up' : 'animate-col-down'}`}
+              className={cn(
+                'flex flex-col',
+                isEven ? 'animate-col-up' : 'animate-col-down',
+              )}
             >
               <BlockSet />
               <BlockSet />
