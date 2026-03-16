@@ -14,6 +14,7 @@ import {
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContext } from 'react-oauth2-code-pkce';
+import { Loading } from '@/common/components';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -65,7 +66,7 @@ const meta: Meta<typeof LandingModal> = {
       }, []);
 
       return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <QueryClientProvider client={queryClient}>
             <AuthContext.Provider value={mockAuthContextValue as any}>
               <I18nextProvider i18n={i18n}>
