@@ -8,7 +8,7 @@ import { useUser } from '@/features/auth';
 import { MOCK_NOTICE } from '../mocks/mock-notice';
 
 export const useNotice = (id: number) => {
-  const { data: User } = useUser();
+  const { data: user } = useUser();
   const { i18n } = useTranslation();
   const queryResult = $api.useQuery(
     'get',
@@ -16,12 +16,13 @@ export const useNotice = (id: number) => {
     {
       params: { path: { id }, query: { lang: i18n.language } },
     },
+    { enabled: user !== null }
   );
 
-  if (User === null) {
+  if (user === null) {
     return {
       ...queryResult,
-      data: MOCK_NOTICE, // 순수 데이터를 여기에 쏙!
+      data: MOCK_NOTICE[0], // 순수 데이터를 여기에 쏙!
       status: 'success',
       isPending: false,
       isLoading: false,
