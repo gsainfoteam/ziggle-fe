@@ -75,14 +75,14 @@ export const AttachPhotoArea = ({
         className={cn(
           'flex items-center justify-center',
           photos.length > 0
-            ? 'bg-greyLight p-[5px]'
+            ? 'bg-greyLight p-1.25'
             : 'border-secondaryText rounded-[5px] border border-dashed',
         )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         {photos.length > 0 ? (
-          <div className="grid w-full grid-cols-2 gap-[15px] p-1.5 md:grid-cols-3 md:p-2.5">
+          <div className="grid w-full grid-cols-2 gap-3.75 p-1.5 md:grid-cols-3 md:p-2.5">
             {photos.map((file, index) => (
               <AttachedPhoto
                 key={index}
@@ -97,7 +97,7 @@ export const AttachPhotoArea = ({
               />
             ))}
             <button
-              className="flex aspect-square items-center justify-center rounded-[4px] bg-white"
+              className="flex aspect-square items-center justify-center rounded-sm bg-white"
               onClick={() => {
                 fileInputRef.current?.click();
               }}
@@ -109,7 +109,7 @@ export const AttachPhotoArea = ({
           <div className="flex flex-col items-center py-8 md:py-12">
             <AddPhotoGray className="" />
 
-            <div className="text-secondaryText mt-[5px] text-xs font-medium">
+            <div className="text-secondaryText mt-1.25 text-xs font-medium">
               {t('fields.photo.drag')}
             </div>
 
@@ -118,7 +118,7 @@ export const AttachPhotoArea = ({
               onClick={() => {
                 fileInputRef.current?.click();
               }}
-              className="bg-greyDark mx-3 my-[10px] px-3 py-[5px] md:mx-4 md:my-3 md:px-3 md:py-[5px]"
+              className="bg-greyDark mx-3 my-2.5 px-3 py-1.25 md:mx-4 md:my-3 md:px-3 md:py-1.25"
             >
               <div className="text-xs font-medium md:text-base">
                 {t('fields.photo.browse')}

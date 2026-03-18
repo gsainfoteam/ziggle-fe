@@ -43,7 +43,7 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="relative w-full max-w-[800px] overflow-hidden">
+      <div className="relative w-full max-w-200 overflow-hidden">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -69,14 +69,14 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
         <button
           onClick={prev}
           aria-label={t('carousel.prev')}
-          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-[5px]"
+          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
           <NavArrowRight className="h-5 w-5 rotate-180" />
         </button>
         <button
           onClick={next}
           aria-label={t('carousel.next')}
-          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-[5px]"
+          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
           <NavArrowRight className="h-5 w-5" />
         </button>

@@ -20,7 +20,7 @@ export const AttachedPhoto = ({
         width={0}
         height={0}
         sizes="30vw"
-        className="aspect-square h-auto w-full rounded-[4px] object-cover"
+        className="aspect-square h-auto w-full rounded-sm object-cover"
       />
       <button
         onClick={(e) => {

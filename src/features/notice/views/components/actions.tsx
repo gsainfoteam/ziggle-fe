@@ -39,7 +39,7 @@ const ActionButton = ({ isSelected, onClick, children }: ActionButtonProps) => {
   return (
     <button
       className={cn(
-        'flex h-10 items-center gap-[7px] rounded-full border-none px-[13px] py-[5px] outline-none',
+        'flex h-10 items-center gap-1.75 rounded-full border-none px-3.25 py-1.25 outline-none',
         isSelected
           ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
           : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',

@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { createRootRoute, createRouter, RouterProvider } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import type { ResultZaboProps } from './type';
@@ -77,7 +81,9 @@ export const WithDeadline: Story = {
   args: {
     ...mockNotice,
     deadline: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
-    currentDeadline: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
+    currentDeadline: new Date(
+      Date.now() + 1 * 24 * 60 * 60 * 1000,
+    ).toISOString(),
   },
 };
 

@@ -17,7 +17,7 @@ export const LanguageTab = ({
       <button
         onClick={() => setWritingTab('korean')}
         className={cn(
-          'border-b-[3px] p-[15px] pb-3',
+          'border-b-[3px] p-3.75 pb-3',
           writingTab === 'korean' ? 'border-primary' : 'border-grey',
         )}
       >
@@ -33,7 +33,7 @@ export const LanguageTab = ({
       <button
         onClick={() => setWritingTab('english')}
         className={cn(
-          'border-b-[3px] p-[15px] pb-3',
+          'border-b-[3px] p-3.75 pb-3',
           writingTab === 'english' ? 'border-primary' : 'border-grey',
         )}
       >

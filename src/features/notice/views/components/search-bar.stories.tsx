@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { createRootRoute, createRouter, RouterProvider } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 
 import { SearchBar } from './search-bar';
 

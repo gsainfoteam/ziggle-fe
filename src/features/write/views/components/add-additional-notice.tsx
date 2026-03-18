@@ -47,9 +47,7 @@ export const AddAdditionalNotice = ({
         <textarea
           className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
           name={'searchQuery'}
-          placeholder={t(
-            'detail.additional_notices.en_placeholder',
-          )}
+          placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
           value={englishContent}
           onChange={(event) => {

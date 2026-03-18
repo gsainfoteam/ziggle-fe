@@ -366,9 +366,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         if (additionalEnglishNotice === null) {
           setIsLoading(false);
           toast.dismiss(loading);
-          toast.error(
-            t('toasts.international_additional_fail'),
-          );
+          toast.error(t('toasts.international_additional_fail'));
           // TODO: add alert
           // Swal.fire({
           //   text: t('toasts.international_additional_fail'),
@@ -419,9 +417,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       {!isEditMode && (
         <div className="flex justify-end">
-          <p className="text-primary text-sm">
-            {t('auto_save.description')}
-          </p>
+          <p className="text-primary text-sm">{t('auto_save.description')}</p>
         </div>
       )}
 

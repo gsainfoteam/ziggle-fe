@@ -22,7 +22,7 @@ export const NoticeInfo = ({
   const { data: user } = useUser();
 
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-col gap-4.5">
       {deadline && <Deadline deadline={dayjs(deadline).tz()} />}
 
       <Metadata
@@ -44,14 +44,14 @@ export const NoticeInfo = ({
 const Deadline = ({ deadline }: { deadline: dayjs.Dayjs }) => {
   const { t } = useTranslation('notice');
   return (
-    <div className="bg-primary dark:text-dark_white flex w-fit gap-[10px] rounded-[5px] px-[13px] py-1 text-lg text-white">
+    <div className="bg-primary dark:text-dark_white flex w-fit gap-2.5 rounded-[5px] px-3.25 py-1 text-lg text-white">
       {t('detail.due_at', { dueAt: deadline.format('LLL') })}
     </div>
   );
 };
 
 const Title = ({ title }: { title: string }) => (
-  <div className="line-clamp-3 text-[25px] leading-[30px] font-semibold">
+  <div className="line-clamp-3 text-[25px] leading-7.5 font-semibold">
     {title}
   </div>
 );
@@ -94,7 +94,7 @@ const Metadata = ({
           <span className="ml-2 text-lg font-medium">{author}</span>
         )}
 
-        <span className="text-greyDark mx-[5px] font-bold">·</span>
+        <span className="text-greyDark mx-1.25 font-bold">·</span>
 
         <span className="text-greyDark font-medium">{timeAgo}</span>
       </div>
