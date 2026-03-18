@@ -1,6 +1,7 @@
 'use client';
 
 import { signOut } from 'next-auth/react';
+import { overlay } from 'overlay-kit';
 
 import LogEvents from '@/api/log/log-events';
 import Analytics from '@/app/components/shared/Analytics';
@@ -9,9 +10,8 @@ import { PropsWithLng } from '@/app/i18next';
 import { useTranslation } from '@/app/i18next/client';
 
 import MypageBox from './MypageBox';
-
-import Swal from 'sweetalert2';
-import { ziggleApi } from '@/api/index';
+import WithdrawalModal from '@/app/components/layout/Modal/WithdrawalModal';
+import WithdrawalSuccessModal from '@/app/components/layout/Modal/WithdrawalSuccessModal';
 
 export default function ClientActions({ lng }: PropsWithLng) {
   const { t } = useTranslation(lng);
@@ -20,46 +20,24 @@ export default function ClientActions({ lng }: PropsWithLng) {
     signOut({ callbackUrl: '/' });
   };
 
-  const handleWithdrawal = async () => {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "text-gray px-4 py-2 rounded hover:bg-red-400 hover:text-white",
-        cancelButton: "text-gray px-4 py-2 rounded hover:bg-red-400 hover:text-white",
-      },
-      buttonsStyling: false
-    });
-
-    try {
-      const result = await swalWithBootstrapButtons.fire({
-        title: t('mypage.withdrawal.confirm.title'),
-        text: t('mypage.withdrawal.confirm.text'),
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: t('mypage.withdrawal.confirm.okBtn'),
-        cancelButtonText: t('mypage.withdrawal.confirm.cancelBtn'),
-        reverseButtons: true
-      });
-
-      if (result.isConfirmed) {
-        try {
-          await ziggleApi.delete('/user');
-          await swalWithBootstrapButtons.fire({
-            title: t('mypage.withdrawal.success.title'),
-            text: t('mypage.withdrawal.success.text'),
-            icon: "success"
-          });
-          signOut({ callbackUrl: '/' });
-        } catch (error) {
-          await swalWithBootstrapButtons.fire({
-            title: t('mypage.withdrawal.error.title'),
-            text: t('mypage.withdrawal.error.text'),
-            icon: "error"
-          });
-        }
-      }
-    } catch (err) {
-      console.error('withdrawal flow error:', err);
-    }
+  const handleWithdrawal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <WithdrawalModal
+        isOpen={isOpen}
+        close={close}
+        lng={lng}
+        onSuccess={() => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalSuccessModal
+              isOpen={isOpen}
+              close={close}
+              lng={lng}
+              onCloseComplete={() => signOut({ callbackUrl: '/' })}
+            />
+          ));
+        }}
+      />
+    ));
   };
 
   return (
