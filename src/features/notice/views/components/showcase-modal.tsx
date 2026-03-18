@@ -52,11 +52,11 @@ const ShowcaseModal = ({
     >
       <div className="absolute top-3 right-5 flex gap-7 text-sm font-medium text-white md:text-base">
         <Button className="flex items-center gap-2" onClick={handleDownload}>
-          {t('zabo.downloadAll')}
+          {t('detail.download_all')}
           <DownloadIcon className="w-6 md:w-8" />
         </Button>
         <Button className="flex items-center gap-2" onClick={onHide}>
-          {t('zabo.close')}
+          {t('detail.close')}
           <CloseIcon className="w-4 md:w-6" />
         </Button>
       </div>

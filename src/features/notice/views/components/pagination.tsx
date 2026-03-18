@@ -1,4 +1,5 @@
 import { Link, useSearch } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?react';
 import { Button } from '@/common/components';
@@ -14,6 +15,7 @@ const Pagination = ({
   itemsPerPage,
   page: rawPage,
 }: PaginationProps) => {
+  const { t } = useTranslation('notice');
   const search = useSearch({ strict: false });
   const page = Number.isNaN(rawPage) ? 0 : rawPage;
   const pages = Math.ceil(items / itemsPerPage);
@@ -27,7 +29,7 @@ const Pagination = ({
     <div className="flex items-center">
       <div className="flex gap-1 p-2">
         <div className="text-xl font-semibold">{`${startItem}~${endItem}`}</div>
-        <div className="text-xl">of</div>
+        <div className="text-xl">{t('list.pagination.of')}</div>
         <div className="text-xl font-semibold">{items}</div>
       </div>
       <div className="flex gap-1">

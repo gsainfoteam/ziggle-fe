@@ -11,7 +11,7 @@ export const LanguageTab = ({
   writingTab,
   setWritingTab,
 }: LanguageTabProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
   return (
     <div className="grid grid-cols-[90px_90px_1fr] justify-items-stretch">
       <button
@@ -27,7 +27,7 @@ export const LanguageTab = ({
             writingTab === 'korean' ? 'text-primary' : 'text-grey',
           )}
         >
-          {t('write.koreanNotice')}
+          {t('fields.korean_notice')}
         </p>
       </button>
       <button
@@ -43,7 +43,7 @@ export const LanguageTab = ({
             writingTab === 'english' ? 'text-primary' : 'text-grey',
           )}
         >
-          {t('write.englishNotice')}
+          {t('fields.english_notice')}
         </p>
       </button>
       <div className="border-grey border-b-[3px]"></div>

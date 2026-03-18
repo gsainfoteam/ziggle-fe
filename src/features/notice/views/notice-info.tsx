@@ -45,7 +45,7 @@ const Deadline = ({ deadline }: { deadline: dayjs.Dayjs }) => {
   const { t } = useTranslation('notice');
   return (
     <div className="bg-primary dark:text-dark_white flex w-fit gap-[10px] rounded-[5px] px-[13px] py-1 text-lg text-white">
-      {t('zabo.dueAt', { dueAt: deadline.format('LLL') })}
+      {t('detail.due_at', { dueAt: deadline.format('LLL') })}
     </div>
   );
 };

@@ -42,7 +42,7 @@ const List = ({
           <SearchNoResult />
 
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
-            {t('searchPage.noResult')}
+            {t('search.no_result')}
           </p>
         </div>
       </div>
@@ -100,7 +100,7 @@ export const SearchFrame = () => {
                 <SearchAnimation />
                 <div className="h-[10px]" />
                 <p className="text-secondaryText mt-[-30px] pt-5 text-lg font-medium md:text-2xl">
-                  {t('searchPage.prompt')}
+                  {t('search.prompt')}
                 </p>
               </div>
             </div>

@@ -36,7 +36,7 @@ export const TitleAndContent = ({
   editorRef,
   disabled,
 }: TitleAndContentProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
   const ref = useRef<Editor | null>(null);
   useImperativeHandle(editorRef, () => ref.current!);
   return (
@@ -53,7 +53,7 @@ export const TitleAndContent = ({
           onChangeTitle(e.target.value);
         }}
         type="text"
-        placeholder={t('write.writeTitle')}
+        placeholder={t('inputs.title.placeholder')}
         className={cn(
           'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-2.5',
           disabled
@@ -64,7 +64,7 @@ export const TitleAndContent = ({
       {title.length > TITLE_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
           {'⚠️ '}
-          {t('write.alerts.titleLengthLessThan', {
+          {t('validations.title_too_long', {
             titleMaxLength: TITLE_MAX_LENGTH,
           })}
         </div>
@@ -87,11 +87,11 @@ export const TitleAndContent = ({
       {content.length > BODY_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
           {'⚠️ '}
-          {t('write.alerts.bodyLengthLessThan', {
+          {t('validations.body_too_long', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
             ' ' +
-            t('write.alerts.numberOfCharacter', {
+            t('validations.char_count', {
               length: content.length,
               maxLength: BODY_MAX_LENGTH,
             })}

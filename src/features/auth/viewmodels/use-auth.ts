@@ -29,7 +29,7 @@ export const useAuth = ({
       if (!idpToken) {
         navigate({ to: '/' });
         if (showToast) {
-          toast.error(t('error.noIdpToken'));
+          toast.error(t('errors.no_idp_token'));
         }
         return;
       }

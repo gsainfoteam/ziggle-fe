@@ -7,7 +7,7 @@ import { BODY_MAX_LENGTH } from './use-handle-notice-submit';
 import { ApiPaths } from '../models';
 
 export const useHandleNoticeEdit = () => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   return async ({
     noticeId,
@@ -23,34 +23,34 @@ export const useHandleNoticeEdit = () => {
     englishBody?: string;
   }) => {
     if (deadline && deadline < new Date()) {
-      toast.error(t('write.alerts.deadline'));
+      toast.error(t('validations.deadline_invalid'));
       return;
     }
 
     switch (noticeLanguage) {
       case 'ko':
         if (!koreanBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         break;
       case 'en':
         if (!englishBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         break;
       case 'both':
         if (!koreanBody && !englishBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         if (!koreanBody && englishBody) {
-          toast.error(t('write.alerts.koreanBody'));
+          toast.error(t('validations.korean_body_required'));
           return;
         }
         if (koreanBody && !englishBody) {
-          toast.error(t('write.alerts.englishBody'));
+          toast.error(t('validations.english_body_required'));
           return;
         }
         break;
@@ -60,10 +60,10 @@ export const useHandleNoticeEdit = () => {
       case 'ko':
         if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.bodyLengthLessThan', {
+            t('validations.body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -74,10 +74,10 @@ export const useHandleNoticeEdit = () => {
       case 'en':
         if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.bodyLengthLessThan', {
+            t('validations.body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -93,14 +93,14 @@ export const useHandleNoticeEdit = () => {
           englishBody.length > BODY_MAX_LENGTH
         ) {
           toast.error(
-            t('write.alerts.bothBodyLengthLessThan', {
+            t('validations.both_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -108,10 +108,10 @@ export const useHandleNoticeEdit = () => {
           return;
         } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.koreanBodyLengthLessThan', {
+            t('validations.korean_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -120,10 +120,10 @@ export const useHandleNoticeEdit = () => {
           return;
         } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.englishBodyLengthLessThan', {
+            t('validations.english_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -134,7 +134,7 @@ export const useHandleNoticeEdit = () => {
         break;
     }
 
-    const loading = toast.loading(t('write.alerts.submittingNotice'));
+    const loading = toast.loading(t('toasts.submitting'));
 
     const koreanNotice =
       noticeLanguage === 'ko' || noticeLanguage === 'both'
@@ -168,12 +168,12 @@ export const useHandleNoticeEdit = () => {
 
     if (!koreanNotice || !englishNotice) {
       toast.dismiss(loading);
-      toast.error(t('write.alerts.submitFail'));
+      toast.error(t('toasts.submit_fail'));
       return;
     }
 
     toast.dismiss(loading);
-    toast.success(t('write.alerts.submitSuccess'));
+    toast.success(t('toasts.submit_success'));
 
     return koreanNotice?.id || englishNotice?.id;
   };

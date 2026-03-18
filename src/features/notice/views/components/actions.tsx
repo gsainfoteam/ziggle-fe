@@ -184,11 +184,11 @@ const ShareButton = ({ title }: ActionsProps) => {
   const { t } = useTranslation('notice');
   const handleShare = () => {
     if (!navigator.canShare) {
-      return toast.error(t('zabo.share.unsupported'));
+      return toast.error(t('detail.share.unsupported'));
     }
     navigator.share({
       title,
-      text: t('zabo.share.content', { title }),
+      text: t('detail.share.content', { title }),
       url: window.location.href,
     });
   };
@@ -199,7 +199,7 @@ const ShareButton = ({ title }: ActionsProps) => {
         <ShareIcon width={26} />
       </span>
 
-      <span className="text-base">{t('zabo.share.action')}</span>
+      <span className="text-base">{t('detail.share.action')}</span>
     </ActionButton>
   );
 };
@@ -208,12 +208,12 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
   const { t } = useTranslation('notice');
   const handleCopy = () => {
     navigator.clipboard.writeText(
-      t('zabo.copyLink.content', { title, link: window.location.href }),
+      t('detail.copy_link.content', { title, link: window.location.href }),
     );
 
     toast.success(
       <div className="flex flex-col text-sm font-medium">
-        <Trans t={t} i18nKey="zabo.copyLink.success">
+        <Trans t={t} i18nKey="detail.copy_link.success">
           succeeded <div className="text-xs">share to friends</div>
         </Trans>
       </div>,
@@ -226,7 +226,7 @@ const CopyLinkButton = ({ title }: ActionsProps) => {
         <LinkIcon width={26} />
       </span>
 
-      <span className="text-base">{t('zabo.copyLink.action')}</span>
+      <span className="text-base">{t('detail.copy_link.action')}</span>
     </ActionButton>
   );
 };

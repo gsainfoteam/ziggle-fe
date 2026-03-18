@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import NavArrowRight from '@/assets/icons/nav-arrow-right.svg?react';
 
@@ -12,6 +13,7 @@ interface BannerCarouselProps {
 }
 
 export function BannerCarousel({ slides }: BannerCarouselProps) {
+  const { t } = useTranslation('common');
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
 
@@ -66,14 +68,14 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
 
         <button
           onClick={prev}
-          aria-label="이전"
+          aria-label={t('carousel.prev')}
           className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-[5px]"
         >
           <NavArrowRight className="h-5 w-5 rotate-180" />
         </button>
         <button
           onClick={next}
-          aria-label="다음"
+          aria-label={t('carousel.next')}
           className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-[5px]"
         >
           <NavArrowRight className="h-5 w-5" />
@@ -84,7 +86,7 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
             <button
               key={i}
               onClick={() => setIndex(i)}
-              aria-label={`슬라이드 ${i + 1} 보기`}
+              aria-label={t('carousel.slide', { number: i + 1 })}
               className={`h-1.5 w-6 rounded-[20px] transition-colors ${
                 i === index ? 'bg-dark_white' : 'bg-deselected'
               }`}

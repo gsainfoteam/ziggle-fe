@@ -19,8 +19,8 @@ export default function MypageActions() {
   const handleWithdrawal = async () => {
     try {
       // TODO: use custom overlay
-      // t('mypage.withdrawal.confirm.okBtn')
-      // t('mypage.withdrawal.confirm.cancelBtn')
+      // t('mypage.withdrawal.confirm.ok_btn')
+      // t('mypage.withdrawal.confirm.cancel_btn')
       const result = confirm(
         t('mypage.withdrawal.confirm.title') +
           '\n\n' +

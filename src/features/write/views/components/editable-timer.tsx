@@ -12,7 +12,7 @@ interface EditableTimerProps {
 }
 
 const EditableTimer = ({ createdAt }: EditableTimerProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const [timeRemaining, setTimeRemaining] = useState(
     calculateRemainingTime(createdAt),
@@ -38,7 +38,7 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
     >
       {isEditable ? (
         <>
-          {t('write.editableTimer')}{' '}
+          {t('editable_timer.label')}{' '}
           <span className="font-bold">
             {`${timeRemaining.minutes}:${String(timeRemaining.seconds).padStart(
               2,
@@ -47,7 +47,7 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
           </span>
         </>
       ) : (
-        t('write.uneditable')
+        t('uneditable')
       )}
     </p>
   );

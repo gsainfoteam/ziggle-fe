@@ -24,7 +24,7 @@ export function NoticeDetailFrame() {
   useEffect(() => {
     document.title = efficientNotice.title;
     return () => {
-      document.title = t('appName');
+      document.title = t('app_name');
     };
   }, [efficientNotice.title, t]);
 

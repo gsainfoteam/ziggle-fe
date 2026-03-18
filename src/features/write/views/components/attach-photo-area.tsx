@@ -23,7 +23,7 @@ export const AttachPhotoArea = ({
   setPhotos,
 }: AttachPhotoAreaProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -110,7 +110,7 @@ export const AttachPhotoArea = ({
             <AddPhotoGray className="" />
 
             <div className="text-secondaryText mt-[5px] text-xs font-medium">
-              {t('write.dragToAddPhoto')}
+              {t('fields.photo.drag')}
             </div>
 
             <Button
@@ -121,7 +121,7 @@ export const AttachPhotoArea = ({
               className="bg-greyDark mx-3 my-[10px] px-3 py-[5px] md:mx-4 md:my-3 md:px-3 md:py-[5px]"
             >
               <div className="text-xs font-medium md:text-base">
-                {t('write.orAddFromPC')}
+                {t('fields.photo.browse')}
               </div>
             </Button>
           </div>
