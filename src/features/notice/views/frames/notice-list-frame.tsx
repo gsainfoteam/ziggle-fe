@@ -16,6 +16,7 @@ import { HomeBannerCarousel } from '../components/home-banner-carousel';
 import Pagination from '../components/pagination';
 import { useSidebarObject } from '../components/sidebar';
 import { Zabo } from '../components/zabo';
+import { ZaboSkeleton } from '../components/skeleton/zabo-skeleton';
 
 function List({
   page,
@@ -44,7 +45,8 @@ function List({
   const { t } = useTranslation('notice');
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (isNotFound || !notices?.list.length) {
+
+  if (isNotFound) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">
@@ -60,7 +62,23 @@ function List({
       </div>
     );
   }
-
+  if (!notices?.list.length) {
+    return (
+      <>
+        <div className="flex w-full flex-col md:max-w-[800px]">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <React.Fragment key={index}>
+              <LogClick eventName="empty">
+                <ZaboSkeleton />
+              </LogClick>
+              <div className="bg-greyLight dark:bg-dark_greyBorder my-[30px] h-px" />
+            </React.Fragment>
+          ))}
+        </div>
+        <Pagination page={page} items={2000} itemsPerPage={ITEMS_PER_PAGE} />
+      </>
+    );
+  }
   return (
     <>
       <div className="flex w-full flex-col md:max-w-[800px]">
