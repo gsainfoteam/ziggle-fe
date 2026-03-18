@@ -233,9 +233,9 @@
     "withdrawal": {
       "confirm": {
         "title": "정말 탈퇴하시겠습니까?",
-        "text": "탈퇴 버튼 선택 시 계정은 삭제되며 복구되지 않습니다.",
-        "okBtn": "탈퇴",
-        "cancelBtn": "취소"
+        "text": "탈퇴 시 계정은 삭제되며 복구되지 않습니다.",
+        "okBtn": "네, 탈퇴하겠습니다.",
+        "cancelBtn": "취소하기"
       },
       "success": {
         "title": "탈퇴 완료",

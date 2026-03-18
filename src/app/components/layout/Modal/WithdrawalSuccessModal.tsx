@@ -48,9 +48,9 @@ export default function WithdrawalSuccessModal({
           </p>
         </div>
 
-        <div className="mt-4">
+        <div className="flex justify-center">
           <Button
-            className="w-full py-3 text-base md:py-3.5 md:text-lg"
+            className="flex-1 whitespace-nowrap py-3 text-base md:py-3.5"
             variant="contained"
             onClick={handleClose}
           >

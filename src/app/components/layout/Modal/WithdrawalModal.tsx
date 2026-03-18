@@ -42,14 +42,14 @@ export default function WithdrawalModal({
 
         <div className="mt-2 flex w-full justify-between gap-2.5">
           <Button
-            className="flex-1"
+            className="flex-1 min-w-0 px-3 py-3 text-sm"
             variant="outlined"
             onClick={close}
           >
             {t('mypage.withdrawal.confirm.cancelBtn')}
           </Button>
           <Button
-            className="flex-1"
+            className="flex-1 min-w-0 px-3 py-3 text-sm"
             variant="contained"
             onClick={async () => {
               try {

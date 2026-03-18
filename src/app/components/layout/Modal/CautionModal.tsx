@@ -42,7 +42,7 @@ export default function CautionModal({
 
           <div className="flex w-full justify-between gap-2.5">
             <Button
-              className="flex-1"
+              className="flex-1 min-w-0 px-3 py-2 text-sm leading-tight md:px-3 md:py-2.5"
               variant="outlined"
               onClick={async () => {
                 await ziggleApi.delete('/user');
@@ -52,7 +52,7 @@ export default function CautionModal({
               {t('zigglePolicyModal.caution.rejectButton')}
             </Button>
             <Button
-              className="flex-1"
+              className="flex-1 min-w-0 px-3 py-2 text-sm leading-tight md:px-3 md:py-2.5"
               variant="contained"
               onClick={() => {
                 close();

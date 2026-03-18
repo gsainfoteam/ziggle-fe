@@ -243,8 +243,8 @@
     "withdrawal": {
       "confirm": {
         "title": "Are you sure you want to withdraw?",
-        "text": "By selecting the withdrawal button, your account will be deleted and cannot be restored.",
-        "okBtn": "Withdraw",
+        "text": "If you withdraw, your account will be deleted and cannot be restored.",
+        "okBtn": "Yes, I want to withdraw",
         "cancelBtn": "Cancel"
       },
       "success": {
