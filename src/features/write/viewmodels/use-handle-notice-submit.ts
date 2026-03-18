@@ -30,8 +30,8 @@ export const useHandleNoticeSubmit = () => {
 
     for (const tagName of tags) {
       const searchedTag = await api
-        .GET(ApiPaths.TagController_findAll, {
-          params: { query: { name: tagName } },
+        .GET(ApiPaths.TagController_findOne, {
+          params: { path: { name: tagName } },
         })
         .then((res) => res.data)
         .catch(() => null);
