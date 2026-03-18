@@ -26,7 +26,7 @@ export function NoticeDetailFrame() {
     return () => {
       document.title = t('appName');
     };
-  }, [efficientNotice.title]);
+  }, [efficientNotice.title, t]);
 
   if (!efficientNotice) return <Loading />;
 
