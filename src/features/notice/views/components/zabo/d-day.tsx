@@ -17,7 +17,7 @@ const DDay = ({ deadline, className }: DDayProps) => {
   return (
     <p
       className={cn(
-        'dark:text-text h-fit rounded-md px-[10px] py-[3px] text-[14px] text-white',
+        'dark:text-text h-fit rounded-md px-2.5 py-0.75 text-[14px] text-white',
         isClosed ? 'bg-greyDark' : 'bg-primary',
         className,
       )}

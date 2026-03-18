@@ -37,7 +37,7 @@ export const TitleAndContent = ({
   useImperativeHandle(editorRef, () => ref.current!);
   return (
     <>
-      <div className="mt-10 mb-[10px] flex gap-[6px]">
+      <div className="mt-10 mb-2.5 flex gap-1.5">
         <TextIcon className="stroke-text w-5 md:w-6" />
         <p className="font-medium">{titleLabel}</p>
       </div>
@@ -51,7 +51,7 @@ export const TitleAndContent = ({
         type="text"
         placeholder={t('write.writeTitle')}
         className={cn(
-          'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-[10px]',
+          'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-2.5',
           disabled
             ? 'border-grey text-greyDark dark:text-dark_greyDark'
             : 'border-primary text-text dark:text-dark_white',

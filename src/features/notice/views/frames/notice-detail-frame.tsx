@@ -36,7 +36,7 @@ export function NoticeDetailFrame() {
 
   return (
     <div className="flex justify-center">
-      <div className="content mt-8 md:mt-12 md:w-[900px] md:min-w-[600px]">
+      <div className="content mt-8 md:mt-12 md:w-225 md:min-w-150">
         <div className="flex gap-5">
           {/* DESKTOP VIEW IMAGE STACK */}
           <div className="hidden md:block">
@@ -48,7 +48,7 @@ export function NoticeDetailFrame() {
             )}
           </div>
 
-          <div className="flex flex-col gap-[18px] md:w-[60%]">
+          <div className="flex flex-col gap-4.5 md:w-[60%]">
             <SendPushAlarm {...efficientNotice} />
 
             <NoticeInfo

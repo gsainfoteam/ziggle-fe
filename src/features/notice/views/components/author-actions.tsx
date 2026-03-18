@@ -41,7 +41,7 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
         <Link
           to="/write"
           search={{ noticeId }}
-          className="flex items-center gap-[10px]"
+          className="flex items-center gap-2.5"
         >
           <EditPencilIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
           <p className="text-greyDark">{t('zabo.authorActions.edit')}</p>
@@ -53,7 +53,7 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
         properties={{ id: noticeId }}
       >
         <button
-          className="flex items-center gap-[10px]"
+          className="flex items-center gap-2.5"
           onClick={handleRemoveNotice}
         >
           <RemoveIcon className="stroke-greyDark dark:stroke-dark_white w-5" />

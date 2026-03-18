@@ -30,7 +30,7 @@ export const NavbarWrite = () => {
             </div>
           </Link>
         </LogClick>
-        <div className="mr-[10px] flex h-full flex-row-reverse items-center md:mr-[20px] md:w-full">
+        <div className="mr-2.5 flex h-full flex-row-reverse items-center md:mr-5 md:w-full">
           <Link to="/">
             <Button variant="outlined">{t('navbarWrite.goBack')}</Button>
           </Link>

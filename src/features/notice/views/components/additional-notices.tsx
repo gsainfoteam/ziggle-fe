@@ -15,7 +15,7 @@ export const AdditionalNotices = ({
   const { t } = useTranslation('notice');
 
   return (
-    <div className="flex flex-col gap-[18px]">
+    <div className="flex flex-col gap-4.5">
       {additionalContents.map((content, index) => {
         const timeAgo = dayjs(content.createdAt).fromNow();
 
@@ -29,9 +29,9 @@ export const AdditionalNotices = ({
         return (
           <div
             key={`${content.id}+${content.lang}`}
-            className="bg-greyLight flex flex-col gap-[10px] rounded-[10px] px-5 py-[18px]"
+            className="bg-greyLight flex flex-col gap-2.5 rounded-[10px] px-5 py-4.5"
           >
-            <div className="flex items-center gap-[5px]">
+            <div className="flex items-center gap-1.25">
               <p className="text-text text-lg font-semibold">
                 {t('zabo.additionalNotices.title')}
               </p>

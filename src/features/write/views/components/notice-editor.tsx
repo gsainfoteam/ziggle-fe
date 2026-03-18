@@ -412,7 +412,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       {isEditMode && (
         <>
           {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
-          <p className="bg-greyLight text-greyDark mt-[10px] rounded-[15px] px-5 py-[15px] text-lg">
+          <p className="bg-greyLight text-greyDark mt-2.5 rounded-[15px] px-5 py-3.75 text-lg">
             {t('write.editDescription')}
           </p>
         </>
@@ -460,7 +460,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         />
       </div>
 
-      <div className="mb-3 flex gap-[6px]">
+      <div className="mb-3 flex gap-1.5">
         <TypeIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
         <p className="font-medium">{t('write.noticeType')}</p>
       </div>
@@ -562,7 +562,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           (state.writingTab === 'english' &&
             hasTimedOut &&
             notice?.enTitle)) && (
-          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-[20px] py-[15px] text-center text-lg">
+          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-5 py-3.75 text-center text-lg">
             {t('write.editDisabled')}
           </p>
         )}

@@ -81,7 +81,7 @@ export const SearchBar = () => {
         onSubmit={handleSearch}
         className={cn(
           isExpanded ? 'w-full' : 'w-fit',
-          'transition-[width] md:w-full md:max-w-[700px]',
+          'transition-[width] md:w-full md:max-w-175',
           'flex flex-row-reverse justify-between md:flex-row',
           'overflow-clip',
           'border-greyBorder rounded-lg',
