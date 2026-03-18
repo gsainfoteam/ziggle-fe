@@ -68,7 +68,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/devtools-vite": "^0.3.11",
     "@tanstack/eslint-plugin-router": "^1.161.4",
-    "@tanstack/router-cli": "^1.163.2",
+    "@tanstack/router-cli": "<=1.166.8",
     "@tanstack/router-plugin": "^1.132.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
