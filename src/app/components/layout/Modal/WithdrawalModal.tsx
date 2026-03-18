@@ -9,11 +9,15 @@ export default function WithdrawalModal({
   close,
   lng,
   onSuccess,
+  onWithdraw,
+  onFailure,
 }: {
   isOpen: boolean;
   close: () => void;
   lng: 'ko' | 'en';
   onSuccess?: () => void | Promise<void>;
+  onWithdraw?: () => Promise<void>;
+  onFailure?: (error: unknown) => void | Promise<void>;
 }) {
   const { t } = useTranslation(lng);
 
@@ -53,13 +57,17 @@ export default function WithdrawalModal({
             variant="contained"
             onClick={async () => {
               try {
-                await ziggleApi.delete('/user');
+                if (onWithdraw) {
+                  await onWithdraw();
+                } else {
+                  await ziggleApi.delete('/user');
+                }
                 if (onSuccess) {
                   await onSuccess();
                 }
               } catch (error) {
-                //실패 했을 때 모달 넣기
                 console.error('withdrawal error', error);
+                await onFailure?.(error);
               } finally {
                 close();
               }

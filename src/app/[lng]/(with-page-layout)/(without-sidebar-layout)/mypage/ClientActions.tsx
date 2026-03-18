@@ -12,6 +12,7 @@ import { useTranslation } from '@/app/i18next/client';
 import MypageBox from './MypageBox';
 import WithdrawalModal from '@/app/components/layout/Modal/WithdrawalModal';
 import WithdrawalSuccessModal from '@/app/components/layout/Modal/WithdrawalSuccessModal';
+import WithdrawalErrorModal from '@/app/components/layout/Modal/WithdrawalErrorModal';
 
 export default function ClientActions({ lng }: PropsWithLng) {
   const { t } = useTranslation(lng);
@@ -33,6 +34,15 @@ export default function ClientActions({ lng }: PropsWithLng) {
               close={close}
               lng={lng}
               onCloseComplete={() => signOut({ callbackUrl: '/' })}
+            />
+          ));
+        }}
+        onFailure={() => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalErrorModal
+              isOpen={isOpen}
+              close={close}
+              lng={lng}
             />
           ));
         }}

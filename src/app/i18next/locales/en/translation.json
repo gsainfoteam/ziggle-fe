@@ -249,11 +249,12 @@
       },
       "success": {
         "title": "Withdrawal Complete",
-        "text": "Your Ziggle account has been successfully deleted."
+        "text": "Your Ziggle account has been successfully deleted.",
+        "goFirst": "Go to Home"
       },
       "error": {
         "title": "Withdrawal Failed",
-        "text": "An error occurred during withdrawal. Please try again later."
+        "text": "Please try again later."
       }
     },
     "switchLanguage": "Enable English",

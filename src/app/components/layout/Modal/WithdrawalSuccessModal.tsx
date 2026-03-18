@@ -43,7 +43,7 @@ export default function WithdrawalSuccessModal({
           <p className="mt-2 text-center text-xl font-semibold md:text-2xl">
             {t('mypage.withdrawal.success.title')}
           </p>
-          <p className="text-center text-sm text-gray-600 md:text-base">
+          <p className="text-center text-sm text-gray-600">
             {t('mypage.withdrawal.success.text')}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function WithdrawalSuccessModal({
             variant="contained"
             onClick={handleClose}
           >
-            {t('zigglePolicyModal.confirm.main')}
+            {t('mypage.withdrawal.success.goFirst')}
           </Button>
         </div>
       </div>
