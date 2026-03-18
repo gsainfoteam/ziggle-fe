@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, redirect } from '@tanstack/react-router';
 
-import z from 'zod';
+import { z } from 'zod';
 
 import { api } from '@/common/lib';
 import { ApiPaths } from '@/features/notice/models';

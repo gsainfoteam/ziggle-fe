@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import z from 'zod';
+import { z } from 'zod';
 
 import { NoticeListFrame } from '@/features/notice';
 import { Category } from '@/features/notice/models';
