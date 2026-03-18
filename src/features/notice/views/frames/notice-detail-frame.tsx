@@ -19,12 +19,12 @@ export function NoticeDetailFrame() {
   });
   const { data: notice } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation('common');
 
   useEffect(() => {
     document.title = efficientNotice.title;
     return () => {
-      document.title = '지글';
+      document.title = t('appName');
     };
   }, [efficientNotice.title]);
 
