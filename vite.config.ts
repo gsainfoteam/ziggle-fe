@@ -1,3 +1,4 @@
+import { visualizer } from 'rollup-plugin-visualizer';
 import { devtools } from '@tanstack/devtools-vite';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 
@@ -19,6 +20,7 @@ const config = defineConfig(({ mode }) => {
       tanstackRouter({ target: 'react', autoCodeSplitting: true }),
       viteReact(),
       svgr(),
+      visualizer(),
     ],
     build: {
       rollupOptions: {
@@ -54,6 +56,18 @@ const config = defineConfig(({ mode }) => {
               id.includes('node_modules/react-clock')
             ) {
               return 'vendor-datetime';
+            }
+            if (id.includes('node_modules/lucide-react')) {
+              return 'vendor-lucide';
+            }
+            if (id.includes('node_modules/zod')) {
+              return 'vendor-zod';
+            }
+            if (
+              id.includes('node_modules/tinymce') ||
+              id.includes('node_modules/@tinymce')
+            ) {
+              return 'vendor-tinymce';
             }
           },
         },
