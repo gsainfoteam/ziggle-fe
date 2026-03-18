@@ -1,0 +1,6 @@
+html.dark .docs-story,
+html.dark .docblock-source,
+html.dark .sbdocs-preview,
+html.dark [data-testid='storybook-root'] {
+  background-color: var(--color-dark_dark) !important;
+}

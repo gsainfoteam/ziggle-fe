@@ -14,3 +14,6 @@ todos.json
 
 src/routeTree.gen.ts
 src/@types/*.ts
+
+*storybook.log
+storybook-static

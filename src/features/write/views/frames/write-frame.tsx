@@ -7,7 +7,7 @@ export const WriteFrame = () => {
 
   return (
     <main className="flex flex-col items-center py-12">
-      <div className="content flex max-w-[600px] flex-col">
+      <div className="content flex max-w-150 flex-col">
         <NoticeEditor
           notice={
             notice
