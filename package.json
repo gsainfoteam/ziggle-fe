@@ -82,6 +82,7 @@
     "openapi-typescript": "^7.13.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "rollup-plugin-visualizer": "^7.0.1",
     "typescript": "^5.7.2",
     "vite": "^7.1.7",
     "vite-plugin-svgr": "^4.5.0",

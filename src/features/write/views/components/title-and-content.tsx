@@ -1,15 +1,19 @@
-import { useImperativeHandle, useRef } from 'react';
+import { lazy, Suspense, useImperativeHandle, useRef } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
 import ContentIcon from '@/assets/icons/content.svg?react';
 import TextIcon from '@/assets/icons/text.svg?react';
+import { LoadingCatAnimation } from '@/common/components';
 import { cn } from '@/common/utils';
 
-import { TinyMCEEditor } from './tiny-mce-editor';
 import { BODY_MAX_LENGTH, TITLE_MAX_LENGTH } from '../../viewmodels';
 
 import type { Editor } from 'tinymce';
+
+const TinyMCEEditor = lazy(() =>
+  import('./tiny-mce-editor').then((m) => ({ default: m.TinyMCEEditor })),
+);
 
 interface TitleAndContentProps {
   title: string;
@@ -71,12 +75,14 @@ export const TitleAndContent = ({
         <p className="font-medium">{contentLabel}</p>
       </div>
 
-      <TinyMCEEditor
-        disabled={disabled}
-        value={content}
-        onEditorChange={onChangeContent}
-        ref={ref}
-      />
+      <Suspense fallback={<LoadingCatAnimation />}>
+        <TinyMCEEditor
+          disabled={disabled}
+          value={content}
+          onEditorChange={onChangeContent}
+          ref={ref}
+        />
+      </Suspense>
 
       {content.length > BODY_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-import z from 'zod';
+import { z } from 'zod';
 
 import { SearchFrame } from '@/features/notice';
 
