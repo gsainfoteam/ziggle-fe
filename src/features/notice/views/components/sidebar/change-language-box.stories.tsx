@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import { ChangeLanguageBox } from './change-language-box';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Features/Notice/Sidebar/ChangeLanguageBox',

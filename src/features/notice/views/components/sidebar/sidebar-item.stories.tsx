@@ -1,14 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   createRootRoute,
   createRouter,
   RouterProvider,
 } from '@tanstack/react-router';
 
-import HomeIcon from '@/assets/icons/home.svg?react';
 import BoldHomeIcon from '@/assets/icons/bold-home.svg?react';
+import HomeIcon from '@/assets/icons/home.svg?react';
 
 import { SidebarItem } from './sidebar-item';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const createSidebarItemRouter = (
   props: React.ComponentProps<typeof SidebarItem>,

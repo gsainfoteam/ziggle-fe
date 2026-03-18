@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   createRootRoute,
   createRouter,
@@ -6,6 +5,8 @@ import {
 } from '@tanstack/react-router';
 
 import { SearchBar } from './search-bar';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const createSearchBarRouter = () => {
   const rootRoute = createRootRoute({

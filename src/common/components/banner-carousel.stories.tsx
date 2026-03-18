@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import { BannerCarousel } from './banner-carousel';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const PlaceholderBanner = ({ className = '' }: { className?: string }) => (
   <div

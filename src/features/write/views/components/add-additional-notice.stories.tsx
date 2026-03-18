@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 
 import { AddAdditionalNotice } from './add-additional-notice';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Features/Write/AddAdditionalNotice',

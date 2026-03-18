@@ -124,7 +124,7 @@ export const SendPushAlarm = ({
         showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden',
       )}
     >
-      <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-[15px] font-normal">
+      <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-3.75 font-normal">
         <span>{t('detail.push_notification.title')} </span>
         <span
           className="cursor-pointer font-bold underline"

@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import type { Notice } from '@/features/notice/models';
 
 import ZaboTags from './zabo-tags';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: Notice = {
   id: 1,

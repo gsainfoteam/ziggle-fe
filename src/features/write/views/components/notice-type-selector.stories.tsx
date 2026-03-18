@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import { fn } from 'storybook/test';
 
 import { NoticeTypeSelector } from './notice-type-selector';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Features/Write/NoticeTypeSelector',

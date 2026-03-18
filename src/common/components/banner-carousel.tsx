@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import NavArrowRight from '@/assets/icons/nav-arrow-right.svg?react';

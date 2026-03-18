@@ -1,8 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import { AdditionalNotices } from './additional-notices';
 
 import type { AdditionalContent, NoticeDetail } from '../../models';
-
-import { AdditionalNotices } from './additional-notices';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: NoticeDetail = {
   id: 1,

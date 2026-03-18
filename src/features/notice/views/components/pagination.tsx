@@ -1,4 +1,5 @@
 import { Link, useSearch } from '@tanstack/react-router';
+
 import { useTranslation } from 'react-i18next';
 
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?react';
