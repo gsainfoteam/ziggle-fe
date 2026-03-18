@@ -62,10 +62,10 @@ export const ResultTextZabo = (props: ResultZaboProps) => {
         <div className="font-regular dark:text-dark_white line-clamp-4 text-start text-ellipsis">
           {searchQuery ? (
             <HighlightedText query={searchQuery}>
-              {content ?? t('zabo.noContent')}
+              {content ?? t('detail.no_content')}
             </HighlightedText>
           ) : (
-            (content ?? t('zabo.noContent'))
+            (content ?? t('detail.no_content'))
           )}
         </div>
         <ZaboActions {...props} />

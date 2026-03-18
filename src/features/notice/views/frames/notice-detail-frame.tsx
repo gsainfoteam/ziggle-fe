@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useLoaderData } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
@@ -24,7 +25,7 @@ export function NoticeDetailFrame() {
   useEffect(() => {
     document.title = efficientNotice.title;
     return () => {
-      document.title = t('appName');
+      document.title = t('app_name');
     };
   }, [efficientNotice.title, t]);
 

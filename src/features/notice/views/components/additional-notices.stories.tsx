@@ -1,8 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import { AdditionalNotices } from './additional-notices';
 
 import type { AdditionalContent, NoticeDetail } from '../../models';
-
-import { AdditionalNotices } from './additional-notices';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: NoticeDetail = {
   id: 1,
@@ -27,7 +26,8 @@ const mockAdditionalContents: AdditionalContent[] = [
   {
     id: 1,
     lang: 'ko',
-    content: '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
+    content:
+      '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {

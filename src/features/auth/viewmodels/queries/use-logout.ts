@@ -16,7 +16,7 @@ export const useLogout = ({
   return $api.useMutation('post', ApiPaths.AuthController_logout, {
     onError: () => {
       if (showToast) {
-        toast.error(t('error.logoutFailed'));
+        toast.error(t('errors.logout_failed'));
       }
     },
     onSettled: () => {

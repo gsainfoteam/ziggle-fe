@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
   createRootRoute,
   createRouter,
   RouterProvider,
 } from '@tanstack/react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-import type { ResultZaboProps } from './type';
 
 import { ResultTextZabo } from './result-text-zabo';
+
+import type { ResultZaboProps } from './type';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: ResultZaboProps = {
   id: 1,

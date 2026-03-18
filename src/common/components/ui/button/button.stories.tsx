@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 import { Button } from './index';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
   title: 'Common/UI/Button',

@@ -23,9 +23,9 @@ const DDay = ({ deadline, className }: DDayProps) => {
       )}
     >
       {isClosed ? (
-        t('dDayPlus')
+        t('list.d_day_plus')
       ) : (
-        <Trans t={t} i18nKey={'zabo.timeLeft'}>
+        <Trans t={t} i18nKey={'detail.time_left'}>
           {{ timeLeft: dayjs(deadline).fromNow(true) }} Left
         </Trans>
       )}

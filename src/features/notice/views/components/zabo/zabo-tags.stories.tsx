@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import type { Notice } from '@/features/notice/models';
 
 import ZaboTags from './zabo-tags';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: Notice = {
   id: 1,
@@ -45,7 +45,16 @@ export const ManyTags: Story = {
   args: {
     notice: {
       ...mockNotice,
-      tags: ['모집', '동아리', '스터디', '개발', '디자인', '기획', '봄학기', '2026'],
+      tags: [
+        '모집',
+        '동아리',
+        '스터디',
+        '개발',
+        '디자인',
+        '기획',
+        '봄학기',
+        '2026',
+      ],
     },
   },
 };

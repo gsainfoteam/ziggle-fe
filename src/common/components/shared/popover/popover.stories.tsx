@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import { Home, Search, Settings } from 'lucide-react';
 
 import { Popover } from './index';
 
 import type { PopoverItem } from './type';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const sampleItems: PopoverItem[] = [
   { icon: Home, boldIcon: Home, label: '홈' },

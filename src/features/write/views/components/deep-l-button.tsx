@@ -13,7 +13,7 @@ export const DeepLButton = ({
   editorRef,
   originalLanguage,
 }: DeepLButtonProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
   const DEEPL_URL =
     originalLanguage === 'korean'
       ? 'https://www.deepl.com/translator#ko/en'
@@ -35,7 +35,7 @@ export const DeepLButton = ({
       <div className="flex gap-2">
         <DeepLLogo />
         <div className="dark:text-dark text-text font-medium">
-          {t('write.translateWithDeepL')}
+          {t('buttons.translate_deepl')}
         </div>
       </div>
     </button>

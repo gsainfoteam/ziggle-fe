@@ -68,13 +68,13 @@
   "navbar": {
     "login": "로그인"
   },
-  "navbarWrite": {
-    "goBack": "돌아가기"
+  "navbar_write": {
+    "go_back": "돌아가기"
   },
   "sidebar": {
     "language": "언어",
     "theme": "테마",
-    "themeOptions": {
+    "theme_options": {
       "dark": "다크",
       "light": "라이트",
       "system": "시스템"

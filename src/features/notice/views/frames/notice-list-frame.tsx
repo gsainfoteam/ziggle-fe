@@ -44,13 +44,13 @@ function List({
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">
-          <div className="h-[100px]" />
-          <div className="mx-auto h-[10px]" />
+          <div className="h-25" />
+          <div className="mx-auto h-2.5" />
 
           <SearchNoResult />
 
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
-            {t('emptyNotices')}
+            {t('list.empty')}
           </p>
         </div>
       </div>
@@ -59,7 +59,7 @@ function List({
 
   return (
     <>
-      <div className="flex w-full flex-col md:max-w-[800px]">
+      <div className="flex w-full flex-col md:max-w-200">
         {...notices.list.map((notice) => (
           <React.Fragment key={notice.id}>
             <LogClick
@@ -72,7 +72,7 @@ function List({
             >
               <Zabo key={notice.id} {...notice} />
             </LogClick>
-            <div className="bg-greyLight dark:bg-dark_greyBorder my-[30px] h-px" />
+            <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
           </React.Fragment>
         ))}
       </div>
@@ -100,12 +100,12 @@ export function NoticeListFrame() {
     <main className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center">
         {category === 'home' && (
-          <div className="mt-6 mb-[30px] flex w-full justify-center">
+          <div className="mt-6 mb-7.5 flex w-full justify-center">
             <HomeBannerCarousel />
           </div>
         )}
         {category !== 'home' && (
-          <div className="flex w-full flex-row flex-wrap justify-between gap-[14px] px-[18px] py-5 font-bold md:max-w-[800px]">
+          <div className="flex w-full flex-row flex-wrap justify-between gap-3.5 px-4.5 py-5 font-bold md:max-w-200">
             <div className="text-primary flex items-center gap-2 text-4xl">
               <icons.bold className="fill-primary dark:stroke-dark_dark w-10 stroke-white" />
               {title}
@@ -138,7 +138,7 @@ export function NoticeListFrame() {
                       deadline ? 'text-primary' : 'text-greyDark',
                     )}
                   >
-                    {t('common.sortByDeadline')}
+                    {t('list.sort_by_deadline')}
                   </p>
                 </Link>
               </LogClick>

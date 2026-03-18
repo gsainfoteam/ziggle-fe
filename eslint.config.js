@@ -6,7 +6,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tanstackRouter from '@tanstack/eslint-plugin-router';
 import storybook from 'eslint-plugin-storybook';
 import prettierConfig from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 import unusedImports from 'eslint-plugin-unused-imports';
 import boundaries from 'eslint-plugin-boundaries';
 import checkFile from 'eslint-plugin-check-file';
@@ -47,6 +47,12 @@ export default defineConfig(
       'check-file': checkFile,
     },
     settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+          alwaysTryTypes: true,
+        },
+      },
       'boundaries/elements': [
         { type: 'model', pattern: 'src/features/*/models/*' },
         { type: 'viewmodel', pattern: 'src/features/*/viewmodels/*' },

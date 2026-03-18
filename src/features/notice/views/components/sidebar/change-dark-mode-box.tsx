@@ -21,17 +21,17 @@ export const ChangeDarkModeBox = () => {
         {
           icon: Sun,
           boldIcon: SunFull,
-          label: t('sidebar.themeOptions.light'),
+          label: t('sidebar.theme_options.light'),
         },
         {
           icon: Moon,
           boldIcon: MoonFull,
-          label: t('sidebar.themeOptions.dark'),
+          label: t('sidebar.theme_options.dark'),
         },
         {
           icon: System,
           boldIcon: SystemFull,
-          label: t('sidebar.themeOptions.system'),
+          label: t('sidebar.theme_options.system'),
         },
       ]}
       selectedIndex={theme === 'light' ? 0 : theme === 'dark' ? 1 : 2}

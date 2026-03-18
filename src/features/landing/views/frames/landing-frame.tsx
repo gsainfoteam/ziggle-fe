@@ -20,7 +20,7 @@ export function LandingFrame() {
       <div className="hidden dark:block">
         <ZiggleLogoDark className="h-20" />
       </div>
-      <p className="text-xl font-semibold md:text-2xl">{t('home.subtitle')}</p>
+      <p className="text-xl font-semibold md:text-2xl">{t('subtitle')}</p>
       <Button
         variant="outlined"
         onClick={() => {
@@ -28,7 +28,7 @@ export function LandingFrame() {
           idpLogIn();
         }}
       >
-        {t('home.login')}
+        {t('login')}
       </Button>
     </div>
   );

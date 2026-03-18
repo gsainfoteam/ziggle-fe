@@ -28,14 +28,14 @@ export const AddAdditionalNotice = ({
         <AddIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
 
         <p className="text-lg font-medium">
-          {t('zabo.additionalNotices.title')}
+          {t('detail.additional_notices.title')}
         </p>
       </div>
 
       <textarea
         className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
         name={'searchQuery'}
-        placeholder={t('zabo.additionalNotices.additionalNoticePlaceholder')}
+        placeholder={t('detail.additional_notices.placeholder')}
         rows={3}
         value={koreanContent}
         onChange={(event) => {
@@ -47,9 +47,7 @@ export const AddAdditionalNotice = ({
         <textarea
           className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
           name={'searchQuery'}
-          placeholder={t(
-            'zabo.additionalNotices.enAdditionalNoticePlaceholder',
-          )}
+          placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
           value={englishContent}
           onChange={(event) => {

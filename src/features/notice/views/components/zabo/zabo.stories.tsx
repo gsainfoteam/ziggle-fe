@@ -1,11 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { createRootRoute, createRouter } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 
 import type { Notice } from '@/features/notice/models';
 
 import { Zabo } from './zabo';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const mockNotice: Notice = {
   id: 1,

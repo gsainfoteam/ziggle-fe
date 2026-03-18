@@ -20,7 +20,7 @@ export const TagInput = ({ tags, setTags }: TagInputProps) => {
   const [keyword, setKeyword] = useState<string>('');
   const [tempTagId, setTempTagId] = useState<number>(0);
   const { data: searchedTags } = useSearchTags({ keyword });
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = event.target.value;
@@ -68,7 +68,7 @@ export const TagInput = ({ tags, setTags }: TagInputProps) => {
         <input
           value={keyword}
           onChange={handleKeywordChange}
-          placeholder={tags.length === 0 ? t('write.writeTags') : ''}
+          placeholder={tags.length === 0 ? t('fields.tags.placeholder') : ''}
           className="grow bg-transparent p-2 outline-none md:text-base"
         />
       </div>

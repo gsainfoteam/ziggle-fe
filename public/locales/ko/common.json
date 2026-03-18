@@ -1,4 +1,15 @@
 {
-  "appName": "지글",
+  "alert_response": {
+    "cancel": "취소",
+    "confirm": "확인",
+    "no": "아니오",
+    "yes": "네"
+  },
+  "app_name": "지글",
+  "carousel": {
+    "next": "다음",
+    "prev": "이전",
+    "slide": "슬라이드 {{number}} 보기"
+  },
   "loading": "로딩 중입니다! -ㅅ-"
 }

@@ -23,7 +23,7 @@ export const TITLE_MAX_LENGTH = 50;
 export const BODY_MAX_LENGTH = 20000;
 
 export const useHandleNoticeSubmit = () => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const handleTagSubmit = async (tags: string[]) => {
     const tagIds: number[] = [];
@@ -45,7 +45,7 @@ export const useHandleNoticeSubmit = () => {
         );
 
         if (!createdTag) {
-          toast.error(t('write.alerts.tagCreationFail'));
+          toast.error(t('toasts.tag_creation_fail'));
           return;
         }
 
@@ -71,18 +71,18 @@ export const useHandleNoticeSubmit = () => {
     groupId,
   }: NoticeSubmitForm) => {
     if (!title) {
-      toast.error(t('write.alerts.title'));
+      toast.error(t('validations.title_required'));
       return;
     }
 
     if (noticeLanguage === 'both' && !enTitle) {
-      toast.error(t('write.alerts.enTitle'));
+      toast.error(t('validations.english_title_required'));
       return;
     }
 
     if (title.length > TITLE_MAX_LENGTH) {
       toast.error(
-        t('write.alerts.titleLengthLessThan', {
+        t('validations.title_too_long', {
           titleMaxLength: TITLE_MAX_LENGTH,
         }),
       );
@@ -90,34 +90,34 @@ export const useHandleNoticeSubmit = () => {
     }
 
     if (deadline && deadline < new Date()) {
-      toast.error(t('write.alerts.deadline'));
+      toast.error(t('validations.deadline_invalid'));
       return;
     }
 
     switch (noticeLanguage) {
       case 'ko':
         if (!koreanBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         break;
       case 'en':
         if (!englishBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         break;
       case 'both':
         if (!koreanBody && !englishBody) {
-          toast.error(t('write.alerts.body'));
+          toast.error(t('validations.body_required'));
           return;
         }
         if (!koreanBody && englishBody) {
-          toast.error(t('write.alerts.koreanBody'));
+          toast.error(t('validations.korean_body_required'));
           return;
         }
         if (koreanBody && !englishBody) {
-          toast.error(t('write.alerts.englishBody'));
+          toast.error(t('validations.english_body_required'));
           return;
         }
         break;
@@ -127,10 +127,10 @@ export const useHandleNoticeSubmit = () => {
       case 'ko':
         if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.bodyLengthLessThan', {
+            t('validations.body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -141,10 +141,10 @@ export const useHandleNoticeSubmit = () => {
       case 'en':
         if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.bodyLengthLessThan', {
+            t('validations.body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -160,14 +160,14 @@ export const useHandleNoticeSubmit = () => {
           englishBody.length > BODY_MAX_LENGTH
         ) {
           toast.error(
-            t('write.alerts.bothBodyLengthLessThan', {
+            t('validations.both_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -175,10 +175,10 @@ export const useHandleNoticeSubmit = () => {
           return;
         } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.koreanBodyLengthLessThan', {
+            t('validations.korean_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: koreanBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -187,10 +187,10 @@ export const useHandleNoticeSubmit = () => {
           return;
         } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
           toast.error(
-            t('write.alerts.englishBodyLengthLessThan', {
+            t('validations.english_body_too_long', {
               bodyMaxLength: BODY_MAX_LENGTH,
             }) +
-              t('write.alerts.numberOfCharacter', {
+              t('validations.char_count', {
                 length: englishBody.length,
                 maxLength: BODY_MAX_LENGTH,
               }),
@@ -201,7 +201,7 @@ export const useHandleNoticeSubmit = () => {
         break;
     }
 
-    const loading = toast.loading(t('write.alerts.submittingNotice'));
+    const loading = toast.loading(t('toasts.submitting'));
 
     const tagIds: number[] | undefined = await handleTagSubmit(tags);
     if (!tagIds) return;
@@ -222,7 +222,7 @@ export const useHandleNoticeSubmit = () => {
         : [];
     if (!imageKeys) {
       toast.dismiss(loading);
-      toast.error(t('write.alerts.submitFail'));
+      toast.error(t('toasts.submit_fail'));
       return;
     }
 
@@ -244,7 +244,7 @@ export const useHandleNoticeSubmit = () => {
 
     if (!notice) {
       toast.dismiss(loading);
-      toast.error(t('write.alerts.submitFail'));
+      toast.error(t('toasts.submit_fail'));
       return;
     }
 
@@ -252,7 +252,7 @@ export const useHandleNoticeSubmit = () => {
 
     if (!id) {
       toast.dismiss(loading);
-      toast.error(t('write.alerts.submitFail'));
+      toast.error(t('toasts.submit_fail'));
       return;
     }
 
@@ -272,15 +272,15 @@ export const useHandleNoticeSubmit = () => {
       if (!noticeWithInternational) {
         // TODO: add alert
         // Swal.fire({
-        //   text: t('write.alerts.attachInternationalFail'),
+        //   text: t('toasts.international_fail'),
         //   icon: 'error',
-        //   confirmButtonText: t('alertResponse.confirm'),
+        //   confirmButtonText: t('common:alert_response.confirm'),
         //   showDenyButton: true,
-        //   denyButtonText: t('write.alerts.copyEnglishContent'),
+        //   denyButtonText: t('toasts.copy_english'),
         // }).then((result) => {
         //   if (result.isDenied) {
         //     navigator.clipboard.writeText(englishBody!);
-        //     toast.success(t('write.alerts.copySuccess'));
+        //     toast.success(t('toasts.copy_success'));
         //   }
         // });
         // return;
@@ -288,7 +288,7 @@ export const useHandleNoticeSubmit = () => {
     }
 
     toast.dismiss(loading);
-    toast.success(t('write.alerts.submitSuccess'));
+    toast.success(t('toasts.submit_success'));
 
     return id;
   };

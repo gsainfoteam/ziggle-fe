@@ -33,7 +33,7 @@ export const AdditionalNotices = ({
           >
             <div className="flex items-center gap-1.25">
               <p className="text-text text-lg font-semibold">
-                {t('zabo.additionalNotices.title')}
+                {t('detail.additional_notices.title')}
               </p>
               <p className="text-greyDark font-bold">·</p>
               <p className="text-greyDark font-medium">{timeAgo}</p>
@@ -43,12 +43,12 @@ export const AdditionalNotices = ({
               <div className="ml-8">
                 <div className="flex items-center gap-3">
                   <p className="text-base font-bold">
-                    {t('zabo.additionalNotices.deadlineChanged')}
+                    {t('detail.additional_notices.deadline_changed')}
                   </p>
                   <p className="text-secondaryText text-base font-medium">
                     {dayjs(lastDeadline).tz().isValid()
                       ? dayjs(lastDeadline).tz().format('LLL')
-                      : t('zabo.additionalNotices.noDeadline')}
+                      : t('detail.additional_notices.no_deadline')}
                   </p>
 
                   <p>▶</p>

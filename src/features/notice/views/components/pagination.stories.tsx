@@ -1,7 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { createRootRoute, createRouter, RouterProvider } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  createRouter,
+  RouterProvider,
+} from '@tanstack/react-router';
 
 import Pagination from './pagination';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 interface PaginationStoryProps {
   items: number;
