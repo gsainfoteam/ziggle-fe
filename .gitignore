@@ -17,3 +17,5 @@ src/@types/*.ts
 
 *storybook.log
 storybook-static
+
+stats.html
