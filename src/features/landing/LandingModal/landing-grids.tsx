@@ -1,5 +1,5 @@
 import { cn } from '@/common/utils';
-
+import { useMemo } from 'react';
 function getRandomInt(min = 50, max = 400) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
@@ -14,14 +14,16 @@ const columnColors = [
 ];
 
 export default function LandingGrids() {
+  const columnHeights = useMemo(() => {
+    return Array.from({ length: 4 }, () => getRandomInt());
+  }, []);
   return (
     <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
       {columnColors.map((color, colIdx) => {
         const isEven = colIdx % 2 === 0;
-        const randomHeights = Array.from({ length: 4 }, () => getRandomInt());
         const BlockSet = () => (
           <div className="flex flex-col gap-4 pb-4">
-            {randomHeights.map((height, blockIdx) => (
+            {columnHeights.map((height, blockIdx) => (
               <div
                 key={blockIdx}
                 className={cn('shrink-0 rounded-xl', color)}
