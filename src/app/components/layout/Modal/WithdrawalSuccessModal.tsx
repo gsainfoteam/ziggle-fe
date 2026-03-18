@@ -29,7 +29,7 @@ export default function WithdrawalSuccessModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
+      className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-text/50 dark:bg-dark_white/50"
       onClick={handleClose}
     >
       <div
@@ -43,7 +43,7 @@ export default function WithdrawalSuccessModal({
           <p className="mt-2 text-center text-xl font-semibold md:text-2xl">
             {t('mypage.withdrawal.success.title')}
           </p>
-          <p className="text-center text-sm text-gray-600">
+          <p className="text-center text-sm text-greyDark">
             {t('mypage.withdrawal.success.text')}
           </p>
         </div>

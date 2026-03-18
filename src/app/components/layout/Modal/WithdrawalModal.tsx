@@ -24,7 +24,7 @@ export default function WithdrawalModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50">
+    <div className="fixed inset-0 z-50 flex h-full w-full items-center justify-center bg-text/50 dark:bg-dark_white/50">
       <div
         className="mx-10 flex h-auto min-w-[400px] max-w-[500px] flex-col justify-between gap-6 rounded-[20px] bg-white p-6 shadow-md"
         onClick={(e) => e.stopPropagation()}
@@ -39,7 +39,7 @@ export default function WithdrawalModal({
           <p className="text-center text-xl font-semibold md:text-2xl">
             {t('mypage.withdrawal.confirm.title')}
           </p>
-          <p className="whitespace-pre-wrap text-center text-sm text-gray-600">
+          <p className="whitespace-pre-wrap text-center text-sm text-greyDark">
             {t('mypage.withdrawal.confirm.text')}
           </p>
         </div>

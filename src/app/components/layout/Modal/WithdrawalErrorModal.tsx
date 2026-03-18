@@ -19,7 +19,7 @@ export default function WithdrawalErrorModal({
 
   return (
     <div
-      className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black/50 dark:bg-gray-100/50"
+      className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-text/50 dark:bg-dark_white/50"
       onClick={close}
     >
       <div
@@ -36,7 +36,7 @@ export default function WithdrawalErrorModal({
           <p className="text-center text-xl font-semibold md:text-2xl">
             {t('mypage.withdrawal.error.title')}
           </p>
-          <p className="whitespace-pre-wrap text-center text-sm text-gray-600">
+          <p className="whitespace-pre-wrap text-center text-sm text-greyDark">
             {t('mypage.withdrawal.error.text')}
           </p>
         </div>
