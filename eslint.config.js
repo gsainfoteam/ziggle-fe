@@ -47,6 +47,12 @@ export default defineConfig(
       'check-file': checkFile,
     },
     settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+          alwaysTryTypes: true,
+        },
+      },
       'boundaries/elements': [
         { type: 'model', pattern: 'src/features/*/models/*' },
         { type: 'viewmodel', pattern: 'src/features/*/viewmodels/*' },
