@@ -4,21 +4,21 @@ Ziggle 공지 플랫폼의 프론트엔드 레포지토리입니다.
 
 ## Tech Stack
 
-| Category | Library |
-| --- | --- |
-| Framework | React 19 |
-| Language | TypeScript |
-| Bundler | Vite |
-| Package Manager | Bun |
-| Routing | TanStack Router |
-| Server State | TanStack Query |
-| Client State | Zustand |
-| Styling | Tailwind CSS v4 |
-| i18n | i18next |
-| API Client | openapi-fetch + openapi-react-query |
-| Rich Text Editor | TinyMCE |
-| Component Catalog | Storybook |
-| Analytics | Amplitude |
+| Category          | Library                             |
+| ----------------- | ----------------------------------- |
+| Framework         | React 19                            |
+| Language          | TypeScript                          |
+| Bundler           | Vite                                |
+| Package Manager   | Bun                                 |
+| Routing           | TanStack Router                     |
+| Server State      | TanStack Query                      |
+| Client State      | Zustand                             |
+| Styling           | Tailwind CSS v4                     |
+| i18n              | i18next                             |
+| API Client        | openapi-fetch + openapi-react-query |
+| Rich Text Editor  | TinyMCE                             |
+| Component Catalog | Storybook                           |
+| Analytics         | Amplitude                           |
 
 ## Getting Started
 
@@ -42,6 +42,7 @@ VITE_IDP_AUTHORIZE_URL=
 VITE_IDP_TOKEN_URL=
 VITE_API_BASE_URL=
 VITE_CHATBOT_WIDGET_KEY=
+VITE_AMPLITUDE_API_KEY=
 ```
 
 ### Install & Run
@@ -53,17 +54,17 @@ bun run dev
 
 ## Scripts
 
-| Command | Description |
-| --- | --- |
-| `bun run dev` | 개발 서버 실행 |
-| `bun run build` | 프로덕션 빌드 |
-| `bun run preview` | 빌드 결과물 미리보기 |
-| `bun run check` | Prettier 포맷 + ESLint 자동 수정 |
-| `bun run lint` | ESLint 검사 |
-| `bun run format` | Prettier 검사 |
-| `bun run test` | 테스트 실행 |
-| `bun run gen:api` | Swagger에서 API 타입 자동 생성 (`src/@types/api-schema.ts`) |
-| `bun run storybook` | Storybook 개발 서버 실행 |
+| Command             | Description                                                 |
+| ------------------- | ----------------------------------------------------------- |
+| `bun run dev`       | 개발 서버 실행                                              |
+| `bun run build`     | 프로덕션 빌드                                               |
+| `bun run preview`   | 빌드 결과물 미리보기                                        |
+| `bun run check`     | Prettier 포맷 + ESLint 자동 수정                            |
+| `bun run lint`      | ESLint 검사                                                 |
+| `bun run format`    | Prettier 검사                                               |
+| `bun run test`      | 테스트 실행                                                 |
+| `bun run gen:api`   | Swagger에서 API 타입 자동 생성 (`src/@types/api-schema.ts`) |
+| `bun run storybook` | Storybook 개발 서버 실행                                    |
 
 ## i18n (국제화)
 
