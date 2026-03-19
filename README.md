@@ -68,7 +68,7 @@ bun run dev
 
 ## i18n (국제화)
 
-한국어(`ko`)와 영어(`en`)를 지원하며, [i18next](https://www.i18next.com)와 [i18next-cli](https://github.com/droppedcode/i18next-cli)를 사용합니다.
+한국어(`ko`)와 영어(`en`)를 지원하며, [i18next](https://www.i18next.com)와 [i18next-cli](https://github.com/i18next/i18next-cli)를 사용합니다.
 
 번역 파일은 `public/locales/{language}/{namespace}.json`에 위치합니다.
 
