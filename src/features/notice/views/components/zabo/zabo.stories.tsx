@@ -27,11 +27,6 @@ const mockNotice: Notice = {
   category: {},
   publishedAt: new Date().toISOString(),
   documentUrls: [],
-  group: {
-    uuid: 'group-1',
-    name: '지글동아리',
-    profileImageUrl: 'https://placehold.co/36?text=G',
-  },
 };
 
 const queryClient = new QueryClient();

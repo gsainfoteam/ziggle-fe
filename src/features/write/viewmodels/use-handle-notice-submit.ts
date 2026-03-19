@@ -16,7 +16,6 @@ export interface NoticeSubmitForm {
   tags: string[];
   images: File[];
   category: (typeof Category)[keyof typeof Category];
-  groupId: string | null;
 }
 
 export const TITLE_MAX_LENGTH = 50;
@@ -68,7 +67,6 @@ export const useHandleNoticeSubmit = () => {
     tags,
     images,
     category,
-    groupId,
   }: NoticeSubmitForm) => {
     if (!title) {
       toast.error(t('validations.title_required'));
@@ -236,7 +234,6 @@ export const useHandleNoticeSubmit = () => {
           // TODO: wrong type
           tags: tagIds as unknown as string[],
           category,
-          groupId: groupId ?? undefined,
         },
       })
       .then((res) => res.data)
