@@ -7,7 +7,7 @@ import { useUser } from '@/features/auth';
 import { AuthorActions } from './components/author-actions';
 import { Tags } from './components/tags';
 
-import type { Group, NoticeDetail } from '../models';
+import type { NoticeDetail } from '../models';
 
 export const NoticeInfo = ({
   id,
@@ -17,7 +17,6 @@ export const NoticeInfo = ({
   createdAt,
   views,
   tags = [],
-  group,
 }: NoticeDetail) => {
   const { data: user } = useUser();
 
@@ -29,7 +28,6 @@ export const NoticeInfo = ({
         author={author.name}
         createdAt={dayjs(createdAt)}
         views={views}
-        group={group}
       />
 
       {user?.uuid === author.uuid && <AuthorActions noticeId={id} />}
@@ -59,40 +57,19 @@ const Title = ({ title }: { title: string }) => (
 const Metadata = ({
   author,
   createdAt,
-  group,
 }: {
   author: string;
   createdAt: dayjs.Dayjs;
   views: number;
-  group?: Group;
 }) => {
   const timeAgo = dayjs(createdAt).fromNow();
 
   return (
     <>
       <div className="flex items-center">
-        {group?.profileImageUrl ? (
-          <img
-            src={group.profileImageUrl}
-            width={36}
-            height={36}
-            alt={group.name}
-          />
-        ) : (
-          <DefaultProfile width={36} height={36} />
-        )}
+        <DefaultProfile width={36} height={36} />
 
-        {group ? (
-          // <Link
-          //   href={`${process.env.NEXT_PUBLIC_GROUPS_URL}/group/${group.uuid}`}
-          // >
-          //   <span className="ml-2 text-lg font-medium">{group.name}</span>
-          // </Link>
-          // TODO: implement with groups feature
-          <></>
-        ) : (
-          <span className="ml-2 text-lg font-medium">{author}</span>
-        )}
+        <span className="ml-2 text-lg font-medium">{author}</span>
 
         <span className="text-greyDark mx-1.25 font-bold">·</span>
 

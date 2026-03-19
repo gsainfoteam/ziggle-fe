@@ -205,7 +205,6 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       tags: [...state.tags.map(({ name }) => name)],
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCategoryMapper[state.noticeType],
-      groupId: state.account,
     };
 
     // TODO: send log
@@ -652,18 +651,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
             setPhotos={(photos) => dispatch({ type: 'SET_PHOTOS', photos })}
           />
 
-          {/* TODO: implement groups feature */}
-          {/* <div className="mt-10 mb-1 flex items-center gap-2">
-            <ColorFilterIcon className="stroke-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('buttons.select_account')}</p>
-          </div> */}
-          {/* <SelectAccountArea
-            account={state.account}
-            setAccount={(account: string | null) =>
-              dispatch({ type: 'SET_ACCOUNT', account })
-            }
-          /> */}
-        </>
+</>
       )}
 
       <div className="mt-40 flex flex-col items-center">

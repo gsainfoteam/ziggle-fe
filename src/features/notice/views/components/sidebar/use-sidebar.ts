@@ -24,7 +24,6 @@ type MenuPath =
   | 'deadline'
   | 'zigglepick'
   | 'write'
-  | 'group'
   | 'own'
   | 'reminded';
 type LogKey =

@@ -23,7 +23,6 @@ export interface EditorState {
   tags: Tag[];
   photos: FileWithUrl[];
   isLoading: boolean;
-  account: string | null;
 }
 
 export const initialEditorState: EditorState = {
@@ -39,7 +38,6 @@ export const initialEditorState: EditorState = {
   tags: [],
   photos: [],
   isLoading: false,
-  account: null,
 };
 
 export type EditorAction =
@@ -58,8 +56,7 @@ export type EditorAction =
   | {
       type: 'SET_ADDITIONAL_ENGLISH_CONTENT';
       additionalEnglishContent: string;
-    }
-  | { type: 'SET_ACCOUNT'; account: string | null };
+    };
 
 export const editorStateReducer = (
   state: EditorState,
@@ -155,8 +152,6 @@ export const editorStateReducer = (
         },
       };
     }
-    case 'SET_ACCOUNT':
-      return { ...state, account: action.account };
     default:
       return state;
   }
