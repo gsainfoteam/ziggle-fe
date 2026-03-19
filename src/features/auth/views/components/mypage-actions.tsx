@@ -1,14 +1,20 @@
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
+import { overlay } from 'overlay-kit';
 
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-
 import { MypageBox } from './mypage-box';
+
 import { useLogout, useWithdraw } from '../../viewmodels';
 
+import WithdrawalModal from '@/common/components/shared/modals/Withdrawal';
+import WithdrawalSuccessModal from '@/common/components/shared/modals/WithdrawalSuccess';
+import WithdrawalErrorModal from '@/common/components/shared/modals/WithdrawalError';
+
 export default function MypageActions() {
-  const { t } = useTranslation('auth');
+  const { t, i18n } = useTranslation('auth');
+  const modalLanguage = i18n.language.startsWith('en') ? 'en' : 'ko';
+
   const { mutate: logout } = useLogout();
   const { mutateAsync: withdraw } = useWithdraw();
 
@@ -16,37 +22,37 @@ export default function MypageActions() {
     logout({});
   };
 
-  const handleWithdrawal = async () => {
-    try {
-      // TODO: use custom overlay
-      // t('mypage.withdrawal.confirm.ok_btn')
-      // t('mypage.withdrawal.confirm.cancel_btn')
-      const result = confirm(
-        t('mypage.withdrawal.confirm.title') +
-          '\n\n' +
-          t('mypage.withdrawal.confirm.text'),
-      );
-      if (result) {
-        try {
+  const handleWithdrawal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <WithdrawalModal
+        isOpen={isOpen}
+        close={close}
+        onWithdraw={async () => {
           await withdraw({});
-          toast.success(
-            t('mypage.withdrawal.success.title') +
-              '\n\n' +
-              t('mypage.withdrawal.success.text'),
-          );
-          logout({});
-        } catch {
-          toast.error(
-            t('mypage.withdrawal.error.title') +
-              '\n\n' +
-              t('mypage.withdrawal.error.text'),
-          );
-        }
-      }
-    } catch (err) {
-      console.error('withdrawal flow error:', err);
-    }
+        }}
+        onSuccess={async () => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalSuccessModal
+              isOpen={isOpen}
+              close={close}
+              lng={modalLanguage}
+              onCloseComplete={() => logout({})}
+            />
+          ));
+        }}
+        onFailure={async () => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalErrorModal
+              isOpen={isOpen}
+              close={close}
+              lng={modalLanguage}
+            />
+          ));
+        }}
+      />
+    ));
   };
+
   return (
     <div className="flex flex-col gap-3">
       <Button onClick={handleSignOut}>
@@ -68,6 +74,7 @@ export default function MypageActions() {
           </MypageBox>
         </LogClick>
       </Button>
+
     </div>
   );
 }
