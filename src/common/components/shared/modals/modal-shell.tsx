@@ -6,18 +6,14 @@ export type ModalShellProps = {
   isOpen: boolean;
   close: () => void;
 
-  // 모달 프레임
   panelClassName?: string;
 
-  // 모달 상단(닫기 버튼 / 체크 아이콘 자리 등)
   header?: ReactNode;
 
-  // 모달 타이틀/설명
   title?: ReactNode;
   description?: ReactNode;
   bodyClassName?: string;
 
-  // 버튼 영역
   actions?: ReactNode;
 };
 
