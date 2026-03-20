@@ -6,13 +6,11 @@ import { ModalShell } from './modal-shell';
 interface WithdrawalErrorModalProps {
   isOpen: boolean;
   close: () => void;
-  lng: 'ko' | 'en';
 }
 
 export function WithdrawalErrorModal({
   isOpen,
   close,
-  lng: _lng,
 }: WithdrawalErrorModalProps) {
   const { t } = useTranslation('auth');
 

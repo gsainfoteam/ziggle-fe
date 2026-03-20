@@ -14,8 +14,7 @@ import { MypageBox } from './mypage-box';
 import { useLogout, useWithdraw } from '../../viewmodels';
 
 export default function MypageActions() {
-  const { t, i18n } = useTranslation('auth');
-  const modalLanguage = i18n.language.startsWith('en') ? 'en' : 'ko';
+  const { t } = useTranslation('auth');
 
   const { mutate: logout } = useLogout();
   const { mutateAsync: withdraw } = useWithdraw();
@@ -37,7 +36,6 @@ export default function MypageActions() {
             <WithdrawalSuccessModal
               isOpen={isOpen}
               close={close}
-              lng={modalLanguage}
               onCloseComplete={() => logout({})}
             />
           ));
@@ -47,7 +45,6 @@ export default function MypageActions() {
             <WithdrawalErrorModal
               isOpen={isOpen}
               close={close}
-              lng={modalLanguage}
             />
           ));
         }}

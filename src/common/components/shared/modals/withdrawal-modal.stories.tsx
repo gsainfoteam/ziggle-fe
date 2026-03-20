@@ -19,7 +19,6 @@ type Story = StoryObj<typeof WithdrawalModal>;
 export const Default: Story = {
   args: { isOpen: false },
   render: () => {
-    const lng = 'ko' as const;
     const [openConfirm, setOpenConfirm] = React.useState(false);
     const [openSuccess, setOpenSuccess] = React.useState(false);
 
@@ -45,7 +44,6 @@ export const Default: Story = {
         <WithdrawalSuccessModal
           isOpen={openSuccess}
           close={() => setOpenSuccess(false)}
-          lng={lng}
         />
       </>
     );
@@ -57,7 +55,6 @@ export const Failure: Story = {
     isOpen: true,
   },
   render: () => {
-    const lng = 'ko' as const;
     const [openConfirm, setOpenConfirm] = React.useState(true);
     const [openError, setOpenError] = React.useState(false);
 
@@ -77,7 +74,6 @@ export const Failure: Story = {
         <WithdrawalErrorModal
           isOpen={openError}
           close={() => setOpenError(false)}
-          lng={lng}
         />
       </>
     );

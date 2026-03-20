@@ -8,7 +8,6 @@ import { ModalShell } from './modal-shell';
 interface WithdrawalSuccessModalProps {
   isOpen: boolean;
   close: () => void;
-  lng: 'ko' | 'en';
   onCloseComplete?: () => void | Promise<void>;
 }
 
