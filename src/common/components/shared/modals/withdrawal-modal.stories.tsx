@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
-import WithdrawalModal from './Withdrawal';
-import WithdrawalSuccessModal from './withdrawal-success';
-import WithdrawalErrorModal from './withdrawal-error';
+import {
+  WithdrawalErrorModal,
+  WithdrawalModal,
+  WithdrawalSuccessModal,
+} from './index';
 
 const meta: Meta<typeof WithdrawalModal> = {
   title: 'Common/Shared/WithdrawalModal',

@@ -9,7 +9,7 @@ interface WithdrawalErrorModalProps {
   lng: 'ko' | 'en';
 }
 
-export default function WithdrawalErrorModal({
+export function WithdrawalErrorModal({
   isOpen,
   close,
   lng: _lng,

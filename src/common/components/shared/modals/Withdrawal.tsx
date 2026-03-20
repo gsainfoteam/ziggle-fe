@@ -7,7 +7,7 @@ import { Button } from '@/common/components/ui/button';
 
 import { ModalShell } from './modal-shell';
 
-export default function WithdrawalModal({
+export function WithdrawalModal({
   isOpen,
   close,
   onSuccess,

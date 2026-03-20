@@ -12,7 +12,7 @@ interface WithdrawalSuccessModalProps {
   onCloseComplete?: () => void | Promise<void>;
 }
 
-export default function WithdrawalSuccessModal({
+export function WithdrawalSuccessModal({
   isOpen,
   close,
   onCloseComplete,
