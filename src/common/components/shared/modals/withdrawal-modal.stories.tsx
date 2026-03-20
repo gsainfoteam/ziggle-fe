@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import WithdrawalModal from './Withdrawal';
-import WithdrawalSuccessModal from './WithdrawalSuccess';
-import WithdrawalErrorModal from './WithdrawalError';
+import WithdrawalSuccessModal from './withdrawal-success';
+import WithdrawalErrorModal from './withdrawal-error';
 
 const meta: Meta<typeof WithdrawalModal> = {
   title: 'Common/Shared/WithdrawalModal',
@@ -33,7 +33,7 @@ export const Default: Story = {
         <WithdrawalModal
           isOpen={openConfirm}
           close={() => setOpenConfirm(false)}
-          onWithdraw={async () => {}}
+          onWithdraw={async () => { }}
           onSuccess={() => {
             setOpenConfirm(false);
             setOpenSuccess(true);

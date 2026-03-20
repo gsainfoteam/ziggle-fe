@@ -8,8 +8,8 @@ import { MypageBox } from './mypage-box';
 import { useLogout, useWithdraw } from '../../viewmodels';
 
 import WithdrawalModal from '@/common/components/shared/modals/Withdrawal';
-import WithdrawalSuccessModal from '@/common/components/shared/modals/WithdrawalSuccess';
-import WithdrawalErrorModal from '@/common/components/shared/modals/WithdrawalError';
+import WithdrawalSuccessModal from '@/common/components/shared/modals/withdrawal-success';
+import WithdrawalErrorModal from '@/common/components/shared/modals/withdrawal-error';
 
 export default function MypageActions() {
   const { t, i18n } = useTranslation('auth');
