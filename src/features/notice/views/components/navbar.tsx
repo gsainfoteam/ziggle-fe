@@ -32,6 +32,8 @@ export const Navbar = () => {
     setIsSidebarOpen(false);
   };
 
+  console.log(user);
+
   return (
     <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
@@ -68,7 +70,15 @@ export const Navbar = () => {
           to={user ? '/mypage' : '/'}
           className="hidden items-center justify-center gap-2 md:flex"
         >
-          <AccountIcon className="flex h-6" />
+          {user?.picture ? (
+            <img
+              src={user.picture}
+              alt="Profile"
+              className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
+            />
+          ) : (
+            <AccountIcon className="flex h-6" />
+          )}
           <div className="text-primary align-middle font-medium whitespace-nowrap">
             {user?.name ?? t('navbar.login')}
           </div>
