@@ -32,8 +32,6 @@ export const Navbar = () => {
     setIsSidebarOpen(false);
   };
 
-  console.log(user);
-
   return (
     <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
