@@ -10,7 +10,7 @@ const noop = () => { };
 const queryClient = new QueryClient();
 
 const meta: Meta<typeof WithdrawalModal> = {
-  title: 'Auth/WithdrawalModal',
+  title: 'Features/Auth/WithdrawalModal',
   component: WithdrawalModal,
   decorators: [
     (Story) => (
