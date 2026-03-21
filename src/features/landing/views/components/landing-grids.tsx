@@ -35,7 +35,9 @@ function BlockSet({ heights, color }: BlockSetProps) {
 
 export default function LandingGrids() {
   const columnHeights = useMemo(() => {
-    return Array.from({ length: 4 }, () => getRandomInt());
+    return Array.from({ length: 4 }, () =>
+      Array.from({ length: 4 }, () => getRandomInt()),
+    );
   }, []);
   return (
     <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
@@ -49,8 +51,8 @@ export default function LandingGrids() {
                 isEven ? 'animate-col-up' : 'animate-col-down',
               )}
             >
-              <BlockSet heights={columnHeights} color={color} />
-              <BlockSet heights={columnHeights} color={color} />
+              <BlockSet heights={columnHeights[colIdx]} color={color} />
+              <BlockSet heights={columnHeights[colIdx]} color={color} />
             </div>
           </div>
         );
