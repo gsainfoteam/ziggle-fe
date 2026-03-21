@@ -30,9 +30,13 @@ export function LandingModal() {
             <div className="text-lg font-bold">{t('home.subtitle')}</div>
           </div>
           <div className="flex h-fit flex-col items-center gap-3">
-            <p className="text-greyDark text-xs font-medium">
+            <a
+              href="https://terms.gistory.me/"
+              rel="noopener noreferrer"
+              className="text-greyDark text-xs font-medium"
+            >
               {t('home.policy')}
-            </p>
+            </a>
             <Button
               className="w-80"
               variant="outlined"
