@@ -60,11 +60,11 @@ export const useNotices = ({
   useEffect(() => {
     if (!isError) return;
     if (error?.statusCode === 401) {
-      toast.error(t('errorHandling.unauthorized.message'));
+      toast.error(t('query_handle.unauthorized'));
     } else if (error?.statusCode === 404) {
       // handling in view
     } else {
-      toast.error(t('errorHandling.fetchError.message'));
+      toast.error(t('query_handle.fetch_fail'));
     }
   }, [error, isError, t]);
 

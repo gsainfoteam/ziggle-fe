@@ -80,5 +80,9 @@
     "urgent": "Near Deadline",
     "write": "Write Notice",
     "zigglepick": "Ziggle-Pick"
+  },
+  "query_handle": {
+    "unauthorized": "You do not have permission to access this notice. Please check your login status.",
+    "fetch_fail": "Failed to load the notice. Please try again later."
   }
 }

@@ -8,7 +8,6 @@ import { useUser } from '@/features/auth';
 
 import { ApiPaths } from '../../models';
 
-
 export const useNotice = (id: number) => {
   const { data: user } = useUser();
   const { i18n } = useTranslation();
@@ -32,11 +31,11 @@ export const useNotice = (id: number) => {
   useEffect(() => {
     if (!isError) return;
     if (error?.statusCode === 401) {
-      toast.error(t('errorHandling.unauthorized.message'));
+      toast.error(t('query_handle.unauthorized'));
     } else if (error?.statusCode === 404) {
       // handling in view
     } else {
-      toast.error(t('errorHandling.fetchError.message'));
+      toast.error(t('query_handle.fetch_fail'));
     }
   }, [error, isError, t]);
 
