@@ -1,14 +1,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { WithdrawalErrorModal } from './withdrawal-error-modal';
 import { WithdrawalModal } from './withdrawal-modal';
 import { WithdrawalSuccessModal } from './withdrawal-success-modal';
 
 const noop = () => { };
+const queryClient = new QueryClient();
 
 const meta: Meta<typeof WithdrawalModal> = {
   title: 'Auth/WithdrawalModal',
   component: WithdrawalModal,
+  decorators: [
+    (Story) => (
+      <QueryClientProvider client={queryClient}>
+        <Story />
+      </QueryClientProvider>
+    ),
+  ],
 };
 
 export default meta;
