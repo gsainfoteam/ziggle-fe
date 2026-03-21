@@ -34,7 +34,7 @@ export function WithdrawalModal({
           <button
             onClick={close}
             type="button"
-            aria-label="close withdrawal modal"
+            aria-label={t('mypage.withdrawal.confirm.close_aria_label')}
           >
             <CloseIcon className="h-5 w-5 stroke-greyDark dark:stroke-dark_white" />
           </button>
