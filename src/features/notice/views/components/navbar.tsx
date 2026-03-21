@@ -71,7 +71,7 @@ export const Navbar = () => {
           {user?.picture ? (
             <img
               src={user.picture}
-              alt="Profile"
+              alt={user.name}
               className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
             />
           ) : (
