@@ -5,8 +5,7 @@ import { useUser } from '@/features/auth';
 
 import { Navbar } from '../components/navbar';
 
-import LandingModal from '@/features/landing/LandingModal/landing-modal';
-
+import NoticeSkeletonLayout from './notice-skeleton-layout';
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth
   // afterwards, remove this check
@@ -15,9 +14,10 @@ export function NoticeCommonLayout() {
 
   if (user === undefined) return <Loading />;
 
+  if (user === null) return <NoticeSkeletonLayout />;
+
   return (
     <div>
-      {user === null && <LandingModal />}
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <div className="mb-96 flex flex-1">

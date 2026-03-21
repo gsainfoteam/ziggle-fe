@@ -46,15 +46,13 @@ function List({
 
   if (isLoading) return <LoadingCatAnimation />;
 
-  if (isNotFound) {
+  if (isNotFound || !notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">
-          <div className="h-[100px]" />
-          <div className="mx-auto h-[10px]" />
-
+          <div className="h-25" />
+          <div className="mx-auto h-2.5" />
           <SearchNoResult />
-
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
             {t('emptyNotices')}
           </p>
@@ -62,26 +60,9 @@ function List({
       </div>
     );
   }
-  if (!notices?.list.length) {
-    return (
-      <>
-        <div className="flex w-full flex-col md:max-w-[800px]">
-          {Array.from({ length: 3 }).map((_, index) => (
-            <React.Fragment key={index}>
-              <LogClick eventName="empty">
-                <ZaboSkeleton />
-              </LogClick>
-              <div className="bg-greyLight dark:bg-dark_greyBorder my-[30px] h-px" />
-            </React.Fragment>
-          ))}
-        </div>
-        <Pagination page={page} items={2000} itemsPerPage={ITEMS_PER_PAGE} />
-      </>
-    );
-  }
   return (
     <>
-      <div className="flex w-full flex-col md:max-w-[800px]">
+      <div className="flex w-full flex-col md:max-w-200">
         {...notices.list.map((notice) => (
           <React.Fragment key={notice.id}>
             <LogClick
@@ -89,12 +70,11 @@ function List({
               properties={{
                 type: 'zabo',
                 id: notice.id,
-                // searchParams: noticeSearchParams,
               }}
             >
               <Zabo key={notice.id} {...notice} />
             </LogClick>
-            <div className="bg-greyLight dark:bg-dark_greyBorder my-[30px] h-px" />
+            <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
           </React.Fragment>
         ))}
       </div>
@@ -122,7 +102,7 @@ export function NoticeListFrame() {
     <main className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center">
         {category === 'home' && (
-          <div className="mt-6 mb-[30px] flex w-full justify-center">
+          <div className="mt-6 mb-7.5 flex w-full justify-center">
             <HomeBannerCarousel />
           </div>
         )}
