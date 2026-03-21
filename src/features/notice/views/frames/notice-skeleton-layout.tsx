@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Footer } from '@/common/components';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
-import { LandingModal } from '@/features/landing/index';
+import { LandingModal } from '@/features/landing';
 
 import { Navbar } from '../components/navbar';
 import Pagination from '../components/pagination';

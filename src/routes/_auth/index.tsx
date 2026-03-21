@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { z } from 'zod';
 
-import { LandingModal } from '@/features/landing/index';
+import { LandingModal } from '@/features/landing';
 
 export const Route = createFileRoute('/_auth/')({
   validateSearch: z.object({ redirect: z.string().optional() }),

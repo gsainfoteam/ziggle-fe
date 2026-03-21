@@ -7,9 +7,8 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { Button } from '@/common/components';
 import { useAuth, useAuthRedirect } from '@/features/auth';
 
-
-import LandingGrids from './landing-grids';
-export default function LandingModal() {
+import LandingGrids from './components/landing-grids';
+export function LandingModal() {
   const { t } = useTranslation('home');
 
   const search = useSearch({ strict: false });

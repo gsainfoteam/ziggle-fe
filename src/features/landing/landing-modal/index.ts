@@ -1,1 +1,0 @@
-export { default as LandingModal} from './landing-modal';

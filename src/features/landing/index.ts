@@ -1,2 +1,1 @@
-
-export * from './landing-modal';
+export * from './views';
