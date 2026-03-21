@@ -87,3 +87,13 @@ export const LongTitle: Story = {
     title: '제목이 매우 긴 경우 최대 세 줄까지만 표시되는지 확인하기 위한 아주 긴 제목의 공지사항 테스트 케이스입니다',
   },
 };
+
+export const WithPicture: Story = {
+  args: {
+    ...mockNotice,
+    author: {
+      ...mockNotice.author,
+      picture: 'https://picsum.photos/seed/author1/36/36',
+    },
+  },
+};
