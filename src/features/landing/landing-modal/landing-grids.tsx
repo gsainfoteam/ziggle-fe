@@ -14,6 +14,25 @@ const columnColors = [
   'bg-primary/80',
 ];
 
+interface BlockSetProps {
+  heights: number[];
+  color: string;
+}
+
+function BlockSet({ heights, color }: BlockSetProps) {
+  return (
+    <div className="flex flex-col gap-4 pb-4">
+      {heights.map((height, blockIdx) => (
+        <div
+          key={blockIdx}
+          className={cn('shrink-0 rounded-xl', color)}
+          style={{ height: `${height}px` }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function LandingGrids() {
   const columnHeights = useMemo(() => {
     return Array.from({ length: 4 }, () => getRandomInt());
@@ -22,20 +41,6 @@ export default function LandingGrids() {
     <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
       {columnColors.map((color, colIdx) => {
         const isEven = colIdx % 2 === 0;
-        const BlockSet = () => (
-          <div className="flex flex-col gap-4 pb-4">
-            {columnHeights.map((height, blockIdx) => (
-              <div
-                key={blockIdx}
-                className={cn('shrink-0 rounded-xl', color)}
-                style={{
-                  height: `${height}px`,
-                }}
-              />
-            ))}
-          </div>
-        );
-
         return (
           <div key={colIdx} className="relative h-full w-31">
             <div
@@ -44,8 +49,8 @@ export default function LandingGrids() {
                 isEven ? 'animate-col-up' : 'animate-col-down',
               )}
             >
-              <BlockSet />
-              <BlockSet />
+              <BlockSet heights={columnHeights} color={color} />
+              <BlockSet heights={columnHeights} color={color} />
             </div>
           </div>
         );
