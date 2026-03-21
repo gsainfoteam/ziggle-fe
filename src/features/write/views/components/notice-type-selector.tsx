@@ -28,7 +28,7 @@ export const NoticeTypeSelector = ({
   // t('write.noticeTypes.recruit.description.example'), t('write.noticeTypes.event.description.example'), t('write.noticeTypes.general.description.example')
   return (
     <>
-      <div className="mb-5 flex gap-[10px]">
+      <div className="mb-5 flex gap-2.5">
         {noticeTypes.map((noticeType) => (
           <div
             className="cursor-pointer"
@@ -47,7 +47,7 @@ export const NoticeTypeSelector = ({
                 selectedNoticeType === noticeType ? 'selected' : 'deselected'
               }
               disabled={disabled}
-              className="gap-[5px]"
+              className="gap-1.25"
             >
               {(() => {
                 switch (noticeType) {

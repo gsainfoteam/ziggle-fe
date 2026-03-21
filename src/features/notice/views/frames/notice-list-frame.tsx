@@ -16,7 +16,6 @@ import { HomeBannerCarousel } from '../components/home-banner-carousel';
 import Pagination from '../components/pagination';
 import { useSidebarObject } from '../components/sidebar';
 import { Zabo } from '../components/zabo';
-import { ZaboSkeleton } from '../components/skeleton/zabo-skeleton';
 
 function List({
   page,
@@ -107,7 +106,7 @@ export function NoticeListFrame() {
           </div>
         )}
         {category !== 'home' && (
-          <div className="flex w-full flex-row flex-wrap justify-between gap-[14px] px-[18px] py-5 font-bold md:max-w-[800px]">
+          <div className="flex w-full flex-row flex-wrap justify-between gap-3.5 px-4.5 py-5 font-bold md:max-w-200">
             <div className="text-primary flex items-center gap-2 text-4xl">
               <icons.bold className="fill-primary dark:stroke-dark_dark w-10 stroke-white" />
               {title}

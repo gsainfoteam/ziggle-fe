@@ -60,7 +60,7 @@ export const Zabo = (props: ZaboProps) => {
             {group ? group.name : author.name}
           </span>
 
-          <span className="text-greyDark dark:text-grey mx-[5px] font-bold">
+          <span className="text-greyDark dark:text-grey mx-1.25 font-bold">
             ·
           </span>
 
@@ -70,7 +70,7 @@ export const Zabo = (props: ZaboProps) => {
 
           {deadline !== null && (
             <>
-              <div className="w-[15px]" />
+              <div className="w-3.75" />
               <DDay deadline={dayjs(deadline)} />
             </>
           )}

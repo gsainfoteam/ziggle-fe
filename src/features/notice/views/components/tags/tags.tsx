@@ -17,7 +17,7 @@ interface TagsProps {
 export const Tags = ({ tags, className }: TagsProps) => {
   const { t } = useTranslation('notice');
   return (
-    <div className={cn('flex gap-[7px]', className)}>
+    <div className={cn('flex gap-1.75', className)}>
       {tags.map((name) => (
         <Tag
           key={name}
