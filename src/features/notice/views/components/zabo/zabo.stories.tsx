@@ -16,7 +16,7 @@ const mockNotice: Notice = {
   title: '모의 공지 제목입니다',
   content: '모의 공지 본문입니다. 여러 줄로 구성된 내용을 보여줍니다.',
   createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-  author: { uuid: 'author-1', name: '홍길동' },
+  author: { uuid: 'author-1', name: '홍길동', picture: null },
   deadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
   imageUrls: ['https://placehold.co/400x200?text=Image'],
   tags: ['태그1', '태그2'],

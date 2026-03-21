@@ -15,7 +15,7 @@ const mockNotice: ResultZaboProps = {
   title: '2026 봄 학기 장학금 공고',
   content:
     '2026학년도 봄 학기 성적우수장학금 신청을 받습니다. 대상은 직전 학기 성적 3.5 이상인 재학생이며, 학생처 홈페이지를 통해 신청하시기 바랍니다.',
-  author: { uuid: 'author-1', name: '학생처' },
+  author: { uuid: 'author-1', name: '학생처', picture: null },
   createdAt: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
   deadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
   imageUrls: [],

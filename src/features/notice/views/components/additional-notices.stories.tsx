@@ -7,7 +7,7 @@ const mockNotice: NoticeDetail = {
   id: 1,
   title: '2026 봄 학기 동아리 모집',
   content: '공지 본문 내용입니다.',
-  author: { uuid: 'author-1', name: '홍길동' },
+  author: { uuid: 'author-1', name: '홍길동', picture: null },
   createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
   tags: ['모집', '동아리'],
   views: 120,
