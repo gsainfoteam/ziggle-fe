@@ -1,4 +1,5 @@
 // primitive components
+export * from './avatar';
 export * from './button';
 export * from './loading';
 export * from './loading-cat';

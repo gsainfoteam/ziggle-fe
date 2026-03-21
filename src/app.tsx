@@ -24,7 +24,7 @@ const createAuthConfig = (recentLogout: boolean): TAuthConfig => ({
   authorizationEndpoint: getRequiredEnv('VITE_IDP_AUTHORIZE_URL'),
   tokenEndpoint: getRequiredEnv('VITE_IDP_TOKEN_URL'),
   redirectUri: getRequiredEnv('VITE_IDP_REDIRECT_URI'),
-  scope: ['offline_access', 'name', 'picture', 'email', 'student_id'].join(' '),
+  scope: ['offline_access', 'name', 'picture', 'email'].join(' '),
   onRefreshTokenExpire: (event) =>
     event.logIn(undefined, undefined, 'redirect'),
   extraAuthParameters: {

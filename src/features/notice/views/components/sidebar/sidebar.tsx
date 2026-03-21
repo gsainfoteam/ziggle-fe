@@ -2,8 +2,12 @@ import React from 'react';
 
 import { useLocation } from '@tanstack/react-router';
 
-import { LogClick } from '@/common/components';
+import { useTranslation } from 'react-i18next';
+
+import FlagIcon from '@/assets/icons/white-flag.svg?react';
+import { CSLink, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
 import { ChangeDarkModeBox } from './change-dark-mode-box';
@@ -14,6 +18,7 @@ import { useSidebarObject } from './use-sidebar';
 export const Sidebar = () => {
   const { pathname } = useLocation();
   const sidebarObject = useSidebarObject();
+  const { t } = useTranslation('auth');
 
   const { data: user } = useUser();
 
@@ -61,6 +66,20 @@ export const Sidebar = () => {
       </div>
       <div className="bg-greyLight dark:bg-dark_greyDark my-3.75 h-px" />
       <ul className="flex flex-col gap-y-2">
+        <li className="w-full">
+          <LogClick eventName={LogEvents.myClickBugReport}>
+            <CSLink
+              className={cn(
+                'dark:hover:bg-dark_grey flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300',
+              )}
+            >
+              <span className="w-6">
+                <FlagIcon className="stroke-text dark:stroke-dark_white" />
+              </span>
+              <span className="ml-4">{t('mypage.feedback')}</span>
+            </CSLink>
+          </LogClick>
+        </li>
         <li className="w-full">
           <ChangeDarkModeBox />
         </li>
