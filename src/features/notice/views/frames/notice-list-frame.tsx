@@ -30,7 +30,11 @@ function List({
   sortByDeadline: boolean;
   category: Category | string;
 }) {
-  const { data: notices, isLoading } = useNotices({
+  const {
+    data: notices,
+    isLoading,
+    isNotFound,
+  } = useNotices({
     page,
     orderBy: sortByDeadline ? 'deadline' : noticeSearchParams?.orderBy,
     my: noticeSearchParams?.my,
@@ -39,15 +43,14 @@ function List({
   const { t } = useTranslation('notice');
 
   if (isLoading) return <LoadingCatAnimation />;
-  if (!notices?.list.length) {
+
+  if (isNotFound || !notices?.list.length) {
     return (
       <div className="flex w-full justify-center">
         <div className="align-center flex flex-col justify-center">
           <div className="h-25" />
           <div className="mx-auto h-2.5" />
-
           <SearchNoResult />
-
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
             {t('list.empty')}
           </p>
@@ -55,7 +58,6 @@ function List({
       </div>
     );
   }
-
   return (
     <>
       <div className="flex w-full flex-col md:max-w-200">
@@ -66,7 +68,6 @@ function List({
               properties={{
                 type: 'zabo',
                 id: notice.id,
-                // searchParams: noticeSearchParams,
               }}
             >
               <Zabo key={notice.id} {...notice} />

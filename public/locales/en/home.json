@@ -1,4 +1,7 @@
 {
-  "login": "Login with Infoteam Account",
-  "subtitle": "All Notices in GIST at a glance"
+  "home": {
+    "login": "Login with Infoteam Account",
+    "policy": "<privacyLink>Privacy Policy</privacyLink> and <termsLink>Terms of Service</termsLink> ",
+    "subtitle": "All Notices in GIST at a glance"
+  }
 }

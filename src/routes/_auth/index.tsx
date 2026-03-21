@@ -1,10 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, redirect } from '@tanstack/react-router';
 
 import { z } from 'zod';
 
-import { LandingFrame } from '@/features/landing';
+import { LandingModal } from '@/features/landing';
 
 export const Route = createFileRoute('/_auth/')({
-  component: LandingFrame,
   validateSearch: z.object({ redirect: z.string().optional() }),
+  component: LandingModal,
+  beforeLoad: () => {
+    throw redirect({
+      to: '/$category',
+      params: { category: 'home' },
+    });
+  },
 });

@@ -1,8 +1,9 @@
-import { Navigate, Outlet } from '@tanstack/react-router';
+import { Outlet } from '@tanstack/react-router';
 
 import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
+import { NoticeSkeletonLayout } from './notice-skeleton-layout';
 import { Navbar } from '../components/navbar';
 
 export function NoticeCommonLayout() {
@@ -12,15 +13,18 @@ export function NoticeCommonLayout() {
   const { data: user } = useUser();
 
   if (user === undefined) return <Loading />;
-  if (user === null) return <Navigate to="/" />;
+
+  if (user === null) return <NoticeSkeletonLayout />;
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="mb-96 flex flex-1">
-        <Outlet />
+    <div>
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <div className="mb-96 flex flex-1">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }
