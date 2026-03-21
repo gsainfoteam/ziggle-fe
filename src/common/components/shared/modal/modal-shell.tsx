@@ -67,7 +67,7 @@ function ModalPanel({ children, className }: ModalSlotProps) {
   return (
     <div
       className={cn(
-        'relative z-10 mx-10 flex h-auto min-w-[400px] max-w-[500px] flex-col justify-between gap-6 rounded-[20px] bg-white p-6 shadow-md',
+        'relative z-10 mx-5 flex h-auto w-full min-w-0 max-w-[500px] flex-col justify-between gap-6 rounded-[20px] bg-white p-6 shadow-md',
         className,
       )}
       onClick={(e) => e.stopPropagation()}
