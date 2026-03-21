@@ -20,7 +20,7 @@ export const SidebarItem = ({
     <Link
       {...props}
       className={cn(
-        'dark:hover:bg-dark_grey flex w-48 items-center gap-5 rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none',
+        'dark:hover:bg-dark_grey flex w-48 items-center gap-5 rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
         isSelected && 'bg-greyLight dark:bg-dark_greyDark',
       )}
     >
