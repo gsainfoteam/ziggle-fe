@@ -40,7 +40,7 @@ export default function LandingGrids() {
     );
   }, []);
   return (
-    <div className="mask-fade-y relative flex h-full items-center justify-center gap-4 overflow-hidden">
+    <div className="mask-fade-y relative hidden h-full items-center justify-center gap-4 overflow-hidden md:flex">
       {columnColors.map((color, colIdx) => {
         const isEven = colIdx % 2 === 0;
         return (

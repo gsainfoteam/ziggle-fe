@@ -17,19 +17,21 @@ export function LandingModal() {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="flex h-145 w-233.5 rounded-2xl bg-white pl-6">
+      <div className="flex h-95 w-80 rounded-2xl bg-white md:h-145 md:w-233.5 md:pl-6">
         <LandingGrids />
-        <div className="flex w-96 flex-col justify-between p-6">
-          <div className="flex h-110 flex-col items-center justify-center">
-            <div className="mb-5 block dark:hidden">
-              <ZiggleLogo className="w-55" />
+        <div className="flex w-full flex-col items-center justify-between p-4 md:w-96 md:p-6">
+          <div className="flex h-110 w-fit flex-col items-center justify-center">
+            <div className="mb-5 inline-block dark:hidden">
+              <ZiggleLogo className="w-50 md:w-55" />
             </div>
-            <div className="mb-5 hidden dark:block">
-              <ZiggleLogoDark className="w-55" />
+            <div className="mb-5 hidden dark:inline-block">
+              <ZiggleLogoDark className="w-50 md:w-55"/>
             </div>
-            <div className="text-lg font-bold">{t('home.subtitle')}</div>
+            <div className="text-center text-lg font-bold">
+              {t('home.subtitle')}
+            </div>
           </div>
-          <div className="flex h-fit flex-col items-center gap-3">
+          <div className="flex h-fit w-full flex-col items-center gap-3">
             <p className="text-muted-foreground text-sm">
               <Trans
                 t={t}
@@ -56,7 +58,7 @@ export function LandingModal() {
             </p>
 
             <Button
-              className="w-80"
+              className="w-full px-5 py-2.5 md:w-80"
               variant="outlined"
               onClick={() => {
                 useAuthRedirect.getState().setRedirect(redirect ?? '/home');
