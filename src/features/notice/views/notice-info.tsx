@@ -7,7 +7,7 @@ import { useUser } from '@/features/auth';
 import { AuthorActions } from './components/author-actions';
 import { Tags } from './components/tags';
 
-import type { NoticeDetail } from '../models';
+import type { Author, NoticeDetail } from '../models';
 
 export const NoticeInfo = ({
   id,
@@ -24,11 +24,7 @@ export const NoticeInfo = ({
     <div className="flex flex-col gap-4.5">
       {deadline && <Deadline deadline={dayjs(deadline).tz()} />}
 
-      <Metadata
-        author={author.name}
-        createdAt={dayjs(createdAt)}
-        views={views}
-      />
+      <Metadata author={author} createdAt={dayjs(createdAt)} views={views} />
 
       {user?.uuid === author.uuid && <AuthorActions noticeId={id} />}
 
@@ -58,7 +54,7 @@ const Metadata = ({
   author,
   createdAt,
 }: {
-  author: string;
+  author: Author;
   createdAt: dayjs.Dayjs;
   views: number;
 }) => {
@@ -67,9 +63,17 @@ const Metadata = ({
   return (
     <>
       <div className="flex items-center">
-        <DefaultProfile width={36} height={36} />
+        {author.picture ? (
+          <img
+            src={author.picture}
+            alt={author.name}
+            className="size-9 rounded-full"
+          />
+        ) : (
+          <DefaultProfile className="size-9" />
+        )}
 
-        <span className="ml-2 text-lg font-medium">{author}</span>
+        <span className="ml-2 text-lg font-medium">{author.name}</span>
 
         <span className="text-greyDark mx-1.25 font-bold">·</span>
 

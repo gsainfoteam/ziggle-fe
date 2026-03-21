@@ -8,6 +8,7 @@ export enum EmojiString {
   SURPRISED = '😮',
 }
 
+export type Author = components['schemas']['AuthorDto'];
 export type NoticeDetail = components['schemas']['ExpandedGeneralNoticeDto'];
 export type AdditionalContent = components['schemas']['AdditionalContentsDto'];
 export type Notice = components['schemas']['GeneralNoticeDto'];
