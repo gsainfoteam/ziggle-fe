@@ -103,15 +103,6 @@
     "vite-plugin-svgr": "^4.5.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5",
-    "zod": "^4.3.5",
-    "storybook": "^10.2.15",
-    "@storybook/react-vite": "^10.2.15",
-    "@chromatic-com/storybook": "^5.0.1",
-    "@storybook/addon-vitest": "^10.2.15",
-    "@storybook/addon-a11y": "^10.2.15",
-    "@storybook/addon-docs": "^10.2.15",
-    "playwright": "^1.58.2",
-    "@vitest/browser": "3.2.4",
-    "@vitest/coverage-v8": "3.2.4"
+    "zod": "^4.3.5"
   }
 }
