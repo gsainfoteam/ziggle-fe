@@ -14,12 +14,25 @@ export function useWithdrawalFlow({
   const { mutateAsync: withdraw } = useWithdraw();
 
   const submitWithdrawal = useCallback(async () => {
+    let isSuccess = false;
+
     try {
       await withdraw({});
-      await onSuccess?.();
+      isSuccess = true;
     } catch (error) {
       console.error('withdrawal error', error);
-      await onFailure?.(error);
+      try {
+        await onFailure?.(error);
+      } finally {
+        close();
+      }
+      return;
+    }
+
+    try {
+      if (isSuccess) {
+        await onSuccess?.();
+      }
     } finally {
       close();
     }
