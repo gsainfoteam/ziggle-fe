@@ -80,5 +80,9 @@
     "urgent": "마감임박",
     "write": "공지 작성",
     "zigglepick": "지글픽"
+  },
+  "query_handle": {
+    "unauthorized": "접근 권한이 없습니다. 로그인을 확인해 주세요.",
+    "fetch_fail": "공지사항을 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요."
   }
 }

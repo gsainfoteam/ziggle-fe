@@ -13,12 +13,13 @@ import { Content } from '../components/content';
 import ImageStack from '../components/image-stack';
 import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
+import { NoticeNotFoundFrame } from './notice-not-found-frame';
 
 export function NoticeDetailFrame() {
   const { notice: preloadedNotice, numId } = useLoaderData({
     from: '/_layout/_sidebar/notice/$id',
   });
-  const { data: notice } = useNotice(numId);
+  const { data: notice, isLoading, isNotFound } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
   const { t, i18n } = useTranslation('common');
 
@@ -29,7 +30,13 @@ export function NoticeDetailFrame() {
     };
   }, [efficientNotice.title, t]);
 
-  if (!efficientNotice) return <Loading />;
+  if (isNotFound) {
+    return <NoticeNotFoundFrame />;
+  }
+
+  if (isLoading || !efficientNotice) {
+    return <Loading />;
+  }
 
   const additionalContents = Object.values(
     efficientNotice.additionalContents.reduce<

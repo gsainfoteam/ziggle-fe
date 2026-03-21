@@ -1,1 +1,1 @@
-export * from './frames';
+export { LandingModal } from './landing-modal';

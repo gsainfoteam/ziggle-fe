@@ -1,14 +1,49 @@
+import { useEffect, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import { $api, api } from '@/common/lib';
+import { useUser } from '@/features/auth';
 
 import { ApiPaths } from '../../models';
 
 export const useNotice = (id: number) => {
+  const { data: user } = useUser();
   const { i18n } = useTranslation();
-  return $api.useQuery('get', ApiPaths.NoticeController_getNotice, {
-    params: { path: { id }, query: { lang: i18n.language } },
-  });
+  const { t } = useTranslation('notice');
+
+  const { data, error, isError, isLoading } = $api.useQuery(
+    'get',
+    ApiPaths.NoticeController_getNotice,
+    {
+      params: { path: { id }, query: { lang: i18n.language } },
+    },
+    {
+      enabled: user !== null,
+      retry(count, error) {
+        if (error?.statusCode === 404 || error?.statusCode === 400)
+          return false;
+        return count < 3;
+      },
+    },
+  );
+  useEffect(() => {
+    if (!isError) return;
+    if (error?.statusCode === 401) {
+      toast.error(t('query_handle.unauthorized'));
+    } else if (error?.statusCode === 404) {
+      // handling in view
+    } else {
+      toast.error(t('query_handle.fetch_fail'));
+    }
+  }, [error, isError, t]);
+
+  const isNotFound = useMemo(
+    () => error?.statusCode === 404,
+    [error?.statusCode],
+  );
+  return { data, isLoading, isNotFound };
 };
 
 export const getNotice = (id: number, lang?: string) => {
