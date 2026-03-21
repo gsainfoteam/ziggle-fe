@@ -5,12 +5,12 @@ import { Link } from '@tanstack/react-router';
 import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
-import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
+import { ProfileModal } from '../profile-modal';
 import { Sidebar } from './sidebar';
 
 interface SidebarProps {
@@ -32,6 +32,19 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
   };
 
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)');
+    if (mq.matches) {
+      onClose();
+      return;
+    }
+    const handler = (e: MediaQueryListEvent) => {
+      if (e.matches) handleClose();
+    };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, [onClose]);
+
+  useEffect(() => {
     if (isOpen) return;
     const timer = setTimeout(onClose, 300);
     return () => {
@@ -40,7 +53,7 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
   }, [isOpen, onClose]);
 
   return ReactDOM.createPortal(
-    <div className="fixed inset-0 w-screen">
+    <div className="fixed inset-0 z-50 w-screen">
       <div
         className={cn(
           'bg-opacity-50 absolute inset-0 h-screen bg-black transition-opacity duration-300',
@@ -54,24 +67,15 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
           isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
-        <LogClick eventName={LogEvents.sidebarClickProfile}>
-          <Link
-            to='/'
-            className="my-2.5 flex items-center gap-3 px-3 py-2.5"
-          >
-            {user?.picture ? (
-              <img
-                src={user.picture}
-                alt={user.name}
-                className="size-9 rounded-full"
-              />
-            ) : (
-              <DefaultProfile className="size-9" />
-            )}
-
-            <p>{user?.name ?? t('navbar.login')}</p>
-          </Link>
-        </LogClick>
+        {user ? (
+          <ProfileModal triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 px-4 py-2" />
+        ) : (
+          <LogClick eventName={LogEvents.sidebarClickProfile}>
+            <Link to="/" className="my-2.5 flex items-center gap-3 px-3 py-2.5">
+              <p>{t('navbar.login')}</p>
+            </Link>
+          </LogClick>
+        )}
         <Sidebar />
         <div className="h-25" />
       </div>
