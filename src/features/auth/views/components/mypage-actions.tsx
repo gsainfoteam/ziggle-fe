@@ -4,20 +4,17 @@ import { overlay } from 'overlay-kit';
 import {
   Button,
   LogClick,
-  WithdrawalErrorModal,
-  WithdrawalModal,
-  WithdrawalSuccessModal,
 } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { MypageBox } from './mypage-box';
 
-import { useLogout, useWithdraw } from '../../viewmodels';
+import { useLogout } from '../../viewmodels';
+import { WithdrawalModal, WithdrawalErrorModal, WithdrawalSuccessModal } from './withdrawal';
 
 export default function MypageActions() {
   const { t } = useTranslation('auth');
 
   const { mutate: logout } = useLogout();
-  const { mutateAsync: withdraw } = useWithdraw();
 
   const handleSignOut = () => {
     logout({});
@@ -28,9 +25,6 @@ export default function MypageActions() {
       <WithdrawalModal
         isOpen={isOpen}
         close={close}
-        onWithdraw={async () => {
-          await withdraw({});
-        }}
         onSuccess={async () => {
           overlay.open(({ isOpen, close }) => (
             <WithdrawalSuccessModal

@@ -1,26 +1,28 @@
 import { useTranslation } from 'react-i18next';
 
-import { ApiPaths } from '@/@types/api-schema';
-import { api } from '@/common/lib/api';
 import CloseIcon from '@/assets/icons/close.svg?react';
 import { Button } from '@/common/components/ui/button';
+import { ModalShell } from '@/common/components/shared/modal/modal-shell';
 
-import { ModalShell } from './modal-shell';
+import { useWithdrawalFlow } from '../../../viewmodels';
 
 export function WithdrawalModal({
   isOpen,
   close,
   onSuccess,
-  onWithdraw,
   onFailure,
 }: {
   isOpen: boolean;
   close: () => void;
   onSuccess?: () => void | Promise<void>;
-  onWithdraw?: () => Promise<void>;
   onFailure?: (error: unknown) => void | Promise<void>;
 }) {
   const { t } = useTranslation('auth');
+  const { submitWithdrawal } = useWithdrawalFlow({
+    onSuccess,
+    onFailure,
+    close,
+  });
 
   if (!isOpen) return null;
 
@@ -62,22 +64,8 @@ export function WithdrawalModal({
           <Button
             className="flex-1 min-w-0 px-3 py-4 text-sm text-white bg-primary hover:brightness-90"
             variant="contained"
-            onClick={async () => {
-              try {
-                if (onWithdraw) {
-                  await onWithdraw();
-                } else {
-                  await api.DELETE(ApiPaths.UserController_deleteUser);
-                }
-                if (onSuccess) {
-                  await onSuccess();
-                }
-              } catch (error) {
-                console.error('withdrawal error', error);
-                await onFailure?.(error);
-              } finally {
-                close();
-              }
+            onClick={() => {
+              void submitWithdrawal();
             }}
           >
             {t('mypage.withdrawal.confirm.ok_btn')}

@@ -1,7 +1,7 @@
-import { Button } from '@/common/components/ui/button';
 import { useTranslation } from 'react-i18next';
 
-import { ModalShell } from './modal-shell';
+import { Button } from '@/common/components/ui/button';
+import { ModalShell } from '@/common/components/shared/modal/modal-shell';
 
 interface WithdrawalErrorModalProps {
   isOpen: boolean;
