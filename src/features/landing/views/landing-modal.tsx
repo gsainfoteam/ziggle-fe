@@ -33,7 +33,7 @@ export function LandingModal() {
             <p className="text-muted-foreground text-sm">
               <Trans
                 t={t}
-                i18nKey={'home.policy'}
+                i18nKey="home.policy"
                 components={{
                   privacyLink: (
                     <a
