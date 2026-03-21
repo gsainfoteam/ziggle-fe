@@ -5,45 +5,44 @@ import {
   RouterProvider,
 } from '@tanstack/react-router';
 
-import type { Notice } from '@/features/notice/models';
+import { NoticeInfo } from './notice-info';
 
-import { Zabo } from './zabo';
-
+import type { NoticeDetail } from '../models';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const mockNotice: Notice = {
+const mockNotice: NoticeDetail = {
   id: 1,
-  title: '모의 공지 제목입니다',
-  content: '모의 공지 본문입니다. 여러 줄로 구성된 내용을 보여줍니다.',
-  createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  title: '2026 봄 학기 동아리 모집',
   author: { uuid: 'author-1', name: '홍길동', picture: null },
-  deadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
-  imageUrls: ['https://placehold.co/400x200?text=Image'],
-  tags: ['태그1', '태그2'],
+  createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  tags: ['모집', '동아리'],
   views: 42,
   langs: ['ko'],
+  content: '<p>저희 동아리에서 신입 부원을 모집합니다.</p>',
   reactions: [{ emoji: '🔥', count: 5, isReacted: false }],
   isReminded: false,
   category: {},
   publishedAt: new Date().toISOString(),
+  imageUrls: [],
   documentUrls: [],
+  additionalContents: [],
 };
 
 const queryClient = new QueryClient();
 
-const createZaboRouter = (notice: Notice) => {
+const createNoticeInfoRouter = (props: NoticeDetail) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <div className="w-160">
-        <Zabo {...notice} />
+      <div className="w-120 p-6">
+        <NoticeInfo {...props} />
       </div>
     ),
   });
   return createRouter({ routeTree: rootRoute });
 };
 
-const ZaboWithProviders = (props: Notice) => {
-  const router = createZaboRouter(props);
+const NoticeInfoWithProviders = (props: NoticeDetail) => {
+  const router = createNoticeInfoRouter(props);
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
@@ -52,13 +51,13 @@ const ZaboWithProviders = (props: Notice) => {
 };
 
 const meta = {
-  title: 'Features/Notice/Zabo/Zabo',
-  component: ZaboWithProviders,
+  title: 'Features/Notice/NoticeInfo',
+  component: NoticeInfoWithProviders,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof ZaboWithProviders>;
+} satisfies Meta<typeof NoticeInfoWithProviders>;
 
 export default meta;
 
@@ -68,35 +67,24 @@ export const Default: Story = {
   args: mockNotice,
 };
 
-export const WithoutDeadline: Story = {
+export const WithDeadline: Story = {
   args: {
     ...mockNotice,
-    deadline: undefined,
+    currentDeadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
   },
 };
 
-export const MultipleImages: Story = {
+export const WithTags: Story = {
   args: {
     ...mockNotice,
-    imageUrls: [
-      'https://placehold.co/400x200?text=Image+1',
-      'https://placehold.co/400x200?text=Image+2',
-      'https://placehold.co/400x200?text=Image+3',
-    ],
+    tags: ['모집', '동아리', '중앙동아리', '스포츠', '봄학기'],
   },
 };
 
-export const WithoutImage: Story = {
+export const LongTitle: Story = {
   args: {
     ...mockNotice,
-    imageUrls: [],
-  },
-};
-
-export const WithoutTags: Story = {
-  args: {
-    ...mockNotice,
-    tags: [],
+    title: '제목이 매우 긴 경우 최대 세 줄까지만 표시되는지 확인하기 위한 아주 긴 제목의 공지사항 테스트 케이스입니다',
   },
 };
 

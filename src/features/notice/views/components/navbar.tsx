@@ -68,7 +68,15 @@ export const Navbar = () => {
           to={user ? '/mypage' : '/'}
           className="hidden items-center justify-center gap-2 md:flex"
         >
-          <AccountIcon className="flex h-6" />
+          {user?.picture ? (
+            <img
+              src={user.picture}
+              alt={user.name}
+              className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
+            />
+          ) : (
+            <AccountIcon className="flex h-6" />
+          )}
           <div className="text-primary align-middle font-medium whitespace-nowrap">
             {user?.name ?? t('navbar.login')}
           </div>

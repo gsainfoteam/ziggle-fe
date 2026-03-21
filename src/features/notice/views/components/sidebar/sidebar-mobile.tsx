@@ -59,7 +59,15 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
             to={user ? '/mypage' : '/'}
             className="my-2.5 flex items-center gap-3 px-3 py-2.5"
           >
-            <DefaultProfile width={36} />
+            {user?.picture ? (
+              <img
+                src={user.picture}
+                alt={user.name}
+                className="size-9 rounded-full"
+              />
+            ) : (
+              <DefaultProfile className="size-9" />
+            )}
 
             <p>{user?.name ?? t('navbar.login')}</p>
           </Link>

@@ -14,7 +14,7 @@ const mockNotice: ResultZaboProps = {
   id: 1,
   title: '2026 봄 학기 동아리 모집',
   content: '저희 동아리에서 신입 부원을 모집합니다. 많은 관심 부탁드립니다.',
-  author: { uuid: 'author-1', name: '홍길동' },
+  author: { uuid: 'author-1', name: '홍길동', picture: null },
   createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   deadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
   imageUrls: [
@@ -92,5 +92,15 @@ export const NoDeadline: Story = {
     ...mockNotice,
     deadline: undefined,
     currentDeadline: undefined,
+  },
+};
+
+export const WithPicture: Story = {
+  args: {
+    ...mockNotice,
+    author: {
+      ...mockNotice.author,
+      picture: 'https://picsum.photos/seed/author1/36/36',
+    },
   },
 };
