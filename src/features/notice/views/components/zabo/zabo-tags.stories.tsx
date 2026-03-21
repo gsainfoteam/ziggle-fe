@@ -8,7 +8,7 @@ const mockNotice: Notice = {
   id: 1,
   title: '2026 봄 학기 동아리 모집',
   content: '공지 본문입니다.',
-  author: { uuid: 'author-1', name: '홍길동' },
+  author: { uuid: 'author-1', name: '홍길동', picture: null },
   createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   imageUrls: [],
