@@ -24,5 +24,8 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "public/locales"
+  ]
 }
