@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react';
 
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import { $api, api } from '@/common/lib';
-
-import { ApiPaths } from '../../models';
 import { useUser } from '@/features/auth';
 
-import { toast } from 'sonner';
+import { ApiPaths } from '../../models';
+
 
 export const useNotice = (id: number) => {
   const { data: user } = useUser();

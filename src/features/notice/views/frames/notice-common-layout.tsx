@@ -3,9 +3,9 @@ import { Outlet } from '@tanstack/react-router';
 import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
+import { NoticeSkeletonLayout } from './notice-skeleton-layout';
 import { Navbar } from '../components/navbar';
 
-import NoticeSkeletonLayout from './notice-skeleton-layout';
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth
   // afterwards, remove this check

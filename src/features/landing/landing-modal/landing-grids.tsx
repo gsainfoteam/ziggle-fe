@@ -1,5 +1,6 @@
-import { cn } from '@/common/utils';
 import { useMemo } from 'react';
+
+import { cn } from '@/common/utils';
 function getRandomInt(min = 50, max = 400) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);

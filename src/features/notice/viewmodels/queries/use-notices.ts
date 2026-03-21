@@ -1,12 +1,13 @@
+import { useEffect, useMemo } from 'react';
+
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
 import { $api } from '@/common/lib';
+import { useUser } from '@/features/auth';
 
 import { ApiPaths, type Category } from '../../models';
-import { useUser } from '@/features/auth';
-import { useEffect, useMemo } from 'react';
-import { toast } from 'sonner';
 
 export const useNotices = ({
   limit = ITEMS_PER_PAGE,

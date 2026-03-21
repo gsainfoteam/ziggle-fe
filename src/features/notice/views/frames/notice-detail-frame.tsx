@@ -13,7 +13,6 @@ import { Content } from '../components/content';
 import ImageStack from '../components/image-stack';
 import { SendPushAlarm } from '../components/send-push-notification';
 import NoticeInfo from '../notice-info';
-
 import { NoticeNotFoundFrame } from './notice-not-found-frame';
 
 export function NoticeDetailFrame() {

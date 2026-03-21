@@ -2,9 +2,9 @@ import { Outlet } from '@tanstack/react-router';
 
 import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
+import { NoticeSkeletonLayout } from '@/features/notice/index';
 
 import { NavbarWrite } from '../components';
-import NoticeSkeletonLayout from '@/features/notice/views/frames/notice-skeleton-layout';
 
 export const WriteLayout = () => {
   const { data: user } = useUser();

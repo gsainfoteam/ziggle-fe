@@ -1,12 +1,15 @@
-import LandingModal from '@/features/landing/LandingModal/landing-modal';
-import { Navbar } from '../components/navbar';
-import { Sidebar } from '../components/sidebar';
 import React from 'react';
-import { ZaboSkeleton } from '../components/skeleton/zabo-skeleton';
-import Pagination from '../components/pagination';
-import { ITEMS_PER_PAGE } from '@/common/const/notice';
+
 import { Footer } from '@/common/components';
-export default function NoticeSkeletonLayout() {
+import { ITEMS_PER_PAGE } from '@/common/const/notice';
+import { LandingModal } from '@/features/landing/index';
+
+import { Navbar } from '../components/navbar';
+import Pagination from '../components/pagination';
+import { Sidebar } from '../components/sidebar';
+import { ZaboSkeleton } from '../components/skeleton/zabo-skeleton';
+
+export function NoticeSkeletonLayout() {
   return (
     <div className="flex min-h-screen flex-col">
       <LandingModal />
@@ -30,7 +33,6 @@ export default function NoticeSkeletonLayout() {
             </div>
             <Pagination page={20} items={2000} itemsPerPage={ITEMS_PER_PAGE} />
           </main>
-          
         </div>
       </div>
       <Footer />
