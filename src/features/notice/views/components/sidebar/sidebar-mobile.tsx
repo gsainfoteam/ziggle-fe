@@ -56,7 +56,7 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
       >
         <LogClick eventName={LogEvents.sidebarClickProfile}>
           <Link
-            to={user ? '/mypage' : '/'}
+            to='/'
             className="my-2.5 flex items-center gap-3 px-3 py-2.5"
           >
             {user?.picture ? (

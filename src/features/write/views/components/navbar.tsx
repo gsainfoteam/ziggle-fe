@@ -36,21 +36,31 @@ export const NavbarWrite = () => {
           </Link>
         </div>
       </div>
-      <LogClick
-        eventName={
-          user ? LogEvents.navBarClickMyPage : LogEvents.navBarClickLogin
-        }
-      >
-        <Link
-          to={user ? '/mypage' : '/'}
-          className="hidden items-center justify-center gap-2 md:flex"
-        >
-          <AccountIcon className="flex h-6" />
+      {user ? (
+        <div className="hidden items-center justify-center gap-2 md:flex">
+          {user.picture ? (
+            <img
+              src={user.picture}
+              alt={user.name}
+              className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
+            />
+          ) : (
+            <AccountIcon className="flex h-6" />
+          )}
           <div className="text-primary align-middle font-medium whitespace-nowrap">
-            {user?.name ?? t('navbar.login')}
+            {user.name}
           </div>
-        </Link>
-      </LogClick>
+        </div>
+      ) : (
+        <LogClick eventName={LogEvents.navBarClickLogin}>
+          <Link to="/" className="hidden items-center justify-center gap-2 md:flex">
+            <AccountIcon className="flex h-6" />
+            <div className="text-primary align-middle font-medium whitespace-nowrap">
+              {t('navbar.login')}
+            </div>
+          </Link>
+        </LogClick>
+      )}
     </header>
   );
 };
