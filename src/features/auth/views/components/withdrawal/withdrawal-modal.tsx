@@ -18,7 +18,7 @@ export function WithdrawalModal({
   onFailure?: (error: unknown) => void | Promise<void>;
 }) {
   const { t } = useTranslation('auth');
-  const { submitWithdrawal } = useWithdrawalFlow({
+  const { submitWithdrawal, isPending } = useWithdrawalFlow({
     onSuccess,
     onFailure,
     close,
@@ -57,6 +57,7 @@ export function WithdrawalModal({
             <Button
               className="flex-1 min-w-0 px-3 py-4 text-sm text-white bg-primary hover:brightness-90"
               variant="contained"
+              disabled={isPending}
               onClick={() => {
                 void submitWithdrawal();
               }}

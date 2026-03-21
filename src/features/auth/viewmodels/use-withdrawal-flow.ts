@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { useWithdraw } from './queries';
 
@@ -12,31 +12,37 @@ export function useWithdrawalFlow({
   close: () => void;
 }) {
   const { mutateAsync: withdraw } = useWithdraw();
+  const [isPending, setIsPending] = useState(false);
+  const inFlightRef = useRef(false);
 
   const submitWithdrawal = useCallback(async () => {
-    let isSuccess = false;
+    if (inFlightRef.current) return;
+    inFlightRef.current = true;
+    setIsPending(true);
 
     try {
-      await withdraw({});
-      isSuccess = true;
-    } catch (error) {
-      console.error('withdrawal error', error);
       try {
-        await onFailure?.(error);
+        await withdraw({});
+      } catch (error) {
+        console.error('withdrawal error', error);
+        try {
+          await onFailure?.(error);
+        } finally {
+          close();
+        }
+        return;
+      }
+
+      try {
+        await onSuccess?.();
       } finally {
         close();
       }
-      return;
-    }
-
-    try {
-      if (isSuccess) {
-        await onSuccess?.();
-      }
     } finally {
-      close();
+      inFlightRef.current = false;
+      setIsPending(false);
     }
   }, [withdraw, onSuccess, onFailure, close]);
 
-  return { submitWithdrawal };
+  return { submitWithdrawal, isPending };
 }
