@@ -1,6 +1,18 @@
-import type { ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useId,
+  type ReactNode,
+} from 'react';
 
 import { cn } from '@/common/utils';
+
+type ModalShellContextValue = {
+  titleId: string;
+  descriptionId: string;
+};
+
+const ModalShellContext = createContext<ModalShellContextValue | null>(null);
 
 export type ModalRootProps = {
   isOpen: boolean;
@@ -18,15 +30,23 @@ type ModalSlotProps = {
 };
 
 function ModalRoot({ isOpen, children }: ModalRootProps) {
+  const titleId = useId();
+  const descriptionId = useId();
+
   if (!isOpen) return null;
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex h-full w-full items-center justify-center"
-      role="dialog"
-    >
-      {children}
-    </div>
+    <ModalShellContext.Provider value={{ titleId, descriptionId }}>
+      <div
+        className="fixed inset-0 z-50 flex h-full w-full items-center justify-center"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+      >
+        {children}
+      </div>
+    </ModalShellContext.Provider>
   );
 }
 
@@ -70,16 +90,28 @@ function ModalBody({ children, className }: ModalSlotProps) {
 }
 
 function ModalTitle({ children, className }: ModalSlotProps) {
+  const ctx = useContext(ModalShellContext);
+
   return (
-    <p className={cn('text-center text-xl font-semibold md:text-2xl', className)}>
+    <p
+      id={ctx?.titleId}
+      className={cn('text-center text-xl font-semibold md:text-2xl', className)}
+    >
       {children}
     </p>
   );
 }
 
 function ModalDescription({ children, className }: ModalSlotProps) {
+  const ctx = useContext(ModalShellContext);
+
   return (
-    <p className={cn('text-center text-sm text-greyDark', className)}>{children}</p>
+    <p
+      id={ctx?.descriptionId}
+      className={cn('text-center text-sm text-greyDark', className)}
+    >
+      {children}
+    </p>
   );
 }
 
