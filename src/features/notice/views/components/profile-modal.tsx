@@ -15,7 +15,6 @@ import ReactDOM from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import AccountIcon from '@/assets/icons/account.svg?react';
 import CloseIcon from '@/assets/icons/close.svg?react';
 import DefaultProfileIcon from '@/assets/icons/default-profile.svg?react';
 import { LogClick } from '@/common/components';
@@ -120,7 +119,7 @@ interface ProfileModalProps {
 }
 
 export const ProfileModal = ({
-  triggerClassName = 'hidden cursor-pointer items-center justify-center gap-2 md:flex',
+  triggerClassName = 'hidden cursor-pointer items-center justify-center gap-3 md:flex',
 }: ProfileModalProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
@@ -152,7 +151,10 @@ export const ProfileModal = ({
   });
 
   const click = useClick(context);
-  const dismiss = useDismiss(context, { outsidePress: true, escapeKey: true });
+  const dismiss = useDismiss(context, {
+    outsidePress: !isMobile,
+    escapeKey: true,
+  });
   const { getReferenceProps, getFloatingProps } = useInteractions([
     click,
     dismiss,
@@ -217,12 +219,12 @@ export const ProfileModal = ({
             <img
               src={user.picture}
               alt={user.name}
-              className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
+              className="size-9 shrink-0 rounded-full"
             />
           ) : (
-            <AccountIcon className="flex h-6" />
+            <DefaultProfileIcon className="size-9 shrink-0" />
           )}
-          <div className="text-primary align-middle font-medium whitespace-nowrap">
+          <div className="text-dark_dark align-middle font-medium whitespace-nowrap">
             {user?.name}
           </div>
         </button>

@@ -37,6 +37,7 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
       onClose();
       return;
     }
+
     const handler = (e: MediaQueryListEvent) => {
       if (e.matches) handleClose();
     };
@@ -68,7 +69,7 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
         )}
       >
         {user ? (
-          <ProfileModal triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 px-4 py-2" />
+          <ProfileModal triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 p-3" />
         ) : (
           <LogClick eventName={LogEvents.sidebarClickProfile}>
             <Link to="/" className="my-2.5 flex items-center gap-3 px-3 py-2.5">
