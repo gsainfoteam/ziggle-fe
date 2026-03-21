@@ -9,9 +9,9 @@ export const useSearchTags = ({ keyword }: { keyword: string }) => {
     { params: { query: { search: keyword } } },
     { enabled: !!keyword },
   );
+
   return {
+    data,
     ...rest,
-    // TODO: ??
-    data: data as unknown as NonNullable<typeof data>[] | undefined,
   };
 };

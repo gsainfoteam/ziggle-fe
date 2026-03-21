@@ -61,7 +61,7 @@ interface NoticeEditorProps {
 export const NOTICE_LOCAL_STORAGE_KEY = 'notice';
 
 export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
   const router = useRouter();
 
   const [state, dispatch] = useReducer(editorStateReducer, initialEditorState);
@@ -87,9 +87,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       setIsLoading(true);
 
-      // t('alertResponse.yes')
-      // t('alertResponse.no')
-      const confirmed = confirm(t('write.hasSavedNotice'));
+      // common:alert_response.yes / common:alert_response.no
+      const confirmed = confirm(t('auto_save.has_saved'));
       if (!confirmed) {
         setIsLoading(false);
         // TODO: send log
@@ -190,7 +189,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     if (isLoading) return;
 
     // TODO: change with custom overlay
-    alert(t('write.alerts.pushWillDelayedNotice'));
+    alert(t('toasts.push_delayed'));
 
     setIsLoading(true);
 
@@ -206,7 +205,6 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       tags: [...state.tags.map(({ name }) => name)],
       images: state.photos.map(({ file }) => file),
       category: NoticeTypeCategoryMapper[state.noticeType],
-      groupId: state.account,
     };
 
     // TODO: send log
@@ -215,7 +213,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const noticeId = await handleNoticeSubmit(noticeToSubmit);
     if (!noticeId) {
       setIsLoading(false);
-      toast.error(t('write.alerts.submitFail'));
+      toast.error(t('toasts.submit_fail'));
       return;
     }
 
@@ -235,13 +233,13 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     const isEdited = !!editedLangs.length;
 
     if (!state.korean.additionalContent && state.english?.additionalContent) {
-      toast.error(t('write.alerts.needKoreanAdditionalNotice'));
+      toast.error(t('validations.korean_additional_required'));
       return;
     }
 
     setIsLoading(true);
 
-    const loading = toast.loading(t('write.alerts.modifyingNotice'));
+    const loading = toast.loading(t('toasts.modifying'));
 
     if (!hasTimedOut) {
       if (isEdited) {
@@ -256,7 +254,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         if (!updatedNoticeId) {
           setIsLoading(false);
           toast.dismiss(loading);
-          toast.error(t('write.alerts.modificationFail'));
+          toast.error(t('toasts.modify_fail'));
           return;
         }
       }
@@ -286,18 +284,18 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (!englishNotice) {
         setIsLoading(false);
         toast.dismiss(loading);
-        toast.error(t('write.alerts.attachInternationalFail'));
+        toast.error(t('toasts.international_fail'));
         // TODO: add alert
         // Swal.fire({
-        //   text: t('write.alerts.attachInternationalFail'),
+        //   text: t('toasts.international_fail'),
         //   icon: 'error',
-        //   confirmButtonText: t('alertResponse.confirm'),
+        //   confirmButtonText: t('common:alert_response.confirm'),
         //   showDenyButton: true,
-        //   denyButtonText: t('write.alerts.copyEnglishContent'),
+        //   denyButtonText: t('toasts.copy_english'),
         // }).then((result) => {
         //   if (result.isDenied) {
         //     navigator.clipboard.writeText(state.english?.content!);
-        //     toast.success(t('write.alerts.copySuccess'));
+        //     toast.success(t('toasts.copy_success'));
         //   }
         // });
         return;
@@ -321,18 +319,18 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (additionalKoreanNotice === null) {
         setIsLoading(false);
         toast.dismiss(loading);
-        toast.error(t('write.alerts.attachAdditionalNoticeFail'));
+        toast.error(t('toasts.additional_notice_fail'));
         // TODO: add alert
         // Swal.fire({
-        //   text: t('write.alerts.attachAdditionalNoticeFail'),
+        //   text: t('toasts.additional_notice_fail'),
         //   icon: 'error',
-        //   confirmButtonText: t('alertResponse.confirm'),
+        //   confirmButtonText: t('common:alert_response.confirm'),
         //   showDenyButton: true,
-        //   denyButtonText: t('write.alerts.copyAdditionalNotice'),
+        //   denyButtonText: t('toasts.copy_additional'),
         // }).then((result) => {
         //   if (result.isDenied) {
         //     navigator.clipboard.writeText(state.korean.additionalContent!);
-        //     toast.success(t('write.alerts.copySuccess'));
+        //     toast.success(t('toasts.copy_success'));
         //   }
         // });
         return;
@@ -367,22 +365,20 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         if (additionalEnglishNotice === null) {
           setIsLoading(false);
           toast.dismiss(loading);
-          toast.error(
-            t('write.alerts.attachInternationalAdditionalNoticeFail'),
-          );
+          toast.error(t('toasts.international_additional_fail'));
           // TODO: add alert
           // Swal.fire({
-          //   text: t('write.alerts.attachInternationalAdditionalNoticeFail'),
+          //   text: t('toasts.international_additional_fail'),
           //   icon: 'error',
-          //   confirmButtonText: t('alertResponse.confirm'),
+          //   confirmButtonText: t('common:alert_response.confirm'),
           //   showDenyButton: true,
-          //   denyButtonText: t('write.alerts.copyInternationalAdditionalNotice'),
+          //   denyButtonText: t('toasts.copy_international_additional'),
           // }).then((result) => {
           //   if (result.isDenied) {
           //     navigator.clipboard.writeText(
           //       state?.english?.additionalContent ?? '',
           //     );
-          //     toast.success(t('write.alerts.copySuccess'));
+          //     toast.success(t('toasts.copy_success'));
           //   }
           // });
           return;
@@ -398,7 +394,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     // });
 
     toast.dismiss(loading);
-    toast.success(t('write.alerts.modificationSuccess'));
+    toast.success(t('toasts.modify_success'));
 
     localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
     router.navigate({
@@ -412,17 +408,15 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       {isEditMode && (
         <>
           {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
-          <p className="bg-greyLight text-greyDark mt-[10px] rounded-[15px] px-5 py-[15px] text-lg">
-            {t('write.editDescription')}
+          <p className="bg-greyLight text-greyDark mt-2.5 rounded-[15px] px-5 py-3.75 text-lg">
+            {t('edit_description')}
           </p>
         </>
       )}
 
       {!isEditMode && (
         <div className="flex justify-end">
-          <p className="text-primary text-sm">
-            {t('write.autoSaveDescription')}
-          </p>
+          <p className="text-primary text-sm">{t('auto_save.description')}</p>
         </div>
       )}
 
@@ -443,7 +437,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
               : 'text-grey dark:text-dark_grey',
           )}
         >
-          {t('write.writeEnglishNotice')}
+          {t('buttons.write_english')}
         </p>
         <Toggle
           isSwitched={!!state.english}
@@ -460,9 +454,9 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         />
       </div>
 
-      <div className="mb-3 flex gap-[6px]">
+      <div className="mb-3 flex gap-1.5">
         <TypeIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
-        <p className="font-medium">{t('write.noticeType')}</p>
+        <p className="font-medium">{t('fields.notice_type')}</p>
       </div>
 
       <NoticeTypeSelector
@@ -501,7 +495,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         >
           <TitleAndContent
             title={state.korean.title}
-            titleLabel={t('write.koreanTitle')}
+            titleLabel={t('fields.korean_title')}
             onChangeTitle={(newTitle: string) =>
               dispatch({ type: 'SET_KOREAN_TITLE', koreanTitle: newTitle })
             }
@@ -512,7 +506,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
                 koreanContent: newContent,
               })
             }
-            contentLabel={t('write.koreanContent')}
+            contentLabel={t('fields.korean_content')}
             editorRef={koreanContentEditorRef}
             disabled={isEditMode && hasTimedOut}
           />
@@ -523,12 +517,12 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         <div className="flex flex-col justify-stretch">
           <TitleAndContent
             title={state.english.title}
-            titleLabel={t('write.englishTitle')}
+            titleLabel={t('fields.english_title')}
             onChangeTitle={(newTitle: string) =>
               dispatch({ type: 'SET_ENGLISH_TITLE', englishTitle: newTitle })
             }
             content={state.english.content}
-            contentLabel={t('write.englishContent')}
+            contentLabel={t('fields.english_content')}
             onChangeContent={(newContent: string) =>
               dispatch({
                 type: 'SET_ENGLISH_CONTENT',
@@ -562,8 +556,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           (state.writingTab === 'english' &&
             hasTimedOut &&
             notice?.enTitle)) && (
-          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-[20px] py-[15px] text-center text-lg">
-            {t('write.editDisabled')}
+          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-5 py-3.75 text-center text-lg">
+            {t('edit_disabled')}
           </p>
         )}
 
@@ -595,7 +589,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         <ClockIcon className="stroke-text w-5 md:w-6" />
 
         <p className="text-lg font-medium">
-          {t(isEditMode ? 'write.changeDeadline' : 'write.setupDeadline')}
+          {t(isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup')}
         </p>
 
         <Toggle
@@ -630,12 +624,12 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         <>
           <div className="mt-10 mb-2 flex gap-2">
             <TagIcon className="fill-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('write.setupTags')}</p>
-            <p className="text-grey">{`(${t('common.optional')})`}</p>
+            <p className="font-medium md:text-lg">{t('fields.tags.setup')}</p>
+            <p className="text-grey">{`(${t('optional')})`}</p>
           </div>
 
           <p className="font-regular text-secondaryText mb-3 text-sm">
-            {t('write.writeTagsDescription')}
+            {t('fields.tags.description')}
           </p>
 
           <TagInput
@@ -645,11 +639,11 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
           <div className="mt-10 mb-1 flex items-center gap-2">
             <AddPhotoIcon className="stroke-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('write.attachPhoto')}</p>
-            <p className="text-grey">{`(${t('common.optional')})`}</p>
+            <p className="font-medium md:text-lg">{t('fields.photo.attach')}</p>
+            <p className="text-grey">{`(${t('optional')})`}</p>
           </div>
           <p className="font-regular text-secondaryText mb-3 text-sm">
-            {t('write.photoDescription')}
+            {t('fields.photo.description')}
           </p>
 
           <AttachPhotoArea
@@ -657,18 +651,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
             setPhotos={(photos) => dispatch({ type: 'SET_PHOTOS', photos })}
           />
 
-          {/* TODO: implement groups feature */}
-          {/* <div className="mt-10 mb-1 flex items-center gap-2">
-            <ColorFilterIcon className="stroke-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('write.selectAccount')}</p>
-          </div> */}
-          {/* <SelectAccountArea
-            account={state.account}
-            setAccount={(account: string | null) =>
-              dispatch({ type: 'SET_ACCOUNT', account })
-            }
-          /> */}
-        </>
+</>
       )}
 
       <div className="mt-40 flex flex-col items-center">
@@ -678,10 +661,10 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
           onClick={isEditMode ? handleModify : handleSubmit}
           disabled={isLoading}
         >
-          <p className="mx-3 my-1 text-base font-bold">{t('write.submit')}</p>
+          <p className="mx-3 my-1 text-base font-bold">{t('buttons.submit')}</p>
         </Button>
         <p className="font-regular text-secondaryText max-w-[70%] text-center text-sm">
-          {t('write.submitDescription')}
+          {t('submit_description')}
         </p>
       </div>
     </>

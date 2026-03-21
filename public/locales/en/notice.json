@@ -1,188 +1,84 @@
 {
-  "alertResponse": {
-    "cancel": "Cancel",
-    "confirm": "Confirm",
-    "no": "No",
-    "yes": "Yes"
-  },
-  "common": {
-    "optional": "Optional",
-    "sortByDeadline": "Sort by Deadline"
-  },
-  "dDayPlus": "OVERDUE",
-  "emptyNotices": "No content. =ㅅ=",
-  "mypage": {
-    "myNotice": "My Notices",
-    "remindNotice": "Reminded Notices"
-  },
-  "notices": {
-    "academic": {
-      "name": "Academic Notices"
-    },
-    "event": {
-      "name": "Events"
-    },
-    "general": {
-      "name": "General"
-    },
-    "recruit": {
-      "name": "Recruiting"
-    }
-  },
-  "searchPage": {
-    "loginRequired": "Login is required",
-    "noResult": "There are no search results.",
-    "prompt": "Please enter a search term",
-    "searchBar": {
-      "collapse": "Cancel",
-      "placeholder": "Search"
-    }
-  },
-  "sidebar": {
-    "academic": "Academic",
-    "event": "Events",
-    "general": "General",
-    "home": "Home",
-    "recruit": "Recruit",
-    "urgent": "Near Deadline",
-    "write": "Write Notice",
-    "zigglepick": "Ziggle-Pick"
-  },
-  "write": {
-    "alerts": {
-      "attachAdditionalNoticeFail": "Failed to post additional notice. Please try posting it again.",
-      "attachInternationalAdditionalNoticeFail": "Failed to post English additional notice. Please try posting it again.",
-      "attachInternationalFail": "Failed to post English version. Please try posting it again.",
-      "body": "Please enter the content",
-      "bodyLengthLessThan": "Please enter body content within {{bodyMaxLength}} characters",
-      "bothBodyLengthLessThan": "Please enter both Korean and English content within {{bodyMaxLength}} characters",
-      "copyAdditionalNotice": "Copy additional notice",
-      "copyEnglishContent": "Copy English content",
-      "copyInternationalAdditionalNotice": "Copy En. add. notice",
-      "copySuccess": "The content has been copied! Paste it in the editor -> Tools -> Source code",
-      "deadline": "Please set the deadline after the current time",
-      "deleteFail": "Failed to delete notice",
-      "deleteSuccess": "The notice was deleted successfully",
-      "englishBody": "Please enter English text content",
-      "englishBodyLengthLessThan": "Please enter English body content within {{bodyMaxLength}} characters",
-      "enTitle": "Please enter an English title",
-      "koreanBody": "Please enter Korean text content",
-      "koreanBodyLengthLessThan": "Please enter Korean body content within {{bodyMaxLength}} characters",
-      "modificationFail": "Failed to modify the notice",
-      "modificationSuccess": "The notice was modified successfully",
-      "modifyingNotice": "Modifying the notice...",
-      "needKoreanAdditionalNotice": "Please write a Korean additional notice",
-      "numberOfCharacter": "({{length}}/{{maxLength}} characters)",
-      "pushWillDelayedNotice": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
-      "sendingAlarmNotice": "Sending notifications...",
-      "sendPushNotice": "Notifications will be sent to all users. Are you sure you want to send them now?",
-      "sendPushNoticeFail": "Failed to send push notification",
-      "sendPushNoticeSuccess": "Push notification sent successfully",
-      "submitFail": "Failed to submit notice",
-      "submitSuccess": "The notice was submitted successfully",
-      "submittingNotice": "Creating a notice...",
-      "tagCreationFail": "Failed to create tag",
-      "title": "Please enter a title",
-      "titleLengthLessThan": "Please enter a title of no more than {{titleMaxLength}} characters"
-    },
-    "attachPhoto": "Attach Photos",
-    "autoSaveDescription": "Drafts are saved to your computer",
-    "changeDeadline": "Change deadline",
-    "dragToAddPhoto": "Drag to add photos",
-    "editableTimer": "Uneditable after",
-    "editDescription": "You only have 15 minutes to edit the original notice. However, you can always write an English version.",
-    "editDisabled": "Editing original notice is disabled! 👇 Why not try an additional announcement?",
-    "englishContent": "Content - English",
-    "englishNotice": "English",
-    "englishTitle": "English Title",
-    "hasSavedNotice": "You have saved notices. Would you like to continue writing?",
-    "koreanContent": "Content - Korean",
-    "koreanNotice": "Korean",
-    "koreanTitle": "Korean Title",
-    "noticeType": "Type",
-    "noticeTypes": {
-      "event": {
-        "description": {
-          "content": "Feel free to promote your event in the event notice.",
-          "example": "Ex) festivals, exhibitions, performances, seminars, lectures, workshops",
-          "title": "🎈 Event notice"
-        },
-        "label": "Events"
-      },
-      "general": {
-        "description": {
-          "content": "Notices that are not part of a recruitment or event notices.",
-          "example": "Ex) GIST House notices, student association notices, notifications, etc.",
-          "title": "🔔 General notice"
-        },
-        "label": "General"
-      },
-      "recruit": {
-        "description": {
-          "content": "If you're looking to recruit people to your club, group, or event, try creating a recruitment announcement.",
-          "example": "Ex) club recruitment, student association recruitment, Infinite Challenge team member recruitment, contests, competitions, etc.",
-          "title": "🎯 Recruiting notice"
-        },
-        "label": "Recruiting"
-      }
-    },
-    "orAddFromPC": "...or browse files",
-    "photoDescription": "The first of the attached photos is set as the representative photo.",
-    "selectAccount": "Select Account",
-    "setupDeadline": "Set a deadline",
-    "setupTags": "Set Tags",
-    "submit": "Submit Notice",
-    "submitDescription": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
-    "translateWithDeepL": "Translate with DeepL",
-    "uneditable": "The editable deadline has passed.",
-    "writeEnglishNotice": "Write English Notice too",
-    "writeTags": "Enter tags.",
-    "writeTagsDescription": "Separate them with a space; you don't need to type #.",
-    "writeTitle": "Enter a title here"
-  },
-  "zabo": {
-    "additionalNotices": {
-      "additionalNoticePlaceholder": "Write an additional notice here",
-      "deadlineChanged": "Deadline Changed",
-      "enAdditionalNoticePlaceholder": "Write an additional notice in English here",
-      "noDeadline": "No Deadline",
+  "detail": {
+    "additional_notices": {
+      "deadline_changed": "Deadline Changed",
+      "en_placeholder": "Write an additional notice in English here",
+      "no_deadline": "No Deadline",
+      "placeholder": "Write an additional notice here",
       "title": "Additional Notices"
     },
-    "authorActions": {
+    "author_actions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",
-      "removeSure": "Are you sure you want to delete this notice?"
+      "remove_confirm": "Are you sure you want to delete this notice?",
+      "toasts": {
+        "delete_fail": "Failed to delete notice",
+        "delete_success": "The notice was deleted successfully"
+      }
     },
     "close": "Close",
-    "copyLink": {
+    "copy_link": {
       "action": "copy link",
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
-    "downloadAll": "Download All",
-    "dueAt": "Due at {{dueAt}}",
-    "noContent": "내용 없음",
-    "sentPushNotificationAlert": {
+    "download_all": "Download All",
+    "due_at": "Due at {{dueAt}}",
+    "no_content": "No Content",
+    "push_notification": {
       "action": "Send Push Notification",
-      "title": "You can't edit once you send a notification."
+      "confirm": "Notifications will be sent to all users. Are you sure you want to send them now?",
+      "title": "You can't edit once you send a notification.",
+      "toasts": {
+        "fail": "Failed to send push notification",
+        "loading": "Sending notifications...",
+        "success": "Push notification sent successfully"
+      }
     },
     "share": {
       "action": "Share",
       "content": "{{title}}\nCheck the notice in Ziggle!",
       "unsupported": "Your browser doesn't support sharing."
     },
-    "timeLeft": "{{timeLeft}} Left"
+    "time_left": "{{timeLeft}} Left"
   },
-  "errorHandling": {
-    "unauthorized": {
-      "message": "You need to log in to view the notices. Please log in and try again."
+  "list": {
+    "categories": {
+      "academic": { "name": "Academic Notices" },
+      "event": { "name": "Events" },
+      "general": { "name": "General" },
+      "recruit": { "name": "Recruiting" }
     },
-    "fetchError": {
-      "message": "Failed to fetch notices. Please try again later."
+    "d_day_plus": "OVERDUE",
+    "empty": "No content. =ㅅ=",
+    "pagination": {
+      "of": "of"
     },
-    "notFound": {
-      "message": "The notice you're looking for doesn't exist. Please check the URL or return to the home page.",
-      "goHome": "Go to Home"
-    }
+    "sort_by_deadline": "Sort by Deadline"
+  },
+  "not_found": {
+    "go_back": "Go back to home",
+    "title": "Notice not found"
+  },
+  "search": {
+    "bar": {
+      "collapse": "Cancel",
+      "placeholder": "Search"
+    },
+    "login_required": "Login is required",
+    "no_result": "There are no search results.",
+    "prompt": "Please enter a search term"
+  },
+  "sidebar": {
+    "academic": "Academic",
+    "event": "Events",
+    "general": "General",
+    "home": "Home",
+    "my_notice": "My Notices",
+    "recruit": "Recruit",
+    "remind_notice": "Reminded Notices",
+    "urgent": "Near Deadline",
+    "write": "Write Notice",
+    "zigglepick": "Ziggle-Pick"
   }
 }

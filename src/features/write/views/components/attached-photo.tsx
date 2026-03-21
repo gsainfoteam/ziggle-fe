@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import CloseIcon from '@/assets/icons/close.svg?react';
 
 interface ImagePreviewItemProps {
@@ -9,15 +11,16 @@ export const AttachedPhoto = ({
   src,
   onDeleteClick,
 }: ImagePreviewItemProps) => {
+  const { t } = useTranslation('write');
   return (
     <div className="relative flex">
       <img
-        alt="preview image"
+        alt={t('fields.photo.preview')}
         src={src}
         width={0}
         height={0}
         sizes="30vw"
-        className="aspect-square h-auto w-full rounded-[4px] object-cover"
+        className="aspect-square h-auto w-full rounded-sm object-cover"
       />
       <button
         onClick={(e) => {

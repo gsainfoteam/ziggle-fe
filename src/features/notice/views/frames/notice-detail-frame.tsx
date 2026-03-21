@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { useLoaderData } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
@@ -20,7 +22,14 @@ export function NoticeDetailFrame() {
   });
   const { data: notice, isLoading, isNotFound } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation('common');
+
+  useEffect(() => {
+    document.title = efficientNotice.title;
+    return () => {
+      document.title = t('app_name');
+    };
+  }, [efficientNotice.title, t]);
 
   if (isNotFound) {
     return <NoticeNotFoundFrame />;

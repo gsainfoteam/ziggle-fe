@@ -20,14 +20,14 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
   const { mutateAsync: deleteNotice } = useDeleteNotice();
 
   const handleRemoveNotice = async () => {
-    if (confirm(t('zabo.authorActions.removeSure'))) {
+    if (confirm(t('detail.author_actions.remove_confirm'))) {
       try {
         await deleteNotice({ params: { path: { id: noticeId } } });
         router.navigate({ to: '/$category', params: { category: 'home' } });
-        toast.success(t('write.alerts.deleteSuccess'));
+        toast.success(t('detail.author_actions.toasts.delete_success'));
       } catch (error) {
         console.error(error);
-        toast.error(t('write.alerts.deleteFail'));
+        toast.error(t('detail.author_actions.toasts.delete_fail'));
       }
     }
   };
@@ -41,10 +41,10 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
         <Link
           to="/write"
           search={{ noticeId }}
-          className="flex items-center gap-[10px]"
+          className="flex items-center gap-2.5"
         >
           <EditPencilIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('zabo.authorActions.edit')}</p>
+          <p className="text-greyDark">{t('detail.author_actions.edit')}</p>
         </Link>
       </LogClick>
 
@@ -53,11 +53,11 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
         properties={{ id: noticeId }}
       >
         <button
-          className="flex items-center gap-[10px]"
+          className="flex items-center gap-2.5"
           onClick={handleRemoveNotice}
         >
           <RemoveIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('zabo.authorActions.remove')}</p>
+          <p className="text-greyDark">{t('detail.author_actions.remove')}</p>
         </button>
       </LogClick>
     </div>

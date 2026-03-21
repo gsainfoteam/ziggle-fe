@@ -68,13 +68,13 @@
   "navbar": {
     "login": "Login"
   },
-  "navbarWrite": {
-    "goBack": "Go back"
+  "navbar_write": {
+    "go_back": "Go back"
   },
   "sidebar": {
     "language": "Language",
     "theme": "Theme",
-    "themeOptions": {
+    "theme_options": {
       "dark": "Dark",
       "light": "Light",
       "system": "System"

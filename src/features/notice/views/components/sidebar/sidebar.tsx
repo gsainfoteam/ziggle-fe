@@ -54,12 +54,12 @@ export const Sidebar = () => {
                 ))}
             </ul>
             {!(sidebarObject.length - 1 === i) && (
-              <div className="bg-greyLight dark:bg-dark_greyDark my-[15px] h-px" />
+              <div className="bg-greyLight dark:bg-dark_greyDark my-3.75 h-px" />
             )}
           </React.Fragment>
         ))}
       </div>
-      <div className="bg-greyLight dark:bg-dark_greyDark my-[15px] h-px" />
+      <div className="bg-greyLight dark:bg-dark_greyDark my-3.75 h-px" />
       <ul className="flex flex-col gap-y-2">
         <li className="w-full">
           <ChangeDarkModeBox />

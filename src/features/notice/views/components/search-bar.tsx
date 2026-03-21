@@ -81,7 +81,7 @@ export const SearchBar = () => {
         onSubmit={handleSearch}
         className={cn(
           isExpanded ? 'w-full' : 'w-fit',
-          'transition-[width] md:w-full md:max-w-[700px]',
+          'transition-[width] md:w-full md:max-w-175',
           'flex flex-row-reverse justify-between md:flex-row',
           'overflow-clip',
           'border-greyBorder rounded-lg',
@@ -104,7 +104,7 @@ export const SearchBar = () => {
               'outline-none',
             )}
             name="searchQuery"
-            placeholder={t('searchPage.searchBar.placeholder')}
+            placeholder={t('search.bar.placeholder')}
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             ref={inputRef}
@@ -152,7 +152,7 @@ export const SearchBar = () => {
             )}
             onClick={() => setIsExpanded(false)}
           >
-            {t('searchPage.searchBar.collapse')}
+            {t('search.bar.collapse')}
           </button>
         </LogClick>
       )}

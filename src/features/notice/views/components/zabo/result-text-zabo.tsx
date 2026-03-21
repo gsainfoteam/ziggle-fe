@@ -29,7 +29,15 @@ export const ResultTextZabo = (props: ResultZaboProps) => {
       <div className="bg-greyLight text-text dark:bg-dark_greyDark flex w-full flex-col gap-2 overflow-hidden rounded-2xl p-4 md:rounded-lg md:p-5">
         <div className="flex items-center justify-between gap-4 md:justify-start">
           <div className="flex items-center justify-center gap-2">
-            <DefaultProfile className="h-10 w-10 md:h-9 md:w-9" />
+            {author.picture ? (
+              <img
+                src={author.picture}
+                alt={author.name}
+                className="size-9 rounded-full"
+              />
+            ) : (
+              <DefaultProfile className="size-9" />
+            )}
             <div className="flex flex-col gap-0 font-medium md:flex-row md:items-center md:gap-1">
               <div className="dark:text-dark_white text-base md:text-lg">
                 {searchQuery ? (
@@ -62,10 +70,10 @@ export const ResultTextZabo = (props: ResultZaboProps) => {
         <div className="font-regular dark:text-dark_white line-clamp-4 text-start text-ellipsis">
           {searchQuery ? (
             <HighlightedText query={searchQuery}>
-              {content ?? t('zabo.noContent')}
+              {content ?? t('detail.no_content')}
             </HighlightedText>
           ) : (
-            (content ?? t('zabo.noContent'))
+            (content ?? t('detail.no_content'))
           )}
         </div>
         <ZaboActions {...props} />

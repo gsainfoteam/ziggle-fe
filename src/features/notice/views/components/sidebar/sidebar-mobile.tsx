@@ -50,22 +50,30 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
       />
       <div
         className={cn(
-          'scrollbar-none dark:bg-dark_dark absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-[10px] transition-transform duration-300',
+          'scrollbar-none dark:bg-dark_dark absolute z-10 h-screen w-fit overflow-y-scroll bg-white px-2.5 transition-transform duration-300',
           isOpen ? 'translate-x-0' : '-translate-x-full',
         )}
       >
         <LogClick eventName={LogEvents.sidebarClickProfile}>
           <Link
             to={user ? '/mypage' : '/'}
-            className="my-[10px] flex items-center gap-3 px-3 py-[10px]"
+            className="my-2.5 flex items-center gap-3 px-3 py-2.5"
           >
-            <DefaultProfile width={36} />
+            {user?.picture ? (
+              <img
+                src={user.picture}
+                alt={user.name}
+                className="size-9 rounded-full"
+              />
+            ) : (
+              <DefaultProfile className="size-9" />
+            )}
 
             <p>{user?.name ?? t('navbar.login')}</p>
           </Link>
         </LogClick>
         <Sidebar />
-        <div className="h-[100px]" />
+        <div className="h-25" />
       </div>
     </div>,
     document.body as HTMLElement,

@@ -58,7 +58,7 @@ export const MypageButtons = () => {
             <MypageButton
               align="left"
               icon={<PencilIcon className={ICON_CLASSNAME} />}
-              buttonText={t('mypage.myNotice')}
+              buttonText={t('mypage.my_notice')}
             />
           </Link>
         </LogClick>
@@ -71,7 +71,7 @@ export const MypageButtons = () => {
             <MypageButton
               align="left"
               icon={<BellIcon className={ICON_CLASSNAME} />}
-              buttonText={t('mypage.remindNotice')}
+              buttonText={t('mypage.remind_notice')}
             />
           </Link>
         </LogClick>

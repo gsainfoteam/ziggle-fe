@@ -24,7 +24,6 @@ type MenuPath =
   | 'deadline'
   | 'zigglepick'
   | 'write'
-  | 'group'
   | 'own'
   | 'reminded';
 type LogKey =
@@ -161,7 +160,7 @@ export const useSidebarObject = () => {
       },
       {
         key: 'myNotice',
-        title: t('mypage.myNotice'),
+        title: t('sidebar.my_notice'),
         path: 'own',
         icons: {
           regular: EditPencil,
@@ -175,7 +174,7 @@ export const useSidebarObject = () => {
       },
       {
         key: 'reminded',
-        title: t('mypage.remindNotice'),
+        title: t('sidebar.remind_notice'),
         path: 'reminded',
         icons: {
           regular: Bell,

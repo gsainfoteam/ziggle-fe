@@ -41,18 +41,17 @@ export const SendPushAlarm = ({
 
   const handleSendPushNotification = useCallback(async () => {
     if (isLoading) return;
-    // t('alertResponse.confirm')
-    // t('alertResponse.cancel')
-    const result = confirm(t('write.alerts.sendPushNotice'));
+    // common:alert_response.confirm / common:alert_response.cancel
+    const result = confirm(t('detail.push_notification.confirm'));
     if (!result) return;
     setIsLoading(true);
 
     try {
       const newNotice = await toast
         .promise(sendNoticeAlarm({ params: { path: { id } } }), {
-          loading: t('write.alerts.sendingAlarmNotice'),
-          success: t('write.alerts.sendPushNoticeSuccess'),
-          error: t('write.alerts.sendPushNoticeFail'),
+          loading: t('detail.push_notification.toasts.loading'),
+          success: t('detail.push_notification.toasts.success'),
+          error: t('detail.push_notification.toasts.fail'),
         })
         .unwrap();
 
@@ -125,8 +124,8 @@ export const SendPushAlarm = ({
         showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden',
       )}
     >
-      <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-[15px] font-normal">
-        <span>{t('zabo.sentPushNotificationAlert.title')} </span>
+      <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-3.75 font-normal">
+        <span>{t('detail.push_notification.title')} </span>
         <span
           className="cursor-pointer font-bold underline"
           onClick={handleSendPushNotification}
@@ -137,7 +136,7 @@ export const SendPushAlarm = ({
             }
           }}
         >
-          {t('zabo.sentPushNotificationAlert.action')}
+          {t('detail.push_notification.action')}
         </span>
       </div>
     </div>

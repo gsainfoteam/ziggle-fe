@@ -12,7 +12,7 @@ interface EditableTimerProps {
 }
 
 const EditableTimer = ({ createdAt }: EditableTimerProps) => {
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const [timeRemaining, setTimeRemaining] = useState(
     calculateRemainingTime(createdAt),
@@ -32,13 +32,13 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
     <p
       suppressHydrationWarning
       className={cn(
-        'rounded-[15px] px-5 py-[15px] text-center text-lg',
+        'rounded-[15px] px-5 py-3.75 text-center text-lg',
         isEditable ? 'bg-secondary text-primary' : 'bg-greyLight text-greyDark',
       )}
     >
       {isEditable ? (
         <>
-          {t('write.editableTimer')}{' '}
+          {t('editable_timer.label')}{' '}
           <span className="font-bold">
             {`${timeRemaining.minutes}:${String(timeRemaining.seconds).padStart(
               2,
@@ -47,7 +47,7 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
           </span>
         </>
       ) : (
-        t('write.uneditable')
+        t('uneditable')
       )}
     </p>
   );

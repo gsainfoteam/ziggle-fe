@@ -20,7 +20,7 @@ export const TagInput = ({ tags, setTags }: TagInputProps) => {
   const [keyword, setKeyword] = useState<string>('');
   const [tempTagId, setTempTagId] = useState<number>(0);
   const { data: searchedTags } = useSearchTags({ keyword });
-  const { t } = useTranslation('notice');
+  const { t } = useTranslation('write');
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = event.target.value;
@@ -68,14 +68,14 @@ export const TagInput = ({ tags, setTags }: TagInputProps) => {
         <input
           value={keyword}
           onChange={handleKeywordChange}
-          placeholder={tags.length === 0 ? t('write.writeTags') : ''}
+          placeholder={tags.length === 0 ? t('fields.tags.placeholder') : ''}
           className="grow bg-transparent p-2 outline-none md:text-base"
         />
       </div>
 
       {searchedTags && searchedTags?.length !== 0 && (
         <div className="relative flex">
-          <div className="border-greyBorder absolute top-[-4px] left-2.5 z-10 flex w-[calc(100%-20px)] flex-col border-2 bg-white">
+          <div className="border-greyBorder absolute -top-1 left-2.5 z-10 flex w-[calc(100%-20px)] flex-col border-2 bg-white">
             {searchedTags.slice(0, 5).map((tag) => (
               <div
                 className="[&:hover]:bg-secondary p-2.5"

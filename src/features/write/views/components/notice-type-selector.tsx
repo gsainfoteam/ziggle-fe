@@ -21,11 +21,11 @@ export const NoticeTypeSelector = ({
   setNoticeType,
   disabled,
 }: NoticeTypeSelectorProps) => {
-  const { t } = useTranslation('notice');
-  // t('write.noticeTypes.recruit.label'), t('write.noticeTypes.event.label'), t('write.noticeTypes.general.label')
-  // t('write.noticeTypes.recruit.description.title'), t('write.noticeTypes.event.description.title'), t('write.noticeTypes.general.description.title')
-  // t('write.noticeTypes.recruit.description.content'), t('write.noticeTypes.event.description.content'), t('write.noticeTypes.general.description.content')
-  // t('write.noticeTypes.recruit.description.example'), t('write.noticeTypes.event.description.example'), t('write.noticeTypes.general.description.example')
+  const { t } = useTranslation('write');
+  // t('notice_types.recruit.label'), t('notice_types.event.label'), t('notice_types.general.label')
+  // t('notice_types.recruit.description.title'), t('notice_types.event.description.title'), t('notice_types.general.description.title')
+  // t('notice_types.recruit.description.content'), t('notice_types.event.description.content'), t('notice_types.general.description.content')
+  // t('notice_types.recruit.description.example'), t('notice_types.event.description.example'), t('notice_types.general.description.example')
   return (
     <>
       <div className="mb-5 flex gap-2.5">
@@ -60,7 +60,7 @@ export const NoticeTypeSelector = ({
                 }
               })()}
               <p className="text-base">
-                {t(`write.noticeTypes.${noticeType}.label`)}
+                {t(`notice_types.${noticeType}.label`)}
               </p>
             </Chip>
           </div>
@@ -76,13 +76,13 @@ export const NoticeTypeSelector = ({
           )}
         >
           <p className="text-text mb-2 text-base font-semibold md:text-xl">
-            {t(`write.noticeTypes.${noticeType}.description.title`)}
+            {t(`notice_types.${noticeType}.description.title`)}
           </p>
           <p className="font-regular text-text text-sm md:text-base">
-            {t(`write.noticeTypes.${noticeType}.description.content`)}
+            {t(`notice_types.${noticeType}.description.content`)}
           </p>
           <p className="font-regular text-secondaryText text-sm md:text-base">
-            {t(`write.noticeTypes.${noticeType}.description.example`)}
+            {t(`notice_types.${noticeType}.description.example`)}
           </p>
         </div>
       ))}

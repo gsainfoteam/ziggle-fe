@@ -1,3 +1,15 @@
 {
+  "alert_response": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "no": "No",
+    "yes": "Yes"
+  },
+  "app_name": "Ziggle",
+  "carousel": {
+    "next": "Next",
+    "prev": "Previous",
+    "slide": "View slide {{number}}"
+  },
   "loading": "Loading! -ㅅ-"
 }

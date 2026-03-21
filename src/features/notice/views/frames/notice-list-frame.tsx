@@ -53,7 +53,7 @@ function List({
           <div className="mx-auto h-2.5" />
           <SearchNoResult />
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
-            {t('emptyNotices')}
+            {t('list.empty')}
           </p>
         </div>
       </div>
@@ -139,7 +139,7 @@ export function NoticeListFrame() {
                       deadline ? 'text-primary' : 'text-greyDark',
                     )}
                   >
-                    {t('common.sortByDeadline')}
+                    {t('list.sort_by_deadline')}
                   </p>
                 </Link>
               </LogClick>

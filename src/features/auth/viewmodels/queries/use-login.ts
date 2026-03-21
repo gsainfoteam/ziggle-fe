@@ -29,13 +29,13 @@ export const useLogin = ({
         idpLogOut();
         navigate({ to: '/' });
         if (showToast) {
-          toast.error(t('error.invalidIdpToken'));
+          toast.error(t('errors.invalid_idp_token'));
         }
       } else {
         idpLogOut();
         navigate({ to: '/' });
         if (showToast) {
-          toast.error(t('error.loginFailed'));
+          toast.error(t('errors.login_failed'));
         }
       }
     },

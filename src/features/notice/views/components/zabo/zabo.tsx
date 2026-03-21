@@ -24,17 +24,8 @@ export type ZaboProps = Notice & {
 };
 
 export const Zabo = (props: ZaboProps) => {
-  const {
-    content,
-    createdAt,
-    author,
-    deadline,
-    title,
-    imageUrls,
-    tags,
-    id,
-    group,
-  } = props;
+  const { content, createdAt, author, deadline, title, imageUrls, tags, id } =
+    props;
   const timeAgo = dayjs(createdAt).fromNow();
 
   const hasImage = imageUrls.length > 0;
@@ -45,19 +36,17 @@ export const Zabo = (props: ZaboProps) => {
     <Link to="/notice/$id" params={{ id: id.toString() }}>
       <div className="text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col rounded-[10px] pt-2.5 transition">
         <div className="mx-3 my-2.5 flex flex-wrap items-center gap-y-3">
-          {group?.profileImageUrl ? (
+          {author.picture ? (
             <img
-              src={group.profileImageUrl}
-              width={36}
-              height={36}
-              alt={group.name}
-              className="rounded-full"
+              src={author.picture}
+              alt={author.name}
+              className="size-9 rounded-full"
             />
           ) : (
-            <DefaultProfile className="h-9 w-9" />
+            <DefaultProfile className="size-9" />
           )}
           <span className="dark:text-dark_white ml-2 text-lg font-medium">
-            {group ? group.name : author.name}
+            {author.name}
           </span>
 
           <span className="text-greyDark dark:text-grey mx-1.25 font-bold">

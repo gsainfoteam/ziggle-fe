@@ -61,7 +61,7 @@ const FireButton = ({ id, fire }: FireButtonProps) => {
         fireReaction ?? { count: 0, emoji: '🔥', isReacted: false },
       );
     } catch {
-      toast.error(t('searchPage.loginRequired'));
+      toast.error(t('search.login_required'));
     }
   };
 
@@ -98,11 +98,11 @@ const ShareButton = ({ title }: ShareButtonProps) => {
     e.preventDefault();
 
     if (!navigator.canShare) {
-      return toast.error(t('zabo.share.unsupported'));
+      return toast.error(t('detail.share.unsupported'));
     }
     navigator.share({
       title,
-      text: t('zabo.share.content', { title }),
+      text: t('detail.share.content', { title }),
       url: window.location.href,
     });
   };
