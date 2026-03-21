@@ -1,6 +1,6 @@
 import { useSearch } from '@tanstack/react-router';
 
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
 import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
@@ -30,13 +30,31 @@ export function LandingModal() {
             <div className="text-lg font-bold">{t('home.subtitle')}</div>
           </div>
           <div className="flex h-fit flex-col items-center gap-3">
-            <a
-              href="https://terms.gistory.me/"
-              rel="noopener noreferrer"
-              className="text-greyDark text-xs font-medium"
-            >
-              {t('home.policy')}
-            </a>
+            <p className="text-muted-foreground text-sm">
+              <Trans
+                t={t}
+                i18nKey={'home.policy'}
+                components={{
+                  privacyLink: (
+                    <a
+                      href="https://terms.gistory.me/ziggle/privacy/250302/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold hover:underline"
+                    />
+                  ),
+                  termsLink: (
+                    <a
+                      href="https://terms.gistory.me/ziggle/tos/250302/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold hover:underline"
+                    />
+                  ),
+                }}
+              />
+            </p>
+
             <Button
               className="w-80"
               variant="outlined"

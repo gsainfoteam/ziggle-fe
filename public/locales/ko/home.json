@@ -1,7 +1,7 @@
 {
   "home": {
     "login": "인포팀 계정으로 로그인",
-    "policy": "개인정보처리방침 및 이용약관",
+    "policy": "<privacyLink>개인정보처리방침</privacyLink> 및 <termsLink>이용약관</termsLink> ",
     "subtitle": "지스트의 모든 공지를 한눈에"
   }
 }
