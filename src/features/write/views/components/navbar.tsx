@@ -7,7 +7,7 @@ import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react'
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
 import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Button, LogClick } from '@/common/components';
+import { Avatar, Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { useUser } from '@/features/auth';
 
@@ -37,20 +37,12 @@ export const NavbarWrite = () => {
         </div>
       </div>
       {user ? (
-        <div className="hidden items-center justify-center gap-2 md:flex">
-          {user.picture ? (
-            <img
-              src={user.picture}
-              alt={user.name}
-              className="outline-primary flex h-6 w-6 rounded-full outline-[1.5px]"
-            />
-          ) : (
-            <AccountIcon className="flex h-6" />
-          )}
-          <div className="text-primary align-middle font-medium whitespace-nowrap">
-            {user.name}
-          </div>
-        </div>
+        <Avatar
+          name={user.name}
+          picture={user.picture}
+          imageClassName="h-6 w-6"
+          className="hidden gap-2 md:flex"
+        />
       ) : (
         <LogClick eventName={LogEvents.navBarClickLogin}>
           <Link to="/" className="hidden items-center justify-center gap-2 md:flex">

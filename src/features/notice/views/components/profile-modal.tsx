@@ -17,7 +17,7 @@ import { toast } from 'sonner';
 
 import CloseIcon from '@/assets/icons/close.svg?react';
 import DefaultProfileIcon from '@/assets/icons/default-profile.svg?react';
-import { LogClick } from '@/common/components';
+import { Avatar, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { useLogout, useUser, useWithdraw } from '@/features/auth';
@@ -215,18 +215,11 @@ export const ProfileModal = ({
           {...getReferenceProps()}
           className={triggerClassName}
         >
-          {user?.picture ? (
-            <img
-              src={user.picture}
-              alt={user.name}
-              className="size-9 shrink-0 rounded-full"
-            />
-          ) : (
-            <DefaultProfileIcon className="size-9 shrink-0" />
-          )}
-          <div className="text-dark_dark align-middle font-medium whitespace-nowrap">
-            {user?.name}
-          </div>
+          <Avatar
+            name={user?.name}
+            picture={user?.picture}
+            imageClassName="size-9"
+          />
         </button>
       </LogClick>
 
