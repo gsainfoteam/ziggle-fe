@@ -1,8 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import CheckIcon from '@/assets/icons/check.svg?react';
-import { Modal } from '@/common/components/shared/modal';
-import { Button } from '@/common/components/ui/button';
+import { Button, Modal } from '@/common/components';
 
 interface WithdrawalSuccessModalProps {
   isOpen: boolean;

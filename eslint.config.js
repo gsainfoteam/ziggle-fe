@@ -185,6 +185,13 @@ export default defineConfig(
     rules: {
       'check-file/filename-naming-convention': 'off',
       'check-file/folder-naming-convention': 'off',
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
+    files: ['src/common/components/shared/modal/modal-shell.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
   {

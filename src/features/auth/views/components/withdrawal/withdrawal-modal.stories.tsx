@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { WithdrawalErrorModal } from './withdrawal-error-modal';
 import { WithdrawalModal } from './withdrawal-modal';
 import { WithdrawalSuccessModal } from './withdrawal-success-modal';
+
+import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const noop = () => { };
 const queryClient = new QueryClient();

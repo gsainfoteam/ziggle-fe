@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import { Modal } from '@/common/components/shared/modal';
-import { Button } from '@/common/components/ui/button';
+import { Button, Modal } from '@/common/components';
 
 interface WithdrawalErrorModalProps {
   isOpen: boolean;
