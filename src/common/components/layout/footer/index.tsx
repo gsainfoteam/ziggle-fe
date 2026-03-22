@@ -66,9 +66,6 @@ export const Footer = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <InfoteamLogo className="w-8/12 sm:w-fit" />
-            <div className="text-sm font-medium sm:text-base">
-              {t('footer.infoteam')}
-            </div>
           </div>
           <div className="flex gap-4">
             <LogClick eventName={LogEvents.footerClickGithub}>
