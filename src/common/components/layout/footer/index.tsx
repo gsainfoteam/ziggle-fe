@@ -1,3 +1,4 @@
+import { ExternalLink as ExternalLinkIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import AppStoreLogo from '@/assets/logos/appstore.svg?react';
@@ -14,9 +15,14 @@ export const playStoreLink =
 export const appStoreLink = 'https://apps.apple.com/kr/app/ziggle/id6451740697';
 
 const ExternalLink = ({
+  children,
+  showIcon,
   ...props
-}: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-  <a {...props} target="_blank" rel="noopener noreferrer" />
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> & { showIcon?: boolean }) => (
+  <a {...props} target="_blank" rel="noopener noreferrer">
+    {children}
+    {showIcon && <ExternalLinkIcon size={12} className="ml-1 inline" />}
+  </a>
 );
 
 const keyToLogEvent = {
@@ -60,9 +66,6 @@ export const Footer = () => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">
             <InfoteamLogo className="w-8/12 sm:w-fit" />
-            <div className="text-sm font-medium sm:text-base">
-              {t('footer.infoteam')}
-            </div>
           </div>
           <div className="flex gap-4">
             <LogClick eventName={LogEvents.footerClickGithub}>
@@ -99,7 +102,7 @@ export const Footer = () => {
                     {key === 'bugReport' ? (
                       <CSLink key={name}>{name}</CSLink>
                     ) : (
-                      <ExternalLink key={name} href={link}>
+                      <ExternalLink key={name} href={link} showIcon>
                         {name}
                       </ExternalLink>
                     )}

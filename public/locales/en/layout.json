@@ -1,7 +1,6 @@
 {
   "footer": {
     "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
-    "infoteam": "GIST Student Council - Information Department",
     "sections": [
       {
         "links": [
@@ -27,12 +26,12 @@
         "links": [
           {
             "key": "serviceTerms",
-            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "link": "https://terms.gistory.me/ziggle/tos/250302/",
             "name": "Terms of Service"
           },
           {
             "key": "privacyPolicy",
-            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "link": "https://terms.gistory.me/ziggle/privacy/250302/",
             "name": "Privacy Policy"
           },
           {

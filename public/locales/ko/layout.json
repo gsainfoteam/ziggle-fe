@@ -1,7 +1,6 @@
 {
   "footer": {
     "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
-    "infoteam": "지스트대학 총학생회 산하 정보국",
     "sections": [
       {
         "links": [
@@ -27,12 +26,12 @@
         "links": [
           {
             "key": "serviceTerms",
-            "link": "https://infoteam-rulrudino.notion.site/6177be6369e44280a23a65866c51b257",
+            "link": "https://terms.gistory.me/ziggle/tos/250302/",
             "name": "서비스이용약관"
           },
           {
             "key": "privacyPolicy",
-            "link": "https://infoteam-rulrudino.notion.site/ceb9340c0b514497b6d916c4a67590a1",
+            "link": "https://terms.gistory.me/ziggle/privacy/250302/",
             "name": "개인정보처리방침"
           },
           {
