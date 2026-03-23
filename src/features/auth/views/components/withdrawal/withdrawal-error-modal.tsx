@@ -28,7 +28,7 @@ export function WithdrawalErrorModal({
         <Modal.Actions>
           <div className="flex justify-center">
             <Button
-              className="flex-1 px-8 py-3 text-base"
+              className="flex-1 whitespace-nowrap py-3 text-base text-white md:py-3.5"
               variant="contained"
               onClick={close}
             >
