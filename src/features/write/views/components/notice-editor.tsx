@@ -650,8 +650,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
             photos={state.photos}
             setPhotos={(photos) => dispatch({ type: 'SET_PHOTOS', photos })}
           />
-
-</>
+        </>
       )}
 
       <div className="mt-40 flex flex-col items-center">

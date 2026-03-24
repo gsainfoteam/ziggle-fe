@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
-import DefaultProfile from '@/assets/icons/default-profile.svg?react';
+import { Avatar } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { AuthorActions } from './components/author-actions';
@@ -63,17 +63,13 @@ const Metadata = ({
   return (
     <>
       <div className="flex items-center">
-        {author.picture ? (
-          <img
-            src={author.picture}
-            alt={author.name}
-            className="size-9 rounded-full"
-          />
-        ) : (
-          <DefaultProfile className="size-9" />
-        )}
-
-        <span className="ml-2 text-lg font-medium">{author.name}</span>
+        <Avatar
+          name={author.name}
+          picture={author.picture}
+          imageClassName="size-9"
+          className="gap-2"
+          labelClassName="text-lg"
+        />
 
         <span className="text-greyDark mx-1.25 font-bold">·</span>
 

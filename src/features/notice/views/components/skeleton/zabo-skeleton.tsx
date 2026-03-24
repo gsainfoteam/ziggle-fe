@@ -23,16 +23,28 @@ export const ZaboSkeleton = () => {
         <div className="group flex w-full flex-col items-center gap-2">
           <div className="flex w-fit max-w-full gap-2 overflow-hidden">
             <div
-              className={cn('h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent', skeletonBg)}
+              className={cn(
+                'h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent',
+                skeletonBg,
+              )}
             />
             <div
-              className={cn('h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent', skeletonBg)}
+              className={cn(
+                'h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent',
+                skeletonBg,
+              )}
             />
             <div
-              className={cn('h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent', skeletonBg)}
+              className={cn(
+                'h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent',
+                skeletonBg,
+              )}
             />
             <div
-              className={cn('h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent', skeletonBg)}
+              className={cn(
+                'h-50 w-50 shrink-0 rounded-md border border-gray-300 dark:border-transparent',
+                skeletonBg,
+              )}
             />
           </div>
         </div>
