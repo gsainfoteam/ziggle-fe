@@ -1,52 +1,55 @@
+import { overlay } from 'overlay-kit';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
 
-import { Button, LogClick } from '@/common/components';
+import {
+  Button,
+  LogClick,
+} from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
 import { MypageBox } from './mypage-box';
-import { useLogout, useWithdraw } from '../../viewmodels';
+import {
+  WithdrawalErrorModal,
+  WithdrawalModal,
+  WithdrawalSuccessModal,
+} from './withdrawal';
+import { useLogout } from '../../viewmodels';
 
 export default function MypageActions() {
   const { t } = useTranslation('auth');
+
   const { mutate: logout } = useLogout();
-  const { mutateAsync: withdraw } = useWithdraw();
 
   const handleSignOut = () => {
     logout({});
   };
 
-  const handleWithdrawal = async () => {
-    try {
-      // TODO: use custom overlay
-      // t('mypage.withdrawal.confirm.ok_btn')
-      // t('mypage.withdrawal.confirm.cancel_btn')
-      const result = confirm(
-        t('mypage.withdrawal.confirm.title') +
-          '\n\n' +
-          t('mypage.withdrawal.confirm.text'),
-      );
-      if (result) {
-        try {
-          await withdraw({});
-          toast.success(
-            t('mypage.withdrawal.success.title') +
-              '\n\n' +
-              t('mypage.withdrawal.success.text'),
-          );
-          logout({});
-        } catch {
-          toast.error(
-            t('mypage.withdrawal.error.title') +
-              '\n\n' +
-              t('mypage.withdrawal.error.text'),
-          );
-        }
-      }
-    } catch (err) {
-      console.error('withdrawal flow error:', err);
-    }
+  const handleWithdrawal = () => {
+    overlay.open(({ isOpen, close }) => (
+      <WithdrawalModal
+        isOpen={isOpen}
+        close={close}
+        onSuccess={async () => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalSuccessModal
+              isOpen={isOpen}
+              close={close}
+              onCloseComplete={() => logout({})}
+            />
+          ));
+        }}
+        onFailure={async () => {
+          overlay.open(({ isOpen, close }) => (
+            <WithdrawalErrorModal
+              isOpen={isOpen}
+              close={close}
+            />
+          ));
+        }}
+      />
+    ));
   };
+
   return (
     <div className="flex flex-col gap-3">
       <Button onClick={handleSignOut}>
@@ -68,6 +71,7 @@ export default function MypageActions() {
           </MypageBox>
         </LogClick>
       </Button>
+
     </div>
   );
 }
