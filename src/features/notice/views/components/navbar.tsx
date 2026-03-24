@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Link } from '@tanstack/react-router';
 
+import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 import AccountIcon from '@/assets/icons/account.svg?react';
@@ -76,11 +77,13 @@ export const Navbar = () => {
         </LogClick>
       )}
 
-      {isSidebarOpen && (
-        <div className="md:hidden">
-          <SidebarMobile onClose={handleSidebarClose} />
-        </div>
-      )}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <div className="md:hidden">
+            <SidebarMobile onClose={handleSidebarClose} />
+          </div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
