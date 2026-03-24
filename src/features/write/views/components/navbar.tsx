@@ -45,7 +45,10 @@ export const NavbarWrite = () => {
         />
       ) : (
         <LogClick eventName={LogEvents.navBarClickLogin}>
-          <Link to="/" className="hidden items-center justify-center gap-2 md:flex">
+          <Link
+            to="/"
+            className="hidden items-center justify-center gap-2 md:flex"
+          >
             <AccountIcon className="flex h-6" />
             <div className="text-primary align-middle font-medium whitespace-nowrap">
               {t('navbar.login')}

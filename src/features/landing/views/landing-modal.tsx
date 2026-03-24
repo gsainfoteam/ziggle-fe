@@ -25,7 +25,7 @@ export function LandingModal() {
               <ZiggleLogo className="w-50 md:w-55" />
             </div>
             <div className="mb-5 hidden dark:inline-block">
-              <ZiggleLogoDark className="w-50 md:w-55"/>
+              <ZiggleLogoDark className="w-50 md:w-55" />
             </div>
             <div className="text-center text-lg font-bold">
               {t('home.subtitle')}

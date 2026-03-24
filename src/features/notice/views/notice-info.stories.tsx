@@ -70,7 +70,9 @@ export const Default: Story = {
 export const WithDeadline: Story = {
   args: {
     ...mockNotice,
-    currentDeadline: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+    currentDeadline: new Date(
+      Date.now() + 3 * 24 * 60 * 60 * 1000,
+    ).toISOString(),
   },
 };
 
@@ -84,7 +86,8 @@ export const WithTags: Story = {
 export const LongTitle: Story = {
   args: {
     ...mockNotice,
-    title: '제목이 매우 긴 경우 최대 세 줄까지만 표시되는지 확인하기 위한 아주 긴 제목의 공지사항 테스트 케이스입니다',
+    title:
+      '제목이 매우 긴 경우 최대 세 줄까지만 표시되는지 확인하기 위한 아주 긴 제목의 공지사항 테스트 케이스입니다',
   },
 };
 
