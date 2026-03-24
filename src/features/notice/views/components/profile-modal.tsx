@@ -114,13 +114,13 @@ export const ProfileModalPanel = ({
   );
 };
 
-interface ProfileModalProps {
+interface ProfileModalButtonProps {
   triggerClassName?: string;
 }
 
-export const ProfileModal = ({
+export const ProfileModalButton = ({
   triggerClassName = 'hidden cursor-pointer items-center justify-center gap-3 md:flex',
-}: ProfileModalProps = {}) => {
+}: ProfileModalButtonProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
   const { mutate: logout } = useLogout();

@@ -10,7 +10,7 @@ import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
-import { ProfileModal } from '../profile-modal';
+import { ProfileModalButton } from '../profile-modal';
 import { Sidebar } from './sidebar';
 
 interface SidebarProps {
@@ -69,7 +69,7 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
         )}
       >
         {user ? (
-          <ProfileModal triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 p-3" />
+          <ProfileModalButton triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 p-3" />
         ) : (
           <LogClick eventName={LogEvents.sidebarClickProfile}>
             <Link to="/" className="my-2.5 flex items-center gap-3 px-3 py-2.5">

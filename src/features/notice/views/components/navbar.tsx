@@ -14,7 +14,7 @@ import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { useUser } from '@/features/auth';
 
-import { ProfileModal } from './profile-modal';
+import { ProfileModalButton } from './profile-modal';
 import { SearchBar } from './search-bar';
 import { SidebarMobile } from './sidebar';
 
@@ -61,7 +61,7 @@ export const Navbar = () => {
         </div>
       </div>
       {user ? (
-        <ProfileModal />
+        <ProfileModalButton />
       ) : (
         <LogClick eventName={LogEvents.navBarClickLogin}>
           <Link
