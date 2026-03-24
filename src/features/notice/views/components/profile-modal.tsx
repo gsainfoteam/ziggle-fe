@@ -116,10 +116,12 @@ export const ProfileModalPanel = ({
 
 interface ProfileModalButtonProps {
   triggerClassName?: string;
+  eventName?: string;
 }
 
 export const ProfileModalButton = ({
   triggerClassName = 'hidden cursor-pointer items-center justify-center gap-3 md:flex',
+  eventName = LogEvents.navBarClickMyPage,
 }: ProfileModalButtonProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
@@ -209,7 +211,7 @@ export const ProfileModalButton = ({
 
   return (
     <>
-      <LogClick eventName={LogEvents.navBarClickMyPage}>
+      <LogClick eventName={eventName}>
         <button
           ref={setReference}
           {...getReferenceProps()}

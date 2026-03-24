@@ -55,7 +55,10 @@ export const SidebarMobile = ({ onClose }: SidebarProps) => {
         exit="exit"
       >
         {user ? (
-          <ProfileModalButton triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 p-3" />
+          <ProfileModalButton
+            triggerClassName="my-2.5 flex w-full cursor-pointer items-center gap-3 p-3"
+            eventName={LogEvents.sidebarClickProfile}
+          />
         ) : (
           <LogClick eventName={LogEvents.sidebarClickProfile}>
             <Link to="/" className="my-2.5 flex items-center gap-3 px-3 py-2.5">
