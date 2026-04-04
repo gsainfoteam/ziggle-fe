@@ -7,7 +7,7 @@ const CHATBOT_COLORS_LIGHT = {
   border: 'd6d6d6',
   userMessageBg: 'ff4500',
   assistantMessageBg: 'f5f5f7',
-} as const;
+} satisfies Record<string, string>;
 
 const CHATBOT_COLORS_DARK = {
   primary: 'ff4500',
@@ -18,61 +18,57 @@ const CHATBOT_COLORS_DARK = {
   border: '5d5d5d',
   userMessageBg: 'ff4500',
   assistantMessageBg: '3b3b3b',
-} as const;
-
-function isHtmlDark(): boolean {
-  return document.documentElement.classList.contains('dark');
-}
+} satisfies Record<string, string>;
 
 function applyChatbotTheme(): void {
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return;
-
-  w.updateColors(
-    isHtmlDark()
-      ? { ...CHATBOT_COLORS_DARK }
-      : { ...CHATBOT_COLORS_LIGHT },
-  );
+  const dark = document.documentElement.classList.contains('dark');
+  w.updateColors(dark ? CHATBOT_COLORS_DARK : CHATBOT_COLORS_LIGHT);
 }
 
 let attached = false;
-function attachChatbotThemeSync(): boolean {
-  if (attached || typeof window.ChatbotWidget === 'undefined') {
-    return attached;
-  }
 
+function tryAttachChatbotTheme(): boolean {
+  if (attached) return true;
   const w = window.ChatbotWidget;
+  if (!w?.updateColors) return false;
+
   const run = () => applyChatbotTheme();
 
-  if (w.isReady?.()) {
+  const onFirstApply = () => {
+    if (attached) return;
     run();
-  } else {
-    w.on?.('onReady', run);
-  }
-
-  let observer: MutationObserver | null = null;
-  if (!observer) {
-    observer = new MutationObserver(run);
-    observer.observe(document.documentElement, {
+    new MutationObserver(run).observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class'],
     });
+    attached = true;
+  };
+
+  if (w.isReady?.() === true) {
+    onFirstApply();
+    return true;
   }
 
-  attached = true;
+  if (typeof w.on !== 'function') {
+    return false;
+  }
+
+  w.on('onReady', onFirstApply);
   return true;
 }
 
 export function initChatbotThemeSync(): void {
-  if (attachChatbotThemeSync()) return;
+  if (tryAttachChatbotTheme()) return;
 
-  const interval = window.setInterval(() => {
-    if (attachChatbotThemeSync()) window.clearInterval(interval);
-  }, 50);
+  const id = window.setInterval(() => {
+    if (tryAttachChatbotTheme()) window.clearInterval(id);
+  }, 100);
 
-  window.setTimeout(() => window.clearInterval(interval), 10_000);
-  window.addEventListener('load', () => attachChatbotThemeSync(), { once: true });
+  window.setTimeout(() => window.clearInterval(id), 10_000);
 }
+
 declare global {
   interface Window {
     ChatbotWidget?: {
