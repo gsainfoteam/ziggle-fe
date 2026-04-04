@@ -7,7 +7,7 @@ const CHATBOT_COLORS_LIGHT = {
   border: 'd6d6d6',
   userMessageBg: 'ff4500',
   assistantMessageBg: 'f5f5f7',
-} satisfies Record<string, string>;
+} as const;
 
 const CHATBOT_COLORS_DARK = {
   primary: 'ff4500',
@@ -18,13 +18,18 @@ const CHATBOT_COLORS_DARK = {
   border: '5d5d5d',
   userMessageBg: 'ff4500',
   assistantMessageBg: '3b3b3b',
-} satisfies Record<string, string>;
+} as const;
 
 function applyChatbotTheme(): void {
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return;
   const dark = document.documentElement.classList.contains('dark');
-  w.updateColors(dark ? CHATBOT_COLORS_DARK : CHATBOT_COLORS_LIGHT);
+  try {
+    w.updateColors(
+      dark ? { ...CHATBOT_COLORS_DARK } : { ...CHATBOT_COLORS_LIGHT },
+    );
+  } catch {
+  }
 }
 
 let attached = false;
@@ -34,28 +39,40 @@ function tryAttachChatbotTheme(): boolean {
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return false;
 
-  const run = () => applyChatbotTheme();
-
   const onFirstApply = () => {
     if (attached) return;
-    run();
-    new MutationObserver(run).observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    });
-    attached = true;
+    try {
+      applyChatbotTheme();
+      new MutationObserver(() => {
+        applyChatbotTheme();
+      }).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+      attached = true;
+    } catch {
+    }
   };
 
-  if (w.isReady?.() === true) {
-    onFirstApply();
-    return true;
+  try {
+    if (w.isReady?.() === true) {
+      onFirstApply();
+      return attached;
+    }
+  } catch {
+    return false;
   }
 
   if (typeof w.on !== 'function') {
     return false;
   }
 
-  w.on('onReady', onFirstApply);
+  try {
+    w.on('onReady', onFirstApply);
+  } catch {
+    return false;
+  }
+
   return true;
 }
 
