@@ -36,6 +36,7 @@ function applyChatbotTheme(): void {
 }
 
 let attached = false;
+let readyHooked = false;
 
 function tryAttachChatbotTheme(): boolean {
   if (attached) return true;
@@ -71,15 +72,16 @@ function tryAttachChatbotTheme(): boolean {
   if (typeof w.on !== 'function') {
     return false;
   }
-
-  try {
-    w.on('onReady', onFirstApply);
-  } catch {
-    void 0;
-    return false;
+  if (!readyHooked) {
+    try {
+      w.on('onReady', onFirstApply);
+      readyHooked = true;
+    } catch {
+      return false;
+    }
   }
 
-  return true;
+  return attached;
 }
 
 export function initChatbotThemeSync(): void {
