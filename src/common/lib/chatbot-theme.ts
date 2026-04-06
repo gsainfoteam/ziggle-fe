@@ -1,3 +1,5 @@
+import { isDarkMode } from '@/common/lib/theme';
+
 const CHATBOT_COLORS_LIGHT = {
   primary: 'ff4500',
   button: 'ff4500',
@@ -13,7 +15,7 @@ const CHATBOT_COLORS_DARK = {
   primary: 'ff4500',
   button: 'ff4500',
   background: '252525',
-  text: 'f1f5f9',
+  text: 'ffffff',
   textSecondary: '919191',
   border: '5d5d5d',
   userMessageBg: 'ff4500',
@@ -23,12 +25,13 @@ const CHATBOT_COLORS_DARK = {
 function applyChatbotTheme(): void {
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return;
-  const dark = document.documentElement.classList.contains('dark');
+  const dark = isDarkMode();
   try {
     w.updateColors(
       dark ? { ...CHATBOT_COLORS_DARK } : { ...CHATBOT_COLORS_LIGHT },
     );
   } catch {
+    void 0;
   }
 }
 
@@ -51,6 +54,7 @@ function tryAttachChatbotTheme(): boolean {
       });
       attached = true;
     } catch {
+      void 0;
     }
   };
 
@@ -60,6 +64,7 @@ function tryAttachChatbotTheme(): boolean {
       return attached;
     }
   } catch {
+    void 0;
     return false;
   }
 
@@ -70,6 +75,7 @@ function tryAttachChatbotTheme(): boolean {
   try {
     w.on('onReady', onFirstApply);
   } catch {
+    void 0;
     return false;
   }
 

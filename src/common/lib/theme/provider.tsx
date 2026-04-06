@@ -6,20 +6,15 @@ import {
 } from 'react';
 
 import { type Theme, ThemeContext } from './context';
+import { getStoredTheme, getSystemTheme } from './theme-dark';
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-  const [theme, setTheme] = useState<Theme>(
-    () =>
-      (typeof window !== 'undefined' &&
-        (localStorage.getItem('theme') as Theme)) ||
-      'system',
+  const [theme, setTheme] = useState<Theme>(() =>
+    typeof window !== 'undefined' ? getStoredTheme() : 'system',
   );
 
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() =>
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light',
+    typeof window !== 'undefined' ? getSystemTheme() : 'light',
   );
 
   const applyTheme = useCallback(() => {
@@ -36,12 +31,7 @@ export function ThemeProvider({ children }: PropsWithChildren) {
   }, [theme, systemTheme]);
 
   const updateSystemTheme = useCallback(() => {
-    const newSystemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-
-    setSystemTheme(newSystemTheme);
+    setSystemTheme(getSystemTheme());
   }, [setSystemTheme]);
 
   const updateTheme = useCallback(

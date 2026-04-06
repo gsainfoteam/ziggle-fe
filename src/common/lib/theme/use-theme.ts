@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 
 import { ThemeContext } from './context';
+import { matchesDark } from './theme-dark';
 
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -11,7 +12,7 @@ export function useTheme() {
   const { theme, systemTheme } = context;
 
   const isDark = useMemo(
-    () => theme === 'dark' || (theme === 'system' && systemTheme === 'dark'),
+    () => matchesDark(theme, systemTheme),
     [theme, systemTheme],
   );
 
