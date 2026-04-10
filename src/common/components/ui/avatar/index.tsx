@@ -29,7 +29,7 @@ export const Avatar = ({
     {name && (
       <span
         className={cn(
-          'text-dark_dark align-middle font-medium whitespace-nowrap',
+          'text-text align-middle font-medium whitespace-nowrap',
           labelClassName,
         )}
       >
