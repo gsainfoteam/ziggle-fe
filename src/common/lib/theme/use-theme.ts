@@ -1,7 +1,7 @@
 import { useContext, useMemo } from 'react';
 
 import { ThemeContext } from './context';
-import { matchesDark } from './theme-dark';
+import { matchesDark } from './theme-resolver';
 
 export function useTheme() {
   const context = useContext(ThemeContext);

@@ -6,7 +6,7 @@ import {
 } from 'react';
 
 import { type Theme, ThemeContext } from './context';
-import { getStoredTheme, getSystemTheme } from './theme-dark';
+import { getStoredTheme, getSystemTheme } from './theme-resolver';
 
 export function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, setTheme] = useState<Theme>(() =>
