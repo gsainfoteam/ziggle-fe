@@ -36,7 +36,8 @@ function applyTheme(): void {
   if (!w?.updateColors) return;
   try {
     w.updateColors(buildColors());
-  } catch {
+  } catch (error) {
+    console.error('[chatbot-theme] updateColors failed', error);
   }
 }
 
@@ -55,14 +56,16 @@ function tryAttachTheme(): boolean {
       new MutationObserver(() => {
         try {
           applyTheme();
-        } catch {
+        } catch (error) {
+          console.error('[chatbot-theme] observer callback failed', error);
         }
       }).observe(document.documentElement, {
         attributes: true,
         attributeFilter: ['class'],
       });
       attached = true;
-    } catch {
+    } catch (error) {
+      console.error('[chatbot-theme] initial attach failed', error);
     }
   };
 

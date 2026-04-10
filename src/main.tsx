@@ -3,7 +3,7 @@ import { createRouter } from '@tanstack/react-router';
 
 import ReactDOM from 'react-dom/client';
 
-import { initChatbotThemeSync } from '@/common/lib';
+import { initThemeSync } from '@/common/lib';
 
 import { App } from './app';
 import { routeTree } from './routeTree.gen';
@@ -28,4 +28,4 @@ if (!rootElement.innerHTML) {
   root.render(<App />);
 }
 
-initChatbotThemeSync();
+initThemeSync();
