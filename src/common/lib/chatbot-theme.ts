@@ -1,44 +1,49 @@
-import { isDarkMode } from '@/common/lib/theme';
-
-const CHATBOT_COLORS_LIGHT = {
+const COLOR_FALLBACK = {
   primary: 'ff4500',
-  button: 'ff4500',
   background: 'ffffff',
   text: '252525',
   textSecondary: '959595',
   border: 'd6d6d6',
-  userMessageBg: 'ff4500',
   assistantMessageBg: 'f5f5f7',
 } as const;
 
-const CHATBOT_COLORS_DARK = {
-  primary: 'ff4500',
-  button: 'ff4500',
-  background: '252525',
-  text: 'ffffff',
-  textSecondary: '919191',
-  border: '5d5d5d',
-  userMessageBg: 'ff4500',
-  assistantMessageBg: '3b3b3b',
-} as const;
+function readCssHex(name: string, fallback: string): string {
+  if (typeof window === 'undefined') return fallback;
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+  if (!raw) return fallback;
+  return raw.replace(/^#/, '');
+}
 
-function applyChatbotTheme(): void {
+function buildColors(): Record<string, string> {
+  const defaults = COLOR_FALLBACK;
+  const primary = readCssHex('--color-primary', defaults.primary);
+  return {
+    primary,
+    button: primary,
+    background: readCssHex('--color-white', defaults.background),
+    text: readCssHex('--color-text', defaults.text),
+    textSecondary: readCssHex('--color-secondaryText', defaults.textSecondary),
+    border: readCssHex('--color-deselected', defaults.border),
+    userMessageBg: primary,
+    assistantMessageBg: readCssHex('--color-greyLight', defaults.assistantMessageBg),
+  };
+}
+
+function applyTheme(): void {
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return;
-  const dark = isDarkMode();
   try {
-    w.updateColors(
-      dark ? { ...CHATBOT_COLORS_DARK } : { ...CHATBOT_COLORS_LIGHT },
-    );
+    w.updateColors(buildColors());
   } catch {
-    void 0;
   }
 }
 
 let attached = false;
 let readyHooked = false;
 
-function tryAttachChatbotTheme(): boolean {
+function tryAttachTheme(): boolean {
   if (attached) return true;
   const w = window.ChatbotWidget;
   if (!w?.updateColors) return false;
@@ -46,16 +51,18 @@ function tryAttachChatbotTheme(): boolean {
   const onFirstApply = () => {
     if (attached) return;
     try {
-      applyChatbotTheme();
+      applyTheme();
       new MutationObserver(() => {
-        applyChatbotTheme();
+        try {
+          applyTheme();
+        } catch {
+        }
       }).observe(document.documentElement, {
         attributes: true,
         attributeFilter: ['class'],
       });
       attached = true;
     } catch {
-      void 0;
     }
   };
 
@@ -65,7 +72,6 @@ function tryAttachChatbotTheme(): boolean {
       return attached;
     }
   } catch {
-    void 0;
     return false;
   }
 
@@ -84,11 +90,11 @@ function tryAttachChatbotTheme(): boolean {
   return attached;
 }
 
-export function initChatbotThemeSync(): void {
-  if (tryAttachChatbotTheme()) return;
+export function initThemeSync(): void {
+  if (tryAttachTheme()) return;
 
   const id = window.setInterval(() => {
-    if (tryAttachChatbotTheme()) window.clearInterval(id);
+    if (tryAttachTheme()) window.clearInterval(id);
   }, 100);
 
   window.setTimeout(() => window.clearInterval(id), 10_000);

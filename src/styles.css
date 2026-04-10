@@ -60,6 +60,7 @@
     --color-white: var(--color-dark_dark);
     --color-greyLight: var(--color-dark_greyDark);
     --color-greyDark: var(--color-dark_grey);
+    --color-deselected: var(--color-dark_greyBorder);
     --color-secondary: var(--color-dark_secondary);
   }
 }
