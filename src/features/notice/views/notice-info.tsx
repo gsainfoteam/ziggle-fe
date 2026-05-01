@@ -5,6 +5,7 @@ import { Avatar } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { AuthorActions } from './components/author-actions';
+import { DocumentUrls } from './components/document-urls';
 import { Tags } from './components/tags';
 
 import type { Author, NoticeDetail } from '../models';
@@ -17,7 +18,10 @@ export const NoticeInfo = ({
   createdAt,
   views,
   tags = [],
-}: NoticeDetail) => {
+  documentUrls,
+  // TODO(ZGB-51): 백엔드 sourceUrl 추가 후 NoticeDetail 타입에서 직접 받고 이 intersection 제거
+  sourceUrl,
+}: NoticeDetail & { sourceUrl?: string }) => {
   const { data: user } = useUser();
 
   return (
@@ -31,6 +35,8 @@ export const NoticeInfo = ({
       <Title title={title} />
 
       <Tags tags={tags} className="flex-wrap" />
+
+      <DocumentUrls sourceUrl={sourceUrl} documentUrls={documentUrls} />
     </div>
   );
 };

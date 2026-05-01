@@ -10,7 +10,9 @@ import { NoticeInfo } from './notice-info';
 import type { NoticeDetail } from '../models';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const mockNotice: NoticeDetail = {
+type NoticeInfoProps = NoticeDetail & { sourceUrl?: string };
+
+const mockNotice: NoticeInfoProps = {
   id: 1,
   title: '2026 봄 학기 동아리 모집',
   author: { uuid: 'author-1', name: '홍길동', picture: null },
@@ -30,10 +32,10 @@ const mockNotice: NoticeDetail = {
 
 const queryClient = new QueryClient();
 
-const createNoticeInfoRouter = (props: NoticeDetail) => {
+const createNoticeInfoRouter = (props: NoticeInfoProps) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <div className="w-120 p-6">
+      <div className="w-180 p-6">
         <NoticeInfo {...props} />
       </div>
     ),
@@ -41,7 +43,7 @@ const createNoticeInfoRouter = (props: NoticeDetail) => {
   return createRouter({ routeTree: rootRoute });
 };
 
-const NoticeInfoWithProviders = (props: NoticeDetail) => {
+const NoticeInfoWithProviders = (props: NoticeInfoProps) => {
   const router = createNoticeInfoRouter(props);
   return (
     <QueryClientProvider client={queryClient}>
@@ -98,5 +100,17 @@ export const WithPicture: Story = {
       ...mockNotice.author,
       picture: 'https://picsum.photos/seed/author1/36/36',
     },
+  },
+};
+
+export const WithSourceUrlAndDocumentUrls: Story = {
+  args: {
+    ...mockNotice,
+    sourceUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+    documentUrls: [
+      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
+      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
+      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목3.pdf',
+    ],
   },
 };

@@ -109,3 +109,13 @@ export const WithPicture: Story = {
     },
   },
 };
+
+export const WithDocumentUrls: Story = {
+  args: {
+    ...mockNotice,
+    documentUrls: [
+      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
+      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
+    ],
+  },
+};
