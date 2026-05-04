@@ -19,9 +19,8 @@ export const NoticeInfo = ({
   views,
   tags = [],
   documentUrls,
-  // TODO(ZGB-51): 백엔드 sourceUrl 추가 후 NoticeDetail 타입에서 직접 받고 이 intersection 제거
-  sourceUrl,
-}: NoticeDetail & { sourceUrl?: string }) => {
+  crawledUrl,
+}: NoticeDetail) => {
   const { data: user } = useUser();
 
   return (
@@ -36,7 +35,7 @@ export const NoticeInfo = ({
 
       <Tags tags={tags} className="flex-wrap" />
 
-      <DocumentUrls sourceUrl={sourceUrl} documentUrls={documentUrls} />
+      <DocumentUrls crawledUrl={crawledUrl} documentUrls={documentUrls} />
     </div>
   );
 };

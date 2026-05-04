@@ -10,7 +10,7 @@ import { NoticeInfo } from './notice-info';
 import type { NoticeDetail } from '../models';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-type NoticeInfoProps = NoticeDetail & { sourceUrl?: string };
+type NoticeInfoProps = NoticeDetail;
 
 const mockNotice: NoticeInfoProps = {
   id: 1,
@@ -106,7 +106,7 @@ export const WithPicture: Story = {
 export const WithSourceUrlAndDocumentUrls: Story = {
   args: {
     ...mockNotice,
-    sourceUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
     documentUrls: [
       'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
       'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',

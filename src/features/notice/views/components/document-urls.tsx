@@ -1,6 +1,8 @@
 import { Link, Paperclip } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+// TODO: file name 추후 백엔드에서 전달할 예정
+
 function getFileName(url: string): string {
   try {
     const pathname = new URL(url).pathname;
@@ -12,29 +14,28 @@ function getFileName(url: string): string {
 }
 
 interface DocumentUrlsProps {
-  // TODO(ZGB-51): 백엔드 sourceUrl 필드 추가 후 gen:api 재실행 및 notice-info.tsx에서 전달 필요
-  sourceUrl?: string;
+  crawledUrl?: string;
   documentUrls: string[];
 }
 
-export function DocumentUrls({ sourceUrl, documentUrls }: DocumentUrlsProps) {
+export function DocumentUrls({ crawledUrl, documentUrls }: DocumentUrlsProps) {
   const { t } = useTranslation('notice');
 
-  if (!sourceUrl && documentUrls.length === 0) return null;
+  if (!crawledUrl && documentUrls.length === 0) return null;
 
   return (
     <div className="border-greyLight border-y py-3">
       <div className="grid grid-cols-[max-content_1fr] items-start gap-x-6 gap-y-3">
-        {sourceUrl && (
+        {crawledUrl && (
           <>
             <Label icon={<Link size={18} />}>{t('detail.source_url')}</Label>
             <a
-              href={sourceUrl}
+              href={crawledUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-secondaryText break-all underline"
             >
-              {sourceUrl}
+              {crawledUrl}
             </a>
           </>
         )}
