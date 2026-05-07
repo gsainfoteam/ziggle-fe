@@ -26,8 +26,10 @@ const mockNotice: NoticeInfoProps = {
   category: {},
   publishedAt: new Date().toISOString(),
   imageUrls: [],
-  documentUrls: [],
+  documents: [],
   additionalContents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const queryClient = new QueryClient();
@@ -107,10 +109,19 @@ export const WithSourceUrlAndDocumentUrls: Story = {
   args: {
     ...mockNotice,
     crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
-    documentUrls: [
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목3.pdf',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
+        name: '첨부파일_제목3.pdf',
+      },
     ],
   },
 };

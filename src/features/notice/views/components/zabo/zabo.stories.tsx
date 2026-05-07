@@ -26,7 +26,9 @@ const mockNotice: Notice = {
   isReminded: false,
   category: {},
   publishedAt: new Date().toISOString(),
-  documentUrls: [],
+  documents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const queryClient = new QueryClient();
@@ -110,12 +112,18 @@ export const WithPicture: Story = {
   },
 };
 
-export const WithDocumentUrls: Story = {
+export const WithDocuments: Story = {
   args: {
     ...mockNotice,
-    documentUrls: [
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
     ],
   },
 };

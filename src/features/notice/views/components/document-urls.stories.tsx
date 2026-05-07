@@ -17,10 +17,19 @@ type Story = StoryObj<typeof meta>;
 
 export const AttachmentsOnly: Story = {
   args: {
-    documentUrls: [
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목3.pdf',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
+        name: '첨부파일_제목3.pdf',
+      },
     ],
   },
 };
@@ -28,23 +37,32 @@ export const AttachmentsOnly: Story = {
 export const SourceUrlOnly: Story = {
   args: {
     crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
-    documentUrls: [],
+    documents: [],
   },
 };
 
 export const Both: Story = {
   args: {
     crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
-    documentUrls: [
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목1.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목2.pdf',
-      'https://www.gist.ac.kr/kr/attachments/첨부파일_제목3.pdf',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
+        name: '첨부파일_제목3.pdf',
+      },
     ],
   },
 };
 
 export const Empty: Story = {
   args: {
-    documentUrls: [],
+    documents: [],
   },
 };

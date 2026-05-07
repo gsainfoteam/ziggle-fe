@@ -18,7 +18,7 @@ export const NoticeInfo = ({
   createdAt,
   views,
   tags = [],
-  documentUrls,
+  documents,
   crawledUrl,
 }: NoticeDetail) => {
   const { data: user } = useUser();
@@ -35,7 +35,7 @@ export const NoticeInfo = ({
 
       <Tags tags={tags} className="flex-wrap" />
 
-      <DocumentUrls crawledUrl={crawledUrl} documentUrls={documentUrls} />
+      <DocumentUrls crawledUrl={crawledUrl} documents={documents} />
     </div>
   );
 };

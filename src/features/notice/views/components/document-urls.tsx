@@ -1,27 +1,15 @@
 import { Link, Paperclip } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-// TODO: file name 추후 백엔드에서 전달할 예정
+import type { NoticeDetail } from '../../models';
 
-function getFileName(url: string): string {
-  try {
-    const pathname = new URL(url).pathname;
-    const name = pathname.split('/').pop();
-    return name ? decodeURIComponent(name) : url;
-  } catch {
-    return url;
-  }
-}
-
-interface DocumentUrlsProps {
-  crawledUrl?: string;
-  documentUrls: string[];
-}
-
-export function DocumentUrls({ crawledUrl, documentUrls }: DocumentUrlsProps) {
+export function DocumentUrls({
+  crawledUrl,
+  documents,
+}: Pick<NoticeDetail, 'crawledUrl' | 'documents'>) {
   const { t } = useTranslation('notice');
 
-  if (!crawledUrl && documentUrls.length === 0) return null;
+  if (!crawledUrl && documents.length === 0) return null;
 
   return (
     <div className="border-greyLight border-y py-3">
@@ -40,13 +28,13 @@ export function DocumentUrls({ crawledUrl, documentUrls }: DocumentUrlsProps) {
           </>
         )}
 
-        {documentUrls.length > 0 && (
+        {documents.length > 0 && (
           <>
             <Label icon={<Paperclip size={18} />}>
               {t('detail.attachments')}
             </Label>
             <div className="flex flex-col gap-1">
-              {documentUrls.map((url) => (
+              {documents.map(({ url, name }) => (
                 <a
                   key={url}
                   href={url}
@@ -54,7 +42,7 @@ export function DocumentUrls({ crawledUrl, documentUrls }: DocumentUrlsProps) {
                   rel="noopener noreferrer"
                   className="text-secondaryText underline"
                 >
-                  {getFileName(url)}
+                  {name}
                 </a>
               ))}
             </div>
