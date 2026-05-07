@@ -26,7 +26,9 @@ const mockNotice: Notice = {
   isReminded: false,
   category: {},
   publishedAt: new Date().toISOString(),
-  documentUrls: [],
+  documents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const queryClient = new QueryClient();
@@ -107,5 +109,45 @@ export const WithPicture: Story = {
       ...mockNotice.author,
       picture: 'https://picsum.photos/seed/author1/36/36',
     },
+  },
+};
+
+export const WithDocuments: Story = {
+  args: {
+    ...mockNotice,
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+    ],
+  },
+};
+
+export const WithCrawledUrl: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+  },
+};
+
+export const WithDocumentsAndCrawledUrl: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+    ],
   },
 };

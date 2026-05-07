@@ -5,6 +5,7 @@ import { Avatar } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { AuthorActions } from './components/author-actions';
+import { DocumentUrls } from './components/document-urls';
 import { Tags } from './components/tags';
 
 import type { Author, NoticeDetail } from '../models';
@@ -17,6 +18,8 @@ export const NoticeInfo = ({
   createdAt,
   views,
   tags = [],
+  documents,
+  crawledUrl,
 }: NoticeDetail) => {
   const { data: user } = useUser();
 
@@ -31,6 +34,8 @@ export const NoticeInfo = ({
       <Title title={title} />
 
       <Tags tags={tags} className="flex-wrap" />
+
+      <DocumentUrls crawledUrl={crawledUrl} documents={documents} />
     </div>
   );
 };

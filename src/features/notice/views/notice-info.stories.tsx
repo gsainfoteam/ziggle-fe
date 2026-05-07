@@ -10,7 +10,9 @@ import { NoticeInfo } from './notice-info';
 import type { NoticeDetail } from '../models';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const mockNotice: NoticeDetail = {
+type NoticeInfoProps = NoticeDetail;
+
+const mockNotice: NoticeInfoProps = {
   id: 1,
   title: '2026 봄 학기 동아리 모집',
   author: { uuid: 'author-1', name: '홍길동', picture: null },
@@ -24,16 +26,18 @@ const mockNotice: NoticeDetail = {
   category: {},
   publishedAt: new Date().toISOString(),
   imageUrls: [],
-  documentUrls: [],
+  documents: [],
   additionalContents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const queryClient = new QueryClient();
 
-const createNoticeInfoRouter = (props: NoticeDetail) => {
+const createNoticeInfoRouter = (props: NoticeInfoProps) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <div className="w-120 p-6">
+      <div className="w-180 p-6">
         <NoticeInfo {...props} />
       </div>
     ),
@@ -41,7 +45,7 @@ const createNoticeInfoRouter = (props: NoticeDetail) => {
   return createRouter({ routeTree: rootRoute });
 };
 
-const NoticeInfoWithProviders = (props: NoticeDetail) => {
+const NoticeInfoWithProviders = (props: NoticeInfoProps) => {
   const router = createNoticeInfoRouter(props);
   return (
     <QueryClientProvider client={queryClient}>
@@ -98,5 +102,44 @@ export const WithPicture: Story = {
       ...mockNotice.author,
       picture: 'https://picsum.photos/seed/author1/36/36',
     },
+  },
+};
+
+export const WithSourceUrlAndDocumentUrls: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
+        name: '첨부파일_제목3.pdf',
+      },
+    ],
+  },
+};
+
+export const WithLongFileName: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl:
+      'https://www.gist.ac.kr/kr/html/sub05/very_long_path_without_any_spaces_to_force_break_all_behavior_test.html',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: 'extremely_long_attachment_filename_without_any_spaces_or_breakpoints_to_verify_break_all_layout_handling.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '띄어쓰기없는한글로된아주아주아주아주긴첨부파일제목으로레이아웃넘침을확인하는테스트케이스.pdf',
+      },
+    ],
   },
 };

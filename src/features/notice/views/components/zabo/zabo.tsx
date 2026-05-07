@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { Avatar } from '@/common/components';
 import type { Notice } from '@/features/notice/models';
 
+import { AttachmentIndicators } from './attachment-indicators';
 import DDay from './d-day';
 import { ZaboActions } from './zabo-actions';
 import { ZaboImageCarousel } from './zabo-image-carousel';
@@ -24,8 +25,18 @@ export type ZaboProps = Notice & {
 };
 
 export const Zabo = (props: ZaboProps) => {
-  const { content, createdAt, author, deadline, title, imageUrls, tags, id } =
-    props;
+  const {
+    content,
+    createdAt,
+    author,
+    deadline,
+    title,
+    imageUrls,
+    tags,
+    id,
+    documents,
+    crawledUrl,
+  } = props;
   const timeAgo = dayjs(createdAt).fromNow();
 
   const hasImage = imageUrls.length > 0;
@@ -61,9 +72,17 @@ export const Zabo = (props: ZaboProps) => {
         </div>
 
         <div className="flex w-full flex-col gap-2.5 px-4 pb-2.5">
-          <p className="dark:text-dark_white line-clamp-3 text-xl font-semibold">
-            {title}
-          </p>
+          <div className="flex items-baseline gap-2">
+            <p className="dark:text-dark_white line-clamp-3 text-xl font-semibold">
+              {title}
+            </p>
+            <div className="shrink-0">
+              <AttachmentIndicators
+                documents={documents}
+                crawledUrl={crawledUrl}
+              />
+            </div>
+          </div>
 
           {hasImage && (
             <ZaboImageCarousel imageUrls={imageUrls} title={title} />

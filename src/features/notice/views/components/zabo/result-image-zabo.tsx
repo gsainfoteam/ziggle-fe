@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 
+import { AttachmentIndicators } from './attachment-indicators';
 import DDay from './d-day';
 import { HighlightedText } from './highlighted-text';
 import { ZaboActions } from './zabo-actions';
@@ -19,6 +20,8 @@ export const ResultImageZabo = (props: ResultZaboProps) => {
     createdAt,
     imageUrls,
     searchQuery,
+    documents,
+    crawledUrl,
   } = props;
   return (
     <Link className="min-w-fit" to="/notice/$id" params={{ id: id.toString() }}>
@@ -56,12 +59,20 @@ export const ResultImageZabo = (props: ResultZaboProps) => {
             <DDay deadline={currentDeadline} className="text-xs md:text-sm" />
           )}
         </div>
-        <div className="dark:text-dark_white text-xl font-semibold">
-          {searchQuery ? (
-            <HighlightedText query={searchQuery}>{title}</HighlightedText>
-          ) : (
-            title
-          )}
+        <div className="flex items-baseline gap-2">
+          <div className="dark:text-dark_white text-xl font-semibold">
+            {searchQuery ? (
+              <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            ) : (
+              title
+            )}
+          </div>
+          <div className="shrink-0">
+            <AttachmentIndicators
+              documents={documents}
+              crawledUrl={crawledUrl}
+            />
+          </div>
         </div>
         <div className="scrollbar scrollbar-thumb-greyBorder scrollbar-thumb-rounded-full scrollbar-h-1 flex gap-2 overflow-x-scroll py-1">
           {imageUrls.map((url, i) => (

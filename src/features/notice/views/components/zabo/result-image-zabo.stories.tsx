@@ -28,7 +28,9 @@ const mockNotice: ResultZaboProps = {
   isReminded: false,
   category: {},
   publishedAt: new Date().toISOString(),
-  documentUrls: [],
+  documents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const queryClient = new QueryClient();

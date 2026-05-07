@@ -18,8 +18,10 @@ const mockNotice: NoticeDetail = {
   deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
   publishedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
   imageUrls: [],
-  documentUrls: [],
+  documents: [],
   additionalContents: [],
+  isViewed: false,
+  isBookmarked: false,
 };
 
 const mockAdditionalContents: AdditionalContent[] = [
