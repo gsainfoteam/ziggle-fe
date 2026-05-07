@@ -40,7 +40,7 @@ export function DocumentUrls({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-secondaryText underline"
+                  className="text-secondaryText break-all underline"
                 >
                   {name}
                 </a>
