@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 
+import { AttachmentIndicators } from './attachment-indicators';
 import DDay from './d-day';
 import { HighlightedText } from './highlighted-text';
 import { ZaboActions } from './zabo-actions';
@@ -20,6 +21,8 @@ export const ResultTextZabo = (props: ResultZaboProps) => {
     createdAt,
     content,
     searchQuery,
+    documents,
+    crawledUrl,
   } = props;
 
   const { t } = useTranslation('notice');
@@ -60,12 +63,20 @@ export const ResultTextZabo = (props: ResultZaboProps) => {
             <DDay deadline={currentDeadline} className="text-xs md:text-sm" />
           )}
         </div>
-        <div className="dark:text-dark_white text-xl font-semibold">
-          {searchQuery ? (
-            <HighlightedText query={searchQuery}>{title}</HighlightedText>
-          ) : (
-            title
-          )}
+        <div className="flex items-baseline gap-2">
+          <div className="dark:text-dark_white text-xl font-semibold">
+            {searchQuery ? (
+              <HighlightedText query={searchQuery}>{title}</HighlightedText>
+            ) : (
+              title
+            )}
+          </div>
+          <div className="shrink-0">
+            <AttachmentIndicators
+              documents={documents}
+              crawledUrl={crawledUrl}
+            />
+          </div>
         </div>
         <div className="font-regular dark:text-dark_white line-clamp-4 text-start text-ellipsis">
           {searchQuery ? (

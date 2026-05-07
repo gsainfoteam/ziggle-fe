@@ -127,3 +127,27 @@ export const WithDocuments: Story = {
     ],
   },
 };
+
+export const WithCrawledUrl: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+  },
+};
+
+export const WithDocumentsAndCrawledUrl: Story = {
+  args: {
+    ...mockNotice,
+    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+    documents: [
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
+        name: '첨부파일_제목1.pdf',
+      },
+      {
+        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
+        name: '첨부파일_제목2.pdf',
+      },
+    ],
+  },
+};
