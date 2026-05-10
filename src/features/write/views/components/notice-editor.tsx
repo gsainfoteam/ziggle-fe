@@ -12,7 +12,14 @@ import ClockIcon from '@/assets/icons/clock.svg?react';
 import GlobeIcon from '@/assets/icons/globe.svg?react';
 import TagIcon from '@/assets/icons/tag.svg?react';
 import TypeIcon from '@/assets/icons/type.svg?react';
-import { Button, LogClick, Toggle } from '@/common/components';
+import {
+  Button,
+  LogClick,
+  Toggle,
+  alertDialog,
+  chooseDialog,
+  confirmDialog,
+} from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { api } from '@/common/lib';
 import { cn } from '@/common/utils';
@@ -87,8 +94,9 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
       setIsLoading(true);
 
-      // common:alert_response.yes / common:alert_response.no
-      const confirmed = confirm(t('auto_save.has_saved'));
+      const confirmed = await confirmDialog({
+        description: t('auto_save.has_saved'),
+      });
       if (!confirmed) {
         setIsLoading(false);
         // TODO: send log
@@ -188,8 +196,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
   const handleSubmit = async () => {
     if (isLoading) return;
 
-    // TODO: change with custom overlay
-    alert(t('toasts.push_delayed'));
+    await alertDialog({ description: t('toasts.push_delayed') });
 
     setIsLoading(true);
 
@@ -284,20 +291,14 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (!englishNotice) {
         setIsLoading(false);
         toast.dismiss(loading);
-        toast.error(t('toasts.international_fail'));
-        // TODO: add alert
-        // Swal.fire({
-        //   text: t('toasts.international_fail'),
-        //   icon: 'error',
-        //   confirmButtonText: t('common:alert_response.confirm'),
-        //   showDenyButton: true,
-        //   denyButtonText: t('toasts.copy_english'),
-        // }).then((result) => {
-        //   if (result.isDenied) {
-        //     navigator.clipboard.writeText(state.english?.content!);
-        //     toast.success(t('toasts.copy_success'));
-        //   }
-        // });
+        const result = await chooseDialog({
+          description: t('toasts.international_fail'),
+          denyLabel: t('toasts.copy_english'),
+        });
+        if (result.outcome === 'denied' && state.english?.content) {
+          await navigator.clipboard.writeText(state.english.content);
+          toast.success(t('toasts.copy_success'));
+        }
         return;
       }
     }
@@ -319,20 +320,14 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (additionalKoreanNotice === null) {
         setIsLoading(false);
         toast.dismiss(loading);
-        toast.error(t('toasts.additional_notice_fail'));
-        // TODO: add alert
-        // Swal.fire({
-        //   text: t('toasts.additional_notice_fail'),
-        //   icon: 'error',
-        //   confirmButtonText: t('common:alert_response.confirm'),
-        //   showDenyButton: true,
-        //   denyButtonText: t('toasts.copy_additional'),
-        // }).then((result) => {
-        //   if (result.isDenied) {
-        //     navigator.clipboard.writeText(state.korean.additionalContent!);
-        //     toast.success(t('toasts.copy_success'));
-        //   }
-        // });
+        const result = await chooseDialog({
+          description: t('toasts.additional_notice_fail'),
+          denyLabel: t('toasts.copy_additional'),
+        });
+        if (result.outcome === 'denied' && state.korean.additionalContent) {
+          await navigator.clipboard.writeText(state.korean.additionalContent);
+          toast.success(t('toasts.copy_success'));
+        }
         return;
       }
 
@@ -365,22 +360,19 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         if (additionalEnglishNotice === null) {
           setIsLoading(false);
           toast.dismiss(loading);
-          toast.error(t('toasts.international_additional_fail'));
-          // TODO: add alert
-          // Swal.fire({
-          //   text: t('toasts.international_additional_fail'),
-          //   icon: 'error',
-          //   confirmButtonText: t('common:alert_response.confirm'),
-          //   showDenyButton: true,
-          //   denyButtonText: t('toasts.copy_international_additional'),
-          // }).then((result) => {
-          //   if (result.isDenied) {
-          //     navigator.clipboard.writeText(
-          //       state?.english?.additionalContent ?? '',
-          //     );
-          //     toast.success(t('toasts.copy_success'));
-          //   }
-          // });
+          const result = await chooseDialog({
+            description: t('toasts.international_additional_fail'),
+            denyLabel: t('toasts.copy_international_additional'),
+          });
+          if (
+            result.outcome === 'denied' &&
+            state.english?.additionalContent
+          ) {
+            await navigator.clipboard.writeText(
+              state.english.additionalContent,
+            );
+            toast.success(t('toasts.copy_success'));
+          }
           return;
         }
       }

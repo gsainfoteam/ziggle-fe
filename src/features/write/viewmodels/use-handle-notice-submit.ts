@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { chooseDialog } from '@/common/components';
 import { api } from '@/common/lib';
 import { ApiPaths, type Category } from '@/features/notice/models';
 
@@ -267,20 +268,14 @@ export const useHandleNoticeSubmit = () => {
         .catch(() => null);
 
       if (!noticeWithInternational) {
-        // TODO: add alert
-        // Swal.fire({
-        //   text: t('toasts.international_fail'),
-        //   icon: 'error',
-        //   confirmButtonText: t('common:alert_response.confirm'),
-        //   showDenyButton: true,
-        //   denyButtonText: t('toasts.copy_english'),
-        // }).then((result) => {
-        //   if (result.isDenied) {
-        //     navigator.clipboard.writeText(englishBody!);
-        //     toast.success(t('toasts.copy_success'));
-        //   }
-        // });
-        // return;
+        const result = await chooseDialog({
+          description: t('toasts.international_fail'),
+          denyLabel: t('toasts.copy_english'),
+        });
+        if (result.outcome === 'denied' && englishBody) {
+          await navigator.clipboard.writeText(englishBody);
+          toast.success(t('toasts.copy_success'));
+        }
       }
     }
 
