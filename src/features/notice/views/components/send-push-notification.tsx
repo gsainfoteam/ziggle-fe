@@ -4,6 +4,7 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { confirmDialog } from '@/common/components';
 import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
@@ -41,9 +42,10 @@ export const SendPushAlarm = ({
 
   const handleSendPushNotification = useCallback(async () => {
     if (isLoading) return;
-    // common:alert_response.confirm / common:alert_response.cancel
-    const result = confirm(t('detail.push_notification.confirm'));
-    if (!result) return;
+    const confirmed = await confirmDialog({
+      description: t('detail.push_notification.confirm'),
+    });
+    if (!confirmed) return;
     setIsLoading(true);
 
     try {

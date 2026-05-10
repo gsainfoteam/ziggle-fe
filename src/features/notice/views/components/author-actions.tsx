@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 
 import EditPencilIcon from '@/assets/icons/edit-pencil.svg?react';
 import RemoveIcon from '@/assets/icons/remove.svg?react';
-import { LogClick } from '@/common/components';
+import { LogClick, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
 import { useDeleteNotice } from '../../viewmodels';
@@ -20,15 +20,19 @@ export const AuthorActions = ({ noticeId }: WriterActionsProps) => {
   const { mutateAsync: deleteNotice } = useDeleteNotice();
 
   const handleRemoveNotice = async () => {
-    if (confirm(t('detail.author_actions.remove_confirm'))) {
-      try {
-        await deleteNotice({ params: { path: { id: noticeId } } });
-        router.navigate({ to: '/$category', params: { category: 'home' } });
-        toast.success(t('detail.author_actions.toasts.delete_success'));
-      } catch (error) {
-        console.error(error);
-        toast.error(t('detail.author_actions.toasts.delete_fail'));
-      }
+    const confirmed = await confirmDialog({
+      description: t('detail.author_actions.remove_confirm'),
+      destructive: true,
+    });
+    if (!confirmed) return;
+
+    try {
+      await deleteNotice({ params: { path: { id: noticeId } } });
+      router.navigate({ to: '/$category', params: { category: 'home' } });
+      toast.success(t('detail.author_actions.toasts.delete_success'));
+    } catch (error) {
+      console.error(error);
+      toast.error(t('detail.author_actions.toasts.delete_fail'));
     }
   };
 
