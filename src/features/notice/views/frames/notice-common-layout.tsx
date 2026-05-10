@@ -5,6 +5,7 @@ import { useUser } from '@/features/auth';
 
 import { NoticeSkeletonLayout } from './notice-skeleton-layout';
 import { Navbar } from '../components/navbar';
+import { MobileShell } from '../components/sidebar';
 
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth
@@ -17,7 +18,7 @@ export function NoticeCommonLayout() {
   if (user === null) return <NoticeSkeletonLayout />;
 
   return (
-    <div>
+    <MobileShell>
       <div className="flex min-h-screen flex-col">
         <Navbar />
         <div className="mb-96 flex flex-1">
@@ -25,6 +26,6 @@ export function NoticeCommonLayout() {
         </div>
         <Footer />
       </div>
-    </div>
+    </MobileShell>
   );
 }

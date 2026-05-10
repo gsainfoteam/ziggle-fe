@@ -1,0 +1,44 @@
+import type { ReactNode } from 'react';
+
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { SidebarMobile } from './sidebar-mobile';
+import { useMobileSidebar } from '../../../viewmodels';
+
+const SIDEBAR_WIDTH_PX = 280;
+
+interface MobileShellProps {
+  children: ReactNode;
+}
+
+export const MobileShell = ({ children }: MobileShellProps) => {
+  const isOpen = useMobileSidebar((state) => state.isOpen);
+  const close = useMobileSidebar((state) => state.close);
+
+  return (
+    <div className="relative min-h-screen overflow-x-hidden">
+      <SidebarMobile />
+      <motion.div
+        className="dark:bg-dark_dark relative z-10 min-h-screen bg-white md:transform-none"
+        animate={{ x: isOpen ? SIDEBAR_WIDTH_PX : 0 }}
+        transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.35 }}
+      >
+        {children}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.button
+              type="button"
+              aria-label="Close sidebar"
+              onClick={close}
+              className="absolute inset-0 z-50 cursor-pointer bg-black/30 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+};
