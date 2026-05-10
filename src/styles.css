@@ -101,6 +101,31 @@
   }
 }
 
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-float {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-greyBorder) transparent;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--color-greyBorder);
+  }
+  &.dark::-webkit-scrollbar-thumb,
+  .dark &::-webkit-scrollbar-thumb {
+    background-color: var(--color-dark_greyBorder);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
