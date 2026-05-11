@@ -127,6 +127,11 @@
 }
 
 @layer base {
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+
   html {
     scroll-behavior: smooth;
     background-color: var(--color-white);
