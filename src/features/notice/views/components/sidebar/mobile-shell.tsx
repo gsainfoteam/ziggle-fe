@@ -14,7 +14,7 @@ export const MobileShell = ({ children }: MobileShellProps) => {
   const close = useMobileSidebar((state) => state.close);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-clip">
       <SidebarMobile />
       <motion.div
         className="dark:bg-dark_dark relative z-10 min-h-screen bg-white md:transform-none"
