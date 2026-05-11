@@ -7,6 +7,7 @@ interface SidebarItemProps {
   icon: React.ReactNode;
   boldIcon: React.ReactNode;
   isSelected: boolean;
+  onClick?: () => void;
 }
 
 export const SidebarItem = ({

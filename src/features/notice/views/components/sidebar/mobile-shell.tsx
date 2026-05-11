@@ -1,5 +1,7 @@
 import { useEffect, type ReactNode } from 'react';
 
+import { useLocation } from '@tanstack/react-router';
+
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { SidebarMobile } from './sidebar-mobile';
@@ -12,6 +14,7 @@ interface MobileShellProps {
 export const MobileShell = ({ children }: MobileShellProps) => {
   const isOpen = useMobileSidebar((state) => state.isOpen);
   const close = useMobileSidebar((state) => state.close);
+  const location = useLocation();
 
   // 데스크톱 레이아웃으로 넘어가면 사이드바를 닫아 transform 리셋
   useEffect(() => {
@@ -24,6 +27,11 @@ export const MobileShell = ({ children }: MobileShellProps) => {
     mql.addEventListener('change', handle);
     return () => mql.removeEventListener('change', handle);
   }, [close]);
+
+  // 페이지 이동 시 사이드바 닫기
+  useEffect(() => {
+    close();
+  }, [location.pathname, close]);
 
   return (
     <div className="relative min-h-screen overflow-x-clip">

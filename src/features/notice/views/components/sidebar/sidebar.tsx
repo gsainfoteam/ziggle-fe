@@ -15,7 +15,7 @@ import { ChangeLanguageBox } from './change-language-box';
 import { SidebarItem } from './sidebar-item';
 import { useSidebarObject } from './use-sidebar';
 
-export const Sidebar = () => {
+export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
   const { pathname } = useLocation();
   const sidebarObject = useSidebarObject();
   const { t } = useTranslation('auth');
@@ -39,6 +39,7 @@ export const Sidebar = () => {
                       properties={{ key: menu.key }}
                     >
                       <SidebarItem
+                        onClick={onClose}
                         icon={
                           <menu.icons.regular className="stroke-text dark:stroke-dark_white" />
                         }
@@ -69,6 +70,7 @@ export const Sidebar = () => {
         <li className="w-full">
           <LogClick eventName={LogEvents.myClickBugReport}>
             <CSLink
+              onClick={onClose}
               className={cn(
                 'dark:hover:bg-dark_grey flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300',
               )}

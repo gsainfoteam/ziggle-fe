@@ -33,7 +33,7 @@ export const SidebarMobile = () => {
           </Link>
         </LogClick>
       )}
-      <Sidebar />
+      <Sidebar onClose={close} />
       <div className="h-25" />
     </aside>
   );
