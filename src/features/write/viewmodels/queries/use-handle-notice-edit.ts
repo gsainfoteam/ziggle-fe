@@ -15,6 +15,7 @@ export interface NoticeEditForm {
   originalNotice: {
     content: string;
     enContent?: string;
+    deadline?: string;
   };
   koreanBody: string;
   englishBody?: string;
@@ -48,7 +49,9 @@ export const useHandleNoticeEdit = () => {
           'en',
       ].filter(Boolean) as ('ko' | 'en')[];
 
-      const isEdited = !!editedLangs.length;
+      const isDeadlineEdited =
+        deadline?.toISOString() !== originalNotice.deadline;
+      const isEdited = !!editedLangs.length || isDeadlineEdited;
       const noticeLanguage = editedLangs.length === 1 ? editedLangs[0] : 'both';
 
       if (!koreanAdditionalContent && englishAdditionalContent) {
@@ -164,8 +167,13 @@ export const useHandleNoticeEdit = () => {
 
       // 1. Update existing notice if edited and not timed out
       if (!hasTimedOut && isEdited) {
-        const koreanNotice =
-          noticeLanguage === 'ko' || noticeLanguage === 'both'
+        // Patch Korean if body changed or deadline changed (Korean is always present)
+        const patchKorean =
+          editedLangs.includes('ko') || isDeadlineEdited || editedLangs.length === 0;
+        const patchEnglish =
+          editedLangs.includes('en') || (isDeadlineEdited && !!originalNotice.enContent);
+
+        const koreanNotice = patchKorean
             ? await api
                 .PATCH(ApiPaths.NoticeController_updateNotice, {
                   params: { path: { id: noticeId } },
@@ -179,8 +187,7 @@ export const useHandleNoticeEdit = () => {
                 .catch(() => null)
             : { id: null };
 
-        const englishNotice =
-          noticeLanguage === 'en' || noticeLanguage === 'both'
+        const englishNotice = patchEnglish
             ? await api
                 .PATCH(ApiPaths.NoticeController_updateNotice, {
                   params: { path: { id: noticeId } },
@@ -210,7 +217,7 @@ export const useHandleNoticeEdit = () => {
             params: { path: { id: noticeId, contentIdx: 1 } },
             body: {
               lang: 'en',
-              title: enTitle || '',
+              title: enTitle?.trim() || undefined,
               deadline: deadline ? deadline.toISOString() : undefined,
               body: englishBody!,
             },

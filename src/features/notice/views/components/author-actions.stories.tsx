@@ -11,12 +11,6 @@ import { AuthorActions } from './author-actions';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false },
-    mutations: { retry: false },
-  },
-});
 
 const StoryComponent = ({ noticeId }: { noticeId: number }) => {
   const router = useMemo(() => {
@@ -29,6 +23,17 @@ const StoryComponent = ({ noticeId }: { noticeId: number }) => {
     });
     return createRouter({ routeTree: rootRoute });
   }, [noticeId]);
+
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: { retry: false },
+          mutations: { retry: false },
+        },
+      }),
+    [],
+  );
 
   return (
     <QueryClientProvider client={queryClient}>

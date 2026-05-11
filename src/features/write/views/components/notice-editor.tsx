@@ -210,6 +210,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       originalNotice: {
         content: notice.content,
         enContent: notice.enContent,
+        deadline: notice.currentDeadline ?? undefined,
       },
       koreanBody: state.korean.content,
       englishBody: state.english?.content,
