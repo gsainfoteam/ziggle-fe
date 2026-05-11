@@ -78,6 +78,7 @@
     "copy_english": "Copy English notice content",
     "copy_international_additional": "Copy English additional notice content",
     "copy_success": "Copied to clipboard",
+    "copy_fail": "Failed to copy to clipboard",
     "international_additional_fail": "Failed to post English additional notice. Please try posting it again.",
     "international_fail": "Failed to post English version. Please try posting it again.",
     "modify_fail": "Failed to modify the notice",

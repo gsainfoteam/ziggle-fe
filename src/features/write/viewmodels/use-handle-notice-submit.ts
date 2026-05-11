@@ -273,8 +273,12 @@ export const useHandleNoticeSubmit = () => {
           denyLabel: t('toasts.copy_english'),
         });
         if (result.outcome === 'denied' && englishBody) {
-          await navigator.clipboard.writeText(englishBody);
-          toast.success(t('toasts.copy_success'));
+          try {
+            await navigator.clipboard.writeText(englishBody);
+            toast.success(t('toasts.copy_success'));
+          } catch {
+            toast.error(t('toasts.copy_fail'));
+          }
         }
       }
     }

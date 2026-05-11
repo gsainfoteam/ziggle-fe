@@ -78,6 +78,7 @@
     "copy_english": "영어 공지 내용 복사",
     "copy_international_additional": "영어 추가 공지 내용 복사",
     "copy_success": "클립보드에 복사되었습니다",
+    "copy_fail": "클립보드 복사에 실패했습니다",
     "international_additional_fail": "영어 추가 공지 작성에 실패했습니다",
     "international_fail": "영어 버전 작성에 실패했습니다. 다시 시도해주세요",
     "modify_fail": "공지 수정에 실패했습니다",
