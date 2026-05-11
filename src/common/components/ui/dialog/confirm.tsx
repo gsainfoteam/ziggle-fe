@@ -61,7 +61,8 @@ const ConfirmDialogContent = ({
           onClick={onConfirm}
           className={cn(
             'flex-1',
-            destructive && 'bg-red-500 text-white dark:text-dark_white hover:brightness-90'
+            destructive &&
+              'dark:text-dark_white bg-red-500 text-white hover:brightness-90',
           )}
         >
           {confirmLabel ?? t('alert_response.confirm')}
@@ -71,9 +72,7 @@ const ConfirmDialogContent = ({
   );
 };
 
-export const confirmDialog = (
-  opts: ConfirmDialogOptions,
-): Promise<boolean> =>
+export const confirmDialog = (opts: ConfirmDialogOptions): Promise<boolean> =>
   overlay.openAsync<boolean>(({ isOpen, close, unmount }) => (
     <ConfirmDialogContent
       {...opts}

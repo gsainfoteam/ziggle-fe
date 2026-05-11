@@ -6,6 +6,7 @@
 
 @theme {
   --spacing-pageSide: 20vw;
+  --spacing-sidebarMobile: 13.25rem;
   --transition-duration: 200ms;
 
   --color-primary: #ff4500;

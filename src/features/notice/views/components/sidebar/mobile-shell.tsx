@@ -5,8 +5,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { SidebarMobile } from './sidebar-mobile';
 import { useMobileSidebar } from '../../../viewmodels';
 
-const SIDEBAR_WIDTH_PX = 280;
-
 interface MobileShellProps {
   children: ReactNode;
 }
@@ -20,7 +18,7 @@ export const MobileShell = ({ children }: MobileShellProps) => {
       <SidebarMobile />
       <motion.div
         className="dark:bg-dark_dark relative z-10 min-h-screen bg-white md:transform-none"
-        animate={{ x: isOpen ? SIDEBAR_WIDTH_PX : 0 }}
+        animate={{ x: isOpen ? 'var(--spacing-sidebarMobile)' : '0px' }}
         transition={{ ease: [0.16, 1, 0.3, 1], duration: 0.35 }}
       >
         {children}
