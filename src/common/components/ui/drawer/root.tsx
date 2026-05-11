@@ -9,7 +9,7 @@ import {
 } from '@floating-ui/react';
 import { AnimatePresence, motion, type PanInfo } from 'framer-motion';
 
-import { cn } from '@/common/utils';
+import { cn, useScrollLock } from '@/common/utils';
 
 import {
   backdropTransition,
@@ -93,14 +93,7 @@ export const DrawerRoot = ({
   });
   const { getFloatingProps } = useInteractions([dismiss]);
 
-  useEffect(() => {
-    if (!lockScroll || !isOpen) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [isOpen, lockScroll]);
+  useScrollLock(isOpen && lockScroll);
 
   const handleDragEnd = useCallback(
     (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) =>

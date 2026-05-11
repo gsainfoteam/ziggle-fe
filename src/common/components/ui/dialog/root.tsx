@@ -9,7 +9,7 @@ import {
 } from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { cn } from '@/common/utils';
+import { cn, useScrollLock } from '@/common/utils';
 
 import {
   backdropTransition,
@@ -70,14 +70,7 @@ export const DialogRoot = ({
   });
   const { getFloatingProps } = useInteractions([dismiss]);
 
-  useEffect(() => {
-    if (!lockScroll || !isOpen) return;
-    const original = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = original;
-    };
-  }, [isOpen, lockScroll]);
+  useScrollLock(isOpen && lockScroll);
 
   return (
     <DialogContext.Provider value={{ titleId, descriptionId, onClose }}>
