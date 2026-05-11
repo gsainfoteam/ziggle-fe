@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -12,6 +12,18 @@ interface MobileShellProps {
 export const MobileShell = ({ children }: MobileShellProps) => {
   const isOpen = useMobileSidebar((state) => state.isOpen);
   const close = useMobileSidebar((state) => state.close);
+
+  // 데스크톱 레이아웃으로 넘어가면 사이드바를 닫아 transform 리셋
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 768px)');
+    const handle = () => {
+      if (mql.matches) close();
+    };
+
+    handle();
+    mql.addEventListener('change', handle);
+    return () => mql.removeEventListener('change', handle);
+  }, [close]);
 
   return (
     <div className="relative min-h-screen overflow-x-clip">
