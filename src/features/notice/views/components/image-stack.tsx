@@ -28,16 +28,21 @@ const ImageStack = ({ width, sources, alt }: ImageStackProps) => {
   return (
     <div className="flex flex-col gap-[10px]">
       {sources.map((src, i) => (
-        <div key={src} className="relative cursor-pointer">
+        <div key={src} className="relative">
           <LogClick eventName={LogEvents.detailClickImage}>
-            <img
-              src={src}
-              alt={alt}
-              width={width ?? 400}
-              height={300}
+            <button
+              type="button"
               onClick={() => onImageClick(i)}
-              className="border-greyBorder shrink-0 basis-48 rounded-[10px] border-2 object-cover md:basis-80"
-            />
+              className="block cursor-pointer text-left"
+            >
+              <img
+                src={src}
+                alt={alt}
+                width={width ?? 400}
+                height={300}
+                className="border-greyBorder shrink-0 basis-48 rounded-[10px] border-2 object-cover md:basis-80"
+              />
+            </button>
           </LogClick>
         </div>
       ))}
