@@ -112,7 +112,7 @@
 @utility scrollbar-float {
   scrollbar-width: thin;
   scrollbar-color: var(--color-greyBorder) transparent;
-  
+
   &::-webkit-scrollbar {
     width: 6px;
     background-color: transparent;
@@ -121,9 +121,11 @@
     border-radius: 4px;
     background-color: var(--color-greyBorder);
   }
-  &.dark::-webkit-scrollbar-thumb,
-  .dark &::-webkit-scrollbar-thumb {
-    background-color: var(--color-dark_greyBorder);
+  @variant dark {
+    scrollbar-color: var(--color-dark_greyBorder) transparent;
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-dark_greyBorder);
+    }
   }
 }
 
