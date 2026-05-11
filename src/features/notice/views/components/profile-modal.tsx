@@ -140,6 +140,11 @@ export const ProfileModalButton = ({
         );
       }
     } catch (err) {
+      toast.error(
+        t('mypage.withdrawal.error.title') +
+          '\n' +
+          t('mypage.withdrawal.error.text'),
+      );
       console.error('withdrawal flow error:', err);
     }
   };
@@ -154,7 +159,7 @@ export const ProfileModalButton = ({
         anchor={anchor}
         placement="bottom-end"
         responsive
-        className="md:w-auto max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none"
+        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none md:w-auto"
       >
         <ProfileModalPanel
           user={user}
@@ -167,7 +172,7 @@ export const ProfileModalButton = ({
             close();
             await handleWithdrawal();
           }}
-          className="md:rounded-2xl md:border-transparent md:shadow-2xl max-md:h-full max-md:w-full max-md:rounded-none max-md:border-none max-md:shadow-none"
+          className="max-md:h-full max-md:w-full max-md:rounded-none max-md:border-none max-md:shadow-none md:rounded-2xl md:border-transparent md:shadow-2xl"
         />
       </Popover.Root>
     ));
