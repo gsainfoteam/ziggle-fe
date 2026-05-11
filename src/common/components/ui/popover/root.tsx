@@ -81,11 +81,7 @@ export const PopoverRoot = ({
     },
     elements: { reference: useFullscreen ? null : anchor },
     placement,
-    middleware: [
-      offsetMiddleware(offset),
-      flip(),
-      shift({ padding: 8 }),
-    ],
+    middleware: [offsetMiddleware(offset), flip(), shift({ padding: 8 })],
     whileElementsMounted: autoUpdate,
   });
   const { setFloating } = refs;

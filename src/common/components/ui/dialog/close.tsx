@@ -7,9 +7,7 @@ interface DialogCloseProps {
   className?: string;
 }
 
-export const DialogClose = ({
-  className,
-}: DialogCloseProps) => {
+export const DialogClose = ({ className }: DialogCloseProps) => {
   const { onClose } = useDialogContext();
   return (
     <button

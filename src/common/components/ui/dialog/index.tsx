@@ -7,14 +7,8 @@ import { DialogRoot } from './root';
 import { DialogTitle } from './title';
 
 export type { DialogRootProps, DialogSize } from './root';
-export {
-  alertDialog,
-  type AlertDialogOptions,
-} from './alert';
-export {
-  confirmDialog,
-  type ConfirmDialogOptions,
-} from './confirm';
+export { alertDialog, type AlertDialogOptions } from './alert';
+export { confirmDialog, type ConfirmDialogOptions } from './confirm';
 export {
   chooseDialog,
   type ChooseDialogOptions,

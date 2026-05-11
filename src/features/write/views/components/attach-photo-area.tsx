@@ -8,10 +8,7 @@ import { cn } from '@/common/utils';
 
 import { AttachedPhoto } from './attached-photo';
 
-export interface FileWithUrl {
-  file: File;
-  url: string;
-}
+import type { FileWithUrl } from '../../viewmodels';
 
 interface AttachPhotoAreaProps {
   photos: FileWithUrl[];

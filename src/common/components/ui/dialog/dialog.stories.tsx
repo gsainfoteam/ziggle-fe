@@ -43,10 +43,18 @@ const DialogPlayground = ({
           <p>본문 영역입니다. 길어지면 내부에서 스크롤됩니다.</p>
         </Dialog.Body>
         <Dialog.Footer>
-          <Button variant="muted" onClick={() => setIsOpen(false)} className="flex-1">
+          <Button
+            variant="muted"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
             취소
           </Button>
-          <Button variant="contained" onClick={() => setIsOpen(false)} className="flex-1">
+          <Button
+            variant="contained"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
             확인
           </Button>
         </Dialog.Footer>
@@ -109,7 +117,11 @@ const LongContent = () => {
           ))}
         </Dialog.Body>
         <Dialog.Footer>
-          <Button variant="contained" onClick={() => setIsOpen(false)} className="flex-1">
+          <Button
+            variant="contained"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
             동의
           </Button>
         </Dialog.Footer>
@@ -165,10 +177,7 @@ const WithdrawalScenario = () => {
               '계정과 관련된 모든 정보가 삭제됩니다.\n이 작업은 되돌릴 수 없어요.',
             destructive: true,
           });
-          setLog((l) => [
-            ...l,
-            ok ? 'withdraw → logout 흐름 진입' : '취소됨',
-          ]);
+          setLog((l) => [...l, ok ? 'withdraw → logout 흐름 진입' : '취소됨']);
         }}
       >
         회원 탈퇴
@@ -223,8 +232,7 @@ const AutoSaveScenario = () => {
         variant="contained"
         onClick={async () => {
           const ok = await confirmDialog({
-            description:
-              '저장된 임시글이 있습니다. 이어서 작성하시겠습니까?',
+            description: '저장된 임시글이 있습니다. 이어서 작성하시겠습니까?',
           });
           setLog((l) => [...l, ok ? '초안 복원됨' : '초안 폐기']);
         }}

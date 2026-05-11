@@ -64,234 +64,233 @@ export const useHandleNoticeSubmit = () => {
 
   return useMutation({
     mutationFn: async ({
-
-    title,
-    enTitle,
-    deadline,
-    noticeLanguage,
-    koreanBody,
-    englishBody,
-    tags,
-    images,
-    category,
+      title,
+      enTitle,
+      deadline,
+      noticeLanguage,
+      koreanBody,
+      englishBody,
+      tags,
+      images,
+      category,
     }: NoticeSubmitForm) => {
       await alertDialog({ description: t('toasts.push_delayed') });
-    if (!title) {
-      toast.error(t('validations.title_required'));
-      return;
-    }
+      if (!title) {
+        toast.error(t('validations.title_required'));
+        return;
+      }
 
-    if (noticeLanguage === 'both' && !enTitle) {
-      toast.error(t('validations.english_title_required'));
-      return;
-    }
+      if (noticeLanguage === 'both' && !enTitle) {
+        toast.error(t('validations.english_title_required'));
+        return;
+      }
 
-    if (title.length > TITLE_MAX_LENGTH) {
-      toast.error(
-        t('validations.title_too_long', {
-          titleMaxLength: TITLE_MAX_LENGTH,
-        }),
-      );
-      return;
-    }
+      if (title.length > TITLE_MAX_LENGTH) {
+        toast.error(
+          t('validations.title_too_long', {
+            titleMaxLength: TITLE_MAX_LENGTH,
+          }),
+        );
+        return;
+      }
 
-    if (deadline && deadline < new Date()) {
-      toast.error(t('validations.deadline_invalid'));
-      return;
-    }
+      if (deadline && deadline < new Date()) {
+        toast.error(t('validations.deadline_invalid'));
+        return;
+      }
 
-    switch (noticeLanguage) {
-      case 'ko':
-        if (!koreanBody) {
-          toast.error(t('validations.body_required'));
-          return;
-        }
-        break;
-      case 'en':
-        if (!englishBody) {
-          toast.error(t('validations.body_required'));
-          return;
-        }
-        break;
-      case 'both':
-        if (!koreanBody && !englishBody) {
-          toast.error(t('validations.body_required'));
-          return;
-        }
-        if (!koreanBody && englishBody) {
-          toast.error(t('validations.korean_body_required'));
-          return;
-        }
-        if (koreanBody && !englishBody) {
-          toast.error(t('validations.english_body_required'));
-          return;
-        }
-        break;
-    }
+      switch (noticeLanguage) {
+        case 'ko':
+          if (!koreanBody) {
+            toast.error(t('validations.body_required'));
+            return;
+          }
+          break;
+        case 'en':
+          if (!englishBody) {
+            toast.error(t('validations.body_required'));
+            return;
+          }
+          break;
+        case 'both':
+          if (!koreanBody && !englishBody) {
+            toast.error(t('validations.body_required'));
+            return;
+          }
+          if (!koreanBody && englishBody) {
+            toast.error(t('validations.korean_body_required'));
+            return;
+          }
+          if (koreanBody && !englishBody) {
+            toast.error(t('validations.english_body_required'));
+            return;
+          }
+          break;
+      }
 
-    switch (noticeLanguage) {
-      case 'ko':
-        if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-          toast.error(
-            t('validations.body_too_long', {
-              bodyMaxLength: BODY_MAX_LENGTH,
-            }) +
-              t('validations.char_count', {
-                length: koreanBody.length,
-                maxLength: BODY_MAX_LENGTH,
-              }),
-          );
-          return;
-        }
-        break;
-      case 'en':
-        if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-          toast.error(
-            t('validations.body_too_long', {
-              bodyMaxLength: BODY_MAX_LENGTH,
-            }) +
-              t('validations.char_count', {
-                length: englishBody.length,
-                maxLength: BODY_MAX_LENGTH,
-              }),
-          );
-          return;
-        }
-        break;
-      case 'both':
-        if (
-          koreanBody &&
-          koreanBody.length > BODY_MAX_LENGTH &&
-          englishBody &&
-          englishBody.length > BODY_MAX_LENGTH
-        ) {
-          toast.error(
-            t('validations.both_body_too_long', {
-              bodyMaxLength: BODY_MAX_LENGTH,
-            }) +
-              t('validations.char_count', {
-                length: koreanBody.length,
-                maxLength: BODY_MAX_LENGTH,
+      switch (noticeLanguage) {
+        case 'ko':
+          if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
+            toast.error(
+              t('validations.body_too_long', {
+                bodyMaxLength: BODY_MAX_LENGTH,
               }) +
-              t('validations.char_count', {
-                length: englishBody.length,
-                maxLength: BODY_MAX_LENGTH,
-              }),
-          );
-          return;
-        } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-          toast.error(
-            t('validations.korean_body_too_long', {
-              bodyMaxLength: BODY_MAX_LENGTH,
-            }) +
-              t('validations.char_count', {
-                length: koreanBody.length,
-                maxLength: BODY_MAX_LENGTH,
-              }),
-          );
+                t('validations.char_count', {
+                  length: koreanBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }),
+            );
+            return;
+          }
+          break;
+        case 'en':
+          if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
+            toast.error(
+              t('validations.body_too_long', {
+                bodyMaxLength: BODY_MAX_LENGTH,
+              }) +
+                t('validations.char_count', {
+                  length: englishBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }),
+            );
+            return;
+          }
+          break;
+        case 'both':
+          if (
+            koreanBody &&
+            koreanBody.length > BODY_MAX_LENGTH &&
+            englishBody &&
+            englishBody.length > BODY_MAX_LENGTH
+          ) {
+            toast.error(
+              t('validations.both_body_too_long', {
+                bodyMaxLength: BODY_MAX_LENGTH,
+              }) +
+                t('validations.char_count', {
+                  length: koreanBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }) +
+                t('validations.char_count', {
+                  length: englishBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }),
+            );
+            return;
+          } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
+            toast.error(
+              t('validations.korean_body_too_long', {
+                bodyMaxLength: BODY_MAX_LENGTH,
+              }) +
+                t('validations.char_count', {
+                  length: koreanBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }),
+            );
 
-          return;
-        } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-          toast.error(
-            t('validations.english_body_too_long', {
-              bodyMaxLength: BODY_MAX_LENGTH,
-            }) +
-              t('validations.char_count', {
-                length: englishBody.length,
-                maxLength: BODY_MAX_LENGTH,
-              }),
-          );
+            return;
+          } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
+            toast.error(
+              t('validations.english_body_too_long', {
+                bodyMaxLength: BODY_MAX_LENGTH,
+              }) +
+                t('validations.char_count', {
+                  length: englishBody.length,
+                  maxLength: BODY_MAX_LENGTH,
+                }),
+            );
 
-          return;
-        }
-        break;
-    }
+            return;
+          }
+          break;
+      }
 
-    const loading = toast.loading(t('toasts.submitting'));
+      const loading = toast.loading(t('toasts.submitting'));
 
-    const tagIds: number[] | undefined = await handleTagSubmit(tags);
-    if (!tagIds) return;
+      const tagIds: number[] | undefined = await handleTagSubmit(tags);
+      if (!tagIds) return;
 
-    const imagesFormData = new FormData();
-    for (const image of images) {
-      imagesFormData.append('images', image);
-    }
-    const imageKeys =
-      images.length > 0
-        ? await api
-            .POST(ApiPaths.ImageController_uploadImage, {
-              // TODO: wrong type
-              body: imagesFormData as never,
-            })
-            .then((res) => res.data)
-            .catch(() => null)
-        : [];
-    if (!imageKeys) {
-      toast.dismiss(loading);
-      toast.error(t('toasts.submit_fail'));
-      return;
-    }
+      const imagesFormData = new FormData();
+      for (const image of images) {
+        imagesFormData.append('images', image);
+      }
+      const imageKeys =
+        images.length > 0
+          ? await api
+              .POST(ApiPaths.ImageController_uploadImage, {
+                // TODO: wrong type
+                body: imagesFormData as never,
+              })
+              .then((res) => res.data)
+              .catch(() => null)
+          : [];
+      if (!imageKeys) {
+        toast.dismiss(loading);
+        toast.error(t('toasts.submit_fail'));
+        return;
+      }
 
-    const notice = await api
-      .POST(ApiPaths.NoticeController_createNotice, {
-        body: {
-          title,
-          deadline: deadline?.toISOString(),
-          body: koreanBody!,
-          images: imageKeys,
-          // TODO: wrong type
-          tags: tagIds as unknown as string[],
-          category,
-        },
-      })
-      .then((res) => res.data)
-      .catch(() => null);
-
-    if (!notice) {
-      toast.dismiss(loading);
-      toast.error(t('toasts.submit_fail'));
-      return;
-    }
-
-    const { id } = notice;
-
-    if (!id) {
-      toast.dismiss(loading);
-      toast.error(t('toasts.submit_fail'));
-      return;
-    }
-
-    if (noticeLanguage === 'both') {
-      const noticeWithInternational = await api
-        .POST(ApiPaths.NoticeController_addForeignContent, {
-          params: { path: { id, contentIdx: 1 } },
+      const notice = await api
+        .POST(ApiPaths.NoticeController_createNotice, {
           body: {
-            lang: 'en' as const,
-            title: enTitle || title,
+            title,
             deadline: deadline?.toISOString(),
-            body: englishBody!,
+            body: koreanBody!,
+            images: imageKeys,
+            // TODO: wrong type
+            tags: tagIds as unknown as string[],
+            category,
           },
         })
+        .then((res) => res.data)
         .catch(() => null);
 
-      if (!noticeWithInternational) {
-        const result = await chooseDialog({
-          description: t('toasts.international_fail'),
-          denyLabel: t('toasts.copy_english'),
-        });
-        if (result.outcome === 'denied' && englishBody) {
-          try {
-            await navigator.clipboard.writeText(englishBody);
-            toast.success(t('toasts.copy_success'));
-          } catch {
-            toast.error(t('toasts.copy_fail'));
+      if (!notice) {
+        toast.dismiss(loading);
+        toast.error(t('toasts.submit_fail'));
+        return;
+      }
+
+      const { id } = notice;
+
+      if (!id) {
+        toast.dismiss(loading);
+        toast.error(t('toasts.submit_fail'));
+        return;
+      }
+
+      if (noticeLanguage === 'both') {
+        const noticeWithInternational = await api
+          .POST(ApiPaths.NoticeController_addForeignContent, {
+            params: { path: { id, contentIdx: 1 } },
+            body: {
+              lang: 'en' as const,
+              title: enTitle || title,
+              deadline: deadline?.toISOString(),
+              body: englishBody!,
+            },
+          })
+          .catch(() => null);
+
+        if (!noticeWithInternational) {
+          const result = await chooseDialog({
+            description: t('toasts.international_fail'),
+            denyLabel: t('toasts.copy_english'),
+          });
+          if (result.outcome === 'denied' && englishBody) {
+            try {
+              await navigator.clipboard.writeText(englishBody);
+              toast.success(t('toasts.copy_success'));
+            } catch {
+              toast.error(t('toasts.copy_fail'));
+            }
           }
         }
       }
-    }
 
-    toast.dismiss(loading);
-    toast.success(t('toasts.submit_success'));
+      toast.dismiss(loading);
+      toast.success(t('toasts.submit_success'));
       localStorage.removeItem('notice');
       router.navigate({ to: '/notice/$id', params: { id: id.toString() } });
 

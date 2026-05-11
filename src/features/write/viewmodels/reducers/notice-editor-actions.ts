@@ -1,8 +1,18 @@
-import dayjs, { type Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
-import type { FileWithUrl } from '../../views/components/attach-photo-area';
-import type { NoticeType } from '../../views/components/notice-type-selector';
-import type { Tag } from '../../views/components/tag-input';
+import type { Dayjs } from 'dayjs';
+
+export interface FileWithUrl {
+  file: File;
+  url: string;
+}
+
+export type NoticeType = 'recruit' | 'event' | 'general';
+
+export interface Tag {
+  id: number;
+  name: string;
+}
 
 export interface EditorState {
   noticeType: NoticeType;

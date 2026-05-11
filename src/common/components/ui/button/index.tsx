@@ -20,7 +20,8 @@ export const Button = ({
       variant && 'rounded-[10px] px-5 py-2.5',
       variant === 'outlined' &&
         'border-primary text-primary hover:bg-secondary border',
-      variant === 'contained' && 'bg-primary text-white dark:text-dark_white hover:brightness-90',
+      variant === 'contained' &&
+        'bg-primary dark:text-dark_white text-white hover:brightness-90',
       variant === 'disabled' && 'bg-greylight text-grey',
       variant === 'muted' && 'bg-greyLight text-greyDark hover:brightness-95',
       animated && 'active:scale-95',

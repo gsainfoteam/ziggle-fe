@@ -46,10 +46,18 @@ const DrawerPlayground = ({
           <p>4방향 슬라이드. side를 바꿔보세요.</p>
         </Drawer.Body>
         <Drawer.Footer>
-          <Button variant="muted" onClick={() => setIsOpen(false)} className="flex-1">
+          <Button
+            variant="muted"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
             취소
           </Button>
-          <Button variant="contained" onClick={() => setIsOpen(false)} className="flex-1">
+          <Button
+            variant="contained"
+            onClick={() => setIsOpen(false)}
+            className="flex-1"
+          >
             확인
           </Button>
         </Drawer.Footer>

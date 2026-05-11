@@ -7,9 +7,7 @@ interface DrawerCloseProps {
   className?: string;
 }
 
-export const DrawerClose = ({
-  className,
-}: DrawerCloseProps) => {
+export const DrawerClose = ({ className }: DrawerCloseProps) => {
   const { onClose } = useDrawerContext();
   return (
     <button

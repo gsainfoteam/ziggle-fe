@@ -70,7 +70,10 @@ const ShowcaseModal = ({
           <DownloadIcon className="w-6 md:w-8" />
         </Button>
       </div>
-      <Dialog.Close className="text-white hover:bg-white/10" aria-label={t('detail.close')} />
+      <Dialog.Close
+        className="text-white hover:bg-white/10"
+        aria-label={t('detail.close')}
+      />
       <div className="flex w-full items-center justify-center gap-5 md:gap-12">
         <Button disabled={index === 0} onClick={left}>
           <LongArrowIcon

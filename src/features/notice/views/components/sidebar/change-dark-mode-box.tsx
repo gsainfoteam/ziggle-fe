@@ -65,9 +65,7 @@ export const ChangeDarkModeBox = () => {
           isOpen && 'bg-greyLight dark:bg-dark_greyDark',
         )}
       >
-        <span className="w-6">
-          {isOpen ? <PaletteFull /> : <Palette />}
-        </span>
+        <span className="w-6">{isOpen ? <PaletteFull /> : <Palette />}</span>
         <span className={isOpen ? 'font-semibold' : 'font-normal'}>
           {t('sidebar.theme')}
         </span>

@@ -43,7 +43,9 @@ export const useHandleNoticeEdit = () => {
     }: NoticeEditForm) => {
       const editedLangs: ('ko' | 'en')[] = [
         koreanBody !== originalNotice.content && 'ko',
-        originalNotice.enContent && englishBody !== originalNotice.enContent && 'en',
+        originalNotice.enContent &&
+          englishBody !== originalNotice.enContent &&
+          'en',
       ].filter(Boolean) as ('ko' | 'en')[];
 
       const isEdited = !!editedLangs.length;
@@ -69,8 +71,13 @@ export const useHandleNoticeEdit = () => {
             }
             if (koreanBody.length > BODY_MAX_LENGTH) {
               toast.error(
-                t('validations.body_too_long', { bodyMaxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: koreanBody.length, maxLength: BODY_MAX_LENGTH }),
+                t('validations.body_too_long', {
+                  bodyMaxLength: BODY_MAX_LENGTH,
+                }) +
+                  t('validations.char_count', {
+                    length: koreanBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }),
               );
               return;
             }
@@ -82,8 +89,13 @@ export const useHandleNoticeEdit = () => {
             }
             if (englishBody.length > BODY_MAX_LENGTH) {
               toast.error(
-                t('validations.body_too_long', { bodyMaxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: englishBody.length, maxLength: BODY_MAX_LENGTH }),
+                t('validations.body_too_long', {
+                  bodyMaxLength: BODY_MAX_LENGTH,
+                }) +
+                  t('validations.char_count', {
+                    length: englishBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }),
               );
               return;
             }
@@ -101,23 +113,46 @@ export const useHandleNoticeEdit = () => {
               toast.error(t('validations.english_body_required'));
               return;
             }
-            if (koreanBody && koreanBody.length > BODY_MAX_LENGTH && englishBody && englishBody.length > BODY_MAX_LENGTH) {
+            if (
+              koreanBody &&
+              koreanBody.length > BODY_MAX_LENGTH &&
+              englishBody &&
+              englishBody.length > BODY_MAX_LENGTH
+            ) {
               toast.error(
-                t('validations.both_body_too_long', { bodyMaxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: koreanBody.length, maxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: englishBody.length, maxLength: BODY_MAX_LENGTH }),
+                t('validations.both_body_too_long', {
+                  bodyMaxLength: BODY_MAX_LENGTH,
+                }) +
+                  t('validations.char_count', {
+                    length: koreanBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }) +
+                  t('validations.char_count', {
+                    length: englishBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }),
               );
               return;
             } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
               toast.error(
-                t('validations.korean_body_too_long', { bodyMaxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: koreanBody.length, maxLength: BODY_MAX_LENGTH }),
+                t('validations.korean_body_too_long', {
+                  bodyMaxLength: BODY_MAX_LENGTH,
+                }) +
+                  t('validations.char_count', {
+                    length: koreanBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }),
               );
               return;
             } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
               toast.error(
-                t('validations.english_body_too_long', { bodyMaxLength: BODY_MAX_LENGTH }) +
-                  t('validations.char_count', { length: englishBody.length, maxLength: BODY_MAX_LENGTH }),
+                t('validations.english_body_too_long', {
+                  bodyMaxLength: BODY_MAX_LENGTH,
+                }) +
+                  t('validations.char_count', {
+                    length: englishBody.length,
+                    maxLength: BODY_MAX_LENGTH,
+                  }),
               );
               return;
             }
@@ -134,7 +169,11 @@ export const useHandleNoticeEdit = () => {
             ? await api
                 .PATCH(ApiPaths.NoticeController_updateNotice, {
                   params: { path: { id: noticeId } },
-                  body: { deadline: deadline?.toISOString(), body: koreanBody!, lng: 'ko' },
+                  body: {
+                    deadline: deadline?.toISOString(),
+                    body: koreanBody!,
+                    lng: 'ko',
+                  },
                 })
                 .then((res) => res.data)
                 .catch(() => null)
@@ -145,7 +184,11 @@ export const useHandleNoticeEdit = () => {
             ? await api
                 .PATCH(ApiPaths.NoticeController_updateNotice, {
                   params: { path: { id: noticeId } },
-                  body: { deadline: deadline?.toISOString(), body: englishBody!, lng: 'en' },
+                  body: {
+                    deadline: deadline?.toISOString(),
+                    body: englishBody!,
+                    lng: 'en',
+                  },
                 })
                 .then((res) => res.data)
                 .catch(() => null)
@@ -159,7 +202,8 @@ export const useHandleNoticeEdit = () => {
       }
 
       // 2. Attach English if newly added
-      const isEnglishAttached = originalNotice.enContent === undefined && !!englishBody;
+      const isEnglishAttached =
+        originalNotice.enContent === undefined && !!englishBody;
       if (isEnglishAttached) {
         const englishNotice = await api
           .POST(ApiPaths.NoticeController_addForeignContent, {
@@ -224,7 +268,11 @@ export const useHandleNoticeEdit = () => {
         }
 
         const contents = additionalKoreanNotice?.additionalContents;
-        if (Array.isArray(contents) && contents.at(-1)?.id && englishAdditionalContent) {
+        if (
+          Array.isArray(contents) &&
+          contents.at(-1)?.id &&
+          englishAdditionalContent
+        ) {
           const additionalEnglishNotice = await api
             .POST(ApiPaths.NoticeController_addForeignContent, {
               params: {
@@ -262,8 +310,11 @@ export const useHandleNoticeEdit = () => {
       toast.success(t('toasts.modify_success'));
 
       localStorage.removeItem('notice');
-      router.navigate({ to: '/notice/$id', params: { id: noticeId.toString() } });
-      
+      router.navigate({
+        to: '/notice/$id',
+        params: { id: noticeId.toString() },
+      });
+
       return noticeId;
     },
   });

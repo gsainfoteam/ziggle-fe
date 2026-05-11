@@ -108,12 +108,7 @@ export const DrawerRoot = ({
       <FloatingPortal>
         <AnimatePresence onExitComplete={onExitComplete}>
           {isOpen && (
-            <div
-              className={cn(
-                'fixed inset-0 z-1000 flex',
-                layout.container,
-              )}
-            >
+            <div className={cn('fixed inset-0 z-1000 flex', layout.container)}>
               <motion.div
                 className="absolute inset-0"
                 variants={backdropVariants}

@@ -1,6 +1,5 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 
-
 import dayjs, { type Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { type Editor } from 'tinymce';
@@ -10,22 +9,11 @@ import ClockIcon from '@/assets/icons/clock.svg?react';
 import GlobeIcon from '@/assets/icons/globe.svg?react';
 import TagIcon from '@/assets/icons/tag.svg?react';
 import TypeIcon from '@/assets/icons/type.svg?react';
-import {
-  Button,
-  LogClick,
-  Toggle,
-  confirmDialog,
-} from '@/common/components';
+import { Button, LogClick, Toggle, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { Category, type NoticeDetail } from '@/features/notice/models';
 
-import {
-  editorStateReducer,
-  initialEditorState,
-  retrieveDraftFromLocalStorage,
-  type Draft,
-} from '../../viewmodels/reducers/notice-editor-actions';
 import { calculateRemainingTime } from '../utils';
 import { AddAdditionalNotice } from './add-additional-notice';
 import { AttachPhotoArea } from './attach-photo-area';
@@ -37,6 +25,10 @@ import { NoticeTypeSelector } from './notice-type-selector';
 import { TagInput } from './tag-input';
 import { TitleAndContent } from './title-and-content';
 import {
+  editorStateReducer,
+  initialEditorState,
+  retrieveDraftFromLocalStorage,
+  type Draft,
   useHandleNoticeEdit,
   useHandleNoticeSubmit,
   type NoticeSubmitForm,
@@ -56,11 +48,8 @@ interface NoticeEditorProps {
   isEditMode: boolean;
 }
 
-
-
 export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
   const { t } = useTranslation('write');
-
 
   const [state, dispatch] = useReducer(editorStateReducer, initialEditorState);
   const [isInitializing, setIsInitializing] = useState(true);
@@ -75,7 +64,8 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
   const submitMutation = useHandleNoticeSubmit();
   const editMutation = useHandleNoticeEdit();
 
-  const isLoading = isInitializing || submitMutation.isPending || editMutation.isPending;
+  const isLoading =
+    isInitializing || submitMutation.isPending || editMutation.isPending;
 
   useEffect(() => {
     const loadDraft = async () => {
@@ -191,7 +181,9 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
     const noticeToSubmit: NoticeSubmitForm = {
       title: state.korean.title,
-      deadline: state.deadline ? (state.deadline.toDate() ?? undefined) : undefined,
+      deadline: state.deadline
+        ? (state.deadline.toDate() ?? undefined)
+        : undefined,
       noticeLanguage: state.english ? 'both' : 'ko',
       koreanBody: state.korean.content,
       enTitle: state.english?.title,
