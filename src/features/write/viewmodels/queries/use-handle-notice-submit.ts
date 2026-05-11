@@ -1,7 +1,10 @@
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from '@tanstack/react-router';
+
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import { chooseDialog } from '@/common/components';
+import { chooseDialog, alertDialog } from '@/common/components';
 import { api } from '@/common/lib';
 import { ApiPaths, type Category } from '@/features/notice/models';
 
@@ -24,6 +27,7 @@ export const BODY_MAX_LENGTH = 20000;
 
 export const useHandleNoticeSubmit = () => {
   const { t } = useTranslation('write');
+  const router = useRouter();
 
   const handleTagSubmit = async (tags: string[]) => {
     const tagIds: number[] = [];
@@ -58,7 +62,9 @@ export const useHandleNoticeSubmit = () => {
     return tagIds;
   };
 
-  return async ({
+  return useMutation({
+    mutationFn: async ({
+
     title,
     enTitle,
     deadline,
@@ -68,7 +74,8 @@ export const useHandleNoticeSubmit = () => {
     tags,
     images,
     category,
-  }: NoticeSubmitForm) => {
+    }: NoticeSubmitForm) => {
+      await alertDialog({ description: t('toasts.push_delayed') });
     if (!title) {
       toast.error(t('validations.title_required'));
       return;
@@ -285,7 +292,10 @@ export const useHandleNoticeSubmit = () => {
 
     toast.dismiss(loading);
     toast.success(t('toasts.submit_success'));
+      localStorage.removeItem('notice');
+      router.navigate({ to: '/notice/$id', params: { id: id.toString() } });
 
-    return id;
-  };
+      return id;
+    },
+  });
 };

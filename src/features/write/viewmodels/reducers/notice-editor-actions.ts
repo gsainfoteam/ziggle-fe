@@ -1,10 +1,8 @@
 import dayjs, { type Dayjs } from 'dayjs';
 
-import { NOTICE_LOCAL_STORAGE_KEY } from '../components';
-
-import type { FileWithUrl } from '../components/attach-photo-area';
-import type { NoticeType } from '../components/notice-type-selector';
-import type { Tag } from '../components/tag-input';
+import type { FileWithUrl } from '../../views/components/attach-photo-area';
+import type { NoticeType } from '../../views/components/notice-type-selector';
+import type { Tag } from '../../views/components/tag-input';
 
 export interface EditorState {
   noticeType: NoticeType;
@@ -160,7 +158,7 @@ export const editorStateReducer = (
 export type Draft = Pick<EditorState, 'korean' | 'english' | 'deadline'>;
 
 export const retrieveDraftFromLocalStorage = (): Draft | null => {
-  const retrievedDraftData = localStorage.getItem(NOTICE_LOCAL_STORAGE_KEY);
+  const retrievedDraftData = localStorage.getItem('notice');
   if (!retrievedDraftData) return null;
 
   try {

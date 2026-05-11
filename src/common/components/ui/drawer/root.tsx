@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useRef, type ReactNode } from 'react';
+import { useCallback, useId, useRef, type ReactNode } from 'react';
 
 import {
   FloatingFocusManager,
