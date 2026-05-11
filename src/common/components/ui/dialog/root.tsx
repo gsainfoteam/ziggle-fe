@@ -108,9 +108,6 @@ export const DialogRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
-                  aria-modal="true"
-                  aria-labelledby={titleId}
-                  aria-describedby={descriptionId}
                   className={cn(
                     'relative mx-5 flex max-h-[80vh] w-full flex-col gap-4 overflow-hidden p-5',
                     'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark rounded-2xl border bg-white shadow-xl',

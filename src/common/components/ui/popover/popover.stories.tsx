@@ -311,7 +311,6 @@ const SelectDropdownScenario = () => {
               type="button"
               key={item.value}
               role="option"
-              aria-selected={item.value === language}
               onClick={() => {
                 setLanguage(item.value);
                 setIsOpen(false);

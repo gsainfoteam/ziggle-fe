@@ -125,7 +125,6 @@ export const PopoverRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
-                  aria-modal="true"
                   className={cn(
                     'relative z-10 max-h-[90vh] max-w-[90vw] overflow-y-auto',
                     className,

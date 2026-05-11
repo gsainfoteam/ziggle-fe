@@ -5,19 +5,16 @@ import { useDialogContext } from './context';
 
 interface DialogCloseProps {
   className?: string;
-  'aria-label'?: string;
 }
 
 export const DialogClose = ({
   className,
-  'aria-label': ariaLabel = 'Close',
 }: DialogCloseProps) => {
   const { onClose } = useDialogContext();
   return (
     <button
       type="button"
       onClick={onClose}
-      aria-label={ariaLabel}
       className={cn(
         'absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md',
         'text-greyDark dark:text-dark_grey hover:bg-greyLight dark:hover:bg-dark_greyDark transition-colors',

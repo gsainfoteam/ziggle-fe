@@ -153,9 +153,6 @@ export const DrawerRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
-                  aria-modal="true"
-                  aria-labelledby={titleId}
-                  aria-describedby={descriptionId}
                   className={cn(
                     'absolute z-10 flex w-full flex-col gap-4 p-5',
                     'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark border bg-white shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
@@ -167,7 +164,6 @@ export const DrawerRoot = ({
                 >
                   {dragToDismiss && (
                     <div
-                      aria-hidden
                       className={cn(
                         'bg-greyBorder dark:bg-dark_greyBorder absolute z-10 rounded-full',
                         layout.handle,
