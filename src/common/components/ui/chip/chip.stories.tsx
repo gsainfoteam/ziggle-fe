@@ -1,9 +1,9 @@
-import Chip from './chip';
+import { Chip } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Features/Write/Chip',
+  title: 'Common/UI/Chip',
   component: Chip,
   parameters: {
     layout: 'centered',

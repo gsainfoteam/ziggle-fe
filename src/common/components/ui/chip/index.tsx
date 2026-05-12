@@ -6,7 +6,7 @@ interface ChipProps {
   disabled?: boolean;
 }
 
-const Chip = ({
+export const Chip = ({
   variant = 'deselected',
   children,
   className,
@@ -24,5 +24,3 @@ const Chip = ({
     {children}
   </div>
 );
-
-export default Chip;
