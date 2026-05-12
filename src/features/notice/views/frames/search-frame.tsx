@@ -7,9 +7,9 @@ import { LoadingCatAnimation, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
 import { useNotices } from '../../viewmodels';
-import Pagination from '../components/pagination';
-import { SearchAnimation } from '../components/search-animation';
-import ResultZabo from '../components/zabo/result-zabo';
+import { NoticeCard } from '../components/notice-list/notice-card';
+import Pagination from '../components/notice-list/pagination';
+import { SearchAnimation } from '../components/notice-list/search-animation';
 
 const ITEMS_PER_CALL = 10;
 
@@ -65,7 +65,38 @@ const List = ({
             }}
             key={notice.id}
           >
-            <ResultZabo {...notice} searchQuery={search} />
+            <NoticeCard.Root id={notice.id}>
+              <NoticeCard.Header
+                author={notice.author}
+                createdAt={notice.createdAt}
+                deadline={notice.deadline}
+                query={search}
+              />
+              <NoticeCard.Body>
+                <div className="flex items-baseline gap-2">
+                  <NoticeCard.Title query={search}>
+                    {notice.title}
+                  </NoticeCard.Title>
+                  <div className="shrink-0">
+                    <NoticeCard.AttachmentIndicators
+                      documents={notice.documents}
+                      crawledUrl={notice.crawledUrl}
+                    />
+                  </div>
+                </div>
+                <NoticeCard.ImageCarousel
+                  imageUrls={notice.imageUrls}
+                  title={notice.title}
+                />
+                <NoticeCard.Tags tags={notice.tags} />
+                <NoticeCard.Content query={search}>
+                  {notice.content}
+                </NoticeCard.Content>
+              </NoticeCard.Body>
+              <div className="mx-3 my-2.5">
+                <NoticeCard.Actions {...notice} />
+              </div>
+            </NoticeCard.Root>
           </LogClick>
         ))}
       </div>

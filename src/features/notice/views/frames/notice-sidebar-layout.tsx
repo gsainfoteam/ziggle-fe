@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router';
 
-import { Sidebar } from '../components/sidebar';
+import { Sidebar } from '../components/layout/sidebar';
 
 export function NoticeSidebarLayout() {
   return (

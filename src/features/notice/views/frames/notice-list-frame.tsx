@@ -12,9 +12,9 @@ import { cn } from '@/common/utils';
 
 import { Category } from '../../models';
 import { useNotices } from '../../viewmodels';
-import Pagination from '../components/pagination';
-import { useSidebarObject } from '../components/sidebar';
-import { Zabo } from '../components/zabo';
+import { useSidebarObject } from '../components/layout/sidebar';
+import { NoticeCard } from '../components/notice-list/notice-card';
+import Pagination from '../components/notice-list/pagination';
 
 function List({
   page,
@@ -66,11 +66,37 @@ function List({
             <LogClick
               eventName={LogEvents.noticeClick}
               properties={{
-                type: 'zabo',
+                type: 'noticeCard',
                 id: notice.id,
               }}
             >
-              <Zabo key={notice.id} {...notice} />
+              <NoticeCard.Root id={notice.id}>
+                <NoticeCard.Header
+                  author={notice.author}
+                  createdAt={notice.createdAt}
+                  deadline={notice.deadline}
+                />
+                <NoticeCard.Body>
+                  <div className="flex items-baseline gap-2">
+                    <NoticeCard.Title>{notice.title}</NoticeCard.Title>
+                    <div className="shrink-0">
+                      <NoticeCard.AttachmentIndicators
+                        documents={notice.documents}
+                        crawledUrl={notice.crawledUrl}
+                      />
+                    </div>
+                  </div>
+                  <NoticeCard.ImageCarousel
+                    imageUrls={notice.imageUrls}
+                    title={notice.title}
+                  />
+                  <NoticeCard.Tags tags={notice.tags} />
+                  <NoticeCard.Content>{notice.content}</NoticeCard.Content>
+                </NoticeCard.Body>
+                <div className="mx-3 my-2.5">
+                  <NoticeCard.Actions {...notice} />
+                </div>
+              </NoticeCard.Root>
             </LogClick>
             <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
           </React.Fragment>

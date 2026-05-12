@@ -5,15 +5,12 @@ import { useLoaderData } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { Loading } from '@/common/components';
+import { useUser } from '@/features/auth';
 
-import { useNotice } from '../../viewmodels';
-import { Actions } from '../components/actions';
-import { AdditionalNotices } from '../components/additional-notices';
-import { Content } from '../components/content';
-import ImageStack from '../components/image-stack';
-import { SendPushAlarm } from '../components/send-push-notification';
-import NoticeInfo from '../notice-info';
 import { NoticeNotFoundFrame } from './notice-not-found-frame';
+import { useNotice } from '../../viewmodels';
+import { SendPushAlarm } from '../components/modals/send-push-notification';
+import { NoticeDetail } from '../components/notice-detail';
 
 export function NoticeDetailFrame() {
   const { notice: preloadedNotice, numId } = useLoaderData({
@@ -22,6 +19,7 @@ export function NoticeDetailFrame() {
   const { data: notice, isLoading, isNotFound } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
   const { t, i18n } = useTranslation('common');
+  const { data: user } = useUser();
 
   useEffect(() => {
     document.title = efficientNotice.title;
@@ -50,50 +48,56 @@ export function NoticeDetailFrame() {
     ),
   );
 
+  const isOwner = user?.uuid === efficientNotice.author.uuid;
+
   return (
-    <div className="flex justify-center">
-      <div className="content mt-8 md:mt-12 md:w-225 md:min-w-150">
-        <div className="flex gap-5">
-          {/* DESKTOP VIEW IMAGE STACK */}
-          <div className="hidden md:block">
-            {efficientNotice.imageUrls.length > 0 && (
-              <ImageStack
-                sources={efficientNotice.imageUrls}
-                alt={efficientNotice.title}
-              />
-            )}
-          </div>
-
-          <div className="flex flex-col gap-4.5 md:w-[60%]">
-            <SendPushAlarm {...efficientNotice} />
-
-            <NoticeInfo
-              {...efficientNotice}
-              currentDeadline={efficientNotice.currentDeadline}
-            />
-
-            {/* MOBILE VIEW IMAGE STACK */}
-            <div className="md:hidden">
-              {efficientNotice.imageUrls.length > 0 && (
-                <ImageStack
-                  width={900}
-                  sources={efficientNotice.imageUrls}
-                  alt={efficientNotice.title}
-                />
-              )}
-            </div>
-
-            <Content content={efficientNotice.content} />
-
-            <Actions notice={efficientNotice} />
-
-            <AdditionalNotices
-              additionalContents={additionalContents}
-              notice={efficientNotice}
-            />
-          </div>
-        </div>
+    <NoticeDetail.Root>
+      {/* DESKTOP — image stack as sidebar */}
+      <div className="hidden md:block">
+        <NoticeDetail.ImageStack
+          sources={efficientNotice.imageUrls}
+          alt={efficientNotice.title}
+        />
       </div>
-    </div>
+
+      <NoticeDetail.Body>
+        <SendPushAlarm {...efficientNotice} />
+
+        <NoticeDetail.Deadline deadline={efficientNotice.currentDeadline} />
+        <NoticeDetail.Metadata
+          author={efficientNotice.author}
+          createdAt={efficientNotice.createdAt}
+        />
+        {isOwner && (
+          <NoticeDetail.AuthorActions noticeId={efficientNotice.id} />
+        )}
+        <NoticeDetail.Title>{efficientNotice.title}</NoticeDetail.Title>
+        <NoticeDetail.Tags tags={efficientNotice.tags} />
+        <NoticeDetail.DocumentUrls
+          crawledUrl={efficientNotice.crawledUrl}
+          documents={efficientNotice.documents}
+        />
+
+        {/* MOBILE — image stack inline */}
+        <div className="md:hidden">
+          <NoticeDetail.ImageStack
+            width={900}
+            sources={efficientNotice.imageUrls}
+            alt={efficientNotice.title}
+          />
+        </div>
+
+        <NoticeDetail.Content content={efficientNotice.content} />
+        <NoticeDetail.Actions
+          id={efficientNotice.id}
+          title={efficientNotice.title}
+          reactions={efficientNotice.reactions}
+        />
+        <NoticeDetail.AdditionalNotices
+          additionalContents={additionalContents}
+          originalDeadline={efficientNotice.deadline}
+        />
+      </NoticeDetail.Body>
+    </NoticeDetail.Root>
   );
 }
