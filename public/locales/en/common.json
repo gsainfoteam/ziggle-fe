@@ -1,9 +1,7 @@
 {
   "alert_response": {
     "cancel": "Cancel",
-    "confirm": "Confirm",
-    "no": "No",
-    "yes": "Yes"
+    "confirm": "Confirm"
   },
   "app_name": "Ziggle",
   "carousel": {

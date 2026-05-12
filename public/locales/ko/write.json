@@ -4,7 +4,6 @@
     "has_saved": "저장된 공지가 있습니다. 이어서 작성하시겠습니까?"
   },
   "buttons": {
-    "select_account": "계정 선택",
     "submit": "공지 제출하기",
     "translate_deepl": "DeepL로 번역하기",
     "write_english": "영어 공지 작성"
@@ -19,7 +18,7 @@
       "change": "마감시간 변경",
       "setup": "마감시간 설정"
     },
-    "english_content": "영어 본문",
+    "english_content": "영문 본문",
     "english_notice": "영어 공지",
     "english_title": "영어 제목",
     "korean_content": "한글 본문",
@@ -76,9 +75,9 @@
     "additional_notice_fail": "추가 공지 작성에 실패했습니다",
     "copy_additional": "추가 공지 내용 복사",
     "copy_english": "영어 공지 내용 복사",
+    "copy_fail": "클립보드 복사에 실패했습니다",
     "copy_international_additional": "영어 추가 공지 내용 복사",
     "copy_success": "클립보드에 복사되었습니다",
-    "copy_fail": "클립보드 복사에 실패했습니다",
     "international_additional_fail": "영어 추가 공지 작성에 실패했습니다",
     "international_fail": "영어 버전 작성에 실패했습니다. 다시 시도해주세요",
     "modify_fail": "공지 수정에 실패했습니다",

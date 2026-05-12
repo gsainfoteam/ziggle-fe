@@ -1,9 +1,7 @@
 {
   "alert_response": {
     "cancel": "취소",
-    "confirm": "확인",
-    "no": "아니오",
-    "yes": "네"
+    "confirm": "확인"
   },
   "app_name": "지글",
   "carousel": {

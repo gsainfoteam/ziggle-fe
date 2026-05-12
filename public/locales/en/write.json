@@ -4,7 +4,6 @@
     "has_saved": "You have saved notices. Would you like to continue writing?"
   },
   "buttons": {
-    "select_account": "Select Account",
     "submit": "Submit Notice",
     "translate_deepl": "Translate with DeepL",
     "write_english": "Write English Notice too"
@@ -19,12 +18,12 @@
       "change": "Change deadline",
       "setup": "Set a deadline"
     },
-    "english_content": "Content - English",
+    "english_content": "English body",
     "english_notice": "English",
-    "english_title": "English Title",
-    "korean_content": "Content - Korean",
+    "english_title": "English title",
+    "korean_content": "Korean body",
     "korean_notice": "Korean",
-    "korean_title": "Korean Title",
+    "korean_title": "Korean title",
     "notice_type": "Type",
     "photo": {
       "attach": "Attach Photos",
@@ -76,9 +75,9 @@
     "additional_notice_fail": "Failed to post additional notice. Please try posting it again.",
     "copy_additional": "Copy additional notice content",
     "copy_english": "Copy English notice content",
+    "copy_fail": "Failed to copy to clipboard",
     "copy_international_additional": "Copy English additional notice content",
     "copy_success": "Copied to clipboard",
-    "copy_fail": "Failed to copy to clipboard",
     "international_additional_fail": "Failed to post English additional notice. Please try posting it again.",
     "international_fail": "Failed to post English version. Please try posting it again.",
     "modify_fail": "Failed to modify the notice",

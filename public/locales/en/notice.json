@@ -7,6 +7,7 @@
       "placeholder": "Write an additional notice here",
       "title": "Additional Notices"
     },
+    "attachments": "Attachments",
     "author_actions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",
@@ -22,8 +23,6 @@
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
       "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
     },
-    "attachments": "Attachments",
-    "source_url": "Source URL",
     "download_all": "Download All",
     "due_at": "Due at {{dueAt}}",
     "no_content": "No Content",
@@ -42,14 +41,23 @@
       "content": "{{title}}\nCheck the notice in Ziggle!",
       "unsupported": "Your browser doesn't support sharing."
     },
+    "source_url": "Source URL",
     "time_left": "{{timeLeft}} Left"
   },
   "list": {
     "categories": {
-      "academic": { "name": "Academic Notices" },
-      "event": { "name": "Events" },
-      "general": { "name": "General" },
-      "recruit": { "name": "Recruiting" }
+      "academic": {
+        "name": "Academic Notices"
+      },
+      "event": {
+        "name": "Events"
+      },
+      "general": {
+        "name": "General"
+      },
+      "recruit": {
+        "name": "Recruiting"
+      }
     },
     "d_day_plus": "OVERDUE",
     "empty": "No content. =ㅅ=",
@@ -61,6 +69,10 @@
   "not_found": {
     "go_back": "Go back to home",
     "title": "Notice not found"
+  },
+  "query_handle": {
+    "fetch_fail": "Failed to load the notice. Please try again later.",
+    "unauthorized": "You do not have permission to access this notice. Please check your login status."
   },
   "search": {
     "bar": {
@@ -82,9 +94,5 @@
     "urgent": "Near Deadline",
     "write": "Write Notice",
     "zigglepick": "Ziggle-Pick"
-  },
-  "query_handle": {
-    "unauthorized": "You do not have permission to access this notice. Please check your login status.",
-    "fetch_fail": "Failed to load the notice. Please try again later."
   }
 }

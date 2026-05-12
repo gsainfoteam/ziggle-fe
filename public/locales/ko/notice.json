@@ -7,6 +7,7 @@
       "placeholder": "여기에 한국어 추가 공지를 입력하세요",
       "title": "추가 공지"
     },
+    "attachments": "첨부파일",
     "author_actions": {
       "edit": "수정 / 영어공지 작성",
       "remove": "삭제",
@@ -22,8 +23,6 @@
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
     },
-    "attachments": "첨부파일",
-    "source_url": "원본링크",
     "download_all": "전체 다운로드하기",
     "due_at": "마감시간 {{dueAt}}",
     "no_content": "내용 없음",
@@ -42,14 +41,23 @@
       "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
       "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
     },
+    "source_url": "원본링크",
     "time_left": "{{timeLeft}} 남음"
   },
   "list": {
     "categories": {
-      "academic": { "name": "학사" },
-      "event": { "name": "행사" },
-      "general": { "name": "일반" },
-      "recruit": { "name": "모집" }
+      "academic": {
+        "name": "학사"
+      },
+      "event": {
+        "name": "행사"
+      },
+      "general": {
+        "name": "일반"
+      },
+      "recruit": {
+        "name": "모집"
+      }
     },
     "d_day_plus": "기한 지남",
     "empty": "글이 없습니다. =ㅅ=",
@@ -61,6 +69,10 @@
   "not_found": {
     "go_back": "홈으로 돌아가기",
     "title": "페이지를 찾을 수 없습니다"
+  },
+  "query_handle": {
+    "fetch_fail": "공지사항을 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요.",
+    "unauthorized": "접근 권한이 없습니다. 로그인을 확인해 주세요."
   },
   "search": {
     "bar": {
@@ -82,9 +94,5 @@
     "urgent": "마감임박",
     "write": "공지 작성",
     "zigglepick": "지글픽"
-  },
-  "query_handle": {
-    "unauthorized": "접근 권한이 없습니다. 로그인을 확인해 주세요.",
-    "fetch_fail": "공지사항을 불러오는 데 실패했습니다. 잠시 후 다시 시도해 주세요."
   }
 }

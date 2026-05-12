@@ -3,6 +3,8 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 
 import { OverlayProvider } from 'overlay-kit';
 
+import { ThemeProvider } from '../src/common/lib/theme';
+
 import '../src/common/lib/dayjs-init';
 import '../src/common/lib/i18n';
 import '../src/styles.css';
@@ -34,6 +36,11 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    (Story) => (
+      <ThemeProvider>
+        <Story />
+      </ThemeProvider>
+    ),
     (Story) => (
       <OverlayProvider>
         <Story />
