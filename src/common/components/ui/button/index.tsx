@@ -1,7 +1,7 @@
 import { cn } from '@/common/utils';
 
 interface ButtonProps {
-  variant?: 'outlined' | 'contained' | 'disabled';
+  variant?: 'outlined' | 'contained' | 'disabled' | 'muted';
   animated?: boolean;
 }
 
@@ -17,11 +17,13 @@ export const Button = ({
   <button
     className={cn(
       'font-semibold transition',
-      variant && 'rounded-[10px] px-2.5 py-1 md:px-5 md:py-2.5',
+      variant && 'rounded-[10px] px-5 py-2.5',
       variant === 'outlined' &&
         'border-primary text-primary hover:bg-secondary border',
-      variant === 'contained' && 'bg-primary text-white hover:brightness-90',
+      variant === 'contained' &&
+        'bg-primary dark:text-dark_white text-white hover:brightness-90',
       variant === 'disabled' && 'bg-greylight text-grey',
+      variant === 'muted' && 'bg-greyLight text-greyDark hover:brightness-95',
       animated && 'active:scale-95',
       className,
     )}

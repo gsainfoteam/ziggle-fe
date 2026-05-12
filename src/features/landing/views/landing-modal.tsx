@@ -4,10 +4,11 @@ import { Trans, useTranslation } from 'react-i18next';
 
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
 import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Button } from '@/common/components';
+import { Button, Dialog } from '@/common/components';
 import { useAuth, useAuthRedirect } from '@/features/auth';
 
 import LandingGrids from './components/landing-grids';
+
 export function LandingModal() {
   const { t } = useTranslation('home');
 
@@ -16,8 +17,15 @@ export function LandingModal() {
   const { idpLogIn } = useAuth();
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="flex h-95 w-80 rounded-2xl bg-white md:h-145 md:w-233.5 md:pl-6">
+    <Dialog.Root
+      isOpen
+      onClose={() => {}}
+      closeOnBackdrop={false}
+      closeOnEscape={false}
+      size="lg"
+      className="max-h-none w-auto max-w-none border-none p-0 shadow-none"
+    >
+      <div className="flex h-95 w-80 overflow-hidden rounded-2xl bg-white md:h-145 md:w-233.5 md:pl-6">
         <LandingGrids />
         <div className="flex w-full flex-col items-center justify-between p-4 md:w-96 md:p-6">
           <div className="flex h-110 w-fit flex-col items-center justify-center">
@@ -70,6 +78,6 @@ export function LandingModal() {
           </div>
         </div>
       </div>
-    </div>
+    </Dialog.Root>
   );
 }

@@ -6,10 +6,9 @@ import CloseIcon from '@/assets/icons/close.svg?react';
 
 import { useSearchTags } from '../../viewmodels';
 
-export interface Tag {
-  id: number;
-  name: string;
-}
+export type { Tag } from '../../viewmodels';
+
+import type { Tag } from '../../viewmodels';
 
 interface TagInputProps {
   tags: Tag[];

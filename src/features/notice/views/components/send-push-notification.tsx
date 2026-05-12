@@ -4,6 +4,7 @@ import dayjs, { type Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
+import { confirmDialog } from '@/common/components';
 import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
@@ -35,16 +36,14 @@ export const SendPushAlarm = ({
   const { t } = useTranslation('notice');
 
   const [isManuallyAlarmed, setIsManuallyAlarmed] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const { mutateAsync: sendNoticeAlarm } = useSendAlarm();
+  const { mutateAsync: sendNoticeAlarm, isPending } = useSendAlarm();
 
   const handleSendPushNotification = useCallback(async () => {
-    if (isLoading) return;
-    // common:alert_response.confirm / common:alert_response.cancel
-    const result = confirm(t('detail.push_notification.confirm'));
-    if (!result) return;
-    setIsLoading(true);
+    const confirmed = await confirmDialog({
+      description: t('detail.push_notification.confirm'),
+    });
+    if (!confirmed) return;
 
     try {
       const newNotice = await toast
@@ -58,10 +57,10 @@ export const SendPushAlarm = ({
       if (!newNotice) throw new Error('No newNotice returned');
 
       setIsManuallyAlarmed(true);
-    } finally {
-      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
     }
-  }, [isLoading, t, sendNoticeAlarm, id]);
+  }, [t, sendNoticeAlarm, id]);
 
   const { data: user } = useUser();
   const isMyNotice = user?.uuid === author.uuid;
@@ -127,12 +126,15 @@ export const SendPushAlarm = ({
       <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-3.75 font-normal">
         <span>{t('detail.push_notification.title')} </span>
         <span
-          className="cursor-pointer font-bold underline"
-          onClick={handleSendPushNotification}
+          className={cn(
+            'cursor-pointer font-bold underline',
+            isPending && 'cursor-not-allowed opacity-50',
+          )}
+          onClick={isPending ? undefined : handleSendPushNotification}
           tabIndex={0}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-              handleSendPushNotification();
+              if (!isPending) handleSendPushNotification();
             }
           }}
         >

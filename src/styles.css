@@ -6,6 +6,7 @@
 
 @theme {
   --spacing-pageSide: 20vw;
+  --spacing-sidebarMobile: 13.25rem;
   --transition-duration: 200ms;
 
   --color-primary: #ff4500;
@@ -101,7 +102,39 @@
   }
 }
 
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-float {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-greyBorder) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: var(--color-greyBorder);
+  }
+  @variant dark {
+    scrollbar-color: var(--color-dark_greyBorder) transparent;
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-dark_greyBorder);
+    }
+  }
+}
+
 @layer base {
+  html,
+  body {
+    overscroll-behavior: none;
+  }
+
   html {
     scroll-behavior: smooth;
     background-color: var(--color-white);

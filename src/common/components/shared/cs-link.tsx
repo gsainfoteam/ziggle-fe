@@ -3,7 +3,8 @@ import { useUser } from '@/features/auth';
 export const CSLink = ({
   children,
   className,
-}: React.PropsWithChildren<{ className?: string }>) => {
+  onClick,
+}: React.PropsWithChildren<{ className?: string; onClick?: () => void }>) => {
   const { data: user } = useUser();
   const email = user?.email;
 
@@ -15,6 +16,7 @@ export const CSLink = ({
         email ? `&email=${email}` : ''
       }`}
       className={className}
+      onClick={onClick}
     >
       {children}
     </a>

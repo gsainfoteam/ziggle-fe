@@ -1,23 +1,11 @@
-import { useEffect, useState } from 'react';
-
-import {
-  autoUpdate,
-  flip,
-  offset,
-  shift,
-  useClick,
-  useDismiss,
-  useFloating,
-  useInteractions,
-} from '@floating-ui/react';
 import { LogOut, OpenNewWindow, ProfileCircle, UserXmark } from 'iconoir-react';
-import ReactDOM from 'react-dom';
+import { overlay } from 'overlay-kit';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import CloseIcon from '@/assets/icons/close.svg?react';
 import DefaultProfileIcon from '@/assets/icons/default-profile.svg?react';
-import { Avatar, LogClick } from '@/common/components';
+import { Avatar, LogClick, Popover, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { useLogout, useUser, useWithdraw } from '@/features/auth';
@@ -128,121 +116,81 @@ export const ProfileModalButton = ({
   const { mutate: logout } = useLogout();
   const { mutateAsync: withdraw } = useWithdraw();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(
-    () => window.matchMedia('(max-width: 767px)').matches,
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)');
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-
-  const {
-    refs: { setReference, setFloating },
-    floatingStyles,
-    context,
-  } = useFloating({
-    open: isOpen,
-    onOpenChange: setIsOpen,
-    placement: 'bottom-end',
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
-    whileElementsMounted: autoUpdate,
-  });
-
-  const click = useClick(context);
-  const dismiss = useDismiss(context, {
-    outsidePress: !isMobile,
-    escapeKey: true,
-  });
-  const { getReferenceProps, getFloatingProps } = useInteractions([
-    click,
-    dismiss,
-  ]);
-
-  const handleSignOut = () => {
-    logout({});
-    setIsOpen(false);
-  };
-
   const handleWithdrawal = async () => {
     try {
-      const result = confirm(
-        t('mypage.withdrawal.confirm.title') +
-          '\n' +
-          t('mypage.withdrawal.confirm.text'),
-      );
-
-      if (result) {
-        try {
-          await withdraw({});
-          toast.success(
-            t('mypage.withdrawal.success.title') +
-              '\n' +
-              t('mypage.withdrawal.success.text'),
-          );
-          logout({});
-        } catch {
-          toast.error(
-            t('mypage.withdrawal.error.title') +
-              '\n' +
-              t('mypage.withdrawal.error.text'),
-          );
-        }
+      const confirmed = await confirmDialog({
+        title: t('mypage.withdrawal.confirm.title'),
+        description: t('mypage.withdrawal.confirm.text'),
+        destructive: true,
+      });
+      if (!confirmed) return;
+      try {
+        await withdraw({});
+        toast.success(
+          t('mypage.withdrawal.success.title') +
+            '\n' +
+            t('mypage.withdrawal.success.text'),
+        );
+        logout({});
+      } catch {
+        toast.error(
+          t('mypage.withdrawal.error.title') +
+            '\n' +
+            t('mypage.withdrawal.error.text'),
+        );
       }
     } catch (err) {
+      toast.error(
+        t('mypage.withdrawal.error.title') +
+          '\n' +
+          t('mypage.withdrawal.error.text'),
+      );
       console.error('withdrawal flow error:', err);
     }
   };
 
-  const panel = user && (
-    <ProfileModalPanel
-      user={user}
-      onClose={() => setIsOpen(false)}
-      onSignOut={handleSignOut}
-      onWithdrawal={handleWithdrawal}
-      className={
-        isMobile ? 'w-full rounded-none border-none shadow-none' : undefined
-      }
-    />
-  );
+  const openProfilePopover = (anchor: HTMLElement) => {
+    if (!user) return;
+    overlay.open(({ isOpen, close, unmount }) => (
+      <Popover.Root
+        isOpen={isOpen}
+        onClose={close}
+        onExitComplete={unmount}
+        anchor={anchor}
+        placement="bottom-end"
+        responsive
+        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none md:w-auto"
+      >
+        <ProfileModalPanel
+          user={user}
+          onClose={close}
+          onSignOut={() => {
+            logout({});
+            close();
+          }}
+          onWithdrawal={async () => {
+            close();
+            await handleWithdrawal();
+          }}
+          className="max-md:h-full max-md:w-full max-md:rounded-none max-md:border-none max-md:shadow-none md:rounded-2xl md:border-transparent md:shadow-2xl"
+        />
+      </Popover.Root>
+    ));
+  };
 
   return (
-    <>
-      <LogClick eventName={eventName}>
-        <button
-          ref={setReference}
-          {...getReferenceProps()}
-          className={triggerClassName}
-        >
-          <Avatar
-            name={user?.name}
-            picture={user?.picture}
-            imageClassName="size-9"
-          />
-        </button>
-      </LogClick>
-
-      {isMobile ? (
-        isOpen &&
-        ReactDOM.createPortal(
-          <div className="dark:bg-dark_dark fixed inset-0 z-1001 overflow-y-auto bg-white">
-            {panel}
-          </div>,
-          document.body,
-        )
-      ) : (
-        <div
-          ref={setFloating}
-          style={{ ...floatingStyles, zIndex: 1000 }}
-          className={isOpen ? '' : 'hidden'}
-          {...getFloatingProps()}
-        >
-          {panel}
-        </div>
-      )}
-    </>
+    <LogClick eventName={eventName}>
+      <button
+        type="button"
+        onClick={(event) => openProfilePopover(event.currentTarget)}
+        className={triggerClassName}
+      >
+        <Avatar
+          name={user?.name}
+          picture={user?.picture}
+          imageClassName="size-9"
+        />
+      </button>
+    </LogClick>
   );
 };

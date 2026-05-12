@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react-vite';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
+import { OverlayProvider } from 'overlay-kit';
+
 import '../src/common/lib/dayjs-init';
 import '../src/common/lib/i18n';
 import '../src/styles.css';
@@ -32,6 +34,11 @@ const preview: Preview = {
       },
       defaultTheme: 'light',
     }),
+    (Story) => (
+      <OverlayProvider>
+        <Story />
+      </OverlayProvider>
+    ),
   ],
   parameters: {
     backgrounds: { disable: true },

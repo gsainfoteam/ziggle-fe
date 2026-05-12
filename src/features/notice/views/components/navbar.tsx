@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
 import { Link } from '@tanstack/react-router';
 
-import { AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 import AccountIcon from '@/assets/icons/account.svg?react';
@@ -17,22 +14,13 @@ import { useUser } from '@/features/auth';
 
 import { ProfileModalButton } from './profile-modal';
 import { SearchBar } from './search-bar';
-import { SidebarMobile } from './sidebar';
+import { useMobileSidebar } from '../../viewmodels';
 
 export const Navbar = () => {
   const { t } = useTranslation('layout');
 
   const { data: user } = useUser();
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const handleSidebarOpen = () => {
-    setIsSidebarOpen(true);
-  };
-
-  const handleSidebarClose = () => {
-    setIsSidebarOpen(false);
-  };
+  const toggleSidebar = useMobileSidebar((state) => state.toggle);
 
   return (
     <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
@@ -53,7 +41,7 @@ export const Navbar = () => {
           <SearchBar />
           <LogClick eventName={LogEvents.navBarClickMenu}>
             <Button
-              onClick={handleSidebarOpen}
+              onClick={toggleSidebar}
               className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden"
             >
               <MenuIcon className="stroke-text dark:stroke-dark_white h-6 md:hidden" />
@@ -76,14 +64,6 @@ export const Navbar = () => {
           </Link>
         </LogClick>
       )}
-
-      <AnimatePresence>
-        {isSidebarOpen && (
-          <div className="md:hidden">
-            <SidebarMobile onClose={handleSidebarClose} />
-          </div>
-        )}
-      </AnimatePresence>
     </header>
   );
 };

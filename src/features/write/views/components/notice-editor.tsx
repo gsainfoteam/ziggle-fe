@@ -1,10 +1,7 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
 
-import { useRouter } from '@tanstack/react-router';
-
 import dayjs, { type Dayjs } from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
 import { type Editor } from 'tinymce';
 
 import AddPhotoIcon from '@/assets/icons/add-photo.svg?react';
@@ -12,22 +9,11 @@ import ClockIcon from '@/assets/icons/clock.svg?react';
 import GlobeIcon from '@/assets/icons/globe.svg?react';
 import TagIcon from '@/assets/icons/tag.svg?react';
 import TypeIcon from '@/assets/icons/type.svg?react';
-import { Button, LogClick, Toggle } from '@/common/components';
+import { Button, LogClick, Toggle, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { api } from '@/common/lib';
 import { cn } from '@/common/utils';
-import {
-  ApiPaths,
-  Category,
-  type NoticeDetail,
-} from '@/features/notice/models';
+import { Category, type NoticeDetail } from '@/features/notice/models';
 
-import {
-  editorStateReducer,
-  initialEditorState,
-  retrieveDraftFromLocalStorage,
-  type Draft,
-} from '../reducers';
 import { calculateRemainingTime } from '../utils';
 import { AddAdditionalNotice } from './add-additional-notice';
 import { AttachPhotoArea } from './attach-photo-area';
@@ -39,6 +25,10 @@ import { NoticeTypeSelector } from './notice-type-selector';
 import { TagInput } from './tag-input';
 import { TitleAndContent } from './title-and-content';
 import {
+  editorStateReducer,
+  initialEditorState,
+  retrieveDraftFromLocalStorage,
+  type Draft,
   useHandleNoticeEdit,
   useHandleNoticeSubmit,
   type NoticeSubmitForm,
@@ -58,14 +48,11 @@ interface NoticeEditorProps {
   isEditMode: boolean;
 }
 
-export const NOTICE_LOCAL_STORAGE_KEY = 'notice';
-
 export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
   const { t } = useTranslation('write');
-  const router = useRouter();
 
   const [state, dispatch] = useReducer(editorStateReducer, initialEditorState);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const hasTimedOut = (() => {
     const remain = calculateRemainingTime(dayjs(notice?.createdAt));
@@ -74,23 +61,27 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
   const koreanContentEditorRef = useRef<Editor | null>(null);
   const englishContentEditorRef = useRef<Editor | null>(null);
-  const handleNoticeSubmit = useHandleNoticeSubmit();
-  const handleNoticeEdit = useHandleNoticeEdit();
+  const submitMutation = useHandleNoticeSubmit();
+  const editMutation = useHandleNoticeEdit();
+
+  const isLoading =
+    isInitializing || submitMutation.isPending || editMutation.isPending;
 
   useEffect(() => {
     const loadDraft = async () => {
       const draft = retrieveDraftFromLocalStorage();
       if (!draft) {
-        setIsLoading(false);
+        setIsInitializing(false);
         return;
       }
 
-      setIsLoading(true);
+      setIsInitializing(true);
 
-      // common:alert_response.yes / common:alert_response.no
-      const confirmed = confirm(t('auto_save.has_saved'));
+      const confirmed = await confirmDialog({
+        description: t('auto_save.has_saved'),
+      });
       if (!confirmed) {
-        setIsLoading(false);
+        setIsInitializing(false);
         // TODO: send log
         // sendLog(LogEvents.writingRejectSaved);
         return;
@@ -124,7 +115,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (deadline)
         dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
 
-      setIsLoading(false);
+      setIsInitializing(false);
     };
 
     const loadExistingNotice = () => {
@@ -156,7 +147,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
       if (deadline)
         dispatch({ type: 'SET_DEADLINE', deadline: dayjs(deadline) });
 
-      setIsLoading(false);
+      setIsInitializing(false);
     };
 
     if (isEditMode) loadExistingNotice();
@@ -179,19 +170,14 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
         deadline: state.deadline,
       };
 
-      localStorage.setItem(NOTICE_LOCAL_STORAGE_KEY, JSON.stringify(draft));
+      localStorage.setItem('notice', JSON.stringify(draft));
     };
 
     saveDraft();
   }, [isEditMode, state.korean, state.english, state.deadline, isLoading]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (isLoading) return;
-
-    // TODO: change with custom overlay
-    alert(t('toasts.push_delayed'));
-
-    setIsLoading(true);
 
     const noticeToSubmit: NoticeSubmitForm = {
       title: state.korean.title,
@@ -210,196 +196,29 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
     // TODO: send log
     // sendLog(LogEvents.writingSubmit, { notice: noticeToSubmit });
 
-    const noticeId = await handleNoticeSubmit(noticeToSubmit);
-    if (!noticeId) {
-      setIsLoading(false);
-      toast.error(t('toasts.submit_fail'));
-      return;
-    }
-
-    localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
-
-    router.navigate({ to: '/notice/$id', params: { id: noticeId.toString() } });
+    submitMutation.mutate(noticeToSubmit);
   };
 
-  const handleModify = async () => {
+  const handleModify = () => {
     if (isLoading || !notice) return;
 
-    const editedLangs: ('ko' | 'en')[] = [
-      state.korean.content !== notice.content && 'ko',
-      notice.enContent && state.english?.content !== notice.enContent && 'en',
-    ].filter(Boolean) as ('ko' | 'en')[];
-
-    const isEdited = !!editedLangs.length;
-
-    if (!state.korean.additionalContent && state.english?.additionalContent) {
-      toast.error(t('validations.korean_additional_required'));
-      return;
-    }
-
-    setIsLoading(true);
-
-    const loading = toast.loading(t('toasts.modifying'));
-
-    if (!hasTimedOut) {
-      if (isEdited) {
-        const updatedNoticeId = await handleNoticeEdit({
-          noticeId: notice.id,
-          koreanBody: state.korean.content,
-          englishBody: state.english?.content,
-          noticeLanguage: editedLangs.length === 1 ? editedLangs[0] : 'both',
-          deadline: state.deadline ? state.deadline.toDate() : undefined,
-        });
-
-        if (!updatedNoticeId) {
-          setIsLoading(false);
-          toast.dismiss(loading);
-          toast.error(t('toasts.modify_fail'));
-          return;
-        }
-      }
-    }
-
-    const isEnglishAttached = notice.enContent === undefined && !!state.english;
-
-    if (isEnglishAttached) {
-      const englishNotice = await api
-        .POST(ApiPaths.NoticeController_addForeignContent, {
-          params: {
-            path: {
-              id: notice.id,
-              contentIdx: 1,
-            },
-          },
-          body: {
-            lang: 'en',
-            title: (state.english as { title: string }).title,
-            deadline: state.deadline ? state.deadline.toISOString() : undefined,
-            body: (state.english as { content: string }).content,
-          },
-        })
-        .then((res) => res.data)
-        .catch(() => null);
-
-      if (!englishNotice) {
-        setIsLoading(false);
-        toast.dismiss(loading);
-        toast.error(t('toasts.international_fail'));
-        // TODO: add alert
-        // Swal.fire({
-        //   text: t('toasts.international_fail'),
-        //   icon: 'error',
-        //   confirmButtonText: t('common:alert_response.confirm'),
-        //   showDenyButton: true,
-        //   denyButtonText: t('toasts.copy_english'),
-        // }).then((result) => {
-        //   if (result.isDenied) {
-        //     navigator.clipboard.writeText(state.english?.content!);
-        //     toast.success(t('toasts.copy_success'));
-        //   }
-        // });
-        return;
-      }
-    }
-
-    const isAdditionalAttached = !!state.korean.additionalContent;
-
-    if (isAdditionalAttached) {
-      const additionalKoreanNotice = await api
-        .POST(ApiPaths.NoticeController_createAdditionalNotice, {
-          params: { path: { id: notice.id } },
-          body: {
-            body: state.korean.additionalContent ?? '',
-            deadline: state.deadline ? state.deadline.toISOString() : undefined,
-          },
-        })
-        .then((res) => res.data)
-        .catch(() => null);
-
-      if (additionalKoreanNotice === null) {
-        setIsLoading(false);
-        toast.dismiss(loading);
-        toast.error(t('toasts.additional_notice_fail'));
-        // TODO: add alert
-        // Swal.fire({
-        //   text: t('toasts.additional_notice_fail'),
-        //   icon: 'error',
-        //   confirmButtonText: t('common:alert_response.confirm'),
-        //   showDenyButton: true,
-        //   denyButtonText: t('toasts.copy_additional'),
-        // }).then((result) => {
-        //   if (result.isDenied) {
-        //     navigator.clipboard.writeText(state.korean.additionalContent!);
-        //     toast.success(t('toasts.copy_success'));
-        //   }
-        // });
-        return;
-      }
-
-      const contents = additionalKoreanNotice?.additionalContents;
-
-      if (
-        Array.isArray(contents) &&
-        contents.at(-1)?.id &&
-        state.english?.additionalContent
-      ) {
-        const additionalEnglishNotice = await api
-          .POST(ApiPaths.NoticeController_addForeignContent, {
-            params: {
-              path: {
-                id: notice.id,
-                contentIdx: contents.at(-1)!.id,
-              },
-            },
-            body: {
-              title: '',
-              body: state.english.additionalContent,
-              lang: 'en',
-              deadline: state.deadline
-                ? state.deadline.toISOString()
-                : undefined,
-            },
-          })
-          .catch(() => null);
-
-        if (additionalEnglishNotice === null) {
-          setIsLoading(false);
-          toast.dismiss(loading);
-          toast.error(t('toasts.international_additional_fail'));
-          // TODO: add alert
-          // Swal.fire({
-          //   text: t('toasts.international_additional_fail'),
-          //   icon: 'error',
-          //   confirmButtonText: t('common:alert_response.confirm'),
-          //   showDenyButton: true,
-          //   denyButtonText: t('toasts.copy_international_additional'),
-          // }).then((result) => {
-          //   if (result.isDenied) {
-          //     navigator.clipboard.writeText(
-          //       state?.english?.additionalContent ?? '',
-          //     );
-          //     toast.success(t('toasts.copy_success'));
-          //   }
-          // });
-          return;
-        }
-      }
-    }
-
     // TODO: send log
-    // sendLog(LogEvents.writingModify, {
-    //   isEdited,
-    //   isEnglishAttached,
-    //   isAdditionalAttached,
-    // });
+    // sendLog(LogEvents.writingModify, ...);
 
-    toast.dismiss(loading);
-    toast.success(t('toasts.modify_success'));
-
-    localStorage.removeItem(NOTICE_LOCAL_STORAGE_KEY);
-    router.navigate({
-      to: '/notice/$id',
-      params: { id: notice.id.toString() },
+    editMutation.mutate({
+      noticeId: notice.id,
+      originalNotice: {
+        content: notice.content,
+        enContent: notice.enContent,
+        deadline: notice.currentDeadline ?? undefined,
+      },
+      koreanBody: state.korean.content,
+      englishBody: state.english?.content,
+      enTitle: state.english?.title,
+      deadline: state.deadline ? state.deadline.toDate() : undefined,
+      koreanAdditionalContent: state.korean.additionalContent,
+      englishAdditionalContent: state.english?.additionalContent,
+      hasTimedOut,
     });
   };
 

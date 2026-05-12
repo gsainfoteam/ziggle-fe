@@ -7,7 +7,10 @@ import { cn } from '@/common/utils';
 
 import Chip from './chip';
 
-export type NoticeType = 'recruit' | 'event' | 'general';
+export type { NoticeType } from '../../viewmodels';
+
+import type { NoticeType } from '../../viewmodels';
+
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 
 interface NoticeTypeSelectorProps {

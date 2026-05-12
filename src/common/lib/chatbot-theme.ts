@@ -27,7 +27,10 @@ function buildColors(): Record<string, string> {
     textSecondary: readCssHex('--color-secondaryText', defaults.textSecondary),
     border: readCssHex('--color-deselected', defaults.border),
     userMessageBg: primary,
-    assistantMessageBg: readCssHex('--color-greyLight', defaults.assistantMessageBg),
+    assistantMessageBg: readCssHex(
+      '--color-greyLight',
+      defaults.assistantMessageBg,
+    ),
   };
 }
 

@@ -9,7 +9,8 @@ export function AttachmentIndicators({
 }: Pick<Notice, 'documents' | 'crawledUrl'>) {
   const { t } = useTranslation('notice');
 
-  const hasDocuments = documents.length > 0;
+  const documentCount = documents?.length ?? 0;
+  const hasDocuments = documentCount > 0;
   const hasSourceUrl = Boolean(crawledUrl);
 
   if (!hasDocuments && !hasSourceUrl) return null;
@@ -22,7 +23,7 @@ export function AttachmentIndicators({
           aria-label={t('detail.attachments')}
         >
           <Paperclip size={16} />
-          <span>{documents.length}</span>
+          <span>{documentCount}</span>
         </span>
       )}
       {hasSourceUrl && (
