@@ -1,44 +1,49 @@
-import { lazy, Suspense, useImperativeHandle, useRef } from 'react';
+import { lazy, Suspense } from 'react';
 
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import ContentIcon from '@/assets/icons/content.svg?react';
 import TextIcon from '@/assets/icons/text.svg?react';
 import { LoadingCatAnimation } from '@/common/components';
 import { cn } from '@/common/utils';
+import {
+  BODY_MAX_LENGTH,
+  TITLE_MAX_LENGTH,
+  type NoticeFormValues,
+} from '@/features/write/viewmodels';
 
-import { BODY_MAX_LENGTH, TITLE_MAX_LENGTH } from '../../viewmodels';
-
-import type { Editor } from 'tinymce';
+import { useEditorRefs } from '../notice-editor/editor-refs-context';
 
 const TinyMCEEditor = lazy(() =>
-  import('./tiny-mce-editor').then((m) => ({ default: m.TinyMCEEditor })),
+  import('../tiny-mce-editor').then((m) => ({ default: m.TinyMCEEditor })),
 );
 
 interface TitleAndContentProps {
-  title: string;
-  titleLabel: string;
-  onChangeTitle: (newTitle: string) => void;
-  content: string;
-  contentLabel: string;
-  onChangeContent: (newContent: string) => void;
-  editorRef: React.Ref<Editor | null>;
+  lang: 'korean' | 'english';
   disabled?: boolean;
 }
 
-export const TitleAndContent = ({
-  title,
-  titleLabel,
-  onChangeTitle,
-  content,
-  contentLabel,
-  onChangeContent,
-  editorRef,
-  disabled,
-}: TitleAndContentProps) => {
+export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
   const { t } = useTranslation('write');
-  const ref = useRef<Editor | null>(null);
-  useImperativeHandle(editorRef, () => ref.current!);
+  const { control } = useFormContext<NoticeFormValues>();
+  const { koreanRef, englishRef } = useEditorRefs();
+  const editorRef = lang === 'korean' ? koreanRef : englishRef;
+
+  const { field: titleField } = useController({
+    control,
+    name: `${lang}.title` as 'korean.title' | 'english.title',
+  });
+  const { field: contentField } = useController({
+    control,
+    name: `${lang}.content` as 'korean.content' | 'english.content',
+  });
+
+  const title = titleField.value ?? '';
+  const content = contentField.value ?? '';
+  const titleLabel = t(`fields.${lang}_title`);
+  const contentLabel = t(`fields.${lang}_content`);
+
   return (
     <>
       <div className="mt-10 mb-2.5 flex gap-1.5">
@@ -49,9 +54,8 @@ export const TitleAndContent = ({
       <input
         disabled={disabled}
         value={title}
-        onChange={(e) => {
-          onChangeTitle(e.target.value);
-        }}
+        onChange={(e) => titleField.onChange(e.target.value)}
+        onBlur={titleField.onBlur}
         type="text"
         placeholder={t('inputs.title.placeholder')}
         className={cn(
@@ -79,8 +83,8 @@ export const TitleAndContent = ({
         <TinyMCEEditor
           disabled={disabled}
           value={content}
-          onEditorChange={onChangeContent}
-          ref={ref}
+          onEditorChange={contentField.onChange}
+          ref={editorRef}
         />
       </Suspense>
 

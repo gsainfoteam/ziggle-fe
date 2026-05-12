@@ -1,17 +1,16 @@
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/common/utils';
+import type { NoticeFormValues } from '@/features/write/viewmodels';
 
-interface LanguageTabProps {
-  writingTab: 'korean' | 'english';
-  setWritingTab: (writingTab: 'korean' | 'english') => void;
-}
-
-export const LanguageTab = ({
-  writingTab,
-  setWritingTab,
-}: LanguageTabProps) => {
+export const LanguageTab = () => {
   const { t } = useTranslation('write');
+  const { control } = useFormContext<NoticeFormValues>();
+  const { field } = useController({ control, name: 'writingTab' });
+  const writingTab = field.value;
+  const setWritingTab = (tab: 'korean' | 'english') => field.onChange(tab);
+
   return (
     <div className="grid grid-cols-[90px_90px_1fr] justify-items-stretch">
       <button

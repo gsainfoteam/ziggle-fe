@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/common/utils';
 
-import { calculateRemainingTime } from '../utils';
+import { calculateRemainingTime } from '../../../utils';
 
 interface EditableTimerProps {
   createdAt: Dayjs | string;

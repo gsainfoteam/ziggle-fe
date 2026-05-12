@@ -1,21 +1,19 @@
 import { useTranslation } from 'react-i18next';
-import { type Editor as TinyMCEEditorRef } from 'tinymce';
 
 import DeepLLogo from '@/assets/logos/deep-l.svg?react';
 
+import { useEditorRefs } from '../notice-editor/editor-refs-context';
+
 interface DeepLButtonProps {
-  query?: string;
-  editorRef?: React.RefObject<TinyMCEEditorRef | null>;
-  originalLanguage: 'korean' | 'english';
+  lang: 'korean' | 'english';
 }
 
-export const DeepLButton = ({
-  editorRef,
-  originalLanguage,
-}: DeepLButtonProps) => {
+export const DeepLButton = ({ lang }: DeepLButtonProps) => {
   const { t } = useTranslation('write');
+  const { koreanRef, englishRef } = useEditorRefs();
+  const editorRef = lang === 'korean' ? koreanRef : englishRef;
   const DEEPL_URL =
-    originalLanguage === 'korean'
+    lang === 'korean'
       ? 'https://www.deepl.com/translator#ko/en'
       : 'https://www.deepl.com/translator#en/ko';
 
@@ -25,7 +23,7 @@ export const DeepLButton = ({
       onClick={(e) => {
         e.preventDefault();
         window.open(
-          `${DEEPL_URL}/${editorRef?.current?.getContent({
+          `${DEEPL_URL}/${editorRef.current?.getContent({
             format: 'text',
           })}`,
           '_blank',

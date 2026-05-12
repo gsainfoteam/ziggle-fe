@@ -1,11 +1,11 @@
 import { fn } from 'storybook/test';
 
-import { AttachedPhoto } from './attached-photo';
+import { AttachedPhoto } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Features/Write/AttachedPhoto',
+  title: 'Write/AttachedPhoto',
   component: AttachedPhoto,
   parameters: {
     layout: 'centered',

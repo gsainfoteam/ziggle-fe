@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 
-import EditableTimer from './editable-timer';
+import EditableTimer from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Features/Write/EditableTimer',
+  title: 'Write/EditableTimer',
   component: EditableTimer,
   parameters: {
     layout: 'centered',

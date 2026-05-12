@@ -1,34 +1,25 @@
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import EventIcon from '@/assets/icons/event.svg?react';
 import GeneralIcon from '@/assets/icons/general.svg?react';
 import RecruitIcon from '@/assets/icons/recruit.svg?react';
+import { Chip } from '@/common/components';
 import { cn } from '@/common/utils';
-
-import Chip from './chip';
-
-export type { NoticeType } from '../../viewmodels';
-
-import type { NoticeType } from '../../viewmodels';
+import type { NoticeFormValues, NoticeType } from '@/features/write/viewmodels';
 
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
 
 interface NoticeTypeSelectorProps {
-  selectedNoticeType: NoticeType;
-  setNoticeType: (noticeType: NoticeType) => void;
   disabled?: boolean;
 }
 
-export const NoticeTypeSelector = ({
-  selectedNoticeType,
-  setNoticeType,
-  disabled,
-}: NoticeTypeSelectorProps) => {
+export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
   const { t } = useTranslation('write');
-  // t('notice_types.recruit.label'), t('notice_types.event.label'), t('notice_types.general.label')
-  // t('notice_types.recruit.description.title'), t('notice_types.event.description.title'), t('notice_types.general.description.title')
-  // t('notice_types.recruit.description.content'), t('notice_types.event.description.content'), t('notice_types.general.description.content')
-  // t('notice_types.recruit.description.example'), t('notice_types.event.description.example'), t('notice_types.general.description.example')
+  const { control } = useFormContext<NoticeFormValues>();
+  const { field } = useController({ control, name: 'noticeType' });
+  const selectedNoticeType = field.value;
+
   return (
     <>
       <div className="mb-5 flex gap-2.5">
@@ -38,11 +29,7 @@ export const NoticeTypeSelector = ({
             key={noticeType}
             onClick={() => {
               if (disabled) return;
-              setNoticeType(noticeType);
-              // TODO: send log
-              // sendLog(LogEvents.writingSelectType, {
-              //   type: noticeType,
-              // });
+              field.onChange(noticeType);
             }}
           >
             <Chip

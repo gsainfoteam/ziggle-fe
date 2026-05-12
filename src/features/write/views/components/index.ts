@@ -1,2 +1,2 @@
-export * from './notice-editor';
-export * from './navbar';
+export * from './editor-core/notice-editor';
+export * from './layout/navbar';

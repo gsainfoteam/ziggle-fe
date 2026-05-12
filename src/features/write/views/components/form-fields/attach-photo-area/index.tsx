@@ -1,26 +1,25 @@
 import { useRef } from 'react';
 
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import AddPhotoGray from '@/assets/icons/add-photo-gray.svg?react';
 import { Button } from '@/common/components';
 import { cn } from '@/common/utils';
+import type {
+  FileWithUrl,
+  NoticeFormValues,
+} from '@/features/write/viewmodels';
 
-import { AttachedPhoto } from './attached-photo';
+import { AttachedPhoto } from '../attached-photo';
 
-import type { FileWithUrl } from '../../viewmodels';
-
-interface AttachPhotoAreaProps {
-  photos: FileWithUrl[];
-  setPhotos: (photos: FileWithUrl[]) => void;
-}
-
-export const AttachPhotoArea = ({
-  photos,
-  setPhotos,
-}: AttachPhotoAreaProps) => {
+export const AttachPhotoArea = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { t } = useTranslation('write');
+  const { control } = useFormContext<NoticeFormValues>();
+  const { field } = useController({ control, name: 'photos' });
+  const photos = field.value;
+  const setPhotos = (next: FileWithUrl[]) => field.onChange(next);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();

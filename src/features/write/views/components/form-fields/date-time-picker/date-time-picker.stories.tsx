@@ -5,7 +5,7 @@ import { DateTimePicker } from './index';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Features/Write/DateTimePicker',
+  title: 'Write/DateTimePicker',
   component: DateTimePicker,
   parameters: {
     layout: 'centered',

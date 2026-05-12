@@ -1,25 +1,25 @@
 import { useState } from 'react';
 
+import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import CloseIcon from '@/assets/icons/close.svg?react';
+import {
+  useSearchTags,
+  type NoticeFormValues,
+  type Tag,
+} from '@/features/write/viewmodels';
 
-import { useSearchTags } from '../../viewmodels';
-
-export type { Tag } from '../../viewmodels';
-
-import type { Tag } from '../../viewmodels';
-
-interface TagInputProps {
-  tags: Tag[];
-  setTags: (tags: Tag[]) => void;
-}
-
-export const TagInput = ({ tags, setTags }: TagInputProps) => {
+export const TagInput = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [tempTagId, setTempTagId] = useState<number>(0);
   const { data: searchedTags } = useSearchTags({ keyword });
   const { t } = useTranslation('write');
+
+  const { control } = useFormContext<NoticeFormValues>();
+  const { field } = useController({ control, name: 'tags' });
+  const tags = field.value;
+  const setTags = (next: Tag[]) => field.onChange(next);
 
   const handleKeywordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputVal = event.target.value;
