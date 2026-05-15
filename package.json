@@ -26,6 +26,7 @@
   "dependencies": {
     "@amplitude/analytics-browser": "^2.35.4",
     "@floating-ui/react": "^0.27.18",
+    "@hookform/resolvers": "^5.2.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "^0.7.0",
     "@tanstack/react-query": "^5.90.21",
@@ -50,6 +51,7 @@
     "react-clock": "^6.0.0",
     "react-datetime-picker": "^7.0.1",
     "react-dom": "^19.2.0",
+    "react-hook-form": "^7.75.0",
     "react-i18next": "^16.5.4",
     "react-loading-skeleton": "^3.5.0",
     "react-oauth2-code-pkce": "^1.24.0",

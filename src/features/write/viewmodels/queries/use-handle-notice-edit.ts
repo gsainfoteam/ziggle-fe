@@ -169,37 +169,40 @@ export const useHandleNoticeEdit = () => {
       if (!hasTimedOut && isEdited) {
         // Patch Korean if body changed or deadline changed (Korean is always present)
         const patchKorean =
-          editedLangs.includes('ko') || isDeadlineEdited || editedLangs.length === 0;
+          editedLangs.includes('ko') ||
+          isDeadlineEdited ||
+          editedLangs.length === 0;
         const patchEnglish =
-          editedLangs.includes('en') || (isDeadlineEdited && !!originalNotice.enContent);
+          editedLangs.includes('en') ||
+          (isDeadlineEdited && !!originalNotice.enContent);
 
         const koreanNotice = patchKorean
-            ? await api
-                .PATCH(ApiPaths.NoticeController_updateNotice, {
-                  params: { path: { id: noticeId } },
-                  body: {
-                    deadline: deadline?.toISOString(),
-                    body: koreanBody!,
-                    lng: 'ko',
-                  },
-                })
-                .then((res) => res.data)
-                .catch(() => null)
-            : { id: null };
+          ? await api
+              .PATCH(ApiPaths.NoticeController_updateNotice, {
+                params: { path: { id: noticeId } },
+                body: {
+                  deadline: deadline?.toISOString(),
+                  body: koreanBody!,
+                  lng: 'ko',
+                },
+              })
+              .then((res) => res.data)
+              .catch(() => null)
+          : { id: null };
 
         const englishNotice = patchEnglish
-            ? await api
-                .PATCH(ApiPaths.NoticeController_updateNotice, {
-                  params: { path: { id: noticeId } },
-                  body: {
-                    deadline: deadline?.toISOString(),
-                    body: englishBody!,
-                    lng: 'en',
-                  },
-                })
-                .then((res) => res.data)
-                .catch(() => null)
-            : { id: null };
+          ? await api
+              .PATCH(ApiPaths.NoticeController_updateNotice, {
+                params: { path: { id: noticeId } },
+                body: {
+                  deadline: deadline?.toISOString(),
+                  body: englishBody!,
+                  lng: 'en',
+                },
+              })
+              .then((res) => res.data)
+              .catch(() => null)
+          : { id: null };
 
         if (!koreanNotice || !englishNotice) {
           toast.dismiss(loading);

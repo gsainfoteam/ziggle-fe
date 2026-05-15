@@ -4,8 +4,8 @@ import { Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { NoticeSkeletonLayout } from './notice-skeleton-layout';
-import { Navbar } from '../components/navbar';
-import { MobileShell } from '../components/sidebar';
+import { Navbar } from '../components/layout/navbar';
+import { MobileShell } from '../components/layout/sidebar';
 
 export function NoticeCommonLayout() {
   // TODO: currently, notice common layout requires auth

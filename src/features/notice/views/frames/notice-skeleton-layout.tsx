@@ -4,10 +4,10 @@ import { Footer } from '@/common/components';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
 import { LandingModal } from '@/features/landing';
 
-import { Navbar } from '../components/navbar';
-import Pagination from '../components/pagination';
-import { MobileShell, Sidebar } from '../components/sidebar';
-import { ZaboSkeleton } from '../components/skeleton/zabo-skeleton';
+import { Navbar } from '../components/layout/navbar';
+import { MobileShell, Sidebar } from '../components/layout/sidebar';
+import { NoticeCard } from '../components/notice-list/notice-card';
+import Pagination from '../components/notice-list/pagination';
 
 export function NoticeSkeletonLayout() {
   return (
@@ -26,7 +26,7 @@ export function NoticeSkeletonLayout() {
                 <div className="flex w-full flex-col md:max-w-200">
                   {Array.from({ length: 10 }).map((_, index) => (
                     <React.Fragment key={index}>
-                      <ZaboSkeleton />
+                      <NoticeCard.Skeleton />
                       <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
                     </React.Fragment>
                   ))}

@@ -46,7 +46,6 @@ const ChooseDialogContent = ({
       onExitComplete={onExitComplete}
       size="sm"
     >
-      <Dialog.Close />
       {title && (
         <Dialog.Header>
           <Dialog.Title>{title}</Dialog.Title>
