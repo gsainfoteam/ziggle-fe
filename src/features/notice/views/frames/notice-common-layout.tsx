@@ -8,13 +8,9 @@ import { Navbar } from '../components/layout/navbar';
 import { MobileShell } from '../components/layout/sidebar';
 
 export function NoticeCommonLayout() {
-  // TODO: currently, notice common layout requires auth
-  // afterwards, remove this check
-
   const { data: user } = useUser();
 
   if (user === undefined) return <Loading />;
-
   if (user === null) return <NoticeSkeletonLayout />;
 
   return (

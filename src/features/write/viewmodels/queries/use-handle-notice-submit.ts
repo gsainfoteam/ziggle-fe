@@ -234,7 +234,7 @@ export const useHandleNoticeSubmit = () => {
       const notice = await api
         .POST(ApiPaths.NoticeController_createNotice, {
           body: {
-            title,
+            title: title.trim(),
             deadline: deadline?.toISOString(),
             body: koreanBody!,
             images: imageKeys,
@@ -266,7 +266,7 @@ export const useHandleNoticeSubmit = () => {
             params: { path: { id, contentIdx: 1 } },
             body: {
               lang: 'en' as const,
-              title: enTitle || title,
+              title: enTitle?.trim() || title.trim(),
               deadline: deadline?.toISOString(),
               body: englishBody!,
             },
