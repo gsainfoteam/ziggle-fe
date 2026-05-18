@@ -3,3 +3,4 @@ export * from './layout';
 export * from './shared';
 export * from './analytics';
 export * from './banner-carousel';
+export * from './app-banner';

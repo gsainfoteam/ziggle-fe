@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Footer } from '@/common/components';
+import { AppBanner, Footer } from '@/common/components';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
 import { LandingModal } from '@/features/landing';
 
@@ -14,7 +14,10 @@ export function NoticeSkeletonLayout() {
     <MobileShell>
       <div className="flex min-h-screen flex-col">
         <LandingModal />
-        <Navbar />
+        <div className="sticky top-0 z-50">
+          <AppBanner />
+          <Navbar />
+        </div>
         <div className="mb-96 flex flex-1">
           <div className="sticky top-20 my-6 ml-4 hidden h-fit self-start md:block">
             <Sidebar />

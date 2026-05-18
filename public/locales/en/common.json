@@ -4,6 +4,11 @@
     "confirm": "Confirm"
   },
   "app_name": "Ziggle",
+  "app_banner": {
+    "description": "Get a better experience in the app",
+    "get": "Open in App",
+    "dismiss": "Dismiss"
+  },
   "carousel": {
     "next": "Next",
     "prev": "Previous",
