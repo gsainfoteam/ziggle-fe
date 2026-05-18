@@ -1,6 +1,6 @@
 import { Outlet } from '@tanstack/react-router';
 
-import { Footer, Loading } from '@/common/components';
+import { AppBanner, Footer, Loading } from '@/common/components';
 import { useUser } from '@/features/auth';
 
 import { NoticeSkeletonLayout } from './notice-skeleton-layout';
@@ -20,7 +20,10 @@ export function NoticeCommonLayout() {
   return (
     <MobileShell>
       <div className="flex min-h-screen flex-col">
-        <Navbar />
+        <div className="sticky top-0 z-50">
+          <AppBanner />
+          <Navbar />
+        </div>
         <div className="mb-96 flex flex-1">
           <Outlet />
         </div>

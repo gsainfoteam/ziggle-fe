@@ -4,6 +4,11 @@
     "confirm": "확인"
   },
   "app_name": "지글",
+  "app_banner": {
+    "description": "앱에서 더 편리하게 이용하세요",
+    "get": "앱으로 열기",
+    "dismiss": "닫기"
+  },
   "carousel": {
     "next": "다음",
     "prev": "이전",
