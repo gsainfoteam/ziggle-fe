@@ -15,7 +15,7 @@ export function AppBanner() {
 
   if (!showBanner) return null;
 
-  const redirect = encodeURIComponent(window.location.pathname);
+  const redirect = encodeURIComponent(window.location.href);
 
   return (
     <div className="dark:bg-dark_dark border-greyLight dark:border-dark_greyBorder flex w-full items-center gap-3 border-b bg-white px-4 py-2 shadow-sm">
