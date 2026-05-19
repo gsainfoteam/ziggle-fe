@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite';
 import { withThemeByClassName } from '@storybook/addon-themes';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OverlayProvider } from 'overlay-kit';
 
 import { ThemeProvider } from '../src/common/lib/theme';
@@ -37,9 +38,11 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
     (Story) => (
-      <ThemeProvider>
-        <Story />
-      </ThemeProvider>
+      <QueryClientProvider client={new QueryClient()}>
+        <ThemeProvider>
+          <Story />
+        </ThemeProvider>
+      </QueryClientProvider>
     ),
     (Story) => (
       <OverlayProvider>

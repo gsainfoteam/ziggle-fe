@@ -10,6 +10,7 @@ export const Button = ({
   children,
   className,
   animated,
+  disabled,
   ...props
 }: React.PropsWithChildren<
   React.ButtonHTMLAttributes<HTMLButtonElement> & ButtonProps
@@ -19,16 +20,24 @@ export const Button = ({
       'font-semibold transition',
       variant && 'rounded-[10px] px-5 py-2.5',
       variant === 'outlined' &&
+        !disabled &&
         'border-primary text-primary hover:bg-secondary border',
+      variant === 'outlined' &&
+        disabled &&
+        'border-greyBorder text-grey border',
       variant === 'contained' &&
+        !disabled &&
         'bg-primary dark:text-dark_white text-white hover:brightness-90',
-      variant === 'disabled' && 'bg-greylight text-grey',
-      variant === 'muted' && 'bg-greyLight text-greyDark hover:brightness-95',
+      variant === 'muted' &&
+        !disabled &&
+        'bg-greyLight text-greyDark hover:brightness-95',
+      (variant === 'disabled' || disabled) &&
+        'bg-greyLight text-grey cursor-not-allowed',
       animated && 'active:scale-95',
       className,
     )}
+    disabled={variant === 'disabled' || disabled}
     {...props}
-    disabled={variant === 'disabled'}
   >
     {children}
   </button>

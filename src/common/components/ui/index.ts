@@ -1,6 +1,7 @@
 // primitive components
 export * from './avatar';
 export * from './button';
+export * from './checkbox';
 export * from './chip';
 export * from './dialog';
 export * from './drawer';

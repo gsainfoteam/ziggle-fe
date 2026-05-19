@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { $api } from '@/common/lib';
 
 import { ApiPaths } from '../../models';
-import { useAuthPrompt, useToken } from '../stores';
+import { useAuthPrompt, useAuthRedirect, useToken } from '../stores';
 
 export const useLogin = ({
   showToast = false,
@@ -18,11 +18,14 @@ export const useLogin = ({
 
   return $api.useMutation('post', ApiPaths.AuthController_login, {
     onSuccess: (response) => {
-      useAuthPrompt.getState().setRequiredConsents(response.consent_required);
       if (response.consent_required) {
-        navigate({ to: '/auth/consent' });
+        useAuthPrompt.getState().setRequiredConsents(true);
+        useAuthPrompt.getState().setPendingToken(response.access_token);
+        const redirect = useAuthRedirect.getState().redirect ?? '/home';
+        navigate({ to: redirect });
+      } else {
+        useToken.getState().saveToken(response.access_token);
       }
-      useToken.getState().saveToken(response.access_token);
     },
     onError: async (error) => {
       if (error?.statusCode === 401) {
