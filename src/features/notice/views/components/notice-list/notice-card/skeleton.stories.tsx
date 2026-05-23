@@ -1,12 +1,10 @@
-import { NoticeCard } from '.';
+import { NoticeCardSkeleton } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const Skeleton = NoticeCard.Skeleton;
-
 const meta = {
   title: 'Notice/NoticeCard/Skeleton',
-  component: Skeleton,
+  component: NoticeCardSkeleton,
   parameters: {
     layout: 'centered',
   },
@@ -18,7 +16,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Skeleton>;
+} satisfies Meta<typeof NoticeCardSkeleton>;
 
 export default meta;
 

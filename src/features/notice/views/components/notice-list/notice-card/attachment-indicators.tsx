@@ -1,4 +1,4 @@
-import { Link as LinkIcon, Paperclip } from 'lucide-react';
+import { Attachment, Link as LinkIcon } from 'iconoir-react';
 import { useTranslation } from 'react-i18next';
 
 import type { Notice } from '@/features/notice/models';
@@ -22,7 +22,7 @@ export const NoticeCardAttachmentIndicators = ({
           className="flex items-center gap-1"
           aria-label={t('detail.attachments')}
         >
-          <Paperclip size={16} />
+          <Attachment className="size-4" />
           <span>{documentCount}</span>
         </span>
       )}
@@ -31,7 +31,7 @@ export const NoticeCardAttachmentIndicators = ({
           className="flex items-center gap-1"
           aria-label={t('detail.source_url')}
         >
-          <LinkIcon size={16} />
+          <LinkIcon className="size-4" />
         </span>
       )}
     </div>

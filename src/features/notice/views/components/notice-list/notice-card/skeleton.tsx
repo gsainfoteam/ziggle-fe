@@ -1,57 +1,46 @@
 import { cn } from '@/common/utils';
 
 export const NoticeCardSkeleton = () => {
-  const skeletonBg = 'bg-greyLight dark:bg-dark_greyDark';
+  const s = 'bg-greyLight dark:bg-dark_greyDark animate-pulse rounded-md';
 
   return (
-    <div className="text-text flex animate-pulse flex-col rounded-[10px] pt-2.5 transition">
-      <div className="mx-3 my-2.5 flex flex-wrap items-center gap-y-3">
-        <div className={cn('h-9 w-9 rounded-full', skeletonBg)} />
-        <div className={cn('ml-2 h-6 w-24 rounded-md', skeletonBg)} />
-
-        <span className="text-greyDark dark:text-grey mx-1.25 font-bold">
-          ·
-        </span>
-        <div className={cn('h-5 w-16 rounded-md', skeletonBg)} />
-
-        <div className="w-3.75" />
-
-        <div className={cn('h-6.5 w-15 rounded-md', skeletonBg)} />
+    <div className="text-text flex flex-col rounded-[10px]">
+      <div className="flex items-center justify-between gap-2 px-3 py-2.5">
+        <div className="flex items-center gap-2">
+          <div className={cn('size-8 shrink-0 rounded-full', s)} />
+          <div className={cn('h-5 w-24', s)} />
+          <div className={cn('h-4 w-16', s)} />
+        </div>
+        <div className={cn('h-6 w-14 rounded-full', s)} />
       </div>
-      <div className="flex w-full flex-col gap-2.5 px-4 pb-2.5">
-        <div className={cn('h-7 w-3/4 rounded-md', skeletonBg)} />
-        <div className="group flex w-full flex-col items-center gap-2">
-          <div className="flex w-fit max-w-full gap-2 overflow-hidden">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div
-                key={i}
-                className={cn('h-50 w-50 shrink-0 rounded-md', skeletonBg)}
-              />
-            ))}
+
+      <div className="flex items-stretch gap-3 px-3 pb-2.5">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <div className={cn('h-7 w-3/4', s)} />
+          <div className="flex flex-col gap-1.5">
+            <div className={cn('h-5 w-full', s)} />
+            <div className={cn('h-5 w-11/12', s)} />
+            <div className={cn('h-5 w-4/6', s)} />
+          </div>
+          <div className="flex gap-2">
+            <div className={cn('h-7 w-14 rounded-full', s)} />
+            <div className={cn('h-7 w-18 rounded-full', s)} />
+            <div className={cn('h-7 w-12 rounded-full', s)} />
           </div>
         </div>
-
-        <div className="flex flex-wrap gap-2 pt-1">
-          <div className={cn('h-7 w-14 rounded-full', skeletonBg)} />
-          <div className={cn('h-7 w-20 rounded-full', skeletonBg)} />
-          <div className={cn('h-7 w-12 rounded-full', skeletonBg)} />
-        </div>
-
-        <div className="flex w-full flex-col gap-2 pt-1">
-          <div className={cn('h-5 w-full rounded-md', skeletonBg)} />
-          <div className={cn('h-5 w-11/12 rounded-md', skeletonBg)} />
-          <div className={cn('h-5 w-4/6 rounded-md', skeletonBg)} />
-        </div>
+        <div className={cn('w-24 shrink-0 self-stretch rounded-lg', s)} />
       </div>
 
-      <div className="mx-3 my-2.5">
+      <div className="px-3 py-2.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
-            <div className={cn('h-9 w-9 rounded-full', skeletonBg)} />
-            <div className={cn('h-5 w-4 rounded-md', skeletonBg)} />
+            <div className={cn('size-6 rounded-full', s)} />
+            <div className={cn('h-4 w-5', s)} />
           </div>
-
-          <div className={cn('h-6.5 w-6.5 rounded-full', skeletonBg)} />
+          <div className="flex items-center gap-2">
+            <div className={cn('size-6 rounded-full', s)} />
+            <div className={cn('size-6 rounded-full', s)} />
+          </div>
         </div>
       </div>
     </div>
