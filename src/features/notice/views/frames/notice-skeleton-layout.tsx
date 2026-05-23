@@ -6,7 +6,7 @@ import { LandingModal } from '@/features/landing';
 
 import { Navbar } from '../components/layout/navbar';
 import { MobileShell, Sidebar } from '../components/layout/sidebar';
-import { NoticeCard } from '../components/notice-list/notice-card';
+import { NoticeCardSkeleton } from '../components/notice-list/notice-card';
 import Pagination from '../components/notice-list/pagination';
 
 export function NoticeSkeletonLayout() {
@@ -29,7 +29,7 @@ export function NoticeSkeletonLayout() {
                 <div className="flex w-full flex-col md:max-w-200">
                   {Array.from({ length: 10 }).map((_, index) => (
                     <React.Fragment key={index}>
-                      <NoticeCard.Skeleton />
+                      <NoticeCardSkeleton />
                       <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
                     </React.Fragment>
                   ))}

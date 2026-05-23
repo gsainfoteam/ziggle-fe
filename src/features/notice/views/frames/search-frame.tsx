@@ -59,44 +59,10 @@ const List = ({
         {notices?.list.map((notice) => (
           <LogClick
             eventName={LogEvents.noticeClick}
-            properties={{
-              type: 'searchResult',
-              id: notice.id,
-            }}
+            properties={{ type: 'searchResult', id: notice.id }}
             key={notice.id}
           >
-            <NoticeCard.Root id={notice.id}>
-              <NoticeCard.Header
-                author={notice.author}
-                createdAt={notice.createdAt}
-                deadline={notice.deadline}
-                query={search}
-              />
-              <NoticeCard.Body>
-                <div className="flex items-baseline gap-2">
-                  <NoticeCard.Title query={search}>
-                    {notice.title}
-                  </NoticeCard.Title>
-                  <div className="shrink-0">
-                    <NoticeCard.AttachmentIndicators
-                      documents={notice.documents}
-                      crawledUrl={notice.crawledUrl}
-                    />
-                  </div>
-                </div>
-                <NoticeCard.ImageCarousel
-                  imageUrls={notice.imageUrls}
-                  title={notice.title}
-                />
-                <NoticeCard.Tags tags={notice.tags} />
-                <NoticeCard.Content query={search}>
-                  {notice.content}
-                </NoticeCard.Content>
-              </NoticeCard.Body>
-              <div className="mx-3 my-2.5">
-                <NoticeCard.Actions {...notice} />
-              </div>
-            </NoticeCard.Root>
+            <NoticeCard notice={notice} searchQuery={search} />
           </LogClick>
         ))}
       </div>

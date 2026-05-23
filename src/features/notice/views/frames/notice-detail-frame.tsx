@@ -51,53 +51,13 @@ export function NoticeDetailFrame() {
   const isOwner = user?.uuid === efficientNotice.author.uuid;
 
   return (
-    <NoticeDetail.Root>
-      {/* DESKTOP — image stack as sidebar */}
-      <div className="hidden md:block">
-        <NoticeDetail.ImageStack
-          sources={efficientNotice.imageUrls}
-          alt={efficientNotice.title}
-        />
-      </div>
-
-      <NoticeDetail.Body>
-        <SendPushAlarm {...efficientNotice} />
-
-        <NoticeDetail.Deadline deadline={efficientNotice.currentDeadline} />
-        <NoticeDetail.Metadata
-          author={efficientNotice.author}
-          createdAt={efficientNotice.createdAt}
-        />
-        {isOwner && (
-          <NoticeDetail.AuthorActions noticeId={efficientNotice.id} />
-        )}
-        <NoticeDetail.Title>{efficientNotice.title}</NoticeDetail.Title>
-        <NoticeDetail.Tags tags={efficientNotice.tags} />
-        <NoticeDetail.DocumentUrls
-          crawledUrl={efficientNotice.crawledUrl}
-          documents={efficientNotice.documents}
-        />
-
-        {/* MOBILE — image stack inline */}
-        <div className="md:hidden">
-          <NoticeDetail.ImageStack
-            width={900}
-            sources={efficientNotice.imageUrls}
-            alt={efficientNotice.title}
-          />
-        </div>
-
-        <NoticeDetail.Content content={efficientNotice.content} />
-        <NoticeDetail.Actions
-          id={efficientNotice.id}
-          title={efficientNotice.title}
-          reactions={efficientNotice.reactions}
-        />
-        <NoticeDetail.AdditionalNotices
-          additionalContents={additionalContents}
-          originalDeadline={efficientNotice.deadline}
-        />
-      </NoticeDetail.Body>
-    </NoticeDetail.Root>
+    <>
+      <SendPushAlarm {...efficientNotice} />
+      <NoticeDetail
+        notice={efficientNotice}
+        isOwner={isOwner}
+        additionalContents={additionalContents}
+      />
+    </>
   );
 }

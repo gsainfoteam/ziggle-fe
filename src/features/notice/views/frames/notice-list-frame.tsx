@@ -60,46 +60,15 @@ function List({
   }
   return (
     <>
-      <div className="flex w-full flex-col md:max-w-200">
-        {...notices.list.map((notice) => (
-          <React.Fragment key={notice.id}>
-            <LogClick
-              eventName={LogEvents.noticeClick}
-              properties={{
-                type: 'noticeCard',
-                id: notice.id,
-              }}
-            >
-              <NoticeCard.Root id={notice.id}>
-                <NoticeCard.Header
-                  author={notice.author}
-                  createdAt={notice.createdAt}
-                  deadline={notice.deadline}
-                />
-                <NoticeCard.Body>
-                  <div className="flex items-baseline gap-2">
-                    <NoticeCard.Title>{notice.title}</NoticeCard.Title>
-                    <div className="shrink-0">
-                      <NoticeCard.AttachmentIndicators
-                        documents={notice.documents}
-                        crawledUrl={notice.crawledUrl}
-                      />
-                    </div>
-                  </div>
-                  <NoticeCard.ImageCarousel
-                    imageUrls={notice.imageUrls}
-                    title={notice.title}
-                  />
-                  <NoticeCard.Tags tags={notice.tags} />
-                  <NoticeCard.Content>{notice.content}</NoticeCard.Content>
-                </NoticeCard.Body>
-                <div className="mx-3 my-2.5">
-                  <NoticeCard.Actions {...notice} />
-                </div>
-              </NoticeCard.Root>
-            </LogClick>
-            <div className="bg-greyLight dark:bg-dark_greyBorder my-7.5 h-px" />
-          </React.Fragment>
+      <div className="flex w-full flex-col gap-5 md:max-w-200">
+        {notices.list.map((notice) => (
+          <LogClick
+            key={notice.id}
+            eventName={LogEvents.noticeClick}
+            properties={{ type: 'noticeCard', id: notice.id }}
+          >
+            <NoticeCard notice={notice} />
+          </LogClick>
         ))}
       </div>
       <Pagination
@@ -125,11 +94,6 @@ export function NoticeListFrame() {
   return (
     <main className="flex w-full flex-col items-center gap-5">
       <div className="flex w-full flex-col items-center">
-        {/* {category === 'home' && (
-          <div className="mt-6 mb-7.5 flex w-full justify-center">
-            <HomeBannerCarousel />
-          </div>
-        )} */}
         {category !== 'home' && (
           <div className="flex w-full flex-row flex-wrap justify-between gap-3.5 px-4.5 py-5 font-bold md:max-w-200">
             <div className="text-primary flex items-center gap-2 text-4xl">
