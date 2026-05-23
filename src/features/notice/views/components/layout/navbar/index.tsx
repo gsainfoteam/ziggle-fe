@@ -23,8 +23,8 @@ export const Navbar = () => {
   const toggleSidebar = useMobileSidebar((state) => state.toggle);
 
   return (
-    <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
-      <div className="relative flex h-full w-full items-center justify-between">
+    <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center bg-white py-3 md:py-2">
+      <div className="flex shrink-0 items-center pl-2 md:ml-4 md:w-40 md:pl-0">
         <LogClick eventName={LogEvents.navBarClickLogo}>
           <Link to="/">
             <div className="block dark:hidden">
@@ -37,33 +37,34 @@ export const Navbar = () => {
             </div>
           </Link>
         </LogClick>
-        <div className="flex h-full items-center md:w-full">
-          <SearchBar />
-          <LogClick eventName={LogEvents.navBarClickMenu}>
-            <Button
-              onClick={toggleSidebar}
-              className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden"
-            >
-              <MenuIcon className="stroke-text dark:stroke-dark_white h-6 md:hidden" />
-            </Button>
-          </LogClick>
-        </div>
       </div>
-      {user ? (
-        <ProfileModalButton />
-      ) : (
-        <LogClick eventName={LogEvents.navBarClickLogin}>
-          <Link
-            to="/"
-            className="hidden items-center justify-center gap-2 md:flex"
+
+      <div className="flex h-full flex-1 items-center justify-end md:justify-start md:px-5">
+        <SearchBar />
+        <LogClick eventName={LogEvents.navBarClickMenu}>
+          <Button
+            onClick={toggleSidebar}
+            className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden"
           >
-            <AccountIcon className="flex h-6" />
-            <div className="text-primary align-middle font-medium whitespace-nowrap">
-              {t('navbar.login')}
-            </div>
-          </Link>
+            <MenuIcon className="stroke-text dark:stroke-dark_white h-6 md:hidden" />
+          </Button>
         </LogClick>
-      )}
+      </div>
+
+      <div className="hidden md:flex md:w-14 md:shrink-0 md:items-center md:justify-end md:pr-4">
+        {user ? (
+          <ProfileModalButton labelClassName="hidden" imageClassName="size-8" />
+        ) : (
+          <LogClick eventName={LogEvents.navBarClickLogin}>
+            <Link to="/" className="flex items-center justify-center gap-2">
+              <AccountIcon className="flex h-6" />
+              <div className="text-primary align-middle font-medium whitespace-nowrap">
+                {t('navbar.login')}
+              </div>
+            </Link>
+          </LogClick>
+        )}
+      </div>
     </header>
   );
 };

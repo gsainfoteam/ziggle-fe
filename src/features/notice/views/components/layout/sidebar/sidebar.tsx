@@ -72,7 +72,7 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
             <CSLink
               onClick={onClose}
               className={cn(
-                'dark:hover:bg-dark_grey flex w-48 items-center rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300',
+                'text-text dark:text-dark_white dark:hover:bg-dark_grey flex w-40 items-center rounded-md px-3 py-2 text-sm transition duration-300 hover:bg-gray-100',
               )}
             >
               <span className="w-6">

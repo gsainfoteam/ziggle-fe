@@ -21,12 +21,14 @@ export const SidebarItem = ({
     <Link
       {...props}
       className={cn(
-        'dark:hover:bg-dark_grey focus-visible:ring-primary flex w-48 items-center gap-5 rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-        isSelected && 'bg-greyLight dark:bg-dark_greyDark',
+        'focus-visible:ring-primary flex w-40 items-center gap-4 rounded-md px-3 py-2 transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+        isSelected
+          ? 'bg-primary/10 text-primary dark:bg-primary/20'
+          : 'text-text dark:text-dark_white hover:bg-gray-100 dark:hover:bg-dark_grey',
       )}
     >
-      <span className="w-6">{isSelected ? boldIcon : icon}</span>
-      <span className={isSelected ? 'font-semibold' : 'font-normal'}>
+      <span className="w-5 shrink-0">{isSelected ? boldIcon : icon}</span>
+      <span className={cn('text-sm', isSelected ? 'font-semibold' : 'font-normal')}>
         {title}
       </span>
     </Link>

@@ -105,11 +105,15 @@ export const ProfileModalPanel = ({
 interface ProfileModalButtonProps {
   triggerClassName?: string;
   eventName?: string;
+  labelClassName?: string;
+  imageClassName?: string;
 }
 
 export const ProfileModalButton = ({
   triggerClassName = 'hidden cursor-pointer items-center justify-center gap-3 md:flex',
   eventName = LogEvents.navBarClickMyPage,
+  labelClassName,
+  imageClassName = 'size-9',
 }: ProfileModalButtonProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
@@ -188,7 +192,8 @@ export const ProfileModalButton = ({
         <Avatar
           name={user?.name}
           picture={user?.picture}
-          imageClassName="size-9"
+          imageClassName={imageClassName}
+          labelClassName={labelClassName}
         />
       </button>
     </LogClick>
