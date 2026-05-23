@@ -72,7 +72,7 @@ export const SearchBar = () => {
     <div
       className={cn(
         isExpanded ? 'absolute h-fit w-full' : 'static h-full w-12',
-        'md:mx-4 md:h-fit md:w-full',
+        'md:h-fit md:w-full',
         'flex items-stretch justify-end md:static md:justify-center',
         'right-0 transition-[width]',
       )}
@@ -81,7 +81,7 @@ export const SearchBar = () => {
         onSubmit={handleSearch}
         className={cn(
           isExpanded ? 'w-full' : 'w-fit',
-          'transition-[width] md:w-full md:max-w-175',
+          'transition-[width] md:w-full md:max-w-200',
           'flex flex-row-reverse justify-between md:flex-row',
           'overflow-clip',
           'border-greyBorder rounded-lg',
