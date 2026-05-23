@@ -11,6 +11,7 @@ import {
 } from '@/features/notice/models';
 
 import { NoticeDetail } from '.';
+import type { NoticeDetailProps } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -53,54 +54,18 @@ const baseNotice: NoticeDetailModel = {
 
 const queryClient = new QueryClient();
 
-interface ComposedArgs {
-  notice: NoticeDetailModel;
-  isOwner?: boolean;
-}
-
-const ComposedNoticeDetail = ({ notice, isOwner }: ComposedArgs) => {
+const WrappedNoticeDetail = ({
+  notice,
+  isOwner = false,
+  additionalContents = [],
+}: NoticeDetailProps) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <NoticeDetail.Root>
-        <div className="hidden md:block">
-          <NoticeDetail.ImageStack
-            sources={notice.imageUrls}
-            alt={notice.title}
-          />
-        </div>
-
-        <NoticeDetail.Body>
-          <NoticeDetail.Deadline deadline={notice.currentDeadline} />
-          <NoticeDetail.Metadata
-            author={notice.author}
-            createdAt={notice.createdAt}
-          />
-          {isOwner && <NoticeDetail.AuthorActions noticeId={notice.id} />}
-          <NoticeDetail.Title>{notice.title}</NoticeDetail.Title>
-          <NoticeDetail.Tags tags={notice.tags} />
-          <NoticeDetail.DocumentUrls
-            crawledUrl={notice.crawledUrl}
-            documents={notice.documents}
-          />
-          <div className="md:hidden">
-            <NoticeDetail.ImageStack
-              width={900}
-              sources={notice.imageUrls}
-              alt={notice.title}
-            />
-          </div>
-          <NoticeDetail.Content content={notice.content} />
-          <NoticeDetail.Actions
-            id={notice.id}
-            title={notice.title}
-            reactions={notice.reactions}
-          />
-          <NoticeDetail.AdditionalNotices
-            additionalContents={notice.additionalContents}
-            originalDeadline={notice.deadline}
-          />
-        </NoticeDetail.Body>
-      </NoticeDetail.Root>
+      <NoticeDetail
+        notice={notice}
+        isOwner={isOwner}
+        additionalContents={additionalContents}
+      />
     ),
   });
   const router = createRouter({ routeTree: rootRoute });
@@ -113,12 +78,12 @@ const ComposedNoticeDetail = ({ notice, isOwner }: ComposedArgs) => {
 
 const meta = {
   title: 'Notice/NoticeDetail',
-  component: ComposedNoticeDetail,
+  component: WrappedNoticeDetail,
   parameters: {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof ComposedNoticeDetail>;
+} satisfies Meta<typeof WrappedNoticeDetail>;
 
 export default meta;
 
@@ -142,6 +107,18 @@ export const WithoutImages: Story = {
   args: { notice: { ...baseNotice, imageUrls: [] } },
 };
 
+export const MultipleImages: Story = {
+  args: {
+    notice: {
+      ...baseNotice,
+      imageUrls: Array.from(
+        { length: 5 },
+        (_, i) => `https://placehold.co/${300 + i * 40}x${400 + i * 20}?text=Image+${i + 1}`,
+      ),
+    },
+  },
+};
+
 export const WithDocuments: Story = {
   args: {
     notice: {
@@ -156,45 +133,54 @@ export const WithDocuments: Story = {
           name: '지원서_양식.pdf',
         },
       ],
+      crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
     },
   },
 };
 
-export const WithCrawledUrl: Story = {
+export const WithAuthorPicture: Story = {
   args: {
     notice: {
       ...baseNotice,
-      crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
+      author: {
+        ...baseNotice.author,
+        picture: 'https://picsum.photos/seed/author1/36/36',
+      },
     },
   },
 };
 
 export const WithAdditionalNotices: Story = {
   args: {
+    notice: baseNotice,
+    additionalContents: [
+      {
+        id: 1,
+        lang: 'ko',
+        content: '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
+        createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 2,
+        lang: 'ko',
+        content: '모집 인원이 10명에서 15명으로 증가했습니다.',
+        deadline: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000).toISOString(),
+        createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+    ],
+  },
+};
+
+export const AllActive: Story = {
+  args: {
     notice: {
       ...baseNotice,
-      additionalContents: [
-        {
-          id: 1,
-          lang: 'ko',
-          content:
-            '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
-          createdAt: new Date(
-            Date.now() - 2 * 24 * 60 * 60 * 1000,
-          ).toISOString(),
-        },
-        {
-          id: 2,
-          lang: 'ko',
-          content: '모집 인원이 10명에서 15명으로 증가했습니다.',
-          deadline: new Date(
-            Date.now() + 10 * 24 * 60 * 60 * 1000,
-          ).toISOString(),
-          createdAt: new Date(
-            Date.now() - 1 * 24 * 60 * 60 * 1000,
-          ).toISOString(),
-        },
+      reactions: [
+        { emoji: EmojiString.FIRE, count: 15, isReacted: true },
+        { emoji: EmojiString.THINKING, count: 8, isReacted: false },
       ],
+      isBookmarked: true,
     },
+    isOwner: true,
   },
 };

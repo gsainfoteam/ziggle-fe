@@ -1,4 +1,4 @@
-import { Link, Paperclip } from 'lucide-react';
+import { Attachment, Link } from 'iconoir-react';
 import { useTranslation } from 'react-i18next';
 
 import type { NoticeDetail } from '@/features/notice/models';
@@ -16,7 +16,7 @@ export function NoticeDetailDocumentUrls({
       <div className="grid grid-cols-[max-content_1fr] items-start gap-x-6 gap-y-3">
         {crawledUrl && (
           <>
-            <Label icon={<Link size={18} />}>{t('detail.source_url')}</Label>
+            <Label icon={<Link className="size-4.5" />}>{t('detail.source_url')}</Label>
             <a
               href={crawledUrl}
               target="_blank"
@@ -30,7 +30,7 @@ export function NoticeDetailDocumentUrls({
 
         {documents.length > 0 && (
           <>
-            <Label icon={<Paperclip size={18} />}>
+            <Label icon={<Attachment className="size-4.5" />}>
               {t('detail.attachments')}
             </Label>
             <div className="flex flex-col gap-1">

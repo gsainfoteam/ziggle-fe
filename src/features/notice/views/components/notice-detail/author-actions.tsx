@@ -3,8 +3,7 @@ import { Link, useRouter } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import EditPencilIcon from '@/assets/icons/edit-pencil.svg?react';
-import RemoveIcon from '@/assets/icons/remove.svg?react';
+import { EditPencil, Trash } from 'iconoir-react';
 import { LogClick, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -37,7 +36,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-2">
       <LogClick
         eventName={LogEvents.detailClickEdit}
         properties={{ id: noticeId }}
@@ -45,10 +44,10 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
         <Link
           to="/write"
           search={{ noticeId }}
-          className="flex items-center gap-2.5"
+          className="border-greyLight text-greyDark dark:text-dark_grey dark:border-dark_greyBorder hover:bg-greyLight dark:hover:bg-dark_greyDark flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition"
         >
-          <EditPencilIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('detail.author_actions.edit')}</p>
+          <EditPencil className="size-4" />
+          {t('detail.author_actions.edit')}
         </Link>
       </LogClick>
 
@@ -58,14 +57,14 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
       >
         <button
           className={cn(
-            'flex items-center gap-2.5',
+            'flex items-center gap-1.5 rounded-full border border-red-200 px-3 py-1.5 text-sm font-medium text-red-500 transition hover:bg-red-50 dark:border-red-900 dark:hover:bg-red-950',
             isPending && 'cursor-not-allowed opacity-50',
           )}
           onClick={handleRemoveNotice}
           disabled={isPending}
         >
-          <RemoveIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('detail.author_actions.remove')}</p>
+          <Trash className="size-4" />
+          {t('detail.author_actions.remove')}
         </button>
       </LogClick>
     </div>

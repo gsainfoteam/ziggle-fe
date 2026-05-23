@@ -117,8 +117,7 @@ export function NoticeDetailContent({ content }: ContentProps) {
     <div
       className={cn(
         'text-text dark:text-dark_white',
-        'leading-[1.4] font-normal',
-        '[&_p]:my-4 [&_p]:text-lg',
+        'text-left leading-7 font-normal',
         '[&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl',
         '[&_a]:text-secondaryText [&_a]:underline',
         'break-all',
@@ -126,7 +125,6 @@ export function NoticeDetailContent({ content }: ContentProps) {
         '[&_td]:bg-transparent [&_th]:bg-transparent',
         '[&_td]:border [&_td]:border-current [&_th]:border [&_th]:border-current',
         '[&_td]:px-3 [&_td]:py-2 [&_th]:px-3 [&_th]:py-2',
-        '[&_p]:text-left',
       )}
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />

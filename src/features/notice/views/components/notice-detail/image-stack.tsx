@@ -6,17 +6,13 @@ import { LogEvents } from '@/common/const/log-events';
 import ShowcaseModal from '../modals/showcase-modal';
 
 interface ImageStackProps {
-  width?: number;
   sources: string[];
   alt: string;
 }
 
-export const NoticeDetailImageStack = ({
-  width,
-  sources,
-  alt,
-}: ImageStackProps) => {
+export const NoticeDetailImageStack = ({ sources, alt }: ImageStackProps) => {
   if (sources.length === 0) return null;
+
   const onImageClick = (index: number) => {
     overlay.open(({ isOpen, close, unmount }) => (
       <ShowcaseModal
@@ -31,25 +27,21 @@ export const NoticeDetailImageStack = ({
   };
 
   return (
-    <div className="flex flex-col gap-[10px]">
+    <div className="flex gap-2.5 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {sources.map((src, i) => (
-        <div key={src} className="relative">
-          <LogClick eventName={LogEvents.detailClickImage}>
-            <button
-              type="button"
-              onClick={() => onImageClick(i)}
-              className="block cursor-pointer text-left"
-            >
-              <img
-                src={src}
-                alt={alt}
-                width={width ?? 400}
-                height={300}
-                className="border-greyBorder shrink-0 basis-48 rounded-[10px] border-2 object-cover md:basis-80"
-              />
-            </button>
-          </LogClick>
-        </div>
+        <LogClick key={src} eventName={LogEvents.detailClickImage}>
+          <button
+            type="button"
+            onClick={() => onImageClick(i)}
+            className="block shrink-0 cursor-pointer text-left"
+          >
+            <img
+              src={src}
+              alt={alt}
+              className="border-greyBorder h-72 w-auto rounded-[10px] border object-contain"
+            />
+          </button>
+        </LogClick>
       ))}
     </div>
   );
