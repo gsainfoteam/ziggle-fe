@@ -6,11 +6,13 @@ import '../styles.css';
 import { Toaster } from 'sonner';
 
 import { ThemeProvider } from '@/common/lib/theme';
+import { LandingModal } from '@/features/auth';
 
 export const Route = createRootRoute({
   component: () => (
     <>
       <ThemeProvider>
+        <LandingModal />
         <Toaster />
         <Outlet />
       </ThemeProvider>
