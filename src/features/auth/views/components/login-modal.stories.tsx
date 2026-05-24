@@ -5,9 +5,8 @@ import {
 } from '@tanstack/react-router';
 
 import { AuthProvider, type TAuthConfig } from 'react-oauth2-code-pkce';
-import { useAuthPrompt } from '@/features/auth';
 
-import { LandingModal } from './landing-modal';
+import { LoginModal } from './login-modal';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -21,34 +20,26 @@ const mockAuthConfig: TAuthConfig = {
   decodeToken: false,
 };
 
-const createLandingRouter = () => {
-  const root = createRootRoute({ component: LandingModal });
+const createLoginRouter = () => {
+  const root = createRootRoute({ component: LoginModal });
   return createRouter({ routeTree: root });
 };
 
-const LandingModalWithProviders = () => (
+const LoginModalWithProviders = () => (
   <AuthProvider authConfig={mockAuthConfig}>
-    <RouterProvider router={createLandingRouter()} />
+    <RouterProvider router={createLoginRouter()} />
   </AuthProvider>
 );
 
 const meta = {
-  title: 'Landing/LandingModal',
-  component: LandingModalWithProviders,
+  title: 'Auth/LoginModal',
+  component: LoginModalWithProviders,
   parameters: { layout: 'fullscreen' },
   tags: ['autodocs'],
-} satisfies Meta<typeof LandingModalWithProviders>;
+} satisfies Meta<typeof LoginModalWithProviders>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Login: Story = {};
-
-export const Consent: Story = {
-  beforeEach: () => {
-    useAuthPrompt.setState({ requiredConsents: true });
-    return () => useAuthPrompt.setState({ requiredConsents: undefined });
-  },
-};
-
+export const Default: Story = {};
