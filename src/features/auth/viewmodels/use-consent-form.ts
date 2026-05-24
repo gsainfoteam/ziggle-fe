@@ -20,7 +20,9 @@ const createConsentSchema = (
   t: ReturnType<typeof useTranslation<'auth'>>['t'],
 ) =>
   z.object({
-    privacy: z.boolean().refine((v) => v === true, t('consent.errors.privacyRequired')),
+    privacy: z
+      .boolean()
+      .refine((v) => v === true, t('consent.errors.privacyRequired')),
     tos: z.boolean().refine((v) => v === true, t('consent.errors.tosRequired')),
   });
 
@@ -30,23 +32,33 @@ export const useConsentForm = () => {
   const { t } = useTranslation('auth');
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
   const [termsVersions, setTermsVersions] = useState<TermsIndex | null>(null);
-  const { submitConsent, isPending } = useConsent();
+  const { mutateAsync } = useConsent();
 
   useEffect(() => {
     fetch(TERMS_INDEX_URL)
       .then((res) => res.json())
       .then((data: TermsIndex) => setTermsVersions(data))
       .catch(() =>
-        setTermsVersions({ service: 'ziggle', privacy: '250302', tos: '250302' }),
+        setTermsVersions({
+          service: 'ziggle',
+          privacy: '250302',
+          tos: '250302',
+        }),
       );
   }, []);
 
-  const { register, handleSubmit, control, setValue, trigger, formState } =
-    useForm<ConsentFormData>({
-      resolver: zodResolver(createConsentSchema(t)),
-      defaultValues: { privacy: false, tos: false },
-      mode: 'onChange',
-    });
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    trigger,
+    formState: { isValid, isLoading },
+  } = useForm<ConsentFormData>({
+    resolver: zodResolver(createConsentSchema(t)),
+    defaultValues: { privacy: false, tos: false },
+    mode: 'onChange',
+  });
 
   const privacy = useWatch({ control, name: 'privacy' });
   const tos = useWatch({ control, name: 'tos' });
@@ -61,6 +73,8 @@ export const useConsentForm = () => {
   const getTermsVersion = (type: 'privacy' | 'tos') =>
     termsVersions?.[type] ?? null;
 
+  const onSubmit = handleSubmit(() => mutateAsync({}).catch(() => {}));
+
   return {
     requiredConsents,
     register,
@@ -68,9 +82,9 @@ export const useConsentForm = () => {
     tos,
     allChecked,
     handleAllChange,
-    onSubmit: handleSubmit(() => submitConsent()),
-    isPending,
-    isValid: formState.isValid,
+    onSubmit,
+    isLoading,
+    isValid,
     getTermsVersion,
   };
 };
