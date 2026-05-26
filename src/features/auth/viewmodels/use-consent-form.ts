@@ -32,7 +32,7 @@ export const useConsentForm = () => {
   const { t } = useTranslation('auth');
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
   const [termsVersions, setTermsVersions] = useState<TermsIndex | null>(null);
-  const { mutateAsync } = useConsent();
+  const { mutateAsync, isPending } = useConsent();
 
   useEffect(() => {
     fetch(TERMS_INDEX_URL)
@@ -53,7 +53,7 @@ export const useConsentForm = () => {
     control,
     setValue,
     trigger,
-    formState: { isValid, isLoading },
+    formState: { isValid },
   } = useForm<ConsentFormData>({
     resolver: zodResolver(createConsentSchema(t)),
     defaultValues: { privacy: false, tos: false },
@@ -83,7 +83,7 @@ export const useConsentForm = () => {
     allChecked,
     handleAllChange,
     onSubmit,
-    isLoading,
+    isLoading: isPending,
     isValid,
     getTermsVersion,
   };
