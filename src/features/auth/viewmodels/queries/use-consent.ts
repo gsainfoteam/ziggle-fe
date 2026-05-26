@@ -18,12 +18,12 @@ export const useConsent = () => {
     'post',
     ApiPaths.UserController_setConsent,
     {
-      onSuccess: () => {
+      onSuccess: async () => {
         useAuthPrompt.getState().setRequiredConsents(undefined);
-        queryClient.invalidateQueries({
+        await queryClient.invalidateQueries({
           queryKey: ['get', ApiPaths.UserController_getUserInfo],
         });
-        navigate({ to: '/' });
+        await navigate({ to: '/' });
       },
       onError: () => {
         toast.error(t('errors.consent_failed'));
