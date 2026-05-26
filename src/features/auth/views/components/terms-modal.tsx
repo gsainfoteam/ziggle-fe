@@ -37,6 +37,8 @@ export function TermsModal({ termsOpen, onClose }: TermsModalProps) {
             <iframe
               src={`https://terms.gistory.me/embedded/ziggle/${termsOpen.type}/${termsOpen.version}/`}
               title={termsTitle[termsOpen.type]}
+              sandbox="allow-scripts"
+              referrerPolicy="no-referrer"
               className="h-full w-full"
             />
           </Dialog.Body>
