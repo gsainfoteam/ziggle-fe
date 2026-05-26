@@ -11,6 +11,8 @@ import '../src/common/lib/i18n';
 import '../src/styles.css';
 import './docs-theme.css';
 
+const queryClient = new QueryClient();
+
 const preview: Preview = {
   globalTypes: {
     theme: {
@@ -38,7 +40,7 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
     (Story) => (
-      <QueryClientProvider client={new QueryClient()}>
+      <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <Story />
         </ThemeProvider>
