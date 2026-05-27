@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { $api } from '@/common/lib';
 
 import { ApiPaths } from '../../models';
-import { useAuthPrompt, useToken } from '../stores';
+import { useAuthRedirect, useToken } from '../stores';
 
 export const useLogin = ({
   showToast = false,
@@ -18,25 +18,25 @@ export const useLogin = ({
 
   return $api.useMutation('post', ApiPaths.AuthController_login, {
     onSuccess: (response) => {
-      useAuthPrompt.getState().setRequiredConsents(response.consent_required);
-      if (response.consent_required) {
-        navigate({ to: '/auth/consent' });
-      }
+      const redirect = useAuthRedirect.getState().redirect ?? '/home';
       useToken.getState().saveToken(response.access_token);
+      useAuthRedirect.getState().clearRedirect();
+      navigate({ to: redirect });
     },
     onError: async (error) => {
-      if (error?.statusCode === 401) {
-        idpLogOut();
-        navigate({ to: '/' });
-        if (showToast) {
-          toast.error(t('errors.invalid_idp_token'));
-        }
-      } else {
-        idpLogOut();
-        navigate({ to: '/' });
-        if (showToast) {
-          toast.error(t('errors.login_failed'));
-        }
+      idpLogOut();
+      navigate({ to: '/' });
+
+      switch (error.statusCode) {
+        case 401:
+          if (showToast) {
+            toast.error(t('errors.invalid_idp_token'));
+          }
+          break;
+        default:
+          if (showToast) {
+            toast.error(t('errors.login_failed'));
+          }
       }
     },
   });

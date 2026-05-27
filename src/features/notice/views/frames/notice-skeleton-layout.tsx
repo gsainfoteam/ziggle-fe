@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AppBanner, Footer } from '@/common/components';
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
-import { LandingModal } from '@/features/landing';
 
 import { Navbar } from '../components/layout/navbar';
 import { MobileShell, Sidebar } from '../components/layout/sidebar';
@@ -13,7 +12,6 @@ export function NoticeSkeletonLayout() {
   return (
     <MobileShell>
       <div className="flex min-h-screen flex-col">
-        <LandingModal />
         <div className="sticky top-0 z-50">
           <AppBanner />
           <Navbar />

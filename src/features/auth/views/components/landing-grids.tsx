@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { cn } from '@/common/utils';
+
 function getRandomInt(min = 50, max = 400) {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
@@ -33,12 +34,13 @@ function BlockSet({ heights, color }: BlockSetProps) {
   );
 }
 
-export default function LandingGrids() {
+export function LandingGrids() {
   const columnHeights = useMemo(() => {
     return Array.from({ length: 4 }, () =>
       Array.from({ length: 4 }, () => getRandomInt()),
     );
   }, []);
+
   return (
     <div className="mask-fade-y relative hidden h-full items-center justify-center gap-4 overflow-hidden md:flex">
       {columnColors.map((color, colIdx) => {

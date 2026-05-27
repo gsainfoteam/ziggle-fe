@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
+
 import { $api } from '@/common/lib';
 
 import { ApiPaths } from '../../models';
-import { useToken } from '../stores';
+import { useAuthPrompt, useToken } from '../stores';
 
 export const useUser = () => {
   const { token } = useToken();
+  const setRequiredConsents = useAuthPrompt((s) => s.setRequiredConsents);
 
-  const { data, ...rest } = $api.useQuery(
+  const { data, error, ...rest } = $api.useQuery(
     'get',
     ApiPaths.UserController_getUserInfo,
     {},
-    { enabled: !!token },
+    { enabled: !!token, retry: false },
   );
+
+  useEffect(() => {
+    if (error != null) {
+      setRequiredConsents(true);
+    }
+  }, [error, setRequiredConsents]);
 
   return {
     ...rest,
-    data: token ? data : null,
+    error,
+    data: token ? (data ?? null) : null,
   };
 };

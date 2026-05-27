@@ -46,7 +46,7 @@ const baseUser: User = {
   name: '홍길동',
   email: 'gildong@gm.gist.ac.kr',
   picture: null,
-  consent: true,
+  consent: '2025-01-01T00:00:00.000Z',
 };
 
 export const Default: Story = {
