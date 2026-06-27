@@ -41,7 +41,7 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
   );
 
   return (
-    <div className="flex flex-1 flex-col gap-y-5">
+    <div className="flex flex-1 flex-col gap-y-8">
       {/* 피드 그룹 — 기본 페이지인 '최근'을 맨 위로, 검색은 그 다음 */}
       <ul className="flex flex-col gap-y-0.5">
         {renderNavRow('recent', nav.feeds.recent)}

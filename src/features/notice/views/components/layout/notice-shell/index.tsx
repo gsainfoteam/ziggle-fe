@@ -27,7 +27,7 @@ export function NoticeShell({ children }: { children: ReactNode }) {
         {/* 데스크탑: 뷰포트 높이 고정 + 페이지 스크롤 차단 / 모바일: auto 높이(페이지 스크롤) */}
         <div className="flex md:h-screen md:overflow-hidden">
           {/* 데스크탑 사이드바 (로고 + 네비) */}
-          <aside className="dark:bg-dark_dark sticky top-0 hidden h-screen w-48 shrink-0 flex-col gap-y-6 overflow-y-auto bg-white px-4 py-6.5 md:flex">
+          <aside className="dark:bg-dark_dark sticky top-0 hidden h-screen w-48 shrink-0 flex-col gap-y-8 overflow-y-auto bg-white px-4 py-6.5 md:flex">
             <LogClick eventName={LogEvents.navBarClickLogo}>
               <Link to="/" className="ml-2.5">
                 <ZiggleLogo className="h-8 overflow-visible dark:hidden" />
