@@ -25,7 +25,6 @@
     },
     "download_all": "전체 다운로드하기",
     "due_at": "마감시간 {{dueAt}}",
-    "no_content": "내용 없음",
     "push_notification": {
       "action": "알림 보내기",
       "confirm": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
@@ -85,14 +84,16 @@
   },
   "sidebar": {
     "academic": "학사",
+    "club": "동아리",
     "event": "행사",
     "general": "일반",
-    "home": "홈",
+    "home": "최근",
     "my_notice": "내 공지",
     "recruit": "모집",
     "remind_notice": "리마인드한 공지",
+    "search": "검색",
     "urgent": "마감임박",
     "write": "공지 작성",
-    "zigglepick": "지글픽"
+    "popular": "인기"
   }
 }

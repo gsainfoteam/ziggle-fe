@@ -25,7 +25,6 @@
     },
     "download_all": "Download All",
     "due_at": "Due at {{dueAt}}",
-    "no_content": "No Content",
     "push_notification": {
       "action": "Send Push Notification",
       "confirm": "Notifications will be sent to all users. Are you sure you want to send them now?",
@@ -85,14 +84,16 @@
   },
   "sidebar": {
     "academic": "Academic",
+    "club": "Club",
     "event": "Events",
     "general": "General",
-    "home": "Home",
+    "home": "Recent",
     "my_notice": "My Notices",
     "recruit": "Recruit",
     "remind_notice": "Reminded Notices",
+    "search": "Search",
     "urgent": "Near Deadline",
     "write": "Write Notice",
-    "zigglepick": "Ziggle-Pick"
+    "popular": "Popular"
   }
 }

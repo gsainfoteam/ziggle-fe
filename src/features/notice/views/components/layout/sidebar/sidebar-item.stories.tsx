@@ -1,6 +1,7 @@
 import {
   createRootRoute,
   createRouter,
+  Link,
   RouterProvider,
 } from '@tanstack/react-router';
 
@@ -35,7 +36,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    isSelected: { control: 'boolean' },
+    isActive: { control: 'boolean' },
   },
 } satisfies Meta<typeof SidebarItemWithRouter>;
 
@@ -45,24 +46,18 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: '홈',
     icon: <HomeIcon className="stroke-text dark:stroke-dark_white" />,
-    boldIcon: (
-      <BoldHomeIcon className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
-    ),
-    isSelected: false,
-    to: '/',
+    activeIcon: <BoldHomeIcon className="fill-primary stroke-primary" />,
+    isActive: false,
+    children: <Link to="/">홈</Link>,
   },
 };
 
-export const Selected: Story = {
+export const Active: Story = {
   args: {
-    title: '홈',
     icon: <HomeIcon className="stroke-text dark:stroke-dark_white" />,
-    boldIcon: (
-      <BoldHomeIcon className="fill-text stroke-text dark:fill-dark_white dark:stroke-none" />
-    ),
-    isSelected: true,
-    to: '/',
+    activeIcon: <BoldHomeIcon className="fill-primary stroke-primary" />,
+    isActive: true,
+    children: <Link to="/">홈</Link>,
   },
 };
