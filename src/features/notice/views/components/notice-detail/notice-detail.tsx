@@ -50,7 +50,7 @@ const Header = ({ author, createdAt, views, currentDeadline }: HeaderProps) => {
         </span>
         <span className="text-greyDark dark:text-grey font-bold">·</span>
         <span className="text-greyDark dark:text-grey flex shrink-0 items-center gap-1 text-base font-medium">
-          <Eye className="size-4" />
+          <Eye className="size-4" strokeWidth={2.5} />
           {views}
         </span>
       </div>

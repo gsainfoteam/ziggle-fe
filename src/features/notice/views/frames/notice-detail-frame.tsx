@@ -9,12 +9,13 @@ import { useUser } from '@/features/auth';
 
 import { NoticeNotFoundFrame } from './notice-not-found-frame';
 import { useNotice } from '../../viewmodels';
+import { Column } from '../components/layout/column';
 import { SendPushAlarm } from '../components/modals/send-push-notification';
 import { NoticeDetail } from '../components/notice-detail';
 
 export function NoticeDetailFrame() {
   const { notice: preloadedNotice, numId } = useLoaderData({
-    from: '/_layout/_sidebar/notice/$id',
+    from: '/_layout/notice/$id',
   });
   const { data: notice, isLoading, isNotFound } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
@@ -51,13 +52,13 @@ export function NoticeDetailFrame() {
   const isOwner = user?.uuid === efficientNotice.author.uuid;
 
   return (
-    <>
+    <Column>
       <SendPushAlarm {...efficientNotice} />
       <NoticeDetail
         notice={efficientNotice}
         isOwner={isOwner}
         additionalContents={additionalContents}
       />
-    </>
+    </Column>
   );
 }

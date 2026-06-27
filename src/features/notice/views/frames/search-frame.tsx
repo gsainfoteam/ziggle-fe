@@ -1,5 +1,6 @@
 import { useSearch } from '@tanstack/react-router';
 
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
 import SearchNoResult from '@/assets/icons/search-no-result.svg?react';
@@ -7,6 +8,7 @@ import { LoadingCatAnimation, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
 import { useNotices } from '../../viewmodels';
+import { Column } from '../components/layout/column';
 import { NoticeCard } from '../components/notice-list/notice-card';
 import Pagination from '../components/notice-list/pagination';
 import { SearchAnimation } from '../components/notice-list/search-animation';
@@ -90,24 +92,23 @@ export const SearchFrame = () => {
   const { t } = useTranslation('notice');
 
   return (
-    <main className="flex w-full flex-col gap-16 px-4">
-      <div className="flex w-full justify-center">
-        <div className="flex w-full flex-col md:max-w-200">
-          {search ? (
-            <List search={search} pageNumber={page} tags={tags} />
-          ) : (
-            <div className="flex w-full justify-center">
-              <div className="flex flex-col items-center">
-                <SearchAnimation />
-                <div className="h-2.5" />
-                <p className="text-secondaryText -mt-7.5 pt-5 text-lg font-medium md:text-2xl">
-                  {t('search.prompt')}
-                </p>
-              </div>
-            </div>
-          )}
+    <Column
+      title={t('sidebar.search')}
+      titleIcon={<MagnifyingGlassIcon weight="bold" />}
+    >
+      {search ? (
+        <List search={search} pageNumber={page} tags={tags} />
+      ) : (
+        <div className="flex w-full justify-center">
+          <div className="flex flex-col items-center">
+            <SearchAnimation />
+            <div className="h-2.5" />
+            <p className="text-secondaryText -mt-7.5 pt-5 text-lg font-medium md:text-2xl">
+              {t('search.prompt')}
+            </p>
+          </div>
         </div>
-      </div>
-    </main>
+      )}
+    </Column>
   );
 };

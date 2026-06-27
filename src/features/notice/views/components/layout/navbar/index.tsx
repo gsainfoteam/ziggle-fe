@@ -1,69 +1,39 @@
 import { Link } from '@tanstack/react-router';
 
-import { useTranslation } from 'react-i18next';
-
-import AccountIcon from '@/assets/icons/account.svg?react';
 import MenuIcon from '@/assets/icons/menu.svg?react';
 import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { useUser } from '@/features/auth';
 import { useMobileSidebar } from '@/features/notice/viewmodels';
 
-import { ProfileModalButton } from '../../modals/profile-modal';
 import { SearchBar } from '../../notice-list/search-bar';
 
+// 데스크탑은 좌측 사이드바가 로고/검색/프로필을 모두 담으므로, Navbar는 모바일 전용 상단바다.
 export const Navbar = () => {
-  const { t } = useTranslation('layout');
-
-  const { data: user } = useUser();
   const toggleSidebar = useMobileSidebar((state) => state.toggle);
 
   return (
-    <header className="text-text dark:bg-dark_dark sticky top-0 z-50 flex w-full items-center bg-white py-3 md:py-2">
-      <div className="flex shrink-0 items-center pl-2 md:ml-4 md:w-40 md:pl-0">
+    <header className="text-text dark:bg-dark_dark flex w-full items-center bg-white py-3 md:hidden">
+      <div className="flex shrink-0 items-center pl-2">
         <LogClick eventName={LogEvents.navBarClickLogo}>
           <Link to="/">
-            <div className="block dark:hidden">
-              <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
-            </div>
-            <div className="hidden dark:block">
-              <ZiggleLogoDark className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogoDark className="h-8 overflow-visible md:hidden" />
-            </div>
+            <ZiggleCompactLogo className="h-8 overflow-visible dark:hidden" />
+            <ZiggleCompactLogoDark className="hidden h-8 overflow-visible dark:block" />
           </Link>
         </LogClick>
       </div>
 
-      <div className="flex h-full flex-1 items-center justify-end md:justify-start md:px-5">
+      <div className="flex h-full flex-1 items-center justify-end">
         <SearchBar />
         <LogClick eventName={LogEvents.navBarClickMenu}>
           <Button
             onClick={toggleSidebar}
-            className="flex h-full w-12 items-center justify-center overflow-clip rounded-md md:hidden"
+            className="flex h-full w-12 items-center justify-center overflow-clip rounded-md"
           >
-            <MenuIcon className="stroke-text dark:stroke-dark_white h-6 md:hidden" />
+            <MenuIcon className="stroke-text dark:stroke-dark_white h-6" />
           </Button>
         </LogClick>
-      </div>
-
-      <div className="hidden md:flex md:w-14 md:shrink-0 md:items-center md:justify-end md:pr-4">
-        {user ? (
-          <ProfileModalButton labelClassName="hidden" imageClassName="size-8" />
-        ) : (
-          <LogClick eventName={LogEvents.navBarClickLogin}>
-            <Link to="/" className="flex items-center justify-center gap-2">
-              <AccountIcon className="flex h-6" />
-              <div className="text-primary align-middle font-medium whitespace-nowrap">
-                {t('navbar.login')}
-              </div>
-            </Link>
-          </LogClick>
-        )}
       </div>
     </header>
   );

@@ -14,15 +14,15 @@ export const Route = createRootRoute({
         <Toaster />
         <Outlet />
       </ThemeProvider>
-      <TanStackDevtools
-        config={{ position: 'bottom-left' }}
+      {/* <TanStackDevtools
+        config={{ position: 'top-right' }}
         plugins={[
           {
             name: 'TanStack Router',
             render: <TanStackRouterDevtoolsPanel />,
           },
         ]}
-      />
+      /> */}
     </>
   ),
 });

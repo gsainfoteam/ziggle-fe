@@ -59,7 +59,7 @@ const Header = ({
       </span>
       <span className="text-greyDark dark:text-grey font-bold">·</span>
       <span className="text-greyDark dark:text-grey flex shrink-0 items-center gap-1 text-sm font-medium">
-        <Eye className="size-3.5" />
+        <Eye className="size-3.5" strokeWidth={2.5} />
         {views}
       </span>
     </div>
@@ -131,7 +131,7 @@ const Footer = ({ id, title, reactions, isBookmarked }: FooterProps) => (
 
 export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
   <Link to="/notice/$id" params={{ id: notice.id.toString() }}>
-    <div className="text-text hover:bg-greyLight dark:hover:bg-dark_greyDark border-greyLight dark:border-dark_greyDark flex flex-col gap-3 rounded-xl border p-4 transition">
+    <div className="text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col gap-3 rounded-xl p-4 transition">
       <Header
         author={notice.author}
         createdAt={notice.createdAt}
