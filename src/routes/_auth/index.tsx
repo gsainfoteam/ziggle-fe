@@ -8,9 +8,6 @@ export const Route = createFileRoute('/_auth/')({
   validateSearch: z.object({ redirect: z.string().optional() }),
   component: LandingModal,
   beforeLoad: () => {
-    throw redirect({
-      to: '/$category',
-      params: { category: 'home' },
-    });
+    throw redirect({ to: '/recent' });
   },
 });

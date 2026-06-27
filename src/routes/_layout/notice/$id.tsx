@@ -5,7 +5,7 @@ import { i18n } from '@/common/lib/i18n';
 import { NoticeDetailFrame, NoticeNotFoundFrame } from '@/features/notice';
 import { getNotice } from '@/features/notice/viewmodels';
 
-export const Route = createFileRoute('/_layout/_sidebar/notice/$id')({
+export const Route = createFileRoute('/_layout/notice/$id')({
   loader: async ({ params }) => {
     const { id } = params;
     const numId = Number.parseInt(id);

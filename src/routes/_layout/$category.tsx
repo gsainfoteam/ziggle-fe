@@ -2,19 +2,18 @@ import { createFileRoute } from '@tanstack/react-router';
 
 import { z } from 'zod';
 
-import { NoticeListFrame } from '@/features/notice';
+import { NoticeCategoryFrame } from '@/features/notice';
 import { Category } from '@/features/notice/models';
 
-export const Route = createFileRoute('/_layout/_sidebar/$category')({
-  component: NoticeListFrame,
+export const Route = createFileRoute('/_layout/$category')({
+  component: NoticeCategoryFrame,
   params: {
     parse: z.object({
       category: z
         .string()
         .toUpperCase()
         .pipe(z.enum(Category))
-        .or(z.enum(['home', 'deadline', 'zigglepick', 'reminded', 'own']))
-        .catch('home'),
+        .catch(Category.ETC),
     }).parse,
     stringify: (params) => ({
       category: params.category.toLowerCase(),
