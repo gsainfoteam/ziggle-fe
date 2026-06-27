@@ -3,12 +3,12 @@
     "cancel": "Cancel",
     "confirm": "Confirm"
   },
-  "app_name": "Ziggle",
   "app_banner": {
     "description": "Get a better experience in the app",
-    "get": "Open in App",
-    "dismiss": "Dismiss"
+    "dismiss": "Dismiss",
+    "get": "Open in App"
   },
+  "app_name": "Ziggle",
   "carousel": {
     "next": "Next",
     "prev": "Previous",
