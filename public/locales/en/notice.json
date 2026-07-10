@@ -1,4 +1,7 @@
 {
+  "deck": {
+    "add_column": "Add column"
+  },
   "detail": {
     "additional_notices": {
       "deadline_changed": "Deadline Changed",
@@ -17,6 +20,7 @@
         "delete_success": "The notice was deleted successfully"
       }
     },
+    "back": "Go back",
     "close": "Close",
     "copy_link": {
       "action": "copy link",
@@ -63,7 +67,12 @@
     "pagination": {
       "of": "of"
     },
-    "sort_by_deadline": "Sort by Deadline"
+    "sort": {
+      "deadline": "Deadline",
+      "hot": "Popular",
+      "recent": "Recent"
+    },
+    "unpin": "Unpin column"
   },
   "not_found": {
     "go_back": "Go back to home",
@@ -87,13 +96,14 @@
     "club": "Club",
     "event": "Events",
     "general": "General",
-    "home": "Recent",
+    "home": "Home",
     "my_notice": "My Notices",
+    "notices": "Notices",
+    "popular": "Popular",
     "recruit": "Recruit",
-    "remind_notice": "Reminded Notices",
+    "remind_notice": "Reminders",
     "search": "Search",
     "urgent": "Near Deadline",
-    "write": "Write Notice",
-    "popular": "Popular"
+    "write": "Write Notice"
   }
 }

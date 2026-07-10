@@ -3,20 +3,28 @@ import { type LinkProps, linkOptions } from '@tanstack/react-router';
 import {
   BellIcon,
   ChatCircleDotsIcon,
-  ClockIcon,
   ConfettiIcon,
   FlameIcon,
   GraduationCapIcon,
   HourglassMediumIcon,
+  HouseIcon,
   MagnifyingGlassIcon,
   MegaphoneSimpleIcon,
+  NewspaperIcon,
   UserListIcon,
   UsersFourIcon,
 } from '@phosphor-icons/react';
-import type { ReactNode } from 'react';
+import { type ReactNode, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Category } from '@/features/notice/models';
+import {
+  Category,
+  categoryPanelKey,
+  feedPanelKey,
+  HOME_PANEL_KEY,
+  type My,
+  type OrderBy,
+} from '@/features/notice/viewmodels';
 
 export type Feed = 'recent' | 'deadline' | 'popular' | 'my' | 'reminded';
 
@@ -28,8 +36,9 @@ export interface NavRowItem {
 }
 
 export interface NoticeNavItem extends NavRowItem {
-  orderBy: 'recent' | 'deadline' | 'hot';
-  my?: 'own' | 'reminders';
+  key: string;
+  orderBy: OrderBy;
+  my?: My;
   apiCategory?: Category;
 }
 
@@ -37,6 +46,13 @@ export const useNoticeNav = () => {
   const { t } = useTranslation('notice');
 
   return {
+    home: {
+      title: t('sidebar.home'),
+      Icon: <HouseIcon />,
+      ActiveIcon: <HouseIcon weight="fill" />,
+      link: linkOptions({ to: '/home' }),
+    } satisfies NavRowItem,
+
     search: {
       title: t('sidebar.search'),
       Icon: <MagnifyingGlassIcon />,
@@ -46,13 +62,15 @@ export const useNoticeNav = () => {
 
     feeds: {
       recent: {
-        title: t('sidebar.home'),
-        Icon: <ClockIcon />,
-        ActiveIcon: <ClockIcon weight="fill" />,
+        key: HOME_PANEL_KEY,
+        title: t('sidebar.notices'),
+        Icon: <NewspaperIcon />,
+        ActiveIcon: <NewspaperIcon weight="fill" />,
         orderBy: 'recent',
-        link: linkOptions({ to: '/recent' }),
+        link: linkOptions({ to: '/home' }),
       },
       deadline: {
+        key: feedPanelKey('deadline'),
         title: t('sidebar.urgent'),
         Icon: <HourglassMediumIcon />,
         ActiveIcon: <HourglassMediumIcon weight="fill" />,
@@ -60,6 +78,7 @@ export const useNoticeNav = () => {
         link: linkOptions({ to: '/deadline' }),
       },
       popular: {
+        key: feedPanelKey('popular'),
         title: t('sidebar.popular'),
         Icon: <FlameIcon />,
         ActiveIcon: <FlameIcon weight="fill" />,
@@ -67,6 +86,7 @@ export const useNoticeNav = () => {
         link: linkOptions({ to: '/popular' }),
       },
       my: {
+        key: feedPanelKey('my'),
         title: t('sidebar.my_notice'),
         Icon: <UserListIcon />,
         ActiveIcon: <UserListIcon weight="fill" />,
@@ -75,6 +95,7 @@ export const useNoticeNav = () => {
         link: linkOptions({ to: '/my' }),
       },
       reminded: {
+        key: feedPanelKey('reminded'),
         title: t('sidebar.remind_notice'),
         Icon: <BellIcon />,
         ActiveIcon: <BellIcon weight="fill" />,
@@ -86,6 +107,7 @@ export const useNoticeNav = () => {
 
     categories: {
       [Category.RECRUIT]: {
+        key: categoryPanelKey(Category.RECRUIT),
         title: t('sidebar.recruit'),
         Icon: <MegaphoneSimpleIcon />,
         ActiveIcon: <MegaphoneSimpleIcon weight="fill" />,
@@ -97,6 +119,7 @@ export const useNoticeNav = () => {
         }),
       },
       [Category.EVENT]: {
+        key: categoryPanelKey(Category.EVENT),
         title: t('sidebar.event'),
         Icon: <ConfettiIcon />,
         ActiveIcon: <ConfettiIcon weight="fill" />,
@@ -108,6 +131,7 @@ export const useNoticeNav = () => {
         }),
       },
       [Category.CLUB]: {
+        key: categoryPanelKey(Category.CLUB),
         title: t('sidebar.club'),
         Icon: <UsersFourIcon />,
         ActiveIcon: <UsersFourIcon weight="fill" />,
@@ -119,6 +143,7 @@ export const useNoticeNav = () => {
         }),
       },
       [Category.ETC]: {
+        key: categoryPanelKey(Category.ETC),
         title: t('sidebar.general'),
         Icon: <ChatCircleDotsIcon />,
         ActiveIcon: <ChatCircleDotsIcon weight="fill" />,
@@ -130,6 +155,7 @@ export const useNoticeNav = () => {
         }),
       },
       [Category.ACADEMIC]: {
+        key: categoryPanelKey(Category.ACADEMIC),
         title: t('sidebar.academic'),
         Icon: <GraduationCapIcon />,
         ActiveIcon: <GraduationCapIcon weight="fill" />,
@@ -142,4 +168,20 @@ export const useNoticeNav = () => {
       },
     } satisfies Record<Category, NoticeNavItem>,
   };
+};
+
+export const usePinnablePanels = (): NoticeNavItem[] => {
+  const nav = useNoticeNav();
+  return useMemo(
+    () => [...Object.values(nav.feeds), ...Object.values(nav.categories)],
+    [nav],
+  );
+};
+
+export const useNavItemByKey = () => {
+  const panels = usePinnablePanels();
+  return useMemo(() => {
+    const byKey = new Map(panels.map((item) => [item.key, item]));
+    return (key: string) => byKey.get(key);
+  }, [panels]);
 };

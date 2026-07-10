@@ -1,4 +1,7 @@
 {
+  "deck": {
+    "add_column": "컬럼 추가"
+  },
   "detail": {
     "additional_notices": {
       "deadline_changed": "마감시간 변경",
@@ -17,6 +20,7 @@
         "delete_success": "공지가 성공적으로 삭제되었습니다"
       }
     },
+    "back": "뒤로가기",
     "close": "닫기",
     "copy_link": {
       "action": "주소 복사하기",
@@ -63,7 +67,12 @@
     "pagination": {
       "of": "중"
     },
-    "sort_by_deadline": "마감시간 순으로 보기"
+    "sort": {
+      "deadline": "마감임박",
+      "hot": "인기",
+      "recent": "최근"
+    },
+    "unpin": "컬럼 고정 해제"
   },
   "not_found": {
     "go_back": "홈으로 돌아가기",
@@ -87,13 +96,14 @@
     "club": "동아리",
     "event": "행사",
     "general": "일반",
-    "home": "최근",
+    "home": "홈",
     "my_notice": "내 공지",
+    "notices": "공지",
+    "popular": "인기",
     "recruit": "모집",
     "remind_notice": "리마인드한 공지",
     "search": "검색",
     "urgent": "마감임박",
-    "write": "공지 작성",
-    "popular": "인기"
+    "write": "공지 작성"
   }
 }
