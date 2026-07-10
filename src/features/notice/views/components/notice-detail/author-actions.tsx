@@ -27,7 +27,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
 
     try {
       await deleteNotice({ params: { path: { id: noticeId } } });
-      router.navigate({ to: '/recent' });
+      router.navigate({ to: '/home' });
       toast.success(t('detail.author_actions.toasts.delete_success'));
     } catch (error) {
       console.error(error);

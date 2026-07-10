@@ -69,7 +69,7 @@ export function LandingModal() {
               className="w-full px-5 py-2.5 md:w-80"
               variant="outlined"
               onClick={() => {
-                useAuthRedirect.getState().setRedirect(redirect ?? '/recent');
+                useAuthRedirect.getState().setRedirect(redirect ?? '/home');
                 idpLogIn();
               }}
             >

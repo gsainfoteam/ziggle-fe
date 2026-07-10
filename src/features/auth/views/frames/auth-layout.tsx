@@ -9,7 +9,7 @@ import { useAuthRedirect, useUser } from '../../viewmodels';
 function Redirect() {
   const { redirect: redirectSearch } = useSearch({ from: '/_auth' });
   const redirectCache = useAuthRedirect((state) => state.redirect);
-  const [redirect] = useState(redirectSearch ?? redirectCache ?? '/recent');
+  const [redirect] = useState(redirectSearch ?? redirectCache ?? '/home');
 
   useEffect(() => {
     useAuthRedirect.getState().clearRedirect();

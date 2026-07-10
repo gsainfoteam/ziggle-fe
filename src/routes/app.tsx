@@ -9,7 +9,7 @@ export const Route = createFileRoute('/app')({
   validateSearch: z.object({ redirect: z.string().optional() }),
   beforeLoad: () => {
     if (!isMobile()) {
-      throw redirect({ to: '/recent' });
+      throw redirect({ to: '/home' });
     }
   },
   component: AppRedirectPage,
