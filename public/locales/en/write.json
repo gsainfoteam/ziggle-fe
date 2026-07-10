@@ -18,8 +18,12 @@
       "change": "Change deadline",
       "setup": "Set a deadline"
     },
+    "english_content": "English content",
     "english_notice": "English",
+    "english_title": "English title",
+    "korean_content": "Korean content",
     "korean_notice": "Korean",
+    "korean_title": "Korean title",
     "notice_type": "Type",
     "photo": {
       "attach": "Attach Photos",

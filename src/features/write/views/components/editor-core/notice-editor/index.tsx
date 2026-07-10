@@ -7,6 +7,7 @@ import {
   useForm,
   useFormContext,
   useWatch,
+  type FieldErrors,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -20,12 +21,11 @@ import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { Category, type NoticeDetail } from '@/features/notice/models';
 import {
+  createNoticeFormSchema,
   defaultNoticeFormValues,
-  noticeFormSchema,
   retrieveDraftFromLocalStorage,
   saveDraftToLocalStorage,
   type NoticeFormValues,
-  type NoticeSubmitForm,
   useHandleNoticeEdit,
   useHandleNoticeSubmit,
 } from '@/features/write/viewmodels';
@@ -57,9 +57,11 @@ interface NoticeEditorProps {
 }
 
 export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
+  const { t } = useTranslation('write');
   const methods = useForm<NoticeFormValues>({
     defaultValues: defaultNoticeFormValues,
-    resolver: zodResolver(noticeFormSchema),
+    resolver: (values, context, options) =>
+      zodResolver(createNoticeFormSchema(t))(values, context, options),
   });
 
   return (
@@ -73,7 +75,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
 const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
   const { t } = useTranslation('write');
-  const { control, setValue, getValues, handleSubmit } =
+  const { control, setValue, handleSubmit, formState } =
     useFormContext<NoticeFormValues>();
   const [isInitializing, setIsInitializing] = useState(true);
 
@@ -139,9 +141,14 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
     saveDraftToLocalStorage({ korean, english, deadline });
   }, [isEditMode, isLoading, korean, english, deadline]);
 
+  const onInvalid = (errors: FieldErrors<NoticeFormValues>) => {
+    if (errors.english) setValue('writingTab', 'english');
+    else if (errors.korean) setValue('writingTab', 'korean');
+  };
+
   const onSubmit = handleSubmit((data) => {
     if (isLoading) return;
-    const payload: NoticeSubmitForm = {
+    submitMutation.mutate({
       title: data.korean.title,
       deadline: data.deadline?.toDate() ?? undefined,
       noticeLanguage: data.english ? 'both' : 'ko',
@@ -151,13 +158,11 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       tags: data.tags.map(({ name }) => name),
       images: data.photos.map(({ file }) => file),
       category: NoticeTypeCategoryMapper[data.noticeType],
-    };
-    submitMutation.mutate(payload);
-  });
+    });
+  }, onInvalid);
 
-  const onEdit = () => {
+  const onEdit = handleSubmit((data) => {
     if (isLoading || !notice) return;
-    const data = getValues();
     editMutation.mutate({
       noticeId: notice.id,
       originalNotice: {
@@ -173,7 +178,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       englishAdditionalContent: data.english?.additionalContent,
       hasTimedOut,
     });
-  };
+  }, onInvalid);
 
   return (
     <>
@@ -305,6 +310,12 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
           />
         )}
       </div>
+      {formState.errors.deadline?.message && (
+        <div className="font-regular text-secondaryText mb-3 text-sm">
+          {'⚠️ '}
+          {formState.errors.deadline.message}
+        </div>
+      )}
 
       {!isEditMode && (
         <>

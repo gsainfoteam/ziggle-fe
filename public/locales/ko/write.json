@@ -18,8 +18,12 @@
       "change": "마감시간 변경",
       "setup": "마감시간 설정"
     },
+    "english_content": "영어 본문",
     "english_notice": "영어 공지",
+    "english_title": "영어 제목",
+    "korean_content": "한글 본문",
     "korean_notice": "한글 공지",
+    "korean_title": "한글 제목",
     "notice_type": "분류",
     "photo": {
       "attach": "사진 첨부",

@@ -1,4 +1,4 @@
-import { useController, useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import AddIcon from '@/assets/icons/add.svg?react';
@@ -6,16 +6,15 @@ import type { NoticeFormValues } from '@/features/write/viewmodels';
 
 export const AddAdditionalNotice = () => {
   const { t } = useTranslation('notice');
-  const { control, setValue } = useFormContext<NoticeFormValues>();
-
-  const { field: koreanField } = useController({
+  const {
     control,
-    name: 'korean.additionalContent',
-  });
-  const english = useWatch({ control, name: 'english' });
-  const englishAdditional = english?.additionalContent;
+    register,
+    formState: { errors },
+  } = useFormContext<NoticeFormValues>();
 
+  const english = useWatch({ control, name: 'english' });
   const isEnglishSupported = english !== undefined;
+  const koreanError = errors.korean?.additionalContent;
 
   return (
     <div className="flex flex-col">
@@ -29,24 +28,23 @@ export const AddAdditionalNotice = () => {
 
       <textarea
         className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
-        name="koreanAdditionalContent"
         placeholder={t('detail.additional_notices.placeholder')}
         rows={3}
-        value={koreanField.value ?? ''}
-        onChange={(event) => koreanField.onChange(event.target.value)}
-        onBlur={koreanField.onBlur}
+        {...register('korean.additionalContent')}
       />
+      {koreanError?.message && (
+        <div className="font-regular text-secondaryText mb-3 text-sm">
+          {'⚠️ '}
+          {koreanError.message}
+        </div>
+      )}
 
       {isEnglishSupported && (
         <textarea
           className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
-          name="englishAdditionalContent"
           placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
-          value={englishAdditional ?? ''}
-          onChange={(event) =>
-            setValue('english.additionalContent', event.target.value)
-          }
+          {...register('english.additionalContent')}
         />
       )}
     </div>

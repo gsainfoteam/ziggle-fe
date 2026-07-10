@@ -30,13 +30,19 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
   const { koreanRef, englishRef } = useEditorRefs();
   const editorRef = lang === 'korean' ? koreanRef : englishRef;
 
-  const { field: titleField } = useController({
+  const {
+    field: titleField,
+    fieldState: { error: titleError },
+  } = useController({
     control,
-    name: `${lang}.title` as 'korean.title' | 'english.title',
+    name: `${lang}.title`,
   });
-  const { field: contentField } = useController({
+  const {
+    field: contentField,
+    fieldState: { error: contentError },
+  } = useController({
     control,
-    name: `${lang}.content` as 'korean.content' | 'english.content',
+    name: `${lang}.content`,
   });
 
   const title = titleField.value ?? '';
@@ -65,7 +71,13 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
             : 'border-primary text-text dark:text-dark_white',
         )}
       />
-      {title.length > TITLE_MAX_LENGTH && (
+      {titleError?.message && (
+        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
+          {'⚠️ '}
+          {titleError.message}
+        </div>
+      )}
+      {!titleError && title.length > TITLE_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
           {'⚠️ '}
           {t('validations.title_too_long', {
@@ -88,13 +100,19 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
         />
       </Suspense>
 
-      {content.length > BODY_MAX_LENGTH && (
+      {contentError?.message && (
+        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
+          {'⚠️ '}
+          {contentError.message}
+        </div>
+      )}
+
+      {!contentError && content.length > BODY_MAX_LENGTH && (
         <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
           {'⚠️ '}
           {t('validations.body_too_long', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +
-            ' ' +
             t('validations.char_count', {
               length: content.length,
               maxLength: BODY_MAX_LENGTH,

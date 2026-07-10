@@ -1,13 +1,13 @@
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from '@tanstack/react-router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { chooseDialog } from '@/common/components';
 import { api } from '@/common/lib';
+import { invalidateNoticeQueries } from '@/features/notice/viewmodels';
 
-import { BODY_MAX_LENGTH } from './use-handle-notice-submit';
 import { ApiPaths } from '../../models';
 
 export interface NoticeEditForm {
@@ -28,7 +28,8 @@ export interface NoticeEditForm {
 
 export const useHandleNoticeEdit = () => {
   const { t } = useTranslation('write');
-  const router = useRouter();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async ({
@@ -52,116 +53,6 @@ export const useHandleNoticeEdit = () => {
       const isDeadlineEdited =
         deadline?.toISOString() !== originalNotice.deadline;
       const isEdited = !!editedLangs.length || isDeadlineEdited;
-      const noticeLanguage = editedLangs.length === 1 ? editedLangs[0] : 'both';
-
-      if (!koreanAdditionalContent && englishAdditionalContent) {
-        toast.error(t('validations.korean_additional_required'));
-        return;
-      }
-
-      if (deadline && deadline < new Date()) {
-        toast.error(t('validations.deadline_invalid'));
-        return;
-      }
-
-      if (isEdited) {
-        // Validation for bodies if they are edited
-        switch (noticeLanguage) {
-          case 'ko':
-            if (!koreanBody) {
-              toast.error(t('validations.body_required'));
-              return;
-            }
-            if (koreanBody.length > BODY_MAX_LENGTH) {
-              toast.error(
-                t('validations.body_too_long', {
-                  bodyMaxLength: BODY_MAX_LENGTH,
-                }) +
-                  t('validations.char_count', {
-                    length: koreanBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }),
-              );
-              return;
-            }
-            break;
-          case 'en':
-            if (!englishBody) {
-              toast.error(t('validations.body_required'));
-              return;
-            }
-            if (englishBody.length > BODY_MAX_LENGTH) {
-              toast.error(
-                t('validations.body_too_long', {
-                  bodyMaxLength: BODY_MAX_LENGTH,
-                }) +
-                  t('validations.char_count', {
-                    length: englishBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }),
-              );
-              return;
-            }
-            break;
-          case 'both':
-            if (!koreanBody && !englishBody) {
-              toast.error(t('validations.body_required'));
-              return;
-            }
-            if (!koreanBody && englishBody) {
-              toast.error(t('validations.korean_body_required'));
-              return;
-            }
-            if (koreanBody && !englishBody) {
-              toast.error(t('validations.english_body_required'));
-              return;
-            }
-            if (
-              koreanBody &&
-              koreanBody.length > BODY_MAX_LENGTH &&
-              englishBody &&
-              englishBody.length > BODY_MAX_LENGTH
-            ) {
-              toast.error(
-                t('validations.both_body_too_long', {
-                  bodyMaxLength: BODY_MAX_LENGTH,
-                }) +
-                  t('validations.char_count', {
-                    length: koreanBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }) +
-                  t('validations.char_count', {
-                    length: englishBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }),
-              );
-              return;
-            } else if (koreanBody && koreanBody.length > BODY_MAX_LENGTH) {
-              toast.error(
-                t('validations.korean_body_too_long', {
-                  bodyMaxLength: BODY_MAX_LENGTH,
-                }) +
-                  t('validations.char_count', {
-                    length: koreanBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }),
-              );
-              return;
-            } else if (englishBody && englishBody.length > BODY_MAX_LENGTH) {
-              toast.error(
-                t('validations.english_body_too_long', {
-                  bodyMaxLength: BODY_MAX_LENGTH,
-                }) +
-                  t('validations.char_count', {
-                    length: englishBody.length,
-                    maxLength: BODY_MAX_LENGTH,
-                  }),
-              );
-              return;
-            }
-            break;
-        }
-      }
 
       const loading = toast.loading(t('toasts.modifying'));
 
@@ -182,7 +73,7 @@ export const useHandleNoticeEdit = () => {
                 params: { path: { id: noticeId } },
                 body: {
                   deadline: deadline?.toISOString(),
-                  body: koreanBody!,
+                  body: koreanBody,
                   lng: 'ko',
                 },
               })
@@ -320,7 +211,8 @@ export const useHandleNoticeEdit = () => {
       toast.success(t('toasts.modify_success'));
 
       localStorage.removeItem('notice');
-      router.navigate({
+      await invalidateNoticeQueries(queryClient);
+      await navigate({
         to: '/notice/$id',
         params: { id: noticeId.toString() },
       });
