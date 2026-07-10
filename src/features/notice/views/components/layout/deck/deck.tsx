@@ -71,13 +71,13 @@ export function Deck() {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-5">
       <Reorder.Group
         as="div"
         axis="x"
         values={panels}
         onReorder={setPanels}
-        className="flex gap-4"
+        className="flex gap-5"
       >
         <AnimatePresence initial={false} mode="popLayout">
           {panels.map((panel) => (
