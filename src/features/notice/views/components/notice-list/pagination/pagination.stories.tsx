@@ -1,8 +1,4 @@
-import {
-  createRootRoute,
-  createRouter,
-  RouterProvider,
-} from '@tanstack/react-router';
+import { useState } from 'react';
 
 import Pagination from '.';
 
@@ -14,21 +10,21 @@ interface PaginationStoryProps {
   page: number;
 }
 
-const createPaginationRouter = (props: PaginationStoryProps) => {
-  const rootRoute = createRootRoute({
-    component: () => <Pagination {...props} />,
-  });
-  return createRouter({ routeTree: rootRoute });
-};
-
-const PaginationWithRouter = (props: PaginationStoryProps) => {
-  const router = createPaginationRouter(props);
-  return <RouterProvider router={router} />;
+const PaginationStory = ({ items, itemsPerPage, page }: PaginationStoryProps) => {
+  const [current, setCurrent] = useState(page);
+  return (
+    <Pagination
+      items={items}
+      itemsPerPage={itemsPerPage}
+      page={current}
+      onPageChange={setCurrent}
+    />
+  );
 };
 
 const meta = {
   title: 'Notice/Pagination',
-  component: PaginationWithRouter,
+  component: PaginationStory,
   parameters: {
     layout: 'centered',
   },
@@ -38,7 +34,7 @@ const meta = {
     itemsPerPage: { control: 'number' },
     page: { control: 'number' },
   },
-} satisfies Meta<typeof PaginationWithRouter>;
+} satisfies Meta<typeof PaginationStory>;
 
 export default meta;
 

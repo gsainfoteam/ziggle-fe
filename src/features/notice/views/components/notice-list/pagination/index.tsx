@@ -1,5 +1,3 @@
-import { Link, useSearch } from '@tanstack/react-router';
-
 import { useTranslation } from 'react-i18next';
 
 import ArrowRightIcon from '@/assets/icons/arrow-right.svg?react';
@@ -9,15 +7,16 @@ interface PaginationProps {
   items: number;
   itemsPerPage: number;
   page: number;
+  onPageChange: (page: number) => void;
 }
 
 const Pagination = ({
   items,
   itemsPerPage,
   page: rawPage,
+  onPageChange,
 }: PaginationProps) => {
   const { t } = useTranslation('notice');
-  const search = useSearch({ strict: false });
   const page = Number.isNaN(rawPage) ? 0 : rawPage;
   const pages = Math.ceil(items / itemsPerPage);
 
@@ -35,10 +34,8 @@ const Pagination = ({
       </div>
       <div className="flex gap-1">
         {page !== 0 ? (
-          <Button animated>
-            <Link to="." search={{ ...search, page: page - 1 }}>
-              <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 rotate-180 fill-none md:w-7" />
-            </Link>
+          <Button animated onClick={() => onPageChange(page - 1)}>
+            <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 rotate-180 fill-none md:w-7" />
           </Button>
         ) : (
           <Button disabled>
@@ -46,10 +43,8 @@ const Pagination = ({
           </Button>
         )}
         {page + 1 !== pages ? (
-          <Button animated>
-            <Link to="." search={{ ...search, page: page + 1 }}>
-              <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 fill-none md:w-7" />
-            </Link>
+          <Button animated onClick={() => onPageChange(page + 1)}>
+            <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 fill-none md:w-7" />
           </Button>
         ) : (
           <Button disabled>
