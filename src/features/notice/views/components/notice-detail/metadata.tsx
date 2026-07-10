@@ -1,5 +1,11 @@
 import dayjs from 'dayjs';
-import { Attachment, Calendar, Eye, Hourglass, Link } from 'iconoir-react';
+import {
+  CalendarBlankIcon,
+  EyeIcon,
+  HourglassIcon,
+  LinkIcon,
+  PaperclipIcon,
+} from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
 import type { NoticeDetail } from '@/features/notice/models';
@@ -17,21 +23,21 @@ export function NoticeDetailMetadata({
   const { t } = useTranslation('notice');
 
   return (
-    <div className="border-greyLight dark:border-dark_greyBorder border-y py-3">
+    <div className="border-greyLight dark:border-dark_greyBorder border-y py-3 text-sm">
       <div className="grid grid-cols-[max-content_1fr] items-start gap-x-6 gap-y-3">
-        <Label icon={<Calendar className="size-4.5" />}>
+        <Label icon={<CalendarBlankIcon className="size-4" />}>
           {t('detail.created_at')}
         </Label>
         <span className="text-secondaryText">
           {dayjs(createdAt).tz().format('LLL')}
         </span>
 
-        <Label icon={<Eye className="size-4.5" />}>{t('detail.views')}</Label>
+        <Label icon={<EyeIcon className="size-4" />}>{t('detail.views')}</Label>
         <span className="text-secondaryText">{views.toLocaleString()}</span>
 
         {currentDeadline && (
           <>
-            <Label icon={<Hourglass className="size-4.5" />}>
+            <Label icon={<HourglassIcon className="size-4" />}>
               {t('detail.deadline')}
             </Label>
             <span className="text-secondaryText">
@@ -42,7 +48,7 @@ export function NoticeDetailMetadata({
 
         {crawledUrl && (
           <>
-            <Label icon={<Link className="size-4.5" />}>
+            <Label icon={<LinkIcon className="size-4" />}>
               {t('detail.source_url')}
             </Label>
             <a
@@ -58,7 +64,7 @@ export function NoticeDetailMetadata({
 
         {documents.length > 0 && (
           <>
-            <Label icon={<Attachment className="size-4.5" />}>
+            <Label icon={<PaperclipIcon className="size-4" />}>
               {t('detail.attachments')}
             </Label>
             <div className="flex flex-col gap-1">
