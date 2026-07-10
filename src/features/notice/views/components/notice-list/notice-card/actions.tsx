@@ -73,7 +73,7 @@ export const NoticeCardActionsDisplay = ({
           <Button
             animated
             onClick={handleFireClick}
-            className="flex items-center"
+            className="flex cursor-pointer items-center"
           >
             {currentFire.isReacted ? (
               <FireActivated className="size-7" />
@@ -98,7 +98,7 @@ export const NoticeCardActionsDisplay = ({
         <Button
           animated
           onClick={handleBookmarkClick}
-          className="flex items-center"
+          className="flex cursor-pointer items-center"
         >
           {bookmarked ? (
             <BookmarkSolid className="text-primary size-7" />
@@ -114,7 +114,7 @@ export const NoticeCardActionsDisplay = ({
               e.preventDefault();
               onShare();
             }}
-            className="flex items-center"
+            className="flex cursor-pointer items-center"
           >
             <ShareIos className="text-text dark:text-dark_white size-7" />
           </Button>

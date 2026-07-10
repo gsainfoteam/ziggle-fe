@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 import { Bookmark, BookmarkSolid, Copy, ShareIos } from 'iconoir-react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import AnguishedFace from '@/assets/icons/anguished-face.svg?react';
@@ -135,18 +135,18 @@ const ActionButton = ({
     title={variant === 'rail' ? label : undefined}
     aria-label={variant === 'rail' ? label : undefined}
     className={cn(
-      'border-none transition outline-none',
+      'cursor-pointer border-none transition outline-none',
       variant === 'rail'
         ? cn(
             'flex size-10 flex-col items-center justify-center gap-0.5 rounded-xl',
             isSelected
-              ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
+              ? 'bg-greyLight dark:bg-dark_greyBorder text-text dark:text-dark_white'
               : 'text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark',
           )
         : cn(
             'flex h-10 items-center gap-1.75 rounded-full px-3.25 py-1.25',
             isSelected
-              ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
+              ? 'bg-greyLight dark:bg-dark_greyBorder text-text dark:text-dark_white ring-grey/50 ring-1 dark:ring-transparent'
               : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
           ),
     )}
@@ -214,6 +214,7 @@ export function NoticeDetailActions({
   variant?: ActionsLayout;
   className?: string;
 }) {
+  const { t } = useTranslation('notice');
   const {
     id,
     title,
@@ -223,7 +224,7 @@ export function NoticeDetailActions({
     handleBookmarkClick,
   } = useNoticeDetailActionsContext();
 
-  const bookmarkLabel = '저장';
+  const bookmarkLabel = t('detail.bookmark');
 
   const reactionButtons = Object.keys(emojis).map((emoji) => {
     const reaction = currentReactions.find((r) => r.emoji === emoji);
@@ -335,9 +336,10 @@ const CopyLinkButton = ({
     );
     toast.success(
       <div className="flex flex-col text-sm font-medium">
-        <Trans t={t} i18nKey="detail.copy_link.success">
-          succeeded <div className="text-xs">share to friends</div>
-        </Trans>
+        <span>{t('detail.copy_link.success')}</span>
+        <span className="text-xs font-normal">
+          {t('detail.copy_link.success_hint')}
+        </span>
       </div>,
     );
   };

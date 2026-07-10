@@ -11,6 +11,7 @@
       "title": "추가 공지"
     },
     "attachments": "첨부파일",
+    "bookmark": "북마크",
     "created_at": "작성일",
     "deadline": "마감시간",
     "views": "조회수",
@@ -28,7 +29,8 @@
     "copy_link": {
       "action": "주소 복사하기",
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
-      "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
+      "success": "공지 주소가 복사되었습니다!",
+      "success_hint": "친구들에게 공지를 공유해보세요"
     },
     "download_all": "전체 다운로드하기",
     "due_at": "마감시간 {{dueAt}}",

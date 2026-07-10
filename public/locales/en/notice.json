@@ -11,6 +11,7 @@
       "title": "Additional Notices"
     },
     "attachments": "Attachments",
+    "bookmark": "Bookmark",
     "created_at": "Posted",
     "deadline": "Deadline",
     "views": "Views",
@@ -28,7 +29,8 @@
     "copy_link": {
       "action": "copy link",
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
-      "success": "The notice link has been copied!<small>Share the notice with your friends.</small>"
+      "success": "The notice link has been copied!",
+      "success_hint": "Share the notice with your friends."
     },
     "download_all": "Download All",
     "due_at": "Due at {{dueAt}}",
