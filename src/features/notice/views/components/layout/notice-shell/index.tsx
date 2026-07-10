@@ -1,45 +1,59 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useState } from 'react';
 
 import { Link } from '@tanstack/react-router';
 
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
+import ZiggleLogoOnly from '@/assets/logos/ziggle-logo-only.svg?react';
 import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { AppBanner, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { cn } from '@/common/utils';
 
 import { Navbar } from '../navbar';
 import { MobileShell, Sidebar } from '../sidebar';
 import { WriteFab } from '../write-fab';
 
-// 공지 영역 공통 셸: 모바일 상단바 + 데스크탑 사이드바 + 컬럼 영역 + FAB.
-// 데스크탑은 페이지 스크롤 없이 컬럼이 각자 독립 스크롤(Threads식)한다.
-// 멀티컬럼은 컬럼 영역에 <Column>을 더 나열하면 된다(현재는 1개 = Outlet).
 export function NoticeShell({ children }: { children: ReactNode }) {
+  const [deckScrolled, setDeckScrolled] = useState(false);
+
   return (
     <>
       <MobileShell>
-        {/* 모바일 전용 상단바 */}
         <div className="sticky top-0 z-50 md:hidden">
           <AppBanner />
           <Navbar />
         </div>
 
-        {/* 데스크탑: 뷰포트 높이 고정 + 페이지 스크롤 차단 / 모바일: auto 높이(페이지 스크롤) */}
         <div className="flex md:h-screen md:overflow-hidden">
-          {/* 데스크탑 사이드바 (로고 + 네비) */}
-          <aside className="dark:bg-dark_dark sticky top-0 hidden h-screen w-48 shrink-0 flex-col gap-y-8 overflow-y-auto bg-white px-4 py-6.5 md:flex">
-            <LogClick eventName={LogEvents.navBarClickLogo}>
-              <Link to="/" className="ml-2.5">
-                <ZiggleLogo className="h-8 overflow-visible dark:hidden" />
-                <ZiggleLogoDark className="hidden h-8 overflow-visible dark:block" />
-              </Link>
-            </LogClick>
-            <Sidebar />
-          </aside>
+          <div className="relative hidden shrink-0 md:block md:w-16 xl:w-48">
+            <aside
+              className={cn(
+                'group/sb dark:bg-dark_dark absolute inset-y-0 left-0 z-40 flex h-screen w-16 flex-col gap-y-8 overflow-x-hidden overflow-y-auto bg-white px-3 py-6.5 transition-all duration-200',
+                'hover:w-48',
+                'xl:static xl:w-48',
+                'border-r border-r-transparent',
+                'max-xl:hover:border-r-greyBorder dark:max-xl:hover:border-r-dark_greyBorder',
+                deckScrolled &&
+                  'border-r-greyBorder dark:border-r-dark_greyBorder',
+              )}
+            >
+              <LogClick eventName={LogEvents.navBarClickLogo}>
+                <Link to="/" className="flex h-8 items-center pl-1.5">
+                  <ZiggleLogoOnly className="h-8 shrink-0 group-hover/sb:hidden xl:hidden" />
+                  <span className="hidden group-hover/sb:block xl:block">
+                    <ZiggleLogo className="h-8 overflow-visible dark:hidden" />
+                    <ZiggleLogoDark className="hidden h-8 overflow-visible dark:block" />
+                  </span>
+                </Link>
+              </LogClick>
+              <Sidebar collapsible />
+            </aside>
+          </div>
 
-          {/* 컬럼 영역: 거터는 사이드바와 같은 bg(투명). 각 프레임이 <Column>을 렌더한다.
-              1개면 중앙, 넘치면 가로 스크롤. */}
-          <div className="flex-1 md:overflow-x-auto">
+          <div
+            className="flex-1 md:overflow-x-auto"
+            onScroll={(e) => setDeckScrolled(e.currentTarget.scrollLeft > 0)}
+          >
             <div className="flex md:w-max md:min-w-full md:justify-center md:gap-4 md:px-4">
               {children}
             </div>

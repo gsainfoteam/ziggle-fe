@@ -13,13 +13,20 @@ import { SidebarItem, sidebarRowClass } from './sidebar-item';
 import { type NavRowItem, useNoticeNav } from '../use-notice-nav';
 import { ProfileModalButton } from '../../modals/profile-modal';
 
-export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
+export const Sidebar = ({
+  onClose,
+  collapsible = false,
+}: { onClose?: () => void; collapsible?: boolean } = {}) => {
   const { pathname } = useLocation();
   const { t: tLayout, i18n } = useTranslation('layout');
   const { t: tAuth } = useTranslation('auth');
   const { data: user } = useUser();
   const { theme, setTheme, themeOptions } = useTheme();
   const nav = useNoticeNav();
+
+  const labelClass = collapsible
+    ? 'opacity-0 transition-opacity duration-200 group-hover/sb:opacity-100 xl:opacity-100'
+    : undefined;
 
   const renderNavRow = (navKey: string, item: NavRowItem) => (
     <li key={navKey}>
@@ -31,6 +38,7 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
           icon={item.Icon}
           activeIcon={item.ActiveIcon}
           isActive={pathname.startsWith(`/${navKey}`)}
+          labelClassName={labelClass}
         >
           <Link {...item.link} onClick={onClose}>
             {item.title}
@@ -42,25 +50,21 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
 
   return (
     <div className="flex flex-1 flex-col gap-y-8">
-      {/* 피드 그룹 — 기본 페이지인 '최근'을 맨 위로, 검색은 그 다음 */}
       <ul className="flex flex-col gap-y-0.5">
-        {renderNavRow('recent', nav.feeds.recent)}
+        {renderNavRow('home', nav.home)}
         {renderNavRow('search', nav.search)}
         {Object.entries(nav.feeds)
-          .filter(([key]) => key !== 'recent')
+          .filter(([key]) => !['recent', 'deadline', 'popular'].includes(key))
           .map(([key, item]) => renderNavRow(key.toLowerCase(), item))}
       </ul>
 
-      {/* 카테고리 그룹 */}
       <ul className="flex flex-col gap-y-0.5">
         {Object.entries(nav.categories).map(([key, item]) =>
           renderNavRow(key.toLowerCase(), item),
         )}
       </ul>
 
-      {/* 하단: 설정 + 프로필 — 뷰포트 바닥에 고정 */}
       <ul className="mt-auto flex flex-col gap-y-0.5">
-        {/* 설정 — 테마·언어·피드백을 한 메뉴로 (중첩 팝오버 불가라 인라인 섹션) */}
         <li>
           <Popover.Menu>
             <Popover.Trigger>
@@ -70,6 +74,7 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
                   activeIcon={<GearSixIcon weight="fill" />}
                   isActive={open}
                   variant="toggle"
+                  labelClassName={labelClass}
                 >
                   <button type="button" aria-expanded={open}>
                     {tLayout('sidebar.settings')}
@@ -80,7 +85,6 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
             <Popover.Content placement="right-start">
               {({ close }) => (
                 <Popover.Body className="flex w-52 flex-col gap-y-0.5 rounded-xl p-1.5">
-                  {/* 테마 */}
                   <p className="text-greyDark px-2.5 pt-1 pb-1 text-xs font-semibold">
                     {tLayout('sidebar.theme')}
                   </p>
@@ -109,7 +113,6 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
                     );
                   })}
 
-                  {/* 언어 */}
                   <p className="text-greyDark px-2.5 pt-2 pb-1 text-xs font-semibold">
                     {tLayout('sidebar.language')}
                   </p>
@@ -148,7 +151,6 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
                     </button>
                   </SidebarItem>
 
-                  {/* 피드백 */}
                   <div className="bg-greyLight dark:bg-dark_greyBorder my-1 h-px" />
                   <LogClick eventName={LogEvents.myClickBugReport}>
                     <SidebarItem icon={<FlagIcon />}>
@@ -168,18 +170,17 @@ export const Sidebar = ({ onClose }: { onClose?: () => void } = {}) => {
           </Popover.Menu>
         </li>
 
-        {/* 프로필 */}
         <li>
           {user ? (
             <ProfileModalButton
               triggerClassName={cn(sidebarRowClass, 'cursor-pointer')}
               eventName={LogEvents.sidebarClickProfile}
-              imageClassName="size-5"
-              labelClassName="font-normal"
+              imageClassName="size-5 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-dark_dark"
+              labelClassName={cn('font-normal', labelClass)}
             />
           ) : (
             <LogClick eventName={LogEvents.sidebarClickProfile}>
-              <SidebarItem icon={<UserIcon />}>
+              <SidebarItem icon={<UserIcon />} labelClassName={labelClass}>
                 <Link to="/" onClick={onClose}>
                   {tLayout('navbar.login')}
                 </Link>
