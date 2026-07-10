@@ -1,39 +1,25 @@
-import { Attachment, Link as LinkIcon } from 'iconoir-react';
+import { Attachment } from 'iconoir-react';
 import { useTranslation } from 'react-i18next';
 
 import type { Notice } from '@/features/notice/models';
 
 export const NoticeCardAttachmentIndicators = ({
   documents,
-  crawledUrl,
-}: Pick<Notice, 'documents' | 'crawledUrl'>) => {
+}: Pick<Notice, 'documents'>) => {
   const { t } = useTranslation('notice');
 
   const documentCount = documents?.length ?? 0;
-  const hasDocuments = documentCount > 0;
-  const hasSourceUrl = Boolean(crawledUrl);
-
-  if (!hasDocuments && !hasSourceUrl) return null;
+  if (documentCount === 0) return null;
 
   return (
-    <div className="text-greyDark dark:text-grey flex items-center gap-3 text-sm font-medium">
-      {hasDocuments && (
-        <span
-          className="flex items-center gap-1"
-          aria-label={t('detail.attachments')}
-        >
-          <Attachment className="size-4" />
-          <span>{documentCount}</span>
-        </span>
-      )}
-      {hasSourceUrl && (
-        <span
-          className="flex items-center gap-1"
-          aria-label={t('detail.source_url')}
-        >
-          <LinkIcon className="size-4" />
-        </span>
-      )}
+    <div className="text-greyDark dark:text-dark_grey flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+      <span
+        className="flex items-center gap-1"
+        aria-label={t('detail.attachments')}
+      >
+        <Attachment className="size-3.5" strokeWidth={2} />
+        <span>{documentCount}</span>
+      </span>
     </div>
   );
 };

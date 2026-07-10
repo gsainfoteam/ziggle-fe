@@ -33,7 +33,7 @@ const Header = ({
   deadline,
   searchQuery,
 }: HeaderProps) => (
-  <div className="flex items-start justify-between gap-2">
+  <div className="flex items-center justify-between gap-2">
     <div className="flex min-w-0 items-center gap-2">
       {author.picture ? (
         <img
@@ -44,7 +44,7 @@ const Header = ({
       ) : (
         <DefaultProfile className="size-8 shrink-0" />
       )}
-      <span className="text-text dark:text-dark_white truncate text-base">
+      <span className="text-text dark:text-dark_white truncate text-base font-semibold">
         {searchQuery ? (
           <NoticeCardHighlightedText query={searchQuery}>
             {author.name}
@@ -53,12 +53,10 @@ const Header = ({
           author.name
         )}
       </span>
-      <span className="text-greyDark dark:text-grey font-bold">·</span>
-      <span className="text-greyDark dark:text-grey shrink-0 text-sm font-medium">
+      <span className="text-greyDark dark:text-dark_grey shrink-0 text-base">
         {dayjs(createdAt).fromNow()}
       </span>
-      <span className="text-greyDark dark:text-grey font-bold">·</span>
-      <span className="text-greyDark dark:text-grey flex shrink-0 items-center gap-1 text-sm font-medium">
+      <span className="text-greyDark dark:text-dark_grey flex shrink-0 items-center gap-1 text-base">
         <Eye className="size-3.5" strokeWidth={2.5} />
         {views}
       </span>
@@ -71,13 +69,7 @@ const Header = ({
 
 type BodyProps = Pick<
   NoticeCardProps['notice'],
-  | 'title'
-  | 'content'
-  | 'tags'
-  | 'imageUrls'
-  | 'documents'
-  | 'crawledUrl'
-  | 'isViewed'
+  'title' | 'content' | 'tags' | 'imageUrls' | 'documents' | 'isViewed'
 > &
   Pick<NoticeCardProps, 'searchQuery'>;
 
@@ -87,22 +79,16 @@ const Body = ({
   tags,
   imageUrls,
   documents,
-  crawledUrl,
   isViewed,
   searchQuery,
 }: BodyProps) => (
   <div className="flex items-stretch gap-3">
     <div className="flex min-w-0 flex-1 flex-col gap-2">
-      <div className="flex items-start gap-2">
+      <div className="flex flex-col gap-1">
         <NoticeCardTitle isRead={isViewed} query={searchQuery}>
           {title}
         </NoticeCardTitle>
-        <div className="mt-1 shrink-0">
-          <NoticeCardAttachmentIndicators
-            documents={documents}
-            crawledUrl={crawledUrl}
-          />
-        </div>
+        <NoticeCardAttachmentIndicators documents={documents} />
       </div>
       <div className="flex-1">
         <NoticeCardContent query={searchQuery}>{content}</NoticeCardContent>
@@ -131,7 +117,7 @@ const Footer = ({ id, title, reactions, isBookmarked }: FooterProps) => (
 
 export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
   <Link to="/notice/$id" params={{ id: notice.id.toString() }}>
-    <div className="text-text hover:bg-greyLight dark:hover:bg-dark_greyDark flex flex-col gap-3 rounded-xl p-4 transition">
+    <div className="text-text flex flex-col gap-3">
       <Header
         author={notice.author}
         createdAt={notice.createdAt}
@@ -145,7 +131,6 @@ export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
         tags={notice.tags}
         imageUrls={notice.imageUrls}
         documents={notice.documents}
-        crawledUrl={notice.crawledUrl}
         isViewed={notice.isViewed}
         searchQuery={searchQuery}
       />

@@ -71,7 +71,7 @@ export function SearchPanel({
       className="md:p-0"
     >
       <div className="flex w-full flex-col">
-        <div className="dark:bg-dark_dark sticky top-0 z-10 mx-4 hidden rounded-b-xl bg-white pt-4 md:block">
+        <div className="dark:bg-dark_dark sticky top-0 z-10 mx-5 hidden rounded-b-xl bg-white pt-5 md:block">
           <SearchInput value={query} onSubmit={onSubmitQuery} />
         </div>
         <div className="px-4 pb-4">
