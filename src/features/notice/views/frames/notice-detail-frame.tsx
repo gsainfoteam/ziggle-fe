@@ -9,7 +9,7 @@ import { useUser } from '@/features/auth';
 
 import { NoticeNotFoundFrame } from './notice-not-found-frame';
 import { useNotice } from '../../viewmodels';
-import { Column } from '../components/layout/column';
+import { PanelShell } from '../components/layout/panel-shell';
 import { SendPushAlarm } from '../components/modals/send-push-notification';
 import { NoticeDetail } from '../components/notice-detail';
 
@@ -52,13 +52,13 @@ export function NoticeDetailFrame() {
   const isOwner = user?.uuid === efficientNotice.author.uuid;
 
   return (
-    <Column>
+    <PanelShell>
       <SendPushAlarm {...efficientNotice} />
       <NoticeDetail
         notice={efficientNotice}
         isOwner={isOwner}
         additionalContents={additionalContents}
       />
-    </Column>
+    </PanelShell>
   );
 }

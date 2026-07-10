@@ -2,12 +2,12 @@ import { Link } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import { Column } from '../components/layout/column';
+import { PanelShell } from '../components/layout/panel-shell';
 
 export function NoticeNotFoundFrame() {
   const { t } = useTranslation('notice');
   return (
-    <Column>
+    <PanelShell>
       <div className="flex flex-1 items-center justify-center">
         <div className="text-center">
           <h1 className="mb-3 text-4xl font-bold">404</h1>
@@ -19,6 +19,6 @@ export function NoticeNotFoundFrame() {
           </Link>
         </div>
       </div>
-    </Column>
+    </PanelShell>
   );
 }
