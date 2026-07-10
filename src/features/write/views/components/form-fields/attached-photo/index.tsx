@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
+import { XIcon } from '@phosphor-icons/react';
 
 interface ImagePreviewItemProps {
   src: string;
@@ -30,7 +30,7 @@ export const AttachedPhoto = ({
         className="bg-greyDark absolute -top-2 -right-2 rounded-full p-1"
       >
         <div className="flex">
-          <CloseIcon className="h-4 w-4 stroke-white md:h-4 md:w-4" />
+          <XIcon className="size-4 text-white" />
         </div>
       </button>
     </div>

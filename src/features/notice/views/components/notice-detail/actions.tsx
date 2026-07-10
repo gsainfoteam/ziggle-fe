@@ -1,12 +1,14 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
-import { Bookmark, BookmarkSolid, Copy, ShareIos } from 'iconoir-react';
+import {
+  BookmarkSimpleIcon,
+  CopyIcon,
+  ExportIcon,
+} from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import AnguishedFace from '@/assets/icons/anguished-face.svg?react';
-import FireActivated from '@/assets/icons/fire-activated.svg?react';
-import Fire from '@/assets/icons/fire-outlined.svg?react';
 import LoudlyCryingFace from '@/assets/icons/loudly-crying-face.svg?react';
 import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg?react';
 import ThinkingFace from '@/assets/icons/thinking-face.svg?react';
@@ -20,16 +22,27 @@ import {
   useToggleBookmark,
 } from '@/features/notice/viewmodels';
 
+import { FlameReactionIcon } from '../flame-reaction-icon';
+
 const EMOJI_WIDTH_INLINE = 28;
 const EMOJI_WIDTH_RAIL = 24;
 
-const emojis: Record<EmojiString, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  [EmojiString.FIRE]: Fire,
+const faceEmojis: Partial<
+  Record<EmojiString, React.FC<React.SVGProps<SVGSVGElement>>>
+> = {
   [EmojiString.CRYING]: LoudlyCryingFace,
   [EmojiString.ANGUISHED]: AnguishedFace,
   [EmojiString.THINKING]: ThinkingFace,
   [EmojiString.SURPRISED]: SurprisedFace,
 };
+
+const reactionEmojis: EmojiString[] = [
+  EmojiString.FIRE,
+  EmojiString.CRYING,
+  EmojiString.ANGUISHED,
+  EmojiString.THINKING,
+  EmojiString.SURPRISED,
+];
 
 type ButtonVariant = 'inline' | 'rail';
 type ActionsLayout = 'inline' | 'rail';
@@ -165,17 +178,11 @@ const ReactionEmoji = ({
   isReacted: boolean;
   size: number;
 }) => {
-  const EmojiComponent = emojis[emoji as keyof typeof emojis];
+  const EmojiComponent = faceEmojis[emoji as EmojiString];
   const isFire = emoji === EmojiString.FIRE;
 
   if (isFire) {
-    return isReacted ? (
-      <FireActivated width={size} />
-    ) : (
-      <span className="stroke-text dark:stroke-dark_white stroke-2">
-        <Fire width={size} />
-      </span>
-    );
+    return <FlameReactionIcon active={isReacted} size={size} />;
   }
 
   if (EmojiComponent) return <EmojiComponent width={size} />;
@@ -226,7 +233,7 @@ export function NoticeDetailActions({
 
   const bookmarkLabel = t('detail.bookmark');
 
-  const reactionButtons = Object.keys(emojis).map((emoji) => {
+  const reactionButtons = reactionEmojis.map((emoji) => {
     const reaction = currentReactions.find((r) => r.emoji === emoji);
     return (
       <ReactionButton
@@ -249,9 +256,14 @@ export function NoticeDetailActions({
         label={bookmarkLabel}
       >
         {bookmarked ? (
-          <BookmarkSolid className={variant === 'rail' ? 'size-5' : 'size-7'} />
+          <BookmarkSimpleIcon
+            weight="fill"
+            className={variant === 'rail' ? 'size-5' : 'size-6'}
+          />
         ) : (
-          <Bookmark className={variant === 'rail' ? 'size-5' : 'size-7'} />
+          <BookmarkSimpleIcon
+            className={variant === 'rail' ? 'size-5' : 'size-6'}
+          />
         )}
         {variant === 'inline' && (
           <span className="text-base">{bookmarkLabel}</span>
@@ -314,7 +326,7 @@ const ShareButton = ({
       variant={variant}
       label={t('detail.share.action')}
     >
-      <ShareIos className={variant === 'rail' ? 'size-5' : 'size-7'} />
+      <ExportIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
       {variant === 'inline' && (
         <span className="text-base">{t('detail.share.action')}</span>
       )}
@@ -350,7 +362,7 @@ const CopyLinkButton = ({
       variant={variant}
       label={t('detail.copy_link.action')}
     >
-      <Copy className={variant === 'rail' ? 'size-5' : 'size-7'} />
+      <CopyIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
       {variant === 'inline' && (
         <span className="text-base">{t('detail.copy_link.action')}</span>
       )}

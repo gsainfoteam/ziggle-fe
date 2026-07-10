@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import AddPhotoGray from '@/assets/icons/add-photo-gray.svg?react';
+import { ImageIcon } from '@phosphor-icons/react';
 import { Button } from '@/common/components';
 import { cn } from '@/common/utils';
 import type {
@@ -98,12 +98,12 @@ export const AttachPhotoArea = () => {
                 fileInputRef.current?.click();
               }}
             >
-              <AddPhotoGray className="fill-white" width={'40px'} />
+              <ImageIcon className="size-10 text-white" />
             </button>
           </div>
         ) : (
           <div className="flex flex-col items-center py-8 md:py-12">
-            <AddPhotoGray className="" />
+            <ImageIcon className="text-secondaryText size-10" />
 
             <div className="text-secondaryText mt-1.25 text-xs font-medium">
               {t('fields.photo.drag')}

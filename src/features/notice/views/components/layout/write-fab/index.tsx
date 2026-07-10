@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import EditPencil from '@/assets/icons/edit-pencil.svg?react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
@@ -21,7 +21,7 @@ export const WriteFab = () => {
         aria-label={t('sidebar.write')}
         className="bg-primary fixed right-[18px] bottom-24 z-40 flex size-14 items-center justify-center rounded-full shadow-lg transition hover:brightness-95 active:scale-95"
       >
-        <EditPencil className="size-6 stroke-white" />
+        <PencilSimpleIcon className="size-6 text-white" />
       </Link>
     </LogClick>
   );

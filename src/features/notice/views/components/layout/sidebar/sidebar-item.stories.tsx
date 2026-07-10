@@ -5,8 +5,7 @@ import {
   RouterProvider,
 } from '@tanstack/react-router';
 
-import BoldHomeIcon from '@/assets/icons/bold-home.svg?react';
-import HomeIcon from '@/assets/icons/home.svg?react';
+import { HouseIcon } from '@phosphor-icons/react';
 
 import { SidebarItem } from './sidebar-item';
 
@@ -46,8 +45,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    icon: <HomeIcon className="stroke-text dark:stroke-dark_white" />,
-    activeIcon: <BoldHomeIcon className="fill-primary stroke-primary" />,
+    icon: <HouseIcon className="text-text dark:text-dark_white" />,
+    activeIcon: <HouseIcon weight="fill" className="text-primary" />,
     isActive: false,
     children: <Link to="/">홈</Link>,
   },
@@ -55,8 +54,8 @@ export const Default: Story = {
 
 export const Active: Story = {
   args: {
-    icon: <HomeIcon className="stroke-text dark:stroke-dark_white" />,
-    activeIcon: <BoldHomeIcon className="fill-primary stroke-primary" />,
+    icon: <HouseIcon className="text-text dark:text-dark_white" />,
+    activeIcon: <HouseIcon weight="fill" className="text-primary" />,
     isActive: true,
     children: <Link to="/">홈</Link>,
   },

@@ -1,7 +1,7 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import AddIcon from '@/assets/icons/add.svg?react';
+import { PlusIcon } from '@phosphor-icons/react';
 import type { NoticeFormValues } from '@/features/write/viewmodels';
 
 export const AddAdditionalNotice = () => {
@@ -19,7 +19,7 @@ export const AddAdditionalNotice = () => {
   return (
     <div className="flex flex-col">
       <div className="mb-2 flex items-center gap-3">
-        <AddIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
+        <PlusIcon className="text-text dark:text-dark_white size-5 md:size-6" />
 
         <p className="text-lg font-medium">
           {t('detail.additional_notices.title')}

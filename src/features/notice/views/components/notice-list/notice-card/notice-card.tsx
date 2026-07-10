@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 
 import dayjs from 'dayjs';
-import { Eye } from 'iconoir-react';
+import { EyeIcon } from '@phosphor-icons/react';
 
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import type { Notice } from '@/features/notice/models';
@@ -57,7 +57,7 @@ const Header = ({
         {dayjs(createdAt).fromNow()}
       </span>
       <span className="text-greyDark dark:text-dark_grey flex shrink-0 items-center gap-1 text-base">
-        <Eye className="size-3.5" strokeWidth={2.5} />
+        <EyeIcon className="size-3.5" weight="bold" />
         {views}
       </span>
     </div>

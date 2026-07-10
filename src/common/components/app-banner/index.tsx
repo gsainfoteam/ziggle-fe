@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
+import { XIcon } from '@phosphor-icons/react';
 import { isMobile } from '@/common/utils';
 
 const DISMISSED_KEY = 'app_banner_dismissed';
@@ -41,7 +41,7 @@ export function AppBanner() {
         className="text-greyDark dark:text-dark_grey hover:bg-greyLight dark:hover:bg-dark_greyDark flex size-8 cursor-pointer items-center justify-center rounded-md transition-colors"
         aria-label={t('app_banner.dismiss')}
       >
-        <CloseIcon className="stroke-greyDark dark:stroke-dark_grey size-5" />
+        <XIcon className="size-5" />
       </button>
     </div>
   );

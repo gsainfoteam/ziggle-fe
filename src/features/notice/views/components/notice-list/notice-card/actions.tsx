@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-import { Bookmark, BookmarkSolid, FireFlame, ShareIos } from 'iconoir-react';
+import { BookmarkSimpleIcon, ExportIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import FireActivated from '@/assets/icons/fire-activated.svg?react';
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -14,6 +13,8 @@ import {
   useDeleteReaction,
   useToggleBookmark,
 } from '@/features/notice/viewmodels';
+
+import { FlameReactionIcon } from '../../flame-reaction-icon';
 
 interface FireState {
   count: number;
@@ -75,11 +76,10 @@ export const NoticeCardActionsDisplay = ({
             onClick={handleFireClick}
             className="flex cursor-pointer items-center"
           >
-            {currentFire.isReacted ? (
-              <FireActivated className="size-7" />
-            ) : (
-              <FireFlame className="text-text dark:text-dark_white size-7" />
-            )}
+            <FlameReactionIcon
+              active={currentFire.isReacted}
+              className="size-6"
+            />
           </Button>
           <span
             className={cn(
@@ -101,9 +101,9 @@ export const NoticeCardActionsDisplay = ({
           className="flex cursor-pointer items-center"
         >
           {bookmarked ? (
-            <BookmarkSolid className="text-primary size-7" />
+            <BookmarkSimpleIcon weight="fill" className="text-primary size-6" />
           ) : (
-            <Bookmark className="text-text dark:text-dark_white size-7" />
+            <BookmarkSimpleIcon className="text-text dark:text-dark_white size-6" />
           )}
         </Button>
 
@@ -116,7 +116,7 @@ export const NoticeCardActionsDisplay = ({
             }}
             className="flex cursor-pointer items-center"
           >
-            <ShareIos className="text-text dark:text-dark_white size-7" />
+            <ExportIcon className="text-text dark:text-dark_white size-6" />
           </Button>
         </LogClick>
       </div>

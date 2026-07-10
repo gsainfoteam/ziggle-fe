@@ -1,9 +1,14 @@
-import { LogOut, OpenNewWindow, ProfileCircle, UserXmark } from 'iconoir-react';
+import {
+  ArrowSquareOutIcon,
+  SignOutIcon,
+  UserCircleIcon,
+  UserMinusIcon,
+  XIcon,
+} from '@phosphor-icons/react';
 import { overlay } from 'overlay-kit';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
 import DefaultProfileIcon from '@/assets/icons/default-profile.svg?react';
 import { Avatar, LogClick, Popover, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
@@ -40,7 +45,7 @@ export const ProfileModalPanel = ({
           onClick={onClose}
           className="absolute top-0 right-0 cursor-pointer"
         >
-          <CloseIcon className="stroke-greyDark dark:stroke-dark_grey h-5 w-5" />
+          <XIcon className="text-greyDark dark:text-dark_grey size-5" />
         </button>
 
         {user.picture ? (
@@ -67,11 +72,11 @@ export const ProfileModalPanel = ({
           onClick={onClose}
           className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey flex items-center gap-3 rounded-xl px-4 py-4 transition-colors md:py-3"
         >
-          <ProfileCircle className="text-text dark:text-dark_white size-6 md:size-5" />
+          <UserCircleIcon className="text-text dark:text-dark_white size-6 md:size-5" />
           <span className="text-text dark:text-dark_white flex-1 text-base font-medium md:text-sm">
             {t('mypage.manage')}
           </span>
-          <OpenNewWindow className="text-greyDark dark:text-dark_grey size-5 md:size-4" />
+          <ArrowSquareOutIcon className="text-greyDark dark:text-dark_grey size-5 md:size-4" />
         </a>
 
         <LogClick eventName={LogEvents.myClickLogout}>
@@ -79,7 +84,7 @@ export const ProfileModalPanel = ({
             onClick={onSignOut}
             className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-4 transition-colors md:py-3"
           >
-            <LogOut className="text-text dark:text-dark_white size-6 md:size-5" />
+            <SignOutIcon className="text-text dark:text-dark_white size-6 md:size-5" />
             <span className="text-text dark:text-dark_white text-base font-medium md:text-sm">
               {t('mypage.logout')}
             </span>
@@ -91,7 +96,7 @@ export const ProfileModalPanel = ({
             onClick={onWithdrawal}
             className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey flex w-full cursor-pointer items-center gap-3 rounded-xl px-4 py-4 transition-colors md:py-3"
           >
-            <UserXmark className="text-text dark:text-dark_white size-6 md:size-5" />
+            <UserMinusIcon className="text-text dark:text-dark_white size-6 md:size-5" />
             <span className="text-text dark:text-dark_white text-base font-medium md:text-sm">
               {t('mypage.quit')}
             </span>

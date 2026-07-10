@@ -1,4 +1,4 @@
-import CloseIcon from '@/assets/icons/close.svg?react';
+import { XIcon } from '@phosphor-icons/react';
 import { cn } from '@/common/utils';
 
 import { useDrawerContext } from './context';
@@ -19,7 +19,7 @@ export const DrawerClose = ({ className }: DrawerCloseProps) => {
         className,
       )}
     >
-      <CloseIcon className="stroke-greyDark dark:stroke-dark_grey h-5 w-5" />
+      <XIcon className="size-5" />
     </button>
   );
 };

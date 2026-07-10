@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import AccountIcon from '@/assets/icons/account.svg?react';
+import { UserIcon } from '@phosphor-icons/react';
 import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
@@ -49,7 +49,7 @@ export const NavbarWrite = () => {
             to="/"
             className="hidden items-center justify-center gap-2 md:flex"
           >
-            <AccountIcon className="flex h-6" />
+            <UserIcon className="size-6" />
             <div className="text-primary align-middle font-medium whitespace-nowrap">
               {t('navbar.login')}
             </div>

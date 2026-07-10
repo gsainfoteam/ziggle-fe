@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
-import SearchIcon from '@/assets/icons/search.svg?react';
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
@@ -28,7 +27,7 @@ export function SearchInput({
       }}
       className="border-greyBorder dark:border-dark_greyBorder bg-greyLight dark:bg-dark_greyDark flex items-center gap-2 rounded-xl border px-4 py-2.5"
     >
-      <SearchIcon className="stroke-greyDark dark:stroke-dark_white size-5 shrink-0" />
+      <MagnifyingGlassIcon className="text-greyDark dark:text-dark_white size-5 shrink-0" />
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -46,7 +45,7 @@ export function SearchInput({
             }}
             className="shrink-0"
           >
-            <CloseIcon className="stroke-greyDark dark:stroke-dark_white size-4" />
+            <XIcon className="text-greyDark dark:text-dark_white size-4" />
           </button>
         </LogClick>
       )}

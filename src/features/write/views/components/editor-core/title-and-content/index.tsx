@@ -3,8 +3,7 @@ import { lazy, Suspense } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import ContentIcon from '@/assets/icons/content.svg?react';
-import TextIcon from '@/assets/icons/text.svg?react';
+import { ArticleIcon, TextTIcon } from '@phosphor-icons/react';
 import { LoadingCatAnimation } from '@/common/components';
 import { cn } from '@/common/utils';
 import {
@@ -53,7 +52,7 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
   return (
     <>
       <div className="mt-10 mb-2.5 flex gap-1.5">
-        <TextIcon className="stroke-text w-5 md:w-6" />
+        <TextTIcon className="text-text size-5 md:size-6" />
         <p className="font-medium">{titleLabel}</p>
       </div>
 
@@ -87,7 +86,7 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
       )}
 
       <div className="mt-10 mb-3 flex items-center gap-2">
-        <ContentIcon className="stroke-text w-5 md:w-6" />
+        <ArticleIcon className="text-text size-5 md:size-6" />
         <p className="font-medium">{contentLabel}</p>
       </div>
 

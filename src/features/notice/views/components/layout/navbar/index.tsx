@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 
-import MenuIcon from '@/assets/icons/menu.svg?react';
+import { ListIcon } from '@phosphor-icons/react';
 import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react';
 import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
 import { Button, LogClick } from '@/common/components';
@@ -31,7 +31,7 @@ export const Navbar = () => {
             onClick={toggleSidebar}
             className="flex h-full w-12 items-center justify-center overflow-clip rounded-md"
           >
-            <MenuIcon className="stroke-text dark:stroke-dark_white h-6" />
+            <ListIcon className="text-text dark:text-dark_white size-6" />
           </Button>
         </LogClick>
       </div>

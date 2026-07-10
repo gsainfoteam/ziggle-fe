@@ -11,11 +11,13 @@ import {
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import AddPhotoIcon from '@/assets/icons/add-photo.svg?react';
-import ClockIcon from '@/assets/icons/clock.svg?react';
-import GlobeIcon from '@/assets/icons/globe.svg?react';
-import TagIcon from '@/assets/icons/tag.svg?react';
-import TypeIcon from '@/assets/icons/type.svg?react';
+import {
+  ClockIcon,
+  GlobeIcon,
+  ImageIcon,
+  TagIcon,
+  TextTIcon,
+} from '@phosphor-icons/react';
 import { Button, LogClick, Toggle, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -200,10 +202,10 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       <div className="mt-10 mb-10 flex items-center gap-2">
         <GlobeIcon
           className={cn(
-            'w-5 md:w-6',
+            'size-5 md:size-6',
             english
-              ? 'stroke-text dark:stroke-dark_white'
-              : 'stroke-grey dark:stroke-dark_grey',
+              ? 'text-text dark:text-dark_white'
+              : 'text-grey dark:text-dark_grey',
           )}
         />
         <p
@@ -234,7 +236,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       </div>
 
       <div className="mb-3 flex gap-1.5">
-        <TypeIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
+        <TextTIcon className="text-text dark:text-dark_white size-5 md:size-6" />
         <p className="font-medium">{t('fields.notice_type')}</p>
       </div>
 
@@ -286,7 +288,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       )}
 
       <div className="mt-10 mb-3 flex items-center gap-2">
-        <ClockIcon className="stroke-text w-5 md:w-6" />
+        <ClockIcon className="text-text size-5 md:size-6" />
 
         <p className="text-lg font-medium">
           {t(isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup')}
@@ -320,7 +322,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       {!isEditMode && (
         <>
           <div className="mt-10 mb-2 flex gap-2">
-            <TagIcon className="fill-text w-5 md:w-6" />
+            <TagIcon className="text-text size-5 md:size-6" />
             <p className="font-medium md:text-lg">{t('fields.tags.setup')}</p>
             <p className="text-grey">{`(${t('optional')})`}</p>
           </div>
@@ -332,7 +334,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
           <TagInput />
 
           <div className="mt-10 mb-1 flex items-center gap-2">
-            <AddPhotoIcon className="stroke-text w-5 md:w-6" />
+            <ImageIcon className="text-text size-5 md:size-6" />
             <p className="font-medium md:text-lg">{t('fields.photo.attach')}</p>
             <p className="text-grey">{`(${t('optional')})`}</p>
           </div>

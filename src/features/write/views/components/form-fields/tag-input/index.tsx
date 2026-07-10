@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
+import { XIcon } from '@phosphor-icons/react';
 import {
   useSearchTags,
   type NoticeFormValues,
@@ -108,7 +108,7 @@ export const TagChip = ({
 
       <div onClick={onClick} className="cursor-pointer">
         <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
-          <CloseIcon className="fill-primary h-3 w-3" />
+          <XIcon className="text-primary size-3" />
         </div>
       </div>
     </div>

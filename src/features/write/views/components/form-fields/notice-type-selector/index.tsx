@@ -1,9 +1,11 @@
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import EventIcon from '@/assets/icons/event.svg?react';
-import GeneralIcon from '@/assets/icons/general.svg?react';
-import RecruitIcon from '@/assets/icons/recruit.svg?react';
+import {
+  ConfettiIcon,
+  MegaphoneIcon,
+  UsersThreeIcon,
+} from '@phosphor-icons/react';
 import { Chip } from '@/common/components';
 import { cn } from '@/common/utils';
 import type { NoticeFormValues, NoticeType } from '@/features/write/viewmodels';
@@ -42,11 +44,11 @@ export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
               {(() => {
                 switch (noticeType) {
                   case 'recruit':
-                    return <RecruitIcon />;
+                    return <UsersThreeIcon />;
                   case 'event':
-                    return <EventIcon />;
+                    return <ConfettiIcon />;
                   case 'general':
-                    return <GeneralIcon />;
+                    return <MegaphoneIcon />;
                 }
               })()}
               <p className="text-base">

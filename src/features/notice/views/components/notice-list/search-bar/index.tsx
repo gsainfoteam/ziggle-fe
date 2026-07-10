@@ -4,8 +4,7 @@ import { useRouter, useSearch } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
-import CloseIcon from '@/assets/icons/close.svg?react';
-import SearchIcon from '@/assets/icons/search.svg?react';
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -29,11 +28,11 @@ const SearchButton = ({
     )}
     onClick={onClick}
   >
-    <SearchIcon
+    <MagnifyingGlassIcon
       className={cn(
-        'h-6 w-6',
-        isToggle ? 'stroke-text' : 'stroke-greyDark',
-        'dark:stroke-dark_white md:stroke-greyDark md:dark:stroke-dark_white',
+        'size-6',
+        isToggle ? 'text-text' : 'text-greyDark',
+        'dark:text-dark_white md:text-greyDark md:dark:text-dark_white',
       )}
     />
   </button>
@@ -116,7 +115,7 @@ export const SearchBar = () => {
                 className="bg-greyLight dark:bg-dark_greyDark md:dark:bg-dark_dark flex h-full items-center justify-center px-2 md:bg-white"
                 onClick={() => setKeyword('')}
               >
-                <CloseIcon className="dark:stroke-dark_white stroke-greyDark h-4 w-4" />
+                <XIcon className="text-greyDark dark:text-dark_white size-4" />
               </button>
             </LogClick>
           )}

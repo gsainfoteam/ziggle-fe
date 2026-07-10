@@ -1,9 +1,9 @@
 import { Link, useRouter } from '@tanstack/react-router';
 
+import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import { EditPencil, Trash } from 'iconoir-react';
 import { LogClick, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -46,7 +46,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
           search={{ noticeId }}
           className="border-greyLight text-greyDark dark:text-dark_grey dark:border-dark_greyBorder hover:bg-greyLight dark:hover:bg-dark_greyDark flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition"
         >
-          <EditPencil className="size-4" />
+          <PencilSimpleIcon className="size-4" />
           {t('detail.author_actions.edit')}
         </Link>
       </LogClick>
@@ -63,7 +63,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
           onClick={handleRemoveNotice}
           disabled={isPending}
         >
-          <Trash className="size-4" />
+          <TrashIcon className="size-4" />
           {t('detail.author_actions.remove')}
         </button>
       </LogClick>

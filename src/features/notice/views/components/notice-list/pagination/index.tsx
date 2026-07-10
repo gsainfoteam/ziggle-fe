@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import ArrowRightIcon from '@/assets/icons/arrow-right.svg?react';
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Button } from '@/common/components';
 
 interface PaginationProps {
@@ -35,20 +35,20 @@ const Pagination = ({
       <div className="flex gap-1">
         {page !== 0 ? (
           <Button animated onClick={() => onPageChange(page - 1)}>
-            <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 rotate-180 fill-none md:w-7" />
+            <ArrowRightIcon className="text-text dark:text-dark_white size-6 rotate-180 md:size-7" />
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="stroke-grey dark:stroke-dark_grey w-6 rotate-180 fill-none md:w-7" />
+            <ArrowRightIcon className="text-grey dark:text-dark_grey size-6 rotate-180 md:size-7" />
           </Button>
         )}
         {page + 1 !== pages ? (
           <Button animated onClick={() => onPageChange(page + 1)}>
-            <ArrowRightIcon className="stroke-text dark:stroke-dark_white w-6 fill-none md:w-7" />
+            <ArrowRightIcon className="text-text dark:text-dark_white size-6 md:size-7" />
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="stroke-grey dark:stroke-dark_grey w-6 md:w-7" />
+            <ArrowRightIcon className="text-grey dark:text-dark_grey size-6 md:size-7" />
           </Button>
         )}
       </div>

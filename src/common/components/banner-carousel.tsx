@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import NavArrowRight from '@/assets/icons/nav-arrow-right.svg?react';
+import { CaretRightIcon } from '@phosphor-icons/react';
 
 interface Slide {
   image: React.ComponentType<{ className?: string }>;
@@ -72,14 +72,14 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
           aria-label={t('carousel.prev')}
           className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
-          <NavArrowRight className="h-5 w-5 rotate-180" />
+          <CaretRightIcon className="size-5 rotate-180" />
         </button>
         <button
           onClick={next}
           aria-label={t('carousel.next')}
           className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
-          <NavArrowRight className="h-5 w-5" />
+          <CaretRightIcon className="size-5" />
         </button>
 
         <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1">
