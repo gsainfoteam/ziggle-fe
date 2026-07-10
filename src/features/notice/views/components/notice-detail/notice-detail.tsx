@@ -1,8 +1,13 @@
+import { useRouter } from '@tanstack/react-router';
+
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import dayjs from 'dayjs';
 import { Eye } from 'iconoir-react';
 import { useTranslation } from 'react-i18next';
 
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
+import { LogClick } from '@/common/components';
+import { LogEvents } from '@/common/const/log-events';
 import type {
   AdditionalContent,
   NoticeDetail as NoticeDetailModel,
@@ -20,6 +25,33 @@ export interface NoticeDetailProps {
   notice: NoticeDetailModel;
   isOwner?: boolean;
   additionalContents?: AdditionalContent[];
+}
+
+function BackButton({ noticeId }: { noticeId: number }) {
+  const { t } = useTranslation('notice');
+  const router = useRouter();
+
+  return (
+    <LogClick
+      eventName={LogEvents.detailClickBack}
+      properties={{ id: noticeId }}
+    >
+      <button
+        type="button"
+        aria-label={t('detail.back')}
+        onClick={() => {
+          if (router.history.canGoBack()) {
+            router.history.back();
+          } else {
+            void router.navigate({ to: '/home' });
+          }
+        }}
+        className="text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark -ml-2 flex size-9 items-center justify-center rounded-full transition"
+      >
+        <ArrowLeftIcon weight="bold" className="size-5" />
+      </button>
+    </LogClick>
+  );
 }
 
 type HeaderProps = Pick<
@@ -110,13 +142,16 @@ export const NoticeDetail = ({
   isOwner = false,
   additionalContents = [],
 }: NoticeDetailProps) => (
-  <div className="mx-auto flex w-full max-w-200 flex-col gap-6 px-4 py-8">
-    <Header
-      author={notice.author}
-      createdAt={notice.createdAt}
-      views={notice.views}
-      currentDeadline={notice.currentDeadline}
-    />
+  <div className="mx-auto flex w-full max-w-200 flex-col gap-6 p-4">
+    <div className="flex flex-col gap-4">
+      <BackButton noticeId={notice.id} />
+      <Header
+        author={notice.author}
+        createdAt={notice.createdAt}
+        views={notice.views}
+        currentDeadline={notice.currentDeadline}
+      />
+    </div>
     {isOwner && <NoticeDetailAuthorActions noticeId={notice.id} />}
     <Body
       title={notice.title}

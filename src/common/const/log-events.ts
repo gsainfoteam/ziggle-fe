@@ -45,6 +45,7 @@ export const LogEvents = {
   myClickUnregister: 'my_click_unregister',
 
   // Notice Detail Page
+  detailClickBack: 'detail_click_back',
   detailClickImage: 'detail_click_image',
   detailClickReaction: 'detail_click_reaction',
   detailClickShare: 'detail_click_share',
