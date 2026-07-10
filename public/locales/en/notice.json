@@ -11,6 +11,9 @@
       "title": "Additional Notices"
     },
     "attachments": "Attachments",
+    "created_at": "Posted",
+    "deadline": "Deadline",
+    "views": "Views",
     "author_actions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",

@@ -11,7 +11,14 @@ import { NoticeNotFoundFrame } from './notice-not-found-frame';
 import { useNotice } from '../../viewmodels';
 import { PanelShell } from '../components/layout/panel-shell';
 import { SendPushAlarm } from '../components/modals/send-push-notification';
-import { NoticeDetail } from '../components/notice-detail';
+import {
+  NoticeDetail,
+  NoticeDetailBackButton,
+} from '../components/notice-detail';
+import {
+  NoticeDetailActions,
+  NoticeDetailActionsProvider,
+} from '../components/notice-detail/actions';
 
 export function NoticeDetailFrame() {
   const { notice: preloadedNotice, numId } = useLoaderData({
@@ -52,13 +59,23 @@ export function NoticeDetailFrame() {
   const isOwner = user?.uuid === efficientNotice.author.uuid;
 
   return (
-    <PanelShell>
-      <SendPushAlarm {...efficientNotice} />
-      <NoticeDetail
-        notice={efficientNotice}
-        isOwner={isOwner}
-        additionalContents={additionalContents}
-      />
-    </PanelShell>
+    <NoticeDetailActionsProvider
+      id={efficientNotice.id}
+      title={efficientNotice.title}
+      reactions={efficientNotice.reactions}
+      isBookmarked={efficientNotice.isBookmarked}
+    >
+      <PanelShell
+        leading={<NoticeDetailBackButton noticeId={efficientNotice.id} />}
+        aside={<NoticeDetailActions variant="rail" />}
+      >
+        <SendPushAlarm {...efficientNotice} />
+        <NoticeDetail
+          notice={efficientNotice}
+          isOwner={isOwner}
+          additionalContents={additionalContents}
+        />
+      </PanelShell>
+    </NoticeDetailActionsProvider>
   );
 }

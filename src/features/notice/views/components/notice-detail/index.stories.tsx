@@ -12,6 +12,7 @@ import {
 
 import { NoticeDetail } from '.';
 import type { NoticeDetailProps } from '.';
+import { NoticeDetailActionsProvider } from './actions';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
@@ -61,11 +62,18 @@ const WrappedNoticeDetail = ({
 }: NoticeDetailProps) => {
   const rootRoute = createRootRoute({
     component: () => (
-      <NoticeDetail
-        notice={notice}
-        isOwner={isOwner}
-        additionalContents={additionalContents}
-      />
+      <NoticeDetailActionsProvider
+        id={notice.id}
+        title={notice.title}
+        reactions={notice.reactions}
+        isBookmarked={notice.isBookmarked}
+      >
+        <NoticeDetail
+          notice={notice}
+          isOwner={isOwner}
+          additionalContents={additionalContents}
+        />
+      </NoticeDetailActionsProvider>
     ),
   });
   const router = createRouter({ routeTree: rootRoute });
@@ -113,7 +121,8 @@ export const MultipleImages: Story = {
       ...baseNotice,
       imageUrls: Array.from(
         { length: 5 },
-        (_, i) => `https://placehold.co/${300 + i * 40}x${400 + i * 20}?text=Image+${i + 1}`,
+        (_, i) =>
+          `https://placehold.co/${300 + i * 40}x${400 + i * 20}?text=Image+${i + 1}`,
       ),
     },
   },
@@ -157,7 +166,8 @@ export const WithAdditionalNotices: Story = {
       {
         id: 1,
         lang: 'ko',
-        content: '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
+        content:
+          '장소가 변경되었습니다. 기존 학생회관 3층 → 도서관 세미나실로 변경됩니다.',
         createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       },
       {

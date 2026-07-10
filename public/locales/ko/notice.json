@@ -11,6 +11,9 @@
       "title": "추가 공지"
     },
     "attachments": "첨부파일",
+    "created_at": "작성일",
+    "deadline": "마감시간",
+    "views": "조회수",
     "author_actions": {
       "edit": "수정 / 영어공지 작성",
       "remove": "삭제",

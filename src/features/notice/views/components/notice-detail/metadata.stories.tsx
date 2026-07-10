@@ -1,48 +1,40 @@
-import { NoticeDetailDocumentUrls as DocumentUrls } from './document-urls';
+import { NoticeDetailMetadata as Metadata } from './metadata';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const meta = {
-  title: 'Notice/NoticeDetail/DocumentUrls',
-  component: DocumentUrls,
+  title: 'Notice/NoticeDetail/Metadata',
+  component: Metadata,
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof DocumentUrls>;
+  args: {
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+    views: 256,
+    documents: [],
+  },
+} satisfies Meta<typeof Metadata>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AttachmentsOnly: Story = {
+export const Basic: Story = {};
+
+export const WithDeadline: Story = {
   args: {
-    documents: [
-      {
-        url: 'https://www.gist.ac.kr/kr/attachments/document1.pdf',
-        name: '첨부파일_제목1.pdf',
-      },
-      {
-        url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
-        name: '첨부파일_제목2.pdf',
-      },
-      {
-        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
-        name: '첨부파일_제목3.pdf',
-      },
-    ],
+    currentDeadline: new Date(
+      Date.now() + 7 * 24 * 60 * 60 * 1000,
+    ).toISOString(),
   },
 };
 
-export const SourceUrlOnly: Story = {
+export const WithSourceAndAttachments: Story = {
   args: {
-    crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
-    documents: [],
-  },
-};
-
-export const Both: Story = {
-  args: {
+    currentDeadline: new Date(
+      Date.now() + 7 * 24 * 60 * 60 * 1000,
+    ).toISOString(),
     crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
     documents: [
       {
@@ -52,10 +44,6 @@ export const Both: Story = {
       {
         url: 'https://www.gist.ac.kr/kr/attachments/document2.pdf',
         name: '첨부파일_제목2.pdf',
-      },
-      {
-        url: 'https://www.gist.ac.kr/kr/attachments/document3.pdf',
-        name: '첨부파일_제목3.pdf',
       },
     ],
   },
@@ -75,11 +63,5 @@ export const LongFileName: Story = {
         name: '띄어쓰기없는한글로된아주아주아주아주긴첨부파일제목으로레이아웃넘침을확인하는테스트케이스.pdf',
       },
     ],
-  },
-};
-
-export const Empty: Story = {
-  args: {
-    documents: [],
   },
 };

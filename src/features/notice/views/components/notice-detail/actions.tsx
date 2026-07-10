@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 
 import { Bookmark, BookmarkSolid, Copy, ShareIos } from 'iconoir-react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -20,11 +20,8 @@ import {
   useToggleBookmark,
 } from '@/features/notice/viewmodels';
 
-const EMOJI_WIDTH = 28;
-
-// TODO: 사이드 바 아이템 디자인 및 간격 수정
-// TODO: 북마크반 모아서 보는 페이지
-// TODO: 지글 로고 위치 좀 더 안정적인 곳으로
+const EMOJI_WIDTH_INLINE = 28;
+const EMOJI_WIDTH_RAIL = 24;
 
 const emojis: Record<EmojiString, React.FC<React.SVGProps<SVGSVGElement>>> = {
   [EmojiString.FIRE]: Fire,
@@ -34,70 +31,45 @@ const emojis: Record<EmojiString, React.FC<React.SVGProps<SVGSVGElement>>> = {
   [EmojiString.SURPRISED]: SurprisedFace,
 };
 
-interface ActionButtonProps {
-  isSelected: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}
+type ButtonVariant = 'inline' | 'rail';
+type ActionsLayout = 'inline' | 'rail';
 
-const ActionButton = ({ isSelected, onClick, children }: ActionButtonProps) => (
-  <button
-    className={cn(
-      'flex h-10 items-center gap-1.75 rounded-full border-none px-3.25 py-1.25 transition outline-none',
-      isSelected
-        ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
-        : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
-    )}
-    onClick={onClick}
-  >
-    {children}
-  </button>
-);
-
-const ReactionButton = ({
-  emoji,
-  count,
-  isReacted,
-  onClick,
-}: Reaction & { onClick: () => void }) => {
-  const EmojiComponent = emojis[emoji as keyof typeof emojis];
-  const isFire = emoji === EmojiString.FIRE;
-
-  return (
-    <ActionButton isSelected={isFire ? false : isReacted} onClick={onClick}>
-      <span>
-        {isFire ? (
-          isReacted ? (
-            <FireActivated width={EMOJI_WIDTH} />
-          ) : (
-            <span className="stroke-text dark:stroke-dark_white stroke-2">
-              <Fire width={EMOJI_WIDTH} />
-            </span>
-          )
-        ) : EmojiComponent ? (
-          <EmojiComponent width={EMOJI_WIDTH} />
-        ) : (
-          <p>{emoji}</p>
-        )}
-      </span>
-      <span className="text-base">{count}</span>
-    </ActionButton>
-  );
-};
-
-interface NoticeDetailActionsProps {
+interface ActionsContextValue {
   id: number;
   title: string;
-  reactions: Reaction[];
-  isBookmarked: boolean;
+  currentReactions: Reaction[];
+  bookmarked: boolean;
+  handleEmojiClick: (emoji: string, isReacted: boolean) => Promise<void>;
+  handleBookmarkClick: () => Promise<void>;
 }
 
-export const NoticeDetailActions = ({
+const NoticeDetailActionsContext = createContext<ActionsContextValue | null>(
+  null,
+);
+
+function useNoticeDetailActionsContext() {
+  const ctx = useContext(NoticeDetailActionsContext);
+  if (!ctx) {
+    throw new Error(
+      'NoticeDetailActions must be used within NoticeDetailActionsProvider',
+    );
+  }
+  return ctx;
+}
+
+export function NoticeDetailActionsProvider({
   id,
   title,
   reactions,
   isBookmarked: initialBookmarked,
-}: NoticeDetailActionsProps) => {
+  children,
+}: {
+  id: number;
+  title: string;
+  reactions: Reaction[];
+  isBookmarked: boolean;
+  children: ReactNode;
+}) {
   const [currentReactions, setCurrentReactions] =
     useState<Reaction[]>(reactions);
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
@@ -128,47 +100,203 @@ export const NoticeDetailActions = ({
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap gap-2">
-        {Object.keys(emojis).map((emoji) => {
-          const reaction = currentReactions.find((r) => r.emoji === emoji);
-          return (
-            <ReactionButton
-              key={emoji}
-              emoji={emoji}
-              count={reaction?.count ?? 0}
-              isReacted={reaction?.isReacted ?? false}
-              onClick={() =>
-                handleEmojiClick(emoji, reaction?.isReacted ?? false)
-              }
-            />
-          );
-        })}
-      </div>
+    <NoticeDetailActionsContext.Provider
+      value={{
+        id,
+        title,
+        currentReactions,
+        bookmarked,
+        handleEmojiClick,
+        handleBookmarkClick,
+      }}
+    >
+      {children}
+    </NoticeDetailActionsContext.Provider>
+  );
+}
 
-      <div className="flex flex-wrap gap-2">
-        <ActionButton isSelected={bookmarked} onClick={handleBookmarkClick}>
-          {bookmarked ? (
-            <BookmarkSolid className="size-7" />
-          ) : (
-            <Bookmark className="size-7" />
-          )}
-          <span className="text-base">저장</span>
-        </ActionButton>
+interface ActionButtonProps {
+  isSelected: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+  variant?: ButtonVariant;
+  label?: string;
+}
 
-        <LogClick eventName={LogEvents.detailClickShare} properties={{ id }}>
-          <ShareButton title={title} />
-        </LogClick>
+const ActionButton = ({
+  isSelected,
+  onClick,
+  children,
+  variant = 'inline',
+  label,
+}: ActionButtonProps) => (
+  <button
+    type="button"
+    title={variant === 'rail' ? label : undefined}
+    aria-label={variant === 'rail' ? label : undefined}
+    className={cn(
+      'border-none transition outline-none',
+      variant === 'rail'
+        ? cn(
+            'flex size-10 flex-col items-center justify-center gap-0.5 rounded-xl',
+            isSelected
+              ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
+              : 'text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark',
+          )
+        : cn(
+            'flex h-10 items-center gap-1.75 rounded-full px-3.25 py-1.25',
+            isSelected
+              ? 'bg-text dark:bg-dark_white dark:text-dark_dark text-white'
+              : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
+          ),
+    )}
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
-        <LogClick eventName={LogEvents.detailClickCopyLink} properties={{ id }}>
-          <CopyLinkButton title={title} />
-        </LogClick>
-      </div>
-    </div>
+const ReactionEmoji = ({
+  emoji,
+  isReacted,
+  size,
+}: {
+  emoji: string;
+  isReacted: boolean;
+  size: number;
+}) => {
+  const EmojiComponent = emojis[emoji as keyof typeof emojis];
+  const isFire = emoji === EmojiString.FIRE;
+
+  if (isFire) {
+    return isReacted ? (
+      <FireActivated width={size} />
+    ) : (
+      <span className="stroke-text dark:stroke-dark_white stroke-2">
+        <Fire width={size} />
+      </span>
+    );
+  }
+
+  if (EmojiComponent) return <EmojiComponent width={size} />;
+  return <span>{emoji}</span>;
+};
+
+const ReactionButton = ({
+  emoji,
+  count,
+  isReacted,
+  onClick,
+  variant = 'inline',
+}: Reaction & { onClick: () => void; variant?: ButtonVariant }) => {
+  const emojiSize = variant === 'rail' ? EMOJI_WIDTH_RAIL : EMOJI_WIDTH_INLINE;
+
+  return (
+    <ActionButton isSelected={isReacted} onClick={onClick} variant={variant}>
+      <ReactionEmoji emoji={emoji} isReacted={isReacted} size={emojiSize} />
+      <span
+        className={cn(
+          variant === 'rail'
+            ? 'text-[10px] leading-none font-medium'
+            : 'text-base',
+        )}
+      >
+        {count}
+      </span>
+    </ActionButton>
   );
 };
 
-const ShareButton = ({ title }: { title: string }) => {
+export function NoticeDetailActions({
+  variant = 'inline',
+  className,
+}: {
+  variant?: ActionsLayout;
+  className?: string;
+}) {
+  const {
+    id,
+    title,
+    currentReactions,
+    bookmarked,
+    handleEmojiClick,
+    handleBookmarkClick,
+  } = useNoticeDetailActionsContext();
+
+  const bookmarkLabel = '저장';
+
+  const reactionButtons = Object.keys(emojis).map((emoji) => {
+    const reaction = currentReactions.find((r) => r.emoji === emoji);
+    return (
+      <ReactionButton
+        key={emoji}
+        emoji={emoji}
+        count={reaction?.count ?? 0}
+        isReacted={reaction?.isReacted ?? false}
+        variant={variant}
+        onClick={() => handleEmojiClick(emoji, reaction?.isReacted ?? false)}
+      />
+    );
+  });
+
+  const utilityButtons = (
+    <>
+      <ActionButton
+        isSelected={bookmarked}
+        onClick={handleBookmarkClick}
+        variant={variant}
+        label={bookmarkLabel}
+      >
+        {bookmarked ? (
+          <BookmarkSolid className={variant === 'rail' ? 'size-5' : 'size-7'} />
+        ) : (
+          <Bookmark className={variant === 'rail' ? 'size-5' : 'size-7'} />
+        )}
+        {variant === 'inline' && (
+          <span className="text-base">{bookmarkLabel}</span>
+        )}
+      </ActionButton>
+
+      <LogClick eventName={LogEvents.detailClickShare} properties={{ id }}>
+        <ShareButton title={title} variant={variant} />
+      </LogClick>
+
+      <LogClick eventName={LogEvents.detailClickCopyLink} properties={{ id }}>
+        <CopyLinkButton title={title} variant={variant} />
+      </LogClick>
+    </>
+  );
+
+  if (variant === 'rail') {
+    return (
+      <div className={className}>
+        <div className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark flex flex-col items-center gap-1 rounded-2xl border bg-white p-1.5 shadow-sm">
+          {reactionButtons}
+          <div
+            aria-hidden
+            className="bg-greyBorder dark:bg-dark_greyBorder my-1 h-px w-8"
+          />
+          {utilityButtons}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn('flex flex-col gap-3', className)}>
+      <div className="flex flex-wrap gap-2">{reactionButtons}</div>
+      <div className="flex flex-wrap gap-2">{utilityButtons}</div>
+    </div>
+  );
+}
+
+const ShareButton = ({
+  title,
+  variant = 'inline',
+}: {
+  title: string;
+  variant?: ButtonVariant;
+}) => {
   const { t } = useTranslation('notice');
   const handleShare = () => {
     if (!navigator.canShare) return toast.error(t('detail.share.unsupported'));
@@ -179,14 +307,27 @@ const ShareButton = ({ title }: { title: string }) => {
     });
   };
   return (
-    <ActionButton isSelected={false} onClick={handleShare}>
-      <ShareIos className="size-7" />
-      <span className="text-base">{t('detail.share.action')}</span>
+    <ActionButton
+      isSelected={false}
+      onClick={handleShare}
+      variant={variant}
+      label={t('detail.share.action')}
+    >
+      <ShareIos className={variant === 'rail' ? 'size-5' : 'size-7'} />
+      {variant === 'inline' && (
+        <span className="text-base">{t('detail.share.action')}</span>
+      )}
     </ActionButton>
   );
 };
 
-const CopyLinkButton = ({ title }: { title: string }) => {
+const CopyLinkButton = ({
+  title,
+  variant = 'inline',
+}: {
+  title: string;
+  variant?: ButtonVariant;
+}) => {
   const { t } = useTranslation('notice');
   const handleCopy = () => {
     navigator.clipboard.writeText(
@@ -201,9 +342,16 @@ const CopyLinkButton = ({ title }: { title: string }) => {
     );
   };
   return (
-    <ActionButton isSelected={false} onClick={handleCopy}>
-      <Copy className="size-7" />
-      <span className="text-base">{t('detail.copy_link.action')}</span>
+    <ActionButton
+      isSelected={false}
+      onClick={handleCopy}
+      variant={variant}
+      label={t('detail.copy_link.action')}
+    >
+      <Copy className={variant === 'rail' ? 'size-5' : 'size-7'} />
+      {variant === 'inline' && (
+        <span className="text-base">{t('detail.copy_link.action')}</span>
+      )}
     </ActionButton>
   );
 };
