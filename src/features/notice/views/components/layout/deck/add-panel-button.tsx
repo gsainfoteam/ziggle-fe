@@ -26,7 +26,7 @@ export function AddPanelButton() {
   ];
 
   return (
-    <div className="flex w-14 shrink-0 flex-col md:my-4 md:h-[calc(100vh-2rem)]">
+    <div className="flex w-14 shrink-0 flex-col md:h-[calc(100vh-3.25rem)]">
       <div className="flex shrink-0 items-center px-2 pb-3" aria-hidden>
         <span className="text-2xl font-bold opacity-0 select-none">+</span>
       </div>

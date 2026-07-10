@@ -54,7 +54,7 @@ export function NoticeShell({ children }: { children: ReactNode }) {
             className="flex-1 md:overflow-x-auto"
             onScroll={(e) => setDeckScrolled(e.currentTarget.scrollLeft > 0)}
           >
-            <div className="flex md:w-max md:min-w-full md:justify-center md:gap-4 md:px-4">
+            <div className="flex md:w-max md:min-w-full md:justify-center md:gap-4 md:px-4 md:py-6.5">
               {children}
             </div>
           </div>
