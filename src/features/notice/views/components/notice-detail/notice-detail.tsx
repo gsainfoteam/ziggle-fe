@@ -44,7 +44,7 @@ export function NoticeDetailBackButton({ noticeId }: { noticeId: number }) {
             void router.navigate({ to: '/home' });
           }
         }}
-        className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark flex size-10 shrink-0 items-center justify-center rounded-xl border bg-white shadow-sm transition"
+        className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark flex size-10 shrink-0 items-center justify-center rounded-xl border bg-white transition"
       >
         <ArrowLeftIcon weight="bold" className="size-5" />
       </button>

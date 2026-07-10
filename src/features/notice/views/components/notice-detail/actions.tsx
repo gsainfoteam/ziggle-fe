@@ -270,7 +270,7 @@ export function NoticeDetailActions({
   if (variant === 'rail') {
     return (
       <div className={className}>
-        <div className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark flex flex-col items-center gap-1 rounded-2xl border bg-white p-1.5 shadow-sm">
+        <div className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark flex flex-col items-center gap-1 rounded-2xl border bg-white p-1.5">
           {reactionButtons}
           <div
             aria-hidden
