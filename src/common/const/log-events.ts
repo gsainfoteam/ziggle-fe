@@ -37,7 +37,7 @@ export const LogEvents = {
 
   // My Page
   myClickMyNotice: 'my_click_my_notice',
-  myClickReminded: 'my_click_reminded',
+  myClickBookmarked: 'my_click_bookmarked',
   myClickBugReport: 'my_click_bug_report',
   myToggleLanguage: 'my_toggle_language',
   myClickMode: 'my_click_mode',

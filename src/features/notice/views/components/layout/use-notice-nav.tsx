@@ -1,7 +1,7 @@
 import { type LinkProps, linkOptions } from '@tanstack/react-router';
 
 import {
-  BellIcon,
+  BookmarkSimpleIcon,
   ChatCircleDotsIcon,
   ConfettiIcon,
   FlameIcon,
@@ -26,7 +26,7 @@ import {
   type OrderBy,
 } from '@/features/notice/viewmodels';
 
-export type Feed = 'recent' | 'deadline' | 'popular' | 'my' | 'reminded';
+export type Feed = 'recent' | 'deadline' | 'popular' | 'my' | 'bookmarked';
 
 export interface NavRowItem {
   title: string;
@@ -94,14 +94,14 @@ export const useNoticeNav = () => {
         my: 'own',
         link: linkOptions({ to: '/my' }),
       },
-      reminded: {
-        key: feedPanelKey('reminded'),
-        title: t('sidebar.remind_notice'),
-        Icon: <BellIcon />,
-        ActiveIcon: <BellIcon weight="fill" />,
+      bookmarked: {
+        key: feedPanelKey('bookmarked'),
+        title: t('sidebar.bookmark_notice'),
+        Icon: <BookmarkSimpleIcon />,
+        ActiveIcon: <BookmarkSimpleIcon weight="fill" />,
         orderBy: 'recent',
-        my: 'reminders',
-        link: linkOptions({ to: '/reminded' }),
+        my: 'bookmarked',
+        link: linkOptions({ to: '/bookmarked' }),
       },
     } satisfies Record<Feed, NoticeNavItem>,
 

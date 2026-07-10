@@ -2,14 +2,14 @@ import { Category } from '../models';
 
 export const SEARCH_PANEL_KEY = 'search';
 
-export type FeedPanelId = 'home' | 'deadline' | 'popular' | 'my' | 'reminded';
+export type FeedPanelId = 'home' | 'deadline' | 'popular' | 'my' | 'bookmarked';
 
 const FEED_PANEL_IDS = [
   'home',
   'deadline',
   'popular',
   'my',
-  'reminded',
+  'bookmarked',
 ] as const satisfies readonly FeedPanelId[];
 
 export const feedPanelKey = (id: FeedPanelId) => `feed:${id}` as const;
