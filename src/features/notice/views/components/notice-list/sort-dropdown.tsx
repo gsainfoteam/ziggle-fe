@@ -25,7 +25,7 @@ export function SortDropdown({
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             className={cn(
-              'flex shrink-0 items-center gap-0.5 rounded-full text-sm font-medium transition',
+              'flex shrink-0 cursor-pointer items-center gap-0.5 rounded-full text-sm font-medium transition',
               open
                 ? 'text-primary'
                 : 'text-greyDark hover:text-text dark:hover:text-dark_white',
@@ -50,7 +50,7 @@ export function SortDropdown({
                     close();
                   }}
                   className={cn(
-                    'rounded-md px-2.5 py-1.5 text-left text-sm transition',
+                    'cursor-pointer rounded-md px-2.5 py-1.5 text-left text-sm transition',
                     selected
                       ? 'text-primary bg-primary/10 dark:bg-primary/20 font-semibold'
                       : 'dark:hover:bg-dark_greyDark hover:bg-gray-100',

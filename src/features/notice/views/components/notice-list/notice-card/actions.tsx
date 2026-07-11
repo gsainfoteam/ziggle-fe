@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { BookmarkSimpleIcon, ExportIcon } from '@phosphor-icons/react';
+import { BookmarkSimpleIcon, ShareFatIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { cn } from '@/common/utils';
+import { cn, shareOrCopy } from '@/common/utils';
 import { EmojiString, type Notice } from '@/features/notice/models';
 import {
   useAddReaction,
@@ -72,6 +72,7 @@ export const NoticeCardActionsDisplay = ({
       >
         <div className="flex items-center gap-1">
           <Button
+            type="button"
             animated
             onClick={handleFireClick}
             className="flex cursor-pointer items-center"
@@ -96,6 +97,7 @@ export const NoticeCardActionsDisplay = ({
 
       <div className="flex items-center gap-2">
         <Button
+          type="button"
           animated
           onClick={handleBookmarkClick}
           className="flex cursor-pointer items-center"
@@ -109,14 +111,16 @@ export const NoticeCardActionsDisplay = ({
 
         <LogClick eventName={LogEvents.noticeClickShare} properties={{ id }}>
           <Button
+            type="button"
             animated
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               onShare();
             }}
             className="flex cursor-pointer items-center"
           >
-            <ExportIcon className="text-text dark:text-dark_white size-6" />
+            <ShareFatIcon className="text-text dark:text-dark_white size-6" />
           </Button>
         </LogClick>
       </div>
@@ -164,16 +168,30 @@ export const NoticeCardActions = ({
     await toggleBookmark({ params: { path: { id } }, body: { bookmarked } });
   };
 
-  const handleShare = () => {
-    if (!navigator.canShare) {
-      toast.error(t('detail.share.unsupported'));
-      return;
-    }
-    navigator.share({
+  const handleShare = async () => {
+    const url = `${window.location.origin}/notice/${id}`;
+    const result = await shareOrCopy({
       title,
       text: t('detail.share.content', { title }),
-      url: window.location.href,
+      url,
+      copyText: t('detail.copy_link.content', { title, link: url }),
     });
+
+    if (result === 'copied') {
+      toast.success(
+        <div className="flex flex-col text-sm font-medium">
+          <span>{t('detail.copy_link.success')}</span>
+          <span className="text-xs font-normal">
+            {t('detail.copy_link.success_hint')}
+          </span>
+        </div>,
+      );
+      return;
+    }
+
+    if (result === 'unsupported') {
+      toast.error(t('detail.share.unsupported'));
+    }
   };
 
   return (

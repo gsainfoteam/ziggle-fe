@@ -74,7 +74,7 @@ export function SearchPanel({
         <div className="dark:bg-dark_dark sticky top-0 z-10 hidden bg-white px-5 pt-5 md:block">
           <SearchInput value={query} onSubmit={onSubmitQuery} />
         </div>
-        <div className="px-5 pb-5">
+        <div className="p-5">
           {query ? (
             <SearchResults
               search={query}

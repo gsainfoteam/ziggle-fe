@@ -49,7 +49,6 @@ export const LogEvents = {
   detailClickImage: 'detail_click_image',
   detailClickReaction: 'detail_click_reaction',
   detailClickShare: 'detail_click_share',
-  detailClickCopyLink: 'detail_click_copy_link',
   // only for author
   detailClickEdit: 'detail_click_edit',
   detailClickRemove: 'detail_click_remove',

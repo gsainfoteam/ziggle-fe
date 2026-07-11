@@ -116,8 +116,12 @@ const Footer = ({ id, title, reactions, isBookmarked }: FooterProps) => (
 );
 
 export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
-  <Link to="/notice/$id" params={{ id: notice.id.toString() }}>
-    <div className="text-text flex flex-col gap-3">
+  <div className="text-text flex flex-col gap-3">
+    <Link
+      to="/notice/$id"
+      params={{ id: notice.id.toString() }}
+      className="flex flex-col gap-3"
+    >
       <Header
         author={notice.author}
         createdAt={notice.createdAt}
@@ -134,12 +138,12 @@ export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
         isViewed={notice.isViewed}
         searchQuery={searchQuery}
       />
-      <Footer
-        id={notice.id}
-        title={notice.title}
-        reactions={notice.reactions}
-        isBookmarked={notice.isBookmarked}
-      />
-    </div>
-  </Link>
+    </Link>
+    <Footer
+      id={notice.id}
+      title={notice.title}
+      reactions={notice.reactions}
+      isBookmarked={notice.isBookmarked}
+    />
+  </div>
 );

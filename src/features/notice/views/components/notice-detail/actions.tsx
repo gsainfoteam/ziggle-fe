@@ -1,10 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
-import {
-  BookmarkSimpleIcon,
-  CopyIcon,
-  ExportIcon,
-} from '@phosphor-icons/react';
+import { BookmarkSimpleIcon, ShareFatIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
@@ -14,7 +10,7 @@ import SurprisedFace from '@/assets/icons/surprised-face-with-open-mouth.svg?rea
 import ThinkingFace from '@/assets/icons/thinking-face.svg?react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { cn } from '@/common/utils';
+import { cn, shareOrCopy } from '@/common/utils';
 import { EmojiString, type Reaction } from '@/features/notice/models';
 import {
   useAddReaction,
@@ -130,7 +126,7 @@ export function NoticeDetailActionsProvider({
 
 interface ActionButtonProps {
   isSelected: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   variant?: ButtonVariant;
   label?: string;
@@ -273,10 +269,6 @@ export function NoticeDetailActions({
       <LogClick eventName={LogEvents.detailClickShare} properties={{ id }}>
         <ShareButton title={title} variant={variant} />
       </LogClick>
-
-      <LogClick eventName={LogEvents.detailClickCopyLink} properties={{ id }}>
-        <CopyLinkButton title={title} variant={variant} />
-      </LogClick>
     </>
   );
 
@@ -311,14 +303,32 @@ const ShareButton = ({
   variant?: ButtonVariant;
 }) => {
   const { t } = useTranslation('notice');
-  const handleShare = () => {
-    if (!navigator.canShare) return toast.error(t('detail.share.unsupported'));
-    navigator.share({
+  const handleShare = async () => {
+    const url = window.location.href;
+    const result = await shareOrCopy({
       title,
       text: t('detail.share.content', { title }),
-      url: window.location.href,
+      url,
+      copyText: t('detail.copy_link.content', { title, link: url }),
     });
+
+    if (result === 'copied') {
+      toast.success(
+        <div className="flex flex-col text-sm font-medium">
+          <span>{t('detail.copy_link.success')}</span>
+          <span className="text-xs font-normal">
+            {t('detail.copy_link.success_hint')}
+          </span>
+        </div>,
+      );
+      return;
+    }
+
+    if (result === 'unsupported') {
+      toast.error(t('detail.share.unsupported'));
+    }
   };
+
   return (
     <ActionButton
       isSelected={false}
@@ -326,45 +336,9 @@ const ShareButton = ({
       variant={variant}
       label={t('detail.share.action')}
     >
-      <ExportIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
+      <ShareFatIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
       {variant === 'inline' && (
         <span className="text-base">{t('detail.share.action')}</span>
-      )}
-    </ActionButton>
-  );
-};
-
-const CopyLinkButton = ({
-  title,
-  variant = 'inline',
-}: {
-  title: string;
-  variant?: ButtonVariant;
-}) => {
-  const { t } = useTranslation('notice');
-  const handleCopy = () => {
-    navigator.clipboard.writeText(
-      t('detail.copy_link.content', { title, link: window.location.href }),
-    );
-    toast.success(
-      <div className="flex flex-col text-sm font-medium">
-        <span>{t('detail.copy_link.success')}</span>
-        <span className="text-xs font-normal">
-          {t('detail.copy_link.success_hint')}
-        </span>
-      </div>,
-    );
-  };
-  return (
-    <ActionButton
-      isSelected={false}
-      onClick={handleCopy}
-      variant={variant}
-      label={t('detail.copy_link.action')}
-    >
-      <CopyIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
-      {variant === 'inline' && (
-        <span className="text-base">{t('detail.copy_link.action')}</span>
       )}
     </ActionButton>
   );

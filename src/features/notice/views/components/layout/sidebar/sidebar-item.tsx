@@ -13,7 +13,7 @@ interface SidebarItemProps {
 }
 
 const baseRow =
-  'text-text dark:text-dark_white focus-visible:ring-primary flex w-full items-center gap-3 rounded-md px-2.5 py-1.5 transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+  'text-text dark:text-dark_white focus-visible:ring-primary flex w-full cursor-pointer items-center gap-3 rounded-md px-2.5 py-1.5 transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
 const inactiveRow = 'dark:hover:bg-dark_greyDark hover:bg-gray-100';
 
 export const sidebarRowClass = cn(baseRow, inactiveRow);
