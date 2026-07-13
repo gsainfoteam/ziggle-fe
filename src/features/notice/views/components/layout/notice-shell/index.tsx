@@ -2,10 +2,8 @@ import { type ReactNode, useState } from 'react';
 
 import { Link, useLocation } from '@tanstack/react-router';
 
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogoOnly from '@/assets/logos/ziggle-logo-only.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { AppBanner, LogClick } from '@/common/components';
+import TitleLong from '@/assets/logos/title-long.svg?react';
+import { AppBanner, LogClick, ZiggleLogo } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
 import { Category } from '@/features/notice/viewmodels';
@@ -60,12 +58,21 @@ export function NoticeShell({ children }: { children: ReactNode }) {
               )}
             >
               <LogClick eventName={LogEvents.navBarClickLogo}>
-                <Link to="/" className="flex h-8 items-center pl-1.5">
-                  <ZiggleLogoOnly className="h-8 shrink-0 group-hover/sb:hidden xl:hidden" />
-                  <span className="hidden group-hover/sb:block xl:block">
-                    <ZiggleLogo className="h-8 overflow-visible dark:hidden" />
-                    <ZiggleLogoDark className="hidden h-8 overflow-visible dark:block" />
+                <Link
+                  to="/"
+                  className="text-text flex h-8 items-center gap-3 px-2.5"
+                >
+                  {/* size-5 아이콘 열과 중심만 맞추고, 불 마크는 h-8 유지 */}
+                  <span className="flex size-5 shrink-0 items-center justify-center overflow-visible">
+                    <ZiggleLogo
+                      variant="mark"
+                      className="h-8 overflow-visible"
+                    />
                   </span>
+                  <TitleLong
+                    aria-hidden
+                    className="hidden h-8 w-auto overflow-visible group-hover/sb:inline xl:inline"
+                  />
                 </Link>
               </LogClick>
               <Sidebar collapsible />

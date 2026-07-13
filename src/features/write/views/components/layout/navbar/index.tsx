@@ -3,11 +3,7 @@ import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { UserIcon } from '@phosphor-icons/react';
-import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react';
-import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Avatar, Button, LogClick } from '@/common/components';
+import { Avatar, Button, LogClick, ZiggleLogo } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { useUser } from '@/features/auth';
 
@@ -20,14 +16,14 @@ export const NavbarWrite = () => {
       <div className="relative flex h-full w-full items-center justify-between">
         <LogClick eventName={LogEvents.navBarClickLogo}>
           <Link to="/">
-            <div className="block dark:hidden">
-              <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
-            </div>
-            <div className="hidden dark:block">
-              <ZiggleLogoDark className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogoDark className="h-8 overflow-visible md:hidden" />
-            </div>
+            <ZiggleLogo
+              variant="full"
+              className="hidden h-8 overflow-visible md:inline-flex"
+            />
+            <ZiggleLogo
+              variant="compact"
+              className="h-8 overflow-visible md:hidden"
+            />
           </Link>
         </LogClick>
         <div className="mr-2.5 flex h-full flex-row-reverse items-center md:mr-5 md:w-full">

@@ -2,9 +2,7 @@ import { useSearch } from '@tanstack/react-router';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Button, Dialog } from '@/common/components';
+import { Button, Dialog, ZiggleLogo } from '@/common/components';
 import { useAuth, useAuthRedirect } from '@/features/auth';
 
 import LandingGrids from './components/landing-grids';
@@ -29,12 +27,11 @@ export function LandingModal() {
         <LandingGrids />
         <div className="flex w-full flex-col items-center justify-between p-4 md:w-96 md:p-6">
           <div className="flex h-110 w-fit flex-col items-center justify-center">
-            <div className="mb-5 inline-block dark:hidden">
-              <ZiggleLogo className="w-50 md:w-55" />
-            </div>
-            <div className="mb-5 hidden dark:inline-block">
-              <ZiggleLogoDark className="w-50 md:w-55" />
-            </div>
+            {/* 모달이 항상 흰 배경이라 다크모드여도 타이틀은 짙은 색 유지 */}
+            <ZiggleLogo
+              variant="full"
+              className="text-dark_dark mb-5 h-14 md:h-15"
+            />
             <div className="text-center text-lg font-bold">
               {t('home.subtitle')}
             </div>
