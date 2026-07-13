@@ -5,11 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { UserIcon } from '@phosphor-icons/react';
 import { Avatar, Button, LogClick, ZiggleLogo } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
+import { useIsDesktop } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
 export const NavbarWrite = () => {
   const { t } = useTranslation('layout');
   const { data: user } = useUser();
+  const isDesktop = useIsDesktop();
 
   return (
     <header className="text-text flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
@@ -17,12 +19,8 @@ export const NavbarWrite = () => {
         <LogClick eventName={LogEvents.navBarClickLogo}>
           <Link to="/">
             <ZiggleLogo
-              variant="full"
-              className="hidden h-8 overflow-visible md:inline-flex"
-            />
-            <ZiggleLogo
-              variant="compact"
-              className="h-8 overflow-visible md:hidden"
+              variant={isDesktop ? 'full' : 'compact'}
+              className="h-8 overflow-visible"
             />
           </Link>
         </LogClick>

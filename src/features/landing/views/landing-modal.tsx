@@ -27,17 +27,13 @@ export function LandingModal() {
         <LandingGrids />
         <div className="flex w-full flex-col items-center justify-between p-4 md:w-96 md:p-6">
           <div className="flex h-110 w-fit flex-col items-center justify-center">
-            {/* 모달이 항상 흰 배경이라 다크모드여도 타이틀은 짙은 색 유지 */}
-            <ZiggleLogo
-              variant="full"
-              className="text-dark_dark mb-5 h-14 md:h-15"
-            />
+            <ZiggleLogo variant="full" className="mb-5 h-14 md:h-15" />
             <div className="text-center text-lg font-bold">
               {t('home.subtitle')}
             </div>
           </div>
           <div className="flex h-fit w-full flex-col items-center gap-3">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-secondaryText text-sm">
               <Trans
                 t={t}
                 i18nKey="home.policy"
