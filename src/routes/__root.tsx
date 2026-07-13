@@ -1,19 +1,13 @@
-import { TanStackDevtools } from '@tanstack/react-devtools';
 import { Outlet, createRootRoute } from '@tanstack/react-router';
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+
+import { OverlayProvider } from 'overlay-kit';
 
 import '../styles.css';
-import { Toaster } from 'sonner';
-
-import { ThemeProvider } from '@/common/lib/theme';
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <ThemeProvider>
-        <Toaster />
-        <Outlet />
-      </ThemeProvider>
+    <OverlayProvider>
+      <Outlet />
       {/* <TanStackDevtools
         config={{ position: 'top-right' }}
         plugins={[
@@ -23,6 +17,6 @@ export const Route = createRootRoute({
           },
         ]}
       /> */}
-    </>
+    </OverlayProvider>
   ),
 });

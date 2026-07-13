@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
-import { useNavigate, useSearch } from '@tanstack/react-router';
+import { useLocation, useNavigate, useSearch } from '@tanstack/react-router';
 import type { DragControls } from 'framer-motion';
 
 import {
+  Category,
   HOME_PANEL_KEY,
   type PanelConfig,
   useDeck,
@@ -16,6 +17,10 @@ import {
 } from '../../layout/use-notice-nav';
 import { SortDropdown } from '../sort-dropdown';
 import { List } from './list';
+
+const categoryPaths = new Set(
+  Object.values(Category).map((c) => `/${c.toLowerCase()}`),
+);
 
 export function Panel({
   item,
@@ -30,6 +35,7 @@ export function Panel({
 }) {
   const resolve = useNavItemByKey();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const search = useSearch({ strict: false });
   const setOrderBy = useDeck((s) => s.setOrderBy);
   const [localPage, setLocalPage] = useState(0);
@@ -42,11 +48,14 @@ export function Panel({
     ? (panel.orderBy ?? navItem.orderBy)
     : (search.orderBy ?? navItem.orderBy);
   const page = isDeck ? localPage : (search.page ?? 0);
+  const hideTitleOnMobile =
+    pathname === '/home' || categoryPaths.has(pathname);
 
   return (
     <PanelShell
       title={navItem.title}
       titleIcon={navItem.ActiveIcon}
+      hideTitleOnMobile={hideTitleOnMobile}
       size={size}
       onHeaderPointerDown={
         dragControls ? (e) => dragControls.start(e) : undefined

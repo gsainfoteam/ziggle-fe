@@ -44,7 +44,7 @@ export function SearchResults({
         <div className="align-center flex flex-col justify-center">
           <div className="h-25" />
           <div className="mx-auto h-2.5" />
-          <SearchNoResult />
+          <SearchNoResult className="mx-auto w-40 md:w-48" />
           <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
             {t('search.no_result')}
           </p>
@@ -55,7 +55,7 @@ export function SearchResults({
 
   return (
     <>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full min-w-0 flex-col">
         {notices.list.map((notice, index) => (
           <Fragment key={notice.id}>
             {index > 0 ? <ListDivider /> : null}

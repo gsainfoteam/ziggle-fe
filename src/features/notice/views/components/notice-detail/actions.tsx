@@ -20,7 +20,7 @@ import {
 
 import { FlameReactionIcon } from '../flame-reaction-icon';
 
-const EMOJI_WIDTH_INLINE = 28;
+const EMOJI_WIDTH_INLINE = 22;
 const EMOJI_WIDTH_RAIL = 24;
 
 const faceEmojis: Partial<
@@ -143,6 +143,7 @@ const ActionButton = ({
     type="button"
     title={variant === 'rail' ? label : undefined}
     aria-label={variant === 'rail' ? label : undefined}
+    aria-pressed={isSelected}
     className={cn(
       'cursor-pointer border-none transition outline-none',
       variant === 'rail'
@@ -153,10 +154,10 @@ const ActionButton = ({
               : 'text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark',
           )
         : cn(
-            'flex h-10 items-center gap-1.75 rounded-full px-3.25 py-1.25',
+            'flex h-8 items-center gap-1 rounded-full border px-2.5 py-1',
             isSelected
-              ? 'bg-greyLight dark:bg-dark_greyBorder text-text dark:text-dark_white ring-grey/50 ring-1 dark:ring-transparent'
-              : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
+              ? 'border-primary/40 bg-primary/10 text-primary'
+              : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white border-transparent',
           ),
     )}
     onClick={onClick}
@@ -201,7 +202,8 @@ const ReactionButton = ({
         className={cn(
           variant === 'rail'
             ? 'text-[10px] leading-none font-medium'
-            : 'text-base',
+            : 'text-sm',
+          isReacted && variant === 'inline' && 'text-primary font-medium',
         )}
       >
         {count}
@@ -254,15 +256,17 @@ export function NoticeDetailActions({
         {bookmarked ? (
           <BookmarkSimpleIcon
             weight="fill"
-            className={variant === 'rail' ? 'size-5' : 'size-6'}
+            className={cn('text-primary size-5')}
           />
         ) : (
-          <BookmarkSimpleIcon
-            className={variant === 'rail' ? 'size-5' : 'size-6'}
-          />
+          <BookmarkSimpleIcon className="size-5" />
         )}
         {variant === 'inline' && (
-          <span className="text-base">{bookmarkLabel}</span>
+          <span
+            className={cn('text-sm', bookmarked && 'text-primary font-medium')}
+          >
+            {bookmarkLabel}
+          </span>
         )}
       </ActionButton>
 
@@ -288,9 +292,11 @@ export function NoticeDetailActions({
   }
 
   return (
-    <div className={cn('flex flex-col gap-3', className)}>
-      <div className="flex flex-wrap gap-2">{reactionButtons}</div>
-      <div className="flex flex-wrap gap-2">{utilityButtons}</div>
+    <div className={cn('flex flex-col gap-2', className)}>
+      <div className="flex flex-nowrap gap-1.5 overflow-x-auto">
+        {reactionButtons}
+      </div>
+      <div className="flex flex-wrap gap-1.5">{utilityButtons}</div>
     </div>
   );
 }
@@ -336,9 +342,9 @@ const ShareButton = ({
       variant={variant}
       label={t('detail.share.action')}
     >
-      <ShareFatIcon className={variant === 'rail' ? 'size-5' : 'size-6'} />
+      <ShareFatIcon className="size-5" />
       {variant === 'inline' && (
-        <span className="text-base">{t('detail.share.action')}</span>
+        <span className="text-sm">{t('detail.share.action')}</span>
       )}
     </ActionButton>
   );

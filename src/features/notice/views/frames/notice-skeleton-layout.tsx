@@ -13,7 +13,11 @@ import Pagination from '../components/notice-list/pagination';
 function NoticeListSkeleton() {
   const recent = useNoticeNav().feeds.recent;
   return (
-    <PanelShell title={recent.title} titleIcon={recent.ActiveIcon}>
+    <PanelShell
+      title={recent.title}
+      titleIcon={recent.ActiveIcon}
+      hideTitleOnMobile
+    >
       <div className="flex w-full flex-col items-center gap-5">
         <div className="flex w-full flex-col items-center">
           <div className="flex w-full flex-col">

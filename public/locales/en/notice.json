@@ -75,6 +75,7 @@
     "sort": {
       "deadline": "Deadline",
       "hot": "Popular",
+      "label": "Sort",
       "recent": "Recent"
     },
     "unpin": "Unpin column"
@@ -110,5 +111,10 @@
     "search": "Search",
     "urgent": "Near Deadline",
     "write": "Write Notice"
+  },
+  "tabs": {
+    "profile": "Profile",
+    "write": "Write",
+    "all": "All"
   }
 }

@@ -12,13 +12,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 interface PopoverPlaygroundArgs {
   placement?: Placement;
-  responsive?: boolean;
   offset?: number;
 }
 
 const PopoverPlayground = ({
   placement = 'bottom-start',
-  responsive = false,
   offset = 8,
 }: PopoverPlaygroundArgs) => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
@@ -41,7 +39,6 @@ const PopoverPlayground = ({
         anchor={anchor}
         placement={placement}
         offset={offset}
-        responsive={responsive}
       >
         <Popover.Body className="w-64">
           <p className="text-sm font-semibold">앵커 기반 Popover</p>
@@ -73,7 +70,6 @@ const meta = {
         'right',
       ] satisfies Placement[],
     },
-    responsive: { control: 'boolean' },
     offset: { control: 'number' },
   },
 } satisfies Meta<typeof PopoverPlayground>;
@@ -82,63 +78,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { placement: 'bottom-start', responsive: false, offset: 8 },
+  args: { placement: 'bottom-start', offset: 8 },
 };
 
 export const TopEnd: Story = {
-  args: { placement: 'top-end', responsive: false, offset: 8 },
+  args: { placement: 'top-end', offset: 8 },
 };
 
 export const Right: Story = {
-  args: { placement: 'right', responsive: false, offset: 8 },
-};
-
-const ResponsiveMobileDemo = () => {
-  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="flex h-64 items-center justify-center">
-      <Button
-        variant="contained"
-        onClick={(event) => {
-          setAnchor(event.currentTarget);
-          setIsOpen(true);
-        }}
-      >
-        Popover 열기
-      </Button>
-      <Popover.Root
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        anchor={anchor}
-        placement="bottom-end"
-        responsive
-        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none"
-      >
-        <div className="dark:bg-dark_dark flex h-full w-full flex-col gap-4 bg-white p-6 md:h-auto md:w-72 md:rounded-2xl md:border md:p-4 md:shadow-xl">
-          <h3 className="text-lg font-semibold">Profile-style 패널</h3>
-          <p className="text-sm">
-            데스크탑은 anchor 옆 dropdown, 모바일은 풀스크린 takeover.
-          </p>
-          <Button
-            variant="outlined"
-            className="mt-auto"
-            onClick={() => setIsOpen(false)}
-          >
-            닫기
-          </Button>
-        </div>
-      </Popover.Root>
-    </div>
-  );
-};
-
-export const ResponsiveMobile: Story = {
-  render: () => <ResponsiveMobileDemo />,
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
-  },
+  args: { placement: 'right', offset: 8 },
 };
 
 const ImperativePopover = () => (
@@ -213,10 +161,8 @@ const ProfileMenuScenario = () => {
         onClose={() => setIsOpen(false)}
         anchor={anchor}
         placement="bottom-end"
-        responsive
-        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none"
       >
-        <div className="dark:bg-dark_dark dark:border-dark_greyBorder w-72 rounded-2xl border border-transparent bg-white p-5 shadow-2xl max-md:flex max-md:h-full max-md:w-full max-md:flex-col max-md:rounded-none max-md:border-none max-md:shadow-none">
+        <div className="dark:bg-dark_dark dark:border-dark_greyBorder w-72 rounded-2xl border border-transparent bg-white p-5 shadow-2xl">
           <div className="flex flex-col items-center gap-1 py-5">
             <div className="bg-greyLight dark:bg-dark_greyDark mb-2 flex size-16 items-center justify-center rounded-full text-2xl font-semibold">
               {mockUser.name[0]}

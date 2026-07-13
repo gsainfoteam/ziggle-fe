@@ -55,17 +55,19 @@ export const NoticeCardTags = ({ tags }: NoticeCardTagsProps) => {
   const extra = tags.length - limit;
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative w-full min-w-0 overflow-hidden">
       <div
         ref={measureRef}
-        className="pointer-events-none absolute flex flex-nowrap opacity-0"
+        className="pointer-events-none absolute top-0 left-0 h-0 overflow-hidden opacity-0"
         aria-hidden
       >
-        {tags.map((tag) => (
-          <span key={tag} data-tag-item className="shrink-0 pr-2">
-            <Tag name={tag} />
-          </span>
-        ))}
+        <div className="flex flex-nowrap">
+          {tags.map((tag) => (
+            <span key={tag} data-tag-item className="shrink-0 pr-2">
+              <Tag name={tag} />
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="flex flex-nowrap items-center gap-2 overflow-hidden">

@@ -116,11 +116,11 @@ const Footer = ({ id, title, reactions, isBookmarked }: FooterProps) => (
 );
 
 export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
-  <div className="text-text flex flex-col gap-3">
+  <div className="text-text flex w-full min-w-0 flex-col gap-3">
     <Link
       to="/notice/$id"
       params={{ id: notice.id.toString() }}
-      className="flex flex-col gap-3"
+      className="flex min-w-0 flex-col gap-3"
     >
       <Header
         author={notice.author}

@@ -1,6 +1,6 @@
 import { type ReactNode, useState } from 'react';
 
-import { Link } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 
 import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
 import ZiggleLogoOnly from '@/assets/logos/ziggle-logo-only.svg?react';
@@ -8,20 +8,42 @@ import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
 import { AppBanner, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
+import { Category } from '@/features/notice/viewmodels';
 
+import { BottomTabBar } from '../bottom-tab-bar';
+import { CategoryChips } from '../category-chips';
 import { Navbar } from '../navbar';
-import { MobileShell, Sidebar } from '../sidebar';
+import { Sidebar } from '../sidebar';
 import { WriteFab } from '../write-fab';
+
+const categoryPaths = new Set(
+  Object.values(Category).map((c) => `/${c.toLowerCase()}`),
+);
+
+function showCategoryChips(pathname: string) {
+  return pathname === '/home' || categoryPaths.has(pathname);
+}
 
 export function NoticeShell({ children }: { children: ReactNode }) {
   const [deckScrolled, setDeckScrolled] = useState(false);
+  const { pathname } = useLocation();
 
   return (
     <>
-      <MobileShell>
-        <div className="sticky top-0 z-50 md:hidden">
+      <div className="relative min-h-screen">
+        <div className="dark:bg-dark_dark sticky top-0 z-50 bg-white pt-[env(safe-area-inset-top)] md:hidden">
           <AppBanner />
           <Navbar />
+          {showCategoryChips(pathname) ? (
+            <div className="relative">
+              <CategoryChips />
+              {/* 스크롤 콘텐츠가 칩 뒤로 지나갈 때 딱딱 잘리지 않게 */}
+              <div
+                aria-hidden
+                className="dark:from-dark_dark pointer-events-none absolute inset-x-0 top-full h-5 bg-linear-to-b from-white to-transparent"
+              />
+            </div>
+          ) : null}
         </div>
 
         <div className="flex md:h-screen md:overflow-hidden">
@@ -51,15 +73,17 @@ export function NoticeShell({ children }: { children: ReactNode }) {
           </div>
 
           <div
-            className="flex-1 md:overflow-x-auto"
+            className="min-w-0 flex-1 overflow-x-hidden pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:overflow-x-auto md:pb-0"
             onScroll={(e) => setDeckScrolled(e.currentTarget.scrollLeft > 0)}
           >
-            <div className="flex md:w-max md:min-w-full md:justify-center md:gap-5 md:px-5 md:py-6.5">
+            <div className="flex w-full min-w-0 md:w-max md:min-w-full md:justify-center md:gap-5 md:px-5 md:py-6.5">
               {children}
             </div>
           </div>
         </div>
-      </MobileShell>
+
+        <BottomTabBar />
+      </div>
 
       <WriteFab />
     </>

@@ -22,11 +22,15 @@ import {
 } from './animation';
 import { DrawerContext, type DrawerSide } from './context';
 
+export type DrawerSize = 'compact' | 'default' | 'large';
+
 export interface DrawerRootProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
   side?: DrawerSide;
+  /** bottom/top only. compact=내용 높이, default=85vh, large=거의 전체 */
+  size?: DrawerSize;
   lockScroll?: boolean;
   closeOnEscape?: boolean;
   closeOnBackdrop?: boolean;
@@ -42,12 +46,13 @@ const sideLayoutClassName: Record<
 > = {
   bottom: {
     container: 'items-end justify-center',
-    panel: 'left-0 right-0 bottom-0 max-h-[85vh] rounded-t-2xl pt-8',
+    panel:
+      'left-0 right-0 bottom-0 rounded-t-2xl pt-8 pb-[max(1.25rem,env(safe-area-inset-bottom))]',
     handle: 'top-3 left-1/2 -translate-x-1/2 h-1 w-12',
   },
   top: {
     container: 'items-start justify-center',
-    panel: 'left-0 right-0 top-0 max-h-[85vh] rounded-b-2xl pb-8',
+    panel: 'left-0 right-0 top-0 rounded-b-2xl pb-8',
     handle: 'bottom-3 left-1/2 -translate-x-1/2 h-1 w-12',
   },
   left: {
@@ -62,11 +67,18 @@ const sideLayoutClassName: Record<
   },
 };
 
+const verticalSizeClassName: Record<DrawerSize, string> = {
+  compact: 'h-auto max-h-[85vh]',
+  default: 'max-h-[85vh]',
+  large: 'max-h-[calc(100dvh-1.5rem)]',
+};
+
 export const DrawerRoot = ({
   isOpen,
   onClose,
   children,
   side = 'bottom',
+  size = 'default',
   lockScroll = true,
   closeOnEscape = true,
   closeOnBackdrop = true,
@@ -102,6 +114,7 @@ export const DrawerRoot = ({
   );
 
   const layout = sideLayoutClassName[side];
+  const isVertical = side === 'bottom' || side === 'top';
 
   return (
     <DrawerContext.Provider value={{ side, titleId, descriptionId, onClose }}>
@@ -146,6 +159,7 @@ export const DrawerRoot = ({
                     'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark border bg-white shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
                     dragToDismiss && 'cursor-grab active:cursor-grabbing',
                     layout.panel,
+                    isVertical && verticalSizeClassName[size],
                     className,
                   )}
                   {...getFloatingProps()}

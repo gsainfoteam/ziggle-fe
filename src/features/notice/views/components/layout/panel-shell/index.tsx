@@ -21,7 +21,7 @@ const panelShell = cv({
 export type PanelSize = NonNullable<VariantProps<typeof panelShell>['size']>;
 
 const borderedPanelClass =
-  'md:rounded-2xl md:border md:border-greyBorder md:dark:border-dark_greyBorder md:bg-white md:p-5';
+  'md:rounded-2xl md:border md:border-greyBorder md:dark:border-dark_greyBorder md:bg-white p-5';
 
 export function PanelShell({
   title,
@@ -33,6 +33,7 @@ export function PanelShell({
   className,
   size,
   onHeaderPointerDown,
+  hideTitleOnMobile = false,
 }: {
   title?: ReactNode;
   titleIcon?: ReactNode;
@@ -44,30 +45,38 @@ export function PanelShell({
   aside?: ReactNode;
   className?: string;
   onHeaderPointerDown?: (e: PointerEvent) => void;
+  /** 모바일 카테고리 칩 바와 중복될 때 헤더 전체 숨김 (정렬은 칩 바로 이동) */
+  hideTitleOnMobile?: boolean;
 } & VariantProps<typeof panelShell>) {
   const panelWidthClass = panelShell({ size })
     .split(' ')
     .filter((token) => token.startsWith('md:w-'));
 
-  const titleHeader = title ? (
-    <header
-      onPointerDown={onHeaderPointerDown}
-      className={cn(
-        'flex shrink-0 items-center justify-between gap-2 px-2 pb-3',
-        onHeaderPointerDown && 'cursor-grab touch-none select-none',
-      )}
-    >
-      <h1 className="text-text dark:text-dark_white flex min-w-0 items-center gap-2 text-2xl font-bold">
-        {titleIcon && (
-          <span className="text-primary flex shrink-0 items-center [&>svg]:size-7">
-            {titleIcon}
-          </span>
+  const titleHeader =
+    title || headerRight ? (
+      <header
+        onPointerDown={onHeaderPointerDown}
+        className={cn(
+          'flex shrink-0 items-center justify-between gap-2 px-5 pt-4 pb-3 md:px-2 md:pt-0',
+          hideTitleOnMobile && 'hidden md:flex',
+          onHeaderPointerDown && 'cursor-grab touch-none select-none',
         )}
-        <span className="truncate">{title}</span>
-      </h1>
-      {headerRight}
-    </header>
-  ) : null;
+      >
+        {title ? (
+          <h1 className="text-text dark:text-dark_white flex min-w-0 items-center gap-2 text-2xl font-bold">
+            {titleIcon && (
+              <span className="text-primary flex shrink-0 items-center [&>svg]:size-7">
+                {titleIcon}
+              </span>
+            )}
+            <span className="truncate">{title}</span>
+          </h1>
+        ) : (
+          <span />
+        )}
+        {headerRight}
+      </header>
+    ) : null;
 
   if (leading || aside) {
     return (
@@ -104,7 +113,7 @@ export function PanelShell({
 
       <section
         className={cn(
-          'scrollbar-none flex w-full flex-col md:min-h-0 md:flex-1 md:overflow-y-auto',
+          'scrollbar-none flex w-full min-w-0 flex-col overflow-x-hidden md:min-h-0 md:flex-1 md:overflow-y-auto',
           borderedPanelClass,
           className,
         )}

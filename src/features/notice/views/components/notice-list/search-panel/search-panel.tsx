@@ -63,18 +63,19 @@ export function SearchPanel({
     <PanelShell
       title={t('sidebar.search')}
       titleIcon={<MagnifyingGlassIcon weight="bold" />}
+      hideTitleOnMobile
       size={size}
       onHeaderPointerDown={
         dragControls ? (e) => dragControls.start(e) : undefined
       }
       headerRight={actions}
-      className="md:p-0"
+      className="p-0"
     >
       <div className="flex w-full min-w-0 flex-col">
-        <div className="dark:bg-dark_dark sticky top-0 z-10 hidden bg-white px-5 pt-5 md:block">
+        <div className="dark:bg-dark_dark sticky top-0 z-10 bg-white px-5 md:pt-5">
           <SearchInput value={query} onSubmit={onSubmitQuery} />
         </div>
-        <div className="p-5">
+        <div className="px-5 py-4 md:p-5">
           {query ? (
             <SearchResults
               search={query}

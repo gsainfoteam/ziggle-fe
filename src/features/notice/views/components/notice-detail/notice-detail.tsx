@@ -122,7 +122,7 @@ export const NoticeDetail = ({
   isOwner = false,
   additionalContents = [],
 }: NoticeDetailProps) => (
-  <div className="mx-auto flex w-full max-w-200 flex-col gap-6 p-5 md:p-0">
+  <div className="mx-auto flex w-full max-w-200 flex-col gap-6">
     <Header noticeId={notice.id} author={notice.author} />
     {isOwner && <NoticeDetailAuthorActions noticeId={notice.id} />}
     <Body

@@ -68,6 +68,8 @@ export function NoticeDetailFrame() {
       <PanelShell
         leading={<NoticeDetailBackButton noticeId={efficientNotice.id} />}
         aside={<NoticeDetailActions variant="rail" />}
+        // 모바일에서 sticky Navbar pb와 섹션 pt 중복 방지. 스크롤 시 헤더 pb는 유지.
+        className="pt-0 md:pt-5"
       >
         <SendPushAlarm {...efficientNotice} />
         <NoticeDetail

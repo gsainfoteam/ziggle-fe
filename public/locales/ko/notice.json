@@ -75,6 +75,7 @@
     "sort": {
       "deadline": "마감임박",
       "hot": "인기",
+      "label": "정렬",
       "recent": "최근"
     },
     "unpin": "컬럼 고정 해제"
@@ -110,5 +111,10 @@
     "search": "검색",
     "urgent": "마감임박",
     "write": "공지 작성"
+  },
+  "tabs": {
+    "profile": "프로필",
+    "write": "작성",
+    "all": "전체"
   }
 }
