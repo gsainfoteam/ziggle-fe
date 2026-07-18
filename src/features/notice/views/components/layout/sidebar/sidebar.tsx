@@ -10,8 +10,8 @@ import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
 import { SidebarItem, sidebarRowClass } from './sidebar-item';
-import { type NavRowItem, useNoticeNav } from '../use-notice-nav';
 import { ProfileModalButton } from '../../modals/profile-modal';
+import { type NavRowItem, useNoticeNav } from '../use-notice-nav';
 
 export const Sidebar = ({
   onClose,

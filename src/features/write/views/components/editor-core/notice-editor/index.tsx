@@ -43,10 +43,7 @@ import { NoticeTypeSelector } from '../../form-fields/notice-type-selector';
 import { TagInput } from '../../form-fields/tag-input';
 import { AddAdditionalNotice } from '../add-additional-notice';
 import { DeepLButton } from '../deep-l-button';
-import {
-  NoticeContentField,
-  NoticeTitleField,
-} from '../title-and-content';
+import { NoticeContentField, NoticeTitleField } from '../title-and-content';
 import { EditorRefsProvider } from './editor-refs-context';
 
 const NoticeTypeCategoryMapper = {
@@ -237,10 +234,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       <section className="flex flex-col gap-6">
         <h2 className={writeBlockHeadingClassName}>{t('sections.content')}</h2>
 
-        <NoticeTitleField
-          lang="korean"
-          disabled={isEditMode && hasTimedOut}
-        />
+        <NoticeTitleField lang="korean" disabled={isEditMode && hasTimedOut} />
 
         {english && (
           <NoticeTitleField
@@ -255,7 +249,6 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
         {english ? (
           <>
             <LanguageTab />
-            {/* 탭 전환 시 언마운트하지 않아 에디터 상태·DeepL 소스 유지 */}
             <div className={writingTab === 'korean' ? undefined : 'hidden'}>
               <NoticeContentField
                 lang="korean"
@@ -265,9 +258,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
             </div>
             <div
               className={
-                writingTab === 'english'
-                  ? writeFieldStackClassName
-                  : 'hidden'
+                writingTab === 'english' ? writeFieldStackClassName : 'hidden'
               }
             >
               <NoticeContentField
@@ -310,9 +301,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
           <div className="flex items-center gap-3">
             <p className={writeFieldLabelClassName}>
               {t(
-                isEditMode
-                  ? 'fields.deadline.change'
-                  : 'fields.deadline.setup',
+                isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup',
               )}
             </p>
             <Toggle

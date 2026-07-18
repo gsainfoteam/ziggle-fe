@@ -8,6 +8,7 @@ import {
 } from '@phosphor-icons/react';
 
 import { ThemeContext } from './context';
+
 import type { Theme } from './context';
 
 export const themeOptions: readonly { value: Theme; Icon: Icon }[] = [

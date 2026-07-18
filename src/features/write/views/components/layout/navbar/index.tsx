@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { LogClick, ZiggleLogo } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
-/** 모바일 작성 헤더 — 홈 Navbar와 동일 패딩·safe-area, 컴팩트 뒤로가기 */
 export const NavbarWrite = () => {
   const { t } = useTranslation('layout');
 

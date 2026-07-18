@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 
+import { ImageIcon } from '@phosphor-icons/react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { ImageIcon } from '@phosphor-icons/react';
 import { Button } from '@/common/components';
 import { cn } from '@/common/utils';
 import type {

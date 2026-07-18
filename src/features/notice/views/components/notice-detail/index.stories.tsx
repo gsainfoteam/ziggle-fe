@@ -10,10 +10,11 @@ import {
   type NoticeDetail as NoticeDetailModel,
 } from '@/features/notice/models';
 
-import { NoticeDetail } from '.';
-import type { NoticeDetailProps } from '.';
 import { NoticeDetailActionsProvider } from './actions';
 
+import { NoticeDetail } from '.';
+
+import type { NoticeDetailProps } from '.';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
 const baseNotice: NoticeDetailModel = {

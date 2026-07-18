@@ -11,7 +11,6 @@ import { NoticeCard } from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-/** Stable picsum URLs with explicit aspect ratios for layout review. */
 const images = {
   square: 'https://picsum.photos/seed/notice-1x1/400/400',
   landscape4x3: 'https://picsum.photos/seed/notice-4x3/400/300',

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
+import { XIcon } from '@phosphor-icons/react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { XIcon } from '@phosphor-icons/react';
 import {
   useSearchTags,
   type NoticeFormValues,

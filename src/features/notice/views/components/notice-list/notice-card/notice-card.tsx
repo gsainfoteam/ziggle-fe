@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router';
 
-import dayjs from 'dayjs';
 import { EyeIcon } from '@phosphor-icons/react';
+import dayjs from 'dayjs';
 
 import DefaultProfile from '@/assets/icons/default-profile.svg?react';
 import type { Notice } from '@/features/notice/models';

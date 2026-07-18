@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { useLocation, useNavigate, useSearch } from '@tanstack/react-router';
-import type { DragControls } from 'framer-motion';
 
+import { List } from './list';
 import {
   Category,
   HOME_PANEL_KEY,
@@ -16,7 +16,8 @@ import {
   useNavItemByKey,
 } from '../../layout/use-notice-nav';
 import { SortDropdown } from '../sort-dropdown';
-import { List } from './list';
+
+import type { DragControls } from 'framer-motion';
 
 const categoryPaths = new Set(
   Object.values(Category).map((c) => `/${c.toLowerCase()}`),

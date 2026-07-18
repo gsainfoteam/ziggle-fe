@@ -1,6 +1,6 @@
+import { ArrowRightIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Button } from '@/common/components';
 
 interface PaginationProps {

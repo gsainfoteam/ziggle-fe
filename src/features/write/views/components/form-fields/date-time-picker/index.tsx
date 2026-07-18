@@ -30,7 +30,12 @@ export const DateTimePicker = ({
           const next = e.target.value;
           if (!next) return;
           const [year, month, day] = next.split('-').map(Number);
-          onChange(dateTime.year(year).month(month - 1).date(day));
+          onChange(
+            dateTime
+              .year(year)
+              .month(month - 1)
+              .date(day),
+          );
         }}
         className={cn(fieldClassName, 'min-w-[9.5rem]')}
       />

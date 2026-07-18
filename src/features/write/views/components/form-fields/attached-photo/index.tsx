@@ -1,6 +1,5 @@
-import { useTranslation } from 'react-i18next';
-
 import { XIcon } from '@phosphor-icons/react';
+import { useTranslation } from 'react-i18next';
 
 interface ImagePreviewItemProps {
   src: string;

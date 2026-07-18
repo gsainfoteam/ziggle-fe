@@ -164,7 +164,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* 브라우저 기본(금색/파란) 링 대신 브랜드 primary */
   :focus {
     outline: none;
   }

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
+import { XIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import { XIcon } from '@phosphor-icons/react';
 import { isMobile } from '@/common/utils';
 
 const DISMISSED_KEY = 'app_banner_dismissed';

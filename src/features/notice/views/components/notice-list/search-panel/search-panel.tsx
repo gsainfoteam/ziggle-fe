@@ -1,16 +1,18 @@
 import { useState, type ReactNode } from 'react';
 
-import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
-import type { DragControls } from 'framer-motion';
+
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
+import { SearchInput } from './search-input';
+import { SearchResults } from './search-results';
 import { SEARCH_PANEL_KEY } from '../../../../viewmodels';
 import { PanelRemoveButton } from '../../layout/deck/remove-button';
 import { PanelShell, type PanelSize } from '../../layout/panel-shell';
 import { SearchAnimation } from '../search-animation';
-import { SearchInput } from './search-input';
-import { SearchResults } from './search-results';
+
+import type { DragControls } from 'framer-motion';
 
 export function SearchPanel({
   inDeck,

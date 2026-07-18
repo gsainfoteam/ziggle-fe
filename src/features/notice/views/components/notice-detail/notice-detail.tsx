@@ -1,5 +1,6 @@
-import { useRouter } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
+
+import { useRouter } from '@tanstack/react-router';
 
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';

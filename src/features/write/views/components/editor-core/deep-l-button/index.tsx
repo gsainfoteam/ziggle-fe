@@ -14,7 +14,6 @@ interface DeepLButtonProps {
 const htmlToPlainText = (html: string) =>
   new DOMParser().parseFromString(html, 'text/html').body.textContent ?? '';
 
-
 export const DeepLButton = ({ lang }: DeepLButtonProps) => {
   const { t } = useTranslation('write');
   const { control } = useFormContext<NoticeFormValues>();
@@ -34,7 +33,9 @@ export const DeepLButton = ({ lang }: DeepLButtonProps) => {
       onClick={(e) => {
         e.preventDefault();
         const fromEditor = editorRef.current?.getContent({ format: 'text' });
-        const text = (fromEditor?.trim() ? fromEditor : htmlToPlainText(formHtml)).trim();
+        const text = (
+          fromEditor?.trim() ? fromEditor : htmlToPlainText(formHtml)
+        ).trim();
         window.open(`${DEEPL_URL}/${encodeURIComponent(text)}`, '_blank');
       }}
     >

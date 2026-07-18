@@ -7,7 +7,6 @@ import type { NoticeFormValues } from '@/features/write/viewmodels';
 
 import { writeRequiredMarkClassName } from '../field-styles';
 
-/** 본문 언어 탭 — 제목은 항상 노출, 에디터만 전환 */
 export const LanguageTab = () => {
   const { t } = useTranslation('write');
   const { control } = useFormContext<NoticeFormValues>();

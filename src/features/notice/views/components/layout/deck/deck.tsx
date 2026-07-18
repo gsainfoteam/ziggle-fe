@@ -2,6 +2,7 @@ import { AnimatePresence, Reorder, useDragControls } from 'framer-motion';
 
 import { useIsDesktop } from '@/common/utils';
 
+import { AddPanelButton } from './add-panel-button';
 import {
   type PanelConfig,
   SEARCH_PANEL_KEY,
@@ -10,7 +11,6 @@ import {
 import { Panel } from '../../notice-list/panel';
 import { SearchPanel } from '../../notice-list/search-panel';
 import { type PanelSize } from '../panel-shell';
-import { AddPanelButton } from './add-panel-button';
 
 function panelSizeForCount(count: number): PanelSize {
   if (count <= 1) return 'wide';

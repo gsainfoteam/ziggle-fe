@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useTranslation } from 'react-i18next';
-
 import { CaretRightIcon } from '@phosphor-icons/react';
+import { useTranslation } from 'react-i18next';
 
 interface Slide {
   image: React.ComponentType<{ className?: string }>;

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Button, Dialog } from '@/common/components';
 import { cn } from '@/common/utils';
 

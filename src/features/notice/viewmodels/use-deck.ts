@@ -2,8 +2,9 @@ import { differenceBy, uniqBy } from 'es-toolkit';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { OrderBy } from '../models';
 import { HOME_PANEL_KEY } from './panel-keys';
+
+import type { OrderBy } from '../models';
 
 export interface PanelConfig {
   key: string;

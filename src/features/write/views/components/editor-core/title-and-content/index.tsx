@@ -76,7 +76,6 @@ export const NoticeTitleField = ({ lang, disabled }: NoticeTitleFieldProps) => {
 interface NoticeContentFieldProps {
   lang: Lang;
   disabled?: boolean;
-  /** LanguageTab이 라벨을 대신할 때 */
   hideLabel?: boolean;
 }
 
@@ -135,7 +134,7 @@ export const NoticeContentField = ({
   );
 };
 
-/** @deprecated 스토리/레거시 — 제목+본문 분리 필드 사용 */
+/** @deprecated */
 export const TitleAndContent = ({
   lang,
   disabled,

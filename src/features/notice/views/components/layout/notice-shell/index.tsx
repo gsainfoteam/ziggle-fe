@@ -10,9 +10,9 @@ import { Category } from '@/features/notice/viewmodels';
 
 import { BottomTabBar } from '../bottom-tab-bar';
 import { CategoryChips } from '../category-chips';
+import { FabStack } from '../fab-stack';
 import { Navbar } from '../navbar';
 import { Sidebar } from '../sidebar';
-import { FabStack } from '../fab-stack';
 
 const categoryPaths = new Set(
   Object.values(Category).map((c) => `/${c.toLowerCase()}`),

@@ -1,8 +1,8 @@
 import type { PointerEvent, ReactNode } from 'react';
 
-import type { VariantProps } from 'tailwind-variants';
-
 import { cn, cv } from '@/common/utils';
+
+import type { VariantProps } from 'tailwind-variants';
 
 const panelShell = cv({
   base: 'flex w-full flex-col md:h-[calc(100vh-3.25rem)] md:shrink-0 md:transition-[width] md:duration-200',

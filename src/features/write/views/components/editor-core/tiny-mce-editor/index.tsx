@@ -28,7 +28,6 @@ const THEME_VARS = [
   '--color-border',
 ] as const;
 
-/** iframe은 부모 CSS 변수를 못 물려받으므로 documentElement에 복사 */
 function syncIframeTheme(editor: EditorType) {
   const doc = editor.getDoc();
   if (!doc) return;
@@ -68,7 +67,6 @@ export const TinyMCEEditor = ({
   const editorRef = useRef<EditorType | null>(null);
   useImperativeHandle(ref, () => editorRef.current!);
 
-  // html class/.dark 전환을 감지해 iframe 변수만 갱신 (재마운트 없음)
   useEffect(() => {
     const sync = () => {
       const editor = editorRef.current;

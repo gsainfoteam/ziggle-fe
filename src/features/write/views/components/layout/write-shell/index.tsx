@@ -10,7 +10,6 @@ import { Sidebar } from '@/features/notice';
 
 import { NavbarWrite } from '../navbar';
 
-/** PC: notice와 동일 사이드바(뷰포트 고정) / 모바일: 폼 + 상단(로고·돌아가기)만 */
 export function WriteShell({ children }: { children: ReactNode }) {
   const isDesktop = useIsDesktop();
 
@@ -52,9 +51,7 @@ export function WriteShell({ children }: { children: ReactNode }) {
         ) : null}
 
         <div className="min-w-0 flex-1 overflow-y-auto">
-          <div className="mx-auto w-full max-w-150 p-5">
-            {children}
-          </div>
+          <div className="mx-auto w-full max-w-150 p-5">{children}</div>
         </div>
       </div>
     </div>

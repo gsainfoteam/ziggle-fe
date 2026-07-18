@@ -15,7 +15,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/common/utils';
-import { Category, type OrderBy } from '@/features/notice/viewmodels';
+import { type Category, type OrderBy } from '@/features/notice/viewmodels';
 
 import { SortDropdown } from '../../notice-list/sort-dropdown';
 import { useNoticeNav } from '../use-notice-nav';

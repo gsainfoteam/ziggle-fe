@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useRouter, useSearch } from '@tanstack/react-router';
 
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';

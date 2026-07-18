@@ -1,11 +1,8 @@
-/* TinyMCE UI — 앱 시맨틱 토큰으로 테마 동기화 */
-
 .tox-tinymce {
   border: none !important;
   background-color: var(--color-background) !important;
 }
 
-/* promotion: false여도 빈 슬롯이 남는 경우 있음 */
 .tox .tox-promotion {
   display: none !important;
 }
@@ -27,7 +24,6 @@
   box-shadow: none !important;
 }
 
-/* TinyMCE 기본 파란 포커스 링 → primary */
 .tox.tox-tinymce--focus {
   border-color: var(--color-primary) !important;
 }

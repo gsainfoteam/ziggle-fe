@@ -194,7 +194,9 @@ export const useHandleNoticeEdit = () => {
             toast.dismiss(loading);
             const result = await chooseDialog({
               title: t('toasts.international_additional_fail.title'),
-              description: t('toasts.international_additional_fail.description'),
+              description: t(
+                'toasts.international_additional_fail.description',
+              ),
               denyLabel: t('toasts.copy_international_additional'),
             });
             if (result.outcome === 'denied' && englishAdditionalContent) {

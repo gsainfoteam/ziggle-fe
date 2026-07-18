@@ -1,7 +1,8 @@
 import dayjs, { type Dayjs } from 'dayjs';
 import { isFile, isPlainObject, isString } from 'es-toolkit';
-import type { TFunction } from 'i18next';
 import { z } from 'zod';
+
+import type { TFunction } from 'i18next';
 
 export const TITLE_MAX_LENGTH = 50;
 export const BODY_MAX_LENGTH = 20000;

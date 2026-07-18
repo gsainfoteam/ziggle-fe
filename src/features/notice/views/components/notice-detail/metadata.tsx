@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import {
   CalendarBlankIcon,
   EyeIcon,
@@ -6,6 +5,7 @@ import {
   LinkIcon,
   PaperclipIcon,
 } from '@phosphor-icons/react';
+import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
 import type { NoticeDetail } from '@/features/notice/models';
