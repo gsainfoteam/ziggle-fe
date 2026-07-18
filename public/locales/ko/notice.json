@@ -18,7 +18,10 @@
     "author_actions": {
       "edit": "수정 / 영어공지 작성",
       "remove": "삭제",
-      "remove_confirm": "정말로 이 공지를 삭제하시겠습니까?",
+      "remove_confirm": {
+        "title": "공지를 삭제할까요?",
+        "description": "삭제된 공지는 복구할 수 없습니다."
+      },
       "toasts": {
         "delete_fail": "공지 삭제에 실패했습니다",
         "delete_success": "공지가 성공적으로 삭제되었습니다"

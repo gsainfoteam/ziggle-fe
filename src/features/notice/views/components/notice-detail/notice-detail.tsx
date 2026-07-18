@@ -1,4 +1,5 @@
 import { useRouter } from '@tanstack/react-router';
+import type { ReactNode } from 'react';
 
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
@@ -87,7 +88,9 @@ type BodyProps = Pick<
   | 'documents'
   | 'imageUrls'
   | 'content'
->;
+> & {
+  authorActions?: ReactNode;
+};
 
 const Body = ({
   title,
@@ -99,12 +102,14 @@ const Body = ({
   documents,
   imageUrls,
   content,
+  authorActions,
 }: BodyProps) => (
   <div className="flex flex-col gap-4">
     <h1 className="text-foreground text-[25px] leading-tight font-semibold">
       {title}
     </h1>
     {tags.length > 0 && <Tags tags={tags} className="flex-wrap gap-1.75" />}
+    {authorActions}
     <NoticeDetailMetadata
       createdAt={createdAt}
       views={views}
@@ -124,7 +129,6 @@ export const NoticeDetail = ({
 }: NoticeDetailProps) => (
   <div className="mx-auto flex w-full max-w-200 flex-col gap-6">
     <Header noticeId={notice.id} author={notice.author} />
-    {isOwner && <NoticeDetailAuthorActions noticeId={notice.id} />}
     <Body
       title={notice.title}
       tags={notice.tags}
@@ -135,6 +139,9 @@ export const NoticeDetail = ({
       documents={notice.documents}
       imageUrls={notice.imageUrls}
       content={notice.content}
+      authorActions={
+        isOwner ? <NoticeDetailAuthorActions noticeId={notice.id} /> : undefined
+      }
     />
     <NoticeDetailActions className="md:hidden" />
     {additionalContents.length > 0 && (

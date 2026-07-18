@@ -20,7 +20,8 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
 
   const handleRemoveNotice = async () => {
     const confirmed = await confirmDialog({
-      description: t('detail.author_actions.remove_confirm'),
+      title: t('detail.author_actions.remove_confirm.title'),
+      description: t('detail.author_actions.remove_confirm.description'),
       destructive: true,
     });
     if (!confirmed) return;

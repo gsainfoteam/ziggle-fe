@@ -18,7 +18,10 @@
     "author_actions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",
-      "remove_confirm": "Are you sure you want to delete this notice?",
+      "remove_confirm": {
+        "title": "Delete this notice?",
+        "description": "Deleted notices cannot be restored."
+      },
       "toasts": {
         "delete_fail": "Failed to delete notice",
         "delete_success": "The notice was deleted successfully"
