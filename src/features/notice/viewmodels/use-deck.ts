@@ -15,6 +15,10 @@ const DEFAULT_DECK: PanelConfig[] = [
   { key: HOME_PANEL_KEY, orderBy: 'recent' },
 ];
 
+function ensurePanels(panels: PanelConfig[]): PanelConfig[] {
+  return panels.length > 0 ? panels : DEFAULT_DECK;
+}
+
 interface DeckState {
   panels: PanelConfig[];
   pin: (key: string) => void;
@@ -33,9 +37,12 @@ export const useDeck = create<DeckState>()(
           panels: uniqBy([...s.panels, { key }], (c) => c.key),
         })),
       unpin: (key) =>
-        set((s) => ({
-          panels: differenceBy(s.panels, [{ key }], (c) => c.key),
-        })),
+        set((s) => {
+          if (s.panels.length <= 1) return s;
+          return {
+            panels: differenceBy(s.panels, [{ key }], (c) => c.key),
+          };
+        }),
       toggle: (key) =>
         get().panels.some((c) => c.key === key)
           ? get().unpin(key)
@@ -44,9 +51,19 @@ export const useDeck = create<DeckState>()(
         set((s) => ({
           panels: s.panels.map((c) => (c.key === key ? { ...c, orderBy } : c)),
         })),
-      setPanels: (panels) => set({ panels }),
+      setPanels: (panels) => set({ panels: ensurePanels(panels) }),
     }),
-    { name: 'ziggle-deck' },
+    {
+      name: 'ziggle-deck',
+      merge: (persisted, current) => {
+        const stored = persisted as Partial<DeckState> | undefined;
+        return {
+          ...current,
+          ...stored,
+          panels: ensurePanels(stored?.panels ?? current.panels),
+        };
+      },
+    },
   ),
 );
 

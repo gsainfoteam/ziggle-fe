@@ -6,6 +6,9 @@ import { useDeck } from '../../../../viewmodels';
 export function PanelRemoveButton({ panelKey }: { panelKey: string }) {
   const { t } = useTranslation('notice');
   const unpin = useDeck((s) => s.unpin);
+  const canUnpin = useDeck((s) => s.panels.length > 1);
+
+  if (!canUnpin) return null;
 
   return (
     <button
