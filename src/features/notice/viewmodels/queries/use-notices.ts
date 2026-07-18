@@ -49,7 +49,7 @@ export const useNotices = ({
       },
     },
     {
-      enabled: user !== null,
+      enabled: user !== undefined,
       retry(count, error) {
         if (error?.statusCode === 404 || error?.statusCode === 400)
           return false;
