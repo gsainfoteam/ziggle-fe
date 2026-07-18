@@ -4,6 +4,7 @@ import { useIsDesktop } from '@/common/utils';
 
 import { AddPanelButton } from './add-panel-button';
 import {
+  getHomePanel,
   type PanelConfig,
   SEARCH_PANEL_KEY,
   useDeck,
@@ -61,11 +62,9 @@ export function Deck() {
   const size = panelSizeForCount(panels.length);
 
   if (!isDesktop) {
-    const first = panels[0];
-    if (!first) return null;
     return (
       <div className="w-full">
-        <DeckPanelContent panel={first} />
+        <DeckPanelContent panel={getHomePanel(panels)} />
       </div>
     );
   }

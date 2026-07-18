@@ -11,12 +11,19 @@ export interface PanelConfig {
   orderBy?: OrderBy;
 }
 
-const DEFAULT_DECK: PanelConfig[] = [
-  { key: HOME_PANEL_KEY, orderBy: 'recent' },
-];
+const DEFAULT_HOME_PANEL: PanelConfig = {
+  key: HOME_PANEL_KEY,
+  orderBy: 'recent',
+};
+
+const DEFAULT_DECK: PanelConfig[] = [DEFAULT_HOME_PANEL];
 
 function ensurePanels(panels: PanelConfig[]): PanelConfig[] {
   return panels.length > 0 ? panels : DEFAULT_DECK;
+}
+
+export function getHomePanel(panels: PanelConfig[]): PanelConfig {
+  return panels.find((p) => p.key === HOME_PANEL_KEY) ?? DEFAULT_HOME_PANEL;
 }
 
 interface DeckState {

@@ -1,8 +1,11 @@
 import { beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
-import { HOME_PANEL_KEY } from './panel-keys';
+import { feedPanelKey, HOME_PANEL_KEY } from './panel-keys';
 
-import type { useDeck as UseDeck } from './use-deck';
+import type {
+  getHomePanel as GetHomePanel,
+  useDeck as UseDeck,
+} from './use-deck';
 
 const memoryStorage = (() => {
   const map = new Map<string, string>();
@@ -26,6 +29,30 @@ Object.defineProperty(globalThis, 'localStorage', {
 });
 
 const DEFAULT_PANEL = { key: HOME_PANEL_KEY, orderBy: 'recent' as const };
+
+describe('getHomePanel', () => {
+  let getHomePanel: typeof GetHomePanel;
+
+  beforeAll(async () => {
+    ({ getHomePanel } = await import('./use-deck'));
+  });
+
+  it('returns the home panel even when it is not first after reorder', () => {
+    const bookmarked = {
+      key: feedPanelKey('bookmarked'),
+      orderBy: 'recent' as const,
+    };
+    const home = { key: HOME_PANEL_KEY, orderBy: 'hot' as const };
+
+    expect(getHomePanel([bookmarked, home])).toEqual(home);
+  });
+
+  it('falls back to the default home panel when home is missing', () => {
+    expect(
+      getHomePanel([{ key: feedPanelKey('bookmarked'), orderBy: 'recent' }]),
+    ).toEqual(DEFAULT_PANEL);
+  });
+});
 
 describe('useDeck', () => {
   let useDeck: typeof UseDeck;
