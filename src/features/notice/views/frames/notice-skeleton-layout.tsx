@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ITEMS_PER_PAGE } from '@/common/const/notice';
-import { LandingModal } from '@/features/landing';
 
 import { NoticeShell } from '../components/layout/notice-shell';
 import { PanelShell } from '../components/layout/panel-shell';
@@ -42,11 +41,8 @@ function NoticeListSkeleton() {
 
 export function NoticeSkeletonLayout() {
   return (
-    <>
-      <LandingModal />
-      <NoticeShell>
-        <NoticeListSkeleton />
-      </NoticeShell>
-    </>
+    <NoticeShell>
+      <NoticeListSkeleton />
+    </NoticeShell>
   );
 }

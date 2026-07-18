@@ -3,20 +3,25 @@ import { useSearch } from '@tanstack/react-router';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { Button, Dialog, ZiggleLogo } from '@/common/components';
-import { useAuth, useAuthRedirect } from '@/features/auth';
 
-import LandingGrids from './components/landing-grids';
+import { LandingGrids } from './landing-grids';
+import {
+  useAuth,
+  useAuthPrompt,
+  useAuthRedirect,
+  useToken,
+} from '../../viewmodels';
 
-export function LandingModal() {
+export function LoginModal() {
   const { t } = useTranslation('home');
-
   const search = useSearch({ strict: false });
-  const redirect = search.redirect;
   const { idpLogIn } = useAuth();
+  const { token } = useToken();
+  const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
 
   return (
     <Dialog.Root
-      isOpen
+      isOpen={!token && !requiredConsents}
       onClose={() => {}}
       closeOnBackdrop={false}
       closeOnEscape={false}
@@ -43,7 +48,8 @@ export function LandingModal() {
                       href="https://terms.gistory.me/ziggle/privacy/250302/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold hover:underline"
+                      tabIndex={-1}
+                      className="font-semibold hover:underline focus:outline-none"
                     />
                   ),
                   termsLink: (
@@ -51,18 +57,20 @@ export function LandingModal() {
                       href="https://terms.gistory.me/ziggle/tos/250302/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold hover:underline"
+                      tabIndex={-1}
+                      className="font-semibold hover:underline focus:outline-none"
                     />
                   ),
                 }}
               />
             </p>
-
             <Button
               className="w-full px-5 py-2.5 md:w-80"
               variant="outlined"
               onClick={() => {
-                useAuthRedirect.getState().setRedirect(redirect ?? '/home');
+                useAuthRedirect
+                  .getState()
+                  .setRedirect(search.redirect ?? '/home');
                 idpLogIn();
               }}
             >

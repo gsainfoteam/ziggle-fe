@@ -4,19 +4,13 @@ import { OverlayProvider } from 'overlay-kit';
 
 import '../styles.css';
 
+import { LandingModal } from '@/features/auth';
+
 export const Route = createRootRoute({
   component: () => (
     <OverlayProvider>
+      <LandingModal />
       <Outlet />
-      {/* <TanStackDevtools
-        config={{ position: 'top-right' }}
-        plugins={[
-          {
-            name: 'TanStack Router',
-            render: <TanStackRouterDevtoolsPanel />,
-          },
-        ]}
-      /> */}
     </OverlayProvider>
   ),
 });
