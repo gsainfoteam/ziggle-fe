@@ -64,7 +64,6 @@ export const Default: Story = {
 };
 
 export const AllAspectRatios: Story = {
-  name: 'All Aspect Ratios',
   args: {
     imageUrls: [images.square],
     title: '비교',

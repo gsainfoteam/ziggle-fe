@@ -127,10 +127,10 @@ export const WithoutDeadline: Story = {
 };
 
 export const ImageAspectRatios: Story = {
-  name: 'Image Aspect Ratios',
   parameters: {
     layout: 'padded',
   },
+  args: { notice: baseNotice },
   render: () => (
     <NoticeCardGallery
       items={[
