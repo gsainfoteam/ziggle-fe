@@ -1,3 +1,4 @@
+/** Fallbacks mirror styles.css brand/surface tokens (hex without #). */
 const COLOR_FALLBACK = {
   primary: 'ff4500',
   background: 'ffffff',
@@ -7,11 +8,8 @@ const COLOR_FALLBACK = {
   assistantMessageBg: 'f5f5f7',
 } as const;
 
-/** BottomTabBar(h-14) + gap — 모바일에서 프로필 탭을 가리지 않도록 */
-const MOBILE_LAUNCHER_BOTTOM =
-  'calc(3.5rem + env(safe-area-inset-bottom, 0px) + 12px)';
-const DESKTOP_LAUNCHER_BOTTOM = '18px';
-const MOBILE_MQ = '(max-width: 767px)';
+// TODO(chatbot): 챗봇 팀에 기본 런처 숨김/커스텀 트리거 옵션이 오면
+// DOM display:none 우회를 data-* 또는 API로 교체한다.
 const LAUNCHER_SELECTOR = 'button[aria-label="챗봇 열기"]';
 
 function readCssHex(name: string, fallback: string): string {
@@ -29,13 +27,13 @@ function buildColors(): Record<string, string> {
   return {
     primary,
     button: primary,
-    background: readCssHex('--color-white', defaults.background),
-    text: readCssHex('--color-text', defaults.text),
-    textSecondary: readCssHex('--color-secondaryText', defaults.textSecondary),
-    border: readCssHex('--color-deselected', defaults.border),
+    background: readCssHex('--color-background', defaults.background),
+    text: readCssHex('--color-foreground', defaults.text),
+    textSecondary: readCssHex('--color-subtle', defaults.textSecondary),
+    border: readCssHex('--color-border', defaults.border),
     userMessageBg: primary,
     assistantMessageBg: readCssHex(
-      '--color-greyLight',
+      '--color-muted',
       defaults.assistantMessageBg,
     ),
   };
@@ -51,26 +49,17 @@ function applyTheme(): void {
   }
 }
 
-function applyLauncherOffset(): boolean {
+/** 기본 런처는 숨기고, 호스트 FAB(ChatbotFab)에서 open/close 한다. */
+function hideDefaultLauncher(): boolean {
   const btn = document.querySelector<HTMLButtonElement>(LAUNCHER_SELECTOR);
   if (!btn) return false;
-  const isMobile = window.matchMedia(MOBILE_MQ).matches;
-  btn.style.bottom = isMobile
-    ? MOBILE_LAUNCHER_BOTTOM
-    : DESKTOP_LAUNCHER_BOTTOM;
-  syncLauncherWithOverlays();
+  btn.style.display = 'none';
   return true;
 }
 
-/** 챗봇 z-index가 MAX라 Drawer/Dialog 위에 뜸 → 오버레이 열리면 숨김 */
-function syncLauncherWithOverlays(): void {
-  const btn = document.querySelector<HTMLButtonElement>(LAUNCHER_SELECTOR);
-  if (!btn) return;
-
+/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 → 오버레이 열리면 닫기 */
+function syncChatbotWithOverlays(): void {
   const overlayOpen = document.querySelector('[role="dialog"]') != null;
-  btn.style.visibility = overlayOpen ? 'hidden' : 'visible';
-  btn.style.pointerEvents = overlayOpen ? 'none' : 'auto';
-
   if (!overlayOpen) return;
   try {
     if (window.ChatbotWidget?.isOpen?.()) {
@@ -83,23 +72,15 @@ function syncLauncherWithOverlays(): void {
 
 let attached = false;
 let readyHooked = false;
-let offsetListening = false;
 let overlayListening = false;
-
-function ensureOffsetListener(): void {
-  if (offsetListening) return;
-  offsetListening = true;
-  window.matchMedia(MOBILE_MQ).addEventListener('change', () => {
-    applyLauncherOffset();
-  });
-}
 
 function ensureOverlayListener(): void {
   if (overlayListening) return;
   overlayListening = true;
-  syncLauncherWithOverlays();
+  syncChatbotWithOverlays();
   new MutationObserver(() => {
-    syncLauncherWithOverlays();
+    hideDefaultLauncher();
+    syncChatbotWithOverlays();
   }).observe(document.body, { childList: true, subtree: true });
 }
 
@@ -112,8 +93,7 @@ function tryAttachTheme(): boolean {
     if (attached) return;
     try {
       applyTheme();
-      applyLauncherOffset();
-      ensureOffsetListener();
+      hideDefaultLauncher();
       ensureOverlayListener();
       new MutationObserver(() => {
         try {
@@ -152,9 +132,7 @@ function tryAttachTheme(): boolean {
     readyHooked = true;
   }
 
-  // onReady 전이라도 런처 버튼은 DOM에 먼저 생길 수 있음
-  applyLauncherOffset();
-  ensureOffsetListener();
+  hideDefaultLauncher();
   ensureOverlayListener();
 
   return attached;
@@ -165,7 +143,7 @@ export function initThemeSync(): void {
   if (tryAttachTheme()) return;
 
   const id = window.setInterval(() => {
-    applyLauncherOffset();
+    hideDefaultLauncher();
     if (tryAttachTheme()) window.clearInterval(id);
   }, 100);
 
@@ -179,7 +157,7 @@ declare global {
       isOpen?: () => boolean;
       open?: () => void;
       close?: () => void;
-      on?: (event: string, callback: () => void) => void;
+      on?: (event: string, callback: () => void) => (() => void) | void;
       updateColors?: (colors: Record<string, string>) => void;
     };
   }

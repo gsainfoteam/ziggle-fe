@@ -79,5 +79,10 @@
       "light": "Light",
       "system": "System"
     }
+  },
+  "fab": {
+    "chatbot": "Open GIST chatbot",
+    "open": "Open shortcuts",
+    "close": "Close shortcuts"
   }
 }
