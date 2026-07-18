@@ -57,7 +57,7 @@ export function PanelShell({
       <header
         onPointerDown={onHeaderPointerDown}
         className={cn(
-          'flex shrink-0 items-center justify-between gap-2 px-5 pt-4 pb-3 md:px-2 md:pt-0',
+          'flex shrink-0 items-center justify-between gap-2 px-5 md:px-2 md:pb-3',
           hideTitleOnMobile && 'hidden md:flex',
           onHeaderPointerDown && 'cursor-grab touch-none select-none',
         )}
