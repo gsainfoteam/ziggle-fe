@@ -85,9 +85,7 @@ export const NoticeCardActionsDisplay = ({
           <span
             className={cn(
               'text-sm font-semibold',
-              currentFire.isReacted
-                ? 'text-primary'
-                : 'text-text dark:text-dark_white',
+              currentFire.isReacted ? 'text-primary' : 'text-foreground',
             )}
           >
             {currentFire.count}
@@ -105,7 +103,7 @@ export const NoticeCardActionsDisplay = ({
           {bookmarked ? (
             <BookmarkSimpleIcon weight="fill" className="text-primary size-6" />
           ) : (
-            <BookmarkSimpleIcon className="text-text dark:text-dark_white size-6" />
+            <BookmarkSimpleIcon className="text-foreground size-6" />
           )}
         </Button>
 
@@ -120,7 +118,7 @@ export const NoticeCardActionsDisplay = ({
             }}
             className="flex cursor-pointer items-center"
           >
-            <ShareFatIcon className="text-text dark:text-dark_white size-6" />
+            <ShareFatIcon className="text-foreground size-6" />
           </Button>
         </LogClick>
       </div>

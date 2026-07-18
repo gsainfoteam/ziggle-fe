@@ -156,7 +156,7 @@ export const DrawerRoot = ({
                   role="dialog"
                   className={cn(
                     'absolute z-10 flex w-full flex-col gap-4 p-5',
-                    'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark border bg-white shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
+                    'border-border bg-background border shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
                     dragToDismiss && 'cursor-grab active:cursor-grabbing',
                     layout.panel,
                     isVertical && verticalSizeClassName[size],
@@ -167,7 +167,7 @@ export const DrawerRoot = ({
                   {dragToDismiss && (
                     <div
                       className={cn(
-                        'bg-greyBorder dark:bg-dark_greyBorder absolute z-10 rounded-full',
+                        'bg-border absolute z-10 rounded-full',
                         layout.handle,
                       )}
                     />

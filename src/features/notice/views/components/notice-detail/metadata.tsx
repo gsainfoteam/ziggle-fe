@@ -23,24 +23,24 @@ export function NoticeDetailMetadata({
   const { t } = useTranslation('notice');
 
   return (
-    <div className="border-greyLight dark:border-dark_greyBorder border-y py-3 text-sm">
+    <div className="border-border border-y py-3 text-sm">
       <div className="grid grid-cols-[max-content_1fr] items-start gap-x-6 gap-y-3">
         <Label icon={<CalendarBlankIcon className="size-4" />}>
           {t('detail.created_at')}
         </Label>
-        <span className="text-secondaryText">
+        <span className="text-subtle">
           {dayjs(createdAt).tz().format('LLL')}
         </span>
 
         <Label icon={<EyeIcon className="size-4" />}>{t('detail.views')}</Label>
-        <span className="text-secondaryText">{views.toLocaleString()}</span>
+        <span className="text-subtle">{views.toLocaleString()}</span>
 
         {currentDeadline && (
           <>
             <Label icon={<HourglassIcon className="size-4" />}>
               {t('detail.deadline')}
             </Label>
-            <span className="text-secondaryText">
+            <span className="text-subtle">
               {dayjs(currentDeadline).tz().format('LLL')}
             </span>
           </>
@@ -55,7 +55,7 @@ export function NoticeDetailMetadata({
               href={crawledUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-secondaryText break-all underline"
+              className="text-subtle break-all underline"
             >
               {crawledUrl}
             </a>
@@ -74,7 +74,7 @@ export function NoticeDetailMetadata({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-secondaryText break-all underline"
+                  className="text-subtle break-all underline"
                 >
                   {name}
                 </a>
@@ -95,7 +95,7 @@ function Label({
   children: React.ReactNode;
 }) {
   return (
-    <div className="text-greyDark dark:text-dark_greyLight flex items-center gap-1.5 font-medium">
+    <div className="text-muted-foreground flex items-center gap-1.5 font-medium">
       {icon}
       <span>{children}</span>
     </div>

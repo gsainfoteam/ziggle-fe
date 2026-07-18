@@ -29,7 +29,7 @@ function SortOptions({
     return (
       <div
         className={cn(
-          'bg-greyLight dark:bg-dark_greyDark flex flex-col overflow-hidden rounded-2xl',
+          'bg-muted flex flex-col overflow-hidden rounded-2xl',
           className,
         )}
       >
@@ -45,11 +45,10 @@ function SortOptions({
               }}
               className={cn(
                 'flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left text-[15px] transition',
-                index > 0 &&
-                  'border-greyBorder dark:border-dark_greyBorder border-t',
+                index > 0 && 'border-border border-t',
                 selected
                   ? 'text-primary font-semibold'
-                  : 'text-text dark:text-dark_white font-medium',
+                  : 'text-foreground font-medium',
               )}
             >
               <span className="flex-1">{t(`list.sort.${option}`)}</span>
@@ -79,7 +78,7 @@ function SortOptions({
               'cursor-pointer rounded-md px-2.5 py-1.5 text-left text-sm transition',
               selected
                 ? 'text-primary bg-primary/10 dark:bg-primary/20 font-semibold'
-                : 'dark:hover:bg-dark_greyDark hover:bg-gray-100',
+                : 'hover:bg-muted',
             )}
           >
             {t(`list.sort.${option}`)}
@@ -115,9 +114,7 @@ export function SortDropdown({
         }}
         className={cn(
           'flex shrink-0 cursor-pointer items-center gap-0.5 rounded-full text-sm font-medium transition',
-          open
-            ? 'text-primary'
-            : 'text-greyDark hover:text-text dark:hover:text-dark_white',
+          open ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
         )}
       >
         {t(`list.sort.${value}`)}

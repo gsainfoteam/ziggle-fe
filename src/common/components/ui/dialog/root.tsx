@@ -103,7 +103,7 @@ export const DialogRoot = ({
                   role="dialog"
                   className={cn(
                     'relative mx-5 flex max-h-[80vh] w-full flex-col gap-4 overflow-hidden p-5',
-                    'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark rounded-2xl border bg-white shadow-xl',
+                    'border-border bg-background rounded-2xl border shadow-xl',
                     sizeClassName[size],
                     className,
                   )}

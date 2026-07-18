@@ -44,7 +44,7 @@ const Header = ({
       ) : (
         <DefaultProfile className="size-8 shrink-0" />
       )}
-      <span className="text-text dark:text-dark_white truncate text-base font-semibold">
+      <span className="text-foreground truncate text-base font-semibold">
         {searchQuery ? (
           <NoticeCardHighlightedText query={searchQuery}>
             {author.name}
@@ -53,10 +53,10 @@ const Header = ({
           author.name
         )}
       </span>
-      <span className="text-greyDark dark:text-dark_grey shrink-0 text-base">
+      <span className="text-muted-foreground shrink-0 text-base">
         {dayjs(createdAt).fromNow()}
       </span>
-      <span className="text-greyDark dark:text-dark_grey flex shrink-0 items-center gap-1 text-base">
+      <span className="text-muted-foreground flex shrink-0 items-center gap-1 text-base">
         <EyeIcon className="size-3.5" weight="bold" />
         {views}
       </span>
@@ -116,7 +116,7 @@ const Footer = ({ id, title, reactions, isBookmarked }: FooterProps) => (
 );
 
 export const NoticeCard = ({ notice, searchQuery }: NoticeCardProps) => (
-  <div className="text-text flex w-full min-w-0 flex-col gap-3">
+  <div className="text-foreground flex w-full min-w-0 flex-col gap-3">
     <Link
       to="/notice/$id"
       params={{ id: notice.id.toString() }}

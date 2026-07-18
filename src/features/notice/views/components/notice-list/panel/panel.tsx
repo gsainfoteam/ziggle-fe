@@ -48,8 +48,7 @@ export function Panel({
     ? (panel.orderBy ?? navItem.orderBy)
     : (search.orderBy ?? navItem.orderBy);
   const page = isDeck ? localPage : (search.page ?? 0);
-  const hideTitleOnMobile =
-    pathname === '/home' || categoryPaths.has(pathname);
+  const hideTitleOnMobile = pathname === '/home' || categoryPaths.has(pathname);
 
   return (
     <PanelShell

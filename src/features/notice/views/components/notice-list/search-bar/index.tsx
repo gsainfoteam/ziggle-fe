@@ -19,20 +19,18 @@ const SearchButton = ({
   <button
     type={isToggle ? 'button' : 'submit'}
     className={cn(
-      isToggle
-        ? 'dark:bg-dark_dark bg-white'
-        : 'bg-greyLight dark:bg-dark_greyDark',
+      isToggle ? 'bg-background' : 'bg-muted',
       'flex h-full items-center justify-center p-0 px-2 md:pr-6 md:pl-5',
-      'border-l-greyBorder dark:border-l-dark_greyBorder border-l-0 md:border-l',
-      'md:bg-greyLight md:dark:bg-dark_greyDark',
+      'border-l-border border-l-0 md:border-l',
+      'md:bg-muted',
     )}
     onClick={onClick}
   >
     <MagnifyingGlassIcon
       className={cn(
         'size-6',
-        isToggle ? 'text-text' : 'text-greyDark',
-        'dark:text-dark_white md:text-greyDark md:dark:text-dark_white',
+        isToggle ? 'text-foreground' : 'text-muted-foreground',
+        'md:text-muted-foreground',
       )}
     />
   </button>
@@ -52,7 +50,7 @@ export const SearchBar = () => {
 
     // TODO: send log
     // sendLog(LogEvents.searchSubmit, {
-    //   query,
+    // query,
     // });
     router.navigate({
       to: '/search',
@@ -83,8 +81,8 @@ export const SearchBar = () => {
           'transition-[width] md:w-full md:max-w-200',
           'flex flex-row-reverse justify-between md:flex-row',
           'overflow-clip',
-          'border-greyBorder rounded-lg',
-          'dark:border-dark_greyBorder md:bg-greyLight md:rounded-full md:border',
+          'border-border rounded-lg',
+          'md:bg-muted md:rounded-full md:border',
           'bg-transparent',
         )}
       >
@@ -98,8 +96,8 @@ export const SearchBar = () => {
             className={cn(
               'flex-1 px-0 py-2 md:px-5',
               'text-base leading-4',
-              'text-text placeholder-greyDark',
-              'dark:bg-dark_greyDark dark:text-dark_white md:dark:bg-dark_dark md:bg-white',
+              'text-foreground placeholder-muted-foreground',
+              'md:bg-background',
               'outline-none',
             )}
             name="searchQuery"
@@ -112,10 +110,10 @@ export const SearchBar = () => {
             <LogClick eventName={LogEvents.searchClickClear}>
               <button
                 type="button"
-                className="bg-greyLight dark:bg-dark_greyDark md:dark:bg-dark_dark flex h-full items-center justify-center px-2 md:bg-white"
+                className="bg-muted md:bg-background flex h-full items-center justify-center px-2"
                 onClick={() => setKeyword('')}
               >
-                <XIcon className="text-greyDark dark:text-dark_white size-4" />
+                <XIcon className="text-muted-foreground size-4" />
               </button>
             </LogClick>
           )}
@@ -146,7 +144,7 @@ export const SearchBar = () => {
             className={cn(
               'flex h-full w-fit items-center justify-center',
               'overflow-hidden px-2 whitespace-nowrap',
-              'text-primary dark:bg-dark_dark bg-white',
+              'text-primary bg-background',
               'md:hidden',
             )}
             onClick={() => setIsExpanded(false)}

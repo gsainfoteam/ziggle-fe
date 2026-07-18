@@ -46,7 +46,7 @@ export function List({
           <div className="h-25" />
           <div className="mx-auto h-2.5" />
           <SearchNoResult className="mx-auto w-40 md:w-48" />
-          <p className="font-lg md:font-2xl text-secondaryText pt-5 text-center font-bold">
+          <p className="font-lg md:font-2xl text-subtle pt-5 text-center font-bold">
             {t('list.empty')}
           </p>
         </div>

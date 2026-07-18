@@ -21,7 +21,7 @@ const panelShell = cv({
 export type PanelSize = NonNullable<VariantProps<typeof panelShell>['size']>;
 
 const borderedPanelClass =
-  'md:rounded-2xl md:border md:border-greyBorder md:dark:border-dark_greyBorder md:bg-white p-5';
+  'md:rounded-2xl md:border md:border-border md:bg-background p-5';
 
 export function PanelShell({
   title,
@@ -49,7 +49,7 @@ export function PanelShell({
   hideTitleOnMobile?: boolean;
 } & VariantProps<typeof panelShell>) {
   const panelWidthClass = panelShell({ size })
-    .split(' ')
+    .split('')
     .filter((token) => token.startsWith('md:w-'));
 
   const titleHeader =
@@ -63,7 +63,7 @@ export function PanelShell({
         )}
       >
         {title ? (
-          <h1 className="text-text dark:text-dark_white flex min-w-0 items-center gap-2 text-2xl font-bold">
+          <h1 className="text-foreground flex min-w-0 items-center gap-2 text-2xl font-bold">
             {titleIcon && (
               <span className="text-primary flex shrink-0 items-center [&>svg]:size-7">
                 {titleIcon}

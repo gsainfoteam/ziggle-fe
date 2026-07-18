@@ -72,7 +72,7 @@ export function SearchPanel({
       className="p-0"
     >
       <div className="flex w-full min-w-0 flex-col">
-        <div className="dark:bg-dark_dark sticky top-0 z-10 bg-white px-5 md:pt-5">
+        <div className="bg-background sticky top-0 z-10 px-5 md:pt-5">
           <SearchInput value={query} onSubmit={onSubmitQuery} />
         </div>
         <div className="px-5 py-4 md:p-5">
@@ -88,7 +88,7 @@ export function SearchPanel({
               <div className="flex flex-col items-center">
                 <SearchAnimation />
                 <div className="h-2.5" />
-                <p className="text-secondaryText -mt-7.5 pt-5 text-lg font-medium md:text-2xl">
+                <p className="text-subtle -mt-7.5 pt-5 text-lg font-medium md:text-2xl">
                   {t('search.prompt')}
                 </p>
               </div>

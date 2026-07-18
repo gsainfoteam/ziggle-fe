@@ -64,16 +64,16 @@ export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
           key={noticeType}
           className={cn(
             selectedNoticeType !== noticeType && 'hidden',
-            'bg-greyLight dark:bg-dark_greyDark rounded-[10px] p-6',
+            'bg-muted rounded-[10px] p-6',
           )}
         >
-          <p className="text-text mb-2 text-base font-semibold md:text-xl">
+          <p className="text-foreground mb-2 text-base font-semibold md:text-xl">
             {t(`notice_types.${noticeType}.description.title`)}
           </p>
-          <p className="font-regular text-text text-sm md:text-base">
+          <p className="font-regular text-foreground text-sm md:text-base">
             {t(`notice_types.${noticeType}.description.content`)}
           </p>
-          <p className="font-regular text-secondaryText text-sm md:text-base">
+          <p className="font-regular text-subtle text-sm md:text-base">
             {t(`notice_types.${noticeType}.description.example`)}
           </p>
         </div>

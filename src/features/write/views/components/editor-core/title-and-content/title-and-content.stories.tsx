@@ -25,7 +25,7 @@ const FormStateView = () => {
   const { control } = useFormContext<NoticeFormValues>();
   const values = useWatch({ control });
   return (
-    <details className="bg-greyLight dark:bg-dark_greyDark mt-8 rounded-md p-3">
+    <details className="bg-muted mt-8 rounded-md p-3">
       <summary className="cursor-pointer text-sm font-semibold">
         Live form state (RHF)
       </summary>

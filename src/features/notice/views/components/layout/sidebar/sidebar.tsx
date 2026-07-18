@@ -85,7 +85,7 @@ export const Sidebar = ({
             <Popover.Content placement="right-start">
               {({ close }) => (
                 <Popover.Body className="flex w-52 flex-col gap-y-0.5 rounded-xl p-1.5">
-                  <p className="text-greyDark px-2.5 pt-1 pb-1 text-xs font-semibold">
+                  <p className="text-muted-foreground px-2.5 pt-1 pb-1 text-xs font-semibold">
                     {tLayout('sidebar.theme')}
                   </p>
                   {themeOptions.map(({ value, Icon }) => {
@@ -113,7 +113,7 @@ export const Sidebar = ({
                     );
                   })}
 
-                  <p className="text-greyDark px-2.5 pt-2 pb-1 text-xs font-semibold">
+                  <p className="text-muted-foreground px-2.5 pt-2 pb-1 text-xs font-semibold">
                     {tLayout('sidebar.language')}
                   </p>
                   <SidebarItem
@@ -151,7 +151,7 @@ export const Sidebar = ({
                     </button>
                   </SidebarItem>
 
-                  <div className="bg-greyLight dark:bg-dark_greyBorder my-1 h-px" />
+                  <div className="bg-muted my-1 h-px" />
                   <LogClick eventName={LogEvents.myClickBugReport}>
                     <SidebarItem icon={<FlagIcon />}>
                       <CSLink
@@ -175,7 +175,7 @@ export const Sidebar = ({
             <ProfileModalButton
               triggerClassName={cn(sidebarRowClass, 'cursor-pointer')}
               eventName={LogEvents.sidebarClickProfile}
-              imageClassName="size-5 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-dark_dark"
+              imageClassName="size-5 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-background"
               labelClassName={cn('font-normal', labelClass)}
             />
           ) : (

@@ -15,9 +15,10 @@ export const Chip = ({
   <div
     className={cn(
       'flex w-max items-center rounded-[5px] px-[10px] py-[5px] text-lg font-medium',
-      variant === 'selected' && 'bg-text stroke-white text-white',
-      variant === 'selected' && disabled && 'bg-greyDark',
-      variant === 'deselected' && 'bg-greyLight stroke-text text-text',
+      variant === 'selected' &&
+        'bg-foreground text-on-primary stroke-on-primary',
+      variant === 'selected' && disabled && 'bg-muted-foreground',
+      variant === 'deselected' && 'bg-muted stroke-foreground text-foreground',
       className,
     )}
   >

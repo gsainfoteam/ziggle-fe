@@ -23,7 +23,7 @@ const Wrapped = ({
         onEditorChange={(next) => setValue(next)}
         disabled={disabled}
       />
-      <details className="bg-greyLight dark:bg-dark_greyDark mt-4 rounded-md p-3">
+      <details className="bg-muted mt-4 rounded-md p-3">
         <summary className="cursor-pointer text-sm font-semibold">
           Live HTML value
         </summary>

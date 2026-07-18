@@ -74,14 +74,14 @@ export const TagInput = () => {
 
       {searchedTags && searchedTags?.length !== 0 && (
         <div className="relative flex">
-          <div className="border-greyBorder absolute -top-1 left-2.5 z-10 flex w-[calc(100%-20px)] flex-col border-2 bg-white">
+          <div className="border-border bg-background absolute -top-1 left-2.5 z-10 flex w-[calc(100%-20px)] flex-col border-2">
             {searchedTags.slice(0, 5).map((tag) => (
               <div
                 className="[&:hover]:bg-secondary p-2.5"
                 key={tag.id}
                 onClick={() => handleTagOptionClick(tag)}
               >
-                <div className="font-regular text-text text-left text-sm">
+                <div className="font-regular text-foreground text-left text-sm">
                   {tag.name}
                 </div>
               </div>
@@ -107,7 +107,7 @@ export const TagChip = ({
       </div>
 
       <div onClick={onClick} className="cursor-pointer">
-        <div className="flex h-4 w-4 items-center justify-center rounded-xl bg-white md:h-5 md:w-5">
+        <div className="bg-background flex h-4 w-4 items-center justify-center rounded-xl md:h-5 md:w-5">
           <XIcon className="text-primary size-3" />
         </div>
       </div>

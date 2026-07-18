@@ -20,7 +20,7 @@ export function ZiggleLogo({
     <span
       {...props}
       className={cn(
-        'text-text inline-flex items-center gap-2 md:gap-3',
+        'text-foreground inline-flex items-center gap-2 md:gap-3',
         className,
       )}
     >

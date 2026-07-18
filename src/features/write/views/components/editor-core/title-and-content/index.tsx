@@ -52,7 +52,7 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
   return (
     <>
       <div className="mt-10 mb-2.5 flex gap-1.5">
-        <TextTIcon className="text-text size-5 md:size-6" />
+        <TextTIcon className="text-foreground size-5 md:size-6" />
         <p className="font-medium">{titleLabel}</p>
       </div>
 
@@ -66,19 +66,19 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
         className={cn(
           'flex items-center gap-1.5 overflow-x-hidden rounded-[10px] border-[1.5px] border-solid bg-transparent px-4 py-2.5',
           disabled
-            ? 'border-grey text-greyDark dark:text-dark_greyDark'
-            : 'border-primary text-text dark:text-dark_white',
+            ? 'border-muted-foreground text-muted-foreground'
+            : 'border-primary text-foreground',
         )}
       />
       {titleError?.message && (
-        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
-          {'⚠️ '}
+        <div className="font-regular text-subtle my-1 text-sm md:text-base">
+          {'⚠️'}
           {titleError.message}
         </div>
       )}
       {!titleError && title.length > TITLE_MAX_LENGTH && (
-        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
-          {'⚠️ '}
+        <div className="font-regular text-subtle my-1 text-sm md:text-base">
+          {'⚠️'}
           {t('validations.title_too_long', {
             titleMaxLength: TITLE_MAX_LENGTH,
           })}
@@ -86,7 +86,7 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
       )}
 
       <div className="mt-10 mb-3 flex items-center gap-2">
-        <ArticleIcon className="text-text size-5 md:size-6" />
+        <ArticleIcon className="text-foreground size-5 md:size-6" />
         <p className="font-medium">{contentLabel}</p>
       </div>
 
@@ -100,15 +100,15 @@ export const TitleAndContent = ({ lang, disabled }: TitleAndContentProps) => {
       </Suspense>
 
       {contentError?.message && (
-        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
-          {'⚠️ '}
+        <div className="font-regular text-subtle my-1 text-sm md:text-base">
+          {'⚠️'}
           {contentError.message}
         </div>
       )}
 
       {!contentError && content.length > BODY_MAX_LENGTH && (
-        <div className="font-regular text-secondaryText my-1 text-sm md:text-base">
-          {'⚠️ '}
+        <div className="font-regular text-subtle my-1 text-sm md:text-base">
+          {'⚠️'}
           {t('validations.body_too_long', {
             bodyMaxLength: BODY_MAX_LENGTH,
           }) +

@@ -71,8 +71,8 @@ export const AttachPhotoArea = () => {
         className={cn(
           'flex items-center justify-center',
           photos.length > 0
-            ? 'bg-greyLight p-1.25'
-            : 'border-secondaryText rounded-[5px] border border-dashed',
+            ? 'bg-muted p-1.25'
+            : 'border-subtle rounded-[5px] border border-dashed',
         )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -93,7 +93,7 @@ export const AttachPhotoArea = () => {
               />
             ))}
             <button
-              className="flex aspect-square items-center justify-center rounded-sm bg-white"
+              className="bg-background flex aspect-square items-center justify-center rounded-sm"
               onClick={() => {
                 fileInputRef.current?.click();
               }}
@@ -103,9 +103,9 @@ export const AttachPhotoArea = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center py-8 md:py-12">
-            <ImageIcon className="text-secondaryText size-10" />
+            <ImageIcon className="text-subtle size-10" />
 
-            <div className="text-secondaryText mt-1.25 text-xs font-medium">
+            <div className="text-subtle mt-1.25 text-xs font-medium">
               {t('fields.photo.drag')}
             </div>
 
@@ -114,7 +114,7 @@ export const AttachPhotoArea = () => {
               onClick={() => {
                 fileInputRef.current?.click();
               }}
-              className="bg-greyDark mx-3 my-2.5 px-3 py-1.25 md:mx-4 md:my-3 md:px-3 md:py-1.25"
+              className="bg-muted-foreground mx-3 my-2.5 px-3 py-1.25 md:mx-4 md:my-3 md:px-3 md:py-1.25"
             >
               <div className="text-xs font-medium md:text-base">
                 {t('fields.photo.browse')}

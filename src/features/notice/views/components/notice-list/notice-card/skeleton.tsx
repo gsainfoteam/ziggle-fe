@@ -1,10 +1,10 @@
 import { cn } from '@/common/utils';
 
 export const NoticeCardSkeleton = () => {
-  const s = 'bg-greyLight dark:bg-dark_greyDark animate-pulse rounded-md';
+  const s = 'bg-muted animate-pulse rounded-md';
 
   return (
-    <div className="text-text flex flex-col rounded-[10px]">
+    <div className="text-foreground flex flex-col rounded-[10px]">
       <div className="flex items-center justify-between gap-2 px-4 py-2.5 md:px-3">
         <div className="flex items-center gap-2">
           <div className={cn('size-8 shrink-0 rounded-full', s)} />

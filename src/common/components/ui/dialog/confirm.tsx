@@ -60,8 +60,7 @@ const ConfirmDialogContent = ({
           onClick={onConfirm}
           className={cn(
             'flex-1',
-            destructive &&
-              'dark:text-dark_white bg-red-500 text-white hover:brightness-90',
+            destructive && 'text-on-primary bg-red-500 hover:brightness-90',
           )}
         >
           {confirmLabel ?? t('alert_response.confirm')}

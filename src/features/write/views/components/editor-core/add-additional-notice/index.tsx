@@ -19,7 +19,7 @@ export const AddAdditionalNotice = () => {
   return (
     <div className="flex flex-col">
       <div className="mb-2 flex items-center gap-3">
-        <PlusIcon className="text-text dark:text-dark_white size-5 md:size-6" />
+        <PlusIcon className="text-foreground size-5 md:size-6" />
 
         <p className="text-lg font-medium">
           {t('detail.additional_notices.title')}
@@ -27,21 +27,21 @@ export const AddAdditionalNotice = () => {
       </div>
 
       <textarea
-        className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
+        className="border-primary text-foreground mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base"
         placeholder={t('detail.additional_notices.placeholder')}
         rows={3}
         {...register('korean.additionalContent')}
       />
       {koreanError?.message && (
-        <div className="font-regular text-secondaryText mb-3 text-sm">
-          {'⚠️ '}
+        <div className="font-regular text-subtle mb-3 text-sm">
+          {'⚠️'}
           {koreanError.message}
         </div>
       )}
 
       {isEnglishSupported && (
         <textarea
-          className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
+          className="border-primary text-foreground mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base"
           placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
           {...register('english.additionalContent')}

@@ -37,10 +37,8 @@ export function AddPanelButton() {
               type="button"
               aria-label={t('deck.add_column')}
               className={cn(
-                'text-greyDark hover:text-primary hover:border-primary flex w-full flex-1 cursor-pointer items-center justify-center rounded-2xl border border-dashed transition',
-                open
-                  ? 'border-primary text-primary'
-                  : 'border-greyBorder dark:border-dark_greyBorder',
+                'text-muted-foreground hover:text-primary hover:border-primary flex w-full flex-1 cursor-pointer items-center justify-center rounded-2xl border border-dashed transition',
+                open ? 'border-primary text-primary' : 'border-border',
               )}
             >
               <PlusIcon className="size-6" weight="bold" />
@@ -50,7 +48,7 @@ export function AddPanelButton() {
         <Popover.Content placement="left">
           {({ close }) => (
             <Popover.Body className="flex w-56 flex-col gap-y-0.5 rounded-xl p-1.5">
-              <p className="text-greyDark px-2.5 pt-1 pb-1 text-xs font-semibold">
+              <p className="text-muted-foreground px-2.5 pt-1 pb-1 text-xs font-semibold">
                 {t('deck.add_column')}
               </p>
               {options.map((option) => {
@@ -67,8 +65,8 @@ export function AddPanelButton() {
                     className={cn(
                       'flex items-center gap-3 rounded-md px-2.5 py-1.5 text-left',
                       added
-                        ? 'text-greyDark cursor-default'
-                        : 'text-text dark:text-dark_white dark:hover:bg-dark_greyDark cursor-pointer hover:bg-gray-100',
+                        ? 'text-muted-foreground cursor-default'
+                        : 'text-foreground hover:bg-muted cursor-pointer',
                     )}
                   >
                     <span className="flex size-5 shrink-0 items-center justify-center [&>svg]:size-5">

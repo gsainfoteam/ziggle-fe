@@ -21,7 +21,7 @@ export const NoticeCardHighlightedText = ({
     <span key={index}>
       <span>{str}</span>
       {index !== result.length - 1 && (
-        <span className="bg-primary text-white">{match[index]}</span>
+        <span className="bg-primary text-on-primary">{match[index]}</span>
       )}
     </span>
   ));

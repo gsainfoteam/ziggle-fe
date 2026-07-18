@@ -12,7 +12,7 @@ export const NoticeCardAttachmentIndicators = ({
   if (documentCount === 0) return null;
 
   return (
-    <div className="text-greyDark dark:text-dark_grey flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+    <div className="text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
       <span
         className="flex items-center gap-1"
         aria-label={t('detail.attachments')}

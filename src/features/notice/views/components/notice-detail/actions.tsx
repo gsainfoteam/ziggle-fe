@@ -150,14 +150,14 @@ const ActionButton = ({
         ? cn(
             'flex size-10 flex-col items-center justify-center gap-0.5 rounded-xl',
             isSelected
-              ? 'bg-greyLight dark:bg-dark_greyBorder text-text dark:text-dark_white'
-              : 'text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark',
+              ? 'bg-muted text-foreground'
+              : 'text-foreground hover:bg-muted',
           )
         : cn(
             'flex h-8 items-center gap-1 rounded-full border px-2.5 py-1',
             isSelected
               ? 'border-primary/40 bg-primary/10 text-primary'
-              : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white border-transparent',
+              : 'bg-muted text-foreground border-transparent',
           ),
     )}
     onClick={onClick}
@@ -279,12 +279,9 @@ export function NoticeDetailActions({
   if (variant === 'rail') {
     return (
       <div className={className}>
-        <div className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark flex flex-col items-center gap-1 rounded-2xl border bg-white p-1.5">
+        <div className="border-border bg-background flex flex-col items-center gap-1 rounded-2xl border p-1.5">
           {reactionButtons}
-          <div
-            aria-hidden
-            className="bg-greyBorder dark:bg-dark_greyBorder my-1 h-px w-8"
-          />
+          <div aria-hidden className="bg-border my-1 h-px w-8" />
           {utilityButtons}
         </div>
       </div>

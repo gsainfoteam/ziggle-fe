@@ -332,7 +332,7 @@ const LandingScenario = () => {
         size="lg"
         className="max-h-none w-auto max-w-none border-none p-0 shadow-none"
       >
-        <div className="flex h-95 w-80 overflow-hidden rounded-2xl bg-white md:h-145 md:w-160">
+        <div className="bg-background flex h-95 w-80 overflow-hidden rounded-2xl md:h-145 md:w-160">
           <div className="from-primary/20 to-primary/5 hidden flex-1 bg-gradient-to-br md:block" />
           <div className="flex w-full flex-col items-center justify-between p-6 md:w-96">
             <div className="flex flex-1 flex-col items-center justify-center gap-3">
@@ -342,7 +342,7 @@ const LandingScenario = () => {
               </div>
             </div>
             <div className="flex w-full flex-col items-center gap-3">
-              <p className="text-greyDark dark:text-dark_grey text-center text-xs">
+              <p className="text-muted-foreground text-center text-xs">
                 계속 진행하면 개인정보 처리방침과 서비스 이용약관에 동의하는
                 것으로 간주됩니다.
               </p>

@@ -32,7 +32,7 @@ export const DeepLButton = ({ lang }: DeepLButtonProps) => {
     >
       <div className="flex gap-2">
         <DeepLLogo />
-        <div className="dark:text-dark text-text font-medium">
+        <div className="dark:text-dark text-foreground font-medium">
           {t('buttons.translate_deepl')}
         </div>
       </div>

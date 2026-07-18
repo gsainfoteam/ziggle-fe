@@ -57,12 +57,12 @@ export const ProfileModalPanel = ({
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   const rowClass =
-    'bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors';
+    'bg-muted hover:bg-border flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors';
 
   return (
     <div
       className={cn(
-        'dark:bg-dark_dark dark:border-dark_greyBorder w-72 rounded-2xl border border-transparent bg-white p-4 shadow-2xl md:p-5',
+        'bg-background w-72 rounded-2xl border border-transparent p-4 shadow-2xl md:p-5',
         className,
       )}
     >
@@ -72,7 +72,7 @@ export const ProfileModalPanel = ({
           onClick={onClose}
           className="absolute top-0 right-0 cursor-pointer"
         >
-          <XIcon className="text-greyDark dark:text-dark_grey size-5" />
+          <XIcon className="text-muted-foreground size-5" />
         </button>
 
         {user.picture ? (
@@ -85,7 +85,7 @@ export const ProfileModalPanel = ({
           <DefaultProfileIcon className="mb-2 size-20 md:mb-2 md:size-16" />
         )}
 
-        <div className="text-text dark:text-dark_white text-xl font-semibold md:text-xl">
+        <div className="text-foreground text-xl font-semibold md:text-xl">
           {user.name}
         </div>
         <div className="text-primary text-sm">{user.email}</div>
@@ -95,14 +95,14 @@ export const ProfileModalPanel = ({
         {showMobileNav && (
           <>
             <Link to="/bookmarked" onClick={onClose} className={rowClass}>
-              <BookmarkSimpleIcon className="text-text dark:text-dark_white size-5" />
-              <span className="text-text dark:text-dark_white flex-1 text-sm font-medium">
+              <BookmarkSimpleIcon className="text-foreground size-5" />
+              <span className="text-foreground flex-1 text-sm font-medium">
                 {tNotice('sidebar.bookmark_notice')}
               </span>
             </Link>
             <Link to="/my" onClick={onClose} className={rowClass}>
-              <UserListIcon className="text-text dark:text-dark_white size-5" />
-              <span className="text-text dark:text-dark_white flex-1 text-sm font-medium">
+              <UserListIcon className="text-foreground size-5" />
+              <span className="text-foreground flex-1 text-sm font-medium">
                 {tNotice('sidebar.my_notice')}
               </span>
             </Link>
@@ -111,14 +111,14 @@ export const ProfileModalPanel = ({
               onClick={() => setSettingsOpen((v) => !v)}
               className={cn(rowClass, 'w-full cursor-pointer')}
             >
-              <GearSixIcon className="text-text dark:text-dark_white size-5" />
-              <span className="text-text dark:text-dark_white flex-1 text-left text-sm font-medium">
+              <GearSixIcon className="text-foreground size-5" />
+              <span className="text-foreground flex-1 text-left text-sm font-medium">
                 {tLayout('sidebar.settings')}
               </span>
             </button>
             {settingsOpen && (
               <div className="flex flex-col gap-y-0.5 px-1 pb-1">
-                <p className="text-greyDark px-2.5 pt-1 pb-1 text-xs font-semibold">
+                <p className="text-muted-foreground px-2.5 pt-1 pb-1 text-xs font-semibold">
                   {tLayout('sidebar.theme')}
                 </p>
                 {themeOptions.map(({ value, Icon }) => {
@@ -142,7 +142,7 @@ export const ProfileModalPanel = ({
                     </SidebarItem>
                   );
                 })}
-                <p className="text-greyDark px-2.5 pt-2 pb-1 text-xs font-semibold">
+                <p className="text-muted-foreground px-2.5 pt-2 pb-1 text-xs font-semibold">
                   {tLayout('sidebar.language')}
                 </p>
                 <SidebarItem
@@ -185,11 +185,11 @@ export const ProfileModalPanel = ({
           onClick={onClose}
           className={rowClass}
         >
-          <UserCircleIcon className="text-text dark:text-dark_white size-5" />
-          <span className="text-text dark:text-dark_white flex-1 text-sm font-medium">
+          <UserCircleIcon className="text-foreground size-5" />
+          <span className="text-foreground flex-1 text-sm font-medium">
             {t('mypage.manage')}
           </span>
-          <ArrowSquareOutIcon className="text-greyDark dark:text-dark_grey size-4" />
+          <ArrowSquareOutIcon className="text-muted-foreground size-4" />
         </a>
 
         <LogClick eventName={LogEvents.myClickLogout}>
@@ -198,8 +198,8 @@ export const ProfileModalPanel = ({
             onClick={onSignOut}
             className={cn(rowClass, 'w-full cursor-pointer')}
           >
-            <SignOutIcon className="text-text dark:text-dark_white size-5" />
-            <span className="text-text dark:text-dark_white text-sm font-medium">
+            <SignOutIcon className="text-foreground size-5" />
+            <span className="text-foreground text-sm font-medium">
               {t('mypage.logout')}
             </span>
           </button>
@@ -211,8 +211,8 @@ export const ProfileModalPanel = ({
             onClick={onWithdrawal}
             className={cn(rowClass, 'w-full cursor-pointer')}
           >
-            <UserMinusIcon className="text-text dark:text-dark_white size-5" />
-            <span className="text-text dark:text-dark_white text-sm font-medium">
+            <UserMinusIcon className="text-foreground size-5" />
+            <span className="text-foreground text-sm font-medium">
               {t('mypage.quit')}
             </span>
           </button>

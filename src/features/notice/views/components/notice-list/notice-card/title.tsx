@@ -18,9 +18,7 @@ export const NoticeCardTitle = ({
     <p
       className={cn(
         'line-clamp-3 min-w-0 flex-1 overflow-hidden text-xl font-semibold text-pretty break-words',
-        isRead
-          ? 'text-greyDark dark:text-dark_grey'
-          : 'dark:text-dark_white text-text',
+        isRead ? 'text-muted-foreground' : 'text-foreground',
       )}
     >
       {query ? (

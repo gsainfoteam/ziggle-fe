@@ -70,14 +70,14 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
         <button
           onClick={prev}
           aria-label={t('carousel.prev')}
-          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
+          className="bg-on-primary/50 hover:bg-on-primary/80 absolute top-1/2 left-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
           <CaretRightIcon className="size-5 rotate-180" />
         </button>
         <button
           onClick={next}
           aria-label={t('carousel.next')}
-          className="bg-dark_white/50 hover:bg-dark_white/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
+          className="bg-on-primary/50 hover:bg-on-primary/80 absolute top-1/2 right-3 inline-flex size-7 -translate-y-1/2 items-center justify-center rounded-2xl p-1.25"
         >
           <CaretRightIcon className="size-5" />
         </button>
@@ -89,7 +89,7 @@ export function BannerCarousel({ slides }: BannerCarouselProps) {
               onClick={() => setIndex(i)}
               aria-label={t('carousel.slide', { number: i + 1 })}
               className={`h-1.5 w-6 rounded-[20px] transition-colors ${
-                i === index ? 'bg-dark_white' : 'bg-deselected'
+                i === index ? 'bg-on-primary' : 'bg-border'
               }`}
             />
           ))}

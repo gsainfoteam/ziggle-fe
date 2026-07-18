@@ -13,7 +13,7 @@ export function PanelRemoveButton({ panelKey }: { panelKey: string }) {
       aria-label={t('list.unpin')}
       onPointerDown={(e) => e.stopPropagation()}
       onClick={() => unpin(panelKey)}
-      className="text-greyDark hover:text-text dark:hover:text-dark_white flex size-7 shrink-0 items-center justify-center"
+      className="text-muted-foreground hover:text-foreground flex size-7 shrink-0 items-center justify-center"
     >
       <XIcon className="size-5" />
     </button>

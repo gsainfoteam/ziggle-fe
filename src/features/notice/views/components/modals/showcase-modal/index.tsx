@@ -61,7 +61,7 @@ const ShowcaseModal = ({
       onClose={onClose}
       onExitComplete={onExitComplete}
       size="full"
-      className="dark:bg-dark_dark/90 flex items-center justify-center gap-3 bg-black/90 p-0"
+      className="/90 flex items-center justify-center gap-3 bg-black/90 p-0"
     >
       <div className="absolute top-3 right-5 z-10 flex gap-7 text-sm font-medium text-white md:text-base">
         <Button className="flex items-center gap-2" onClick={handleDownload}>
@@ -70,16 +70,13 @@ const ShowcaseModal = ({
         </Button>
       </div>
       <Dialog.Close
-        className="text-white hover:bg-white/10"
+        className="hover:bg-background/10 text-white"
         aria-label={t('detail.close')}
       />
       <div className="flex w-full items-center justify-center gap-5 md:gap-12">
         <Button disabled={index === 0} onClick={left}>
           <ArrowRightIcon
-            className={cn(
-              'size-5 md:size-16',
-              index === 0 && 'text-secondaryText',
-            )}
+            className={cn('size-5 md:size-16', index === 0 && 'text-subtle')}
           />
         </Button>
         <img
@@ -95,12 +92,12 @@ const ShowcaseModal = ({
           <ArrowRightIcon
             className={cn(
               'size-5 rotate-180 md:size-16',
-              index === sources.length - 1 && 'text-secondaryText',
+              index === sources.length - 1 && 'text-subtle',
             )}
           />
         </Button>
       </div>
-      <div className="bg-text absolute bottom-4 flex gap-1 p-1">
+      <div className="bg-foreground absolute bottom-4 flex gap-1 p-1">
         {sources.map((src, i) => (
           <img
             key={src}

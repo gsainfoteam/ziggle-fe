@@ -36,7 +36,7 @@ export function BottomTabBar() {
 
   return (
     <nav
-      className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark fixed inset-x-0 bottom-0 z-40 border-t bg-white pb-[calc(env(safe-area-inset-bottom)+1px)] md:hidden"
+      className="border-border bg-background fixed inset-x-0 bottom-0 z-40 border-t pb-[calc(env(safe-area-inset-bottom)+1px)] md:hidden"
       aria-label="Primary"
     >
       <div className="flex h-14 items-stretch">
@@ -48,7 +48,7 @@ export function BottomTabBar() {
             to="/home"
             className={cn(
               tabClass,
-              isHome ? 'text-primary' : 'text-greyDark dark:text-dark_grey',
+              isHome ? 'text-primary' : 'text-muted-foreground',
             )}
           >
             <HouseIcon
@@ -67,7 +67,7 @@ export function BottomTabBar() {
             to="/search"
             className={cn(
               tabClass,
-              isSearch ? 'text-primary' : 'text-greyDark dark:text-dark_grey',
+              isSearch ? 'text-primary' : 'text-muted-foreground',
             )}
           >
             <MagnifyingGlassIcon
@@ -86,7 +86,7 @@ export function BottomTabBar() {
             to="/write"
             className={cn(
               tabClass,
-              isWrite ? 'text-primary' : 'text-greyDark dark:text-dark_grey',
+              isWrite ? 'text-primary' : 'text-muted-foreground',
             )}
           >
             <PencilSimpleIcon
@@ -102,7 +102,7 @@ export function BottomTabBar() {
             eventName={LogEvents.navBarClickMyPage}
             triggerClassName={cn(
               tabClass,
-              'text-greyDark dark:text-dark_grey cursor-pointer',
+              'text-muted-foreground cursor-pointer',
             )}
             imageClassName="size-6 rounded-full"
             showName={false}
@@ -113,7 +113,7 @@ export function BottomTabBar() {
           <LogClick eventName={LogEvents.sidebarClickProfile}>
             <button
               type="button"
-              className={cn(tabClass, 'text-greyDark dark:text-dark_grey')}
+              className={cn(tabClass, 'text-muted-foreground')}
               onClick={() => router.navigate({ to: '/' })}
             >
               <UserIcon className="size-6" />

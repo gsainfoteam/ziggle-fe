@@ -10,9 +10,7 @@ export const LoadingCatAnimation = () => {
     <div className="flex w-full flex-col items-center">
       <div className="h-12" />
       <Lottie animationData={CatBounceAnimation} loop className="w-40" />
-      <div className="text-secondaryText text-2xl font-medium">
-        {t('loading')}
-      </div>
+      <div className="text-subtle text-2xl font-medium">{t('loading')}</div>
     </div>
   );
 };

@@ -61,7 +61,7 @@ export const Footer = () => {
   const { t } = useTranslation('layout');
 
   return (
-    <footer className="bg-primary px-pageSide dark:text-dark_white mt-8 box-content flex flex-col gap-x-24 gap-y-12 py-12 text-white sm:py-16 xl:flex-row">
+    <footer className="bg-primary text-on-primary px-pageSide mt-8 box-content flex flex-col gap-x-24 gap-y-12 py-12 sm:py-16 xl:flex-row">
       <div className="flex flex-col justify-between gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col">

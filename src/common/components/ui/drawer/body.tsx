@@ -10,7 +10,7 @@ interface DrawerBodyProps {
 export const DrawerBody = ({ children, className }: DrawerBodyProps) => (
   <div
     className={cn(
-      'text-text dark:text-dark_white flex-1 overflow-y-auto text-base',
+      'text-foreground flex-1 overflow-y-auto text-base',
       className,
     )}
   >

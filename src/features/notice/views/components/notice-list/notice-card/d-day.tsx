@@ -18,8 +18,8 @@ export const NoticeCardDDay = ({
   return (
     <p
       className={cn(
-        'dark:text-text h-fit rounded-md px-2.5 py-0.75 text-sm text-white',
-        isClosed ? 'bg-greyDark' : 'bg-primary',
+        'text-on-primary h-fit rounded-md px-2.5 py-0.75 text-sm',
+        isClosed ? 'bg-muted-foreground' : 'bg-primary',
         className,
       )}
     >

@@ -78,7 +78,7 @@ function filterInlineStyle(val: string) {
     })
     .filter(Boolean);
 
-  return newStyles.join('; ');
+  return newStyles.join(';');
 }
 
 DOMPurify.addHook('uponSanitizeAttribute', (_node, data) => {
@@ -116,10 +116,10 @@ export function NoticeDetailContent({ content }: ContentProps) {
   return (
     <div
       className={cn(
-        'text-text dark:text-dark_white',
+        'text-foreground',
         'text-left leading-7 font-normal',
         '[&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl',
-        '[&_a]:text-secondaryText [&_a]:underline',
+        '[&_a]:text-subtle [&_a]:underline',
         'break-all',
         '[&_table]:w-full [&_table]:border-collapse',
         '[&_td]:bg-transparent [&_th]:bg-transparent',

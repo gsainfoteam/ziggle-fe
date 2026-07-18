@@ -17,13 +17,15 @@ export const LanguageTab = () => {
         onClick={() => setWritingTab('korean')}
         className={cn(
           'border-b-[3px] p-3.75 pb-3',
-          writingTab === 'korean' ? 'border-primary' : 'border-grey',
+          writingTab === 'korean'
+            ? 'border-primary'
+            : 'border-muted-foreground',
         )}
       >
         <p
           className={cn(
             'text-center',
-            writingTab === 'korean' ? 'text-primary' : 'text-grey',
+            writingTab === 'korean' ? 'text-primary' : 'text-muted-foreground',
           )}
         >
           {t('fields.korean_notice')}
@@ -33,19 +35,21 @@ export const LanguageTab = () => {
         onClick={() => setWritingTab('english')}
         className={cn(
           'border-b-[3px] p-3.75 pb-3',
-          writingTab === 'english' ? 'border-primary' : 'border-grey',
+          writingTab === 'english'
+            ? 'border-primary'
+            : 'border-muted-foreground',
         )}
       >
         <p
           className={cn(
             'text-center',
-            writingTab === 'english' ? 'text-primary' : 'text-grey',
+            writingTab === 'english' ? 'text-primary' : 'text-muted-foreground',
           )}
         >
           {t('fields.english_notice')}
         </p>
       </button>
-      <div className="border-grey border-b-[3px]"></div>
+      <div className="border-muted-foreground border-b-[3px]"></div>
     </div>
   );
 };

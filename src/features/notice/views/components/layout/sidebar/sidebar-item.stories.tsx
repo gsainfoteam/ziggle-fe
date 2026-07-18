@@ -45,7 +45,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    icon: <HouseIcon className="text-text dark:text-dark_white" />,
+    icon: <HouseIcon className="text-foreground" />,
     activeIcon: <HouseIcon weight="fill" className="text-primary" />,
     isActive: false,
     children: <Link to="/">홈</Link>,
@@ -54,7 +54,7 @@ export const Default: Story = {
 
 export const Active: Story = {
   args: {
-    icon: <HouseIcon className="text-text dark:text-dark_white" />,
+    icon: <HouseIcon className="text-foreground" />,
     activeIcon: <HouseIcon weight="fill" className="text-primary" />,
     isActive: true,
     children: <Link to="/">홈</Link>,

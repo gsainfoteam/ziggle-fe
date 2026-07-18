@@ -28,7 +28,7 @@ export const Dark: Story = {
   parameters: { themes: { themeOverride: 'dark' } },
   decorators: [
     (Story) => (
-      <div className="dark bg-dark_dark rounded-lg p-4">
+      <div className="dark bg-background rounded-lg p-4">
         <Story />
       </div>
     ),

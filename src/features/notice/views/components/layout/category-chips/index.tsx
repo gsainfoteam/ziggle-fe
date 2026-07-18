@@ -96,7 +96,7 @@ export function CategoryChips({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        'dark:bg-dark_dark flex items-center gap-2 bg-white px-5 md:hidden',
+        'bg-background flex items-center gap-2 px-5 md:hidden',
         className,
       )}
     >
@@ -118,8 +118,8 @@ export function CategoryChips({ className }: { className?: string }) {
               className={cn(
                 'flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition',
                 chip.isActive
-                  ? 'bg-primary text-white'
-                  : 'bg-greyLight dark:bg-dark_greyDark text-text dark:text-dark_white',
+                  ? 'bg-primary text-on-primary'
+                  : 'bg-muted text-foreground',
               )}
             >
               <span className="flex size-5 shrink-0 items-center justify-center [&>svg]:size-5">
@@ -137,7 +137,7 @@ export function CategoryChips({ className }: { className?: string }) {
           disabled={!edgeFade.left}
           onClick={() => scrollByDir('left')}
           className={cn(
-            'text-greyDark dark:text-dark_grey absolute inset-y-0 left-0 z-10 flex w-7 items-center justify-center transition-opacity',
+            'text-muted-foreground absolute inset-y-0 left-0 z-10 flex w-7 items-center justify-center transition-opacity',
             edgeFade.left ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
@@ -150,7 +150,7 @@ export function CategoryChips({ className }: { className?: string }) {
           disabled={!edgeFade.right}
           onClick={() => scrollByDir('right')}
           className={cn(
-            'text-greyDark dark:text-dark_grey absolute inset-y-0 right-0 z-10 flex w-7 items-center justify-center transition-opacity',
+            'text-muted-foreground absolute inset-y-0 right-0 z-10 flex w-7 items-center justify-center transition-opacity',
             edgeFade.right ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >

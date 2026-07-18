@@ -14,7 +14,7 @@ export const NavbarWrite = () => {
   const isDesktop = useIsDesktop();
 
   return (
-    <header className="text-text flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
+    <header className="text-foreground bg-background flex w-full items-center justify-between py-3 pr-1 pl-2 md:px-4 md:py-2">
       <div className="relative flex h-full w-full items-center justify-between">
         <LogClick eventName={LogEvents.navBarClickLogo}>
           <Link to="/">

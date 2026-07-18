@@ -187,7 +187,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       {isEditMode && (
         <>
           {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
-          <p className="bg-greyLight text-greyDark mt-2.5 rounded-[15px] px-5 py-3.75 text-lg">
+          <p className="bg-muted text-muted-foreground mt-2.5 rounded-[15px] px-5 py-3.75 text-lg">
             {t('edit_description')}
           </p>
         </>
@@ -203,17 +203,13 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
         <GlobeIcon
           className={cn(
             'size-5 md:size-6',
-            english
-              ? 'text-text dark:text-dark_white'
-              : 'text-grey dark:text-dark_grey',
+            english ? 'text-foreground' : 'text-muted-foreground',
           )}
         />
         <p
           className={cn(
             'mr-1 text-lg font-medium',
-            english
-              ? 'text-text dark:text-dark_white'
-              : 'text-grey dark:text-dark_grey',
+            english ? 'text-foreground' : 'text-muted-foreground',
           )}
         >
           {t('buttons.write_english')}
@@ -236,7 +232,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       </div>
 
       <div className="mb-3 flex gap-1.5">
-        <TextTIcon className="text-text dark:text-dark_white size-5 md:size-6" />
+        <TextTIcon className="text-foreground size-5 md:size-6" />
         <p className="font-medium">{t('fields.notice_type')}</p>
       </div>
 
@@ -275,7 +271,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       {isEditMode &&
         ((writingTab === 'korean' && hasTimedOut) ||
           (writingTab === 'english' && hasTimedOut && notice?.enTitle)) && (
-          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-5 py-3.75 text-center text-lg">
+          <p className="bg-muted text-muted-foreground my-10 rounded-[10px] px-5 py-3.75 text-center text-lg">
             {t('edit_disabled')}
           </p>
         )}
@@ -288,7 +284,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       )}
 
       <div className="mt-10 mb-3 flex items-center gap-2">
-        <ClockIcon className="text-text size-5 md:size-6" />
+        <ClockIcon className="text-foreground size-5 md:size-6" />
 
         <p className="text-lg font-medium">
           {t(isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup')}
@@ -313,8 +309,8 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
         )}
       </div>
       {formState.errors.deadline?.message && (
-        <div className="font-regular text-secondaryText mb-3 text-sm">
-          {'⚠️ '}
+        <div className="font-regular text-subtle mb-3 text-sm">
+          {'⚠️'}
           {formState.errors.deadline.message}
         </div>
       )}
@@ -322,23 +318,23 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       {!isEditMode && (
         <>
           <div className="mt-10 mb-2 flex gap-2">
-            <TagIcon className="text-text size-5 md:size-6" />
+            <TagIcon className="text-foreground size-5 md:size-6" />
             <p className="font-medium md:text-lg">{t('fields.tags.setup')}</p>
-            <p className="text-grey">{`(${t('optional')})`}</p>
+            <p className="text-muted-foreground">{`(${t('optional')})`}</p>
           </div>
 
-          <p className="font-regular text-secondaryText mb-3 text-sm">
+          <p className="font-regular text-subtle mb-3 text-sm">
             {t('fields.tags.description')}
           </p>
 
           <TagInput />
 
           <div className="mt-10 mb-1 flex items-center gap-2">
-            <ImageIcon className="text-text size-5 md:size-6" />
+            <ImageIcon className="text-foreground size-5 md:size-6" />
             <p className="font-medium md:text-lg">{t('fields.photo.attach')}</p>
-            <p className="text-grey">{`(${t('optional')})`}</p>
+            <p className="text-muted-foreground">{`(${t('optional')})`}</p>
           </div>
-          <p className="font-regular text-secondaryText mb-3 text-sm">
+          <p className="font-regular text-subtle mb-3 text-sm">
             {t('fields.photo.description')}
           </p>
 
@@ -355,7 +351,7 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
         >
           <p className="mx-3 my-1 text-base font-bold">{t('buttons.submit')}</p>
         </Button>
-        <p className="font-regular text-secondaryText max-w-[70%] text-center text-sm">
+        <p className="font-regular text-subtle max-w-[70%] text-center text-sm">
           {t('submit_description')}
         </p>
       </div>

@@ -17,10 +17,7 @@ export function FlameReactionIcon({
 
   if (!active) {
     return (
-      <FlameIcon
-        className={cn('text-text dark:text-dark_white', className)}
-        style={style}
-      />
+      <FlameIcon className={cn('text-foreground', className)} style={style} />
     );
   }
 

@@ -35,20 +35,20 @@ const Pagination = ({
       <div className="flex gap-1">
         {page !== 0 ? (
           <Button animated onClick={() => onPageChange(page - 1)}>
-            <ArrowRightIcon className="text-text dark:text-dark_white size-6 rotate-180 md:size-7" />
+            <ArrowRightIcon className="text-foreground size-6 rotate-180 md:size-7" />
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="text-grey dark:text-dark_grey size-6 rotate-180 md:size-7" />
+            <ArrowRightIcon className="text-muted-foreground size-6 rotate-180 md:size-7" />
           </Button>
         )}
         {page + 1 !== pages ? (
           <Button animated onClick={() => onPageChange(page + 1)}>
-            <ArrowRightIcon className="text-text dark:text-dark_white size-6 md:size-7" />
+            <ArrowRightIcon className="text-foreground size-6 md:size-7" />
           </Button>
         ) : (
           <Button disabled>
-            <ArrowRightIcon className="text-grey dark:text-dark_grey size-6 md:size-7" />
+            <ArrowRightIcon className="text-muted-foreground size-6 md:size-7" />
           </Button>
         )}
       </div>

@@ -38,7 +38,7 @@ export const NoticeDetailImageStack = ({ sources, alt }: ImageStackProps) => {
             <img
               src={src}
               alt={alt}
-              className="border-greyBorder h-72 w-auto rounded-[10px] border object-contain"
+              className="border-border h-72 w-auto rounded-[10px] border object-contain"
             />
           </button>
         </LogClick>

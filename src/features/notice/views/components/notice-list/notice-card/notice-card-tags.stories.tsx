@@ -41,7 +41,9 @@ export const ResizablePreview: Story = {
 
 const ResizableWrapper = ({ tags }: { tags: string[] }) => (
   <div>
-    <p className="text-greyDark mb-2 text-xs">← 오른쪽 하단 드래그로 폭 조절</p>
+    <p className="text-muted-foreground mb-2 text-xs">
+      ← 오른쪽 하단 드래그로 폭 조절
+    </p>
     <div
       className="resize overflow-hidden border border-dashed border-gray-300 p-2"
       style={{ width: 400, minWidth: 80 }}

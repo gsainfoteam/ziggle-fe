@@ -15,7 +15,7 @@ export const DrawerClose = ({ className }: DrawerCloseProps) => {
       onClick={onClose}
       className={cn(
         'absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md',
-        'text-greyDark dark:text-dark_grey hover:bg-greyLight dark:hover:bg-dark_greyDark transition-colors',
+        'text-muted-foreground hover:bg-muted transition-colors',
         className,
       )}
     >

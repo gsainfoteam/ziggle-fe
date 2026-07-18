@@ -44,7 +44,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
         <Link
           to="/write"
           search={{ noticeId }}
-          className="border-greyLight text-greyDark dark:text-dark_grey dark:border-dark_greyBorder hover:bg-greyLight dark:hover:bg-dark_greyDark flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition"
+          className="border-border text-muted-foreground hover:bg-muted flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition"
         >
           <PencilSimpleIcon className="size-4" />
           {t('detail.author_actions.edit')}

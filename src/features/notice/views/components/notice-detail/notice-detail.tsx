@@ -44,7 +44,7 @@ export function NoticeDetailBackButton({ noticeId }: { noticeId: number }) {
             void router.navigate({ to: '/home' });
           }
         }}
-        className="border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark text-text dark:text-dark_white hover:bg-greyLight dark:hover:bg-dark_greyDark flex size-10 shrink-0 items-center justify-center rounded-xl border bg-white transition"
+        className="border-border text-foreground hover:bg-muted bg-background flex size-10 shrink-0 items-center justify-center rounded-xl border transition"
       >
         <ArrowLeftIcon weight="bold" className="size-5" />
       </button>
@@ -70,7 +70,7 @@ const Header = ({ noticeId, author }: HeaderProps) => (
     ) : (
       <DefaultProfile className="size-9 shrink-0" />
     )}
-    <span className="text-text dark:text-dark_white truncate text-lg font-semibold">
+    <span className="text-foreground truncate text-lg font-semibold">
       {author.name}
     </span>
   </div>
@@ -101,7 +101,7 @@ const Body = ({
   content,
 }: BodyProps) => (
   <div className="flex flex-col gap-4">
-    <h1 className="text-text dark:text-dark_white text-[25px] leading-tight font-semibold">
+    <h1 className="text-foreground text-[25px] leading-tight font-semibold">
       {title}
     </h1>
     {tags.length > 0 && <Tags tags={tags} className="flex-wrap gap-1.75" />}

@@ -14,10 +14,7 @@ export const DialogTitle = ({ children, className }: DialogTitleProps) => {
   return (
     <h2
       id={titleId}
-      className={cn(
-        'text-text dark:text-dark_white text-xl font-bold',
-        className,
-      )}
+      className={cn('text-foreground text-xl font-bold', className)}
     >
       {children}
     </h2>

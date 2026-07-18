@@ -27,7 +27,7 @@ export const AttachedPhoto = ({
           e.stopPropagation();
           onDeleteClick();
         }}
-        className="bg-greyDark absolute -top-2 -right-2 rounded-full p-1"
+        className="bg-muted-foreground absolute -top-2 -right-2 rounded-full p-1"
       >
         <div className="flex">
           <XIcon className="size-4 text-white" />

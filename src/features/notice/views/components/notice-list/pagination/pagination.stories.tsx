@@ -10,7 +10,11 @@ interface PaginationStoryProps {
   page: number;
 }
 
-const PaginationStory = ({ items, itemsPerPage, page }: PaginationStoryProps) => {
+const PaginationStory = ({
+  items,
+  itemsPerPage,
+  page,
+}: PaginationStoryProps) => {
   const [current, setCurrent] = useState(page);
   return (
     <Pagination
