@@ -55,7 +55,7 @@ export function NoticeDetailMetadata({
               href={crawledUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-subtle break-all underline"
+              className="text-subtle hover:text-foreground break-all underline transition-colors"
             >
               {crawledUrl}
             </a>
@@ -74,7 +74,7 @@ export function NoticeDetailMetadata({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-subtle break-all underline"
+                  className="text-subtle hover:text-foreground break-all underline transition-colors"
                 >
                   {name}
                 </a>
