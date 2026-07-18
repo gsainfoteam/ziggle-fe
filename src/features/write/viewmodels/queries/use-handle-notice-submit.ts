@@ -71,11 +71,6 @@ export const useHandleNoticeSubmit = () => {
       images,
       category,
     }: NoticeSubmitForm) => {
-      await alertDialog({
-        title: t('toasts.push_delayed.title'),
-        description: t('toasts.push_delayed.description'),
-      });
-
       const loading = toast.loading(t('toasts.submitting'));
 
       const tagIds: number[] | undefined = await handleTagSubmit(tags);
@@ -164,6 +159,10 @@ export const useHandleNoticeSubmit = () => {
       }
 
       toast.dismiss(loading);
+      await alertDialog({
+        title: t('toasts.push_delayed.title'),
+        description: t('toasts.push_delayed.description'),
+      });
       toast.success(t('toasts.submit_success'));
       localStorage.removeItem('notice');
       invalidateNoticeQueries(queryClient);
