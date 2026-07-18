@@ -1,0 +1,103 @@
+/* TinyMCE UI — 앱 시맨틱 토큰으로 테마 동기화 */
+
+.tox-tinymce {
+  border: none !important;
+  background-color: var(--color-background) !important;
+}
+
+/* promotion: false여도 빈 슬롯이 남는 경우 있음 */
+.tox .tox-promotion {
+  display: none !important;
+}
+
+.tox .tox-editor-header,
+.tox .tox-menubar,
+.tox .tox-toolbar,
+.tox .tox-toolbar__primary,
+.tox .tox-toolbar__overflow,
+.tox .tox-toolbar-overlord,
+.tox .tox-anchorbar,
+.tox .tox-statusbar,
+.tox .tox-sidebar-wrap,
+.tox .tox-edit-area,
+.tox .tox-edit-area__iframe {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-foreground) !important;
+  box-shadow: none !important;
+}
+
+/* TinyMCE 기본 파란 포커스 링 → primary */
+.tox.tox-tinymce--focus {
+  border-color: var(--color-primary) !important;
+}
+
+.tox .tox-edit-area::before {
+  border-color: var(--color-primary) !important;
+  outline: none !important;
+}
+
+.tox .tox-edit-area__iframe:focus,
+.tox .tox-edit-area__iframe:focus-visible {
+  outline: none !important;
+}
+
+.tox .tox-editor-header {
+  border-bottom: 1px solid var(--color-border) !important;
+}
+
+.tox .tox-statusbar {
+  border-top: 1px solid var(--color-border) !important;
+  color: var(--color-muted-foreground) !important;
+}
+
+.tox .tox-mbtn,
+.tox .tox-tbtn,
+.tox .tox-split-button,
+.tox .tox-tbtn--select {
+  background: transparent !important;
+  color: var(--color-foreground) !important;
+}
+
+.tox .tox-tbtn svg,
+.tox .tox-tbtn__icon-wrap svg,
+.tox .tox-tbtn__select-chevron svg {
+  fill: var(--color-foreground) !important;
+}
+
+.tox .tox-mbtn:hover:not(:disabled):not(.tox-mbtn--active),
+.tox .tox-tbtn:hover,
+.tox .tox-split-button:hover,
+.tox .tox-mbtn--active,
+.tox .tox-tbtn--enabled,
+.tox .tox-tbtn:focus,
+.tox .tox-mbtn:focus {
+  background: var(--color-muted) !important;
+  color: var(--color-foreground) !important;
+}
+
+.tox .tox-statusbar a,
+.tox .tox-statusbar__path-item {
+  color: var(--color-muted-foreground) !important;
+}
+
+.tox .tox-statusbar__branding svg {
+  fill: var(--color-muted-foreground) !important;
+}
+
+.tox-tinymce-aux .tox-menu,
+.tox-tinymce-aux .tox-collection,
+.tox-tinymce-aux .tox-dialog,
+.tox-tinymce-aux .tox-dialog__header,
+.tox-tinymce-aux .tox-dialog__footer,
+.tox-tinymce-aux .tox-dialog__body,
+.tox-tinymce-aux .tox-dialog__body-content {
+  background-color: var(--color-background) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-foreground) !important;
+}
+
+.tox-tinymce-aux .tox-collection__item--active,
+.tox-tinymce-aux .tox-collection__item:hover {
+  background-color: var(--color-muted) !important;
+}

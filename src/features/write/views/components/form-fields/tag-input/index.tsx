@@ -10,6 +10,8 @@ import {
   type Tag,
 } from '@/features/write/viewmodels';
 
+import { writeFieldShellClassName } from '../field-styles';
+
 export const TagInput = () => {
   const [keyword, setKeyword] = useState<string>('');
   const [tempTagId, setTempTagId] = useState<number>(0);
@@ -53,7 +55,7 @@ export const TagInput = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="border-primary flex items-center gap-1.5 rounded-[10px] border-[1.5px] border-solid px-2 py-1">
+      <div className={writeFieldShellClassName}>
         {tags.map((tag) => (
           <TagChip
             key={tag.name}
@@ -68,23 +70,22 @@ export const TagInput = () => {
           value={keyword}
           onChange={handleKeywordChange}
           placeholder={tags.length === 0 ? t('fields.tags.placeholder') : ''}
-          className="grow bg-transparent p-2 outline-none md:text-base"
+          className="placeholder:text-muted-foreground text-foreground min-w-24 grow bg-transparent px-2 py-1.5 text-base outline-none"
         />
       </div>
 
       {searchedTags && searchedTags?.length !== 0 && (
         <div className="relative flex">
-          <div className="border-border bg-background absolute -top-1 left-2.5 z-10 flex w-[calc(100%-20px)] flex-col border-2">
+          <div className="border-border bg-background absolute top-1.5 left-0 z-10 flex w-full flex-col overflow-hidden rounded-xl border shadow-sm">
             {searchedTags.slice(0, 5).map((tag) => (
-              <div
-                className="[&:hover]:bg-secondary p-2.5"
+              <button
+                type="button"
+                className="hover:bg-muted text-foreground px-3.5 py-2.5 text-left text-sm transition"
                 key={tag.id}
                 onClick={() => handleTagOptionClick(tag)}
               >
-                <div className="font-regular text-foreground text-left text-sm">
-                  {tag.name}
-                </div>
-              </div>
+                {tag.name}
+              </button>
             ))}
           </div>
         </div>
@@ -101,16 +102,16 @@ export const TagChip = ({
   onClick: () => void;
 }) => {
   return (
-    <div className="bg-primary md:rounded-2x flex h-6 w-max items-center gap-2 rounded-2xl pr-1 pl-1.5 md:h-8 md:pr-1 md:pl-2.5">
-      <div className="text-sm font-medium text-white md:text-base">
-        #{children}
-      </div>
-
-      <div onClick={onClick} className="cursor-pointer">
-        <div className="bg-background flex h-4 w-4 items-center justify-center rounded-xl md:h-5 md:w-5">
-          <XIcon className="text-primary size-3" />
-        </div>
-      </div>
-    </div>
+    <span className="bg-primary text-on-primary flex h-7 w-max items-center gap-1 rounded-full pr-1 pl-2.5 text-sm font-medium">
+      #{children}
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={`remove ${children}`}
+        className="text-on-primary/80 hover:bg-on-primary/15 flex size-5 items-center justify-center rounded-full transition"
+      >
+        <XIcon className="size-3" weight="bold" />
+      </button>
+    </span>
   );
 };

@@ -7,7 +7,6 @@ import {
   UsersThreeIcon,
 } from '@phosphor-icons/react';
 import { Chip } from '@/common/components';
-import { cn } from '@/common/utils';
 import type { NoticeFormValues, NoticeType } from '@/features/write/viewmodels';
 
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
@@ -23,61 +22,49 @@ export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
   const selectedNoticeType = field.value;
 
   return (
-    <>
-      <div className="mb-5 flex gap-2.5">
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap gap-2">
         {noticeTypes.map((noticeType) => (
-          <div
-            className="cursor-pointer"
+          <button
+            type="button"
+            className="cursor-pointer disabled:cursor-not-allowed"
             key={noticeType}
-            onClick={() => {
-              if (disabled) return;
-              field.onChange(noticeType);
-            }}
+            disabled={disabled}
+            onClick={() => field.onChange(noticeType)}
           >
             <Chip
               variant={
                 selectedNoticeType === noticeType ? 'selected' : 'deselected'
               }
               disabled={disabled}
-              className="gap-1.25"
             >
               {(() => {
                 switch (noticeType) {
                   case 'recruit':
-                    return <UsersThreeIcon />;
+                    return <UsersThreeIcon weight="fill" />;
                   case 'event':
-                    return <ConfettiIcon />;
+                    return <ConfettiIcon weight="fill" />;
                   case 'general':
-                    return <MegaphoneIcon />;
+                    return <MegaphoneIcon weight="fill" />;
                 }
               })()}
-              <p className="text-base">
-                {t(`notice_types.${noticeType}.label`)}
-              </p>
+              <span>{t(`notice_types.${noticeType}.label`)}</span>
             </Chip>
-          </div>
+          </button>
         ))}
       </div>
 
-      {noticeTypes.map((noticeType) => (
-        <div
-          key={noticeType}
-          className={cn(
-            selectedNoticeType !== noticeType && 'hidden',
-            'bg-muted rounded-[10px] p-6',
-          )}
-        >
-          <p className="text-foreground mb-2 text-base font-semibold md:text-xl">
-            {t(`notice_types.${noticeType}.description.title`)}
-          </p>
-          <p className="font-regular text-foreground text-sm md:text-base">
-            {t(`notice_types.${noticeType}.description.content`)}
-          </p>
-          <p className="font-regular text-subtle text-sm md:text-base">
-            {t(`notice_types.${noticeType}.description.example`)}
-          </p>
-        </div>
-      ))}
-    </>
+      <div className="bg-muted flex flex-col gap-1 rounded-xl px-4 py-3.5">
+        <p className="text-foreground text-sm font-semibold">
+          {t(`notice_types.${selectedNoticeType}.description.title`)}
+        </p>
+        <p className="text-foreground text-sm">
+          {t(`notice_types.${selectedNoticeType}.description.content`)}
+        </p>
+        <p className="text-muted-foreground text-sm">
+          {t(`notice_types.${selectedNoticeType}.description.example`)}
+        </p>
+      </div>
+    </div>
   );
 };

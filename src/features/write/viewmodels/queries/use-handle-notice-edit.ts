@@ -122,7 +122,8 @@ export const useHandleNoticeEdit = () => {
         if (!englishNotice) {
           toast.dismiss(loading);
           const result = await chooseDialog({
-            description: t('toasts.international_fail'),
+            title: t('toasts.international_fail.title'),
+            description: t('toasts.international_fail.description'),
             denyLabel: t('toasts.copy_english'),
           });
           if (result.outcome === 'denied' && englishBody) {
@@ -154,7 +155,8 @@ export const useHandleNoticeEdit = () => {
         if (additionalKoreanNotice === null) {
           toast.dismiss(loading);
           const result = await chooseDialog({
-            description: t('toasts.additional_notice_fail'),
+            title: t('toasts.additional_notice_fail.title'),
+            description: t('toasts.additional_notice_fail.description'),
             denyLabel: t('toasts.copy_additional'),
           });
           if (result.outcome === 'denied' && koreanAdditionalContent) {
@@ -191,7 +193,8 @@ export const useHandleNoticeEdit = () => {
           if (additionalEnglishNotice === null) {
             toast.dismiss(loading);
             const result = await chooseDialog({
-              description: t('toasts.international_additional_fail'),
+              title: t('toasts.international_additional_fail.title'),
+              description: t('toasts.international_additional_fail.description'),
               denyLabel: t('toasts.copy_international_additional'),
             });
             if (result.outcome === 'denied' && englishAdditionalContent) {

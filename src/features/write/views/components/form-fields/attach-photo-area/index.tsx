@@ -55,30 +55,27 @@ export const AttachPhotoArea = () => {
     <>
       <input
         className="hidden"
-        id={'file-input'}
-        type={'file'}
-        accept={'image/*'}
+        id="file-input"
+        type="file"
+        accept="image/*"
         multiple
         ref={fileInputRef}
         onChange={handleFileInputChange}
-        style={{
-          display: 'none',
-        }}
       />
       <label htmlFor="file-input" />
 
       <div
         className={cn(
-          'flex items-center justify-center',
+          'flex items-center justify-center rounded-xl',
           photos.length > 0
-            ? 'bg-muted p-1.25'
-            : 'border-subtle rounded-[5px] border border-dashed',
+            ? 'bg-muted p-2'
+            : 'border-border border border-dashed bg-transparent',
         )}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >
         {photos.length > 0 ? (
-          <div className="grid w-full grid-cols-2 gap-3.75 p-1.5 md:grid-cols-3 md:p-2.5">
+          <div className="grid w-full grid-cols-2 gap-3 p-1.5 md:grid-cols-3 md:p-2.5">
             {photos.map((file, index) => (
               <AttachedPhoto
                 key={index}
@@ -93,32 +90,29 @@ export const AttachPhotoArea = () => {
               />
             ))}
             <button
-              className="bg-background flex aspect-square items-center justify-center rounded-sm"
+              type="button"
+              className="border-border bg-background text-muted-foreground hover:bg-muted flex aspect-square items-center justify-center rounded-lg border border-dashed transition"
               onClick={() => {
                 fileInputRef.current?.click();
               }}
             >
-              <ImageIcon className="size-10 text-white" />
+              <ImageIcon className="size-8" />
             </button>
           </div>
         ) : (
-          <div className="flex flex-col items-center py-8 md:py-12">
-            <ImageIcon className="text-subtle size-10" />
-
-            <div className="text-subtle mt-1.25 text-xs font-medium">
+          <div className="flex flex-col items-center gap-2 py-10 md:py-14">
+            <ImageIcon className="text-muted-foreground size-10" />
+            <p className="text-muted-foreground text-xs font-medium">
               {t('fields.photo.drag')}
-            </div>
-
+            </p>
             <Button
-              variant="contained"
+              variant="muted"
               onClick={() => {
                 fileInputRef.current?.click();
               }}
-              className="bg-muted-foreground mx-3 my-2.5 px-3 py-1.25 md:mx-4 md:my-3 md:px-3 md:py-1.25"
+              className="text-sm"
             >
-              <div className="text-xs font-medium md:text-base">
-                {t('fields.photo.browse')}
-              </div>
+              {t('fields.photo.browse')}
             </Button>
           </div>
         )}

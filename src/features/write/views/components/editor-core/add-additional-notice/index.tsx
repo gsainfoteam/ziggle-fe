@@ -1,8 +1,15 @@
 import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { PlusIcon } from '@phosphor-icons/react';
+import { cn } from '@/common/utils';
 import type { NoticeFormValues } from '@/features/write/viewmodels';
+
+import {
+  writeErrorClassName,
+  writeFieldClassNames,
+  writeFieldLabelClassName,
+  writeFieldStackClassName,
+} from '../../form-fields/field-styles';
 
 export const AddAdditionalNotice = () => {
   const { t } = useTranslation('notice');
@@ -17,31 +24,28 @@ export const AddAdditionalNotice = () => {
   const koreanError = errors.korean?.additionalContent;
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-2 flex items-center gap-3">
-        <PlusIcon className="text-foreground size-5 md:size-6" />
-
-        <p className="text-lg font-medium">
-          {t('detail.additional_notices.title')}
-        </p>
-      </div>
+    <div className={writeFieldStackClassName}>
+      <label className={writeFieldLabelClassName}>
+        {t('detail.additional_notices.title')}
+      </label>
 
       <textarea
-        className="border-primary text-foreground mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base"
+        className={cn(
+          writeFieldClassNames(Boolean(koreanError)),
+          'min-h-24 resize-none',
+        )}
         placeholder={t('detail.additional_notices.placeholder')}
         rows={3}
+        aria-invalid={Boolean(koreanError)}
         {...register('korean.additionalContent')}
       />
       {koreanError?.message && (
-        <div className="font-regular text-subtle mb-3 text-sm">
-          {'⚠️'}
-          {koreanError.message}
-        </div>
+        <p className={writeErrorClassName}>{koreanError.message}</p>
       )}
 
       {isEnglishSupported && (
         <textarea
-          className="border-primary text-foreground mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base"
+          className={cn(writeFieldClassNames(false), 'min-h-24 resize-none')}
           placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
           {...register('english.additionalContent')}

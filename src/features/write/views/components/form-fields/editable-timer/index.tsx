@@ -32,7 +32,7 @@ const EditableTimer = ({ createdAt }: EditableTimerProps) => {
     <p
       suppressHydrationWarning
       className={cn(
-        'rounded-[15px] px-5 py-3.75 text-center text-lg',
+        'rounded-xl px-4 py-3 text-center text-sm md:text-base',
         isEditable
           ? 'bg-secondary text-primary'
           : 'bg-muted text-muted-foreground',

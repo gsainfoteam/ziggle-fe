@@ -71,7 +71,10 @@ export const useHandleNoticeSubmit = () => {
       images,
       category,
     }: NoticeSubmitForm) => {
-      await alertDialog({ description: t('toasts.push_delayed') });
+      await alertDialog({
+        title: t('toasts.push_delayed.title'),
+        description: t('toasts.push_delayed.description'),
+      });
 
       const loading = toast.loading(t('toasts.submitting'));
 
@@ -145,7 +148,8 @@ export const useHandleNoticeSubmit = () => {
 
         if (!noticeWithInternational) {
           const result = await chooseDialog({
-            description: t('toasts.international_fail'),
+            title: t('toasts.international_fail.title'),
+            description: t('toasts.international_fail.description'),
             denyLabel: t('toasts.copy_english'),
           });
           if (result.outcome === 'denied' && englishBody) {
