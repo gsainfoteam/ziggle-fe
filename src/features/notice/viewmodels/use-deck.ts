@@ -2,7 +2,7 @@ import { differenceBy, uniqBy } from 'es-toolkit';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { HOME_PANEL_KEY } from './panel-keys';
+import { HOME_PANEL_KEY, isValidPanelKey, migratePanelKey } from './panel-keys';
 
 import type { OrderBy } from '../models';
 
@@ -19,7 +19,13 @@ const DEFAULT_HOME_PANEL: PanelConfig = {
 const DEFAULT_DECK: PanelConfig[] = [DEFAULT_HOME_PANEL];
 
 function ensurePanels(panels: PanelConfig[]): PanelConfig[] {
-  return panels.length > 0 ? panels : DEFAULT_DECK;
+  const sanitized = uniqBy(
+    panels
+      .map((panel) => ({ ...panel, key: migratePanelKey(panel.key) }))
+      .filter((panel) => isValidPanelKey(panel.key)),
+    (panel) => panel.key,
+  );
+  return sanitized.length > 0 ? sanitized : DEFAULT_DECK;
 }
 
 export function getHomePanel(panels: PanelConfig[]): PanelConfig {

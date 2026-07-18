@@ -87,4 +87,38 @@ describe('useDeck', () => {
 
     expect(useDeck.getState().panels).toEqual([DEFAULT_PANEL]);
   });
+
+  it('migrates renamed panel keys and drops unknown ones on setPanels', () => {
+    useDeck
+      .getState()
+      .setPanels([
+        DEFAULT_PANEL,
+        { key: 'feed:reminded', orderBy: 'hot' },
+        { key: 'legacy-unknown' },
+        { key: 'search' },
+      ]);
+
+    expect(useDeck.getState().panels).toEqual([
+      DEFAULT_PANEL,
+      { key: feedPanelKey('bookmarked'), orderBy: 'hot' },
+      { key: 'search' },
+    ]);
+  });
+
+  it('falls back to the default deck when every persisted key is invalid', () => {
+    useDeck.getState().setPanels([{ key: 'gone' }, { key: 'also-gone' }]);
+
+    expect(useDeck.getState().panels).toEqual([DEFAULT_PANEL]);
+  });
+
+  it('dedupes after migrating a renamed key onto an existing panel', () => {
+    useDeck.getState().setPanels([
+      { key: 'feed:reminded', orderBy: 'deadline' },
+      { key: feedPanelKey('bookmarked'), orderBy: 'recent' },
+    ]);
+
+    expect(useDeck.getState().panels).toEqual([
+      { key: feedPanelKey('bookmarked'), orderBy: 'deadline' },
+    ]);
+  });
 });
