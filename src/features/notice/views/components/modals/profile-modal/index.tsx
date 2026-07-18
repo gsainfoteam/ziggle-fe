@@ -1,10 +1,9 @@
-import { type ReactNode, useState } from 'react';
+import { type ReactNode, useLayoutEffect, useState } from 'react';
 
 import { Link } from '@tanstack/react-router';
 
 import {
   ArrowSquareOutIcon,
-  BookmarkSimpleIcon,
   GearSixIcon,
   SignOutIcon,
   UserCircleIcon,
@@ -19,7 +18,7 @@ import { toast } from 'sonner';
 import DefaultProfileIcon from '@/assets/icons/default-profile.svg?react';
 import {
   Avatar,
-  Drawer,
+  Dialog,
   LogClick,
   Popover,
   confirmDialog,
@@ -32,13 +31,32 @@ import type { User } from '@/features/auth/models';
 
 import { SidebarItem } from '../../layout/sidebar/sidebar-item';
 
+const PROFILE_TRIGGER_ATTR = 'data-profile-trigger';
+
+function isElementVisible(el: HTMLElement) {
+  if (!el.isConnected) return false;
+  const rect = el.getBoundingClientRect();
+  return rect.width > 0 && rect.height > 0;
+}
+
+/** 현재 레이아웃에서 실제로 보이는 프로필 트리거만 (모바일 숨김 버튼 제외) */
+function findVisibleProfileTrigger(): HTMLElement | null {
+  const nodes = document.querySelectorAll<HTMLElement>(
+    `[${PROFILE_TRIGGER_ATTR}]`,
+  );
+  for (const el of nodes) {
+    if (isElementVisible(el)) return el;
+  }
+  return null;
+}
+
 interface ProfileModalPanelProps {
   user: User;
   onClose: () => void;
   onSignOut: () => void;
   onWithdrawal: () => void;
   className?: string;
-  /** 모바일 시트: 북마크·내 공지·설정 진입 */
+  /** 모바일: 내 공지·설정 (PC는 사이드바) */
   showMobileNav?: boolean;
 }
 
@@ -66,7 +84,12 @@ export const ProfileModalPanel = ({
         className,
       )}
     >
-      <div className="relative flex flex-col items-center gap-0.5 pt-1 pb-4 md:py-5">
+      <div
+        className={cn(
+          'relative flex flex-col items-center gap-0.5 md:py-5',
+          showMobileNav ? 'pt-4 pb-8' : 'pt-1 pb-4',
+        )}
+      >
         <button
           type="button"
           onClick={onClose}
@@ -94,18 +117,13 @@ export const ProfileModalPanel = ({
       <div className="flex flex-col gap-2">
         {showMobileNav && (
           <>
-            <Link to="/bookmarked" onClick={onClose} className={rowClass}>
-              <BookmarkSimpleIcon className="text-foreground size-5" />
-              <span className="text-foreground flex-1 text-sm font-medium">
-                {tNotice('sidebar.bookmark_notice')}
-              </span>
-            </Link>
             <Link to="/my" onClick={onClose} className={rowClass}>
               <UserListIcon className="text-foreground size-5" />
               <span className="text-foreground flex-1 text-sm font-medium">
                 {tNotice('sidebar.my_notice')}
               </span>
             </Link>
+
             <button
               type="button"
               onClick={() => setSettingsOpen((v) => !v)}
@@ -222,6 +240,112 @@ export const ProfileModalPanel = ({
   );
 };
 
+interface ProfileOverlayProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onExitComplete: () => void;
+  anchor: HTMLElement;
+  user: User;
+  onSignOut: () => void;
+  onWithdrawal: () => void;
+}
+
+/** 뷰포트에 따라 팝오버 ↔ 풀스크린을 실시간 전환 */
+function ProfileOverlay({
+  isOpen,
+  onClose,
+  onExitComplete,
+  anchor: _anchor,
+  user,
+  onSignOut,
+  onWithdrawal,
+}: ProfileOverlayProps) {
+  const isDesktop = useIsDesktop();
+  // 모바일에서 연 앵커는 PC에서 숨겨지므로 절대 재사용하지 않음
+  const [desktopAnchor, setDesktopAnchor] = useState<HTMLElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (!isOpen || !isDesktop) {
+      setDesktopAnchor(null);
+      return;
+    }
+
+    let cancelled = false;
+    let frames = 0;
+
+    const tick = () => {
+      if (cancelled) return;
+      const next = findVisibleProfileTrigger();
+      if (next) {
+        setDesktopAnchor(next);
+        return;
+      }
+      frames += 1;
+      if (frames < 24) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      onClose();
+    };
+
+    tick();
+    return () => {
+      cancelled = true;
+    };
+  }, [isDesktop, isOpen, onClose]);
+
+  // 셸 전환 시 exit 애니메이션이 overlay를 내리지 않도록, 실제 닫힐 때만 unmount
+  const handleExitComplete = () => {
+    if (!isOpen) onExitComplete();
+  };
+
+  const panel = (
+    <ProfileModalPanel
+      user={user}
+      onClose={onClose}
+      onSignOut={onSignOut}
+      onWithdrawal={onWithdrawal}
+      showMobileNav={!isDesktop}
+      className={
+        isDesktop
+          ? undefined
+          : 'w-full max-w-none rounded-none border-none px-5 pt-12 pb-10 shadow-none'
+      }
+    />
+  );
+
+  if (isDesktop) {
+    // 보이는 PC 트리거를 잡을 때까지 팝오버를 그리지 않음 (숨은 모바일 앵커로 뜨는 것 방지)
+    if (!desktopAnchor) return null;
+
+    return (
+      <Popover.Root
+        isOpen={isOpen}
+        onClose={onClose}
+        onExitComplete={handleExitComplete}
+        anchor={desktopAnchor}
+        placement="top-start"
+      >
+        {panel}
+      </Popover.Root>
+    );
+  }
+
+  return (
+    <Dialog.Root
+      isOpen={isOpen}
+      onClose={onClose}
+      onExitComplete={handleExitComplete}
+      size="full"
+      closeOnBackdrop={false}
+      className="mx-0 box-border h-dvh max-h-dvh w-screen max-w-[100vw] gap-0 overflow-x-hidden overflow-y-auto p-0 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] shadow-none"
+    >
+      {/* Body 기본 -mr-5/pr-5는 패딩 있는 다이얼로그용 → 풀스크린에선 가로 넘침 */}
+      <Dialog.Body className="mr-0 overflow-y-auto px-0">{panel}</Dialog.Body>
+    </Dialog.Root>
+  );
+}
+
 interface ProfileModalButtonProps {
   triggerClassName?: string;
   eventName?: string;
@@ -229,6 +353,7 @@ interface ProfileModalButtonProps {
   imageClassName?: string;
   showName?: boolean;
   children?: ReactNode;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const ProfileModalButton = ({
@@ -238,12 +363,12 @@ export const ProfileModalButton = ({
   imageClassName = 'size-9',
   showName = true,
   children,
+  onOpenChange,
 }: ProfileModalButtonProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
   const { mutate: logout } = useLogout();
   const { mutateAsync: withdraw } = useWithdraw();
-  const isDesktop = useIsDesktop();
 
   const handleWithdrawal = async () => {
     try {
@@ -281,62 +406,39 @@ export const ProfileModalButton = ({
   const openProfile = (anchor: HTMLElement) => {
     if (!user) return;
 
-    const panel = (close: () => void) => (
-      <ProfileModalPanel
-        user={user}
-        onClose={close}
-        onSignOut={() => {
-          logout({});
-          close();
-        }}
-        onWithdrawal={async () => {
-          close();
-          await handleWithdrawal();
-        }}
-        showMobileNav={!isDesktop}
-        className={
-          isDesktop
-            ? undefined
-            : 'w-full max-w-none rounded-none border-none p-4 shadow-none'
-        }
-      />
-    );
+    onOpenChange?.(true);
 
-    if (isDesktop) {
-      overlay.open(({ isOpen, close, unmount }) => (
-        <Popover.Root
+    overlay.open(({ isOpen, close, unmount }) => {
+      const handleClose = () => {
+        onOpenChange?.(false);
+        close();
+      };
+
+      return (
+        <ProfileOverlay
           isOpen={isOpen}
-          onClose={close}
+          onClose={handleClose}
           onExitComplete={unmount}
           anchor={anchor}
-          placement="bottom-end"
-        >
-          {panel(close)}
-        </Popover.Root>
-      ));
-      return;
-    }
-
-    overlay.open(({ isOpen, close, unmount }) => (
-      <Drawer.Root
-        isOpen={isOpen}
-        onClose={close}
-        onExitComplete={unmount}
-        side="bottom"
-        size="large"
-        className="gap-0 p-0 pt-6 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
-      >
-        <Drawer.Body className="overflow-y-auto px-0">
-          {panel(close)}
-        </Drawer.Body>
-      </Drawer.Root>
-    ));
+          user={user}
+          onSignOut={() => {
+            logout({});
+            handleClose();
+          }}
+          onWithdrawal={async () => {
+            handleClose();
+            await handleWithdrawal();
+          }}
+        />
+      );
+    });
   };
 
   return (
     <LogClick eventName={eventName}>
       <button
         type="button"
+        data-profile-trigger
         onClick={(event) => openProfile(event.currentTarget)}
         className={triggerClassName}
       >
