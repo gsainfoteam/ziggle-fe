@@ -10,7 +10,7 @@ import { Button } from '../button';
 import { Dialog } from './index';
 
 export interface ConfirmDialogOptions {
-  title?: ReactNode;
+  title: ReactNode;
   description: ReactNode;
   confirmLabel?: ReactNode;
   cancelLabel?: ReactNode;
@@ -41,16 +41,15 @@ const ConfirmDialogContent = ({
       isOpen={isOpen}
       onClose={onCancel}
       onExitComplete={onExitComplete}
-      size="sm"
+      size="xs"
+      className="gap-5"
     >
-      {title && (
-        <Dialog.Header>
-          <Dialog.Title>{title}</Dialog.Title>
-        </Dialog.Header>
-      )}
-      <Dialog.Body>
-        <p className="whitespace-pre-line">{description}</p>
-      </Dialog.Body>
+      <Dialog.Header>
+        <Dialog.Title className="text-lg text-pretty">{title}</Dialog.Title>
+        <Dialog.Description className="text-pretty whitespace-pre-line">
+          {description}
+        </Dialog.Description>
+      </Dialog.Header>
       <Dialog.Footer>
         <Button variant="muted" onClick={onCancel} className="flex-1">
           {cancelLabel ?? t('alert_response.cancel')}
@@ -60,7 +59,8 @@ const ConfirmDialogContent = ({
           onClick={onConfirm}
           className={cn(
             'flex-1',
-            destructive && 'text-on-primary bg-red-500 hover:brightness-90',
+            destructive &&
+              'bg-red-500 text-on-primary hover:bg-red-600 active:bg-red-700',
           )}
         >
           {confirmLabel ?? t('alert_response.confirm')}

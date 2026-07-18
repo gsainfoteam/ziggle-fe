@@ -18,7 +18,8 @@ export const Button = ({
 >) => (
   <button
     className={cn(
-      'font-semibold transition',
+      'font-semibold transition outline-none',
+      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary',
       variant && 'rounded-[10px] px-5 py-2.5',
       variant === 'outlined' &&
         !disabled &&

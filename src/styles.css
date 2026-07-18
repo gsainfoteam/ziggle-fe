@@ -143,6 +143,7 @@
     scroll-behavior: smooth;
     scrollbar-gutter: stable;
     background-color: var(--color-background);
+    accent-color: var(--color-primary);
     font-family:
       'Pretendard Variable',
       Pretendard,
@@ -161,6 +162,16 @@
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* 브라우저 기본(금색/파란) 링 대신 브랜드 primary */
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 }
 

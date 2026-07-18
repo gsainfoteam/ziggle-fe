@@ -1,12 +1,5 @@
 import type { Theme } from './context';
 
-export function matchesDark(
-  theme: Theme,
-  systemTheme: 'light' | 'dark',
-): boolean {
-  return theme === 'dark' || (theme === 'system' && systemTheme === 'dark');
-}
-
 export function getStoredTheme(): Theme {
   if (typeof window === 'undefined') return 'system';
   const raw = localStorage.getItem('theme');
@@ -19,9 +12,4 @@ export function getSystemTheme(): 'light' | 'dark' {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
     ? 'dark'
     : 'light';
-}
-
-export function isDarkMode(): boolean {
-  if (typeof window === 'undefined') return false;
-  return matchesDark(getStoredTheme(), getSystemTheme());
 }

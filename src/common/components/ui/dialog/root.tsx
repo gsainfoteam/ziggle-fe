@@ -19,9 +19,10 @@ import {
 } from './animation';
 import { DialogContext } from './context';
 
-export type DialogSize = 'sm' | 'md' | 'lg' | 'full';
+export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'full';
 
 const sizeClassName: Record<DialogSize, string> = {
+  xs: 'max-w-xs',
   sm: 'max-w-sm',
   md: 'max-w-md',
   lg: 'max-w-lg',

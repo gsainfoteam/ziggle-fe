@@ -14,11 +14,11 @@ export const Chip = ({
 }: React.PropsWithChildren<ChipProps>) => (
   <div
     className={cn(
-      'flex w-max items-center rounded-[5px] px-[10px] py-[5px] text-lg font-medium',
-      variant === 'selected' &&
-        'bg-foreground text-on-primary stroke-on-primary',
+      'flex w-max items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition [&>svg]:size-5',
+      variant === 'selected' && 'bg-primary text-on-primary',
       variant === 'selected' && disabled && 'bg-muted-foreground',
-      variant === 'deselected' && 'bg-muted stroke-foreground text-foreground',
+      variant === 'deselected' && 'bg-muted text-foreground',
+      disabled && 'cursor-not-allowed opacity-60',
       className,
     )}
   >

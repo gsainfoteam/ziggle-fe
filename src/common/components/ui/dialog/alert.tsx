@@ -8,7 +8,7 @@ import { Button } from '../button';
 import { Dialog } from './index';
 
 export interface AlertDialogOptions {
-  title?: ReactNode;
+  title: ReactNode;
   description: ReactNode;
   confirmLabel?: ReactNode;
 }
@@ -33,16 +33,15 @@ const AlertDialogContent = ({
       isOpen={isOpen}
       onClose={onConfirm}
       onExitComplete={onExitComplete}
-      size="sm"
+      size="xs"
+      className="gap-5"
     >
-      {title && (
-        <Dialog.Header>
-          <Dialog.Title>{title}</Dialog.Title>
-        </Dialog.Header>
-      )}
-      <Dialog.Body>
-        <p className="whitespace-pre-line">{description}</p>
-      </Dialog.Body>
+      <Dialog.Header>
+        <Dialog.Title className="text-lg text-pretty">{title}</Dialog.Title>
+        <Dialog.Description className="text-pretty whitespace-pre-line">
+          {description}
+        </Dialog.Description>
+      </Dialog.Header>
       <Dialog.Footer>
         <Button variant="contained" onClick={onConfirm} className="flex-1">
           {confirmLabel ?? t('alert_response.confirm')}

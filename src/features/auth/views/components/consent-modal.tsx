@@ -50,7 +50,7 @@ export function ConsentModal({ onTermsClick }: ConsentModalProps) {
               'flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition-colors',
               allChecked
                 ? 'border-primary bg-primary/10 text-primary'
-                : 'border-greyBorder',
+                : 'border-border',
             )}
           >
             <Checkbox
@@ -77,7 +77,7 @@ export function ConsentModal({ onTermsClick }: ConsentModalProps) {
                 className="flex items-center"
                 aria-label={t('consent.viewPrivacyPolicy')}
               >
-                <ChevronRight size={18} className="text-greyDark" />
+                <ChevronRight size={18} className="text-muted-foreground" />
               </button>
             </div>
 
@@ -95,7 +95,7 @@ export function ConsentModal({ onTermsClick }: ConsentModalProps) {
                 className="flex items-center"
                 aria-label={t('consent.viewTermsOfService')}
               >
-                <ChevronRight size={18} className="text-greyDark" />
+                <ChevronRight size={18} className="text-muted-foreground" />
               </button>
             </div>
           </div>
