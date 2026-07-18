@@ -46,13 +46,13 @@ export function ChatbotFab({ onActivate }: { onActivate?: () => void }) {
       disabled={!ready}
       onClick={handleClick}
       className={cn(
-        'border-primary bg-secondary text-primary flex size-11 items-center justify-center rounded-2xl border shadow-lg transition',
+        'border-primary bg-secondary text-primary flex size-12 items-center justify-center rounded-2xl border shadow-lg transition',
         'hover:bg-primary hover:text-on-primary active:scale-95',
         chatOpen && 'bg-primary text-on-primary',
         !ready && 'cursor-not-allowed opacity-50',
       )}
     >
-      <StarFourIcon className="size-5" weight={chatOpen ? 'fill' : 'bold'} />
+      <StarFourIcon className="size-6" weight={chatOpen ? 'fill' : 'bold'} />
     </button>
   );
 }

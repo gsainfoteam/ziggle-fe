@@ -1,9 +1,11 @@
+import { useState } from 'react';
+
 import { Link, useLocation, useRouter } from '@tanstack/react-router';
 
 import {
+  BookmarkSimpleIcon,
   HouseIcon,
   MagnifyingGlassIcon,
-  PencilSimpleIcon,
   UserIcon,
 } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
@@ -29,10 +31,11 @@ export function BottomTabBar() {
   const { pathname } = useLocation();
   const router = useRouter();
   const { data: user } = useUser();
+  const [profileOpen, setProfileOpen] = useState(false);
 
   const isHome = pathname === '/home' || categoryPaths.has(pathname);
   const isSearch = pathname.startsWith('/search');
-  const isWrite = pathname.startsWith('/write');
+  const isBookmark = pathname.startsWith('/bookmarked');
 
   return (
     <nav
@@ -48,12 +51,12 @@ export function BottomTabBar() {
             to="/home"
             className={cn(
               tabClass,
-              isHome ? 'text-primary' : 'text-muted-foreground',
+              isHome && !profileOpen ? 'text-primary' : 'text-muted-foreground',
             )}
           >
             <HouseIcon
               className="size-6"
-              weight={isHome ? 'fill' : 'regular'}
+              weight={isHome && !profileOpen ? 'fill' : 'regular'}
             />
             <span>{t('sidebar.home')}</span>
           </Link>
@@ -67,12 +70,14 @@ export function BottomTabBar() {
             to="/search"
             className={cn(
               tabClass,
-              isSearch ? 'text-primary' : 'text-muted-foreground',
+              isSearch && !profileOpen
+                ? 'text-primary'
+                : 'text-muted-foreground',
             )}
           >
             <MagnifyingGlassIcon
               className="size-6"
-              weight={isSearch ? 'bold' : 'regular'}
+              weight={isSearch && !profileOpen ? 'bold' : 'regular'}
             />
             <span>{t('sidebar.search')}</span>
           </Link>
@@ -80,29 +85,33 @@ export function BottomTabBar() {
 
         <LogClick
           eventName={LogEvents.sidebarClickLink}
-          properties={{ key: 'write' }}
+          properties={{ key: 'bookmarked' }}
         >
           <Link
-            to="/write"
+            to="/bookmarked"
             className={cn(
               tabClass,
-              isWrite ? 'text-primary' : 'text-muted-foreground',
+              isBookmark && !profileOpen
+                ? 'text-primary'
+                : 'text-muted-foreground',
             )}
           >
-            <PencilSimpleIcon
+            <BookmarkSimpleIcon
               className="size-6"
-              weight={isWrite ? 'fill' : 'regular'}
+              weight={isBookmark && !profileOpen ? 'fill' : 'regular'}
             />
-            <span>{t('tabs.write')}</span>
+            <span>{t('sidebar.bookmark_notice')}</span>
           </Link>
         </LogClick>
 
         {user ? (
           <ProfileModalButton
             eventName={LogEvents.navBarClickMyPage}
+            onOpenChange={setProfileOpen}
             triggerClassName={cn(
               tabClass,
-              'text-muted-foreground cursor-pointer',
+              'cursor-pointer',
+              profileOpen ? 'text-primary' : 'text-muted-foreground',
             )}
             imageClassName="size-6 rounded-full"
             showName={false}

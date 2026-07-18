@@ -19,9 +19,9 @@ export const WriteFab = ({ onActivate }: { onActivate?: () => void }) => {
         to="/write"
         aria-label={t('sidebar.write')}
         onClick={onActivate}
-        className="bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active flex size-11 items-center justify-center rounded-2xl shadow-lg transition active:scale-95"
+        className="bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active flex size-12 items-center justify-center rounded-2xl shadow-lg transition active:scale-95"
       >
-        <PencilSimpleIcon weight="fill" className="size-5" />
+        <PencilSimpleIcon weight="fill" className="size-6" />
       </Link>
     </LogClick>
   );

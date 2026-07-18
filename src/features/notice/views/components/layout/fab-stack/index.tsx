@@ -8,7 +8,7 @@ import { cn } from '@/common/utils';
 import { ChatbotFab } from '../chatbot-fab';
 import { WriteFab } from '../write-fab';
 
-/** 데스크탑 우하단 스피드 다이얼. 모바일은 하단 탭으로 대체. */
+/** 우하단 스피드 다이얼. 모바일은 하단 탭 위에 올린다. */
 export function FabStack() {
   const { t } = useTranslation('layout');
   const [open, setOpen] = useState(false);
@@ -35,7 +35,10 @@ export function FabStack() {
   const close = () => setOpen(false);
 
   return (
-    <div ref={rootRef} className="fixed right-5 bottom-5 z-40 hidden md:block">
+    <div
+      ref={rootRef}
+      className="fixed right-5 bottom-[calc(3.5rem+env(safe-area-inset-bottom)+1.25rem)] z-40 md:bottom-5"
+    >
       <div className="relative flex flex-col items-center">
         <div
           className={cn(
@@ -54,12 +57,12 @@ export function FabStack() {
           aria-label={open ? t('fab.close') : t('fab.open')}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active flex size-12 items-center justify-center rounded-2xl shadow-lg transition active:scale-95"
+          className="bg-primary text-on-primary hover:bg-primary-hover active:bg-primary-active flex size-14 items-center justify-center rounded-2xl shadow-lg transition active:scale-95"
         >
           <PlusIcon
             weight="bold"
             className={cn(
-              'size-6 transition-transform duration-200',
+              'size-7 transition-transform duration-200',
               open && 'rotate-45',
             )}
           />
