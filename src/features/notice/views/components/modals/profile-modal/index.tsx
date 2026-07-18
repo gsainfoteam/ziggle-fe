@@ -29,26 +29,8 @@ import { cn, useIsDesktop } from '@/common/utils';
 import { useLogout, useUser, useWithdraw } from '@/features/auth';
 import type { User } from '@/features/auth/models';
 
+import { watchVisibleProfileTrigger } from './watch-visible-profile-trigger.ts';
 import { SidebarItem } from '../../layout/sidebar/sidebar-item';
-
-const PROFILE_TRIGGER_ATTR = 'data-profile-trigger';
-
-function isElementVisible(el: HTMLElement) {
-  if (!el.isConnected) return false;
-  const rect = el.getBoundingClientRect();
-  return rect.width > 0 && rect.height > 0;
-}
-
-/** 현재 레이아웃에서 실제로 보이는 프로필 트리거만 (모바일 숨김 버튼 제외) */
-function findVisibleProfileTrigger(): HTMLElement | null {
-  const nodes = document.querySelectorAll<HTMLElement>(
-    `[${PROFILE_TRIGGER_ATTR}]`,
-  );
-  for (const el of nodes) {
-    if (isElementVisible(el)) return el;
-  }
-  return null;
-}
 
 interface ProfileModalPanelProps {
   user: User;
@@ -268,29 +250,10 @@ function ProfileOverlay({
   useLayoutEffect(() => {
     if (!isOpen || !isDesktop) return;
 
-    let cancelled = false;
-    let frames = 0;
-
-    const tick = () => {
-      if (cancelled) return;
-      const next = findVisibleProfileTrigger();
-      if (next) {
-        setDesktopAnchor(next);
-        return;
-      }
-      frames += 1;
-      if (frames < 24) {
-        requestAnimationFrame(tick);
-        return;
-      }
-      onClose();
-    };
-
-    tick();
-    return () => {
-      cancelled = true;
-    };
-  }, [isDesktop, isOpen, onClose]);
+    return watchVisibleProfileTrigger({
+      onFound: setDesktopAnchor,
+    });
+  }, [isDesktop, isOpen]);
 
   // 셸 전환 시 exit 애니메이션이 overlay를 내리지 않도록, 실제 닫힐 때만 unmount
   const handleExitComplete = () => {
