@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useNavigate } from '@tanstack/react-router';
 
@@ -20,7 +20,7 @@ export const useAuth = ({
   const { mutate: logInMutate, ...logInMutation } = useLogin({ showToast });
   const { mutate: logOut, ...logOutMutation } = useLogout({ showToast });
   const { token } = useToken();
-  const { data, isLoading, error, refetch } = useUser();
+  const { data: user, refetch } = useUser();
   const { t } = useTranslation('auth');
   const navigate = useNavigate();
 
@@ -38,13 +38,6 @@ export const useAuth = ({
     },
     [idpToken, navigate, showToast, t, logInMutate],
   );
-
-  const user = useMemo(() => {
-    if (!token) return null;
-    if (isLoading) return undefined;
-    if (error) return null;
-    return data;
-  }, [data, error, isLoading, token]);
 
   useEffect(() => {
     if (token) {
