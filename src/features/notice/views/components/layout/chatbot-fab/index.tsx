@@ -17,8 +17,6 @@ export function ChatbotFab({ onActivate }: { onActivate?: () => void }) {
     const w = window.ChatbotWidget;
     if (!w?.on) return;
 
-    if (w.isReady?.()) setReady(true);
-
     const unsubReady = w.on('onReady', () => setReady(true));
     const unsubOpen = w.on('onOpen', () => setChatOpen(true));
     const unsubClose = w.on('onClose', () => setChatOpen(false));

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
+import { useTranslation } from 'react-i18next';
+
 import { LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 
@@ -15,9 +15,11 @@ export function SearchInput({
 }) {
   const { t } = useTranslation('notice');
   const [text, setText] = useState(value);
-
-  // 외부(URL 등)에서 query가 바뀌면 입력값 동기화
-  useEffect(() => setText(value), [value]);
+  const [prevValue, setPrevValue] = useState(value);
+  if (value !== prevValue) {
+    setPrevValue(value);
+    setText(value);
+  }
 
   return (
     <form

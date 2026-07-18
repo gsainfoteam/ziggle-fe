@@ -263,12 +263,10 @@ function ProfileOverlay({
   const isDesktop = useIsDesktop();
   // 모바일에서 연 앵커는 PC에서 숨겨지므로 절대 재사용하지 않음
   const [desktopAnchor, setDesktopAnchor] = useState<HTMLElement | null>(null);
+  const resolvedDesktopAnchor = isDesktop ? desktopAnchor : null;
 
   useLayoutEffect(() => {
-    if (!isOpen || !isDesktop) {
-      setDesktopAnchor(null);
-      return;
-    }
+    if (!isOpen || !isDesktop) return;
 
     let cancelled = false;
     let frames = 0;
@@ -296,7 +294,10 @@ function ProfileOverlay({
 
   // 셸 전환 시 exit 애니메이션이 overlay를 내리지 않도록, 실제 닫힐 때만 unmount
   const handleExitComplete = () => {
-    if (!isOpen) onExitComplete();
+    if (!isOpen) {
+      setDesktopAnchor(null);
+      onExitComplete();
+    }
   };
 
   const panel = (
@@ -316,14 +317,14 @@ function ProfileOverlay({
 
   if (isDesktop) {
     // 보이는 PC 트리거를 잡을 때까지 팝오버를 그리지 않음 (숨은 모바일 앵커로 뜨는 것 방지)
-    if (!desktopAnchor) return null;
+    if (!resolvedDesktopAnchor) return null;
 
     return (
       <Popover.Root
         isOpen={isOpen}
         onClose={onClose}
         onExitComplete={handleExitComplete}
-        anchor={desktopAnchor}
+        anchor={resolvedDesktopAnchor}
         placement="top-start"
       >
         {panel}
