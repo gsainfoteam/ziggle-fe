@@ -56,9 +56,9 @@
       "description": {
         "content": "Notices that are not part of a recruitment or event notices.",
         "example": "Ex) GIST House notices, student association notices, notifications, etc.",
-        "title": "🔔 General notice"
+        "title": "🔔 Other notice"
       },
-      "label": "General"
+      "label": "Other"
     },
     "recruit": {
       "description": {

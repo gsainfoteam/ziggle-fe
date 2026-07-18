@@ -61,7 +61,7 @@
         "name": "Events"
       },
       "general": {
-        "name": "General"
+        "name": "Other"
       },
       "recruit": {
         "name": "Recruiting"
@@ -101,7 +101,7 @@
     "academic": "Academic",
     "club": "Club",
     "event": "Events",
-    "general": "General",
+    "general": "Other",
     "home": "Home",
     "my_notice": "My Notices",
     "notices": "Notices",

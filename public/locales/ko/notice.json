@@ -61,7 +61,7 @@
         "name": "행사"
       },
       "general": {
-        "name": "일반"
+        "name": "기타"
       },
       "recruit": {
         "name": "모집"
@@ -101,7 +101,7 @@
     "academic": "학사",
     "club": "동아리",
     "event": "행사",
-    "general": "일반",
+    "general": "기타",
     "home": "홈",
     "my_notice": "내 공지",
     "notices": "공지",

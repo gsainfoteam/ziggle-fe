@@ -56,9 +56,9 @@
       "description": {
         "content": "모집이나 행사 공지에 해당되지 않는 공지들입니다.",
         "example": "예시) 하우스 공지, 학생회 공지, 통보 등",
-        "title": "🔔 일반 공지"
+        "title": "🔔 기타 공지"
       },
-      "label": "일반"
+      "label": "기타"
     },
     "recruit": {
       "description": {
