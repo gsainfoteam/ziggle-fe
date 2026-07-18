@@ -154,6 +154,7 @@ export const DrawerRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
+                  data-ziggle-overlay=""
                   className={cn(
                     'absolute z-10 flex w-full flex-col gap-4 p-5',
                     'border-border bg-background border shadow-[0_8px_30px_rgba(0,0,0,0.12)]',

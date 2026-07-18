@@ -1,3 +1,5 @@
+import { APP_OVERLAY_SELECTOR } from '@/common/const/overlay';
+
 /** Fallbacks mirror styles.css brand/surface tokens (hex without #). */
 const COLOR_FALLBACK = {
   primary: 'ff4500',
@@ -57,9 +59,9 @@ function hideDefaultLauncher(): boolean {
   return true;
 }
 
-/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 → 오버레이 열리면 닫기 */
+/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 → 앱 오버레이 열리면 닫기 */
 function syncChatbotWithOverlays(): void {
-  const overlayOpen = document.querySelector('[role="dialog"]') != null;
+  const overlayOpen = document.querySelector(APP_OVERLAY_SELECTOR) != null;
   if (!overlayOpen) return;
   try {
     if (window.ChatbotWidget?.isOpen?.()) {

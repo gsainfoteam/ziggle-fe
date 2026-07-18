@@ -102,6 +102,7 @@ export const DialogRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
+                  data-ziggle-overlay=""
                   className={cn(
                     'relative mx-5 flex max-h-[80vh] w-full flex-col gap-4 overflow-hidden p-5',
                     'border-border bg-background rounded-2xl border shadow-xl',
