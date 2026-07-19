@@ -73,7 +73,12 @@
     "d_day_plus": "OVERDUE",
     "empty": "No content. =ㅅ=",
     "pagination": {
-      "of": "of"
+      "jump": "Go to page",
+      "label": "Pagination",
+      "of": "of",
+      "page": "Page {{page}}",
+      "prev": "Previous",
+      "next": "Next"
     },
     "sort": {
       "deadline": "Deadline",

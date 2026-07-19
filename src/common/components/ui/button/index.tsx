@@ -18,7 +18,7 @@ export const Button = ({
 >) => (
   <button
     className={cn(
-      'font-semibold transition outline-none',
+      'cursor-pointer font-semibold transition outline-none',
       'focus-visible:outline-primary focus-visible:outline-2 focus-visible:outline-offset-2',
       variant && 'rounded-[10px] px-5 py-2.5',
       variant === 'outlined' &&
@@ -34,7 +34,8 @@ export const Button = ({
         !disabled &&
         'bg-muted text-muted-foreground hover:brightness-95',
       (variant === 'disabled' || disabled) &&
-        'bg-muted text-muted-foreground cursor-not-allowed',
+        'text-muted-foreground cursor-not-allowed',
+      (variant === 'disabled' || (disabled && variant)) && 'bg-muted',
       animated && 'active:scale-95',
       className,
     )}
