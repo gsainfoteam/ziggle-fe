@@ -18,9 +18,12 @@ vi.mock('sonner', () => ({
 }));
 
 vi.mock('@/common/components', () => ({
-  Button: (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-    <button {...props} />
-  ),
+  Button: ({
+    animated: _animated,
+    ...props
+  }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    animated?: boolean;
+  }) => <button {...props} />,
   LogClick: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
