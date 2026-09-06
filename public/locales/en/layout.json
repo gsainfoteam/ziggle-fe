@@ -72,11 +72,17 @@
   },
   "sidebar": {
     "language": "Language",
+    "settings": "Settings",
     "theme": "Theme",
     "theme_options": {
       "dark": "Dark",
       "light": "Light",
       "system": "System"
     }
+  },
+  "fab": {
+    "chatbot": "Open GIST chatbot",
+    "open": "Open shortcuts",
+    "close": "Close shortcuts"
   }
 }

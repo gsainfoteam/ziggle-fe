@@ -1,29 +1,103 @@
+import {
+  CalendarBlankIcon,
+  EyeIcon,
+  HourglassIcon,
+  LinkIcon,
+  PaperclipIcon,
+} from '@phosphor-icons/react';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
-import { Avatar } from '@/common/components';
-import type { Author } from '@/features/notice/models';
+import type { NoticeDetail } from '@/features/notice/models';
 
-interface NoticeDetailMetadataProps {
-  author: Author;
-  createdAt: string;
-}
-
-export const NoticeDetailMetadata = ({
-  author,
+export function NoticeDetailMetadata({
   createdAt,
-}: NoticeDetailMetadataProps) => {
-  const timeAgo = dayjs(createdAt).fromNow();
+  views,
+  currentDeadline,
+  crawledUrl,
+  documents,
+}: Pick<
+  NoticeDetail,
+  'createdAt' | 'views' | 'currentDeadline' | 'crawledUrl' | 'documents'
+>) {
+  const { t } = useTranslation('notice');
+
   return (
-    <div className="flex items-center">
-      <Avatar
-        name={author.name}
-        picture={author.picture}
-        imageClassName="size-9"
-        className="gap-2"
-        labelClassName="text-lg"
-      />
-      <span className="text-greyDark mx-1.25 font-bold">·</span>
-      <span className="text-greyDark font-medium">{timeAgo}</span>
+    <div className="border-border border-y py-3 text-sm">
+      <div className="grid grid-cols-[max-content_1fr] items-start gap-x-6 gap-y-3">
+        <Label icon={<CalendarBlankIcon className="size-4" />}>
+          {t('detail.created_at')}
+        </Label>
+        <span className="text-subtle">
+          {dayjs(createdAt).tz().format('LLL')}
+        </span>
+
+        <Label icon={<EyeIcon className="size-4" />}>{t('detail.views')}</Label>
+        <span className="text-subtle">{views.toLocaleString()}</span>
+
+        {currentDeadline && (
+          <>
+            <Label icon={<HourglassIcon className="size-4" />}>
+              {t('detail.deadline')}
+            </Label>
+            <span className="text-subtle">
+              {dayjs(currentDeadline).tz().format('LLL')}
+            </span>
+          </>
+        )}
+
+        {crawledUrl && (
+          <>
+            <Label icon={<LinkIcon className="size-4" />}>
+              {t('detail.source_url')}
+            </Label>
+            <a
+              href={crawledUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-subtle hover:text-foreground break-all underline transition-colors"
+            >
+              {crawledUrl}
+            </a>
+          </>
+        )}
+
+        {documents.length > 0 && (
+          <>
+            <Label icon={<PaperclipIcon className="size-4" />}>
+              {t('detail.attachments')}
+            </Label>
+            <div className="flex flex-col gap-1">
+              {documents.map(({ url, name }) => (
+                <a
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-subtle hover:text-foreground break-all underline transition-colors"
+                >
+                  {name}
+                </a>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
-};
+}
+
+function Label({
+  icon,
+  children,
+}: {
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="text-muted-foreground flex items-center gap-1.5 font-medium">
+      {icon}
+      <span>{children}</span>
+    </div>
+  );
+}

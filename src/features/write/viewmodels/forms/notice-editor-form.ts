@@ -1,5 +1,11 @@
 import dayjs, { type Dayjs } from 'dayjs';
+import { isFile, isPlainObject, isString } from 'es-toolkit';
 import { z } from 'zod';
+
+import type { TFunction } from 'i18next';
+
+export const TITLE_MAX_LENGTH = 50;
+export const BODY_MAX_LENGTH = 20000;
 
 export type NoticeType = 'recruit' | 'event' | 'general';
 
@@ -31,26 +37,117 @@ export interface NoticeFormValues {
   photos: FileWithUrl[];
 }
 
-const localizedBody = z.object({
-  title: z.string(),
-  content: z.string(),
-  additionalContent: z.string().optional(),
-});
+/** TinyMCE 빈 본문(`<p></p>` 등)을 미입력으로 취급 */
+export const isBlankRichText = (html: string) =>
+  html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim().length === 0;
 
-export const noticeFormSchema = z.object({
-  noticeType: z.enum(['recruit', 'event', 'general']),
-  writingTab: z.enum(['korean', 'english']),
-  korean: localizedBody,
-  english: localizedBody.optional(),
-  deadline: z.custom<Dayjs>((v) => dayjs.isDayjs(v)).optional(),
-  tags: z.array(z.object({ id: z.number(), name: z.string() })),
-  photos: z.array(
-    z.object({
-      file: z.custom<File>((v) => v instanceof File),
-      url: z.string(),
+export const createNoticeFormSchema = (t: TFunction<'write'>) => {
+  const koreanLocalizedBody = z.object({
+    title: z
+      .string()
+      .trim()
+      .min(1, { error: t('validations.title_required') })
+      .max(TITLE_MAX_LENGTH, {
+        error: t('validations.title_too_long', {
+          titleMaxLength: TITLE_MAX_LENGTH,
+        }),
+      }),
+    content: z.string().superRefine((value, ctx) => {
+      if (isBlankRichText(value)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: t('validations.body_required'),
+        });
+        return;
+      }
+      if (value.length > BODY_MAX_LENGTH) {
+        ctx.addIssue({
+          code: 'custom',
+          message:
+            t('validations.body_too_long', {
+              bodyMaxLength: BODY_MAX_LENGTH,
+            }) +
+            t('validations.char_count', {
+              length: value.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        });
+      }
     }),
-  ),
-}) satisfies z.ZodType<NoticeFormValues, NoticeFormValues>;
+    additionalContent: z.string().optional(),
+  });
+
+  const englishLocalizedBody = z.object({
+    title: z
+      .string()
+      .trim()
+      .min(1, { error: t('validations.english_title_required') })
+      .max(TITLE_MAX_LENGTH, {
+        error: t('validations.title_too_long', {
+          titleMaxLength: TITLE_MAX_LENGTH,
+        }),
+      }),
+    content: z.string().superRefine((value, ctx) => {
+      if (isBlankRichText(value)) {
+        ctx.addIssue({
+          code: 'custom',
+          message: t('validations.english_body_required'),
+        });
+        return;
+      }
+      if (value.length > BODY_MAX_LENGTH) {
+        ctx.addIssue({
+          code: 'custom',
+          message:
+            t('validations.english_body_too_long', {
+              bodyMaxLength: BODY_MAX_LENGTH,
+            }) +
+            t('validations.char_count', {
+              length: value.length,
+              maxLength: BODY_MAX_LENGTH,
+            }),
+        });
+      }
+    }),
+    additionalContent: z.string().optional(),
+  });
+
+  return z
+    .object({
+      noticeType: z.enum(['recruit', 'event', 'general']),
+      writingTab: z.enum(['korean', 'english']),
+      korean: koreanLocalizedBody,
+      english: englishLocalizedBody.optional(),
+      deadline: z
+        .custom<Dayjs>((value) => dayjs.isDayjs(value))
+        .refine((value) => !value.isBefore(dayjs()), {
+          error: t('validations.deadline_invalid'),
+        })
+        .optional(),
+      tags: z.array(z.object({ id: z.number(), name: z.string() })),
+      photos: z.array(
+        z.object({
+          file: z.custom<File>((value) => isFile(value)),
+          url: z.string(),
+        }),
+      ),
+    })
+    .superRefine((data, ctx) => {
+      const englishAdditional = data.english?.additionalContent?.trim();
+      const koreanAdditional = data.korean.additionalContent?.trim();
+      if (englishAdditional && !koreanAdditional) {
+        ctx.addIssue({
+          code: 'custom',
+          message: t('validations.korean_additional_required'),
+          path: ['korean', 'additionalContent'],
+        });
+      }
+    }) satisfies z.ZodType<NoticeFormValues, NoticeFormValues>;
+};
 
 export const defaultNoticeFormValues: NoticeFormValues = {
   noticeType: 'recruit',
@@ -72,19 +169,13 @@ export const retrieveDraftFromLocalStorage = (): Draft | null => {
 
   try {
     const { korean, english, deadline } = JSON.parse(retrieved);
+    const isLocalized = (value: unknown) =>
+      isPlainObject(value) && isString(value.title) && isString(value.content);
+
     const isValid =
-      typeof korean === 'object' &&
-      'title' in korean &&
-      typeof korean.title === 'string' &&
-      'content' in korean &&
-      typeof korean.content === 'string' &&
-      (typeof english === 'undefined' ||
-        (typeof english === 'object' &&
-          'title' in english &&
-          typeof english.title === 'string' &&
-          'content' in english &&
-          typeof english.content === 'string')) &&
-      (typeof deadline === 'string' || typeof deadline === 'undefined');
+      isLocalized(korean) &&
+      (english === undefined || isLocalized(english)) &&
+      (isString(deadline) || deadline === undefined);
     if (!isValid) throw new Error('Parsed data have invalid type');
 
     return {

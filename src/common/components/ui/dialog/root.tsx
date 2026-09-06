@@ -19,9 +19,10 @@ import {
 } from './animation';
 import { DialogContext } from './context';
 
-export type DialogSize = 'sm' | 'md' | 'lg' | 'full';
+export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'full';
 
 const sizeClassName: Record<DialogSize, string> = {
+  xs: 'max-w-xs',
   sm: 'max-w-sm',
   md: 'max-w-md',
   lg: 'max-w-lg',
@@ -101,9 +102,10 @@ export const DialogRoot = ({
                   animate="open"
                   exit="closed"
                   role="dialog"
+                  data-ziggle-overlay=""
                   className={cn(
                     'relative mx-5 flex max-h-[80vh] w-full flex-col gap-4 overflow-hidden p-5',
-                    'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark rounded-2xl border bg-white shadow-xl',
+                    'border-border bg-background rounded-2xl border shadow-xl',
                     sizeClassName[size],
                     className,
                   )}

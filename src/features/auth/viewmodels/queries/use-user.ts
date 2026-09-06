@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { $api } from '@/common/lib';
 
@@ -9,7 +9,7 @@ export const useUser = () => {
   const { token } = useToken();
   const setRequiredConsents = useAuthPrompt((s) => s.setRequiredConsents);
 
-  const { data, error, ...rest } = $api.useQuery(
+  const { data, error, isLoading, ...rest } = $api.useQuery(
     'get',
     ApiPaths.UserController_getUserInfo,
     {},
@@ -22,9 +22,17 @@ export const useUser = () => {
     }
   }, [error, setRequiredConsents]);
 
+  const user = useMemo(() => {
+    if (!token) return null;
+    if (isLoading) return undefined;
+    if (error) return null;
+    return data ?? null;
+  }, [data, error, isLoading, token]);
+
   return {
     ...rest,
+    isLoading,
     error,
-    data: token ? (data ?? null) : null,
+    data: user,
   };
 };

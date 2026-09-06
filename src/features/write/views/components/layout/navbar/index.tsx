@@ -1,61 +1,30 @@
 import { Link } from '@tanstack/react-router';
 
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import AccountIcon from '@/assets/icons/account.svg?react';
-import ZiggleCompactLogoDark from '@/assets/logos/ziggle-compact-dark.svg?react';
-import ZiggleCompactLogo from '@/assets/logos/ziggle-compact.svg?react';
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Avatar, Button, LogClick } from '@/common/components';
+import { LogClick, ZiggleLogo } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { useUser } from '@/features/auth';
 
 export const NavbarWrite = () => {
   const { t } = useTranslation('layout');
-  const { data: user } = useUser();
 
   return (
-    <header className="text-text flex w-full items-center justify-between bg-white py-3 pr-1 pl-2 md:px-4 md:py-2">
-      <div className="relative flex h-full w-full items-center justify-between">
+    <div className="bg-background sticky top-0 z-50 pt-[env(safe-area-inset-top)] md:hidden">
+      <header className="text-foreground flex w-full items-center justify-between p-5">
         <LogClick eventName={LogEvents.navBarClickLogo}>
-          <Link to="/">
-            <div className="block dark:hidden">
-              <ZiggleLogo className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogo className="h-8 overflow-visible md:hidden" />
-            </div>
-            <div className="hidden dark:block">
-              <ZiggleLogoDark className="hidden h-8 overflow-visible md:flex" />
-              <ZiggleCompactLogoDark className="h-8 overflow-visible md:hidden" />
-            </div>
+          <Link to="/home" className="flex shrink-0 items-center">
+            <ZiggleLogo variant="compact" className="h-8 overflow-visible" />
           </Link>
         </LogClick>
-        <div className="mr-2.5 flex h-full flex-row-reverse items-center md:mr-5 md:w-full">
-          <Link to="/">
-            <Button variant="outlined">{t('navbar_write.go_back')}</Button>
-          </Link>
-        </div>
-      </div>
-      {user ? (
-        <Avatar
-          name={user.name}
-          picture={user.picture}
-          imageClassName="h-6 w-6"
-          className="hidden gap-2 md:flex"
-        />
-      ) : (
-        <LogClick eventName={LogEvents.navBarClickLogin}>
-          <Link
-            to="/"
-            className="hidden items-center justify-center gap-2 md:flex"
-          >
-            <AccountIcon className="flex h-6" />
-            <div className="text-primary align-middle font-medium whitespace-nowrap">
-              {t('navbar.login')}
-            </div>
-          </Link>
-        </LogClick>
-      )}
-    </header>
+        <Link
+          to="/home"
+          className="text-muted-foreground hover:text-foreground flex h-8 items-center gap-0.5 text-sm font-medium transition"
+        >
+          <CaretLeftIcon className="size-4" weight="bold" aria-hidden />
+          {t('navbar_write.go_back')}
+        </Link>
+      </header>
+    </div>
   );
 };

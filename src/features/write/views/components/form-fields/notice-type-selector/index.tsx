@@ -1,11 +1,12 @@
+import {
+  ConfettiIcon,
+  MegaphoneIcon,
+  UsersThreeIcon,
+} from '@phosphor-icons/react';
 import { useController, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import EventIcon from '@/assets/icons/event.svg?react';
-import GeneralIcon from '@/assets/icons/general.svg?react';
-import RecruitIcon from '@/assets/icons/recruit.svg?react';
 import { Chip } from '@/common/components';
-import { cn } from '@/common/utils';
 import type { NoticeFormValues, NoticeType } from '@/features/write/viewmodels';
 
 const noticeTypes: NoticeType[] = ['recruit', 'event', 'general'];
@@ -21,61 +22,49 @@ export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
   const selectedNoticeType = field.value;
 
   return (
-    <>
-      <div className="mb-5 flex gap-2.5">
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap gap-2">
         {noticeTypes.map((noticeType) => (
-          <div
-            className="cursor-pointer"
+          <button
+            type="button"
+            className="cursor-pointer disabled:cursor-not-allowed"
             key={noticeType}
-            onClick={() => {
-              if (disabled) return;
-              field.onChange(noticeType);
-            }}
+            disabled={disabled}
+            onClick={() => field.onChange(noticeType)}
           >
             <Chip
               variant={
                 selectedNoticeType === noticeType ? 'selected' : 'deselected'
               }
               disabled={disabled}
-              className="gap-1.25"
             >
               {(() => {
                 switch (noticeType) {
                   case 'recruit':
-                    return <RecruitIcon />;
+                    return <UsersThreeIcon weight="fill" />;
                   case 'event':
-                    return <EventIcon />;
+                    return <ConfettiIcon weight="fill" />;
                   case 'general':
-                    return <GeneralIcon />;
+                    return <MegaphoneIcon weight="fill" />;
                 }
               })()}
-              <p className="text-base">
-                {t(`notice_types.${noticeType}.label`)}
-              </p>
+              <span>{t(`notice_types.${noticeType}.label`)}</span>
             </Chip>
-          </div>
+          </button>
         ))}
       </div>
 
-      {noticeTypes.map((noticeType) => (
-        <div
-          key={noticeType}
-          className={cn(
-            selectedNoticeType !== noticeType && 'hidden',
-            'bg-greyLight dark:bg-dark_greyDark rounded-[10px] p-6',
-          )}
-        >
-          <p className="text-text mb-2 text-base font-semibold md:text-xl">
-            {t(`notice_types.${noticeType}.description.title`)}
-          </p>
-          <p className="font-regular text-text text-sm md:text-base">
-            {t(`notice_types.${noticeType}.description.content`)}
-          </p>
-          <p className="font-regular text-secondaryText text-sm md:text-base">
-            {t(`notice_types.${noticeType}.description.example`)}
-          </p>
-        </div>
-      ))}
-    </>
+      <div className="bg-muted flex flex-col gap-1 rounded-xl px-4 py-3.5">
+        <p className="text-foreground text-sm font-semibold">
+          {t(`notice_types.${selectedNoticeType}.description.title`)}
+        </p>
+        <p className="text-foreground text-sm">
+          {t(`notice_types.${selectedNoticeType}.description.content`)}
+        </p>
+        <p className="text-muted-foreground text-sm">
+          {t(`notice_types.${selectedNoticeType}.description.example`)}
+        </p>
+      </div>
+    </div>
   );
 };

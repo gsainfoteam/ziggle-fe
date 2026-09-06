@@ -1,7 +1,21 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
+
+import {
+  DesktopIcon,
+  type Icon,
+  MoonIcon,
+  SunIcon,
+} from '@phosphor-icons/react';
 
 import { ThemeContext } from './context';
-import { matchesDark } from './theme-resolver';
+
+import type { Theme } from './context';
+
+export const themeOptions: readonly { value: Theme; Icon: Icon }[] = [
+  { value: 'light', Icon: SunIcon },
+  { value: 'dark', Icon: MoonIcon },
+  { value: 'system', Icon: DesktopIcon },
+];
 
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -9,12 +23,5 @@ export function useTheme() {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
 
-  const { theme, systemTheme } = context;
-
-  const isDark = useMemo(
-    () => matchesDark(theme, systemTheme),
-    [theme, systemTheme],
-  );
-
-  return { isDark, ...context };
+  return { themeOptions, ...context };
 }

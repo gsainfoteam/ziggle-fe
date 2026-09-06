@@ -9,12 +9,20 @@ import { useUser } from '@/features/auth';
 
 import { NoticeNotFoundFrame } from './notice-not-found-frame';
 import { useNotice } from '../../viewmodels';
+import { PanelShell } from '../components/layout/panel-shell';
 import { SendPushAlarm } from '../components/modals/send-push-notification';
-import { NoticeDetail } from '../components/notice-detail';
+import {
+  NoticeDetail,
+  NoticeDetailBackButton,
+} from '../components/notice-detail';
+import {
+  NoticeDetailActions,
+  NoticeDetailActionsProvider,
+} from '../components/notice-detail/actions';
 
 export function NoticeDetailFrame() {
   const { notice: preloadedNotice, numId } = useLoaderData({
-    from: '/_layout/_sidebar/notice/$id',
+    from: '/_layout/notice/$id',
   });
   const { data: notice, isLoading, isNotFound } = useNotice(numId);
   const efficientNotice = notice ?? preloadedNotice;
@@ -51,53 +59,25 @@ export function NoticeDetailFrame() {
   const isOwner = user?.uuid === efficientNotice.author.uuid;
 
   return (
-    <NoticeDetail.Root>
-      {/* DESKTOP — image stack as sidebar */}
-      <div className="hidden md:block">
-        <NoticeDetail.ImageStack
-          sources={efficientNotice.imageUrls}
-          alt={efficientNotice.title}
-        />
-      </div>
-
-      <NoticeDetail.Body>
+    <NoticeDetailActionsProvider
+      id={efficientNotice.id}
+      title={efficientNotice.title}
+      reactions={efficientNotice.reactions}
+      isBookmarked={efficientNotice.isBookmarked}
+    >
+      <PanelShell
+        leading={<NoticeDetailBackButton noticeId={efficientNotice.id} />}
+        aside={<NoticeDetailActions variant="rail" />}
+        // 모바일에서 sticky Navbar pb와 섹션 pt 중복 방지. 스크롤 시 헤더 pb는 유지.
+        className="pt-0 md:pt-5"
+      >
         <SendPushAlarm {...efficientNotice} />
-
-        <NoticeDetail.Deadline deadline={efficientNotice.currentDeadline} />
-        <NoticeDetail.Metadata
-          author={efficientNotice.author}
-          createdAt={efficientNotice.createdAt}
-        />
-        {isOwner && (
-          <NoticeDetail.AuthorActions noticeId={efficientNotice.id} />
-        )}
-        <NoticeDetail.Title>{efficientNotice.title}</NoticeDetail.Title>
-        <NoticeDetail.Tags tags={efficientNotice.tags} />
-        <NoticeDetail.DocumentUrls
-          crawledUrl={efficientNotice.crawledUrl}
-          documents={efficientNotice.documents}
-        />
-
-        {/* MOBILE — image stack inline */}
-        <div className="md:hidden">
-          <NoticeDetail.ImageStack
-            width={900}
-            sources={efficientNotice.imageUrls}
-            alt={efficientNotice.title}
-          />
-        </div>
-
-        <NoticeDetail.Content content={efficientNotice.content} />
-        <NoticeDetail.Actions
-          id={efficientNotice.id}
-          title={efficientNotice.title}
-          reactions={efficientNotice.reactions}
-        />
-        <NoticeDetail.AdditionalNotices
+        <NoticeDetail
+          notice={efficientNotice}
+          isOwner={isOwner}
           additionalContents={additionalContents}
-          originalDeadline={efficientNotice.deadline}
         />
-      </NoticeDetail.Body>
-    </NoticeDetail.Root>
+      </PanelShell>
+    </NoticeDetailActionsProvider>
   );
 }

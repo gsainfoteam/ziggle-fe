@@ -1,19 +1,17 @@
 import dayjs from 'dayjs';
 
-import { NoticeCard } from '.';
+import { NoticeCardDDay } from './d-day';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const DDay = NoticeCard.DDay;
-
 const meta = {
   title: 'Notice/NoticeCard/DDay',
-  component: DDay,
+  component: NoticeCardDDay,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof DDay>;
+} satisfies Meta<typeof NoticeCardDDay>;
 
 export default meta;
 

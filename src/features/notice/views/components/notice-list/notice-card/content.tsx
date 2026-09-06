@@ -12,7 +12,7 @@ export const NoticeCardContent = ({
 }: NoticeCardContentProps) => {
   if (!children || children.trim().length === 0) return null;
   return (
-    <div className="dark:text-dark_white line-clamp-3 w-full text-lg">
+    <div className="line-clamp-3 w-full min-w-0 overflow-hidden text-base leading-relaxed text-pretty break-words">
       {query ? (
         <NoticeCardHighlightedText query={query}>
           {children}

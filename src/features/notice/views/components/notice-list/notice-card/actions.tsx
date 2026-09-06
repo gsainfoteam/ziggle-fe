@@ -1,141 +1,205 @@
 import { useState } from 'react';
 
+import { BookmarkSimpleIcon, ShareFatIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import FireActivated from '@/assets/icons/fire-activated.svg?react';
-import Fire from '@/assets/icons/fire.svg?react';
-import ShareIcon from '@/assets/icons/share.svg?react';
 import { Button, LogClick } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import {
-  EmojiString,
-  type Notice,
-  type Reaction,
-} from '@/features/notice/models';
+import { cn, shareOrCopy } from '@/common/utils';
+import { EmojiString, type Notice } from '@/features/notice/models';
 import {
   useAddReaction,
   useDeleteReaction,
+  useToggleBookmark,
 } from '@/features/notice/viewmodels';
 
-interface FireButtonProps {
-  id: number;
-  fire: Reaction;
+import { FlameReactionIcon } from '../../flame-reaction-icon';
+
+interface FireState {
+  count: number;
+  isReacted: boolean;
 }
 
-const FireButton = ({ id, fire }: FireButtonProps) => {
+export interface NoticeCardActionsDisplayProps {
+  id: number;
+  fire: FireState;
+  isBookmarked: boolean;
+  onFireToggle: (isReacted: boolean) => Promise<FireState>;
+  onBookmarkToggle: (bookmarked: boolean) => Promise<void>;
+  onShare: () => void;
+}
+
+export const NoticeCardActionsDisplay = ({
+  id,
+  fire: initialFire,
+  isBookmarked: initialBookmarked,
+  onFireToggle,
+  onBookmarkToggle,
+  onShare,
+}: NoticeCardActionsDisplayProps) => {
   const { t } = useTranslation('notice');
-  const { mutateAsync: addReaction } = useAddReaction();
-  const { mutateAsync: deleteReaction } = useDeleteReaction();
+  const [currentFire, setCurrentFire] = useState<FireState>(initialFire);
+  const [bookmarked, setBookmarked] = useState(initialBookmarked);
 
-  const [currentFire, setCurrentFire] = useState<Reaction>(fire);
-
-  const toggleReaction = async (emoji: string, isReacted: boolean) => {
-    if (isReacted) {
-      const res = await deleteReaction({
-        params: { path: { id } },
-        body: { emoji },
-      });
-      return res.reactions;
-    } else {
-      const res = await addReaction({
-        params: { path: { id } },
-        body: { emoji },
-      });
-      return res.reactions;
+  const handleFireClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      const next = await onFireToggle(currentFire.isReacted);
+      setCurrentFire(next);
+    } catch {
+      toast.error(t('search.login_required'));
     }
   };
 
-  const handleEmojiClick = async (
+  const handleBookmarkClick = async (
     e: React.MouseEvent<HTMLButtonElement>,
-    emoji: string,
-    isReacted: boolean,
   ) => {
     e.preventDefault();
     try {
-      const reactions = await toggleReaction(emoji, isReacted);
-      const fireReaction = reactions.find(({ emoji }) => emoji === '🔥');
-      setCurrentFire(
-        fireReaction ?? { count: 0, emoji: '🔥', isReacted: false },
-      );
+      await onBookmarkToggle(!bookmarked);
+      setBookmarked((prev) => !prev);
     } catch {
       toast.error(t('search.login_required'));
     }
   };
 
   return (
-    <div className="flex items-center gap-1">
-      <Button
-        animated
-        className="group flex items-center gap-1"
-        onClick={(e) =>
-          handleEmojiClick(e, currentFire.emoji, currentFire.isReacted)
-        }
+    <div className="flex items-center justify-between">
+      <LogClick
+        eventName={LogEvents.noticeClickReaction}
+        properties={{ id, emoji: EmojiString.FIRE }}
       >
-        {currentFire.isReacted ? (
-          <FireActivated width={36} className="duration-150 hover:scale-125" />
-        ) : (
-          <Fire
-            width={36}
-            className="stroke-text dark:stroke-dark_white duration-150 hover:scale-125"
-          />
-        )}
-      </Button>
-      <p className="dark:text-dark_white font-semibold">{currentFire.count}</p>
+        <div className="flex items-center gap-1">
+          <Button
+            type="button"
+            animated
+            onClick={handleFireClick}
+            className="flex cursor-pointer items-center"
+          >
+            <FlameReactionIcon
+              active={currentFire.isReacted}
+              className="size-6"
+            />
+          </Button>
+          <span
+            className={cn(
+              'text-sm font-semibold',
+              currentFire.isReacted ? 'text-primary' : 'text-foreground',
+            )}
+          >
+            {currentFire.count}
+          </span>
+        </div>
+      </LogClick>
+
+      <div className="flex items-center gap-2">
+        <Button
+          type="button"
+          animated
+          onClick={handleBookmarkClick}
+          className="flex cursor-pointer items-center"
+        >
+          {bookmarked ? (
+            <BookmarkSimpleIcon weight="fill" className="text-primary size-6" />
+          ) : (
+            <BookmarkSimpleIcon className="text-foreground size-6" />
+          )}
+        </Button>
+
+        <LogClick eventName={LogEvents.noticeClickShare} properties={{ id }}>
+          <Button
+            type="button"
+            animated
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onShare();
+            }}
+            className="flex cursor-pointer items-center"
+          >
+            <ShareFatIcon className="text-foreground size-6" />
+          </Button>
+        </LogClick>
+      </div>
     </div>
   );
 };
 
-interface ShareButtonProps {
+interface NoticeCardActionsProps {
+  id: number;
   title: string;
+  reactions: Notice['reactions'];
+  isBookmarked: boolean;
 }
 
-const ShareButton = ({ title }: ShareButtonProps) => {
+export const NoticeCardActions = ({
+  id,
+  title,
+  reactions,
+  isBookmarked,
+}: NoticeCardActionsProps) => {
   const { t } = useTranslation('notice');
-  const handleShare = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    if (!navigator.canShare) {
-      return toast.error(t('detail.share.unsupported'));
-    }
-    navigator.share({
-      title,
-      text: t('detail.share.content', { title }),
-      url: window.location.href,
-    });
-  };
+  const { mutateAsync: addReaction } = useAddReaction();
+  const { mutateAsync: deleteReaction } = useDeleteReaction();
+  const { mutateAsync: toggleBookmark } = useToggleBookmark();
 
-  return (
-    <Button
-      animated
-      className="group flex items-center gap-1"
-      onClick={handleShare}
-    >
-      <ShareIcon
-        width={26}
-        className="stroke-text dark:stroke-dark_white stroke-2 duration-150 hover:scale-125"
-      />
-    </Button>
-  );
-};
-
-export const NoticeCardActions = ({ id, title, reactions }: Notice) => {
   const fire = reactions.find(({ emoji }) => emoji === EmojiString.FIRE) ?? {
     emoji: EmojiString.FIRE,
     count: 0,
     isReacted: false,
   };
 
+  const handleFireToggle = async (isReacted: boolean) => {
+    const fn = isReacted ? deleteReaction : addReaction;
+    const res = await fn({
+      params: { path: { id } },
+      body: { emoji: EmojiString.FIRE },
+    });
+    const fireReaction = res.reactions.find(
+      ({ emoji }) => emoji === EmojiString.FIRE,
+    );
+    return fireReaction ?? { count: 0, isReacted: false };
+  };
+
+  const handleBookmarkToggle = async (bookmarked: boolean): Promise<void> => {
+    await toggleBookmark({ params: { path: { id } }, body: { bookmarked } });
+  };
+
+  const handleShare = async () => {
+    const url = `${window.location.origin}/notice/${id}`;
+    const result = await shareOrCopy({
+      title,
+      text: t('detail.share.content', { title }),
+      url,
+      copyText: t('detail.copy_link.content', { title, link: url }),
+    });
+
+    if (result === 'copied') {
+      toast.success(
+        <div className="flex flex-col text-sm font-medium">
+          <span>{t('detail.copy_link.success')}</span>
+          <span className="text-xs font-normal">
+            {t('detail.copy_link.success_hint')}
+          </span>
+        </div>,
+      );
+      return;
+    }
+
+    if (result === 'unsupported') {
+      toast.error(t('detail.share.unsupported'));
+    }
+  };
+
   return (
-    <div className="flex items-center justify-between">
-      <LogClick
-        eventName={LogEvents.noticeClickReaction}
-        properties={{ id, emoji: fire.emoji }}
-      >
-        <FireButton id={id} fire={fire} />
-      </LogClick>
-      <LogClick eventName={LogEvents.noticeClickShare} properties={{ id }}>
-        <ShareButton title={title} />
-      </LogClick>
-    </div>
+    <NoticeCardActionsDisplay
+      id={id}
+      fire={fire}
+      isBookmarked={isBookmarked}
+      onFireToggle={handleFireToggle}
+      onBookmarkToggle={handleBookmarkToggle}
+      onShare={handleShare}
+    />
   );
 };

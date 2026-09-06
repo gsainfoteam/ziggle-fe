@@ -1,19 +1,33 @@
+import { cn } from '@/common/utils';
+
 import { NoticeCardHighlightedText } from './highlighted-text';
 
 interface NoticeCardTitleProps {
   children: string;
-  /** When provided, the title highlights matching substrings. */
   query?: string;
+  isRead?: boolean;
 }
 
-export const NoticeCardTitle = ({ children, query }: NoticeCardTitleProps) => (
-  <p className="dark:text-dark_white line-clamp-3 text-xl font-semibold">
-    {query ? (
-      <NoticeCardHighlightedText query={query}>
-        {children}
-      </NoticeCardHighlightedText>
-    ) : (
-      children
-    )}
-  </p>
+export const NoticeCardTitle = ({
+  children,
+  query,
+  isRead = false,
+}: NoticeCardTitleProps) => (
+  <div className="flex items-center gap-2">
+    {!isRead && <span className="bg-primary size-2 shrink-0 rounded-full" />}
+    <p
+      className={cn(
+        'line-clamp-3 min-w-0 flex-1 overflow-hidden text-xl font-semibold text-pretty break-words',
+        isRead ? 'text-muted-foreground' : 'text-foreground',
+      )}
+    >
+      {query ? (
+        <NoticeCardHighlightedText query={query}>
+          {children}
+        </NoticeCardHighlightedText>
+      ) : (
+        children
+      )}
+    </p>
+  </div>
 );

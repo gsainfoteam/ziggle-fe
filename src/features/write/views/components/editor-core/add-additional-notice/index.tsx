@@ -1,52 +1,54 @@
-import { useController, useFormContext, useWatch } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import AddIcon from '@/assets/icons/add.svg?react';
+import { cn } from '@/common/utils';
 import type { NoticeFormValues } from '@/features/write/viewmodels';
+
+import {
+  writeErrorClassName,
+  writeFieldClassNames,
+  writeFieldLabelClassName,
+  writeFieldStackClassName,
+} from '../../form-fields/field-styles';
 
 export const AddAdditionalNotice = () => {
   const { t } = useTranslation('notice');
-  const { control, setValue } = useFormContext<NoticeFormValues>();
-
-  const { field: koreanField } = useController({
+  const {
     control,
-    name: 'korean.additionalContent',
-  });
-  const english = useWatch({ control, name: 'english' });
-  const englishAdditional = english?.additionalContent;
+    register,
+    formState: { errors },
+  } = useFormContext<NoticeFormValues>();
 
+  const english = useWatch({ control, name: 'english' });
   const isEnglishSupported = english !== undefined;
+  const koreanError = errors.korean?.additionalContent;
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-2 flex items-center gap-3">
-        <AddIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
-
-        <p className="text-lg font-medium">
-          {t('detail.additional_notices.title')}
-        </p>
-      </div>
+    <div className={writeFieldStackClassName}>
+      <label className={writeFieldLabelClassName}>
+        {t('detail.additional_notices.title')}
+      </label>
 
       <textarea
-        className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
-        name="koreanAdditionalContent"
+        className={cn(
+          writeFieldClassNames(Boolean(koreanError)),
+          'min-h-24 resize-none',
+        )}
         placeholder={t('detail.additional_notices.placeholder')}
         rows={3}
-        value={koreanField.value ?? ''}
-        onChange={(event) => koreanField.onChange(event.target.value)}
-        onBlur={koreanField.onBlur}
+        aria-invalid={Boolean(koreanError)}
+        {...register('korean.additionalContent')}
       />
+      {koreanError?.message && (
+        <p className={writeErrorClassName}>{koreanError.message}</p>
+      )}
 
       {isEnglishSupported && (
         <textarea
-          className="border-primary mt-1 mb-3 grow resize-none rounded-[10px] border border-solid bg-transparent p-4 text-base dark:text-white"
-          name="englishAdditionalContent"
+          className={cn(writeFieldClassNames(false), 'min-h-24 resize-none')}
           placeholder={t('detail.additional_notices.en_placeholder')}
           rows={3}
-          value={englishAdditional ?? ''}
-          onChange={(event) =>
-            setValue('english.additionalContent', event.target.value)
-          }
+          {...register('english.additionalContent')}
         />
       )}
     </div>

@@ -1,8 +1,4 @@
-import {
-  createRootRoute,
-  createRouter,
-  RouterProvider,
-} from '@tanstack/react-router';
+import { useState } from 'react';
 
 import Pagination from '.';
 
@@ -14,21 +10,25 @@ interface PaginationStoryProps {
   page: number;
 }
 
-const createPaginationRouter = (props: PaginationStoryProps) => {
-  const rootRoute = createRootRoute({
-    component: () => <Pagination {...props} />,
-  });
-  return createRouter({ routeTree: rootRoute });
-};
-
-const PaginationWithRouter = (props: PaginationStoryProps) => {
-  const router = createPaginationRouter(props);
-  return <RouterProvider router={router} />;
+const PaginationStory = ({
+  items,
+  itemsPerPage,
+  page,
+}: PaginationStoryProps) => {
+  const [current, setCurrent] = useState(page);
+  return (
+    <Pagination
+      items={items}
+      itemsPerPage={itemsPerPage}
+      page={current}
+      onPageChange={setCurrent}
+    />
+  );
 };
 
 const meta = {
   title: 'Notice/Pagination',
-  component: PaginationWithRouter,
+  component: PaginationStory,
   parameters: {
     layout: 'centered',
   },
@@ -38,7 +38,7 @@ const meta = {
     itemsPerPage: { control: 'number' },
     page: { control: 'number' },
   },
-} satisfies Meta<typeof PaginationWithRouter>;
+} satisfies Meta<typeof PaginationStory>;
 
 export default meta;
 
@@ -46,32 +46,40 @@ type Story = StoryObj<typeof meta>;
 
 export const FirstPage: Story = {
   args: {
-    items: 100,
-    itemsPerPage: 10,
+    items: 300,
+    itemsPerPage: 30,
     page: 0,
   },
 };
 
 export const MiddlePage: Story = {
   args: {
-    items: 100,
-    itemsPerPage: 10,
+    items: 300,
+    itemsPerPage: 30,
     page: 4,
   },
 };
 
 export const LastPage: Story = {
   args: {
-    items: 100,
-    itemsPerPage: 10,
+    items: 300,
+    itemsPerPage: 30,
     page: 9,
   },
 };
 
-export const FewItems: Story = {
+export const ManyPages: Story = {
   args: {
-    items: 5,
-    itemsPerPage: 10,
+    items: 2522,
+    itemsPerPage: 30,
     page: 0,
+  },
+};
+
+export const FewPages: Story = {
+  args: {
+    items: 90,
+    itemsPerPage: 30,
+    page: 1,
   },
 };

@@ -26,7 +26,7 @@ export function TermsModal({ termsOpen, onClose }: TermsModalProps) {
             <button
               type="button"
               onClick={onClose}
-              className="text-greyDark hover:bg-greyLight shrink-0 rounded-md p-1 transition-colors"
+              className="text-muted-foreground hover:bg-muted hover:text-foreground shrink-0 rounded-md p-1 transition-colors"
               aria-label={t('consent.back')}
             >
               <ChevronLeft size={20} />
@@ -39,7 +39,7 @@ export function TermsModal({ termsOpen, onClose }: TermsModalProps) {
               title={termsTitle[termsOpen.type]}
               sandbox="allow-scripts"
               referrerPolicy="no-referrer"
-              className="h-full w-full"
+              className="h-full w-full border-0 dark:hue-rotate-180 dark:invert"
             />
           </Dialog.Body>
         </>

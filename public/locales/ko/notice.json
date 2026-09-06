@@ -1,4 +1,7 @@
 {
+  "deck": {
+    "add_column": "컬럼 추가"
+  },
   "detail": {
     "additional_notices": {
       "deadline_changed": "마감시간 변경",
@@ -8,24 +11,32 @@
       "title": "추가 공지"
     },
     "attachments": "첨부파일",
+    "bookmark": "북마크",
+    "created_at": "작성일",
+    "deadline": "마감시간",
+    "views": "조회수",
     "author_actions": {
       "edit": "수정 / 영어공지 작성",
       "remove": "삭제",
-      "remove_confirm": "정말로 이 공지를 삭제하시겠습니까?",
+      "remove_confirm": {
+        "title": "공지를 삭제할까요?",
+        "description": "삭제된 공지는 복구할 수 없습니다."
+      },
       "toasts": {
         "delete_fail": "공지 삭제에 실패했습니다",
         "delete_success": "공지가 성공적으로 삭제되었습니다"
       }
     },
+    "back": "뒤로가기",
     "close": "닫기",
     "copy_link": {
       "action": "주소 복사하기",
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
-      "success": "공지 주소가 복사되었습니다!<small>친구들에게 공지를 공유해보세요</small>"
+      "success": "공지 주소가 복사되었습니다!",
+      "success_hint": "친구들에게 공지를 공유해보세요"
     },
     "download_all": "전체 다운로드하기",
     "due_at": "마감시간 {{dueAt}}",
-    "no_content": "내용 없음",
     "push_notification": {
       "action": "알림 보내기",
       "confirm": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
@@ -53,7 +64,7 @@
         "name": "행사"
       },
       "general": {
-        "name": "일반"
+        "name": "기타"
       },
       "recruit": {
         "name": "모집"
@@ -62,9 +73,20 @@
     "d_day_plus": "기한 지남",
     "empty": "글이 없습니다. =ㅅ=",
     "pagination": {
-      "of": "중"
+      "jump": "페이지로 이동",
+      "label": "페이지네이션",
+      "of": "중",
+      "page": "{{page}}페이지",
+      "prev": "이전",
+      "next": "다음"
     },
-    "sort_by_deadline": "마감시간 순으로 보기"
+    "sort": {
+      "deadline": "마감임박",
+      "hot": "인기",
+      "label": "정렬",
+      "recent": "최근"
+    },
+    "unpin": "컬럼 고정 해제"
   },
   "not_found": {
     "go_back": "홈으로 돌아가기",
@@ -85,14 +107,22 @@
   },
   "sidebar": {
     "academic": "학사",
+    "club": "동아리",
     "event": "행사",
-    "general": "일반",
+    "general": "기타",
     "home": "홈",
     "my_notice": "내 공지",
+    "notices": "공지",
+    "popular": "인기",
     "recruit": "모집",
-    "remind_notice": "리마인드한 공지",
+    "bookmark_notice": "북마크",
+    "search": "검색",
     "urgent": "마감임박",
-    "write": "공지 작성",
-    "zigglepick": "지글픽"
+    "write": "공지 작성"
+  },
+  "tabs": {
+    "profile": "프로필",
+    "write": "작성",
+    "all": "전체"
   }
 }

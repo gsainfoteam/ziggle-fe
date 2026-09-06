@@ -10,7 +10,7 @@ interface PopoverBodyProps {
 export const PopoverBody = ({ children, className }: PopoverBodyProps) => (
   <div
     className={cn(
-      'border-greyBorder dark:border-dark_greyBorder dark:bg-dark_dark rounded-2xl border bg-white p-4 shadow-xl',
+      'border-border bg-background rounded-2xl border p-4 shadow-xl',
       className,
     )}
   >

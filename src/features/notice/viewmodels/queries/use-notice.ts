@@ -20,7 +20,7 @@ export const useNotice = (id: number) => {
       params: { path: { id }, query: { lang: i18n.language } },
     },
     {
-      enabled: user !== null,
+      enabled: user !== undefined,
       retry(count, error) {
         if (error?.statusCode === 404 || error?.statusCode === 400)
           return false;

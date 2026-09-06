@@ -7,7 +7,7 @@ import { ITEMS_PER_PAGE } from '@/common/const/notice';
 import { $api } from '@/common/lib';
 import { useUser } from '@/features/auth';
 
-import { ApiPaths, type Category } from '../../models';
+import { ApiPaths, type Category, type My, type OrderBy } from '../../models';
 
 export const useNotices = ({
   limit = ITEMS_PER_PAGE,
@@ -20,8 +20,8 @@ export const useNotices = ({
 }: {
   limit?: number;
   page?: number;
-  orderBy?: 'recent' | 'deadline' | 'hot';
-  my?: 'own' | 'reminders';
+  orderBy?: OrderBy;
+  my?: My;
   category?: Category;
   search?: string;
   tags?: string[];
@@ -49,7 +49,7 @@ export const useNotices = ({
       },
     },
     {
-      enabled: user !== null,
+      enabled: user !== undefined,
       retry(count, error) {
         if (error?.statusCode === 404 || error?.statusCode === 400)
           return false;

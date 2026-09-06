@@ -6,7 +6,7 @@ import { DrawerHeader } from './header';
 import { DrawerRoot } from './root';
 import { DrawerTitle } from './title';
 
-export type { DrawerRootProps } from './root';
+export type { DrawerRootProps, DrawerSize } from './root';
 export type { DrawerSide } from './context';
 
 export const Drawer = {

@@ -1,17 +1,15 @@
-import { NoticeCard } from '.';
+import { NoticeCardHighlightedText } from './highlighted-text';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const HighlightedText = NoticeCard.HighlightedText;
-
 const meta = {
   title: 'Notice/NoticeCard/HighlightedText',
-  component: HighlightedText,
+  component: NoticeCardHighlightedText,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof HighlightedText>;
+} satisfies Meta<typeof NoticeCardHighlightedText>;
 
 export default meta;
 

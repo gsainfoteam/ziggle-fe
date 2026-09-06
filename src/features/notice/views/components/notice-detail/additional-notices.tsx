@@ -30,14 +30,14 @@ export const NoticeDetailAdditionalNotices = ({
         return (
           <div
             key={`${content.id}+${content.lang}`}
-            className="bg-greyLight flex flex-col gap-2.5 rounded-[10px] px-5 py-4.5"
+            className="bg-muted flex flex-col gap-2.5 rounded-[10px] px-5 py-4.5"
           >
             <div className="flex items-center gap-1.25">
-              <p className="text-text text-lg font-semibold">
+              <p className="text-foreground text-lg font-semibold">
                 {t('detail.additional_notices.title')}
               </p>
-              <p className="text-greyDark font-bold">·</p>
-              <p className="text-greyDark font-medium">{timeAgo}</p>
+              <p className="text-muted-foreground font-bold">·</p>
+              <p className="text-muted-foreground font-medium">{timeAgo}</p>
             </div>
 
             {deadlineChanged && (
@@ -46,7 +46,7 @@ export const NoticeDetailAdditionalNotices = ({
                   <p className="text-base font-bold">
                     {t('detail.additional_notices.deadline_changed')}
                   </p>
-                  <p className="text-secondaryText text-base font-medium">
+                  <p className="text-subtle text-base font-medium">
                     {dayjs(lastDeadline).tz().isValid()
                       ? dayjs(lastDeadline).tz().format('LLL')
                       : t('detail.additional_notices.no_deadline')}
@@ -61,7 +61,7 @@ export const NoticeDetailAdditionalNotices = ({
               </div>
             )}
 
-            <p className="text-greyDark leading-[1.4] font-normal">
+            <p className="text-muted-foreground leading-[1.4] font-normal">
               {content.content}
             </p>
           </div>

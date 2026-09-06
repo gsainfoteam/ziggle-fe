@@ -1,10 +1,9 @@
 import { Link, useRouter } from '@tanstack/react-router';
 
+import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import EditPencilIcon from '@/assets/icons/edit-pencil.svg?react';
-import RemoveIcon from '@/assets/icons/remove.svg?react';
 import { LogClick, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
@@ -21,14 +20,15 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
 
   const handleRemoveNotice = async () => {
     const confirmed = await confirmDialog({
-      description: t('detail.author_actions.remove_confirm'),
+      title: t('detail.author_actions.remove_confirm.title'),
+      description: t('detail.author_actions.remove_confirm.description'),
       destructive: true,
     });
     if (!confirmed) return;
 
     try {
       await deleteNotice({ params: { path: { id: noticeId } } });
-      router.navigate({ to: '/$category', params: { category: 'home' } });
+      router.navigate({ to: '/home' });
       toast.success(t('detail.author_actions.toasts.delete_success'));
     } catch (error) {
       console.error(error);
@@ -37,7 +37,7 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-2">
       <LogClick
         eventName={LogEvents.detailClickEdit}
         properties={{ id: noticeId }}
@@ -45,10 +45,10 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
         <Link
           to="/write"
           search={{ noticeId }}
-          className="flex items-center gap-2.5"
+          className="border-border text-muted-foreground hover:bg-muted flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition"
         >
-          <EditPencilIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('detail.author_actions.edit')}</p>
+          <PencilSimpleIcon className="size-4" />
+          {t('detail.author_actions.edit')}
         </Link>
       </LogClick>
 
@@ -58,14 +58,14 @@ export const NoticeDetailAuthorActions = ({ noticeId }: WriterActionsProps) => {
       >
         <button
           className={cn(
-            'flex items-center gap-2.5',
+            'flex items-center gap-1.5 rounded-full border border-red-200 px-3 py-1.5 text-sm font-medium text-red-500 transition hover:bg-red-50 dark:border-red-900 dark:hover:bg-red-950',
             isPending && 'cursor-not-allowed opacity-50',
           )}
           onClick={handleRemoveNotice}
           disabled={isPending}
         >
-          <RemoveIcon className="stroke-greyDark dark:stroke-dark_white w-5" />
-          <p className="text-greyDark">{t('detail.author_actions.remove')}</p>
+          <TrashIcon className="size-4" />
+          {t('detail.author_actions.remove')}
         </button>
       </LogClick>
     </div>

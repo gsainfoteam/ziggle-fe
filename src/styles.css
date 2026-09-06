@@ -9,24 +9,30 @@
   --spacing-sidebarMobile: 13.25rem;
   --transition-duration: 200ms;
 
-  --color-primary: #ff4500;
-  --color-secondary: #fff4f0;
-  --color-text: #252525;
-  --color-secondaryText: #959595;
-  --color-white: #ffffff;
-  --color-deselected: #d6d6d6;
-  --color-grey: #b3b3b3;
-  --color-greyDark: #6e6e73;
-  --color-greyBorder: #d6d6d6;
-  --color-greyLight: #f5f5f7;
+  /*
+   * Semantic color tokens (light defaults; .dark remaps the same names)
+   *
+   * Brand:     primary / primary-hover / primary-active / on-primary
+   * Soft:      secondary (primary tint surface)
+   * Neutral:   background / foreground / muted / muted-foreground / subtle / border
+   */
 
-  --color-dark_dark: #252525;
-  --color-dark_greyDark: #3b3b3b;
-  --color-dark_greyBorder: #5d5d5d;
-  --color-dark_grey: #919191;
-  --color-dark_greyLight: #bebebe;
-  --color-dark_white: #ffffff;
-  --color-dark_secondary: #432b22;
+  /* Brand */
+  --color-primary: #ff4500;
+  --color-primary-hover: #e63e00;
+  --color-primary-active: #cc3700;
+  --color-on-primary: #ffffff;
+
+  /* Brand soft surface */
+  --color-secondary: #fff4f0;
+
+  /* App chrome */
+  --color-background: #ffffff;
+  --color-foreground: #252525;
+  --color-muted: #f5f5f7;
+  --color-muted-foreground: #6e6e73;
+  --color-subtle: #959595;
+  --color-border: #d6d6d6;
 
   @keyframes fadeInWithGoUp {
     0% {
@@ -58,12 +64,16 @@
 
 @layer theme {
   .dark {
-    --color-text: var(--color-dark_white);
-    --color-white: var(--color-dark_dark);
-    --color-greyLight: var(--color-dark_greyDark);
-    --color-greyDark: var(--color-dark_grey);
-    --color-deselected: var(--color-dark_greyBorder);
-    --color-secondary: var(--color-dark_secondary);
+    --color-background: #252525;
+    --color-foreground: #ffffff;
+    --color-secondary: #432b22;
+    --color-muted: #3b3b3b;
+    --color-muted-foreground: #919191;
+    --color-subtle: #bebebe;
+    --color-border: #5d5d5d;
+    --color-primary-hover: #ff6a33;
+    --color-primary-active: #ff4500;
+    /* on-primary stays #ffffff */
   }
 }
 
@@ -111,7 +121,7 @@
 
 @utility scrollbar-float {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-greyBorder) transparent;
+  scrollbar-color: var(--color-border) transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -119,13 +129,7 @@
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: var(--color-greyBorder);
-  }
-  @variant dark {
-    scrollbar-color: var(--color-dark_greyBorder) transparent;
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--color-dark_greyBorder);
-    }
+    background-color: var(--color-border);
   }
 }
 
@@ -137,7 +141,9 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-white);
+    scrollbar-gutter: stable;
+    background-color: var(--color-background);
+    accent-color: var(--color-primary);
     font-family:
       'Pretendard Variable',
       Pretendard,
@@ -157,10 +163,19 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  :focus {
+    outline: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
 }
 
 body {
-  color: var(--color-text);
+  color: var(--color-foreground);
 
   transition:
     background-color var(--transition-duration) ease,

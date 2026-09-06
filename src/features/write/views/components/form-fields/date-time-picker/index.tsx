@@ -1,45 +1,58 @@
-import './date-time-picker.css';
-
 import { type Dayjs } from 'dayjs';
-import DatePicker from 'react-date-picker';
 
-import { TimePicker } from './time-picker';
-
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import { cn } from '@/common/utils';
 
 interface DateTimePickerProps {
   dateTime: Dayjs;
   onChange: (dateTime: Dayjs) => void;
+  className?: string;
 }
 
-export const DateTimePicker = ({ dateTime, onChange }: DateTimePickerProps) => {
-  const date = dateTime.toDate();
-  const setDate = (value: Value) => {
-    if (!(value instanceof Date)) return;
-    const newDateTime = dateTime
-      .set('date', value.getDate())
-      .set('month', value.getMonth())
-      .set('year', value.getFullYear());
-    onChange(newDateTime);
-  };
+const fieldClassName =
+  'bg-transparent text-foreground text-sm font-medium outline-none [color-scheme:light] dark:[color-scheme:dark]';
 
-  const time = dateTime.format('HH:mm');
-  const setTime = (value: string) => {
-    const [hour, minute] = value.split(':').map(Number);
-    const newDateTime = dateTime.set('hour', hour).set('minute', minute);
-    onChange(newDateTime);
-  };
-
+export const DateTimePicker = ({
+  dateTime,
+  onChange,
+  className,
+}: DateTimePickerProps) => {
   return (
-    <div className="flex">
-      <DatePicker
-        value={date}
-        onChange={setDate}
-        locale={'en'}
-        format="y-MM-dd"
+    <div
+      className={cn(
+        'border-border bg-muted inline-flex shrink-0 items-center gap-1 rounded-xl border px-2.5 py-1.5',
+        className,
+      )}
+    >
+      <input
+        type="date"
+        value={dateTime.format('YYYY-MM-DD')}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (!next) return;
+          const [year, month, day] = next.split('-').map(Number);
+          onChange(
+            dateTime
+              .year(year)
+              .month(month - 1)
+              .date(day),
+          );
+        }}
+        className={cn(fieldClassName, 'min-w-[9.5rem]')}
       />
-      <TimePicker time={time} setTime={setTime} />
+      <span className="text-border px-0.5" aria-hidden>
+        ·
+      </span>
+      <input
+        type="time"
+        value={dateTime.format('HH:mm')}
+        onChange={(e) => {
+          const next = e.target.value;
+          if (!next) return;
+          const [hour, minute] = next.split(':').map(Number);
+          onChange(dateTime.hour(hour).minute(minute).second(0));
+        }}
+        className={cn(fieldClassName, 'min-w-[6.5rem]')}
+      />
     </div>
   );
 };

@@ -78,7 +78,7 @@ function filterInlineStyle(val: string) {
     })
     .filter(Boolean);
 
-  return newStyles.join('; ');
+  return newStyles.join(';');
 }
 
 DOMPurify.addHook('uponSanitizeAttribute', (_node, data) => {
@@ -116,17 +116,15 @@ export function NoticeDetailContent({ content }: ContentProps) {
   return (
     <div
       className={cn(
-        'text-text dark:text-dark_white',
-        'leading-[1.4] font-normal',
-        '[&_p]:my-4 [&_p]:text-lg',
+        'text-foreground',
+        'text-left leading-7 font-normal',
         '[&_h1]:text-3xl [&_h2]:text-2xl [&_h3]:text-xl',
-        '[&_a]:text-secondaryText [&_a]:underline',
+        '[&_a]:text-subtle [&_a]:underline',
         'break-all',
         '[&_table]:w-full [&_table]:border-collapse',
         '[&_td]:bg-transparent [&_th]:bg-transparent',
         '[&_td]:border [&_td]:border-current [&_th]:border [&_th]:border-current',
         '[&_td]:px-3 [&_td]:py-2 [&_th]:px-3 [&_th]:py-2',
-        '[&_p]:text-left',
       )}
       dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }}
     />

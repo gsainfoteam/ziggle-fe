@@ -22,7 +22,7 @@ const TagsView = () => {
   const { control } = useFormContext<NoticeFormValues>();
   const tags = useWatch({ control, name: 'tags' });
   return (
-    <details className="bg-greyLight dark:bg-dark_greyDark mt-4 rounded-md p-3">
+    <details className="bg-muted mt-4 rounded-md p-3">
       <summary className="cursor-pointer text-sm font-semibold">
         Live tags state
       </summary>

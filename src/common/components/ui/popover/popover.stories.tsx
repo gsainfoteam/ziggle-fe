@@ -12,13 +12,11 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 interface PopoverPlaygroundArgs {
   placement?: Placement;
-  responsive?: boolean;
   offset?: number;
 }
 
 const PopoverPlayground = ({
   placement = 'bottom-start',
-  responsive = false,
   offset = 8,
 }: PopoverPlaygroundArgs) => {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
@@ -41,11 +39,10 @@ const PopoverPlayground = ({
         anchor={anchor}
         placement={placement}
         offset={offset}
-        responsive={responsive}
       >
         <Popover.Body className="w-64">
           <p className="text-sm font-semibold">앵커 기반 Popover</p>
-          <p className="text-greyDark dark:text-dark_grey mt-1 text-xs">
+          <p className="text-muted-foreground mt-1 text-xs">
             outsidePress / Escape로 닫힙니다.
           </p>
         </Popover.Body>
@@ -73,7 +70,6 @@ const meta = {
         'right',
       ] satisfies Placement[],
     },
-    responsive: { control: 'boolean' },
     offset: { control: 'number' },
   },
 } satisfies Meta<typeof PopoverPlayground>;
@@ -82,63 +78,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { placement: 'bottom-start', responsive: false, offset: 8 },
+  args: { placement: 'bottom-start', offset: 8 },
 };
 
 export const TopEnd: Story = {
-  args: { placement: 'top-end', responsive: false, offset: 8 },
+  args: { placement: 'top-end', offset: 8 },
 };
 
 export const Right: Story = {
-  args: { placement: 'right', responsive: false, offset: 8 },
-};
-
-const ResponsiveMobileDemo = () => {
-  const [anchor, setAnchor] = useState<HTMLElement | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="flex h-64 items-center justify-center">
-      <Button
-        variant="contained"
-        onClick={(event) => {
-          setAnchor(event.currentTarget);
-          setIsOpen(true);
-        }}
-      >
-        Popover 열기
-      </Button>
-      <Popover.Root
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        anchor={anchor}
-        placement="bottom-end"
-        responsive
-        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none"
-      >
-        <div className="dark:bg-dark_dark flex h-full w-full flex-col gap-4 bg-white p-6 md:h-auto md:w-72 md:rounded-2xl md:border md:p-4 md:shadow-xl">
-          <h3 className="text-lg font-semibold">Profile-style 패널</h3>
-          <p className="text-sm">
-            데스크탑은 anchor 옆 dropdown, 모바일은 풀스크린 takeover.
-          </p>
-          <Button
-            variant="outlined"
-            className="mt-auto"
-            onClick={() => setIsOpen(false)}
-          >
-            닫기
-          </Button>
-        </div>
-      </Popover.Root>
-    </div>
-  );
-};
-
-export const ResponsiveMobile: Story = {
-  render: () => <ResponsiveMobileDemo />,
-  parameters: {
-    viewport: { defaultViewport: 'mobile1' },
-  },
+  args: { placement: 'right', offset: 8 },
 };
 
 const ImperativePopover = () => (
@@ -157,7 +105,7 @@ const ImperativePopover = () => (
           >
             <Popover.Body className="w-56">
               <p className="text-sm font-medium">overlay.open()</p>
-              <p className="text-greyDark dark:text-dark_grey mt-1 text-xs">
+              <p className="text-muted-foreground mt-1 text-xs">
                 e.currentTarget을 클로저로 캡쳐했습니다.
               </p>
               <Button
@@ -193,7 +141,7 @@ const ProfileMenuScenario = () => {
 
   return (
     <div className="flex h-64 items-start justify-end gap-4 p-6">
-      <ul className="text-greyDark dark:text-dark_grey flex-1 text-sm">
+      <ul className="text-muted-foreground flex-1 text-sm">
         {log.map((entry, i) => (
           <li key={i}>· {entry}</li>
         ))}
@@ -204,7 +152,7 @@ const ProfileMenuScenario = () => {
           setAnchor(event.currentTarget);
           setIsOpen((v) => !v);
         }}
-        className="bg-greyLight dark:bg-dark_greyDark flex h-10 w-10 items-center justify-center rounded-full font-semibold"
+        className="bg-muted flex h-10 w-10 items-center justify-center rounded-full font-semibold"
       >
         {mockUser.name[0]}
       </button>
@@ -213,15 +161,13 @@ const ProfileMenuScenario = () => {
         onClose={() => setIsOpen(false)}
         anchor={anchor}
         placement="bottom-end"
-        responsive
-        className="max-md:h-full max-md:max-h-none max-md:w-full max-md:max-w-none"
       >
-        <div className="dark:bg-dark_dark dark:border-dark_greyBorder w-72 rounded-2xl border border-transparent bg-white p-5 shadow-2xl max-md:flex max-md:h-full max-md:w-full max-md:flex-col max-md:rounded-none max-md:border-none max-md:shadow-none">
+        <div className="bg-background w-72 rounded-2xl border border-transparent p-5 shadow-2xl">
           <div className="flex flex-col items-center gap-1 py-5">
-            <div className="bg-greyLight dark:bg-dark_greyDark mb-2 flex size-16 items-center justify-center rounded-full text-2xl font-semibold">
+            <div className="bg-muted mb-2 flex size-16 items-center justify-center rounded-full text-2xl font-semibold">
               {mockUser.name[0]}
             </div>
-            <div className="text-text dark:text-dark_white text-xl font-semibold">
+            <div className="text-foreground text-xl font-semibold">
               {mockUser.name}
             </div>
             <div className="text-primary text-sm">{mockUser.email}</div>
@@ -233,7 +179,7 @@ const ProfileMenuScenario = () => {
                 setLog((l) => [...l, 'profile manage 클릭']);
                 setIsOpen(false);
               }}
-              className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey rounded-xl px-4 py-3 text-left text-sm font-medium"
+              className="bg-muted hover:bg-border rounded-xl px-4 py-3 text-left text-sm font-medium"
             >
               계정 관리
             </button>
@@ -243,7 +189,7 @@ const ProfileMenuScenario = () => {
                 setLog((l) => [...l, 'logout 클릭']);
                 setIsOpen(false);
               }}
-              className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey rounded-xl px-4 py-3 text-left text-sm font-medium"
+              className="bg-muted hover:bg-border rounded-xl px-4 py-3 text-left text-sm font-medium"
             >
               로그아웃
             </button>
@@ -259,7 +205,7 @@ const ProfileMenuScenario = () => {
                 });
                 setLog((l) => [...l, ok ? 'withdraw 확정' : 'withdraw 취소']);
               }}
-              className="bg-greyLight dark:bg-dark_greyDark hover:bg-greyBorder dark:hover:bg-dark_grey rounded-xl px-4 py-3 text-left text-sm font-medium"
+              className="bg-muted hover:bg-border rounded-xl px-4 py-3 text-left text-sm font-medium"
             >
               회원 탈퇴
             </button>
@@ -292,10 +238,10 @@ const SelectDropdownScenario = () => {
           setAnchor(event.currentTarget);
           setIsOpen((v) => !v);
         }}
-        className="dark:hover:bg-dark_grey flex w-48 items-center gap-5 rounded-md px-4 py-2 hover:bg-gray-300"
+        className="hover:bg-border flex w-48 items-center gap-5 rounded-md px-4 py-2"
       >
         <span className="font-medium">언어 설정</span>
-        <span className="text-greyDark ml-auto text-sm">
+        <span className="text-muted-foreground ml-auto text-sm">
           {items.find((i) => i.value === language)?.label}
         </span>
       </button>
@@ -316,9 +262,9 @@ const SelectDropdownScenario = () => {
                 setIsOpen(false);
               }}
               className={
-                'dark:hover:bg-dark_grey rounded-md px-4 py-2 text-left transition hover:bg-gray-200 ' +
+                'hover:bg-muted rounded-md px-4 py-2 text-left transition' +
                 (item.value === language
-                  ? 'bg-greyLight dark:bg-dark_greyDark font-semibold'
+                  ? 'bg-muted font-semibold'
                   : 'font-normal')
               }
             >

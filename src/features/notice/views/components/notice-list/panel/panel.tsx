@@ -1,0 +1,99 @@
+import { useState } from 'react';
+
+import { useLocation, useNavigate, useSearch } from '@tanstack/react-router';
+
+import { List } from './list';
+import {
+  Category,
+  HOME_PANEL_KEY,
+  type PanelConfig,
+  useDeck,
+} from '../../../../viewmodels';
+import { PanelRemoveButton } from '../../layout/deck/remove-button';
+import { PanelShell, type PanelSize } from '../../layout/panel-shell';
+import {
+  type NoticeNavItem,
+  useNavItemByKey,
+} from '../../layout/use-notice-nav';
+import { SortDropdown } from '../sort-dropdown';
+
+import type { DragControls } from 'framer-motion';
+
+const categoryPaths = new Set(
+  Object.values(Category).map((c) => `/${c.toLowerCase()}`),
+);
+
+export function Panel({
+  item,
+  panel,
+  size,
+  dragControls,
+}: {
+  item?: NoticeNavItem;
+  panel?: PanelConfig;
+  size?: PanelSize;
+  dragControls?: DragControls;
+}) {
+  const resolve = useNavItemByKey();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const search = useSearch({ strict: false });
+  const setOrderBy = useDeck((s) => s.setOrderBy);
+  const [localPage, setLocalPage] = useState(0);
+
+  const isDeck = panel != null;
+  const navItem = isDeck ? resolve(panel.key) : item;
+  if (!navItem) return null;
+
+  const orderBy = isDeck
+    ? (panel.orderBy ?? navItem.orderBy)
+    : (search.orderBy ?? navItem.orderBy);
+  const page = isDeck ? localPage : (search.page ?? 0);
+  const hideTitleOnMobile = pathname === '/home' || categoryPaths.has(pathname);
+
+  return (
+    <PanelShell
+      title={navItem.title}
+      titleIcon={navItem.ActiveIcon}
+      hideTitleOnMobile={hideTitleOnMobile}
+      size={size}
+      onHeaderPointerDown={
+        dragControls ? (e) => dragControls.start(e) : undefined
+      }
+      headerRight={
+        <div className="flex shrink-0 items-center gap-2">
+          <SortDropdown
+            value={orderBy}
+            onChange={(v) => {
+              if (isDeck) {
+                setOrderBy(panel.key, v);
+                setLocalPage(0);
+              } else {
+                navigate({
+                  to: '.',
+                  search: { ...search, orderBy: v, page: 0 },
+                });
+              }
+            }}
+          />
+          {isDeck && panel.key !== HOME_PANEL_KEY ? (
+            <PanelRemoveButton panelKey={panel.key} />
+          ) : null}
+        </div>
+      }
+    >
+      <div className="flex w-full flex-col items-center gap-5">
+        <List
+          page={page}
+          orderBy={orderBy}
+          my={navItem.my}
+          category={navItem.apiCategory}
+          onPageChange={(p) => {
+            if (isDeck) setLocalPage(p);
+            else navigate({ to: '.', search: { ...search, page: p } });
+          }}
+        />
+      </div>
+    </PanelShell>
+  );
+}

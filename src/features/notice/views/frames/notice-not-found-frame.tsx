@@ -2,19 +2,27 @@ import { Link } from '@tanstack/react-router';
 
 import { useTranslation } from 'react-i18next';
 
+import { Button } from '@/common/components';
+
+import { PanelShell } from '../components/layout/panel-shell';
+
 export function NoticeNotFoundFrame() {
   const { t } = useTranslation('notice');
   return (
-    <div className="flex h-[calc(80vh)] items-center justify-center">
-      <div className="text-center">
-        <h1 className="mb-3 text-4xl font-bold">404</h1>
-        <p className="mb-3 text-xl">{t('not_found.title')}</p>
-        <Link to="/">
-          <p className="bg-primary rounded-md px-4 py-1 text-lg">
-            {t('not_found.go_back')}
+    <PanelShell>
+      <div className="flex flex-1 items-center justify-center p-5">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <h1 className="text-foreground text-4xl font-bold tracking-tight">
+            404
+          </h1>
+          <p className="text-muted-foreground text-base">
+            {t('not_found.title')}
           </p>
-        </Link>
+          <Link to="/home">
+            <Button variant="contained">{t('not_found.go_back')}</Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </PanelShell>
   );
 }

@@ -1,12 +1,20 @@
 {
   "auto_save": {
     "description": "Drafts are saved to your computer",
-    "has_saved": "You have saved notices. Would you like to continue writing?"
+    "has_saved": {
+      "title": "You have a saved draft",
+      "description": "Would you like to continue writing?"
+    }
   },
   "buttons": {
     "submit": "Submit Notice",
     "translate_deepl": "Translate with DeepL",
     "write_english": "Write English Notice too"
+  },
+  "sections": {
+    "settings": "Settings",
+    "content": "Content",
+    "options": "Options"
   },
   "edit_description": "You only have 15 minutes to edit the original notice. However, you can always write an English version.",
   "edit_disabled": "Editing original notice is disabled! 👇 Why not try an additional announcement?",
@@ -18,10 +26,10 @@
       "change": "Change deadline",
       "setup": "Set a deadline"
     },
-    "english_content": "English body",
+    "english_content": "English content",
     "english_notice": "English",
     "english_title": "English title",
-    "korean_content": "Korean body",
+    "korean_content": "Korean content",
     "korean_notice": "Korean",
     "korean_title": "Korean title",
     "notice_type": "Type",
@@ -56,9 +64,9 @@
       "description": {
         "content": "Notices that are not part of a recruitment or event notices.",
         "example": "Ex) GIST House notices, student association notices, notifications, etc.",
-        "title": "🔔 General notice"
+        "title": "🔔 Other notice"
       },
-      "label": "General"
+      "label": "Other"
     },
     "recruit": {
       "description": {
@@ -72,18 +80,30 @@
   "optional": "Optional",
   "submit_description": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
   "toasts": {
-    "additional_notice_fail": "Failed to post additional notice. Please try posting it again.",
+    "additional_notice_fail": {
+      "title": "Failed to post additional notice",
+      "description": "Would you like to copy the content to the clipboard?"
+    },
     "copy_additional": "Copy additional notice content",
     "copy_english": "Copy English notice content",
     "copy_fail": "Failed to copy to clipboard",
     "copy_international_additional": "Copy English additional notice content",
     "copy_success": "Copied to clipboard",
-    "international_additional_fail": "Failed to post English additional notice. Please try posting it again.",
-    "international_fail": "Failed to post English version. Please try posting it again.",
+    "international_additional_fail": {
+      "title": "Failed to post English additional notice",
+      "description": "Would you like to copy the content to the clipboard?"
+    },
+    "international_fail": {
+      "title": "Failed to post English version",
+      "description": "Would you like to copy the content to the clipboard?"
+    },
     "modify_fail": "Failed to modify the notice",
     "modify_success": "The notice was modified successfully",
     "modifying": "Modifying the notice...",
-    "push_delayed": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
+    "push_delayed": {
+      "title": "Push notification scheduled",
+      "description": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page."
+    },
     "submit_fail": "Failed to submit notice",
     "submit_success": "The notice was submitted successfully",
     "submitting": "Creating a notice...",

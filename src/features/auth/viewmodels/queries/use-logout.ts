@@ -1,3 +1,5 @@
+import { useQueryClient } from '@tanstack/react-query';
+
 import { useTranslation } from 'react-i18next';
 import { useAuthContext } from 'react-oauth2-code-pkce';
 import { toast } from 'sonner';
@@ -12,6 +14,7 @@ export const useLogout = ({
 }: { showToast?: boolean } = {}) => {
   const { t } = useTranslation('auth');
   const { logOut: idpLogOut } = useAuthContext();
+  const queryClient = useQueryClient();
 
   return $api.useMutation('post', ApiPaths.AuthController_logout, {
     onError: () => {
@@ -24,6 +27,7 @@ export const useLogout = ({
       useAuthPrompt.getState().setRecentLogout(true);
       useAuthPrompt.getState().setRequiredConsents(undefined);
       idpLogOut();
+      queryClient.clear();
     },
   });
 };

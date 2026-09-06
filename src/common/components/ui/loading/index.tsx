@@ -20,7 +20,7 @@ export function Loading({
     return (
       <div
         className={cn(
-          'flex h-dvh items-center justify-center',
+          'flex h-dvh w-full items-center justify-center',
           containerClassName,
         )}
       >

@@ -16,7 +16,7 @@ const DialogPlayground = ({
   closeOnBackdrop,
   closeOnEscape,
 }: {
-  size?: 'sm' | 'md' | 'lg' | 'full';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'full';
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
 }) => {
@@ -72,7 +72,7 @@ const meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    size: { control: 'select', options: ['sm', 'md', 'lg', 'full'] },
+    size: { control: 'select', options: ['xs', 'sm', 'md', 'lg', 'full'] },
     closeOnBackdrop: { control: 'boolean' },
     closeOnEscape: { control: 'boolean' },
   },
@@ -142,7 +142,8 @@ const DeleteNoticeScenario = () => {
         variant="contained"
         onClick={async () => {
           const ok = await confirmDialog({
-            description: '공지를 정말 삭제하시겠습니까?',
+            title: '공지를 삭제할까요?',
+            description: '삭제된 공지는 복구할 수 없습니다.',
             destructive: true,
           });
           if (ok) setLog((l) => [...l, 'deleteNotice 호출됨 → 홈으로 이동']);
@@ -203,6 +204,7 @@ const SendPushScenario = () => {
         variant="contained"
         onClick={async () => {
           const ok = await confirmDialog({
+            title: '알림을 바로 보낼까요?',
             description:
               '예약된 푸시 알림을 즉시 보냅니다. 한 번 보낸 알림은 취소할 수 없어요.',
           });
@@ -232,7 +234,8 @@ const AutoSaveScenario = () => {
         variant="contained"
         onClick={async () => {
           const ok = await confirmDialog({
-            description: '저장된 임시글이 있습니다. 이어서 작성하시겠습니까?',
+            title: '저장된 공지가 있습니다',
+            description: '이어서 작성하시겠습니까?',
           });
           setLog((l) => [...l, ok ? '초안 복원됨' : '초안 폐기']);
         }}
@@ -260,6 +263,7 @@ const PushDelayedAlertScenario = () => {
         variant="contained"
         onClick={async () => {
           await alertDialog({
+            title: '푸시 알림이 예약되었습니다',
             description:
               '공지 등록 후 푸시 알림이 발송되기까지 약 5분 정도 소요될 수 있어요.',
           });
@@ -286,8 +290,8 @@ const EnglishNoticeFailScenario = () => {
         variant="contained"
         onClick={async () => {
           const result = await chooseDialog({
-            description:
-              '영문 본문 등록에 실패했어요. 작성한 본문을 클립보드에 복사할까요?',
+            title: '영문 본문 등록에 실패했어요',
+            description: '작성한 본문을 클립보드에 복사할까요?',
             denyLabel: '본문 복사',
           });
           if (result.outcome === 'denied') {
@@ -332,7 +336,7 @@ const LandingScenario = () => {
         size="lg"
         className="max-h-none w-auto max-w-none border-none p-0 shadow-none"
       >
-        <div className="flex h-95 w-80 overflow-hidden rounded-2xl bg-white md:h-145 md:w-160">
+        <div className="bg-background flex h-95 w-80 overflow-hidden rounded-2xl md:h-145 md:w-160">
           <div className="from-primary/20 to-primary/5 hidden flex-1 bg-gradient-to-br md:block" />
           <div className="flex w-full flex-col items-center justify-between p-6 md:w-96">
             <div className="flex flex-1 flex-col items-center justify-center gap-3">
@@ -342,7 +346,7 @@ const LandingScenario = () => {
               </div>
             </div>
             <div className="flex w-full flex-col items-center gap-3">
-              <p className="text-greyDark dark:text-dark_grey text-center text-xs">
+              <p className="text-muted-foreground text-center text-xs">
                 계속 진행하면 개인정보 처리방침과 서비스 이용약관에 동의하는
                 것으로 간주됩니다.
               </p>

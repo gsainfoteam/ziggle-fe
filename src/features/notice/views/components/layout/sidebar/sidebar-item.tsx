@@ -1,34 +1,67 @@
-import { Link, type LinkProps } from '@tanstack/react-router';
+import { Children, type ReactElement, cloneElement } from 'react';
 
 import { cn } from '@/common/utils';
 
 interface SidebarItemProps {
-  title: string;
   icon: React.ReactNode;
-  boldIcon: React.ReactNode;
-  isSelected: boolean;
-  onClick?: () => void;
+  activeIcon?: React.ReactNode;
+  isActive?: boolean;
+  variant?: 'nav' | 'toggle';
+  children: ReactElement;
+  onClick?: React.MouseEventHandler;
+  labelClassName?: string;
 }
 
+const baseRow =
+  'text-foreground flex w-full cursor-pointer items-center gap-3 rounded-md px-2.5 py-1.5 transition duration-300 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
+const inactiveRow = 'hover:bg-muted';
+
+export const sidebarRowClass = cn(baseRow, inactiveRow);
+
 export const SidebarItem = ({
-  title,
   icon,
-  boldIcon,
-  isSelected,
-  ...props
-}: SidebarItemProps & LinkProps) => {
-  return (
-    <Link
-      {...props}
-      className={cn(
-        'dark:hover:bg-dark_grey focus-visible:ring-primary flex w-48 items-center gap-5 rounded-md px-4 py-2 transition duration-300 hover:bg-gray-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-        isSelected && 'bg-greyLight dark:bg-dark_greyDark',
-      )}
-    >
-      <span className="w-6">{isSelected ? boldIcon : icon}</span>
-      <span className={isSelected ? 'font-semibold' : 'font-normal'}>
-        {title}
-      </span>
-    </Link>
-  );
+  activeIcon,
+  isActive = false,
+  variant = 'nav',
+  children,
+  onClick,
+  labelClassName,
+}: SidebarItemProps) => {
+  const child = Children.only(children) as ReactElement<{
+    className?: string;
+    children?: React.ReactNode;
+    onClick?: React.MouseEventHandler;
+  }>;
+
+  return cloneElement(child, {
+    className: cn(
+      baseRow,
+      isActive
+        ? variant === 'toggle'
+          ? 'bg-muted'
+          : 'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary'
+        : inactiveRow,
+      child.props.className,
+    ),
+    onClick: (event: React.MouseEvent<HTMLElement>) => {
+      onClick?.(event);
+      child.props.onClick?.(event);
+    },
+    children: (
+      <>
+        <span className="flex size-5 shrink-0 items-center justify-center [&>svg]:size-5">
+          {isActive && activeIcon ? activeIcon : icon}
+        </span>
+        <span
+          className={cn(
+            'min-w-0 truncate',
+            isActive ? 'font-semibold' : 'font-normal',
+            labelClassName,
+          )}
+        >
+          {child.props.children}
+        </span>
+      </>
+    ),
+  });
 };

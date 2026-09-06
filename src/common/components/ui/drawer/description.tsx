@@ -17,10 +17,7 @@ export const DrawerDescription = ({
   return (
     <p
       id={descriptionId}
-      className={cn(
-        'text-greyDark dark:text-dark_grey text-sm leading-relaxed',
-        className,
-      )}
+      className={cn('text-muted-foreground text-sm leading-relaxed', className)}
     >
       {children}
     </p>

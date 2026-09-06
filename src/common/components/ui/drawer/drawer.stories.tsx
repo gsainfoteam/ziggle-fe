@@ -11,6 +11,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 
 interface DrawerPlaygroundArgs {
   side?: DrawerSide;
+  size?: 'compact' | 'default' | 'large';
   dragToDismiss?: boolean;
   closeOnBackdrop?: boolean;
   closeOnEscape?: boolean;
@@ -18,6 +19,7 @@ interface DrawerPlaygroundArgs {
 
 const DrawerPlayground = ({
   side = 'bottom',
+  size = 'default',
   dragToDismiss = true,
   closeOnBackdrop = true,
   closeOnEscape = true,
@@ -32,6 +34,7 @@ const DrawerPlayground = ({
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         side={side}
+        size={size}
         dragToDismiss={dragToDismiss}
         closeOnBackdrop={closeOnBackdrop}
         closeOnEscape={closeOnEscape}
@@ -43,7 +46,7 @@ const DrawerPlayground = ({
           </Drawer.Description>
         </Drawer.Header>
         <Drawer.Body>
-          <p>4방향 슬라이드. side를 바꿔보세요.</p>
+          <p>4방향 슬라이드. side / size를 바꿔보세요.</p>
         </Drawer.Body>
         <Drawer.Footer>
           <Button
@@ -77,6 +80,10 @@ const meta = {
       control: 'select',
       options: ['top', 'right', 'bottom', 'left'] satisfies DrawerSide[],
     },
+    size: {
+      control: 'select',
+      options: ['compact', 'default', 'large'],
+    },
     dragToDismiss: { control: 'boolean' },
     closeOnBackdrop: { control: 'boolean' },
     closeOnEscape: { control: 'boolean' },
@@ -86,7 +93,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const BottomSheet: Story = { args: { side: 'bottom' } };
+export const BottomSheet: Story = { args: { side: 'bottom', size: 'default' } };
+export const BottomSheetCompact: Story = {
+  args: { side: 'bottom', size: 'compact' },
+};
+export const BottomSheetLarge: Story = {
+  args: { side: 'bottom', size: 'large' },
+};
 export const Right: Story = { args: { side: 'right' } };
 export const Left: Story = { args: { side: 'left' } };
 export const Top: Story = { args: { side: 'top' } };

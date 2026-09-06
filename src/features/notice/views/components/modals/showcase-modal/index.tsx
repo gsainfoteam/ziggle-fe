@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import DownloadIcon from '@/assets/icons/download.svg?react';
-import LongArrowIcon from '@/assets/icons/long-arrow.svg?react';
 import { Button, Dialog } from '@/common/components';
 import { cn } from '@/common/utils';
 
@@ -62,22 +61,22 @@ const ShowcaseModal = ({
       onClose={onClose}
       onExitComplete={onExitComplete}
       size="full"
-      className="dark:bg-dark_dark/90 flex items-center justify-center gap-3 bg-black/90 p-0"
+      className="/90 flex items-center justify-center gap-3 bg-black/90 p-0"
     >
       <div className="absolute top-3 right-5 z-10 flex gap-7 text-sm font-medium text-white md:text-base">
         <Button className="flex items-center gap-2" onClick={handleDownload}>
           {t('detail.download_all')}
-          <DownloadIcon className="w-6 md:w-8" />
+          <DownloadSimpleIcon className="size-6 md:size-8" />
         </Button>
       </div>
       <Dialog.Close
-        className="text-white hover:bg-white/10"
+        className="hover:bg-background/10 text-white"
         aria-label={t('detail.close')}
       />
       <div className="flex w-full items-center justify-center gap-5 md:gap-12">
         <Button disabled={index === 0} onClick={left}>
-          <LongArrowIcon
-            className={cn('w-5 md:w-16', index === 0 && 'stroke-secondaryText')}
+          <ArrowRightIcon
+            className={cn('size-5 md:size-16', index === 0 && 'text-subtle')}
           />
         </Button>
         <img
@@ -90,15 +89,15 @@ const ShowcaseModal = ({
           className="max-h-[75vh] w-auto max-w-[70vw] grow object-contain"
         />
         <Button disabled={index === sources.length - 1} onClick={right}>
-          <LongArrowIcon
+          <ArrowRightIcon
             className={cn(
-              'w-5 rotate-180 md:w-16',
-              index === sources.length - 1 && 'stroke-secondaryText',
+              'size-5 rotate-180 md:size-16',
+              index === sources.length - 1 && 'text-subtle',
             )}
           />
         </Button>
       </div>
-      <div className="bg-text absolute bottom-4 flex gap-1 p-1">
+      <div className="bg-foreground absolute bottom-4 flex gap-1 p-1">
         {sources.map((src, i) => (
           <img
             key={src}

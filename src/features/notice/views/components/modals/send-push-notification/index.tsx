@@ -39,6 +39,7 @@ export const SendPushAlarm = ({
 
   const handleSendPushNotification = useCallback(async () => {
     const confirmed = await confirmDialog({
+      title: t('detail.push_notification.title'),
       description: t('detail.push_notification.confirm'),
     });
     if (!confirmed) return;
@@ -118,7 +119,7 @@ export const SendPushAlarm = ({
     <div
       className={cn(
         'transform transition-all duration-1000 ease-in-out',
-        showComponent ? 'max-h-screen' : 'max-h-0 overflow-hidden',
+        showComponent ? 'mb-6 max-h-screen' : 'max-h-0 overflow-hidden',
       )}
     >
       <div className="text-primary bg-secondary inline-flex w-full items-start justify-start gap-1.5 rounded-[15px] px-5 py-3.75 font-normal">

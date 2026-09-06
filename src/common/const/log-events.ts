@@ -37,7 +37,7 @@ export const LogEvents = {
 
   // My Page
   myClickMyNotice: 'my_click_my_notice',
-  myClickReminded: 'my_click_reminded',
+  myClickBookmarked: 'my_click_bookmarked',
   myClickBugReport: 'my_click_bug_report',
   myToggleLanguage: 'my_toggle_language',
   myClickMode: 'my_click_mode',
@@ -45,10 +45,10 @@ export const LogEvents = {
   myClickUnregister: 'my_click_unregister',
 
   // Notice Detail Page
+  detailClickBack: 'detail_click_back',
   detailClickImage: 'detail_click_image',
   detailClickReaction: 'detail_click_reaction',
   detailClickShare: 'detail_click_share',
-  detailClickCopyLink: 'detail_click_copy_link',
   // only for author
   detailClickEdit: 'detail_click_edit',
   detailClickRemove: 'detail_click_remove',

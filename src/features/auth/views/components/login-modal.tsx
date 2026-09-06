@@ -2,9 +2,7 @@ import { useSearch } from '@tanstack/react-router';
 
 import { Trans, useTranslation } from 'react-i18next';
 
-import ZiggleLogoDark from '@/assets/logos/ziggle-dark.svg?react';
-import ZiggleLogo from '@/assets/logos/ziggle.svg?react';
-import { Button, Dialog } from '@/common/components';
+import { Button, Dialog, ZiggleLogo } from '@/common/components';
 
 import { LandingGrids } from './landing-grids';
 import {
@@ -30,22 +28,17 @@ export function LoginModal() {
       size="lg"
       className="max-h-none w-auto max-w-none border-none p-0 shadow-none"
     >
-      <div className="flex h-95 w-80 overflow-hidden rounded-2xl bg-white md:h-145 md:w-233.5 md:pl-6">
+      <div className="bg-background flex h-95 w-80 overflow-hidden rounded-2xl md:h-145 md:w-233.5 md:pl-6">
         <LandingGrids />
         <div className="flex w-full flex-col items-center justify-between p-4 md:w-96 md:p-6">
           <div className="flex h-110 w-fit flex-col items-center justify-center">
-            <div className="mb-5 inline-block dark:hidden">
-              <ZiggleLogo className="w-50 md:w-55" />
-            </div>
-            <div className="mb-5 hidden dark:inline-block">
-              <ZiggleLogoDark className="w-50 md:w-55" />
-            </div>
+            <ZiggleLogo variant="full" className="mb-5 h-14 md:h-15" />
             <div className="text-center text-lg font-bold">
               {t('home.subtitle')}
             </div>
           </div>
           <div className="flex h-fit w-full flex-col items-center gap-3">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-subtle text-sm">
               <Trans
                 t={t}
                 i18nKey="home.policy"

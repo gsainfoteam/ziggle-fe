@@ -10,7 +10,7 @@ interface DialogBodyProps {
 export const DialogBody = ({ children, className }: DialogBodyProps) => (
   <div
     className={cn(
-      'text-text dark:text-dark_white overflow-y-auto text-base',
+      'text-foreground overflow-y-auto text-base',
       'scrollbar-float -mr-5 pr-5',
       className,
     )}

@@ -4,7 +4,7 @@ interface TagProps {
 
 export const Tag = ({ name }: TagProps) => {
   return (
-    <div className="bg-secondary text-primary dark:bg-dark_secondary rounded-[5px] px-2.5 py-1.25 text-lg">
+    <div className="bg-secondary text-primary rounded-sm px-1.5 py-1 text-sm">
       #{name}
     </div>
   );

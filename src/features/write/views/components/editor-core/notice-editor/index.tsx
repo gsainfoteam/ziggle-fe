@@ -7,25 +7,21 @@ import {
   useForm,
   useFormContext,
   useWatch,
+  type FieldErrors,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import AddPhotoIcon from '@/assets/icons/add-photo.svg?react';
-import ClockIcon from '@/assets/icons/clock.svg?react';
-import GlobeIcon from '@/assets/icons/globe.svg?react';
-import TagIcon from '@/assets/icons/tag.svg?react';
-import TypeIcon from '@/assets/icons/type.svg?react';
 import { Button, LogClick, Toggle, confirmDialog } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
 import { cn } from '@/common/utils';
-import { Category, type NoticeDetail } from '@/features/notice/models';
+import type { NoticeDetail } from '@/features/notice/models';
+import { Category } from '@/features/notice/viewmodels';
 import {
+  createNoticeFormSchema,
   defaultNoticeFormValues,
-  noticeFormSchema,
   retrieveDraftFromLocalStorage,
   saveDraftToLocalStorage,
   type NoticeFormValues,
-  type NoticeSubmitForm,
   useHandleNoticeEdit,
   useHandleNoticeSubmit,
 } from '@/features/write/viewmodels';
@@ -34,12 +30,20 @@ import { calculateRemainingTime } from '../../../utils';
 import { AttachPhotoArea } from '../../form-fields/attach-photo-area';
 import { DateTimePicker } from '../../form-fields/date-time-picker';
 import EditableTimer from '../../form-fields/editable-timer';
+import {
+  writeBlockHeadingClassName,
+  writeErrorClassName,
+  writeFieldLabelClassName,
+  writeFieldStackClassName,
+  writeHintClassName,
+  writeRequiredMarkClassName,
+} from '../../form-fields/field-styles';
 import { LanguageTab } from '../../form-fields/language-tab';
 import { NoticeTypeSelector } from '../../form-fields/notice-type-selector';
 import { TagInput } from '../../form-fields/tag-input';
 import { AddAdditionalNotice } from '../add-additional-notice';
 import { DeepLButton } from '../deep-l-button';
-import { TitleAndContent } from '../title-and-content';
+import { NoticeContentField, NoticeTitleField } from '../title-and-content';
 import { EditorRefsProvider } from './editor-refs-context';
 
 const NoticeTypeCategoryMapper = {
@@ -57,9 +61,11 @@ interface NoticeEditorProps {
 }
 
 export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
+  const { t } = useTranslation('write');
   const methods = useForm<NoticeFormValues>({
     defaultValues: defaultNoticeFormValues,
-    resolver: zodResolver(noticeFormSchema),
+    resolver: (values, context, options) =>
+      zodResolver(createNoticeFormSchema(t))(values, context, options),
   });
 
   return (
@@ -73,7 +79,7 @@ export const NoticeEditor = ({ notice, isEditMode }: NoticeEditorProps) => {
 
 const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
   const { t } = useTranslation('write');
-  const { control, setValue, getValues, handleSubmit } =
+  const { control, setValue, handleSubmit, formState } =
     useFormContext<NoticeFormValues>();
   const [isInitializing, setIsInitializing] = useState(true);
 
@@ -120,7 +126,8 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
         const draft = retrieveDraftFromLocalStorage();
         if (draft) {
           const confirmed = await confirmDialog({
-            description: t('auto_save.has_saved'),
+            title: t('auto_save.has_saved.title'),
+            description: t('auto_save.has_saved.description'),
           });
           if (confirmed) {
             setValue('korean', draft.korean);
@@ -139,9 +146,14 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
     saveDraftToLocalStorage({ korean, english, deadline });
   }, [isEditMode, isLoading, korean, english, deadline]);
 
+  const onInvalid = (errors: FieldErrors<NoticeFormValues>) => {
+    if (errors.english) setValue('writingTab', 'english');
+    else if (errors.korean) setValue('writingTab', 'korean');
+  };
+
   const onSubmit = handleSubmit((data) => {
     if (isLoading) return;
-    const payload: NoticeSubmitForm = {
+    submitMutation.mutate({
       title: data.korean.title,
       deadline: data.deadline?.toDate() ?? undefined,
       noticeLanguage: data.english ? 'both' : 'ko',
@@ -151,13 +163,11 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       tags: data.tags.map(({ name }) => name),
       images: data.photos.map(({ file }) => file),
       category: NoticeTypeCategoryMapper[data.noticeType],
-    };
-    submitMutation.mutate(payload);
-  });
+    });
+  }, onInvalid);
 
-  const onEdit = () => {
+  const onEdit = handleSubmit((data) => {
     if (isLoading || !notice) return;
-    const data = getValues();
     editMutation.mutate({
       noticeId: notice.id,
       originalNotice: {
@@ -173,179 +183,198 @@ const NoticeEditorBody = ({ notice, isEditMode }: NoticeEditorProps) => {
       englishAdditionalContent: data.english?.additionalContent,
       hasTimedOut,
     });
-  };
+  }, onInvalid);
 
   return (
-    <>
+    <div className="flex flex-col gap-10">
       {isEditMode && (
-        <>
+        <div className="flex flex-col gap-2">
           {notice?.createdAt && <EditableTimer createdAt={notice.createdAt} />}
-          <p className="bg-greyLight text-greyDark mt-2.5 rounded-[15px] px-5 py-3.75 text-lg">
+          <p className="bg-muted text-muted-foreground rounded-xl px-4 py-3 text-sm">
             {t('edit_description')}
           </p>
-        </>
-      )}
-
-      {!isEditMode && (
-        <div className="flex justify-end">
-          <p className="text-primary text-sm">{t('auto_save.description')}</p>
         </div>
       )}
 
-      <div className="mt-10 mb-10 flex items-center gap-2">
-        <GlobeIcon
-          className={cn(
-            'w-5 md:w-6',
-            english
-              ? 'stroke-text dark:stroke-dark_white'
-              : 'stroke-grey dark:stroke-dark_grey',
-          )}
-        />
-        <p
-          className={cn(
-            'mr-1 text-lg font-medium',
-            english
-              ? 'text-text dark:text-dark_white'
-              : 'text-grey dark:text-dark_grey',
-          )}
-        >
-          {t('buttons.write_english')}
-        </p>
-        <Toggle
-          isSwitched={!!english}
-          onSwitch={(e) => {
-            if (e.target.checked) {
-              setValue('english', {
-                title: '',
-                content: '',
-                additionalContent: undefined,
-              });
-            } else {
-              setValue('english', undefined);
-              setValue('writingTab', 'korean');
-            }
-          }}
-        />
-      </div>
+      <section className="flex flex-col gap-6">
+        <h2 className={writeBlockHeadingClassName}>{t('sections.settings')}</h2>
 
-      <div className="mb-3 flex gap-1.5">
-        <TypeIcon className="stroke-text dark:stroke-dark_white w-5 md:w-6" />
-        <p className="font-medium">{t('fields.notice_type')}</p>
-      </div>
-
-      <NoticeTypeSelector disabled={isEditMode} />
-
-      {english && (
-        <div className="mt-10">
-          <LanguageTab />
+        <div className={writeFieldStackClassName}>
+          <p className={writeFieldLabelClassName}>
+            {t('fields.notice_type')}
+            <span className={writeRequiredMarkClassName} aria-hidden>
+              *
+            </span>
+          </p>
+          <NoticeTypeSelector disabled={isEditMode} />
         </div>
-      )}
 
-      {writingTab === 'korean' && (
-        <div className="flex flex-col justify-stretch">
-          <TitleAndContent lang="korean" disabled={isEditMode && hasTimedOut} />
+        <div className="flex items-center gap-3">
+          <p className={writeFieldLabelClassName}>
+            {t('buttons.write_english')}
+          </p>
+          <Toggle
+            isSwitched={!!english}
+            onSwitch={(e) => {
+              if (e.target.checked) {
+                setValue('english', {
+                  title: '',
+                  content: '',
+                  additionalContent: undefined,
+                });
+              } else {
+                setValue('english', undefined);
+                setValue('writingTab', 'korean');
+              }
+            }}
+          />
         </div>
-      )}
+      </section>
 
-      {writingTab === 'english' && english && (
-        <div className="flex flex-col justify-stretch">
-          <TitleAndContent
+      <section className="flex flex-col gap-6">
+        <h2 className={writeBlockHeadingClassName}>{t('sections.content')}</h2>
+
+        <NoticeTitleField lang="korean" disabled={isEditMode && hasTimedOut} />
+
+        {english && (
+          <NoticeTitleField
             lang="english"
             disabled={
               (isEditMode && Boolean(notice?.enTitle) && hasTimedOut) ||
               !english
             }
           />
-        </div>
-      )}
-
-      {english && (
-        <LogClick eventName={LogEvents.writingClickDeepl}>
-          <DeepLButton lang={writingTab} />
-        </LogClick>
-      )}
-
-      {isEditMode &&
-        ((writingTab === 'korean' && hasTimedOut) ||
-          (writingTab === 'english' && hasTimedOut && notice?.enTitle)) && (
-          <p className="bg-greyLight text-greyDark my-10 rounded-[10px] px-5 py-3.75 text-center text-lg">
-            {t('edit_disabled')}
-          </p>
         )}
 
-      {isEditMode && notice && korean.additionalContent !== undefined && (
-        <>
-          <div className="h-10" />
-          <AddAdditionalNotice />
-        </>
-      )}
-
-      <div className="mt-10 mb-3 flex items-center gap-2">
-        <ClockIcon className="stroke-text w-5 md:w-6" />
-
-        <p className="text-lg font-medium">
-          {t(isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup')}
-        </p>
-
-        <Toggle
-          isSwitched={!!deadline}
-          onSwitch={(e) => {
-            if (e.target.checked) setValue('deadline', dayjs());
-            else setValue('deadline', undefined);
-            e.isDefaultPrevented();
-          }}
-        />
-
-        <div className="w-1" />
-
-        {deadline && (
-          <DateTimePicker
-            dateTime={deadline}
-            onChange={(dateTime) => setValue('deadline', dateTime)}
+        {english ? (
+          <>
+            <LanguageTab />
+            <div className={writingTab === 'korean' ? undefined : 'hidden'}>
+              <NoticeContentField
+                lang="korean"
+                hideLabel
+                disabled={isEditMode && hasTimedOut}
+              />
+            </div>
+            <div
+              className={
+                writingTab === 'english' ? writeFieldStackClassName : 'hidden'
+              }
+            >
+              <NoticeContentField
+                lang="english"
+                hideLabel
+                disabled={
+                  (isEditMode && Boolean(notice?.enTitle) && hasTimedOut) ||
+                  !english
+                }
+              />
+              <LogClick eventName={LogEvents.writingClickDeepl}>
+                <DeepLButton lang="korean" />
+              </LogClick>
+            </div>
+          </>
+        ) : (
+          <NoticeContentField
+            lang="korean"
+            disabled={isEditMode && hasTimedOut}
           />
         )}
-      </div>
 
-      {!isEditMode && (
-        <>
-          <div className="mt-10 mb-2 flex gap-2">
-            <TagIcon className="fill-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('fields.tags.setup')}</p>
-            <p className="text-grey">{`(${t('optional')})`}</p>
+        {isEditMode &&
+          ((writingTab === 'korean' && hasTimedOut) ||
+            (writingTab === 'english' && hasTimedOut && notice?.enTitle)) && (
+            <p className="bg-muted text-muted-foreground rounded-xl px-4 py-3 text-center text-sm">
+              {t('edit_disabled')}
+            </p>
+          )}
+
+        {isEditMode && notice && korean.additionalContent !== undefined && (
+          <AddAdditionalNotice />
+        )}
+      </section>
+
+      <section className="flex flex-col gap-6">
+        <h2 className={writeBlockHeadingClassName}>{t('sections.options')}</h2>
+
+        <div className={writeFieldStackClassName}>
+          <div className="flex items-center gap-3">
+            <p className={writeFieldLabelClassName}>
+              {t(
+                isEditMode ? 'fields.deadline.change' : 'fields.deadline.setup',
+              )}
+            </p>
+            <Toggle
+              isSwitched={!!deadline}
+              onSwitch={(e) => {
+                if (e.target.checked) setValue('deadline', dayjs());
+                else setValue('deadline', undefined);
+                e.isDefaultPrevented();
+              }}
+            />
           </div>
+          {deadline && (
+            <DateTimePicker
+              dateTime={deadline}
+              onChange={(dateTime) => setValue('deadline', dateTime)}
+              className={cn(
+                'w-full justify-between sm:w-auto sm:justify-start',
+                formState.errors.deadline && 'border-red-500',
+              )}
+            />
+          )}
+          {formState.errors.deadline?.message && (
+            <p className={writeErrorClassName}>
+              {formState.errors.deadline.message}
+            </p>
+          )}
+        </div>
 
-          <p className="font-regular text-secondaryText mb-3 text-sm">
-            {t('fields.tags.description')}
-          </p>
+        {!isEditMode && (
+          <>
+            <div className={writeFieldStackClassName}>
+              <label className={writeFieldLabelClassName}>
+                {t('fields.tags.setup')}
+                <span className="text-muted-foreground ml-1.5 font-normal">
+                  ({t('optional')})
+                </span>
+              </label>
+              <p className={writeHintClassName}>
+                {t('fields.tags.description')}
+              </p>
+              <TagInput />
+            </div>
 
-          <TagInput />
+            <div className={writeFieldStackClassName}>
+              <label className={writeFieldLabelClassName}>
+                {t('fields.photo.attach')}
+                <span className="text-muted-foreground ml-1.5 font-normal">
+                  ({t('optional')})
+                </span>
+              </label>
+              <p className={writeHintClassName}>
+                {t('fields.photo.description')}
+              </p>
+              <AttachPhotoArea />
+            </div>
+          </>
+        )}
+      </section>
 
-          <div className="mt-10 mb-1 flex items-center gap-2">
-            <AddPhotoIcon className="stroke-text w-5 md:w-6" />
-            <p className="font-medium md:text-lg">{t('fields.photo.attach')}</p>
-            <p className="text-grey">{`(${t('optional')})`}</p>
-          </div>
-          <p className="font-regular text-secondaryText mb-3 text-sm">
-            {t('fields.photo.description')}
-          </p>
-
-          <AttachPhotoArea />
-        </>
-      )}
-
-      <div className="mt-40 flex flex-col items-center">
+      <div className="flex flex-col gap-3">
         <Button
           variant="contained"
-          className="mb-4 w-60 rounded-[10px] py-2"
+          className="w-full"
           onClick={isEditMode ? onEdit : onSubmit}
           disabled={isLoading}
         >
-          <p className="mx-3 my-1 text-base font-bold">{t('buttons.submit')}</p>
+          {t('buttons.submit')}
         </Button>
-        <p className="font-regular text-secondaryText max-w-[70%] text-center text-sm">
-          {t('submit_description')}
-        </p>
+        <div className="text-muted-foreground flex flex-col gap-1 text-center text-sm">
+          <p>{t('submit_description')}</p>
+          {!isEditMode && <p>{t('auto_save.description')}</p>}
+        </div>
       </div>
-    </>
+    </div>
   );
 };

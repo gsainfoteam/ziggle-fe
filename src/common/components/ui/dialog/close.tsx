@@ -1,4 +1,5 @@
-import CloseIcon from '@/assets/icons/close.svg?react';
+import { XIcon } from '@phosphor-icons/react';
+
 import { cn } from '@/common/utils';
 
 import { useDialogContext } from './context';
@@ -15,11 +16,11 @@ export const DialogClose = ({ className }: DialogCloseProps) => {
       onClick={onClose}
       className={cn(
         'absolute top-3 right-3 flex h-8 w-8 cursor-pointer items-center justify-center rounded-md',
-        'text-greyDark dark:text-dark_grey hover:bg-greyLight dark:hover:bg-dark_greyDark transition-colors',
+        'text-muted-foreground hover:bg-muted transition-colors',
         className,
       )}
     >
-      <CloseIcon className="stroke-greyDark dark:stroke-dark_grey h-5 w-5" />
+      <XIcon className="size-5" />
     </button>
   );
 };

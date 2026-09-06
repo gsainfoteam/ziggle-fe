@@ -18,7 +18,7 @@ export const DialogDescription = ({
     <p
       id={descriptionId}
       className={cn(
-        'text-greyDark dark:text-dark_grey text-sm leading-relaxed',
+        'text-muted-foreground text-sm leading-relaxed text-pretty',
         className,
       )}
     >
