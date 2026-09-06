@@ -42,13 +42,26 @@ export const NoticeCardActionsDisplay = ({
   const [currentFire, setCurrentFire] = useState<FireState>(initialFire);
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
 
+  // 서버 응답 전에 먼저 토글하고 실패 시 되돌린다. 응답 대기 중 연타는 무시.
+  const [firePending, setFirePending] = useState(false);
+  const [bookmarkPending, setBookmarkPending] = useState(false);
+
   const handleFireClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (firePending) return;
+    const prev = currentFire;
+    setFirePending(true);
+    setCurrentFire({
+      count: prev.count + (prev.isReacted ? -1 : 1),
+      isReacted: !prev.isReacted,
+    });
     try {
-      const next = await onFireToggle(currentFire.isReacted);
-      setCurrentFire(next);
+      setCurrentFire(await onFireToggle(prev.isReacted));
     } catch {
+      setCurrentFire(prev);
       toast.error(t('search.login_required'));
+    } finally {
+      setFirePending(false);
     }
   };
 
@@ -56,11 +69,17 @@ export const NoticeCardActionsDisplay = ({
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
+    if (bookmarkPending) return;
+    const prev = bookmarked;
+    setBookmarkPending(true);
+    setBookmarked(!prev);
     try {
-      await onBookmarkToggle(!bookmarked);
-      setBookmarked((prev) => !prev);
+      await onBookmarkToggle(!prev);
     } catch {
+      setBookmarked(prev);
       toast.error(t('search.login_required'));
+    } finally {
+      setBookmarkPending(false);
     }
   };
 
