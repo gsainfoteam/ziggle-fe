@@ -4,14 +4,16 @@ import { cn, cv } from '@/common/utils';
 
 import type { VariantProps } from 'tailwind-variants';
 
+const panelWidth = {
+  wide: 'md:w-180',
+  default: 'md:w-140',
+  compact: 'md:w-120',
+} as const;
+
 const panelShell = cv({
   base: 'flex w-full flex-col md:h-[calc(100vh-3.25rem)] md:shrink-0 md:transition-[width] md:duration-200',
   variants: {
-    size: {
-      wide: 'md:w-180',
-      default: 'md:w-140',
-      compact: 'md:w-120',
-    },
+    size: panelWidth,
   },
   defaultVariants: {
     size: 'wide',
@@ -48,9 +50,7 @@ export function PanelShell({
   /** 모바일 카테고리 칩 바와 중복될 때 헤더 전체 숨김 (정렬은 칩 바로 이동) */
   hideTitleOnMobile?: boolean;
 } & VariantProps<typeof panelShell>) {
-  const panelWidthClass = panelShell({ size })
-    .split('')
-    .filter((token) => token.startsWith('md:w-'));
+  const panelWidthClass = panelWidth[size ?? 'wide'];
 
   const titleHeader =
     title || headerRight ? (

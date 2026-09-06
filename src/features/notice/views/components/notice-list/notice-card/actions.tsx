@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 
 import { BookmarkSimpleIcon, ShareFatIcon } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
@@ -42,26 +42,46 @@ export const NoticeCardActionsDisplay = ({
   const [currentFire, setCurrentFire] = useState<FireState>(initialFire);
   const [bookmarked, setBookmarked] = useState(initialBookmarked);
 
-  const handleFireClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  // 트랜지션 동안 낙관 값을 보여주고, 끝나면 base 로 수렴한다.
+  // 실패 시 base 가 그대로라 자동 복귀. 연타는 startTransition 이 직렬화하지 않으므로 직접 막는다.
+  const [optimisticFire, setOptimisticFire] = useOptimistic(currentFire);
+  const [optimisticBookmarked, setOptimisticBookmarked] =
+    useOptimistic(bookmarked);
+  const [firePending, startFire] = useTransition();
+  const [bookmarkPending, startBookmark] = useTransition();
+
+  const handleFireClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      const next = await onFireToggle(currentFire.isReacted);
-      setCurrentFire(next);
-    } catch {
-      toast.error(t('search.login_required'));
-    }
+    if (firePending) return;
+    startFire(async () => {
+      const prev = currentFire;
+      setOptimisticFire({
+        count: prev.count + (prev.isReacted ? -1 : 1),
+        isReacted: !prev.isReacted,
+      });
+      try {
+        const next = await onFireToggle(prev.isReacted);
+        // await 뒤 갱신은 다시 감싸야 optimistic 해제와 같은 커밋에 들어간다
+        startFire(() => setCurrentFire(next));
+      } catch {
+        toast.error(t('search.login_required'));
+      }
+    });
   };
 
-  const handleBookmarkClick = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    try {
-      await onBookmarkToggle(!bookmarked);
-      setBookmarked((prev) => !prev);
-    } catch {
-      toast.error(t('search.login_required'));
-    }
+    if (bookmarkPending) return;
+    startBookmark(async () => {
+      const next = !bookmarked;
+      setOptimisticBookmarked(next);
+      try {
+        await onBookmarkToggle(next);
+        startBookmark(() => setBookmarked(next));
+      } catch {
+        toast.error(t('search.login_required'));
+      }
+    });
   };
 
   return (
@@ -78,17 +98,17 @@ export const NoticeCardActionsDisplay = ({
             className="flex cursor-pointer items-center"
           >
             <FlameReactionIcon
-              active={currentFire.isReacted}
+              active={optimisticFire.isReacted}
               className="size-6"
             />
           </Button>
           <span
             className={cn(
               'text-sm font-semibold',
-              currentFire.isReacted ? 'text-primary' : 'text-foreground',
+              optimisticFire.isReacted ? 'text-primary' : 'text-foreground',
             )}
           >
-            {currentFire.count}
+            {optimisticFire.count}
           </span>
         </div>
       </LogClick>
@@ -100,7 +120,7 @@ export const NoticeCardActionsDisplay = ({
           onClick={handleBookmarkClick}
           className="flex cursor-pointer items-center"
         >
-          {bookmarked ? (
+          {optimisticBookmarked ? (
             <BookmarkSimpleIcon weight="fill" className="text-primary size-6" />
           ) : (
             <BookmarkSimpleIcon className="text-foreground size-6" />

@@ -333,6 +333,12 @@ export const ProfileModalButton = ({
   const { data: user } = useUser();
   const { mutate: logout } = useLogout();
   const { mutateAsync: withdraw } = useWithdraw();
+  const [open, setOpen] = useState(false);
+
+  const setOpenState = (next: boolean) => {
+    setOpen(next);
+    onOpenChange?.(next);
+  };
 
   const handleWithdrawal = async () => {
     try {
@@ -370,11 +376,11 @@ export const ProfileModalButton = ({
   const openProfile = (anchor: HTMLElement) => {
     if (!user) return;
 
-    onOpenChange?.(true);
+    setOpenState(true);
 
     overlay.open(({ isOpen, close, unmount }) => {
       const handleClose = () => {
-        onOpenChange?.(false);
+        setOpenState(false);
         close();
       };
 
@@ -403,6 +409,8 @@ export const ProfileModalButton = ({
       <button
         type="button"
         data-profile-trigger
+        aria-haspopup="dialog"
+        aria-expanded={open}
         onClick={(event) => openProfile(event.currentTarget)}
         className={triggerClassName}
       >
