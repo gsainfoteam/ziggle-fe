@@ -1,2 +1,2 @@
 export * from './frames';
-export { Sidebar } from './components/layout/sidebar';
+export { Sidebar, SidebarRail } from './components/layout/sidebar';
