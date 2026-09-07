@@ -10,9 +10,11 @@ const COLOR_FALLBACK = {
   assistantMessageBg: 'f5f5f7',
 } as const;
 
-// TODO(chatbot): 챗봇 팀에 기본 런처 숨김/커스텀 트리거 옵션이 오면
-// DOM display:none 우회를 data-* 또는 API로 교체한다.
-const LAUNCHER_SELECTOR = 'button[aria-label="챗봇 열기"]';
+/** 로더가 아직 안 붙었거나 pre-load 큐(배열)면 null. */
+export function getChatbot(): ChatbotWidgetApi | null {
+  const api = window.ChatbotWidget;
+  return api && !Array.isArray(api) ? api : null;
+}
 
 function readCssHex(name: string, fallback: string): string {
   if (typeof window === 'undefined') return fallback;
@@ -42,125 +44,39 @@ function buildColors(): Record<string, string> {
 }
 
 function applyTheme(): void {
-  const w = window.ChatbotWidget;
-  if (!w?.updateColors) return;
   try {
-    w.updateColors(buildColors());
+    getChatbot()?.updateColors(buildColors());
   } catch (error) {
     console.error('[chatbot-theme] updateColors failed', error);
   }
 }
 
-/** 기본 런처는 숨기고, 호스트 FAB(ChatbotFab)에서 open/close 한다. */
-function hideDefaultLauncher(): boolean {
-  const btn = document.querySelector<HTMLButtonElement>(LAUNCHER_SELECTOR);
-  if (!btn) return false;
-  btn.style.display = 'none';
-  return true;
-}
-
-/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 → 앱 오버레이 열리면 닫기 */
-function syncChatbotWithOverlays(): void {
-  const overlayOpen = document.querySelector(APP_OVERLAY_SELECTOR) != null;
-  if (!overlayOpen) return;
+/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 - 앱 오버레이 열리면 닫기 */
+function closeOnOverlay(): void {
+  if (document.querySelector(APP_OVERLAY_SELECTOR) == null) return;
   try {
-    if (window.ChatbotWidget?.isOpen?.()) {
-      window.ChatbotWidget.close?.();
-    }
+    const w = getChatbot();
+    if (w?.isOpen()) w.close();
   } catch (error) {
     console.error('[chatbot-theme] close on overlay failed', error);
   }
 }
 
-let attached = false;
-let readyHooked = false;
-let overlayListening = false;
+function attach(): void {
+  applyTheme();
+  closeOnOverlay();
 
-function ensureOverlayListener(): void {
-  if (overlayListening) return;
-  overlayListening = true;
-  syncChatbotWithOverlays();
-  new MutationObserver(() => {
-    hideDefaultLauncher();
-    syncChatbotWithOverlays();
-  }).observe(document.body, { childList: true, subtree: true });
-}
-
-function tryAttachTheme(): boolean {
-  if (attached) return true;
-  const w = window.ChatbotWidget;
-  if (!w?.updateColors) return false;
-
-  const onFirstApply = () => {
-    if (attached) return;
-    try {
-      applyTheme();
-      hideDefaultLauncher();
-      ensureOverlayListener();
-      new MutationObserver(() => {
-        try {
-          applyTheme();
-        } catch (error) {
-          console.error('[chatbot-theme] observer callback failed', error);
-        }
-      }).observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['class'],
-      });
-      attached = true;
-    } catch (error) {
-      console.error('[chatbot-theme] initial attach failed', error);
-    }
-  };
-
-  try {
-    if (w.isReady?.() === true) {
-      onFirstApply();
-      return attached;
-    }
-  } catch {
-    return false;
-  }
-
-  if (typeof w.on !== 'function') {
-    return false;
-  }
-  if (!readyHooked) {
-    try {
-      w.on('onReady', onFirstApply);
-    } catch {
-      return false;
-    }
-    readyHooked = true;
-  }
-
-  hideDefaultLauncher();
-  ensureOverlayListener();
-
-  return attached;
+  new MutationObserver(closeOnOverlay).observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+  new MutationObserver(applyTheme).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  });
 }
 
 export function initThemeSync(): void {
-  ensureOverlayListener();
-  if (tryAttachTheme()) return;
-
-  const id = window.setInterval(() => {
-    hideDefaultLauncher();
-    if (tryAttachTheme()) window.clearInterval(id);
-  }, 100);
-
-  window.setTimeout(() => window.clearInterval(id), 10_000);
-}
-
-declare global {
-  interface Window {
-    ChatbotWidget?: {
-      isReady?: () => boolean;
-      isOpen?: () => boolean;
-      open?: () => void;
-      close?: () => void;
-      on?: (event: string, callback: () => void) => (() => void) | void;
-      updateColors?: (colors: Record<string, string>) => void;
-    };
-  }
+  if (getChatbot()) attach();
+  else window.addEventListener('chatbot:onLoad', attach, { once: true });
 }
