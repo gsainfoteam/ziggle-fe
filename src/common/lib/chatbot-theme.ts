@@ -1,6 +1,7 @@
 import { APP_OVERLAY_SELECTOR } from '@/common/const/overlay';
 
-/** Fallbacks mirror styles.css brand/surface tokens (hex without #). */
+import { getChatbot } from './chatbot';
+
 const COLOR_FALLBACK = {
   primary: 'ff4500',
   background: 'ffffff',
@@ -9,12 +10,6 @@ const COLOR_FALLBACK = {
   border: 'd6d6d6',
   assistantMessageBg: 'f5f5f7',
 } as const;
-
-/** 로더가 아직 안 붙었거나 pre-load 큐(배열)면 null. */
-export function getChatbot(): ChatbotWidgetApi | null {
-  const api = window.ChatbotWidget;
-  return api && !Array.isArray(api) ? api : null;
-}
 
 function readCssHex(name: string, fallback: string): string {
   if (typeof window === 'undefined') return fallback;
@@ -51,7 +46,6 @@ function applyTheme(): void {
   }
 }
 
-/** 챗봇 패널 z-index가 MAX라 Drawer/Dialog 위에 뜸 - 앱 오버레이 열리면 닫기 */
 function closeOnOverlay(): void {
   if (document.querySelector(APP_OVERLAY_SELECTOR) == null) return;
   try {
