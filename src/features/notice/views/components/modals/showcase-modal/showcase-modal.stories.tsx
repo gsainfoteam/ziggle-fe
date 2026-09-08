@@ -9,10 +9,11 @@ import ShowcaseModal from '.';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
+/** 한 게시글에 세로 포스터, 가로 배너, 스캔본이 섞여 올라온다. 같은 비율만 모인 경우가 오히려 드물다. */
 const mockSources = [
-  'https://placehold.co/800x600?text=Image+1',
-  'https://placehold.co/800x600?text=Image+2',
-  'https://placehold.co/800x600?text=Image+3',
+  'https://placehold.co/900x1300/0b1440/ffffff?text=Poster',
+  'https://placehold.co/1600x600/1f3a5f/ffffff?text=Banner',
+  'https://placehold.co/1000x1000/2b2b3d/ffffff?text=Square',
 ];
 
 /** 라이트박스는 흐려진 공지 페이지 위에 뜬다. 배경 없이는 그 느낌을 볼 수 없다. */
@@ -94,38 +95,35 @@ export const StartFromSecond: Story = {
 
 export const SingleImage: Story = {
   args: {
-    sources: ['https://placehold.co/800x600?text=Single+Image'],
+    sources: ['https://placehold.co/900x1300/0b1440/ffffff?text=Poster'],
     alt: '단일 이미지',
   },
 };
 
-/** 실제 공지 이미지는 대부분 세로 포스터라 세로 여백 처리가 관건이다. */
-export const PortraitPoster: Story = {
+/** 세로 스캔본이 이어지다 가로 지도가 끼는 식으로, 실제 첨부는 순서도 비율도 제각각이다. */
+export const ManyImages: Story = {
   args: {
     sources: [
-      'https://placehold.co/900x1300/0b1440/ffffff?text=Poster+1',
-      'https://placehold.co/900x1300/1a1a3a/ffffff?text=Poster+2',
+      'https://placehold.co/900x1300/0b1440/ffffff?text=1',
+      'https://placehold.co/1240x1750/ffffff/333333?text=2',
+      'https://placehold.co/1600x600/1f3a5f/ffffff?text=3',
+      'https://placehold.co/1000x1000/2b2b3d/ffffff?text=4',
+      'https://placehold.co/700x1600/3d2b2b/ffffff?text=5',
+      'https://placehold.co/2000x900/1f3a5f/ffffff?text=6',
     ],
-    alt: '세로 포스터',
+    alt: '첨부 이미지',
   },
 };
 
-/** 비율이 섞이면 이미지를 넘길 때 레이아웃이 튀기 쉽다. */
-export const MixedAspectRatios: Story = {
+/** 원본이 클수록 축소 폭이 크다. 작은 이미지와 나란히 두면 축소가 제대로 되는지 바로 보인다. */
+export const ExtremeSizes: Story = {
   args: {
     sources: [
-      'https://placehold.co/900x1300?text=Portrait',
-      'https://placehold.co/1600x600?text=Wide',
-      'https://placehold.co/800x800?text=Square',
+      'https://placehold.co/3000x4000?text=3000x4000',
+      'https://placehold.co/320x240?text=320x240',
+      'https://placehold.co/4000x1000?text=4000x1000',
     ],
-    alt: '혼합 비율 이미지',
-  },
-};
-
-export const OversizedImage: Story = {
-  args: {
-    sources: ['https://placehold.co/3000x4000?text=3000x4000'],
-    alt: '초대형 이미지',
+    alt: '크기 차이가 큰 이미지',
   },
 };
 
