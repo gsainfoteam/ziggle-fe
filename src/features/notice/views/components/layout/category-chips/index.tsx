@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-
 import {
   Link,
   useNavigate,
@@ -14,25 +12,13 @@ import {
 } from '@phosphor-icons/react';
 import { useTranslation } from 'react-i18next';
 
-import { cn } from '@/common/utils';
+import { cn, useEdgeFade } from '@/common/utils';
 import { type Category, type OrderBy } from '@/features/notice/viewmodels';
 
 import { SortDropdown } from '../../notice-list/sort-dropdown';
 import { useNoticeNav } from '../use-notice-nav';
 
 const SCROLL_STEP = 120;
-const EDGE_FADE = '2.75rem';
-
-function edgeMask({ left, right }: { left: boolean; right: boolean }) {
-  if (!left && !right) return undefined;
-  if (left && right) {
-    return `linear-gradient(to right, transparent, black ${EDGE_FADE}, black calc(100% - ${EDGE_FADE}), transparent)`;
-  }
-  if (left) {
-    return `linear-gradient(to right, transparent, black ${EDGE_FADE}, black)`;
-  }
-  return `linear-gradient(to right, black, black calc(100% - ${EDGE_FADE}), transparent)`;
-}
 
 export function CategoryChips({ className }: { className?: string }) {
   const { t } = useTranslation('notice');
@@ -42,8 +28,7 @@ export function CategoryChips({ className }: { className?: string }) {
   const params = useParams({ strict: false }) as { category?: string };
   const activeCategory = params.category?.toUpperCase() as Category | undefined;
   const orderBy = (search.orderBy as OrderBy | undefined) ?? 'recent';
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [edgeFade, setEdgeFade] = useState({ left: false, right: false });
+  const { edges, elementRef, scrollerProps } = useEdgeFade<HTMLDivElement>();
 
   const chips = [
     {
@@ -66,32 +51,12 @@ export function CategoryChips({ className }: { className?: string }) {
     })),
   ];
 
-  const updateEdgeFade = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    setEdgeFade({
-      left: scrollLeft > 2,
-      right: scrollLeft + clientWidth < scrollWidth - 2,
-    });
-  };
-
   const scrollByDir = (dir: 'left' | 'right') => {
-    scrollerRef.current?.scrollBy({
+    elementRef.current?.scrollBy({
       left: dir === 'left' ? -SCROLL_STEP : SCROLL_STEP,
       behavior: 'smooth',
     });
   };
-
-  useEffect(() => {
-    updateEdgeFade();
-    const el = scrollerRef.current;
-    if (!el) return;
-
-    const observer = new ResizeObserver(updateEdgeFade);
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [chips.length, t]);
 
   return (
     <div
@@ -102,13 +67,8 @@ export function CategoryChips({ className }: { className?: string }) {
     >
       <div className="relative min-w-0 flex-1">
         <div
-          ref={scrollerRef}
-          onScroll={updateEdgeFade}
+          {...scrollerProps}
           className="scrollbar-none flex gap-2 overflow-x-auto"
-          style={{
-            maskImage: edgeMask(edgeFade),
-            WebkitMaskImage: edgeMask(edgeFade),
-          }}
         >
           {chips.map((chip) => (
             <Link
@@ -132,26 +92,26 @@ export function CategoryChips({ className }: { className?: string }) {
 
         <button
           type="button"
-          tabIndex={edgeFade.left ? 0 : -1}
+          tabIndex={edges.start ? 0 : -1}
           aria-label="이전 카테고리"
-          disabled={!edgeFade.left}
+          disabled={!edges.start}
           onClick={() => scrollByDir('left')}
           className={cn(
             'text-muted-foreground absolute inset-y-0 left-0 z-10 flex w-7 items-center justify-center transition-opacity',
-            edgeFade.left ? 'opacity-100' : 'pointer-events-none opacity-0',
+            edges.start ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
           <CaretLeftIcon className="size-4" weight="bold" />
         </button>
         <button
           type="button"
-          tabIndex={edgeFade.right ? 0 : -1}
+          tabIndex={edges.end ? 0 : -1}
           aria-label="다음 카테고리"
-          disabled={!edgeFade.right}
+          disabled={!edges.end}
           onClick={() => scrollByDir('right')}
           className={cn(
             'text-muted-foreground absolute inset-y-0 right-0 z-10 flex w-7 items-center justify-center transition-opacity',
-            edgeFade.right ? 'opacity-100' : 'pointer-events-none opacity-0',
+            edges.end ? 'opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
           <CaretRightIcon className="size-4" weight="bold" />

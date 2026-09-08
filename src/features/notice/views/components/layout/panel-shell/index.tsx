@@ -22,8 +22,9 @@ const panelShell = cv({
 
 export type PanelSize = NonNullable<VariantProps<typeof panelShell>['size']>;
 
-const borderedPanelClass =
-  'md:rounded-2xl md:border md:border-border md:bg-background p-5';
+const borderedPanelClass = cn(
+  'md:border-border md:bg-background p-5 md:rounded-2xl md:border',
+);
 
 export function PanelShell({
   title,

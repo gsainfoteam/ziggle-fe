@@ -1,7 +1,7 @@
 import { cn } from '@/common/utils';
 
 export const NoticeCardSkeleton = () => {
-  const s = 'bg-muted animate-pulse rounded-md';
+  const s = cn('bg-muted animate-pulse rounded-md');
 
   return (
     <div className="text-foreground flex flex-col rounded-[10px]">

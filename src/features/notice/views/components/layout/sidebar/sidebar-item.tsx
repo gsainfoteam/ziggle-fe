@@ -12,9 +12,10 @@ interface SidebarItemProps {
   labelClassName?: string;
 }
 
-const baseRow =
-  'text-foreground flex w-full cursor-pointer items-center gap-3 rounded-md px-2.5 py-1.5 transition duration-300 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary';
-const inactiveRow = 'hover:bg-muted';
+const baseRow = cn(
+  'text-foreground focus-visible:outline-primary flex w-full cursor-pointer items-center gap-3 rounded-md px-2.5 py-1.5 transition duration-300 outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+);
+const inactiveRow = cn('hover:bg-muted');
 
 export const sidebarRowClass = cn(baseRow, inactiveRow);
 

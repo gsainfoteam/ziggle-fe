@@ -8,8 +8,9 @@ interface DateTimePickerProps {
   className?: string;
 }
 
-const fieldClassName =
-  'bg-transparent text-foreground text-sm font-medium outline-none [color-scheme:light] dark:[color-scheme:dark]';
+const fieldClassName = cn(
+  'text-foreground bg-transparent text-sm font-medium [color-scheme:light] outline-none dark:[color-scheme:dark]',
+);
 
 export const DateTimePicker = ({
   dateTime,

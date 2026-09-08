@@ -24,5 +24,9 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "tailwindCSS.classFunctions": [
+    "cn",
+    "cv"
+  ]
 }
