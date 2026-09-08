@@ -14,8 +14,8 @@ import {
   type ReactZoomPanPinchRef,
 } from 'react-zoom-pan-pinch';
 
-import { Button, Dialog } from '@/common/components';
-import { cn, useEdgeFade } from '@/common/utils';
+import { Button, Dialog, Overflow } from '@/common/components';
+import { cn } from '@/common/utils';
 
 import { saveImage, saveImages } from './download';
 
@@ -55,8 +55,6 @@ const ShowcaseModal = ({
   const [isZoomed, setIsZoomed] = useState(false);
   const zoomRef = useRef<ReactZoomPanPinchRef>(null);
   const imageRef = useRef<HTMLImageElement>(null);
-
-  const { scrollerProps: railProps } = useEdgeFade<HTMLDivElement>('12px');
 
   const show = useCallback(
     (next: number) => {
@@ -150,9 +148,9 @@ const ShowcaseModal = ({
           )}
         >
           {total > 1 && (
-            <div
-              {...railProps}
-              className="flex min-w-0 flex-1 gap-2 overflow-x-auto p-0.5 [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[45vh] md:w-full md:flex-col md:overflow-x-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden"
+            <Overflow
+              fade="12px"
+              className="flex min-w-0 flex-1 gap-2 overflow-x-auto p-0.5 md:max-h-[45vh] md:w-full md:flex-col md:overflow-x-hidden md:overflow-y-auto"
             >
               {sources.map((src, i) => (
                 <button
@@ -175,7 +173,7 @@ const ShowcaseModal = ({
                   />
                 </button>
               ))}
-            </div>
+            </Overflow>
           )}
 
           <span className="shrink-0 text-sm font-medium tabular-nums">

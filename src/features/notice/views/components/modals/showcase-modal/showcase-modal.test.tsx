@@ -56,6 +56,9 @@ vi.mock('@/common/components', () => ({
   }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
     animated?: boolean;
   }) => <button {...props} />,
+  Overflow: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
+  ),
   Dialog: {
     Root: ({
       isOpen,
