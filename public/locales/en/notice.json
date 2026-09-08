@@ -35,7 +35,7 @@
       "success": "The notice link has been copied!",
       "success_hint": "Share the notice with your friends."
     },
-    "download_all": "Download All",
+    "download_all": "Save all",
     "due_at": "Due at {{dueAt}}",
     "push_notification": {
       "action": "Send Push Notification",
@@ -53,7 +53,10 @@
       "unsupported": "Your browser doesn't support sharing."
     },
     "source_url": "Source URL",
-    "time_left": "{{timeLeft}} Left"
+    "time_left": "{{timeLeft}} Left",
+    "download_current": "Save",
+    "download_failed": "Couldn't save the image. Opened it in a new tab.",
+    "reset_zoom": "Reset zoom"
   },
   "list": {
     "categories": {
