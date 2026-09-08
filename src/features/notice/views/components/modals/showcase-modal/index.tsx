@@ -199,7 +199,7 @@ const ShowcaseModal = ({
           )}
         >
           {total > 1 && (
-            <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto md:max-h-64 md:w-full md:flex-col md:overflow-x-hidden md:overflow-y-auto">
+            <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[45vh] md:w-full md:flex-col md:items-center md:overflow-x-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
               {sources.map((src, i) => (
                 <button
                   key={src}
@@ -208,7 +208,7 @@ const ShowcaseModal = ({
                   aria-current={i === index}
                   aria-label={`${i + 1} / ${total}`}
                   className={cn(
-                    'size-12 shrink-0 cursor-pointer overflow-hidden rounded-lg transition md:aspect-3/4 md:h-auto md:w-full',
+                    'size-12 shrink-0 cursor-pointer overflow-hidden rounded-lg transition md:aspect-3/4 md:h-auto md:w-20',
                     i === index
                       ? 'ring-primary ring-2'
                       : 'opacity-50 hover:opacity-100',
