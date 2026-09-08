@@ -8,6 +8,16 @@ import type * as Download from './download';
 const saveImageMock = vi.fn();
 const saveImagesMock = vi.fn();
 
+// jsdom 에는 ResizeObserver 가 없다. 썸네일 목록의 가장자리 흐림이 이걸 쓴다.
+vi.stubGlobal(
+  'ResizeObserver',
+  class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  },
+);
+
 vi.mock('react-i18next', () => ({
   useTranslation: () => ({ t: (key: string) => key }),
 }));

@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 import { Button, Dialog } from '@/common/components';
-import { cn } from '@/common/utils';
+import { cn, useEdgeFade } from '@/common/utils';
 
 import { saveImage, saveImages } from './download';
 
@@ -52,29 +52,7 @@ const ShowcaseModal = ({
   const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
   const pointers = useRef(new Map<number, { x: number; y: number }>());
 
-  const railRef = useRef<HTMLDivElement>(null);
-  const [railFade, setRailFade] = useState<string>();
-
-  /** 잘린 카드의 모서리가 컨테이너 곡선에 눌려 찌그러져 보인다. 자르는 대신 흐린다. */
-  const syncRailFade = useCallback(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const vertical = rail.scrollHeight > rail.clientHeight;
-    const position = vertical ? rail.scrollTop : rail.scrollLeft;
-    const max = vertical
-      ? rail.scrollHeight - rail.clientHeight
-      : rail.scrollWidth - rail.clientWidth;
-    const hasBefore = position > 1;
-    const hasAfter = position < max - 1;
-    if (!hasBefore && !hasAfter) return setRailFade(undefined);
-    setRailFade(
-      `linear-gradient(${vertical ? 'to bottom' : 'to right'}, ${
-        hasBefore ? 'transparent 0, black 12px' : 'black 0'
-      }, ${hasAfter ? 'black calc(100% - 12px), transparent 100%' : 'black 100%'})`,
-    );
-  }, []);
-
-  useEffect(syncRailFade, [syncRailFade, sources]);
+  const { scrollerProps: railProps } = useEdgeFade<HTMLDivElement>('12px');
 
   const isZoomed = scale > 1;
 
@@ -207,9 +185,7 @@ const ShowcaseModal = ({
         >
           {total > 1 && (
             <div
-              ref={railRef}
-              onScroll={syncRailFade}
-              style={{ maskImage: railFade }}
+              {...railProps}
               className="flex min-w-0 flex-1 gap-2 overflow-x-auto p-0.5 [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[45vh] md:w-full md:flex-col md:overflow-x-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden"
             >
               {sources.map((src, i) => (
@@ -229,7 +205,6 @@ const ShowcaseModal = ({
                   <img
                     src={src}
                     alt=""
-                    onLoad={syncRailFade}
                     className="block h-full w-auto md:h-auto md:w-full"
                   />
                 </button>
