@@ -5,6 +5,11 @@ export const backdropVariants: Variants = {
   open: { backgroundColor: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(4px)' },
 };
 
+export const darkBackdropVariants: Variants = {
+  closed: { backgroundColor: 'rgba(0, 0, 0, 0)', backdropFilter: 'blur(0px)' },
+  open: { backgroundColor: 'rgba(0, 0, 0, 0.85)', backdropFilter: 'blur(8px)' },
+};
+
 export const backdropTransition: Transition = {
   duration: 0.3,
   ease: [0.16, 1, 0.3, 1],

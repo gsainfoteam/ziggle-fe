@@ -16,10 +16,12 @@ import {
   backdropVariants,
   contentTransition,
   contentVariants,
+  darkBackdropVariants,
 } from './animation';
 import { DialogContext } from './context';
 
 export type DialogSize = 'xs' | 'sm' | 'md' | 'lg' | 'full';
+export type DialogBackdrop = 'default' | 'dark';
 
 const sizeClassName: Record<DialogSize, string> = {
   xs: 'max-w-xs',
@@ -34,6 +36,7 @@ export interface DialogRootProps {
   onClose: () => void;
   children: ReactNode;
   size?: DialogSize;
+  backdrop?: DialogBackdrop;
   lockScroll?: boolean;
   closeOnEscape?: boolean;
   closeOnBackdrop?: boolean;
@@ -47,6 +50,7 @@ export const DialogRoot = ({
   onClose,
   children,
   size = 'md',
+  backdrop = 'default',
   lockScroll = true,
   closeOnEscape = true,
   closeOnBackdrop = true,
@@ -81,7 +85,9 @@ export const DialogRoot = ({
             <div className="fixed inset-0 z-1000 flex items-center justify-center">
               <motion.div
                 className="absolute inset-0"
-                variants={backdropVariants}
+                variants={
+                  backdrop === 'dark' ? darkBackdropVariants : backdropVariants
+                }
                 transition={backdropTransition}
                 initial="closed"
                 animate="open"
