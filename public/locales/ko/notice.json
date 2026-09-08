@@ -35,7 +35,7 @@
       "success": "공지 주소가 복사되었습니다!",
       "success_hint": "친구들에게 공지를 공유해보세요"
     },
-    "download_all": "전체 다운로드하기",
+    "download_all": "전체 저장",
     "due_at": "마감시간 {{dueAt}}",
     "push_notification": {
       "action": "알림 보내기",
@@ -54,10 +54,9 @@
     },
     "source_url": "원본링크",
     "time_left": "{{timeLeft}} 남음",
-    "download_current": "이 이미지 저장",
+    "download_current": "저장",
     "download_failed": "이미지를 저장하지 못했어요. 새 탭에서 열었어요.",
-    "previous_image": "이전 이미지",
-    "next_image": "다음 이미지"
+    "reset_zoom": "원래 크기"
   },
   "list": {
     "categories": {

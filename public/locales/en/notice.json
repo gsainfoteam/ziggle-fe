@@ -35,7 +35,7 @@
       "success": "The notice link has been copied!",
       "success_hint": "Share the notice with your friends."
     },
-    "download_all": "Download All",
+    "download_all": "Save all",
     "due_at": "Due at {{dueAt}}",
     "push_notification": {
       "action": "Send Push Notification",
@@ -54,10 +54,9 @@
     },
     "source_url": "Source URL",
     "time_left": "{{timeLeft}} Left",
-    "download_current": "Save this image",
+    "download_current": "Save",
     "download_failed": "Couldn't save the image. Opened it in a new tab.",
-    "previous_image": "Previous image",
-    "next_image": "Next image"
+    "reset_zoom": "Reset zoom"
   },
   "list": {
     "categories": {

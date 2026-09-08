@@ -1,8 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
-  CaretLeftIcon,
-  CaretRightIcon,
+  ArrowsInSimpleIcon,
   DownloadSimpleIcon,
   XIcon,
 } from '@phosphor-icons/react';
@@ -24,10 +23,17 @@ interface ShowcaseModalProps {
   alt: string;
 }
 
+const MAX_SCALE = 4;
 const SWIPE_THRESHOLD = 60;
 
-const controlClassName =
-  'flex items-center justify-center rounded-full p-2 text-white transition hover:bg-white/15 disabled:pointer-events-none disabled:opacity-30';
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
+
+const actionClassName =
+  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition hover:bg-white/15 disabled:opacity-40 md:w-full';
+
+const glass =
+  'rounded-2xl bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-xl';
 
 const ShowcaseModal = ({
   isOpen,
@@ -40,25 +46,36 @@ const ShowcaseModal = ({
   const { t } = useTranslation('notice');
   const total = sources.length;
   const [index, setIndex] = useState(() =>
-    Math.min(Math.max(initialIndex, 0), Math.max(total - 1, 0)),
+    clamp(initialIndex, 0, Math.max(total - 1, 0)),
   );
+  const [scale, setScale] = useState(1);
   const [isDownloading, setIsDownloading] = useState(false);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
 
-  const go = useCallback(
-    (delta: number) =>
-      setIndex((prev) => Math.min(Math.max(prev + delta, 0), total - 1)),
+  const isZoomed = scale > 1;
+
+  const show = useCallback(
+    (next: number) => {
+      setIndex((prev) => {
+        const target = clamp(next, 0, total - 1);
+        if (target !== prev) setScale(1);
+        return target;
+      });
+    },
     [total],
   );
 
   useEffect(() => {
     if (!isOpen) return;
     const handler = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') go(-1);
-      if (event.key === 'ArrowRight') go(1);
+      if (event.key === 'ArrowLeft') show(index - 1);
+      if (event.key === 'ArrowRight') show(index + 1);
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [isOpen, go]);
+  }, [isOpen, index, show]);
 
   const save = async (targets: number[]) => {
     setIsDownloading(true);
@@ -75,7 +92,42 @@ const ShowcaseModal = ({
     if (failed > 0) toast.error(t('detail.download_failed'));
   };
 
-  const stopClose = (event: React.MouseEvent) => event.stopPropagation();
+  /** 트랙패드 핀치는 ctrlKey 가 붙은 wheel 로 들어온다. 휠 스크롤도 같이 받는다. */
+  const handleWheel = (event: React.WheelEvent) => {
+    setScale((prev) => clamp(prev - event.deltaY * 0.005, 1, MAX_SCALE));
+  };
+
+  const distanceBetweenPointers = () => {
+    const [a, b] = Array.from(pointers.current.values());
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  const handlePointerDown = (event: React.PointerEvent) => {
+    pointers.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+    if (pointers.current.size === 2) {
+      pinchStart.current = { distance: distanceBetweenPointers(), scale };
+    }
+  };
+
+  const handlePointerMove = (event: React.PointerEvent) => {
+    if (!pointers.current.has(event.pointerId)) return;
+    pointers.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+    const start = pinchStart.current;
+    if (!start || pointers.current.size !== 2) return;
+    const ratio = distanceBetweenPointers() / start.distance;
+    setScale(clamp(start.scale * ratio, 1, MAX_SCALE));
+  };
+
+  const handlePointerUp = (event: React.PointerEvent) => {
+    pointers.current.delete(event.pointerId);
+    if (pointers.current.size < 2) pinchStart.current = null;
+  };
 
   return (
     <Dialog.Root
@@ -83,125 +135,129 @@ const ShowcaseModal = ({
       onClose={onClose}
       onExitComplete={onExitComplete}
       size="full"
-      backdrop="dark"
       className="m-0 gap-0 bg-transparent p-0 shadow-none"
     >
-      {/* 이미지 바깥 어디를 눌러도 닫힌다. 컨트롤과 이미지는 전파를 막는다. */}
-      <div className="flex h-full w-full flex-col" onClick={onClose}>
-        <header
-          className="flex shrink-0 items-center justify-between gap-3 px-4 py-3"
-          onClick={stopClose}
+      <div className="relative flex h-full w-full flex-col md:flex-row">
+        {/* 이미지 바깥을 누르면 닫힌다. 이미지와 컨트롤은 전파를 막는다. */}
+        <div
+          ref={stageRef}
+          onClick={onClose}
+          onWheel={handleWheel}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4 pb-32 md:p-10 md:pr-44 md:pb-10"
         >
-          <span className="text-sm font-medium text-white tabular-nums md:text-base">
-            {index + 1} / {total}
-          </span>
-
-          <div className="flex items-center gap-1">
-            <Button
-              className={controlClassName}
-              onClick={() => save([index])}
-              disabled={isDownloading}
-              aria-label={t('detail.download_current')}
-            >
-              <DownloadSimpleIcon className="size-6" />
-            </Button>
-
-            {total > 1 && (
-              <Button
-                className={cn(controlClassName, 'gap-2 px-3')}
-                onClick={() => save(sources.map((_, i) => i))}
-                disabled={isDownloading}
-              >
-                <span className="hidden text-sm sm:inline md:text-base">
-                  {t('detail.download_all')}
-                </span>
-                <DownloadSimpleIcon className="size-6 sm:hidden" />
-              </Button>
-            )}
-
-            <Button
-              className={controlClassName}
-              onClick={onClose}
-              aria-label={t('detail.close')}
-            >
-              <XIcon className="size-6" />
-            </Button>
-          </div>
-        </header>
-
-        <div className="flex min-h-0 flex-1 items-center justify-center gap-2 px-2 md:gap-6 md:px-6">
-          {total > 1 && (
-            <Button
-              className={cn(controlClassName, 'shrink-0')}
-              onClick={(event) => {
-                stopClose(event);
-                go(-1);
-              }}
-              disabled={index === 0}
-              aria-label={t('detail.previous_image')}
-            >
-              <CaretLeftIcon className="size-6 md:size-10" />
-            </Button>
-          )}
-
           <motion.img
             key={sources[index]}
             src={sources[index]}
             alt={alt}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            drag={total > 1 ? 'x' : false}
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.15}
+            animate={{ opacity: 1, scale }}
+            drag={isZoomed || total > 1}
+            dragDirectionLock={!isZoomed}
+            dragConstraints={
+              isZoomed ? stageRef : { left: 0, right: 0, top: 0, bottom: 0 }
+            }
+            dragElastic={isZoomed ? 0 : 0.15}
             dragMomentum={false}
             onDragEnd={(_, info) => {
-              if (info.offset.x <= -SWIPE_THRESHOLD) go(1);
-              if (info.offset.x >= SWIPE_THRESHOLD) go(-1);
+              if (isZoomed) return;
+              if (info.offset.x <= -SWIPE_THRESHOLD) show(index + 1);
+              if (info.offset.x >= SWIPE_THRESHOLD) show(index - 1);
             }}
-            onClick={stopClose}
+            onDoubleClick={(event) => {
+              event.stopPropagation();
+              setScale((prev) => (prev > 1 ? 1 : 2.5));
+            }}
+            onClick={(event) => event.stopPropagation()}
             draggable={false}
-            className="max-h-full min-h-0 max-w-full object-contain select-none"
+            className={cn(
+              'max-h-full max-w-full rounded-lg object-contain shadow-2xl ring-1 ring-white/15 select-none',
+              isZoomed ? 'cursor-grab active:cursor-grabbing' : 'touch-pan-y',
+            )}
           />
-
-          {total > 1 && (
-            <Button
-              className={cn(controlClassName, 'shrink-0')}
-              onClick={(event) => {
-                stopClose(event);
-                go(1);
-              }}
-              disabled={index === total - 1}
-              aria-label={t('detail.next_image')}
-            >
-              <CaretRightIcon className="size-6 md:size-10" />
-            </Button>
-          )}
         </div>
 
-        {total > 1 && (
-          <div
-            className="flex shrink-0 justify-center gap-2 overflow-x-auto p-4"
-            onClick={stopClose}
-          >
-            {sources.map((src, i) => (
-              <button
-                key={src}
-                type="button"
-                onClick={() => setIndex(i)}
-                aria-current={i === index}
-                aria-label={`${i + 1} / ${total}`}
-                className={cn(
-                  'size-14 shrink-0 cursor-pointer overflow-hidden rounded-md transition',
-                  i === index
-                    ? 'ring-primary ring-2'
-                    : 'opacity-50 hover:opacity-100',
-                )}
+        <Button
+          onClick={onClose}
+          aria-label={t('detail.close')}
+          className={cn(
+            glass,
+            'absolute top-4 right-4 flex size-10 items-center justify-center rounded-full transition hover:bg-black/60',
+          )}
+        >
+          <XIcon className="size-5" />
+        </Button>
+
+        <div
+          className={cn(
+            glass,
+            'absolute inset-x-4 bottom-4 flex items-center gap-3 p-2',
+            'md:inset-x-auto md:top-1/2 md:right-4 md:bottom-auto md:w-36 md:-translate-y-1/2 md:flex-col',
+          )}
+        >
+          {total > 1 && (
+            <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto md:max-h-64 md:w-full md:flex-col md:overflow-x-hidden md:overflow-y-auto">
+              {sources.map((src, i) => (
+                <button
+                  key={src}
+                  type="button"
+                  onClick={() => show(i)}
+                  aria-current={i === index}
+                  aria-label={`${i + 1} / ${total}`}
+                  className={cn(
+                    'size-12 shrink-0 cursor-pointer overflow-hidden rounded-lg transition md:aspect-3/4 md:h-auto md:w-full',
+                    i === index
+                      ? 'ring-primary ring-2'
+                      : 'opacity-50 hover:opacity-100',
+                  )}
+                >
+                  <img src={src} alt="" className="size-full object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+
+          <span className="shrink-0 text-sm font-medium tabular-nums">
+            {index + 1} / {total}
+          </span>
+
+          <div className="flex shrink-0 items-center gap-1 md:w-full md:flex-col">
+            {isZoomed && (
+              <Button
+                onClick={() => setScale(1)}
+                aria-label={t('detail.reset_zoom')}
+                className={actionClassName}
               >
-                <img src={src} alt="" className="size-full object-cover" />
-              </button>
-            ))}
+                <ArrowsInSimpleIcon className="size-5 shrink-0" />
+                <span>{t('detail.reset_zoom')}</span>
+              </Button>
+            )}
+
+            <Button
+              onClick={() => save([index])}
+              disabled={isDownloading}
+              aria-label={t('detail.download_current')}
+              className={actionClassName}
+            >
+              <DownloadSimpleIcon className="size-5 shrink-0" />
+              <span>{t('detail.download_current')}</span>
+            </Button>
+
+            {total > 1 && (
+              <Button
+                onClick={() => save(sources.map((_, i) => i))}
+                disabled={isDownloading}
+                className={actionClassName}
+              >
+                <DownloadSimpleIcon className="size-5 shrink-0" weight="fill" />
+                <span>{t('detail.download_all')}</span>
+              </Button>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </Dialog.Root>
   );

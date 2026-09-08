@@ -15,6 +15,28 @@ const mockSources = [
   'https://placehold.co/800x600?text=Image+3',
 ];
 
+/** 라이트박스는 흐려진 공지 페이지 위에 뜬다. 배경 없이는 그 느낌을 볼 수 없다. */
+const PageBehind = () => (
+  <div className="pointer-events-none absolute inset-0 overflow-hidden p-10">
+    <div className="mx-auto flex max-w-3xl flex-col gap-4">
+      <div className="h-8 w-2/3 rounded bg-gray-300 dark:bg-gray-700" />
+      <div className="h-4 w-1/3 rounded bg-gray-200 dark:bg-gray-800" />
+      <div className="mt-6 flex gap-3">
+        {mockSources.map((src) => (
+          <img key={src} src={src} alt="" className="h-48 w-auto rounded-lg" />
+        ))}
+      </div>
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div
+          key={i}
+          className="h-4 rounded bg-gray-200 dark:bg-gray-800"
+          style={{ width: `${90 - i * 6}%` }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
 const ShowcaseDemo = ({
   initialIndex = 0,
   sources = mockSources,
@@ -26,7 +48,8 @@ const ShowcaseDemo = ({
 }) => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <div>
+    <div className="relative h-screen">
+      <PageBehind />
       {!isOpen && (
         <Button variant="contained" onClick={() => setIsOpen(true)}>
           ShowcaseModal 열기

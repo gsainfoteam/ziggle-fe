@@ -36,6 +36,7 @@ vi.mock('framer-motion', () => ({
       dragElastic: _dragElastic,
       dragMomentum: _dragMomentum,
       onDragEnd: _onDragEnd,
+      dragDirectionLock: _dragDirectionLock,
       initial: _initial,
       animate: _animate,
       ...props
@@ -105,40 +106,32 @@ describe('ShowcaseModal', () => {
   beforeEach(() => vi.resetAllMocks());
   afterEach(cleanup);
 
-  it('moves forward with the next arrow and back with the previous one', async () => {
+  it('walks the list with the arrow keys', async () => {
     await renderModal();
 
     expect(screen.getByText('1 / 2')).toBeTruthy();
-    expect(shownImage().src).toBe(sources[0]);
 
-    fireEvent.click(screen.getByLabelText('detail.next_image'));
+    fireEvent.keyDown(window, { key: 'ArrowRight' });
     expect(screen.getByText('2 / 2')).toBeTruthy();
     expect(shownImage().src).toBe(sources[1]);
 
-    fireEvent.click(screen.getByLabelText('detail.previous_image'));
+    fireEvent.keyDown(window, { key: 'ArrowLeft' });
     expect(screen.getByText('1 / 2')).toBeTruthy();
     expect(shownImage().src).toBe(sources[0]);
   });
 
-  it('disables each arrow at its end of the list', async () => {
+  it('stops at both ends of the list', async () => {
     await renderModal();
 
-    const previous = screen.getByLabelText(
-      'detail.previous_image',
-    ) as HTMLButtonElement;
-    const next = screen.getByLabelText(
-      'detail.next_image',
-    ) as HTMLButtonElement;
+    fireEvent.keyDown(window, { key: 'ArrowLeft' });
+    expect(screen.getByText('1 / 2')).toBeTruthy();
 
-    expect(previous.disabled).toBe(true);
-    expect(next.disabled).toBe(false);
-
-    fireEvent.click(next);
-    expect(previous.disabled).toBe(false);
-    expect(next.disabled).toBe(true);
+    fireEvent.keyDown(window, { key: 'ArrowRight' });
+    fireEvent.keyDown(window, { key: 'ArrowRight' });
+    expect(screen.getByText('2 / 2')).toBeTruthy();
   });
 
-  it('jumps to the image picked from the thumbnail strip', async () => {
+  it('jumps to the image picked from the sheet', async () => {
     await renderModal();
 
     fireEvent.click(screen.getByLabelText('2 / 2'));
@@ -147,12 +140,34 @@ describe('ShowcaseModal', () => {
     expect(shownImage().src).toBe(sources[1]);
   });
 
-  it('hides the arrows and the strip for a single image', async () => {
+  it('drops the thumbnails and the bulk save for a single image', async () => {
     await renderModal({ sources: [sources[0]] });
 
-    expect(screen.queryByLabelText('detail.next_image')).toBeNull();
-    expect(screen.queryByLabelText('detail.previous_image')).toBeNull();
+    expect(screen.queryByLabelText('1 / 1')).toBeNull();
     expect(screen.queryByText('detail.download_all')).toBeNull();
+    expect(screen.getByText('1 / 1')).toBeTruthy();
+  });
+
+  it('offers the zoom reset only while zoomed in', async () => {
+    await renderModal();
+
+    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
+
+    fireEvent.doubleClick(shownImage());
+    expect(screen.getByLabelText('detail.reset_zoom')).toBeTruthy();
+
+    fireEvent.click(screen.getByLabelText('detail.reset_zoom'));
+    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
+  });
+
+  it('drops the zoom when the shown image changes', async () => {
+    await renderModal();
+
+    fireEvent.doubleClick(shownImage());
+    expect(screen.getByLabelText('detail.reset_zoom')).toBeTruthy();
+
+    fireEvent.click(screen.getByLabelText('2 / 2'));
+    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
   });
 
   it('clamps an out-of-range initial index', async () => {
