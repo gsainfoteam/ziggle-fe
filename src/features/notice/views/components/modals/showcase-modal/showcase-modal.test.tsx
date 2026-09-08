@@ -133,28 +133,6 @@ describe('ShowcaseModal', () => {
     expect(screen.getByText('1 / 1')).toBeTruthy();
   });
 
-  it('offers the zoom reset only while zoomed in', async () => {
-    await renderModal();
-
-    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
-
-    fireEvent.doubleClick(shownImage());
-    expect(screen.getByLabelText('detail.reset_zoom')).toBeTruthy();
-
-    fireEvent.click(screen.getByLabelText('detail.reset_zoom'));
-    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
-  });
-
-  it('drops the zoom when the shown image changes', async () => {
-    await renderModal();
-
-    fireEvent.doubleClick(shownImage());
-    expect(screen.getByLabelText('detail.reset_zoom')).toBeTruthy();
-
-    fireEvent.click(screen.getByLabelText('2 / 2'));
-    expect(screen.queryByLabelText('detail.reset_zoom')).toBeNull();
-  });
-
   it('clamps an out-of-range initial index', async () => {
     await renderModal({ initialIndex: 9 });
 

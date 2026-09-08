@@ -8,6 +8,11 @@ import {
 import { clamp } from 'es-toolkit';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import {
+  TransformComponent,
+  TransformWrapper,
+  type ReactZoomPanPinchRef,
+} from 'react-zoom-pan-pinch';
 
 import { Button, Dialog } from '@/common/components';
 import { cn, useEdgeFade } from '@/common/utils';
@@ -47,22 +52,16 @@ const ShowcaseModal = ({
   const [index, setIndex] = useState(() =>
     clamp(initialIndex, 0, Math.max(total - 1, 0)),
   );
-  const [scale, setScale] = useState(1);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
-  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const [isZoomed, setIsZoomed] = useState(false);
+  const zoomRef = useRef<ReactZoomPanPinchRef>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
 
   const { scrollerProps: railProps } = useEdgeFade<HTMLDivElement>('12px');
 
-  const isZoomed = scale > 1;
-
   const show = useCallback(
     (next: number) => {
-      setIndex((prev) => {
-        const target = clamp(next, 0, total - 1);
-        if (target !== prev) setScale(1);
-        return target;
-      });
+      zoomRef.current?.resetTransform();
+      setIndex(clamp(next, 0, total - 1));
     },
     [total],
   );
@@ -77,41 +76,19 @@ const ShowcaseModal = ({
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen, index, show]);
 
-  /** 트랙패드 핀치는 ctrlKey 가 붙은 wheel 로 들어온다. 휠 스크롤도 같이 받는다. */
-  const handleWheel = (event: React.WheelEvent) => {
-    setScale((prev) => clamp(prev - event.deltaY * 0.005, 1, MAX_SCALE));
-  };
-
-  const distanceBetweenPointers = () => {
-    const [a, b] = Array.from(pointers.current.values());
-    return Math.hypot(a.x - b.x, a.y - b.y);
-  };
-
-  const handlePointerDown = (event: React.PointerEvent) => {
-    pointers.current.set(event.pointerId, {
-      x: event.clientX,
-      y: event.clientY,
-    });
-    if (pointers.current.size === 2) {
-      pinchStart.current = { distance: distanceBetweenPointers(), scale };
-    }
-  };
-
-  const handlePointerMove = (event: React.PointerEvent) => {
-    if (!pointers.current.has(event.pointerId)) return;
-    pointers.current.set(event.pointerId, {
-      x: event.clientX,
-      y: event.clientY,
-    });
-    const start = pinchStart.current;
-    if (!start || pointers.current.size !== 2) return;
-    const ratio = distanceBetweenPointers() / start.distance;
-    setScale(clamp(start.scale * ratio, 1, MAX_SCALE));
-  };
-
-  const handlePointerUp = (event: React.PointerEvent) => {
-    pointers.current.delete(event.pointerId);
-    if (pointers.current.size < 2) pinchStart.current = null;
+  /**
+   * 확대 라이브러리가 이미지에 pointer-events: none 을 걸어 이미지 위 클릭을
+   * 따로 가로챌 수 없다. 클릭 좌표가 이미지 밖인지로 닫기를 판단한다.
+   */
+  const closeIfOutsideImage = (event: React.MouseEvent) => {
+    const box = imageRef.current?.getBoundingClientRect();
+    const inside =
+      box &&
+      event.clientX >= box.left &&
+      event.clientX <= box.right &&
+      event.clientY >= box.top &&
+      event.clientY <= box.bottom;
+    if (!inside) onClose();
   };
 
   return (
@@ -123,46 +100,41 @@ const ShowcaseModal = ({
       className="m-0 gap-0 bg-transparent p-0 shadow-none"
     >
       <div className="relative flex h-full w-full flex-col md:flex-row">
-        {/* 이미지 바깥을 누르면 닫힌다. 이미지와 컨트롤은 전파를 막는다. */}
         <div
-          ref={stageRef}
-          onClick={onClose}
-          onWheel={handleWheel}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
+          onClick={closeIfOutsideImage}
           className="flex min-h-0 flex-1 items-center justify-center overflow-hidden p-4 pb-32 md:p-10 md:pr-44 md:pb-10"
         >
-          <motion.img
-            key={sources[index]}
-            src={sources[index]}
-            alt={alt}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, scale }}
-            drag={isZoomed || total > 1}
-            dragDirectionLock={!isZoomed}
-            dragConstraints={
-              isZoomed ? stageRef : { left: 0, right: 0, top: 0, bottom: 0 }
-            }
-            dragElastic={isZoomed ? 0 : 0.15}
-            dragMomentum={false}
-            onDragEnd={(_, info) => {
-              if (isZoomed) return;
-              if (info.offset.x <= -SWIPE_THRESHOLD) show(index + 1);
-              if (info.offset.x >= SWIPE_THRESHOLD) show(index - 1);
+          <TransformWrapper
+            ref={zoomRef}
+            maxScale={MAX_SCALE}
+            doubleClick={{ mode: 'toggle', step: 1.5 }}
+            limitToBounds={isZoomed}
+            panning={{ velocityDisabled: true }}
+            onTransform={(_, state) => setIsZoomed(state.scale > 1)}
+            onPanningStop={(ref) => {
+              // 확대 전에는 팬이 곧 좌우 넘기기다. 확대 중에는 팬 그대로 둔다.
+              if (ref.state.scale > 1) return;
+              const moved = ref.state.positionX;
+              ref.resetTransform(0);
+              if (moved <= -SWIPE_THRESHOLD) show(index + 1);
+              if (moved >= SWIPE_THRESHOLD) show(index - 1);
             }}
-            onDoubleClick={(event) => {
-              event.stopPropagation();
-              setScale((prev) => (prev > 1 ? 1 : 2.5));
-            }}
-            onClick={(event) => event.stopPropagation()}
-            draggable={false}
-            className={cn(
-              'max-h-full max-w-full rounded-lg object-contain shadow-2xl ring-1 ring-white/15 select-none',
-              isZoomed ? 'cursor-grab active:cursor-grabbing' : 'touch-pan-y',
-            )}
-          />
+          >
+            <TransformComponent
+              wrapperClass="!h-full !w-full !items-center !justify-center"
+              contentClass="!h-full !w-full !items-center !justify-center"
+            >
+              <motion.img
+                ref={imageRef}
+                key={sources[index]}
+                src={sources[index]}
+                alt={alt}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="max-h-full max-w-full rounded-lg object-contain shadow-2xl ring-1 ring-white/15 select-none"
+              />
+            </TransformComponent>
+          </TransformWrapper>
         </div>
 
         <Button
@@ -219,7 +191,7 @@ const ShowcaseModal = ({
           <div className="flex shrink-0 items-center gap-1 md:w-full md:flex-col">
             {isZoomed && (
               <Button
-                onClick={() => setScale(1)}
+                onClick={() => zoomRef.current?.resetTransform()}
                 aria-label={t('detail.reset_zoom')}
                 className={actionClassName}
               >
