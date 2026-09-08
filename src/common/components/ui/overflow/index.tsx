@@ -8,6 +8,7 @@ export const Overflow = ({
   fade,
   className,
   style,
+  onScroll,
   children,
   ...props
 }: OverflowProps) => {
@@ -17,6 +18,10 @@ export const Overflow = ({
     <div
       {...props}
       {...scrollerProps}
+      onScroll={(event) => {
+        onScroll?.(event);
+        scrollerProps.onScroll();
+      }}
       style={{ ...style, ...scrollerProps.style }}
       className={cn('scrollbar-none', className)}
     >
