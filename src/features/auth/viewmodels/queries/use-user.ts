@@ -17,9 +17,12 @@ export const useUser = () => {
   );
 
   useEffect(() => {
-    if (!data) return;
-    setRequiredConsents(data.consent ? undefined : true);
-  }, [data, setRequiredConsents]);
+    if (data) {
+      setRequiredConsents(data.consent ? undefined : true);
+      return;
+    }
+    if (error?.statusCode === 403) setRequiredConsents(true);
+  }, [data, error, setRequiredConsents]);
 
   const user = useMemo(() => {
     if (!token) return null;
