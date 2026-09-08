@@ -5,6 +5,7 @@ import {
   DownloadSimpleIcon,
   XIcon,
 } from '@phosphor-icons/react';
+import { clamp } from 'es-toolkit';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -24,9 +25,6 @@ interface ShowcaseModalProps {
 
 const MAX_SCALE = 4;
 const SWIPE_THRESHOLD = 60;
-
-const clamp = (value: number, min: number, max: number) =>
-  Math.min(Math.max(value, min), max);
 
 const actionClassName =
   'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition hover:bg-white/15 disabled:opacity-40 md:w-full';
