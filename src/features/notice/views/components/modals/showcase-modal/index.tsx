@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, useTransition } from 'react';
 
 import {
   ArrowsInSimpleIcon,
@@ -53,7 +53,7 @@ const ShowcaseModal = ({
     clamp(initialIndex, 0, Math.max(total - 1, 0)),
   );
   const [isZoomed, setIsZoomed] = useState(false);
-  const [isSavingAll, setIsSavingAll] = useState(false);
+  const [isSavingAll, startSavingAll] = useTransition();
   const zoomRef = useRef<ReactZoomPanPinchRef>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -74,16 +74,6 @@ const ShowcaseModal = ({
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen, index, show]);
-
-  const saveAll = async () => {
-    if (isSavingAll) return;
-    setIsSavingAll(true);
-    try {
-      await saveImages(sources, alt);
-    } finally {
-      setIsSavingAll(false);
-    }
-  };
 
   const closeIfOutsideImage = (event: React.MouseEvent) => {
     const box = imageRef.current?.getBoundingClientRect();
@@ -215,7 +205,7 @@ const ShowcaseModal = ({
 
             {total > 1 && (
               <Button
-                onClick={saveAll}
+                onClick={() => startSavingAll(() => saveImages(sources, alt))}
                 disabled={isSavingAll}
                 className={actionClassName}
               >
