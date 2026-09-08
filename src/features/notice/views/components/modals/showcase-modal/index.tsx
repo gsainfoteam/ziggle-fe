@@ -26,11 +26,13 @@ interface ShowcaseModalProps {
 const MAX_SCALE = 4;
 const SWIPE_THRESHOLD = 60;
 
-const actionClassName =
-  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition hover:bg-white/15 disabled:opacity-40 md:w-full';
+const actionClassName = cn(
+  'flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap transition hover:bg-white/15 disabled:opacity-40 md:w-full',
+);
 
-const glass =
-  'rounded-2xl bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-xl';
+const glass = cn(
+  'rounded-2xl bg-black/45 text-white ring-1 ring-white/15 backdrop-blur-xl',
+);
 
 const ShowcaseModal = ({
   isOpen,
