@@ -56,18 +56,18 @@ describe('saveImages', () => {
   ];
 
   it('sends the first image right away so the click still counts as a gesture', () => {
-    saveImages(sources, '공지');
+    void saveImages(sources, '공지');
 
     expect(clicked).toEqual([sources[0]]);
   });
 
-  it('staggers the rest instead of firing them at once', () => {
-    saveImages(sources, '공지');
+  it('staggers the rest instead of firing them at once', async () => {
+    void saveImages(sources, '공지');
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(clicked).toEqual([sources[0], sources[1]]);
 
-    vi.advanceTimersByTime(300);
+    await vi.advanceTimersByTimeAsync(300);
     expect(clicked).toEqual(sources);
   });
 });

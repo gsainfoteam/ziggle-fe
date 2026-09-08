@@ -1,3 +1,5 @@
+import { delay } from 'es-toolkit';
+
 export const fileNameOf = (src: string, fallback: string) => {
   const path = URL.canParse(src) ? new URL(src).pathname : src.split(/[?#]/)[0];
   const name = decodeURIComponent(path.split('/').filter(Boolean).pop() ?? '');
@@ -15,9 +17,9 @@ export const saveImage = (src: string, fallbackName: string) => {
 
 const STAGGER_MS = 300;
 
-export const saveImages = (sources: string[], baseName: string) => {
-  sources.forEach((src, i) => {
-    if (i === 0) return saveImage(src, `${baseName}-1`);
-    setTimeout(() => saveImage(src, `${baseName}-${i + 1}`), i * STAGGER_MS);
-  });
+export const saveImages = async (sources: string[], baseName: string) => {
+  for (const [i, src] of sources.entries()) {
+    if (i > 0) await delay(STAGGER_MS);
+    saveImage(src, `${baseName}-${i + 1}`);
+  }
 };
