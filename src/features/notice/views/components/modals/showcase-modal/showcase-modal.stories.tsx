@@ -76,6 +76,36 @@ export const SingleImage: Story = {
   },
 };
 
+/** 실제 공지 이미지는 대부분 세로 포스터라 세로 여백 처리가 관건이다. */
+export const PortraitPoster: Story = {
+  args: {
+    sources: [
+      'https://placehold.co/900x1300/0b1440/ffffff?text=Poster+1',
+      'https://placehold.co/900x1300/1a1a3a/ffffff?text=Poster+2',
+    ],
+    alt: '세로 포스터',
+  },
+};
+
+/** 비율이 섞이면 이미지를 넘길 때 레이아웃이 튀기 쉽다. */
+export const MixedAspectRatios: Story = {
+  args: {
+    sources: [
+      'https://placehold.co/900x1300?text=Portrait',
+      'https://placehold.co/1600x600?text=Wide',
+      'https://placehold.co/800x800?text=Square',
+    ],
+    alt: '혼합 비율 이미지',
+  },
+};
+
+export const OversizedImage: Story = {
+  args: {
+    sources: ['https://placehold.co/3000x4000?text=3000x4000'],
+    alt: '초대형 이미지',
+  },
+};
+
 const ImperativeShowcase = () => (
   <div className="flex h-screen items-center justify-center">
     <Button

@@ -1,10 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { ArrowRightIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
+import {
+  CaretLeftIcon,
+  CaretRightIcon,
+  DownloadSimpleIcon,
+  XIcon,
+} from '@phosphor-icons/react';
+import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'sonner';
 
 import { Button, Dialog } from '@/common/components';
 import { cn } from '@/common/utils';
+
+import { downloadImage, openInNewTab } from './download';
 
 interface ShowcaseModalProps {
   isOpen: boolean;
@@ -15,14 +24,10 @@ interface ShowcaseModalProps {
   alt: string;
 }
 
-const downloadImage = (src: string) => {
-  const link = document.createElement('a');
-  link.href = src;
-  link.download = src.split('/').pop() || 'image';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
+const SWIPE_THRESHOLD = 60;
+
+const controlClassName =
+  'flex items-center justify-center rounded-full p-2 text-white transition hover:bg-white/15 disabled:pointer-events-none disabled:opacity-30';
 
 const ShowcaseModal = ({
   isOpen,
@@ -33,27 +38,44 @@ const ShowcaseModal = ({
   alt,
 }: ShowcaseModalProps) => {
   const { t } = useTranslation('notice');
-  const [index, setIndex] = useState(initialIndex);
+  const total = sources.length;
+  const [index, setIndex] = useState(() =>
+    Math.min(Math.max(initialIndex, 0), Math.max(total - 1, 0)),
+  );
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  const left = useCallback(() => setIndex((prev) => Math.max(prev - 1, 0)), []);
-  const right = useCallback(
-    () => setIndex((prev) => Math.min(prev + 1, sources.length - 1)),
-    [sources],
+  const go = useCallback(
+    (delta: number) =>
+      setIndex((prev) => Math.min(Math.max(prev + delta, 0), total - 1)),
+    [total],
   );
 
   useEffect(() => {
     if (!isOpen) return;
     const handler = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft') return left();
-      if (event.key === 'ArrowRight') return right();
+      if (event.key === 'ArrowLeft') go(-1);
+      if (event.key === 'ArrowRight') go(1);
     };
     window.addEventListener('keydown', handler);
-    return () => {
-      window.removeEventListener('keydown', handler);
-    };
-  }, [isOpen, left, right]);
+    return () => window.removeEventListener('keydown', handler);
+  }, [isOpen, go]);
 
-  const handleDownload = () => sources.forEach(downloadImage);
+  const save = async (targets: number[]) => {
+    setIsDownloading(true);
+    let failed = 0;
+    for (const i of targets) {
+      try {
+        await downloadImage(sources[i], `${alt}-${i + 1}`);
+      } catch {
+        failed += 1;
+        openInNewTab(sources[i]);
+      }
+    }
+    setIsDownloading(false);
+    if (failed > 0) toast.error(t('detail.download_failed'));
+  };
+
+  const stopClose = (event: React.MouseEvent) => event.stopPropagation();
 
   return (
     <Dialog.Root
@@ -61,58 +83,125 @@ const ShowcaseModal = ({
       onClose={onClose}
       onExitComplete={onExitComplete}
       size="full"
-      className="/90 flex items-center justify-center gap-3 bg-black/90 p-0"
+      backdrop="dark"
+      className="m-0 gap-0 bg-transparent p-0 shadow-none"
     >
-      <div className="absolute top-3 right-5 z-10 flex gap-7 text-sm font-medium text-white md:text-base">
-        <Button className="flex items-center gap-2" onClick={handleDownload}>
-          {t('detail.download_all')}
-          <DownloadSimpleIcon className="size-6 md:size-8" />
-        </Button>
-      </div>
-      <Dialog.Close
-        className="hover:bg-background/10 text-white"
-        aria-label={t('detail.close')}
-      />
-      <div className="flex w-full items-center justify-center gap-5 md:gap-12">
-        <Button disabled={index === 0} onClick={left}>
-          <ArrowRightIcon
-            className={cn('size-5 md:size-16', index === 0 && 'text-subtle')}
-          />
-        </Button>
-        <img
-          key={sources[index]}
-          src={sources[index]}
-          alt={alt}
-          width={0}
-          height={0}
-          sizes="50vw"
-          className="max-h-[75vh] w-auto max-w-[70vw] grow object-contain"
-        />
-        <Button disabled={index === sources.length - 1} onClick={right}>
-          <ArrowRightIcon
-            className={cn(
-              'size-5 rotate-180 md:size-16',
-              index === sources.length - 1 && 'text-subtle',
+      {/* 이미지 바깥 어디를 눌러도 닫힌다. 컨트롤과 이미지는 전파를 막는다. */}
+      <div className="flex h-full w-full flex-col" onClick={onClose}>
+        <header
+          className="flex shrink-0 items-center justify-between gap-3 px-4 py-3"
+          onClick={stopClose}
+        >
+          <span className="text-sm font-medium text-white tabular-nums md:text-base">
+            {index + 1} / {total}
+          </span>
+
+          <div className="flex items-center gap-1">
+            <Button
+              className={controlClassName}
+              onClick={() => save([index])}
+              disabled={isDownloading}
+              aria-label={t('detail.download_current')}
+            >
+              <DownloadSimpleIcon className="size-6" />
+            </Button>
+
+            {total > 1 && (
+              <Button
+                className={cn(controlClassName, 'gap-2 px-3')}
+                onClick={() => save(sources.map((_, i) => i))}
+                disabled={isDownloading}
+              >
+                <span className="hidden text-sm sm:inline md:text-base">
+                  {t('detail.download_all')}
+                </span>
+                <DownloadSimpleIcon className="size-6 sm:hidden" />
+              </Button>
             )}
-          />
-        </Button>
-      </div>
-      <div className="bg-foreground absolute bottom-4 flex gap-1 p-1">
-        {sources.map((src, i) => (
-          <img
-            key={src}
-            src={src}
+
+            <Button
+              className={controlClassName}
+              onClick={onClose}
+              aria-label={t('detail.close')}
+            >
+              <XIcon className="size-6" />
+            </Button>
+          </div>
+        </header>
+
+        <div className="flex min-h-0 flex-1 items-center justify-center gap-2 px-2 md:gap-6 md:px-6">
+          {total > 1 && (
+            <Button
+              className={cn(controlClassName, 'shrink-0')}
+              onClick={(event) => {
+                stopClose(event);
+                go(-1);
+              }}
+              disabled={index === 0}
+              aria-label={t('detail.previous_image')}
+            >
+              <CaretLeftIcon className="size-6 md:size-10" />
+            </Button>
+          )}
+
+          <motion.img
+            key={sources[index]}
+            src={sources[index]}
             alt={alt}
-            width={50}
-            sizes="50vw"
-            height={0}
-            className={cn(
-              'pointer box-border h-auto cursor-pointer border',
-              i === index && 'border-primary',
-            )}
-            onClick={() => setIndex(i)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            drag={total > 1 ? 'x' : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.15}
+            dragMomentum={false}
+            onDragEnd={(_, info) => {
+              if (info.offset.x <= -SWIPE_THRESHOLD) go(1);
+              if (info.offset.x >= SWIPE_THRESHOLD) go(-1);
+            }}
+            onClick={stopClose}
+            draggable={false}
+            className="max-h-full min-h-0 max-w-full object-contain select-none"
           />
-        ))}
+
+          {total > 1 && (
+            <Button
+              className={cn(controlClassName, 'shrink-0')}
+              onClick={(event) => {
+                stopClose(event);
+                go(1);
+              }}
+              disabled={index === total - 1}
+              aria-label={t('detail.next_image')}
+            >
+              <CaretRightIcon className="size-6 md:size-10" />
+            </Button>
+          )}
+        </div>
+
+        {total > 1 && (
+          <div
+            className="flex shrink-0 justify-center gap-2 overflow-x-auto p-4"
+            onClick={stopClose}
+          >
+            {sources.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setIndex(i)}
+                aria-current={i === index}
+                aria-label={`${i + 1} / ${total}`}
+                className={cn(
+                  'size-14 shrink-0 cursor-pointer overflow-hidden rounded-md transition',
+                  i === index
+                    ? 'ring-primary ring-2'
+                    : 'opacity-50 hover:opacity-100',
+                )}
+              >
+                <img src={src} alt="" className="size-full object-cover" />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </Dialog.Root>
   );
