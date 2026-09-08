@@ -67,6 +67,7 @@ describe('useUser', () => {
     const { result } = renderHook(() => useUser());
 
     expect(result.current.data).toBeNull();
+    expect(setRequiredConsentsMock).not.toHaveBeenCalled();
   });
 
   it('exposes the loaded user when the query succeeds', async () => {
@@ -82,5 +83,33 @@ describe('useUser', () => {
     const { result } = renderHook(() => useUser());
 
     expect(result.current.data).toEqual(user);
+  });
+
+  it('requires consent when the loaded user has no consent date', async () => {
+    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useQueryMock.mockReturnValue({
+      data: { uuid: 'u-1', name: 'Zig' },
+      error: null,
+      isLoading: false,
+    });
+
+    const { useUser } = await import('./use-user');
+    renderHook(() => useUser());
+
+    expect(setRequiredConsentsMock).toHaveBeenCalledWith(true);
+  });
+
+  it('clears the consent prompt when the loaded user has a consent date', async () => {
+    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useQueryMock.mockReturnValue({
+      data: { uuid: 'u-1', name: 'Zig', consent: '2023-01-01T00:00:00.000Z' },
+      error: null,
+      isLoading: false,
+    });
+
+    const { useUser } = await import('./use-user');
+    renderHook(() => useUser());
+
+    expect(setRequiredConsentsMock).toHaveBeenCalledWith(undefined);
   });
 });
