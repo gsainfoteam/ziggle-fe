@@ -158,4 +158,22 @@ describe('ShowcaseModal', () => {
 
     expect(saveImagesMock).toHaveBeenCalledWith(sources, '공지 이미지');
   });
+
+  it('ignores a second bulk save while the first is still running', async () => {
+    let finish = () => {};
+    saveImagesMock.mockReturnValue(
+      new Promise<void>((resolve) => {
+        finish = resolve;
+      }),
+    );
+    await renderModal();
+
+    const button = screen.getByText('detail.download_all');
+    fireEvent.click(button);
+    fireEvent.click(button);
+
+    expect(saveImagesMock).toHaveBeenCalledTimes(1);
+
+    finish();
+  });
 });
