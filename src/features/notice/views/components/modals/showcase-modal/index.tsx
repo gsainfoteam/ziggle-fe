@@ -75,11 +75,6 @@ const ShowcaseModal = ({
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen, index, show]);
-
-  /**
-   * 확대 라이브러리가 이미지에 pointer-events: none 을 걸어 이미지 위 클릭을
-   * 따로 가로챌 수 없다. 클릭 좌표가 이미지 밖인지로 닫기를 판단한다.
-   */
   const closeIfOutsideImage = (event: React.MouseEvent) => {
     const box = imageRef.current?.getBoundingClientRect();
     const inside =
@@ -112,7 +107,6 @@ const ShowcaseModal = ({
             panning={{ velocityDisabled: true }}
             onTransform={(_, state) => setIsZoomed(state.scale > 1)}
             onPanningStop={(ref) => {
-              // 확대 전에는 팬이 곧 좌우 넘기기다. 확대 중에는 팬 그대로 둔다.
               if (ref.state.scale > 1) return;
               const moved = ref.state.positionX;
               ref.resetTransform(0);
