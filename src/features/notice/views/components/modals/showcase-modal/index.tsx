@@ -199,7 +199,7 @@ const ShowcaseModal = ({
           )}
         >
           {total > 1 && (
-            <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[45vh] md:w-full md:flex-col md:items-center md:overflow-x-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
+            <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto p-0.5 [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[45vh] md:w-full md:flex-col md:items-center md:overflow-x-hidden md:overflow-y-auto [&::-webkit-scrollbar]:hidden">
               {sources.map((src, i) => (
                 <button
                   key={src}
