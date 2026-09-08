@@ -7,12 +7,11 @@ import {
 } from '@phosphor-icons/react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
 
 import { Button, Dialog } from '@/common/components';
 import { cn } from '@/common/utils';
 
-import { downloadImage, openInNewTab } from './download';
+import { saveImage, saveImages } from './download';
 
 interface ShowcaseModalProps {
   isOpen: boolean;
@@ -49,7 +48,6 @@ const ShowcaseModal = ({
     clamp(initialIndex, 0, Math.max(total - 1, 0)),
   );
   const [scale, setScale] = useState(1);
-  const [isDownloading, setIsDownloading] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const pinchStart = useRef<{ distance: number; scale: number } | null>(null);
   const pointers = useRef(new Map<number, { x: number; y: number }>());
@@ -76,21 +74,6 @@ const ShowcaseModal = ({
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen, index, show]);
-
-  const save = async (targets: number[]) => {
-    setIsDownloading(true);
-    let failed = 0;
-    for (const i of targets) {
-      try {
-        await downloadImage(sources[i], `${alt}-${i + 1}`);
-      } catch {
-        failed += 1;
-        openInNewTab(sources[i]);
-      }
-    }
-    setIsDownloading(false);
-    if (failed > 0) toast.error(t('detail.download_failed'));
-  };
 
   /** 트랙패드 핀치는 ctrlKey 가 붙은 wheel 로 들어온다. 휠 스크롤도 같이 받는다. */
   const handleWheel = (event: React.WheelEvent) => {
@@ -241,8 +224,7 @@ const ShowcaseModal = ({
             )}
 
             <Button
-              onClick={() => save([index])}
-              disabled={isDownloading}
+              onClick={() => saveImage(sources[index], `${alt}-${index + 1}`)}
               aria-label={t('detail.download_current')}
               className={actionClassName}
             >
@@ -252,8 +234,7 @@ const ShowcaseModal = ({
 
             {total > 1 && (
               <Button
-                onClick={() => save(sources.map((_, i) => i))}
-                disabled={isDownloading}
+                onClick={() => saveImages(sources, alt)}
                 className={actionClassName}
               >
                 <DownloadSimpleIcon className="size-5 shrink-0" weight="fill" />

@@ -4,29 +4,20 @@ export const fileNameOf = (src: string, fallback: string) => {
   return name || fallback;
 };
 
-const saveBlob = (blob: Blob, fileName: string) => {
-  const url = URL.createObjectURL(blob);
+export const saveImage = (src: string, fallbackName: string) => {
   const link = document.createElement('a');
-  link.href = url;
-  link.download = fileName;
+  link.href = src;
+  link.download = fileNameOf(src, fallbackName);
   document.body.appendChild(link);
   link.click();
   link.remove();
-  URL.revokeObjectURL(url);
 };
 
-/**
- * a[download] 는 cross-origin 주소에서 무시돼 저장 대신 이동해버린다.
- * blob 으로 받아 same-origin 으로 만든 뒤 저장한다. CORS 가 막혀 blob 을
- * 못 받는 경우에만 새 탭으로 여는 폴백을 쓴다.
- */
-export const downloadImage = async (src: string, fallbackName: string) => {
-  const response = await fetch(src);
-  if (!response.ok)
-    throw new Error(`failed to fetch image: ${response.status}`);
-  saveBlob(await response.blob(), fileNameOf(src, fallbackName));
-};
+const STAGGER_MS = 300;
 
-export const openInNewTab = (src: string) => {
-  window.open(src, '_blank', 'noopener,noreferrer');
+export const saveImages = (sources: string[], baseName: string) => {
+  sources.forEach((src, i) => {
+    if (i === 0) return saveImage(src, `${baseName}-1`);
+    setTimeout(() => saveImage(src, `${baseName}-${i + 1}`), i * STAGGER_MS);
+  });
 };

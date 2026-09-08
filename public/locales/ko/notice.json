@@ -55,7 +55,6 @@
     "source_url": "원본링크",
     "time_left": "{{timeLeft}} 남음",
     "download_current": "저장",
-    "download_failed": "이미지를 저장하지 못했어요. 새 탭에서 열었어요.",
     "reset_zoom": "원래 크기"
   },
   "list": {

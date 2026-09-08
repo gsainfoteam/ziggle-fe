@@ -55,7 +55,6 @@
     "source_url": "Source URL",
     "time_left": "{{timeLeft}} Left",
     "download_current": "Save",
-    "download_failed": "Couldn't save the image. Opened it in a new tab.",
     "reset_zoom": "Reset zoom"
   },
   "list": {
