@@ -6,7 +6,7 @@ import { DialogHeader } from './header';
 import { DialogRoot } from './root';
 import { DialogTitle } from './title';
 
-export type { DialogBackdrop, DialogRootProps, DialogSize } from './root';
+export type { DialogRootProps, DialogSize } from './root';
 export { alertDialog, type AlertDialogOptions } from './alert';
 export { confirmDialog, type ConfirmDialogOptions } from './confirm';
 export {
