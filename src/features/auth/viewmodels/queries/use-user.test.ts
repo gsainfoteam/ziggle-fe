@@ -55,6 +55,20 @@ describe('useUser', () => {
     expect(result.current.data).toBeNull();
   });
 
+  it('requires consent when the server rejects with 403', async () => {
+    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useQueryMock.mockReturnValue({
+      data: undefined,
+      error: { statusCode: 403, message: 'Consent required' },
+      isLoading: false,
+    });
+
+    const { useUser } = await import('./use-user');
+    renderHook(() => useUser());
+
+    expect(setRequiredConsentsMock).toHaveBeenCalledWith(true);
+  });
+
   it('requires consent when the server rejects with Consent required', async () => {
     useTokenMock.mockReturnValue({ token: 'session-token' });
     useQueryMock.mockReturnValue({
