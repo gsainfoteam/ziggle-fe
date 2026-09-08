@@ -17,10 +17,9 @@ export const useUser = () => {
   );
 
   useEffect(() => {
-    if (error != null) {
-      setRequiredConsents(true);
-    }
-  }, [error, setRequiredConsents]);
+    if (!data) return;
+    setRequiredConsents(data.consent ? undefined : true);
+  }, [data, setRequiredConsents]);
 
   const user = useMemo(() => {
     if (!token) return null;
