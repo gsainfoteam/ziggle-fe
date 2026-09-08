@@ -56,8 +56,9 @@ export const ProfileModalPanel = ({
   const { theme, setTheme, themeOptions } = useTheme();
   const [settingsOpen, setSettingsOpen] = useState(false);
 
-  const rowClass =
-    'bg-muted hover:bg-border flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors';
+  const rowClass = cn(
+    'bg-muted hover:bg-border flex items-center gap-3 rounded-xl px-3.5 py-3 transition-colors',
+  );
 
   return (
     <div
