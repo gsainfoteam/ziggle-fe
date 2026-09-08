@@ -73,6 +73,7 @@ const ShowcaseModal = ({
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, [isOpen, index, show]);
+
   const closeIfOutsideImage = (event: React.MouseEvent) => {
     const box = imageRef.current?.getBoundingClientRect();
     const inside =

@@ -13,6 +13,7 @@ const maskOf = ({ start, end, vertical }: Edges, fade: string) => {
   const tail = end ? `black calc(100% - ${fade}), transparent` : 'black';
   return `linear-gradient(${direction}, ${head}, ${tail})`;
 };
+
 export const useEdgeFade = <T extends HTMLElement>(fade = '2.75rem') => {
   const elementRef = useRef<T | null>(null);
   const [edges, setEdges] = useState<Edges>({
@@ -31,6 +32,7 @@ export const useEdgeFade = <T extends HTMLElement>(fade = '2.75rem') => {
       : el.scrollWidth - el.clientWidth;
     setEdges({ start: position > 2, end: position < max - 2, vertical });
   }, []);
+
   const attach = useCallback(
     (el: T | null) => {
       elementRef.current = el;
@@ -43,6 +45,7 @@ export const useEdgeFade = <T extends HTMLElement>(fade = '2.75rem') => {
         for (const child of el.children) resize.observe(child);
       };
       observeAll();
+
       const mutation = new MutationObserver(() => {
         observeAll();
         sync();
