@@ -69,25 +69,11 @@ describe('useUser', () => {
     expect(setRequiredConsentsMock).toHaveBeenCalledWith(true);
   });
 
-  it('requires consent when the server rejects with Consent required', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
-    useQueryMock.mockReturnValue({
-      data: undefined,
-      error: { statusCode: 401, message: 'Consent required' },
-      isLoading: false,
-    });
-
-    const { useUser } = await import('./use-user');
-    renderHook(() => useUser());
-
-    expect(setRequiredConsentsMock).toHaveBeenCalledWith(true);
-  });
-
   it('leaves the consent prompt alone for other failures', async () => {
     useTokenMock.mockReturnValue({ token: 'session-token' });
     useQueryMock.mockReturnValue({
       data: undefined,
-      error: { statusCode: 500, message: 'Internal server error' },
+      error: { statusCode: 401, message: 'Unauthorized' },
       isLoading: false,
     });
 

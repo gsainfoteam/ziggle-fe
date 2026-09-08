@@ -5,12 +5,6 @@ import { $api } from '@/common/lib';
 import { ApiPaths } from '../../models';
 import { useAuthPrompt, useToken } from '../stores';
 
-const CONSENT_REQUIRED_MESSAGE = 'Consent required';
-
-const needsConsent = (
-  error: { statusCode?: number; message?: string } | null | undefined,
-) => error?.statusCode === 403 || error?.message === CONSENT_REQUIRED_MESSAGE;
-
 export const useUser = () => {
   const { token } = useToken();
   const setRequiredConsents = useAuthPrompt((s) => s.setRequiredConsents);
@@ -27,7 +21,7 @@ export const useUser = () => {
       setRequiredConsents(data.consent ? undefined : true);
       return;
     }
-    if (needsConsent(error)) setRequiredConsents(true);
+    if (error?.statusCode === 403) setRequiredConsents(true);
   }, [data, error, setRequiredConsents]);
 
   const user = useMemo(() => {
