@@ -11,8 +11,8 @@ export function NoticeDetailSummary({ summary }: NoticeDetailSummaryProps) {
   if (!summary || summary.trim().length === 0) return null;
 
   return (
-    <div className="border-border flex flex-col gap-1.5 border-l-2 py-0.5 pl-3.5">
-      <div className="text-subtle flex items-center gap-1">
+    <div className="border-primary/30 flex flex-col gap-1.5 border-l-2 py-0.5 pl-3.5">
+      <div className="text-primary flex items-center gap-1">
         <SparkleIcon weight="fill" className="size-3.5 shrink-0" aria-hidden />
         <span className="text-xs font-medium tracking-wide">
           {t('detail.summary')}
