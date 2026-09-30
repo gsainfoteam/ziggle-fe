@@ -39,6 +39,9 @@ const baseNotice: Notice = {
   documents: [],
   isViewed: false,
   isBookmarked: false,
+  keywords: ['자치회비', '납부'],
+  summary:
+    '2025학년도 1학기 학생 자치회비 납부 안내입니다. 납부 기간은 3월 10일부터 3월 28일까지이며, 미납 시 학생 서비스 이용이 제한될 수 있습니다.',
 };
 
 const queryClient = new QueryClient();
@@ -282,7 +285,6 @@ export const WithAttachments: Story = {
           name: '첨부파일_제목2.pdf',
         },
       ],
-      crawledUrl: 'https://www.gist.ac.kr/kr/html/sub05/050502.html',
     },
   },
 };
