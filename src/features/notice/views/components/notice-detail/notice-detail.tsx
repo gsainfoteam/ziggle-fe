@@ -19,6 +19,7 @@ import { NoticeDetailAuthorActions } from './author-actions';
 import { NoticeDetailContent } from './content';
 import { NoticeDetailImageStack } from './image-stack';
 import { NoticeDetailMetadata } from './metadata';
+import { NoticeDetailSummary } from './summary';
 import { Tags } from '../notice-list/tags';
 
 export interface NoticeDetailProps {
@@ -88,6 +89,7 @@ type BodyProps = Pick<
   | 'crawledUrl'
   | 'documents'
   | 'imageUrls'
+  | 'summary'
   | 'content'
 > & {
   authorActions?: ReactNode;
@@ -102,6 +104,7 @@ const Body = ({
   crawledUrl,
   documents,
   imageUrls,
+  summary,
   content,
   authorActions,
 }: BodyProps) => (
@@ -119,6 +122,7 @@ const Body = ({
       documents={documents}
     />
     <NoticeDetailImageStack sources={imageUrls} alt={title} />
+    <NoticeDetailSummary summary={summary} />
     <NoticeDetailContent content={content} />
   </div>
 );
@@ -139,6 +143,7 @@ export const NoticeDetail = ({
       crawledUrl={notice.crawledUrl}
       documents={notice.documents}
       imageUrls={notice.imageUrls}
+      summary={notice.summary}
       content={notice.content}
       authorActions={
         isOwner ? <NoticeDetailAuthorActions noticeId={notice.id} /> : undefined
