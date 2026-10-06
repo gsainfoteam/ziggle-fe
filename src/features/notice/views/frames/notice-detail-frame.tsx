@@ -21,32 +21,46 @@ import {
 } from '../components/notice-detail/actions';
 
 export function NoticeDetailFrame() {
-  const { notice: preloadedNotice, numId } = useLoaderData({
+  const { numId } = useLoaderData({
     from: '/_layout/notice/$id',
   });
-  const { data: notice, isLoading, isNotFound } = useNotice(numId);
-  const efficientNotice = notice ?? preloadedNotice;
-  const { t, i18n } = useTranslation('common');
+  const { data: notice, isLoading, isError, isNotFound } = useNotice(numId);
+  const { t: commonT, i18n } = useTranslation('common');
+  const { t: noticeT } = useTranslation('notice');
   const { data: user } = useUser();
 
   useEffect(() => {
-    document.title = efficientNotice.title;
+    if (!notice) return;
+    document.title = notice.title;
     return () => {
-      document.title = t('app_name');
+      document.title = commonT('app_name');
     };
-  }, [efficientNotice.title, t]);
+  }, [notice?.title, commonT]);
 
   if (isNotFound) {
     return <NoticeNotFoundFrame />;
   }
 
-  if (isLoading || !efficientNotice) {
+  if (isLoading) {
     return <Loading />;
   }
 
+  if (isError || !notice) {
+    return (
+      <PanelShell>
+        <p
+          className="text-muted-foreground py-12 text-center text-sm"
+          role="alert"
+        >
+          {noticeT('query_handle.fetch_fail')}
+        </p>
+      </PanelShell>
+    );
+  }
+
   const additionalContents = Object.values(
-    efficientNotice.additionalContents.reduce<
-      Record<number, (typeof efficientNotice.additionalContents)[number]>
+    notice.additionalContents.reduce<
+      Record<number, (typeof notice.additionalContents)[number]>
     >(
       (prev, curr) => ({
         ...prev,
@@ -56,24 +70,24 @@ export function NoticeDetailFrame() {
     ),
   );
 
-  const isOwner = user?.uuid === efficientNotice.author.uuid;
+  const isOwner = user?.uuid === notice.author.uuid;
 
   return (
     <NoticeDetailActionsProvider
-      id={efficientNotice.id}
-      title={efficientNotice.title}
-      reactions={efficientNotice.reactions}
-      isBookmarked={efficientNotice.isBookmarked}
+      id={notice.id}
+      title={notice.title}
+      reactions={notice.reactions}
+      isBookmarked={notice.isBookmarked}
     >
       <PanelShell
-        leading={<NoticeDetailBackButton noticeId={efficientNotice.id} />}
+        leading={<NoticeDetailBackButton noticeId={notice.id} />}
         aside={<NoticeDetailActions variant="rail" />}
         // 모바일에서 sticky Navbar pb와 섹션 pt 중복 방지. 스크롤 시 헤더 pb는 유지.
         className="pt-0 md:pt-5"
       >
-        <SendPushAlarm {...efficientNotice} />
+        <SendPushAlarm {...notice} />
         <NoticeDetail
-          notice={efficientNotice}
+          notice={notice}
           isOwner={isOwner}
           additionalContents={additionalContents}
         />
