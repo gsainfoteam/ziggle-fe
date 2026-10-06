@@ -53,6 +53,7 @@
       "unsupported": "Your browser doesn't support sharing."
     },
     "source_url": "Source URL",
+    "summary": "AI Summary",
     "time_left": "{{timeLeft}} Left",
     "download_current": "Save",
     "reset_zoom": "Reset zoom"
