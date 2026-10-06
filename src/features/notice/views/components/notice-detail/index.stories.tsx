@@ -52,6 +52,9 @@ const baseNotice: NoticeDetailModel = {
   additionalContents: [],
   isViewed: false,
   isBookmarked: false,
+  keywords: ['모집', '동아리', '봄학기'],
+  summary:
+    '2026 봄 학기 동아리 신입 부원을 모집합니다. 개발·디자인·기획 분야로 재학생 누구나 지원할 수 있으며, 자기소개서를 제출하면 됩니다.',
 };
 
 const queryClient = new QueryClient();
@@ -114,6 +117,10 @@ export const WithoutDeadline: Story = {
 
 export const WithoutImages: Story = {
   args: { notice: { ...baseNotice, imageUrls: [] } },
+};
+
+export const WithoutSummary: Story = {
+  args: { notice: { ...baseNotice, summary: undefined } },
 };
 
 export const MultipleImages: Story = {

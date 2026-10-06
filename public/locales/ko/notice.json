@@ -53,6 +53,7 @@
       "unsupported": "공유하기를 지원하지 않는 브라우저입니다"
     },
     "source_url": "원본링크",
+    "summary": "AI 요약",
     "time_left": "{{timeLeft}} 남음",
     "download_current": "저장",
     "reset_zoom": "원래 크기"
