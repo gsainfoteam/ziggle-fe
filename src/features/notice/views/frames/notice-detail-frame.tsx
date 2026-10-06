@@ -37,12 +37,12 @@ export function NoticeDetailFrame() {
     };
   }, [notice?.title, commonT]);
 
-  if (isNotFound) {
-    return <NoticeNotFoundFrame />;
+  if (user === undefined || isLoading) {
+    return <Loading />;
   }
 
-  if (isLoading) {
-    return <Loading />;
+  if (isNotFound) {
+    return <NoticeNotFoundFrame />;
   }
 
   if (isError || !notice) {
