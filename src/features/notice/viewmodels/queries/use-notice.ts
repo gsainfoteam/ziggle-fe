@@ -3,7 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import { $api, api } from '@/common/lib';
+import { $api } from '@/common/lib';
 import { useUser } from '@/features/auth';
 
 import { ApiPaths } from '../../models';
@@ -43,11 +43,5 @@ export const useNotice = (id: number) => {
     () => error?.statusCode === 404,
     [error?.statusCode],
   );
-  return { data, isLoading, isNotFound };
-};
-
-export const getNotice = (id: number, lang?: string) => {
-  return api.GET(ApiPaths.NoticeController_getNotice, {
-    params: { path: { id }, query: { lang } },
-  });
+  return { data, isLoading, isError, isNotFound };
 };
