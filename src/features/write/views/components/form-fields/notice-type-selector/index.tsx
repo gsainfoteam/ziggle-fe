@@ -19,7 +19,8 @@ export const NoticeTypeSelector = ({ disabled }: NoticeTypeSelectorProps) => {
   const { t } = useTranslation('write');
   const { control } = useFormContext<NoticeFormValues>();
   const { field } = useController({ control, name: 'noticeType' });
-  const selectedNoticeType = field.value;
+  // `satisfies` lets i18next-cli expand the dynamic description keys below.
+  const selectedNoticeType = field.value satisfies NoticeType;
 
   return (
     <div className="flex flex-col gap-2">

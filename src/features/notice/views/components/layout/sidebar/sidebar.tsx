@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { CSLink, LogClick, Popover } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { useTheme } from '@/common/lib/theme';
+import { type Theme, useTheme } from '@/common/lib/theme';
 import { cn } from '@/common/utils';
 import { useUser } from '@/features/auth';
 
@@ -107,7 +107,9 @@ export const Sidebar = ({
                             close();
                           }}
                         >
-                          {tLayout(`sidebar.theme_options.${value}`)}
+                          {tLayout(
+                            `sidebar.theme_options.${value satisfies Theme}`,
+                          )}
                         </button>
                       </SidebarItem>
                     );
