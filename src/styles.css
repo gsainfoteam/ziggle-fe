@@ -1,4 +1,4 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov.min.css');
 @import 'react-loading-skeleton/dist/skeleton.css';
 @import 'tailwindcss';
 
@@ -145,8 +145,8 @@
     background-color: var(--color-background);
     accent-color: var(--color-primary);
     font-family:
-      'Pretendard Variable',
-      Pretendard,
+      'Pretendard GOV Variable',
+      'Pretendard GOV',
       -apple-system,
       BlinkMacSystemFont,
       system-ui,

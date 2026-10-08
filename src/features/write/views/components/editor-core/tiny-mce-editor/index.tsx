@@ -45,7 +45,7 @@ const CONTENT_STYLE = [
   'body {',
   '  background-color: var(--color-background);',
   '  color: var(--color-foreground);',
-  "  font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;",
+  "  font-family: 'Pretendard GOV Variable', 'Pretendard GOV', system-ui, sans-serif;",
   '  line-height: 1.5;',
   '  margin: 1rem;',
   '}',
