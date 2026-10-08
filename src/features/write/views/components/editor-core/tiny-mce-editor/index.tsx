@@ -96,7 +96,9 @@ export const TinyMCEEditor = ({
         }}
         init={{
           skin: 'oxide',
-          content_css: false,
+          // The editor renders in an iframe, so the font loaded by styles.css does not reach it.
+          content_css:
+            'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov.min.css',
           content_style: CONTENT_STYLE,
           promotion: false,
           plugins: ['link', 'image', 'code', 'autolink'],
