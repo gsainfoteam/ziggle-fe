@@ -11,16 +11,12 @@
       "title": "Additional Notices"
     },
     "attachments": "Attachments",
-    "bookmark": "Bookmark",
-    "created_at": "Posted",
-    "deadline": "Deadline",
-    "views": "Views",
     "author_actions": {
       "edit": "Edit / Add English Version",
       "remove": "Remove",
       "remove_confirm": {
-        "title": "Delete this notice?",
-        "description": "Deleted notices cannot be restored."
+        "description": "Deleted notices cannot be restored.",
+        "title": "Delete this notice?"
       },
       "toasts": {
         "delete_fail": "Failed to delete notice",
@@ -28,15 +24,17 @@
       }
     },
     "back": "Go back",
+    "bookmark": "Bookmark",
     "close": "Close",
     "copy_link": {
-      "action": "copy link",
       "content": "{{title}}\n\nCheck the notice in Ziggle!\n{{- link}}",
       "success": "The notice link has been copied!",
       "success_hint": "Share the notice with your friends."
     },
+    "created_at": "Posted",
+    "deadline": "Deadline",
     "download_all": "Save all",
-    "due_at": "Due at {{dueAt}}",
+    "download_current": "Save",
     "push_notification": {
       "action": "Send Push Notification",
       "confirm": "Notifications will be sent to all users. Are you sure you want to send them now?",
@@ -47,6 +45,7 @@
         "success": "Push notification sent successfully"
       }
     },
+    "reset_zoom": "Reset zoom",
     "share": {
       "action": "Share",
       "content": "{{title}}\nCheck the notice in Ziggle!",
@@ -55,8 +54,7 @@
     "source_url": "Source URL",
     "summary": "AI Summary",
     "time_left": "{{timeLeft}} Left",
-    "download_current": "Save",
-    "reset_zoom": "Reset zoom"
+    "views": "Views"
   },
   "list": {
     "categories": {
@@ -78,10 +76,9 @@
     "pagination": {
       "jump": "Go to page",
       "label": "Pagination",
-      "of": "of",
+      "next": "Next",
       "page": "Page {{page}}",
-      "prev": "Previous",
-      "next": "Next"
+      "prev": "Previous"
     },
     "sort": {
       "deadline": "Deadline",
@@ -110,6 +107,7 @@
   },
   "sidebar": {
     "academic": "Academic",
+    "bookmark_notice": "Bookmarks",
     "club": "Club",
     "event": "Events",
     "general": "Other",
@@ -118,14 +116,12 @@
     "notices": "Notices",
     "popular": "Popular",
     "recruit": "Recruit",
-    "bookmark_notice": "Bookmarks",
     "search": "Search",
     "urgent": "Near Deadline",
     "write": "Write Notice"
   },
   "tabs": {
-    "profile": "Profile",
-    "write": "Write",
-    "all": "All"
+    "all": "All",
+    "profile": "Profile"
   }
 }

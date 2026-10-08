@@ -11,16 +11,12 @@
       "title": "추가 공지"
     },
     "attachments": "첨부파일",
-    "bookmark": "북마크",
-    "created_at": "작성일",
-    "deadline": "마감시간",
-    "views": "조회수",
     "author_actions": {
       "edit": "수정 / 영어공지 작성",
       "remove": "삭제",
       "remove_confirm": {
-        "title": "공지를 삭제할까요?",
-        "description": "삭제된 공지는 복구할 수 없습니다."
+        "description": "삭제된 공지는 복구할 수 없습니다.",
+        "title": "공지를 삭제할까요?"
       },
       "toasts": {
         "delete_fail": "공지 삭제에 실패했습니다",
@@ -28,15 +24,17 @@
       }
     },
     "back": "뒤로가기",
+    "bookmark": "북마크",
     "close": "닫기",
     "copy_link": {
-      "action": "주소 복사하기",
       "content": "{{title}}\n\nZiggle에서 공지를 확인해주세요\n{{- link}}",
       "success": "공지 주소가 복사되었습니다!",
       "success_hint": "친구들에게 공지를 공유해보세요"
     },
+    "created_at": "작성일",
+    "deadline": "마감시간",
     "download_all": "전체 저장",
-    "due_at": "마감시간 {{dueAt}}",
+    "download_current": "저장",
     "push_notification": {
       "action": "알림 보내기",
       "confirm": "모든 사용자들에게 알림이 전송됩니다. 정말 지금 알림을 보낼까요?",
@@ -47,6 +45,7 @@
         "success": "알림을 성공적으로 보냈습니다"
       }
     },
+    "reset_zoom": "원래 크기",
     "share": {
       "action": "공유하기",
       "content": "{{title}}\nZiggle에서 공지를 확인해보세요",
@@ -55,8 +54,7 @@
     "source_url": "원본링크",
     "summary": "AI 요약",
     "time_left": "{{timeLeft}} 남음",
-    "download_current": "저장",
-    "reset_zoom": "원래 크기"
+    "views": "조회수"
   },
   "list": {
     "categories": {
@@ -78,10 +76,9 @@
     "pagination": {
       "jump": "페이지로 이동",
       "label": "페이지네이션",
-      "of": "중",
+      "next": "다음",
       "page": "{{page}}페이지",
-      "prev": "이전",
-      "next": "다음"
+      "prev": "이전"
     },
     "sort": {
       "deadline": "마감임박",
@@ -110,6 +107,7 @@
   },
   "sidebar": {
     "academic": "학사",
+    "bookmark_notice": "북마크",
     "club": "동아리",
     "event": "행사",
     "general": "기타",
@@ -118,14 +116,12 @@
     "notices": "공지",
     "popular": "인기",
     "recruit": "모집",
-    "bookmark_notice": "북마크",
     "search": "검색",
     "urgent": "마감임박",
     "write": "공지 작성"
   },
   "tabs": {
-    "profile": "프로필",
-    "write": "작성",
-    "all": "전체"
+    "all": "전체",
+    "profile": "프로필"
   }
 }

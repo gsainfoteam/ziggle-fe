@@ -2,19 +2,14 @@
   "auto_save": {
     "description": "초안은 컴퓨터에 자동 저장됩니다.",
     "has_saved": {
-      "title": "저장된 공지가 있습니다",
-      "description": "이어서 작성하시겠습니까?"
+      "description": "이어서 작성하시겠습니까?",
+      "title": "저장된 공지가 있습니다"
     }
   },
   "buttons": {
     "submit": "공지 제출하기",
     "translate_deepl": "DeepL로 번역하기",
     "write_english": "영어 공지 작성"
-  },
-  "sections": {
-    "settings": "설정",
-    "content": "본문",
-    "options": "부가 정보"
   },
   "edit_description": "원본에 작성된 공지는 15분 내에만 수정하실 수 있습니다. 다만, 영어 공지는 언제나 추가로 작성 가능합니다.",
   "edit_disabled": "원문 수정이 비활성화되었군요! 👇 추가 공지를 이용해보는건 어떠신가요?",
@@ -27,10 +22,8 @@
       "setup": "마감시간 설정"
     },
     "english_content": "영어 본문",
-    "english_notice": "영어 공지",
     "english_title": "영어 제목",
     "korean_content": "한글 본문",
-    "korean_notice": "한글 공지",
     "korean_title": "한글 제목",
     "notice_type": "분류",
     "photo": {
@@ -78,11 +71,16 @@
     }
   },
   "optional": "선택",
+  "sections": {
+    "content": "본문",
+    "options": "부가 정보",
+    "settings": "설정"
+  },
   "submit_description": "공지 제출 시 15분 내로 수정이 가능합니다.\n 제출 전에 내용을 다시 한 번 확인해주세요.",
   "toasts": {
     "additional_notice_fail": {
-      "title": "추가 공지 작성에 실패했습니다",
-      "description": "작성한 내용을 클립보드에 복사할까요?"
+      "description": "작성한 내용을 클립보드에 복사할까요?",
+      "title": "추가 공지 작성에 실패했습니다"
     },
     "copy_additional": "추가 공지 내용 복사",
     "copy_english": "영어 공지 내용 복사",
@@ -90,19 +88,19 @@
     "copy_international_additional": "영어 추가 공지 내용 복사",
     "copy_success": "클립보드에 복사되었습니다",
     "international_additional_fail": {
-      "title": "영어 추가 공지 작성에 실패했습니다",
-      "description": "작성한 내용을 클립보드에 복사할까요?"
+      "description": "작성한 내용을 클립보드에 복사할까요?",
+      "title": "영어 추가 공지 작성에 실패했습니다"
     },
     "international_fail": {
-      "title": "영어 버전 작성에 실패했습니다",
-      "description": "작성한 본문을 클립보드에 복사할까요?"
+      "description": "작성한 본문을 클립보드에 복사할까요?",
+      "title": "영어 버전 작성에 실패했습니다"
     },
     "modify_fail": "공지 수정에 실패했습니다",
     "modify_success": "공지가 성공적으로 수정되었습니다",
     "modifying": "공지를 수정 중입니다",
     "push_delayed": {
-      "title": "푸시 알림이 예약되었습니다",
-      "description": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요."
+      "description": "15분 뒤에 사용자들에게 푸시알람이 전송됩니다. 긴급한 경우 내 공지 > 알림 보내기 기능을 사용하세요.",
+      "title": "푸시 알림이 예약되었습니다"
     },
     "submit_fail": "공지 작성에 실패했습니다",
     "submit_success": "공지가 성공적으로 작성되었습니다",
@@ -113,15 +111,12 @@
   "validations": {
     "body_required": "본문 내용을 입력해주세요",
     "body_too_long": "본문 내용은 {{bodyMaxLength}}자 이내로 입력해주세요",
-    "both_body_too_long": "한국어와 영어 본문 모두 {{bodyMaxLength}}자 이내로 입력해주세요",
     "char_count": "({{length}}/{{maxLength}} 자)",
     "deadline_invalid": "마감 시간은 현재 시간 이후로 설정해주세요",
     "english_body_required": "영어 본문 내용을 입력해주세요",
     "english_body_too_long": "영어 본문을 {{bodyMaxLength}}자 이내로 입력해주세요",
     "english_title_required": "영어 제목을 입력해주세요",
     "korean_additional_required": "한국어 추가 공지를 입력해주세요",
-    "korean_body_required": "한국어 본문 내용을 입력해주세요",
-    "korean_body_too_long": "한국어 본문을 {{bodyMaxLength}}자 이내로 입력해주세요",
     "title_required": "제목을 입력해주세요",
     "title_too_long": "제목은 {{titleMaxLength}}자 이내로 입력해주세요"
   }
