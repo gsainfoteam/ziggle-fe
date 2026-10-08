@@ -99,7 +99,7 @@
     "eslint-plugin-storybook": "^10.2.13",
     "eslint-plugin-unused-imports": "^4.4.1",
     "globals": "^17.7.0",
-    "i18next-cli": "^1.46.1",
+    "i18next-cli": "^1.75.0",
     "jsdom": "^27.0.0",
     "openapi-typescript": "^7.13.0",
     "playwright": "^1.58.2",

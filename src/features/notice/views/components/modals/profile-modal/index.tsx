@@ -24,7 +24,7 @@ import {
   confirmDialog,
 } from '@/common/components';
 import { LogEvents } from '@/common/const/log-events';
-import { useTheme } from '@/common/lib/theme';
+import { type Theme, useTheme } from '@/common/lib/theme';
 import { cn, useIsDesktop } from '@/common/utils';
 import { useLogout, useUser, useWithdraw } from '@/features/auth';
 import type { User } from '@/features/auth/models';
@@ -138,7 +138,9 @@ export const ProfileModalPanel = ({
                         aria-selected={selected}
                         onClick={() => setTheme(value)}
                       >
-                        {tLayout(`sidebar.theme_options.${value}`)}
+                        {tLayout(
+                          `sidebar.theme_options.${value satisfies Theme}`,
+                        )}
                       </button>
                     </SidebarItem>
                   );

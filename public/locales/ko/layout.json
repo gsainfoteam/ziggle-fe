@@ -1,4 +1,9 @@
 {
+  "fab": {
+    "chatbot": "GIST 챗봇 열기",
+    "close": "바로가기 닫기",
+    "open": "바로가기 열기"
+  },
   "footer": {
     "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
     "sections": [
@@ -79,10 +84,5 @@
       "light": "라이트",
       "system": "시스템"
     }
-  },
-  "fab": {
-    "chatbot": "GIST 챗봇 열기",
-    "open": "바로가기 열기",
-    "close": "바로가기 닫기"
   }
 }

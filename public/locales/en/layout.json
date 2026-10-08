@@ -1,4 +1,9 @@
 {
+  "fab": {
+    "chatbot": "Open GIST chatbot",
+    "close": "Close shortcuts",
+    "open": "Open shortcuts"
+  },
   "footer": {
     "copyright": "ⓒ {{year}}. INFOTEAM all rights reserved.",
     "sections": [
@@ -79,10 +84,5 @@
       "light": "Light",
       "system": "System"
     }
-  },
-  "fab": {
-    "chatbot": "Open GIST chatbot",
-    "open": "Open shortcuts",
-    "close": "Close shortcuts"
   }
 }

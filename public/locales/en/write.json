@@ -2,19 +2,14 @@
   "auto_save": {
     "description": "Drafts are saved to your computer",
     "has_saved": {
-      "title": "You have a saved draft",
-      "description": "Would you like to continue writing?"
+      "description": "Would you like to continue writing?",
+      "title": "You have a saved draft"
     }
   },
   "buttons": {
     "submit": "Submit Notice",
     "translate_deepl": "Translate with DeepL",
     "write_english": "Write English Notice too"
-  },
-  "sections": {
-    "settings": "Settings",
-    "content": "Content",
-    "options": "Options"
   },
   "edit_description": "You only have 15 minutes to edit the original notice. However, you can always write an English version.",
   "edit_disabled": "Editing original notice is disabled! 👇 Why not try an additional announcement?",
@@ -27,10 +22,8 @@
       "setup": "Set a deadline"
     },
     "english_content": "English content",
-    "english_notice": "English",
     "english_title": "English title",
     "korean_content": "Korean content",
-    "korean_notice": "Korean",
     "korean_title": "Korean title",
     "notice_type": "Type",
     "photo": {
@@ -78,11 +71,16 @@
     }
   },
   "optional": "Optional",
+  "sections": {
+    "content": "Content",
+    "options": "Options",
+    "settings": "Settings"
+  },
   "submit_description": "You can edit your notice in 15 mins. \n Please double-check your content before submitting.",
   "toasts": {
     "additional_notice_fail": {
-      "title": "Failed to post additional notice",
-      "description": "Would you like to copy the content to the clipboard?"
+      "description": "Would you like to copy the content to the clipboard?",
+      "title": "Failed to post additional notice"
     },
     "copy_additional": "Copy additional notice content",
     "copy_english": "Copy English notice content",
@@ -90,19 +88,19 @@
     "copy_international_additional": "Copy English additional notice content",
     "copy_success": "Copied to clipboard",
     "international_additional_fail": {
-      "title": "Failed to post English additional notice",
-      "description": "Would you like to copy the content to the clipboard?"
+      "description": "Would you like to copy the content to the clipboard?",
+      "title": "Failed to post English additional notice"
     },
     "international_fail": {
-      "title": "Failed to post English version",
-      "description": "Would you like to copy the content to the clipboard?"
+      "description": "Would you like to copy the content to the clipboard?",
+      "title": "Failed to post English version"
     },
     "modify_fail": "Failed to modify the notice",
     "modify_success": "The notice was modified successfully",
     "modifying": "Modifying the notice...",
     "push_delayed": {
-      "title": "Push notification scheduled",
-      "description": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page."
+      "description": "Users will receive a push notification after 15 minutes. If it's urgent, you can use Send Notification button in your notice page.",
+      "title": "Push notification scheduled"
     },
     "submit_fail": "Failed to submit notice",
     "submit_success": "The notice was submitted successfully",
@@ -113,15 +111,12 @@
   "validations": {
     "body_required": "Please enter the content",
     "body_too_long": "Please enter body content within {{bodyMaxLength}} characters",
-    "both_body_too_long": "Please enter both Korean and English content within {{bodyMaxLength}} characters",
     "char_count": "({{length}}/{{maxLength}} characters)",
     "deadline_invalid": "Please set the deadline after the current time",
     "english_body_required": "Please enter English text content",
     "english_body_too_long": "Please enter English body content within {{bodyMaxLength}} characters",
     "english_title_required": "Please enter an English title",
     "korean_additional_required": "Please write a Korean additional notice",
-    "korean_body_required": "Please enter Korean text content",
-    "korean_body_too_long": "Please enter Korean body content within {{bodyMaxLength}} characters",
     "title_required": "Please enter a title",
     "title_too_long": "Please enter a title of no more than {{titleMaxLength}} characters"
   }
