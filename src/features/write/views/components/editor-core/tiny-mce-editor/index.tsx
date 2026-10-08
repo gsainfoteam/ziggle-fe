@@ -45,7 +45,7 @@ const CONTENT_STYLE = [
   'body {',
   '  background-color: var(--color-background);',
   '  color: var(--color-foreground);',
-  "  font-family: 'Pretendard Variable', Pretendard, system-ui, sans-serif;",
+  "  font-family: 'Pretendard GOV Variable', 'Pretendard GOV', system-ui, sans-serif;",
   '  line-height: 1.5;',
   '  margin: 1rem;',
   '}',
@@ -96,7 +96,9 @@ export const TinyMCEEditor = ({
         }}
         init={{
           skin: 'oxide',
-          content_css: false,
+          // The editor renders in an iframe, so the font loaded by styles.css does not reach it.
+          content_css:
+            'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-gov.min.css',
           content_style: CONTENT_STYLE,
           promotion: false,
           plugins: ['link', 'image', 'code', 'autolink'],
