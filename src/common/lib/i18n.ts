@@ -19,7 +19,7 @@ await i18n
     lng: 'ko',
     fallbackLng: 'ko',
     defaultNS: '_',
-    ns: ['_', 'home', 'common', 'notice', 'layout', 'auth'],
+    ns: ['_', 'home', 'common', 'notice', 'layout', 'auth', 'admin'],
     nsSeparator: ':',
     keySeparator: '.',
     backend: {

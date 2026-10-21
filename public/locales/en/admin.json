@@ -1,0 +1,63 @@
+{
+  "title": "Admin",
+  "navigation": "Admin navigation",
+  "back_home": "Back to Ziggle",
+  "retry": "Retry",
+  "fetch_error": "Unable to load this information. Please try again.",
+  "search": "Search",
+  "previous": "Previous",
+  "next": "Next",
+  "page": "Page {{page}} of {{total}}",
+  "access": {
+    "title": "Admin access required",
+    "denied": "Only accounts with admin permission can access this page.",
+    "login": "Sign in to verify your admin permission.",
+    "error": "Unable to verify your account. Please try again."
+  },
+  "notices": {
+    "title": "Notices",
+    "description": "Search registered notices and review their details.",
+    "search": "Search notices",
+    "category": "Category",
+    "all_categories": "All categories",
+    "empty": "No notices to display.",
+    "total": "{{count}} notices",
+    "columns": {
+      "id": "ID",
+      "subject": "Title",
+      "author": "Author",
+      "category": "Category",
+      "created": "Created",
+      "views": "Views"
+    },
+    "back": "← Notice list",
+    "not_found": "Notice not found.",
+    "view_count": "{{count}} views",
+    "deadline": "Deadline",
+    "attachments": "Attachments",
+    "additional": "Additional notice",
+    "open_public": "View in Ziggle"
+  },
+  "permissions": {
+    "title": "Admin permissions",
+    "description": "Grant or revoke admin permission using a user UUID.",
+    "uuid": "User UUID",
+    "uuid_hint": "Enter the UUID of a registered Ziggle user.",
+    "invalid_uuid": "Enter a valid UUID.",
+    "action": "Permission change",
+    "grant": "Grant admin permission",
+    "revoke": "Revoke admin permission",
+    "notice": "Changes take effect on the next request. Revoking the last admin requires restoring permission in the database.",
+    "confirm": "User UUID: {{uuid}}\nChange this user’s admin permission?",
+    "confirm_self": "Revoking your own admin permission removes your access to these pages. Continue?",
+    "save": "Change permission",
+    "saving": "Saving…",
+    "success": "Permission updated.",
+    "admin": "Admin",
+    "user": "User",
+    "not_found": "No user with this UUID exists.",
+    "forbidden": "You do not have admin permission. Check your account.",
+    "unauthorized": "Your session expired. Please sign in again.",
+    "error": "Unable to change permission. Please try again."
+  }
+}

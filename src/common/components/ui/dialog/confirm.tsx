@@ -6,8 +6,11 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/common/utils';
 
 import { Button } from '../button';
-
-import { Dialog } from './index';
+import { DialogDescription } from './description';
+import { DialogFooter } from './footer';
+import { DialogHeader } from './header';
+import { DialogRoot } from './root';
+import { DialogTitle } from './title';
 
 export interface ConfirmDialogOptions {
   title: ReactNode;
@@ -37,20 +40,20 @@ const ConfirmDialogContent = ({
 }: ConfirmDialogContentProps) => {
   const { t } = useTranslation('common');
   return (
-    <Dialog.Root
+    <DialogRoot
       isOpen={isOpen}
       onClose={onCancel}
       onExitComplete={onExitComplete}
       size="xs"
       className="gap-5"
     >
-      <Dialog.Header>
-        <Dialog.Title className="text-lg text-pretty">{title}</Dialog.Title>
-        <Dialog.Description className="text-pretty whitespace-pre-line">
+      <DialogHeader>
+        <DialogTitle className="text-lg text-pretty">{title}</DialogTitle>
+        <DialogDescription className="text-pretty whitespace-pre-line">
           {description}
-        </Dialog.Description>
-      </Dialog.Header>
-      <Dialog.Footer>
+        </DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
         <Button variant="muted" onClick={onCancel} className="flex-1">
           {cancelLabel ?? t('alert_response.cancel')}
         </Button>
@@ -65,8 +68,8 @@ const ConfirmDialogContent = ({
         >
           {confirmLabel ?? t('alert_response.confirm')}
         </Button>
-      </Dialog.Footer>
-    </Dialog.Root>
+      </DialogFooter>
+    </DialogRoot>
   );
 };
 
