@@ -16,6 +16,11 @@ export function AdminNoticesFrame() {
   const { page, search, category } = useSearch({ from: '/admin/notices/' });
   const navigate = useNavigate({ from: '/admin/notices/' });
   const [draft, setDraft] = useState(search ?? '');
+  const [syncedSearch, setSyncedSearch] = useState(search);
+  if (syncedSearch !== search) {
+    setSyncedSearch(search);
+    setDraft(search ?? '');
+  }
   const { data, isLoading, error, refetch } = useAdminNotices({
     page,
     search,
