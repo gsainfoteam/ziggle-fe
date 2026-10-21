@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router';
 import {
   ArrowSquareOutIcon,
   GearSixIcon,
+  ShieldCheckIcon,
   SignOutIcon,
   UserCircleIcon,
   UserListIcon,
@@ -51,6 +52,7 @@ export const ProfileModalPanel = ({
   showMobileNav = false,
 }: ProfileModalPanelProps) => {
   const { t } = useTranslation('auth');
+  const { t: tAdmin } = useTranslation('admin');
   const { t: tNotice } = useTranslation('notice');
   const { t: tLayout, i18n } = useTranslation('layout');
   const { theme, setTheme, themeOptions } = useTheme();
@@ -98,6 +100,19 @@ export const ProfileModalPanel = ({
       </div>
 
       <div className="flex flex-col gap-2">
+        {user.isAdmin === true && (
+          <Link
+            to="/admin/notices"
+            search={{ page: 0 }}
+            onClick={onClose}
+            className={rowClass}
+          >
+            <ShieldCheckIcon className="text-foreground size-5" />
+            <span className="text-foreground flex-1 text-sm font-medium">
+              {tAdmin('title')}
+            </span>
+          </Link>
+        )}
         {showMobileNav && (
           <>
             <Link to="/my" onClick={onClose} className={rowClass}>

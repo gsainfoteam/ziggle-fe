@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 
 import { $api } from '@/common/lib';
 
-import { ApiPaths } from '../../models';
+import { ApiPaths, type User } from '../../models';
 import { useAuthPrompt, useToken } from '../stores';
 
 export const useUser = () => {
@@ -24,7 +24,7 @@ export const useUser = () => {
     if (error?.statusCode === 403) setRequiredConsents(true);
   }, [data, error, setRequiredConsents]);
 
-  const user = useMemo(() => {
+  const user = useMemo<User | null | undefined>(() => {
     if (!token) return null;
     if (isLoading) return undefined;
     if (error) return null;
