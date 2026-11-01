@@ -7,7 +7,7 @@
       "dependencies": {
         "@amplitude/analytics-browser": "^2.35.4",
         "@floating-ui/react": "^0.27.18",
-        "@gsainfoteam/account-react": "^0.5.0",
+        "@gsainfoteam/account-react": "^0.5.1",
         "@hookform/resolvers": "^5.2.2",
         "@phosphor-icons/react": "^2.1.10",
         "@tailwindcss/vite": "^4.1.18",
@@ -285,11 +285,11 @@
 
     "@gsainfoteam/account-contract": ["@gsainfoteam/account-contract@0.2.0", "https://npm.pkg.github.com/download/@gsainfoteam/account-contract/0.2.0/ab0d792d46b8610a570b728c2922836e84fdedd3", {}, "sha512-C6CXSavpgfUc3EnTs2tJcSEMIZ+BITX5NDcFr+MHd2ANz6wytxICBczI69GKwlULoClPnNbT00TYxxtKlMwxyw=="],
 
-    "@gsainfoteam/account-core": ["@gsainfoteam/account-core@0.5.0", "https://npm.pkg.github.com/download/@gsainfoteam/account-core/0.5.0/a3c4a27c36af2578b161f98b1ad9aae0373408fb", { "dependencies": { "@gsainfoteam/account-contract": "^0.2.0", "es-toolkit": "^1.52.0", "jose": "^6.2.12", "oauth4webapi": "^3.8.8" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-m+ovZTLdNuuAvJO2vzJn3e5Ad9gavzGxfZnIv2m0pSj10rYJLm41UOs5N00rMfHS/4dACmMhrP0olIRDUl+iNA=="],
+    "@gsainfoteam/account-core": ["@gsainfoteam/account-core@0.5.1", "https://npm.pkg.github.com/download/@gsainfoteam/account-core/0.5.1/489684121e57494132031ab2eb402e5d330c6d31", { "dependencies": { "@gsainfoteam/account-contract": "^0.2.0", "es-toolkit": "^1.52.0", "jose": "^6.2.12", "oauth4webapi": "^3.8.8" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-PTpgAEUgPKqQLNjQWAeSCsDNEIE0XyPC7988aMRejzXpX8KcSZhtaP1t2+3JycwtxtuMx4LsXhigqSReqdB+OQ=="],
 
-    "@gsainfoteam/account-react": ["@gsainfoteam/account-react@0.5.0", "https://npm.pkg.github.com/download/@gsainfoteam/account-react/0.5.0/96e3c04c34cb447b2746f82e60f0d8c51a2b11a3", { "dependencies": { "@gsainfoteam/account-web": "^0.5.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "openapi-fetch": ">=0.13.0", "react": "^19.2.0" } }, "sha512-65hMTf/OBgq+Ig28aWqGe44GGOGlzOo2vzCCNn6kDMPvz1+HUT6G+PA6rtAHx8ZbmkWpiNXXfefJO9XJ9Qei6A=="],
+    "@gsainfoteam/account-react": ["@gsainfoteam/account-react@0.5.1", "https://npm.pkg.github.com/download/@gsainfoteam/account-react/0.5.1/8b55ccb1c0d28fe128e3bcdc1850d4b952557d9c", { "dependencies": { "@gsainfoteam/account-web": "^0.5.1", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "openapi-fetch": ">=0.13.0", "react": "^19.2.0" } }, "sha512-Ywr/Yjz0H4M5OeMDYSGjuCCl0Xz+ZA/1D4VTn+8FTEioNaEaItbrBs1P7Otqu145a5TvPOZYZem/z1K8Dsr/UA=="],
 
-    "@gsainfoteam/account-web": ["@gsainfoteam/account-web@0.5.0", "https://npm.pkg.github.com/download/@gsainfoteam/account-web/0.5.0/78f5a5032da6e321057eb022b113c6071aca6cea", { "dependencies": { "@gsainfoteam/account-core": "^0.5.0", "es-toolkit": "^1.52.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "openapi-fetch": ">=0.13.0", "zod": "^4.0.0" } }, "sha512-BR5dkDmVlHsBd8luLfzA7dBJUnEW6QAIS3yFm4UfWd2JvDXAA0+NSzZ3Rujp56VlNI9UPZ6V46r9UmhwVeX/ng=="],
+    "@gsainfoteam/account-web": ["@gsainfoteam/account-web@0.5.1", "https://npm.pkg.github.com/download/@gsainfoteam/account-web/0.5.1/bfc50824b3e33075a5b985242703acbee3c9e54a", { "dependencies": { "@gsainfoteam/account-core": "^0.5.1", "es-toolkit": "^1.52.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "openapi-fetch": ">=0.13.0", "zod": "^4.0.0" } }, "sha512-DNg0tc64gU1NybciThE0Lqr8R1+UtWE9K9MsrpbrG7eAL9dJE1mnzuCuAXjsfxZw+gb7p+8y49vzSF2RGu/riA=="],
 
     "@hookform/resolvers": ["@hookform/resolvers@5.2.2", "", { "dependencies": { "@standard-schema/utils": "^0.3.0" }, "peerDependencies": { "react-hook-form": "^7.55.0" } }, "sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA=="],
 
