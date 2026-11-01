@@ -36,10 +36,8 @@ Ziggle 공지 플랫폼의 프론트엔드 레포지토리입니다.
 SWAGGER_USER=
 SWAGGER_PASSWORD=
 
+VITE_IDP_ISSUER=  # production 또는 staging
 VITE_IDP_CLIENT_ID=
-VITE_IDP_REDIRECT_URI=
-VITE_IDP_AUTHORIZE_URL=
-VITE_IDP_TOKEN_URL=
 VITE_API_BASE_URL=
 VITE_CHATBOT_WIDGET_KEY=
 VITE_AMPLITUDE_API_KEY=
@@ -47,7 +45,10 @@ VITE_AMPLITUDE_API_KEY=
 
 ### Install & Run
 
+로그인은 [`@gsainfoteam/account-react`](https://github.com/gsainfoteam/account-sdk/tree/main/packages/react)가 맡습니다. 이 패키지는 GitHub Packages에서 받으므로 `read:packages` 권한이 있는 토큰이 필요합니다.
+
 ```bash
+export NODE_AUTH_TOKEN=$(gh auth token)
 bun install
 bun run dev
 ```

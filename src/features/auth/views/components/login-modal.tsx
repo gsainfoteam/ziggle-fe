@@ -5,23 +5,17 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Button, Dialog, ZiggleLogo } from '@/common/components';
 
 import { LandingGrids } from './landing-grids';
-import {
-  useAuth,
-  useAuthPrompt,
-  useAuthRedirect,
-  useToken,
-} from '../../viewmodels';
+import { useAuth, useAuthPrompt } from '../../viewmodels';
 
 export function LoginModal() {
   const { t } = useTranslation('home');
   const search = useSearch({ strict: false });
-  const { idpLogIn } = useAuth();
-  const { token } = useToken();
+  const { status, login } = useAuth();
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
 
   return (
     <Dialog.Root
-      isOpen={!token && !requiredConsents}
+      isOpen={status === 'unauthenticated' && !requiredConsents}
       onClose={() => {}}
       closeOnBackdrop={false}
       closeOnEscape={false}
@@ -67,12 +61,7 @@ export function LoginModal() {
             <Button
               className="w-full px-5 py-2.5 md:w-80"
               variant="outlined"
-              onClick={() => {
-                useAuthRedirect
-                  .getState()
-                  .setRedirect(search.redirect ?? '/home');
-                idpLogIn();
-              }}
+              onClick={() => login({ returnTo: search.redirect ?? '/home' })}
             >
               {t('home.login')}
             </Button>

@@ -11,6 +11,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
+      packages: read
     steps:
       - uses: actions/checkout@v6
       - uses: oven-sh/setup-bun@v2
@@ -19,10 +20,9 @@ jobs:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
           VITE_CHATBOT_WIDGET_KEY: ${{ secrets.VITE_CHATBOT_WIDGET_KEY }}
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_IDP_ISSUER: production
           VITE_IDP_CLIENT_ID: ${{ secrets.VITE_IDP_CLIENT_ID }}
-          VITE_IDP_AUTHORIZE_URL: ${{ secrets.VITE_IDP_AUTHORIZE_URL }}
-          VITE_IDP_TOKEN_URL: ${{ secrets.VITE_IDP_TOKEN_URL }}
-          VITE_IDP_REDIRECT_URI: ${{ secrets.VITE_IDP_REDIRECT_URI }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SWAGGER_USER: ${{ secrets.SWAGGER_USER }}
           SWAGGER_PASSWORD: ${{ secrets.SWAGGER_PASSWORD }}
         run: |
