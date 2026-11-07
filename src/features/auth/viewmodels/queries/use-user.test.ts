@@ -4,7 +4,7 @@ import { renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const useQueryMock = vi.fn();
-const useTokenMock = vi.fn();
+const useAccountMock = vi.fn();
 const setRequiredConsentsMock = vi.fn();
 
 vi.mock('@/common/lib', () => ({
@@ -13,8 +13,11 @@ vi.mock('@/common/lib', () => ({
   },
 }));
 
+vi.mock('@infoteam/account-react', () => ({
+  useAccount: () => useAccountMock(),
+}));
+
 vi.mock('../stores', () => ({
-  useToken: () => useTokenMock(),
   useAuthPrompt: (
     selector: (state: {
       setRequiredConsents: typeof setRequiredConsentsMock;
@@ -27,8 +30,8 @@ describe('useUser', () => {
     vi.clearAllMocks();
   });
 
-  it('exposes data as undefined while a token exists and user info is loading', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+  it('exposes data as undefined while a session exists and user info is loading', async () => {
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: null,
@@ -41,8 +44,8 @@ describe('useUser', () => {
     expect(result.current.data).toBeUndefined();
   });
 
-  it('exposes data as null when there is no token', async () => {
-    useTokenMock.mockReturnValue({ token: null });
+  it('exposes data as null when there is no session', async () => {
+    useAccountMock.mockReturnValue({ status: 'unauthenticated' });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: null,
@@ -56,7 +59,7 @@ describe('useUser', () => {
   });
 
   it('requires consent when the server rejects with 403', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 403, message: 'Consent required' },
@@ -70,7 +73,7 @@ describe('useUser', () => {
   });
 
   it('leaves the consent prompt alone for other failures', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 401, message: 'Unauthorized' },
@@ -84,7 +87,7 @@ describe('useUser', () => {
   });
 
   it('exposes data as null when user info failed to load', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 401 },
@@ -100,7 +103,7 @@ describe('useUser', () => {
 
   it('exposes the loaded user when the query succeeds', async () => {
     const user = { uuid: 'u-1', name: 'Zig' };
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: user,
       error: null,
@@ -114,7 +117,7 @@ describe('useUser', () => {
   });
 
   it('requires consent when the loaded user has no consent date', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: { uuid: 'u-1', name: 'Zig' },
       error: null,
@@ -128,7 +131,7 @@ describe('useUser', () => {
   });
 
   it('clears the consent prompt when the loaded user has a consent date', async () => {
-    useTokenMock.mockReturnValue({ token: 'session-token' });
+    useAccountMock.mockReturnValue({ status: 'authenticated' });
     useQueryMock.mockReturnValue({
       data: { uuid: 'u-1', name: 'Zig', consent: '2023-01-01T00:00:00.000Z' },
       error: null,
