@@ -1,21 +1,13 @@
-import { useEffect, useState } from 'react';
-
 import { Navigate, Outlet, useSearch } from '@tanstack/react-router';
 
 import { Loading } from '@/common/components';
 
-import { useAuthRedirect, useUser } from '../../viewmodels';
+import { useUser } from '../../viewmodels';
 
 function Redirect() {
-  const { redirect: redirectSearch } = useSearch({ from: '/_auth' });
-  const redirectCache = useAuthRedirect((state) => state.redirect);
-  const [redirect] = useState(redirectSearch ?? redirectCache ?? '/home');
+  const { redirect } = useSearch({ from: '/_auth' });
 
-  useEffect(() => {
-    useAuthRedirect.getState().clearRedirect();
-  }, []);
-
-  return <Navigate to={redirect} />;
+  return <Navigate to={redirect ?? '/home'} />;
 }
 
 export function AuthLayout() {

@@ -1,19 +1,21 @@
 import { useEffect, useMemo } from 'react';
 
+import { useAccount } from '@infoteam/account-react';
+
 import { $api } from '@/common/lib';
 
 import { ApiPaths, type User } from '../../models';
-import { useAuthPrompt, useToken } from '../stores';
+import { useAuthPrompt } from '../stores';
 
 export const useUser = () => {
-  const { token } = useToken();
+  const { status } = useAccount();
   const setRequiredConsents = useAuthPrompt((s) => s.setRequiredConsents);
 
   const { data, error, isLoading, ...rest } = $api.useQuery(
     'get',
     ApiPaths.UserController_getUserInfo,
     {},
-    { enabled: !!token, retry: false },
+    { enabled: status === 'authenticated', retry: false },
   );
 
   useEffect(() => {
@@ -25,11 +27,12 @@ export const useUser = () => {
   }, [data, error, setRequiredConsents]);
 
   const user = useMemo<User | null | undefined>(() => {
-    if (!token) return null;
+    if (status === 'loading') return undefined;
+    if (status === 'unauthenticated') return null;
     if (isLoading) return undefined;
     if (error) return null;
     return data ?? null;
-  }, [data, error, isLoading, token]);
+  }, [data, error, isLoading, status]);
 
   return {
     ...rest,
