@@ -13,12 +13,12 @@ export function LoginModal() {
   const { t } = useTranslation('home');
   const search = useSearch({ strict: false });
   const { t: tAuth } = useTranslation('auth');
-  const { status, login } = useAccount();
+  const { isLoading, isAuthenticated, login } = useAccount();
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
 
   return (
     <Dialog.Root
-      isOpen={status === 'unauthenticated' && !requiredConsents}
+      isOpen={!isLoading && !isAuthenticated && !requiredConsents}
       onClose={() => {}}
       closeOnBackdrop={false}
       closeOnEscape={false}

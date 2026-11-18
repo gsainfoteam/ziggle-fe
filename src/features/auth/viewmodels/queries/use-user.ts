@@ -8,14 +8,14 @@ import { ApiPaths, type User } from '../../models';
 import { useAuthPrompt } from '../stores';
 
 export const useUser = () => {
-  const { status } = useAccount();
+  const { isLoading: isAccountLoading, isAuthenticated } = useAccount();
   const setRequiredConsents = useAuthPrompt((s) => s.setRequiredConsents);
 
   const { data, error, isLoading, ...rest } = $api.useQuery(
     'get',
     ApiPaths.UserController_getUserInfo,
     {},
-    { enabled: status === 'authenticated', retry: false },
+    { enabled: isAuthenticated, retry: false },
   );
 
   useEffect(() => {
@@ -27,12 +27,12 @@ export const useUser = () => {
   }, [data, error, setRequiredConsents]);
 
   const user = useMemo<User | null | undefined>(() => {
-    if (status === 'loading') return undefined;
-    if (status === 'unauthenticated') return null;
+    if (isAccountLoading) return undefined;
+    if (!isAuthenticated) return null;
     if (isLoading) return undefined;
     if (error) return null;
     return data ?? null;
-  }, [data, error, isLoading, status]);
+  }, [data, error, isLoading, isAccountLoading, isAuthenticated]);
 
   return {
     ...rest,

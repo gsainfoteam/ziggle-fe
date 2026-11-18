@@ -31,7 +31,10 @@ describe('useUser', () => {
   });
 
   it('exposes data as undefined while a session exists and user info is loading', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: null,
@@ -45,7 +48,10 @@ describe('useUser', () => {
   });
 
   it('exposes data as null when there is no session', async () => {
-    useAccountMock.mockReturnValue({ status: 'unauthenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: false,
+    });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: null,
@@ -59,7 +65,10 @@ describe('useUser', () => {
   });
 
   it('requires consent when the server rejects with 403', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 403, message: 'Consent required' },
@@ -73,7 +82,10 @@ describe('useUser', () => {
   });
 
   it('leaves the consent prompt alone for other failures', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 401, message: 'Unauthorized' },
@@ -87,7 +99,10 @@ describe('useUser', () => {
   });
 
   it('exposes data as null when user info failed to load', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: undefined,
       error: { statusCode: 401 },
@@ -103,7 +118,10 @@ describe('useUser', () => {
 
   it('exposes the loaded user when the query succeeds', async () => {
     const user = { uuid: 'u-1', name: 'Zig' };
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: user,
       error: null,
@@ -117,7 +135,10 @@ describe('useUser', () => {
   });
 
   it('requires consent when the loaded user has no consent date', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: { uuid: 'u-1', name: 'Zig' },
       error: null,
@@ -131,7 +152,10 @@ describe('useUser', () => {
   });
 
   it('clears the consent prompt when the loaded user has a consent date', async () => {
-    useAccountMock.mockReturnValue({ status: 'authenticated' });
+    useAccountMock.mockReturnValue({
+      isLoading: false,
+      isAuthenticated: true,
+    });
     useQueryMock.mockReturnValue({
       data: { uuid: 'u-1', name: 'Zig', consent: '2023-01-01T00:00:00.000Z' },
       error: null,
