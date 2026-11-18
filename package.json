@@ -27,7 +27,7 @@
     "@amplitude/analytics-browser": "^2.35.4",
     "@floating-ui/react": "^0.27.18",
     "@hookform/resolvers": "^5.2.2",
-    "@infoteam/account-react": "^0.6.0",
+    "@infoteam/account-react": "^0.8.0",
     "@phosphor-icons/react": "^2.1.10",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-devtools": "^0.7.0",
