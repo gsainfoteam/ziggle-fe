@@ -8,7 +8,7 @@
         "@amplitude/analytics-browser": "^2.35.4",
         "@floating-ui/react": "^0.27.18",
         "@hookform/resolvers": "^5.2.2",
-        "@infoteam/account-react": "^0.8.0",
+        "@infoteam/account-react": "^0.9.0",
         "@phosphor-icons/react": "^2.1.10",
         "@tailwindcss/vite": "^4.1.18",
         "@tanstack/react-devtools": "^0.7.0",
@@ -295,11 +295,11 @@
 
     "@infoteam/account-contract": ["@infoteam/account-contract@0.3.0", "", {}, "sha512-PEg/QcQKL7ILw5I21wQkBYAxoRTo0AbVst76YiiZasZN6WydVWrwx+yiTjLcLzSm/+MJI9jvyy7DOpLesBGn2g=="],
 
-    "@infoteam/account-core": ["@infoteam/account-core@0.8.0", "", { "dependencies": { "@infoteam/account-contract": "^0.3.0", "es-toolkit": "^1.52.0", "jose": "^6.2.12", "oauth4webapi": "^3.8.8" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-IM2+nmN7w5q6QyzHZqMh/xvW55CdjESzmf7Hy4iT+/vMWnXYLfXlkMgoBEmIY/5J5gEk1wEtGL7RntbKdWN0Lw=="],
+    "@infoteam/account-core": ["@infoteam/account-core@0.9.0", "", { "dependencies": { "@infoteam/account-contract": "^0.3.0", "es-toolkit": "^1.52.0", "jose": "^6.2.12", "oauth4webapi": "^3.8.8" }, "peerDependencies": { "zod": "^4.0.0" } }, "sha512-mei2VrMa/4Pmo5PjPEdmZLKXtf1HsYSX6BQLXZYAxh0TcqlsEAIlekUqwL4cjPqd/yt6q/qDeyvSPWu0QlmgFg=="],
 
-    "@infoteam/account-react": ["@infoteam/account-react@0.8.0", "", { "dependencies": { "@infoteam/account-web": "^0.8.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "react": "^19.2.0" }, "optionalPeers": ["axios"] }, "sha512-kq60C5Klk05V5Du/AUhr+lxFb5ZYUflXyu8s+lOVk+1S54P04ezcJ6z3dbaiS7wq2aiZwGWjImzzExFrz7yZeA=="],
+    "@infoteam/account-react": ["@infoteam/account-react@0.9.0", "", { "dependencies": { "@infoteam/account-web": "^0.9.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "react": "^19.2.0" }, "optionalPeers": ["axios"] }, "sha512-x/XLv5Uh03TPlL4IXUYTKycr5H+VmCOaA5aBzg4F8EnJCZZYUndqHlSH570m+6oueO/x3v7848TQb7FqiMTzIA=="],
 
-    "@infoteam/account-web": ["@infoteam/account-web@0.8.0", "", { "dependencies": { "@infoteam/account-core": "^0.8.0", "es-toolkit": "^1.52.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "zod": "^4.0.0" }, "optionalPeers": ["axios"] }, "sha512-mub9t2VmzkuFku0FrfFuKZsg+dM637EFOa53jDhOMKJVIQmE+H/6cYNHqUdXDpWZA7sF2/rxHIFyc2bYUdAhUw=="],
+    "@infoteam/account-web": ["@infoteam/account-web@0.9.0", "", { "dependencies": { "@infoteam/account-core": "^0.9.0", "es-toolkit": "^1.52.0", "zustand": "^5.0.15" }, "peerDependencies": { "axios": "^1.0.0", "zod": "^4.0.0" }, "optionalPeers": ["axios"] }, "sha512-wQB/MTyPH9eW/t4CBsAYEBDKUU6cioO8Aimxizab5qhEahPIEJaDMPbr6Zj/sjy9ZMia+V7VRXvi//UiDf/e2A=="],
 
     "@inquirer/ansi": ["@inquirer/ansi@2.0.9", "", {}, "sha512-0Ywt3S8tqM6TWUcsRlBFQ1x+X3/o8kktX0ZiKAnByYb9GFDknnOhse1PVtfiD2BXPI8ar+BWx9PV9R0lQIcygw=="],
 
