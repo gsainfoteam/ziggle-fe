@@ -2,6 +2,7 @@ import { ChevronLeft } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { Dialog } from '@/common/components';
+import { useTheme } from '@/common/lib/theme';
 
 type TermsView = { type: 'privacy' | 'tos'; version: string };
 
@@ -12,6 +13,7 @@ interface TermsModalProps {
 
 export function TermsModal({ termsOpen, onClose }: TermsModalProps) {
   const { t } = useTranslation('auth');
+  const { theme } = useTheme();
 
   const termsTitle: Record<string, string> = {
     privacy: t('consent.termsTitle.privacy'),
@@ -35,11 +37,11 @@ export function TermsModal({ termsOpen, onClose }: TermsModalProps) {
           </Dialog.Header>
           <Dialog.Body className="h-120">
             <iframe
-              src={`https://terms.gistory.me/embedded/ziggle/${termsOpen.type}/${termsOpen.version}/`}
+              src={`https://terms.gistory.me/embedded/ziggle/${termsOpen.type}/${termsOpen.version}/?theme=${theme}`}
               title={termsTitle[termsOpen.type]}
               sandbox="allow-scripts"
               referrerPolicy="no-referrer"
-              className="h-full w-full border-0 dark:hue-rotate-180 dark:invert"
+              className="h-full w-full border-0"
             />
           </Dialog.Body>
         </>
