@@ -2,19 +2,18 @@ import { useSearch } from '@tanstack/react-router';
 
 import { useAccount } from '@infoteam/account-react';
 import { Trans, useTranslation } from 'react-i18next';
-import { toast } from 'sonner';
 
 import { Button, Dialog, ZiggleLogo } from '@/common/components';
 
 import { LandingGrids } from './landing-grids';
-import { useAuthPrompt } from '../../viewmodels';
+import { useAccountErrorToast, useAuthPrompt } from '../../viewmodels';
 
 export function LoginModal() {
   const { t } = useTranslation('home');
   const search = useSearch({ strict: false });
-  const { t: tAuth } = useTranslation('auth');
   const { isLoading, isAuthenticated, login } = useAccount();
   const requiredConsents = useAuthPrompt((state) => state.requiredConsents);
+  useAccountErrorToast();
 
   return (
     <Dialog.Root
@@ -65,9 +64,8 @@ export function LoginModal() {
               className="w-full px-5 py-2.5 md:w-80"
               variant="outlined"
               onClick={() => {
-                login({ returnTo: search.redirect ?? '/home' }).catch(() =>
-                  toast.error(tAuth('errors.login_failed')),
-                );
+                // 실패하면 SDK가 error에 남기고 useAccountErrorToast가 알린다.
+                login({ returnTo: search.redirect ?? '/home' }).catch(() => {});
               }}
             >
               {t('home.login')}
