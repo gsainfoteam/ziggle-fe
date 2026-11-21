@@ -20,8 +20,7 @@ jobs:
           VITE_CHATBOT_WIDGET_KEY: ${{ secrets.VITE_CHATBOT_WIDGET_KEY }}
           VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
           VITE_IDP_CLIENT_ID: ${{ secrets.VITE_IDP_CLIENT_ID }}
-          VITE_IDP_AUTHORIZE_URL: ${{ secrets.VITE_IDP_AUTHORIZE_URL }}
-          VITE_IDP_TOKEN_URL: ${{ secrets.VITE_IDP_TOKEN_URL }}
+          VITE_IDP_ISSUER: ${{ secrets.VITE_IDP_ISSUER }}
           VITE_IDP_REDIRECT_URI: ${{ secrets.VITE_IDP_REDIRECT_URI }}
           SWAGGER_USER: ${{ secrets.SWAGGER_USER }}
           SWAGGER_PASSWORD: ${{ secrets.SWAGGER_PASSWORD }}

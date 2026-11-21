@@ -4,21 +4,13 @@ import {
   RouterProvider,
 } from '@tanstack/react-router';
 
-import { AuthProvider, type TAuthConfig } from 'react-oauth2-code-pkce';
+import { AccountProvider } from '@infoteam/account-react';
+
+import { account } from '@/common/lib';
 
 import { LoginModal } from './login-modal';
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
-
-const mockAuthConfig: TAuthConfig = {
-  clientId: 'storybook',
-  authorizationEndpoint: 'https://example.com/auth',
-  tokenEndpoint: 'https://example.com/token',
-  redirectUri: 'http://localhost:6006',
-  scope: 'openid',
-  autoLogin: false,
-  decodeToken: false,
-};
 
 const createLoginRouter = () => {
   const root = createRootRoute({ component: LoginModal });
@@ -26,9 +18,9 @@ const createLoginRouter = () => {
 };
 
 const LoginModalWithProviders = () => (
-  <AuthProvider authConfig={mockAuthConfig}>
+  <AccountProvider client={account}>
     <RouterProvider router={createLoginRouter()} />
-  </AuthProvider>
+  </AccountProvider>
 );
 
 const meta = {

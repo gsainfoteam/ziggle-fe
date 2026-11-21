@@ -373,7 +373,7 @@ export const ProfileModalButton = ({
             '\n' +
             t('mypage.withdrawal.success.text'),
         );
-        logout({});
+        logout();
       } catch {
         toast.error(
           t('mypage.withdrawal.error.title') +
@@ -410,7 +410,7 @@ export const ProfileModalButton = ({
           anchor={anchor}
           user={user}
           onSignOut={() => {
-            logout({});
+            logout();
             handleClose();
           }}
           onWithdrawal={async () => {

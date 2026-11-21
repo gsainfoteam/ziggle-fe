@@ -1,32 +1,16 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { useTranslation } from 'react-i18next';
-import { useAuthContext } from 'react-oauth2-code-pkce';
-import { toast } from 'sonner';
+import { account } from '@/common/lib';
 
-import { $api } from '@/common/lib';
+import { useAuthPrompt } from '../stores';
 
-import { ApiPaths } from '../../models';
-import { useAuthPrompt, useToken } from '../stores';
-
-export const useLogout = ({
-  showToast = false,
-}: { showToast?: boolean } = {}) => {
-  const { t } = useTranslation('auth');
-  const { logOut: idpLogOut } = useAuthContext();
+export const useLogout = () => {
   const queryClient = useQueryClient();
 
-  return $api.useMutation('post', ApiPaths.AuthController_logout, {
-    onError: () => {
-      if (showToast) {
-        toast.error(t('errors.logout_failed'));
-      }
-    },
+  return useMutation({
+    mutationFn: () => account.logout(),
     onSettled: () => {
-      useToken.getState().saveToken(null);
-      useAuthPrompt.getState().setRecentLogout(true);
       useAuthPrompt.getState().setRequiredConsents(undefined);
-      idpLogOut();
       queryClient.clear();
     },
   });
