@@ -4,6 +4,7 @@ import { createRouter } from '@tanstack/react-router';
 import ReactDOM from 'react-dom/client';
 
 import { initThemeSync } from '@/common/lib';
+import { syncAccountSession } from '@/features/auth';
 
 import { App } from './app';
 import { routeTree } from './routeTree.gen';
@@ -14,6 +15,8 @@ export const router = createRouter({
   defaultPreload: 'intent',
   scrollRestoration: true,
 });
+
+syncAccountSession({ queryClient, onStatusChange: () => router.invalidate() });
 
 declare module '@tanstack/react-router' {
   interface Register {
