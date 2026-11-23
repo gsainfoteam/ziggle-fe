@@ -12,5 +12,10 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
   ],
   framework: '@storybook/react-vite',
+  env: (config) => ({
+    ...config,
+    VITE_IDP_ISSUER: 'staging',
+    VITE_IDP_CLIENT_ID: 'storybook',
+  }),
 };
 export default config;

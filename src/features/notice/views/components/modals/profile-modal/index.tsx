@@ -2,6 +2,7 @@ import { type ReactNode, useLayoutEffect, useState } from 'react';
 
 import { Link } from '@tanstack/react-router';
 
+import { useAccount } from '@infoteam/account-react';
 import {
   ArrowSquareOutIcon,
   GearSixIcon,
@@ -27,7 +28,7 @@ import {
 import { LogEvents } from '@/common/const/log-events';
 import { type Theme, useTheme } from '@/common/lib/theme';
 import { cn, useIsDesktop } from '@/common/utils';
-import { useLogout, useUser, useWithdraw } from '@/features/auth';
+import { useUser, useWithdraw } from '@/features/auth';
 import type { User } from '@/features/auth/models';
 
 import { watchVisibleProfileTrigger } from './watch-visible-profile-trigger.ts';
@@ -349,7 +350,7 @@ export const ProfileModalButton = ({
 }: ProfileModalButtonProps = {}) => {
   const { t } = useTranslation('auth');
   const { data: user } = useUser();
-  const { mutate: logout } = useLogout();
+  const { logout } = useAccount();
   const { mutateAsync: withdraw } = useWithdraw();
   const [open, setOpen] = useState(false);
 
@@ -373,7 +374,7 @@ export const ProfileModalButton = ({
             '\n' +
             t('mypage.withdrawal.success.text'),
         );
-        logout({});
+        void logout();
       } catch {
         toast.error(
           t('mypage.withdrawal.error.title') +
@@ -410,7 +411,7 @@ export const ProfileModalButton = ({
           anchor={anchor}
           user={user}
           onSignOut={() => {
-            logout({});
+            void logout();
             handleClose();
           }}
           onWithdrawal={async () => {
