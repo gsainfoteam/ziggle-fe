@@ -13,6 +13,10 @@
             "/": "/app",
             "?": {"redirect": "*"},
             "comment": "app redirect"
+          },
+          {
+            "/": "/notice/*",
+            "comment": "notice detail"
           }
         ]
       }
